@@ -1,0 +1,267 @@
+diff -Nur my-kmod-11/libkmod/libkmod-array.c my-kmod-11_subs/libkmod/libkmod-array.c
+--- my-kmod-11/libkmod/libkmod-array.c	2013-05-23 20:45:11.153071419 +0800
++++ my-kmod-11_subs/libkmod/libkmod-array.c	2013-05-23 20:46:44.613072179 +0800
+@@ -28,7 +28,17 @@
+ 
+ /* basic pointer array growing in steps */
+ 
+-// array_init.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* array 结构体初始化 */
+ void array_init(struct array *array, size_t step)
+ {
+ 	assert(step > 0);
+@@ -38,7 +48,17 @@
+ 	array->step = step;
+ }
+ 
+-// array_append.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* array 结构体添加元素 */
+ int array_append(struct array *array, const void *element)
+ {
+ 	size_t idx;
+@@ -58,7 +78,17 @@
+ 	return idx;
+ }
+ 
+-// array_append_unique.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* array 结构体添加新元素，确保之前不存在才执行添加操作 */
+ int array_append_unique(struct array *array, const void *element)
+ {
+ 	void **itr = array->array;
+@@ -69,7 +99,17 @@
+ 	return array_append(array, element);
+ }
+ 
+-// array_pop.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* array 出栈操作 */
+ void array_pop(struct array *array) {
+ 	array->count--;
+ 	if (array->count + array->step < array->total) {
+@@ -83,7 +123,17 @@
+ 	}
+ }
+ 
+-// array_free_array.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* array 释放内层空间操作 */
+ void array_free_array(struct array *array) {
+ 	free(array->array);
+ 	array->count = 0;
+@@ -91,13 +141,33 @@
+ }
+ 
+ 
+-// array_sort.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* array 元素的排序操作，采用 qsort 快速排序 */
+ void array_sort(struct array *array, int (*cmp)(const void *a, const void *b))
+ {
+ 	qsort(array->array, array->count, sizeof(void *), cmp);
+ }
+ 
+-// array_remove_at.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* array 删除节点操作，可以删除在指定位置 pos 的元素 */
+ int array_remove_at(struct array *array, unsigned int pos)
+ {
+ 	if (array->count <= pos)
+diff -Nur my-kmod-11/tools/kmod.c my-kmod-11_subs/tools/kmod.c
+--- my-kmod-11/tools/kmod.c	2013-05-23 20:32:43.465065306 +0800
++++ my-kmod-11_subs/tools/kmod.c	2013-05-23 20:47:02.801072327 +0800
+@@ -35,13 +35,33 @@
+ 
+ static const struct kmod_cmd kmod_cmd_help;
+ 
+-// kmod_cmds.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* kmod 命令的主程序 */
+ static const struct kmod_cmd *kmod_cmds[] = {
+ 	&kmod_cmd_help,
+ 	&kmod_cmd_list,
+ };
+ 
+-// kmod_compat_cmds.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* kmod 支持的compat命令 lsmod/rmmod/insmod/modinfo/modprobe/depmod */
+ static const struct kmod_cmd *kmod_compat_cmds[] = {
+ 	&kmod_cmd_compat_lsmod,
+ 	&kmod_cmd_compat_rmmod,
+@@ -51,7 +71,17 @@
+ 	&kmod_cmd_compat_depmod,
+ };
+ 
+-// kmod_help.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* kmod 的帮助提示，运行 kmod help 时显示信息 */
+ static int kmod_help(int argc, char *argv[])
+ {
+ 	size_t i;
+@@ -83,14 +113,34 @@
+ 	return EXIT_SUCCESS;
+ }
+ 
+-// kmod_cmd_help.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* kmod help 帮助命令的数据结构 */
+ static const struct kmod_cmd kmod_cmd_help = {
+ 	.name = "help",
+ 	.cmd = kmod_help,
+ 	.help = "Show help message",
+ };
+ 
+-// handle_kmod_commands.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 解释 kmod -h -V -? 等命令参数 */
+ static int handle_kmod_commands(int argc, char *argv[])
+ {
+ 	const char *cmd;
+@@ -146,7 +196,17 @@
+ }
+ 
+ 
+-// handle_kmod_compat_commands.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 解释 kmod compat 命令 */
+ static int handle_kmod_compat_commands(int argc, char *argv[])
+ {
+ 	const char *cmd;
+@@ -162,7 +222,17 @@
+ 	return -ENOENT;
+ }
+ 
+-// kmod_main.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* kmod 命令的主程序 */
+ int main(int argc, char *argv[])
+ {
+ 	int err;
