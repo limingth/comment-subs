@@ -39,11 +39,7 @@
 
 #include "testsuite.h"
 
-/*
- * 通过名字新建一个模块
- * 成功则返回 EXIT_SUCCESS
- * 失败则返回 EXIT_FAILURE
- */
+// from_name.cmt
 static int from_name(const struct test *t)
 {
 	static const char *modnames[] = {
@@ -87,11 +83,7 @@ static DEFINE_TEST(from_name,
 		.stdout = TESTSUITE_ROOTFS "test-new-module/from_name/correct.txt",
 	});
 
-/*
- * 通过alias新建一个模块
- * 成功则返回 EXIT_SUCCESS
- * 失败则返回 EXIT_FAILURE
- */
+// from_alias.cmt
 static int from_alias(const struct test *t)
 {
 	static const char *modnames[] = {
@@ -143,4 +135,5 @@ static const struct test *tests[] = {
 	NULL,
 };
 
+// TESTSUITE_MAIN.cmt
 TESTSUITE_MAIN(tests);

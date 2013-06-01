@@ -640,6 +640,7 @@ static int prepend_path(const char *extra)
 	return r;
 }
 
+// test_run.cmt
 int test_run(const struct test *t)
 {
 	pid_t pid;

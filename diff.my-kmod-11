@@ -1,6 +1,6 @@
-diff -Nur my-kmod-11/libkmod/libkmod-array.c my-kmod-11_subs/libkmod/libkmod-array.c
+diff -Nur my-kmod-11/libkmod/libkmod-array.c my-kmod-11-subs/libkmod/libkmod-array.c
 --- my-kmod-11/libkmod/libkmod-array.c	2013-05-23 20:45:11.153071419 +0800
-+++ my-kmod-11_subs/libkmod/libkmod-array.c	2013-05-23 20:46:44.613072179 +0800
++++ my-kmod-11-subs/libkmod/libkmod-array.c	2013-06-02 00:21:33.532460116 +0800
 @@ -28,7 +28,17 @@
  
  /* basic pointer array growing in steps */
@@ -132,9 +132,564 @@ diff -Nur my-kmod-11/libkmod/libkmod-array.c my-kmod-11_subs/libkmod/libkmod-arr
  int array_remove_at(struct array *array, unsigned int pos)
  {
  	if (array->count <= pos)
-diff -Nur my-kmod-11/tools/kmod.c my-kmod-11_subs/tools/kmod.c
---- my-kmod-11/tools/kmod.c	2013-05-23 20:32:43.465065306 +0800
-+++ my-kmod-11_subs/tools/kmod.c	2013-05-23 20:47:02.801072327 +0800
+diff -Nur my-kmod-11/testsuite/delete_module.c my-kmod-11-subs/testsuite/delete_module.c
+--- my-kmod-11/testsuite/delete_module.c	2013-05-31 22:25:40.750338290 +0800
++++ my-kmod-11-subs/testsuite/delete_module.c	2013-06-02 00:21:34.912460127 +0800
+@@ -97,7 +97,17 @@
+ 	}
+ }
+ 
+-// find_module.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 根据 modname 从 _modules 开始，找到匹配名字的模块指针 mod 返回 */
+ static struct mod *find_module(struct mod *_modules, const char *modname)
+ {
+ 	struct mod *mod;
+@@ -135,7 +145,21 @@
+  * Default behavior is to exit successfully. If this is not the intended
+  * behavior, set TESTSUITE_DELETE_MODULE_RETCODES env var.
+  */
+-// delete_module.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 先通过 find_module 找到对应 modname 的 mod 指针，
++ * 如果没有这个 modname，则返回值为 0
++ * 如果找到了，则返回 mod->ret ，并给 errno 赋值
++ */
+ long delete_module(const char *modname, unsigned int flags)
+ {
+ 	struct mod *mod;
+@@ -151,7 +175,17 @@
+ 
+ /* the test is going away anyway, but lets keep valgrind happy */
+ void free_resources(void) __attribute__((destructor));
+-// free_resources.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 从 modules 指针开始，通过 free 释放所有 mod 指针空间 */
+ void free_resources(void)
+ {
+ 	while (modules) {
+diff -Nur my-kmod-11/testsuite/test-depmod.c my-kmod-11-subs/testsuite/test-depmod.c
+--- my-kmod-11/testsuite/test-depmod.c	2013-05-31 21:26:37.698309339 +0800
++++ my-kmod-11-subs/testsuite/test-depmod.c	2013-06-02 00:21:38.548460157 +0800
+@@ -60,5 +60,22 @@
+ 	NULL,
+ };
+ 
+-// TESTSUITE_MAIN.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * 这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
++ * 基本的实现原理是通过宏定义，调用了如下函数
++ *	- test_init()
++ *	- test_find()
++ *	- test_run()
++ *	- exit()
++ */
+ TESTSUITE_MAIN(tests);
+diff -Nur my-kmod-11/testsuite/test-init.c my-kmod-11-subs/testsuite/test-init.c
+--- my-kmod-11/testsuite/test-init.c	2013-05-30 17:34:03.277852621 +0800
++++ my-kmod-11-subs/testsuite/test-init.c	2013-06-02 00:21:38.816460161 +0800
+@@ -26,7 +26,22 @@
+ 
+ #include "testsuite.h"
+ 
+-// test_initlib.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 测试 initlib 模块功能 
++ * 其中用到了如下 libkmod 函数
++ *	- kmod_new()
++ *	- kmod_unref()
++ */
+ static __noreturn int test_initlib(const struct test *t)
+ {
+ 	struct kmod_ctx *ctx;
+@@ -43,7 +58,24 @@
+ static DEFINE_TEST(test_initlib,
+ 		.description = "test if libkmod's init function work");
+ 
+-// test_insert.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 测试 insert 模块功能 
++ * 其中用到了如下 libkmod 函数
++ *	- kmod_new()
++ *	- kmod_module_new_from_path()
++ *	- kmod_module_insert_module()
++ *	- kmod_unref()
++ */
+ static __noreturn int test_insert(const struct test *t)
+ {
+ 	struct kmod_ctx *ctx;
+@@ -78,7 +110,24 @@
+ 	},
+ 	.need_spawn = true);
+ 
+-// test_remove.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 测试 remove 模块功能 
++ * 其中用到了如下 libkmod 函数
++ *	- kmod_new()
++ *	- kmod_module_new_from_name()
++ *	- kmod_module_remove_module()
++ *	- kmod_unref()
++ */
+ static __noreturn int test_remove(const struct test *t)
+ {
+ 	struct kmod_ctx *ctx;
+@@ -120,5 +169,22 @@
+ 	NULL,
+ };
+ 
+-// TESTSUITE_MAIN.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * 这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
++ * 基本的实现原理是通过宏定义，调用了如下函数
++ *	- test_init()
++ *	- test_find()
++ *	- test_run()
++ *	- exit()
++ */
+ TESTSUITE_MAIN(tests);
+diff -Nur my-kmod-11/testsuite/test-loaded.c my-kmod-11-subs/testsuite/test-loaded.c
+--- my-kmod-11/testsuite/test-loaded.c	2013-05-30 17:35:40.785853421 +0800
++++ my-kmod-11-subs/testsuite/test-loaded.c	2013-06-02 00:21:38.984460160 +0800
+@@ -27,7 +27,31 @@
+ 
+ #include "testsuite.h"
+ 
+-// loaded_1.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 测试 list 模块功能 
++ * 其中用到了如下 libkmod 函数
++ *	- kmod_new()
++ *	- kmod_module_new_from_loaded()
++ *	- kmod_list_foreach()
++ *	- kmod_module_get_module()
++ *	- kmod_module_get_name()
++ *	- kmod_module_get_refcnt()
++ *	- kmod_module_get_size()
++ *	- kmod_module_get_holders()
++ *	- kmod_module_unref_list()
++ *	- kmod_module_unref()
++ *	- kmod_unref()
++ */
+ static int loaded_1(const struct test *t)
+ {
+ 	struct kmod_ctx *ctx;
+@@ -94,5 +118,22 @@
+ 	NULL,
+ };
+ 
+-// TESTSUITE_MAIN.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * 这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
++ * 基本的实现原理是通过宏定义，调用了如下函数
++ *	- test_init()
++ *	- test_find()
++ *	- test_run()
++ *	- exit()
++ */
+ TESTSUITE_MAIN(tests);
+diff -Nur my-kmod-11/testsuite/test-modinfo.c my-kmod-11-subs/testsuite/test-modinfo.c
+--- my-kmod-11/testsuite/test-modinfo.c	2013-05-30 18:43:58.833886908 +0800
++++ my-kmod-11-subs/testsuite/test-modinfo.c	2013-06-02 00:21:39.104460161 +0800
+@@ -53,5 +53,22 @@
+ 	NULL,
+ };
+ 
+-// TESTSUITE_MAIN.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * 这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
++ * 基本的实现原理是通过宏定义，调用了如下函数
++ *	- test_init()
++ *	- test_find()
++ *	- test_run()
++ *	- exit()
++ */
+ TESTSUITE_MAIN(tests);
+diff -Nur my-kmod-11/testsuite/test-modprobe.c my-kmod-11-subs/testsuite/test-modprobe.c
+--- my-kmod-11/testsuite/test-modprobe.c	2013-05-31 21:40:19.830316058 +0800
++++ my-kmod-11-subs/testsuite/test-modprobe.c	2013-06-02 00:21:39.252460163 +0800
+@@ -143,5 +143,22 @@
+ 	NULL,
+ };
+ 
+-// TESTSUITE_MAIN.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * 这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
++ * 基本的实现原理是通过宏定义，调用了如下函数
++ *	- test_init()
++ *	- test_find()
++ *	- test_run()
++ *	- exit()
++ */
+ TESTSUITE_MAIN(tests);
+diff -Nur my-kmod-11/testsuite/test-new-module.c my-kmod-11-subs/testsuite/test-new-module.c
+--- my-kmod-11/testsuite/test-new-module.c	2013-05-30 15:40:01.896852853 +0800
++++ my-kmod-11-subs/testsuite/test-new-module.c	2013-06-02 00:21:39.512460165 +0800
+@@ -39,7 +39,21 @@
+ 
+ #include "testsuite.h"
+ 
+-// from_name.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * 通过名字新建一个模块
++ * 成功则返回 EXIT_SUCCESS
++ * 失败则返回 EXIT_FAILURE
++ */
+ static int from_name(const struct test *t)
+ {
+ 	static const char *modnames[] = {
+@@ -83,7 +97,21 @@
+ 		.stdout = TESTSUITE_ROOTFS "test-new-module/from_name/correct.txt",
+ 	});
+ 
+-// from_alias.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * 通过alias新建一个模块
++ * 成功则返回 EXIT_SUCCESS
++ * 失败则返回 EXIT_FAILURE
++ */
+ static int from_alias(const struct test *t)
+ {
+ 	static const char *modnames[] = {
+@@ -135,5 +163,22 @@
+ 	NULL,
+ };
+ 
+-// TESTSUITE_MAIN.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * 这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
++ * 基本的实现原理是通过宏定义，调用了如下函数
++ *	- test_init()
++ *	- test_find()
++ *	- test_run()
++ *	- exit()
++ */
+ TESTSUITE_MAIN(tests);
+diff -Nur my-kmod-11/testsuite/testsuite.c my-kmod-11-subs/testsuite/testsuite.c
+--- my-kmod-11/testsuite/testsuite.c	2013-05-30 17:28:38.781849972 +0800
++++ my-kmod-11-subs/testsuite/testsuite.c	2013-06-02 00:21:39.660460165 +0800
+@@ -640,7 +640,22 @@
+ 	return r;
+ }
+ 
+-// test_run.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 测试运行
++ * 通过 pipe 创建管道，通过 fork 创建子进程，
++ * 父进程通过 test_run_parent() 
++ * 子进程通过 test_run_child() 
++ */
+ int test_run(const struct test *t)
+ {
+ 	pid_t pid;
+diff -Nur my-kmod-11/testsuite/test-testsuite.c my-kmod-11-subs/testsuite/test-testsuite.c
+--- my-kmod-11/testsuite/test-testsuite.c	2013-05-30 15:25:07.996845547 +0800
++++ my-kmod-11-subs/testsuite/test-testsuite.c	2013-06-02 00:21:39.812460167 +0800
+@@ -167,5 +167,22 @@
+ 	NULL,
+ };
+ 
+-// TESTSUITE_MAIN.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * 这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
++ * 基本的实现原理是通过宏定义，调用了如下函数
++ *	- test_init()
++ *	- test_find()
++ *	- test_run()
++ *	- exit()
++ */
+ TESTSUITE_MAIN(tests);
+diff -Nur my-kmod-11/tools/depmod.c my-kmod-11-subs/tools/depmod.c
+--- my-kmod-11/tools/depmod.c	2013-05-29 17:22:55.973317396 +0800
++++ my-kmod-11-subs/tools/depmod.c	2013-06-02 00:21:40.064460169 +0800
+@@ -2722,7 +2722,22 @@
+ 	return EXIT_FAILURE;
+ }
+ 
+-// kmod_cmd_compat_xxx.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
++ * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
++ * 这个结构体中还有一个 cmd 成员，是一个函数指针，
++ * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx
++ */
+ const struct kmod_cmd kmod_cmd_compat_depmod = {
+ 	.name = "depmod",
+ 	.cmd = do_depmod,
+diff -Nur my-kmod-11/tools/insmod.c my-kmod-11-subs/tools/insmod.c
+--- my-kmod-11/tools/insmod.c	2013-05-29 17:23:20.089317595 +0800
++++ my-kmod-11-subs/tools/insmod.c	2013-06-02 00:21:40.332460171 +0800
+@@ -33,7 +33,17 @@
+ 	{NULL, 0, 0, 0}
+ };
+ 
+-// help.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 负责打印该命令的帮助提示信息，通过 -h 参数可以显示 */
+ static void help(void)
+ {
+ 	printf("Usage:\n"
+@@ -44,7 +54,17 @@
+ 		program_invocation_short_name);
+ }
+ 
+-// mod_strerror.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 根据传入 err 的值，打印出错信息 */
+ static const char *mod_strerror(int err)
+ {
+ 	switch (err) {
+@@ -61,7 +81,26 @@
+ 	}
+ }
+ 
+-// do_insmod.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * insmod 函数的真正实现，通过 getopt_long 分析传入参数，
++ * 通过调用 libkmod 的接口，实现 insmod 命令
++ * 主要使用的接口包括
++ * - kmod_new()
++ * - kmod_module_new_from_path()
++ * - kmod_module_insert_module()
++ * - kmod_module_unref()
++ * - kmod_unref()
++ */ 
+ static int do_insmod(int argc, char *argv[])
+ {
+ 	struct kmod_ctx *ctx;
+@@ -154,7 +193,22 @@
+ 	return err >= 0 ? EXIT_SUCCESS : EXIT_FAILURE;
+ }
+ 
+-// kmod_cmd_compat_xxx.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
++ * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
++ * 这个结构体中还有一个 cmd 成员，是一个函数指针，
++ * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx
++ */
+ const struct kmod_cmd kmod_cmd_compat_insmod = {
+ 	.name = "insmod",
+ 	.cmd = do_insmod,
+diff -Nur my-kmod-11/tools/kmod.c my-kmod-11-subs/tools/kmod.c
+--- my-kmod-11/tools/kmod.c	2013-05-30 11:34:07.819073601 +0800
++++ my-kmod-11-subs/tools/kmod.c	2013-06-02 00:21:40.752460175 +0800
 @@ -35,13 +35,33 @@
  
  static const struct kmod_cmd kmod_cmd_help;
@@ -265,3 +820,421 @@ diff -Nur my-kmod-11/tools/kmod.c my-kmod-11_subs/tools/kmod.c
  int main(int argc, char *argv[])
  {
  	int err;
+diff -Nur my-kmod-11/tools/lsmod.c my-kmod-11-subs/tools/lsmod.c
+--- my-kmod-11/tools/lsmod.c	2013-05-29 17:22:34.289317220 +0800
++++ my-kmod-11-subs/tools/lsmod.c	2013-06-02 00:21:40.972460177 +0800
+@@ -92,7 +92,22 @@
+ 	.help = "compat lsmod command",
+ };
+ 
+-// kmod_cmd_compat_xxx.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
++ * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
++ * 这个结构体中还有一个 cmd 成员，是一个函数指针，
++ * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx
++ */
+ const struct kmod_cmd kmod_cmd_list = {
+ 	.name = "list",
+ 	.cmd = do_lsmod,
+diff -Nur my-kmod-11/tools/modinfo.c my-kmod-11-subs/tools/modinfo.c
+--- my-kmod-11/tools/modinfo.c	2013-05-29 17:53:26.861332360 +0800
++++ my-kmod-11-subs/tools/modinfo.c	2013-06-02 00:21:41.120460178 +0800
+@@ -362,7 +362,28 @@
+ 	return false;
+ }
+ 
+-// do_modinfo.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * modinfo 函数的真正实现，通过 getopt_long 分析传入参数，
++ * 通过调用 libkmod 的接口，实现 modinfo 命令
++ * 主要使用的接口包括
++ * - kmod_new()
++ * - kmod_unref()
++ * 以下接口是在这个函数中调用的，在当前文件内部通过 static 实现的内部函数
++ * 	- is_module_filename()
++ * 	- modinfo_path_do()
++ * 	- modinfo_alias_do()
++ */
++ 
+ static int do_modinfo(int argc, char *argv[])
+ {
+ 	struct kmod_ctx *ctx;
+@@ -465,7 +486,22 @@
+ 	return err >= 0 ? EXIT_SUCCESS : EXIT_FAILURE;
+ }
+ 
+-// kmod_cmd_compat_xxx.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
++ * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
++ * 这个结构体中还有一个 cmd 成员，是一个函数指针，
++ * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx
++ */
+ const struct kmod_cmd kmod_cmd_compat_modinfo = {
+ 	.name = "modinfo",
+ 	.cmd = do_modinfo,
+diff -Nur my-kmod-11/tools/modprobe.c my-kmod-11-subs/tools/modprobe.c
+--- my-kmod-11/tools/modprobe.c	2013-05-30 11:25:53.715069562 +0800
++++ my-kmod-11-subs/tools/modprobe.c	2013-06-02 00:21:41.660460183 +0800
+@@ -285,7 +285,28 @@
+ 	return ret;
+ }
+ 
+-// rmmod_do_remove_module.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 真正能够完成一个模块的卸载操作的函数，也是一个内部的static函数，
++ * 此函数是被 rmmod_do_module() 所调用的，因此仅在 modprobe.c 中使用
++ * 其中用到了 libkmod 的一些接口，如下
++ *	- kmod_module_get_name()
++ *	- kmod_module_remove_module()		*
++ *	- kmod_module_get_dependencies()
++ *	- kmod_module_get_module()
++ *	- rmmod_do_remove_module()
++ *	- kmod_module_unref();
++ *	- kmod_module_unref_list();
++ */
+ static int rmmod_do_remove_module(struct kmod_module *mod)
+ {
+ 	const char *modname = kmod_module_get_name(mod);
+@@ -340,7 +361,33 @@
+ 	return 0;
+ }
+ 
+-// rmmod_do_module.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 真正能够完成一个模块的卸载操作的函数，也是一个内部的static函数，
++ * 因此仅在 modprobe.c 中使用
++ * 其中用到了 libkmod 的一些接口，如下
++ *	- kmod_module_get_module()
++ *	- kmod_module_get_softdeps()
++ *	- kmod_module_get_remove_commands()
++ *	- kmod_module_get_initstate()
++ *	- rmmod_do_deps_list()
++ *	- kmod_module_get_dependencies()
++ *	- kmod_module_get_refcnt()
++ *	- rmmod_do_remove_module()		*
++ *	- command_do()
++ *	- kmod_module_unref_list();
++ * 删除/卸载模块的核心调用是 rmmod_do_remove_module() 
++ * 这个函数也是在 modprobe 模块内部的一个 static 函数，不对外。
++ */
+ static int rmmod_do_module(struct kmod_module *mod, bool do_dependencies)
+ {
+ 	const char *modname = kmod_module_get_name(mod);
+@@ -416,7 +463,28 @@
+ 	return err;
+ }
+ 
+-// rmmod.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 完成一个模块的卸载操作，是一个内部的static函数，
++ * 因此仅在 modprobe.c 中使用
++ * 其中用到了 libkmod 的一些接口，如下
++ *	- kmod_module_new_from_lookup()
++ *	- kmod_module_get_module()
++ *	- rmmod_do_module()
++ *	- kmod_module_unref()
++ *	- kmod_module_unref_list();
++ * 删除/卸载模块的核心调用是 rmmod_do_module() 
++ * 这个函数也是在 rmmod 模块内部的一个 static 函数，不对外。
++ */
+ static int rmmod(struct kmod_ctx *ctx, const char *alias)
+ {
+ 	struct kmod_list *l, *list = NULL;
+@@ -443,7 +511,17 @@
+ 	return err;
+ }
+ 
+-// rmmod_all.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 根据传入的 argv[] 参数，依次卸载 nargs 个模块 */ 
+ static int rmmod_all(struct kmod_ctx *ctx, char **args, int nargs)
+ {
+ 	int i, err = 0;
+@@ -505,7 +583,27 @@
+ 		printf("insmod %s %s\n", kmod_module_get_path(m), options);
+ }
+ 
+-// insmod.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 完成一个模块的插入操作，是一个内部的static函数，
++ * 因此仅在 modprobe.c 中使用
++ * 其中用到了 libkmod 的一些接口，如下
++ *	- kmod_module_new_from_lookup()
++ *	- kmod_module_get_module()
++ *	- kmod_module_get_name()
++ *	- kmod_module_probe_insert_module()
++ *	- kmod_module_unref()
++ *	- kmod_module_unref_list()
++ */
+ static int insmod(struct kmod_ctx *ctx, const char *alias,
+ 						const char *extra_options)
+ {
+@@ -581,7 +679,17 @@
+ 	return err;
+ }
+ 
+-// insmod_all.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 根据传入的 argv[] 参数，依次插入 nargs 个模块 */ 
+ static int insmod_all(struct kmod_ctx *ctx, char **args, int nargs)
+ {
+ 	int i, err = 0;
+@@ -740,7 +848,33 @@
+ 	return new_argv;
+ }
+ 
+-// do_modprobe.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * modprobe 函数的真正实现，通过 getopt_long 分析传入参数，
++ * 通过调用 libkmod 的接口，实现 modprobe 命令
++ * 主要使用的接口包括
++ * - log_open()
++ * - kmod_new()
++ * - log_setup_kmod_log()
++ * - kmod_load_resources()
++ * - kmod_unref()
++ * - log_close()
++ * 以下接口是在这个函数中调用的，在当前文件内部通过 static 实现的内部函数
++ * 	- show_config()
++ * 	- show_modversion()
++ * 	- insmod_all()
++ * 	- rmmod_all()
++ *	- insmod()
++ */ 
+ static int do_modprobe(int argc, char **orig_argv)
+ {
+ 	struct kmod_ctx *ctx;
+@@ -939,7 +1073,22 @@
+ 	return err >= 0 ? EXIT_SUCCESS : EXIT_FAILURE;
+ }
+ 
+-// kmod_cmd_compat_xxx.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
++ * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
++ * 这个结构体中还有一个 cmd 成员，是一个函数指针，
++ * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx
++ */
+ const struct kmod_cmd kmod_cmd_compat_modprobe = {
+ 	.name = "modprobe",
+ 	.cmd = do_modprobe,
+diff -Nur my-kmod-11/tools/rmmod.c my-kmod-11-subs/tools/rmmod.c
+--- my-kmod-11/tools/rmmod.c	2013-05-29 17:32:36.229322140 +0800
++++ my-kmod-11-subs/tools/rmmod.c	2013-06-02 00:21:41.924460185 +0800
+@@ -45,7 +45,17 @@
+ 	{NULL, 0, 0, 0}
+ };
+ 
+-// help.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 负责打印该命令的帮助提示信息，通过 -h 参数可以显示 */
+ static void help(void)
+ {
+ 	printf("Usage:\n"
+@@ -61,7 +71,30 @@
+ 		program_invocation_short_name);
+ }
+ 
+-// check_module_inuse.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * 检查模块是否正在使用，通过引用计数来帮助判断是否真正需要卸载模块 
++ * 主要用到的函数接口
++ * - kmod_module_get_initstate()
++ * - kmod_module_get_name()
++ * - kmod_module_get_holders()
++ * - kmod_list_foreach()
++ * - kmod_module_get_module()
++ * - kmod_module_unref()
++ * - kmod_module_unref_list()
++ * - kmod_module_get_refcnt()
++ * 其中 最后通过 kmod_module_get_refcnt() 函数可以得到模块当前的引用计数
++ */
++
+ static int check_module_inuse(struct kmod_module *mod) {
+ 	struct kmod_list *holders;
+ 
+@@ -96,7 +129,30 @@
+ 	return 0;
+ }
+ 
+-// do_rmmod.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * rmmod 函数的真正实现，通过 getopt_long 分析传入参数，
++ * 通过调用 libkmod 的接口，实现 rmmod 命令
++ * 主要使用的接口包括
++ * - log_open()
++ * - kmod_new()
++ * - log_setup_kmod_log()
++ * - kmod_module_new_from_path()
++ * - check_module_inuse()
++ * - kmod_module_remove_module()
++ * - kmod_module_unref()
++ * - kmod_unref()
++ * - log_close()
++ */ 
+ static int do_rmmod(int argc, char *argv[])
+ {
+ 	struct kmod_ctx *ctx;
+@@ -194,7 +250,22 @@
+ 	return r == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
+ }
+ 
+-// kmod_cmd_compat_xxx.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
++ * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
++ * 这个结构体中还有一个 cmd 成员，是一个函数指针，
++ * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx
++ */
+ const struct kmod_cmd kmod_cmd_compat_rmmod = {
+ 	.name = "rmmod",
+ 	.cmd = do_rmmod,

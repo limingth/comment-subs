@@ -1,0 +1,8 @@
+/* 
+ * 测试 insert 模块功能 
+ * 其中用到了如下 libkmod 函数
+ *	- kmod_new()
+ *	- kmod_module_new_from_path()
+ *	- kmod_module_insert_module()
+ *	- kmod_unref()
+ */

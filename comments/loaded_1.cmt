@@ -1,0 +1,15 @@
+/* 
+ * 测试 list 模块功能 
+ * 其中用到了如下 libkmod 函数
+ *	- kmod_new()
+ *	- kmod_module_new_from_loaded()
+ *	- kmod_list_foreach()
+ *	- kmod_module_get_module()
+ *	- kmod_module_get_name()
+ *	- kmod_module_get_refcnt()
+ *	- kmod_module_get_size()
+ *	- kmod_module_get_holders()
+ *	- kmod_module_unref_list()
+ *	- kmod_module_unref()
+ *	- kmod_unref()
+ */

@@ -92,6 +92,7 @@ const struct kmod_cmd kmod_cmd_compat_lsmod = {
 	.help = "compat lsmod command",
 };
 
+// kmod_cmd_compat_xxx.cmt
 const struct kmod_cmd kmod_cmd_list = {
 	.name = "list",
 	.cmd = do_lsmod,

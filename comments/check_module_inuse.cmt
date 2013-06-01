@@ -1,0 +1,14 @@
+/*
+ * 检查模块是否正在使用，通过引用计数来帮助判断是否真正需要卸载模块 
+ * 主要用到的函数接口
+ * - kmod_module_get_initstate()
+ * - kmod_module_get_name()
+ * - kmod_module_get_holders()
+ * - kmod_list_foreach()
+ * - kmod_module_get_module()
+ * - kmod_module_unref()
+ * - kmod_module_unref_list()
+ * - kmod_module_get_refcnt()
+ * 其中 最后通过 kmod_module_get_refcnt() 函数可以得到模块当前的引用计数
+ */
+

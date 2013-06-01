@@ -1,0 +1,17 @@
+/* 
+ * 真正能够完成一个模块的卸载操作的函数，也是一个内部的static函数，
+ * 因此仅在 modprobe.c 中使用
+ * 其中用到了 libkmod 的一些接口，如下
+ *	- kmod_module_get_module()
+ *	- kmod_module_get_softdeps()
+ *	- kmod_module_get_remove_commands()
+ *	- kmod_module_get_initstate()
+ *	- rmmod_do_deps_list()
+ *	- kmod_module_get_dependencies()
+ *	- kmod_module_get_refcnt()
+ *	- rmmod_do_remove_module()		*
+ *	- command_do()
+ *	- kmod_module_unref_list();
+ * 删除/卸载模块的核心调用是 rmmod_do_remove_module() 
+ * 这个函数也是在 modprobe 模块内部的一个 static 函数，不对外。
+ */

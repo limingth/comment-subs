@@ -1,29 +1,35 @@
-#! /bin/bash
+#! /bin/sh
 
-function subs_file()
+ROOT=$PWD
+CMT=$ROOT/comments
+PUBCMT=pub.cmt
+
+subs_files()
 {
 	count=`expr ${count} + 1`
-	echo "    " $count: subs file $i
+	echo "    " $count: subs file .${PWD##$ROOT}/$1
 
 	FILE=$1
 	cat $FILE > $FILE.tmp
 
+	cmt_files=`grep "^// .*.cmt" $FILE | awk '{ print $2 ;}'`
+	echo "\t\t" find [$cmt_files] in $1
+	touch $FILE.tmp
+
 	for cmt_file in $cmt_files
 	do
-		# echo substitute $cmt_file
+		echo -n "\t\t" -\> substitute $cmt_file ...
 		cat $CMT/$PUBCMT $CMT/$cmt_file > cmt.tmp
-		sed '/'$cmt_file'/r cmt.tmp' $FILE.tmp > $FILE.tmp2
-		sed '/'$cmt_file'/d' $FILE.tmp2 > $FILE.tmp 
+		sed '/'$cmt_file'/r cmt.tmp' $FILE > $FILE.tmp
+		sed '/'$cmt_file'/d' $FILE.tmp > $FILE
 		rm cmt.tmp
+		echo " ok!" 
 	done
 
-	# cat $FILE.tmp
-	cp $FILE.tmp $FILE
 	rm $FILE.tmp
-	rm $FILE.tmp2
 }
 
-function subs_dir()
+subs_dir()
 {
 	all=`ls .`
 
@@ -34,9 +40,9 @@ function subs_dir()
 			# echo "   " \* checking file $i
 			cfile=`echo $i | awk -F. '{print $NF}'`
 			# echo $cfile
-			if [ "$cfile" == "c" ]
+			if [ "$cfile" = "c" ]
 			then 
-				subs_file $i
+				subs_files $i
 			fi 
 		fi
 
@@ -50,9 +56,6 @@ function subs_dir()
 	done
 }
 
-ROOT=$PWD
-CMT=$ROOT/comments
-PUBCMT=pub.cmt
 
 echo Total \*.c files
 find $1 -name "*.c" | wc -l
@@ -63,10 +66,10 @@ echo $cmt_files
 cd ..
 
 SRC=$1
-DST=$1_subs
+DST=$1-subs
 echo $DST
 
-if [ "$1" == "" ]
+if [ "$1" = "" ]
 then
 	echo Your must enter the dir name 
 	echo For example: ./s.sh testdir
@@ -78,6 +81,7 @@ mkdir $DST
 cp $SRC/* $DST -r
 
 cd $DST
+DIR=$DIR/$1
 subs_dir 
 cd ..
 

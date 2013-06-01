@@ -362,6 +362,7 @@ static bool is_module_filename(const char *name)
 	return false;
 }
 
+// do_modinfo.cmt
 static int do_modinfo(int argc, char *argv[])
 {
 	struct kmod_ctx *ctx;
@@ -464,6 +465,7 @@ static int do_modinfo(int argc, char *argv[])
 	return err >= 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
+// kmod_cmd_compat_xxx.cmt
 const struct kmod_cmd kmod_cmd_compat_modinfo = {
 	.name = "modinfo",
 	.cmd = do_modinfo,

@@ -1,0 +1,12 @@
+/* 
+ * modinfo 函数的真正实现，通过 getopt_long 分析传入参数，
+ * 通过调用 libkmod 的接口，实现 modinfo 命令
+ * 主要使用的接口包括
+ * - kmod_new()
+ * - kmod_unref()
+ * 以下接口是在这个函数中调用的，在当前文件内部通过 static 实现的内部函数
+ * 	- is_module_filename()
+ * 	- modinfo_path_do()
+ * 	- modinfo_alias_do()
+ */
+ 

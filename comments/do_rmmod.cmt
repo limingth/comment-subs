@@ -1,0 +1,14 @@
+/* 
+ * rmmod 函数的真正实现，通过 getopt_long 分析传入参数，
+ * 通过调用 libkmod 的接口，实现 rmmod 命令
+ * 主要使用的接口包括
+ * - log_open()
+ * - kmod_new()
+ * - log_setup_kmod_log()
+ * - kmod_module_new_from_path()
+ * - check_module_inuse()
+ * - kmod_module_remove_module()
+ * - kmod_module_unref()
+ * - kmod_unref()
+ * - log_close()
+ */ 

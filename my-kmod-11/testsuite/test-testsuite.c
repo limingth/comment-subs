@@ -167,4 +167,5 @@ static const struct test *tests[] = {
 	NULL,
 };
 
+// TESTSUITE_MAIN.cmt
 TESTSUITE_MAIN(tests);

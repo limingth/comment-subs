@@ -1,0 +1,10 @@
+/* 
+ * insmod 函数的真正实现，通过 getopt_long 分析传入参数，
+ * 通过调用 libkmod 的接口，实现 insmod 命令
+ * 主要使用的接口包括
+ * - kmod_new()
+ * - kmod_module_new_from_path()
+ * - kmod_module_insert_module()
+ * - kmod_module_unref()
+ * - kmod_unref()
+ */ 

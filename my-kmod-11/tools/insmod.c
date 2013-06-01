@@ -33,6 +33,7 @@ static const struct option cmdopts[] = {
 	{NULL, 0, 0, 0}
 };
 
+// help.cmt
 static void help(void)
 {
 	printf("Usage:\n"
@@ -43,6 +44,7 @@ static void help(void)
 		program_invocation_short_name);
 }
 
+// mod_strerror.cmt
 static const char *mod_strerror(int err)
 {
 	switch (err) {
@@ -59,6 +61,7 @@ static const char *mod_strerror(int err)
 	}
 }
 
+// do_insmod.cmt
 static int do_insmod(int argc, char *argv[])
 {
 	struct kmod_ctx *ctx;
@@ -151,6 +154,7 @@ end:
 	return err >= 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
+// kmod_cmd_compat_xxx.cmt
 const struct kmod_cmd kmod_cmd_compat_insmod = {
 	.name = "insmod",
 	.cmd = do_insmod,

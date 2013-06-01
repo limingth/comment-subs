@@ -45,6 +45,7 @@ static const struct option cmdopts[] = {
 	{NULL, 0, 0, 0}
 };
 
+// help.cmt
 static void help(void)
 {
 	printf("Usage:\n"
@@ -60,6 +61,7 @@ static void help(void)
 		program_invocation_short_name);
 }
 
+// check_module_inuse.cmt
 static int check_module_inuse(struct kmod_module *mod) {
 	struct kmod_list *holders;
 
@@ -94,6 +96,7 @@ static int check_module_inuse(struct kmod_module *mod) {
 	return 0;
 }
 
+// do_rmmod.cmt
 static int do_rmmod(int argc, char *argv[])
 {
 	struct kmod_ctx *ctx;
@@ -191,6 +194,7 @@ done:
 	return r == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
+// kmod_cmd_compat_xxx.cmt
 const struct kmod_cmd kmod_cmd_compat_rmmod = {
 	.name = "rmmod",
 	.cmd = do_rmmod,

@@ -1,0 +1,17 @@
+/* 
+ * modprobe 函数的真正实现，通过 getopt_long 分析传入参数，
+ * 通过调用 libkmod 的接口，实现 modprobe 命令
+ * 主要使用的接口包括
+ * - log_open()
+ * - kmod_new()
+ * - log_setup_kmod_log()
+ * - kmod_load_resources()
+ * - kmod_unref()
+ * - log_close()
+ * 以下接口是在这个函数中调用的，在当前文件内部通过 static 实现的内部函数
+ * 	- show_config()
+ * 	- show_modversion()
+ * 	- insmod_all()
+ * 	- rmmod_all()
+ *	- insmod()
+ */ 

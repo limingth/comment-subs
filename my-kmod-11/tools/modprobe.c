@@ -285,6 +285,7 @@ end:
 	return ret;
 }
 
+// rmmod_do_remove_module.cmt
 static int rmmod_do_remove_module(struct kmod_module *mod)
 {
 	const char *modname = kmod_module_get_name(mod);
@@ -339,6 +340,7 @@ static int rmmod_do_deps_list(struct kmod_list *list, bool stop_on_errors)
 	return 0;
 }
 
+// rmmod_do_module.cmt
 static int rmmod_do_module(struct kmod_module *mod, bool do_dependencies)
 {
 	const char *modname = kmod_module_get_name(mod);
@@ -414,6 +416,7 @@ error:
 	return err;
 }
 
+// rmmod.cmt
 static int rmmod(struct kmod_ctx *ctx, const char *alias)
 {
 	struct kmod_list *l, *list = NULL;
@@ -440,6 +443,7 @@ static int rmmod(struct kmod_ctx *ctx, const char *alias)
 	return err;
 }
 
+// rmmod_all.cmt
 static int rmmod_all(struct kmod_ctx *ctx, char **args, int nargs)
 {
 	int i, err = 0;
@@ -501,6 +505,7 @@ static void print_action(struct kmod_module *m, bool install,
 		printf("insmod %s %s\n", kmod_module_get_path(m), options);
 }
 
+// insmod.cmt
 static int insmod(struct kmod_ctx *ctx, const char *alias,
 						const char *extra_options)
 {
@@ -576,6 +581,7 @@ static int insmod(struct kmod_ctx *ctx, const char *alias,
 	return err;
 }
 
+// insmod_all.cmt
 static int insmod_all(struct kmod_ctx *ctx, char **args, int nargs)
 {
 	int i, err = 0;
@@ -734,6 +740,7 @@ static char **prepend_options_from_env(int *p_argc, char **orig_argv)
 	return new_argv;
 }
 
+// do_modprobe.cmt
 static int do_modprobe(int argc, char **orig_argv)
 {
 	struct kmod_ctx *ctx;
@@ -932,6 +939,7 @@ done:
 	return err >= 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
+// kmod_cmd_compat_xxx.cmt
 const struct kmod_cmd kmod_cmd_compat_modprobe = {
 	.name = "modprobe",
 	.cmd = do_modprobe,

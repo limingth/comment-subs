@@ -27,6 +27,7 @@
 
 #include "testsuite.h"
 
+// loaded_1.cmt
 static int loaded_1(const struct test *t)
 {
 	struct kmod_ctx *ctx;
@@ -93,4 +94,5 @@ static const struct test *tests[] = {
 	NULL,
 };
 
+// TESTSUITE_MAIN.cmt
 TESTSUITE_MAIN(tests);

@@ -97,6 +97,7 @@ static void parse_retcodes(struct mod *_modules, const char *s)
 	}
 }
 
+// find_module.cmt
 static struct mod *find_module(struct mod *_modules, const char *modname)
 {
 	struct mod *mod;
@@ -134,6 +135,7 @@ TS_EXPORT long delete_module(const char *name, unsigned int flags);
  * Default behavior is to exit successfully. If this is not the intended
  * behavior, set TESTSUITE_DELETE_MODULE_RETCODES env var.
  */
+// delete_module.cmt
 long delete_module(const char *modname, unsigned int flags)
 {
 	struct mod *mod;
@@ -149,6 +151,7 @@ long delete_module(const char *modname, unsigned int flags)
 
 /* the test is going away anyway, but lets keep valgrind happy */
 void free_resources(void) __attribute__((destructor));
+// free_resources.cmt
 void free_resources(void)
 {
 	while (modules) {

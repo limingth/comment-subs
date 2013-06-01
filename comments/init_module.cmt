@@ -1,0 +1,13 @@
+/*
+ * init_module 默认操作是模仿在内核中的 init_module 
+ * 其中主要用到了 kmod_elf 模块的接口
+ *	- kmod_elf_new()
+ *	- kmod_elf_get_section()
+ *	- kmod_elf_unref()
+ * 以下函数是 static 内部实现
+ *	- init_retcodes()
+ *	- elf_identify()
+ *	- find_module()
+ *	- module_is_inkernel()
+ *	- create_sysfs_files()
+ */

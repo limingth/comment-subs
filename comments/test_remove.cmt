@@ -1,0 +1,8 @@
+/* 
+ * 测试 remove 模块功能 
+ * 其中用到了如下 libkmod 函数
+ *	- kmod_new()
+ *	- kmod_module_new_from_name()
+ *	- kmod_module_remove_module()
+ *	- kmod_unref()
+ */

@@ -1,0 +1,5 @@
+/* 
+ * 先通过 find_module 找到对应 modname 的 mod 指针，
+ * 如果没有这个 modname，则返回值为 0
+ * 如果找到了，则返回 mod->ret ，并给 errno 赋值
+ */

@@ -1,0 +1,1204 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ANSI_HIGHLIGHT_GREEN_ON	testsuite/testsuite.c	/^static const char *ANSI_HIGHLIGHT_GREEN_ON = "\\x1B[1;32m";$/;"	v	file:
+ANSI_HIGHLIGHT_OFF	testsuite/testsuite.c	/^static const char *ANSI_HIGHLIGHT_OFF = "\\x1B[0m";$/;"	v	file:
+ANSI_HIGHLIGHT_RED_ON	testsuite/testsuite.c	/^static const char *ANSI_HIGHLIGHT_RED_ON =  "\\x1B[1;31m";$/;"	v	file:
+ARRAY_SIZE	libkmod/macro.h	71;"	d
+BUF_STEP	libkmod/libkmod-index.c	147;"	d	file:
+BUILD_ASSERT	libkmod/macro.h	24;"	d
+BUILD_ASSERT_OR_ZERO	libkmod/macro.h	62;"	d
+CFG_BUILTIN_KEY	tools/depmod.c	/^static const char CFG_BUILTIN_KEY[] = "built-in";$/;"	v	file:
+CHECK_ERR_AND_FINISH	libkmod/libkmod-module.c	469;"	d	file:
+CHECK_ERR_AND_FINISH	libkmod/libkmod-module.c	559;"	d	file:
+CONFIG_TYPE_ALIAS	libkmod/libkmod-config.c	/^	CONFIG_TYPE_ALIAS,$/;"	e	enum:config_type	file:
+CONFIG_TYPE_BLACKLIST	libkmod/libkmod-config.c	/^	CONFIG_TYPE_BLACKLIST = 0,$/;"	e	enum:config_type	file:
+CONFIG_TYPE_INSTALL	libkmod/libkmod-config.c	/^	CONFIG_TYPE_INSTALL,$/;"	e	enum:config_type	file:
+CONFIG_TYPE_OPTION	libkmod/libkmod-config.c	/^	CONFIG_TYPE_OPTION,$/;"	e	enum:config_type	file:
+CONFIG_TYPE_REMOVE	libkmod/libkmod-config.c	/^	CONFIG_TYPE_REMOVE,$/;"	e	enum:config_type	file:
+CONFIG_TYPE_SOFTDEP	libkmod/libkmod-config.c	/^	CONFIG_TYPE_SOFTDEP,$/;"	e	enum:config_type	file:
+CRIT	tools/log.h	30;"	d
+CreateProcess	build-aux/ltmain.sh	/^   CreateProcess().  We must quote the arguments since Win32 CreateProcess()$/;"	f
+DBG	libkmod/libkmod-private.h	22;"	d
+DBG	libkmod/libkmod-private.h	24;"	d
+DBG	libkmod/libkmod-private.h	29;"	d
+DBG	tools/log.h	34;"	d
+DEFAULT_VERBOSE	tools/depmod.c	40;"	d	file:
+DEFAULT_VERBOSE	tools/modprobe.c	44;"	d	file:
+DEFAULT_VERBOSE	tools/rmmod.c	33;"	d	file:
+DEFINE_TEST	testsuite/testsuite.h	119;"	d
+ELFDBG	libkmod/libkmod-elf.c	78;"	d	file:
+ELFDBG	libkmod/libkmod-elf.c	94;"	d	file:
+ERR	libkmod/libkmod-private.h	27;"	d
+ERR	libkmod/libkmod-private.h	31;"	d
+ERR	testsuite/init_module.c	39;"	d	file:
+ERR	testsuite/test-blacklist.c	33;"	d	file:
+ERR	testsuite/testsuite.h	116;"	d
+ERR	tools/log.h	31;"	d
+EXPR_BUILD_ASSERT	libkmod/macro.h	27;"	d
+INDEX_CHILDMAX	libkmod/libkmod-index.c	36;"	d	file:
+INDEX_CHILDMAX	tools/depmod.c	245;"	d	file:
+INDEX_MAGIC	libkmod/libkmod-index.h	31;"	d
+INDEX_MAGIC	tools/depmod.c	164;"	d	file:
+INDEX_NODE_CHILDS	libkmod/libkmod-index.c	/^	INDEX_NODE_CHILDS   = 0x20000000,$/;"	e	enum:node_offset	file:
+INDEX_NODE_CHILDS	tools/depmod.c	/^	INDEX_NODE_CHILDS   = 0x20000000,$/;"	e	enum:node_offset	file:
+INDEX_NODE_FLAGS	libkmod/libkmod-index.c	/^	INDEX_NODE_FLAGS    = 0xF0000000, \/* Flags in high nibble *\/$/;"	e	enum:node_offset	file:
+INDEX_NODE_FLAGS	tools/depmod.c	/^	INDEX_NODE_FLAGS    = 0xF0000000, \/* Flags in high nibble *\/$/;"	e	enum:node_offset	file:
+INDEX_NODE_MASK	libkmod/libkmod-index.c	/^	INDEX_NODE_MASK     = 0x0FFFFFFF, \/* Offset value *\/$/;"	e	enum:node_offset	file:
+INDEX_NODE_MASK	tools/depmod.c	/^	INDEX_NODE_MASK     = 0x0FFFFFFF, \/* Offset value *\/$/;"	e	enum:node_offset	file:
+INDEX_NODE_PREFIX	libkmod/libkmod-index.c	/^	INDEX_NODE_PREFIX   = 0x80000000,$/;"	e	enum:node_offset	file:
+INDEX_NODE_PREFIX	tools/depmod.c	/^	INDEX_NODE_PREFIX   = 0x80000000,$/;"	e	enum:node_offset	file:
+INDEX_NODE_VALUES	libkmod/libkmod-index.c	/^	INDEX_NODE_VALUES = 0x40000000,$/;"	e	enum:node_offset	file:
+INDEX_NODE_VALUES	tools/depmod.c	/^	INDEX_NODE_VALUES = 0x40000000,$/;"	e	enum:node_offset	file:
+INDEX_PRIORITY_MIN	libkmod/libkmod-index.h	102;"	d
+INDEX_PRIORITY_MIN	tools/depmod.c	235;"	d	file:
+INDEX_VERSION	libkmod/libkmod-index.h	40;"	d
+INDEX_VERSION	tools/depmod.c	173;"	d	file:
+INDEX_VERSION_MAJOR	libkmod/libkmod-index.h	38;"	d
+INDEX_VERSION_MAJOR	tools/depmod.c	171;"	d	file:
+INDEX_VERSION_MINOR	libkmod/libkmod-index.h	39;"	d
+INDEX_VERSION_MINOR	tools/depmod.c	172;"	d	file:
+INF	tools/log.h	33;"	d
+INFO	libkmod/libkmod-private.h	26;"	d
+INFO	libkmod/libkmod-private.h	30;"	d
+KCMD_LINE_SIZE	libkmod/libkmod-private.h	36;"	d
+KMOD_ELF_32	libkmod/libkmod-elf.c	/^	KMOD_ELF_32 = (1 << 1),$/;"	e	enum:kmod_elf_class	file:
+KMOD_ELF_64	libkmod/libkmod-elf.c	/^	KMOD_ELF_64 = (1 << 2),$/;"	e	enum:kmod_elf_class	file:
+KMOD_ELF_LSB	libkmod/libkmod-elf.c	/^	KMOD_ELF_LSB = (1 << 3),$/;"	e	enum:kmod_elf_class	file:
+KMOD_ELF_MSB	libkmod/libkmod-elf.c	/^	KMOD_ELF_MSB = (1 << 4)$/;"	e	enum:kmod_elf_class	file:
+KMOD_EXPORT	libkmod/libkmod-private.h	34;"	d
+KMOD_EXT_UNC	tools/depmod.c	43;"	d	file:
+KMOD_FILTER_BLACKLIST	libkmod/libkmod.h	/^	KMOD_FILTER_BLACKLIST = 0x00001,$/;"	e	enum:kmod_filter
+KMOD_FILTER_BUILTIN	libkmod/libkmod.h	/^	KMOD_FILTER_BUILTIN = 0x00002,$/;"	e	enum:kmod_filter
+KMOD_HASH_SIZE	libkmod/libkmod.c	39;"	d	file:
+KMOD_INDEX_MODULES_ALIAS	libkmod/libkmod.h	/^	KMOD_INDEX_MODULES_ALIAS,$/;"	e	enum:kmod_index
+KMOD_INDEX_MODULES_BUILTIN	libkmod/libkmod.h	/^	KMOD_INDEX_MODULES_BUILTIN,$/;"	e	enum:kmod_index
+KMOD_INDEX_MODULES_DEP	libkmod/libkmod.h	/^	KMOD_INDEX_MODULES_DEP = 0,$/;"	e	enum:kmod_index
+KMOD_INDEX_MODULES_SYMBOL	libkmod/libkmod.h	/^	KMOD_INDEX_MODULES_SYMBOL,$/;"	e	enum:kmod_index
+KMOD_INSERT_FORCE_MODVERSION	libkmod/libkmod.h	/^	KMOD_INSERT_FORCE_MODVERSION = 0x2,$/;"	e	enum:kmod_insert
+KMOD_INSERT_FORCE_VERMAGIC	libkmod/libkmod.h	/^	KMOD_INSERT_FORCE_VERMAGIC = 0x1,$/;"	e	enum:kmod_insert
+KMOD_LRU_MAX	libkmod/libkmod.c	40;"	d	file:
+KMOD_MODULE_BUILTIN	libkmod/libkmod.h	/^	KMOD_MODULE_BUILTIN = 0,$/;"	e	enum:kmod_module_initstate
+KMOD_MODULE_COMING	libkmod/libkmod.h	/^	KMOD_MODULE_COMING,$/;"	e	enum:kmod_module_initstate
+KMOD_MODULE_GOING	libkmod/libkmod.h	/^	KMOD_MODULE_GOING,$/;"	e	enum:kmod_module_initstate
+KMOD_MODULE_LIVE	libkmod/libkmod.h	/^	KMOD_MODULE_LIVE,$/;"	e	enum:kmod_module_initstate
+KMOD_PROBE_APPLY_BLACKLIST	libkmod/libkmod.h	/^	KMOD_PROBE_APPLY_BLACKLIST =		0x20000,$/;"	e	enum:kmod_probe
+KMOD_PROBE_APPLY_BLACKLIST_ALIAS_ONLY	libkmod/libkmod.h	/^	KMOD_PROBE_APPLY_BLACKLIST_ALIAS_ONLY =	0x40000,$/;"	e	enum:kmod_probe
+KMOD_PROBE_APPLY_BLACKLIST_ALL	libkmod/libkmod.h	/^	KMOD_PROBE_APPLY_BLACKLIST_ALL =	0x10000,$/;"	e	enum:kmod_probe
+KMOD_PROBE_DRY_RUN	libkmod/libkmod.h	/^	KMOD_PROBE_DRY_RUN =			0x00010,$/;"	e	enum:kmod_probe
+KMOD_PROBE_FAIL_ON_LOADED	libkmod/libkmod.h	/^	KMOD_PROBE_FAIL_ON_LOADED =		0x00020,$/;"	e	enum:kmod_probe
+KMOD_PROBE_FORCE_MODVERSION	libkmod/libkmod.h	/^	KMOD_PROBE_FORCE_MODVERSION =		0x00002,$/;"	e	enum:kmod_probe
+KMOD_PROBE_FORCE_VERMAGIC	libkmod/libkmod.h	/^	KMOD_PROBE_FORCE_VERMAGIC =		0x00001,$/;"	e	enum:kmod_probe
+KMOD_PROBE_IGNORE_COMMAND	libkmod/libkmod.h	/^	KMOD_PROBE_IGNORE_COMMAND =		0x00004,$/;"	e	enum:kmod_probe
+KMOD_PROBE_IGNORE_LOADED	libkmod/libkmod.h	/^	KMOD_PROBE_IGNORE_LOADED =		0x00008,$/;"	e	enum:kmod_probe
+KMOD_REMOVE_FORCE	libkmod/libkmod.h	/^	KMOD_REMOVE_FORCE = O_TRUNC,$/;"	e	enum:kmod_remove
+KMOD_REMOVE_NOWAIT	libkmod/libkmod.h	/^	KMOD_REMOVE_NOWAIT = O_NONBLOCK,$/;"	e	enum:kmod_remove
+KMOD_RESOURCES_MUST_RECREATE	libkmod/libkmod.h	/^	KMOD_RESOURCES_MUST_RECREATE = 2,$/;"	e	enum:kmod_resources
+KMOD_RESOURCES_MUST_RELOAD	libkmod/libkmod.h	/^	KMOD_RESOURCES_MUST_RELOAD = 1,$/;"	e	enum:kmod_resources
+KMOD_RESOURCES_OK	libkmod/libkmod.h	/^	KMOD_RESOURCES_OK = 0,$/;"	e	enum:kmod_resources
+KMOD_SYMBOL_GLOBAL	libkmod/libkmod.h	/^	KMOD_SYMBOL_GLOBAL = 'G',$/;"	e	enum:kmod_symbol_bind
+KMOD_SYMBOL_LOCAL	libkmod/libkmod.h	/^	KMOD_SYMBOL_LOCAL = 'L',$/;"	e	enum:kmod_symbol_bind
+KMOD_SYMBOL_NONE	libkmod/libkmod.h	/^	KMOD_SYMBOL_NONE = '\\0',$/;"	e	enum:kmod_symbol_bind
+KMOD_SYMBOL_UNDEF	libkmod/libkmod.h	/^	KMOD_SYMBOL_UNDEF = 'U'$/;"	e	enum:kmod_symbol_bind
+KMOD_SYMBOL_WEAK	libkmod/libkmod.h	/^	KMOD_SYMBOL_WEAK = 'W',$/;"	e	enum:kmod_symbol_bind
+LOAD_HEADER	libkmod/libkmod-elf.c	307;"	d	file:
+LOAD_HEADER	libkmod/libkmod-elf.c	324;"	d	file:
+LOG	testsuite/testsuite.h	114;"	d
+LOG	tools/modprobe.c	42;"	d	file:
+MODULES_ORDER_LIB_MODULES	testsuite/test-depmod.c	31;"	d	file:
+MODULES_ORDER_ROOTFS	testsuite/test-depmod.c	30;"	d	file:
+MODULES_ORDER_UNAME	testsuite/test-depmod.c	29;"	d	file:
+MODULE_NAME_LEN	testsuite/stripped-module.h	14;"	d
+MODULE_NAME_OFFSET_32	testsuite/stripped-module.h	29;"	d
+MODULE_NAME_OFFSET_64	testsuite/stripped-module.h	28;"	d
+MODULE_STATE_COMING	testsuite/stripped-module.h	/^	MODULE_STATE_COMING,$/;"	e	enum:module_state
+MODULE_STATE_GOING	testsuite/stripped-module.h	/^	MODULE_STATE_GOING,$/;"	e	enum:module_state
+MODULE_STATE_LIVE	testsuite/stripped-module.h	/^	MODULE_STATE_LIVE,$/;"	e	enum:module_state
+MODVERSION_SEC_SIZE	libkmod/libkmod-elf.c	489;"	d	file:
+NOFAIL	libkmod/macro.h	74;"	d
+NSEC_PER_USEC	libkmod/libkmod-util.c	312;"	d	file:
+OVERRIDE_LIBDIR	testsuite/testsuite.c	50;"	d	file:
+READV	libkmod/libkmod-elf.c	1073;"	d	file:
+READV	libkmod/libkmod-elf.c	1087;"	d	file:
+READV	libkmod/libkmod-elf.c	242;"	d	file:
+READV	libkmod/libkmod-elf.c	256;"	d	file:
+READV	libkmod/libkmod-elf.c	304;"	d	file:
+READV	libkmod/libkmod-elf.c	325;"	d	file:
+READV	libkmod/libkmod-elf.c	771;"	d	file:
+READV	libkmod/libkmod-elf.c	781;"	d	file:
+READV	libkmod/libkmod-elf.c	812;"	d	file:
+READV	libkmod/libkmod-elf.c	826;"	d	file:
+READV	libkmod/libkmod-elf.c	978;"	d	file:
+READV	libkmod/libkmod-elf.c	992;"	d	file:
+READ_STEP	libkmod/libkmod-file.c	172;"	d	file:
+SHOW	tools/depmod.c	132;"	d	file:
+SHOW	tools/modprobe.c	157;"	d	file:
+STT_REGISTER	libkmod/libkmod-elf.c	884;"	d	file:
+S_TC_DELETE_MODULE_RETCODES	testsuite/testsuite.h	73;"	d
+S_TC_INIT_MODULE_RETCODES	testsuite/testsuite.h	72;"	d
+S_TC_ROOTFS	testsuite/testsuite.h	70;"	d
+S_TC_UNAME_R	testsuite/testsuite.h	71;"	d
+TC_DELETE_MODULE_RETCODES	testsuite/testsuite.h	/^	TC_DELETE_MODULE_RETCODES,$/;"	e	enum:test_config
+TC_INIT_MODULE_RETCODES	testsuite/testsuite.h	/^	TC_INIT_MODULE_RETCODES,$/;"	e	enum:test_config
+TC_ROOTFS	testsuite/testsuite.h	/^	TC_ROOTFS = 0,$/;"	e	enum:test_config
+TC_UNAME_R	testsuite/testsuite.h	/^	TC_UNAME_R,$/;"	e	enum:test_config
+TESTSUITE_MAIN	testsuite/testsuite.h	126;"	d
+TEST_TIMEOUT_USEC	testsuite/testsuite.c	64;"	d	file:
+TEST_UNAME	testsuite/test-dependencies.c	29;"	d	file:
+TEST_UNAME	testsuite/test-testsuite.c	34;"	d	file:
+TS_EXPORT	testsuite/testsuite.h	111;"	d
+USEC_PER_MSEC	testsuite/testsuite.c	63;"	d	file:
+USEC_PER_SEC	libkmod/libkmod-util.c	311;"	d	file:
+USEC_PER_SEC	testsuite/testsuite.c	62;"	d	file:
+WARN	testsuite/testsuite.h	115;"	d
+WRAP_1ARG	testsuite/path.c	99;"	d	file:
+WRAP_2ARGS	testsuite/path.c	116;"	d	file:
+WRAP_OPEN	testsuite/path.c	133;"	d	file:
+WRAP_VERSTAT	testsuite/path.c	161;"	d	file:
+WRITEV	libkmod/libkmod-elf.c	561;"	d	file:
+WRITEV	libkmod/libkmod-elf.c	572;"	d	file:
+WRN	tools/log.h	32;"	d
+_KMOD_INDEX_MODULES_SIZE	libkmod/libkmod.c	41;"	d	file:
+_KMOD_INDEX_PAD	libkmod/libkmod.h	/^	_KMOD_INDEX_PAD = (1 << 31),$/;"	e	enum:kmod_index
+_KMOD_MODULE_PAD	libkmod/libkmod.h	/^	_KMOD_MODULE_PAD = (1 << 31),$/;"	e	enum:kmod_module_initstate
+_LIBKMOD_H_	libkmod/libkmod.h	23;"	d
+_LOG	testsuite/testsuite.h	113;"	d
+_TC_LAST	testsuite/testsuite.h	/^	_TC_LAST,$/;"	e	enum:test_config
+__kmod_module_fill_softdep	libkmod/libkmod-module.c	/^static int __kmod_module_fill_softdep(struct kmod_module *mod,$/;"	f	file:
+__kmod_module_get_probe_list	libkmod/libkmod-module.c	/^static int __kmod_module_get_probe_list(struct kmod_module *mod,$/;"	f	file:
+__noreturn	testsuite/testsuite.h	155;"	d
+_always_inline_	libkmod/macro.h	82;"	d
+_array_size_chk	libkmod/macro.h	67;"	d
+_elf_dbg	libkmod/libkmod-elf.c	/^static inline void _elf_dbg(const struct kmod_elf *elf, const char *fname, unsigned line, const char *func, const char *fmt, ...)$/;"	f	file:
+_env_config	testsuite/testsuite.c	/^struct _env_config {$/;"	s	file:
+_idx_empty_str	libkmod/libkmod-index.c	/^static const char _idx_empty_str[] = "";$/;"	v	file:
+_index_files	libkmod/libkmod.c	/^static struct _index_files {$/;"	s	file:
+_must_check_	libkmod/macro.h	79;"	d
+_printf_format_	libkmod/macro.h	80;"	d
+_show	tools/depmod.c	/^static inline void _show(const char *fmt, ...)$/;"	f	file:
+_show	tools/modprobe.c	/^static inline void _show(const char *fmt, ...)$/;"	f	file:
+_unused_	libkmod/macro.h	81;"	d
+ac_fn_c_check_func	configure	/^ac_fn_c_check_func ()$/;"	f
+ac_fn_c_check_header_compile	configure	/^ac_fn_c_check_header_compile ()$/;"	f
+ac_fn_c_check_header_mongrel	configure	/^ac_fn_c_check_header_mongrel ()$/;"	f
+ac_fn_c_check_member	configure	/^ac_fn_c_check_member ()$/;"	f
+ac_fn_c_try_compile	configure	/^ac_fn_c_try_compile ()$/;"	f
+ac_fn_c_try_cpp	configure	/^ac_fn_c_try_cpp ()$/;"	f
+ac_fn_c_try_link	configure	/^ac_fn_c_try_link ()$/;"	f
+ac_fn_c_try_run	configure	/^ac_fn_c_try_run ()$/;"	f
+add_param	tools/modinfo.c	/^static struct param *add_param(const char *name, int namelen, const char *param, int paramlen, const char *type, int typelen, struct param **list)$/;"	f	file:
+add_value	libkmod/libkmod-index.c	/^static int add_value(struct index_value **values,$/;"	f	file:
+address	libkmod/libkmod-module.c	/^	unsigned long address;$/;"	m	struct:kmod_module_section	file:
+alias	libkmod/libkmod-module.c	/^	char *alias; \/* only set if this module was created from an alias *\/$/;"	m	struct:kmod_module	file:
+alias_1	testsuite/test-alias.c	/^static int alias_1(const struct test *t)$/;"	f	file:
+alias_normalize	libkmod/libkmod-util.c	/^inline int alias_normalize(const char *alias, char buf[PATH_MAX], size_t *len)$/;"	f
+aliases	libkmod/libkmod-private.h	/^	struct kmod_list *aliases;$/;"	m	struct:kmod_config	typeref:struct:kmod_config::kmod_list
+array	libkmod/libkmod-array.h	/^	void **array;$/;"	m	struct:array
+array	libkmod/libkmod-array.h	/^struct array {$/;"	s
+array_append	libkmod/libkmod-array.c	/^int array_append(struct array *array, const void *element)$/;"	f
+array_append_unique	libkmod/libkmod-array.c	/^int array_append_unique(struct array *array, const void *element)$/;"	f
+array_free_array	libkmod/libkmod-array.c	/^void array_free_array(struct array *array) {$/;"	f
+array_init	libkmod/libkmod-array.c	/^void array_init(struct array *array, size_t step)$/;"	f
+array_pop	libkmod/libkmod-array.c	/^void array_pop(struct array *array) {$/;"	f
+array_remove_at	libkmod/libkmod-array.c	/^int array_remove_at(struct array *array, unsigned int pos)$/;"	f
+array_sort	libkmod/libkmod-array.c	/^void array_sort(struct array *array, int (*cmp)(const void *a, const void *b))$/;"	f
+as_fn_append	configure	/^  as_fn_append ()$/;"	f
+as_fn_arith	configure	/^  as_fn_arith ()$/;"	f
+as_fn_error	configure	/^as_fn_error ()$/;"	f
+as_fn_executable_p	configure	/^as_fn_executable_p ()$/;"	f
+as_fn_exit	configure	/^as_fn_exit ()$/;"	f
+as_fn_failure	configure	/^as_fn_failure () { as_fn_return 1; }$/;"	f
+as_fn_mkdir_p	configure	/^as_fn_mkdir_p ()$/;"	f
+as_fn_ret_failure	configure	/^as_fn_ret_failure () { return 1; }$/;"	f
+as_fn_ret_success	configure	/^as_fn_ret_success () { return 0; }$/;"	f
+as_fn_set_status	configure	/^as_fn_set_status ()$/;"	f
+as_fn_success	configure	/^as_fn_success () { as_fn_return 0; }$/;"	f
+as_fn_unset	configure	/^as_fn_unset ()$/;"	f
+baselen	tools/depmod.c	/^	size_t baselen; \/* points to start of basename\/filename *\/$/;"	m	struct:mod	file:
+bind	libkmod/libkmod-module.c	/^	uint8_t bind;$/;"	m	struct:kmod_module_dependency_symbol	file:
+bind	libkmod/libkmod-private.h	/^	enum kmod_symbol_bind bind;$/;"	m	struct:kmod_modversion	typeref:enum:kmod_modversion::kmod_symbol_bind
+blacklist_1	testsuite/test-blacklist.c	/^static int blacklist_1(const struct test *t)$/;"	f	file:
+blacklists	libkmod/libkmod-private.h	/^	struct kmod_list *blacklists;$/;"	m	struct:kmod_config	typeref:struct:kmod_config::kmod_list
+bucket	libkmod/libkmod-hash.h	/^	unsigned int bucket;$/;"	m	struct:hash_iter
+buckets	libkmod/libkmod-hash.c	/^	struct hash_bucket buckets[];$/;"	m	struct:hash	typeref:struct:hash::hash_bucket	file:
+buf_clear	libkmod/libkmod-index.c	/^static void buf_clear(struct buffer *buf)$/;"	f	file:
+buf_freadchars	libkmod/libkmod-index.c	/^static unsigned buf_freadchars(struct buffer *buf, FILE *in)$/;"	f	file:
+buf_grow	libkmod/libkmod-index.c	/^static bool buf_grow(struct buffer *buf, size_t newsize)$/;"	f	file:
+buf_init	libkmod/libkmod-index.c	/^static void buf_init(struct buffer *buf)$/;"	f	file:
+buf_popchar	libkmod/libkmod-index.c	/^static void buf_popchar(struct buffer *buf)$/;"	f	file:
+buf_popchars	libkmod/libkmod-index.c	/^static void buf_popchars(struct buffer *buf, unsigned n)$/;"	f	file:
+buf_pushchar	libkmod/libkmod-index.c	/^static bool buf_pushchar(struct buffer *buf, char ch)$/;"	f	file:
+buf_pushchars	libkmod/libkmod-index.c	/^static unsigned buf_pushchars(struct buffer *buf, const char *str)$/;"	f	file:
+buf_release	libkmod/libkmod-index.c	/^static void buf_release(struct buffer *buf)$/;"	f	file:
+buf_steal	libkmod/libkmod-index.c	/^static char *buf_steal(struct buffer *buf)$/;"	f	file:
+buf_str	libkmod/libkmod-index.c	/^static const char *buf_str(struct buffer *buf)$/;"	f	file:
+buffer	libkmod/libkmod-index.c	/^struct buffer {$/;"	s	file:
+builtin	libkmod/libkmod-module.c	/^	bool builtin : 1;$/;"	m	struct:kmod_module	file:
+builtin	tools/depmod.c	/^	uint8_t builtin;$/;"	m	struct:cfg_search	file:
+bytes	libkmod/libkmod-index.c	/^	char *bytes;$/;"	m	struct:buffer	file:
+cfg	tools/depmod.c	/^	const struct cfg *cfg;$/;"	m	struct:depmod	typeref:struct:depmod::cfg	file:
+cfg	tools/depmod.c	/^struct cfg {$/;"	s	file:
+cfg_file	tools/depmod.c	/^struct cfg_file {$/;"	s	file:
+cfg_file_free	tools/depmod.c	/^static void cfg_file_free(struct cfg_file *f)$/;"	f	file:
+cfg_file_parse	tools/depmod.c	/^static int cfg_file_parse(struct cfg *cfg, const char *filename)$/;"	f	file:
+cfg_files_filter_out	tools/depmod.c	/^static int cfg_files_filter_out(DIR *d, const char *dir, const char *name)$/;"	f	file:
+cfg_files_insert_sorted	tools/depmod.c	/^static int cfg_files_insert_sorted(struct cfg_file ***p_files, size_t *p_n_files,$/;"	f	file:
+cfg_files_list	tools/depmod.c	/^static int cfg_files_list(struct cfg_file ***p_files, size_t *p_n_files,$/;"	f	file:
+cfg_free	tools/depmod.c	/^static void cfg_free(struct cfg *cfg)$/;"	f	file:
+cfg_kernel_matches	tools/depmod.c	/^static int cfg_kernel_matches(const struct cfg *cfg, const char *pattern)$/;"	f	file:
+cfg_load	tools/depmod.c	/^static int cfg_load(struct cfg *cfg, const char * const *cfg_paths)$/;"	f	file:
+cfg_override	tools/depmod.c	/^struct cfg_override {$/;"	s	file:
+cfg_override_add	tools/depmod.c	/^static int cfg_override_add(struct cfg *cfg, const char *modname, const char *subdir)$/;"	f	file:
+cfg_override_free	tools/depmod.c	/^static void cfg_override_free(struct cfg_override *o)$/;"	f	file:
+cfg_search	tools/depmod.c	/^struct cfg_search {$/;"	s	file:
+cfg_search_add	tools/depmod.c	/^static int cfg_search_add(struct cfg *cfg, const char *path, uint8_t builtin)$/;"	f	file:
+cfg_search_free	tools/depmod.c	/^static void cfg_search_free(struct cfg_search *s)$/;"	f	file:
+changed	libkmod/libkmod-elf.c	/^	uint8_t *changed;$/;"	m	struct:kmod_elf	file:
+check_generated_files	testsuite/testsuite.c	/^static bool check_generated_files(const struct test *t)$/;"	f	file:
+check_module_inuse	tools/rmmod.c	/^static int check_module_inuse(struct kmod_module *mod) {$/;"	f	file:
+check_symvers	tools/depmod.c	/^	uint8_t check_symvers;$/;"	m	struct:cfg	file:
+check_type	libkmod/macro.h	31;"	d
+check_type	libkmod/macro.h	38;"	d
+check_types_match	libkmod/macro.h	34;"	d
+check_types_match	libkmod/macro.h	41;"	d
+children	libkmod/libkmod-index.c	/^	uint32_t children[0];$/;"	m	struct:index_node_f	file:
+children	libkmod/libkmod-index.c	/^	uint32_t children[];$/;"	m	struct:index_mm_node	file:
+children	tools/depmod.c	/^	struct index_node *children[INDEX_CHILDMAX]; \/* indexed by character *\/$/;"	m	struct:index_node	typeref:struct:index_node::index_node	file:
+class	libkmod/libkmod-elf.c	/^	enum kmod_elf_class class;$/;"	m	struct:kmod_elf	typeref:enum:kmod_elf::kmod_elf_class	file:
+cmd	tools/kmod.h	/^	int (*cmd)(int argc, char *argv[]);$/;"	m	struct:kmod_cmd
+cmdopts	tools/depmod.c	/^static const struct option cmdopts[] = {$/;"	v	typeref:struct:option	file:
+cmdopts	tools/insmod.c	/^static const struct option cmdopts[] = {$/;"	v	typeref:struct:option	file:
+cmdopts	tools/modinfo.c	/^static const struct option cmdopts[] = {$/;"	v	typeref:struct:option	file:
+cmdopts	tools/modprobe.c	/^static const struct option cmdopts[] = {$/;"	v	typeref:struct:option	file:
+cmdopts	tools/rmmod.c	/^static const struct option cmdopts[] = {$/;"	v	typeref:struct:option	file:
+cmdopts_s	tools/depmod.c	/^static const char cmdopts_s[] = "aAb:C:E:F:euqrvnP:wmVh";$/;"	v	file:
+cmdopts_s	tools/insmod.c	/^static const char cmdopts_s[] = "psfVh";$/;"	v	file:
+cmdopts_s	tools/modinfo.c	/^static const char cmdopts_s[] = "adlpn0F:k:b:Vh";$/;"	v	file:
+cmdopts_s	tools/modprobe.c	/^static const char cmdopts_s[] = "arRibfDcnC:d:S:sqvVh";$/;"	v	file:
+cmdopts_s	tools/rmmod.c	/^static const char cmdopts_s[] = "fsvVwh";$/;"	v	file:
+command	libkmod/libkmod-config.c	/^	char *command;$/;"	m	struct:kmod_command	file:
+command_do	libkmod/libkmod-module.c	/^static int command_do(struct kmod_module *mod, const char *type,$/;"	f	file:
+command_do	tools/modprobe.c	/^static int command_do(struct kmod_module *module, const char *type,$/;"	f	file:
+comp_type	libkmod/libkmod-file.c	/^static const struct comp_type {$/;"	s	file:
+comp_types	libkmod/libkmod-file.c	/^} comp_types[] = {$/;"	v	typeref:struct:comp_type	file:
+conf_file	libkmod/libkmod-config.c	/^struct conf_file {$/;"	s	file:
+conf_files_filter_out	libkmod/libkmod-config.c	/^static bool conf_files_filter_out(struct kmod_ctx *ctx, DIR *d,$/;"	f	file:
+conf_files_insert_sorted	libkmod/libkmod-config.c	/^static int conf_files_insert_sorted(struct kmod_ctx *ctx,$/;"	f	file:
+conf_files_list	libkmod/libkmod-config.c	/^static int conf_files_list(struct kmod_ctx *ctx, struct kmod_list **list,$/;"	f	file:
+config	libkmod/libkmod.c	/^	struct kmod_config *config;$/;"	m	struct:kmod_ctx	typeref:struct:kmod_ctx::kmod_config	file:
+config	testsuite/testsuite.h	/^	const char *config[_TC_LAST];$/;"	m	struct:test
+config_type	libkmod/libkmod-config.c	/^enum config_type {$/;"	g	file:
+container_of	libkmod/macro.h	45;"	d
+count	libkmod/libkmod-array.h	/^	size_t count;$/;"	m	struct:array
+count	libkmod/libkmod-elf.c	/^			uint16_t count;$/;"	m	struct:kmod_elf::kmod_elf_header::__anon2	file:
+count	libkmod/libkmod-hash.c	/^	unsigned int count;$/;"	m	struct:hash	file:
+crc	libkmod/libkmod-elf.c	/^	uint32_t crc;$/;"	m	struct:kmod_modversion32	file:
+crc	libkmod/libkmod-elf.c	/^	uint64_t crc;$/;"	m	struct:kmod_modversion64	file:
+crc	libkmod/libkmod-module.c	/^	uint64_t crc;$/;"	m	struct:kmod_module_dependency_symbol	file:
+crc	libkmod/libkmod-module.c	/^	uint64_t crc;$/;"	m	struct:kmod_module_symbol	file:
+crc	libkmod/libkmod-module.c	/^	uint64_t crc;$/;"	m	struct:kmod_module_version	file:
+crc	libkmod/libkmod-private.h	/^	uint64_t crc;$/;"	m	struct:kmod_modversion
+crc	tools/depmod.c	/^	uint64_t crc;$/;"	m	struct:symbol	file:
+create_sysfs_files	testsuite/init_module.c	/^static int create_sysfs_files(const char *modname)$/;"	f	file:
+ctx	libkmod/libkmod-file.c	/^	const struct kmod_ctx *ctx;$/;"	m	struct:kmod_file	typeref:struct:kmod_file::kmod_ctx	file:
+ctx	libkmod/libkmod-index.c	/^	struct kmod_ctx *ctx;$/;"	m	struct:index_mm	typeref:struct:index_mm::kmod_ctx	file:
+ctx	libkmod/libkmod-module.c	/^	struct kmod_ctx *ctx;$/;"	m	struct:kmod_module	typeref:struct:kmod_module::kmod_ctx	file:
+ctx	libkmod/libkmod-private.h	/^	struct kmod_ctx *ctx;$/;"	m	struct:kmod_config	typeref:struct:kmod_config::kmod_ctx
+ctx	testsuite/init_module.c	/^static struct kmod_ctx *ctx;$/;"	v	typeref:struct:kmod_ctx	file:
+ctx	tools/depmod.c	/^	struct kmod_ctx *ctx;$/;"	m	struct:depmod	typeref:struct:depmod::kmod_ctx	file:
+curr	libkmod/libkmod-config.c	/^	const struct kmod_list *curr;$/;"	m	struct:kmod_config_iter	typeref:struct:kmod_config_iter::kmod_list	file:
+data	libkmod/libkmod-config.c	/^	void *data;$/;"	m	struct:kmod_config_iter	file:
+data	libkmod/libkmod-module.c	/^	void *data;$/;"	m	struct:probe_insert_cb	file:
+data	libkmod/libkmod-private.h	/^	void *data;$/;"	m	struct:kmod_list
+default_cfg_paths	tools/depmod.c	/^static const char *default_cfg_paths[] = {$/;"	v	file:
+default_config_paths	libkmod/libkmod.c	/^static const char *default_config_paths[] = {$/;"	v	file:
+delete_module	testsuite/delete_module.c	/^long delete_module(const char *modname, unsigned int flags)$/;"	f
+dep	libkmod/libkmod-module.c	/^		bool dep : 1;$/;"	m	struct:kmod_module::__anon4	file:
+dep	libkmod/libkmod-module.c	/^	struct kmod_list *dep;$/;"	m	struct:kmod_module	typeref:struct:kmod_module::kmod_list	file:
+dep_cmp	tools/depmod.c	/^static int dep_cmp(const void *pa, const void *pb)$/;"	f	file:
+dep_loop	tools/depmod.c	/^	uint8_t dep_loop : 1;$/;"	m	struct:mod	file:
+dep_loops	tools/depmod.c	/^	unsigned int dep_loops;$/;"	m	struct:depmod	file:
+dep_sort_idx	tools/depmod.c	/^	int dep_sort_idx; \/* topological sort index *\/$/;"	m	struct:mod	file:
+dep_sym_list	tools/depmod.c	/^	struct kmod_list *dep_sym_list;$/;"	m	struct:mod	typeref:struct:mod::kmod_list	file:
+depfile_up_to_date	tools/depmod.c	/^static int depfile_up_to_date(const char *dirname)$/;"	f	file:
+depfile_up_to_date_dir	tools/depmod.c	/^static int depfile_up_to_date_dir(DIR *d, time_t mtime, size_t baselen, char *path)$/;"	f	file:
+depmod	tools/depmod.c	/^struct depmod {$/;"	s	file:
+depmod_add_fake_syms	tools/depmod.c	/^static void depmod_add_fake_syms(struct depmod *depmod)$/;"	f	file:
+depmod_calculate_dependencies	tools/depmod.c	/^static int depmod_calculate_dependencies(struct depmod *depmod)$/;"	f	file:
+depmod_init	tools/depmod.c	/^static int depmod_init(struct depmod *depmod, struct cfg *cfg,$/;"	f	file:
+depmod_load	tools/depmod.c	/^static int depmod_load(struct depmod *depmod)$/;"	f	file:
+depmod_load_dependencies	tools/depmod.c	/^static int depmod_load_dependencies(struct depmod *depmod)$/;"	f	file:
+depmod_load_module_dependencies	tools/depmod.c	/^static int depmod_load_module_dependencies(struct depmod *depmod, struct mod *mod)$/;"	f	file:
+depmod_load_modules	tools/depmod.c	/^static int depmod_load_modules(struct depmod *depmod)$/;"	f	file:
+depmod_load_symvers	tools/depmod.c	/^static int depmod_load_symvers(struct depmod *depmod, const char *filename)$/;"	f	file:
+depmod_load_system_map	tools/depmod.c	/^static int depmod_load_system_map(struct depmod *depmod, const char *filename)$/;"	f	file:
+depmod_module_add	tools/depmod.c	/^static int depmod_module_add(struct depmod *depmod, struct kmod_module *kmod)$/;"	f	file:
+depmod_module_del	tools/depmod.c	/^static int depmod_module_del(struct depmod *depmod, struct mod *mod)$/;"	f	file:
+depmod_module_is_higher_priority	tools/depmod.c	/^static int depmod_module_is_higher_priority(const struct depmod *depmod, const struct mod *mod, size_t baselen, size_t namelen, size_t modnamelen, const char *newpath)$/;"	f	file:
+depmod_modules_build_array	tools/depmod.c	/^static int depmod_modules_build_array(struct depmod *depmod)$/;"	f	file:
+depmod_modules_order_for_compressed	testsuite/test-depmod.c	/^static __noreturn int depmod_modules_order_for_compressed(const struct test *t)$/;"	f	file:
+depmod_modules_search	tools/depmod.c	/^static int depmod_modules_search(struct depmod *depmod)$/;"	f	file:
+depmod_modules_search_dir	tools/depmod.c	/^static int depmod_modules_search_dir(struct depmod *depmod, DIR *d, size_t baselen, char *path)$/;"	f	file:
+depmod_modules_search_file	tools/depmod.c	/^static int depmod_modules_search_file(struct depmod *depmod, size_t baselen, size_t namelen, const char *path)$/;"	f	file:
+depmod_modules_sort	tools/depmod.c	/^static void depmod_modules_sort(struct depmod *depmod)$/;"	f	file:
+depmod_output	tools/depmod.c	/^static int depmod_output(struct depmod *depmod, FILE *out)$/;"	f	file:
+depmod_shutdown	tools/depmod.c	/^static void depmod_shutdown(struct depmod *depmod)$/;"	f	file:
+depmod_sort_dependencies	tools/depmod.c	/^static void depmod_sort_dependencies(struct depmod *depmod)$/;"	f	file:
+depmod_symbol_add	tools/depmod.c	/^static int depmod_symbol_add(struct depmod *depmod, const char *name,$/;"	f	file:
+depmod_symbol_find	tools/depmod.c	/^static struct symbol *depmod_symbol_find(const struct depmod *depmod,$/;"	f	file:
+deps	tools/depmod.c	/^	struct array deps; \/* struct symbol *\/$/;"	m	struct:mod	typeref:struct:mod::array	file:
+description	testsuite/testsuite.h	/^	const char *description;$/;"	m	struct:test
+dirlen	tools/depmod.c	/^	size_t dirlen;$/;"	m	struct:cfg_file	file:
+dirname	libkmod/libkmod.c	/^	char *dirname;$/;"	m	struct:kmod_ctx	file:
+dirname	tools/depmod.c	/^	char dirname[PATH_MAX];$/;"	m	struct:cfg	file:
+dirname_default_prefix	libkmod/libkmod.c	/^static const char *dirname_default_prefix = "\/lib\/modules";$/;"	v	file:
+dirnamelen	tools/depmod.c	/^	size_t dirnamelen;$/;"	m	struct:cfg	file:
+do_depmod	tools/depmod.c	/^static int do_depmod(int argc, char *argv[])$/;"	f	file:
+do_insmod	tools/insmod.c	/^static int do_insmod(int argc, char *argv[])$/;"	f	file:
+do_lsmod	tools/lsmod.c	/^static int do_lsmod(int argc, char *argv[])$/;"	f	file:
+do_modinfo	tools/modinfo.c	/^static int do_modinfo(int argc, char *argv[])$/;"	f	file:
+do_modprobe	tools/modprobe.c	/^static int do_modprobe(int argc, char **orig_argv)$/;"	f	file:
+do_rmmod	tools/rmmod.c	/^static int do_rmmod(int argc, char *argv[])$/;"	f	file:
+do_show	tools/modprobe.c	/^static int do_show = 0;$/;"	v	file:
+dry_run	tools/modprobe.c	/^static int dry_run = 0;$/;"	v	file:
+elf	libkmod/libkmod-file.c	/^	struct kmod_elf *elf;$/;"	m	struct:kmod_file	typeref:struct:kmod_file::kmod_elf	file:
+elf_get_mem	libkmod/libkmod-elf.c	/^static inline const void *elf_get_mem(const struct kmod_elf *elf, uint64_t offset)$/;"	f	file:
+elf_get_section_header	libkmod/libkmod-elf.c	/^static inline const void *elf_get_section_header(const struct kmod_elf *elf, uint16_t idx)$/;"	f	file:
+elf_get_section_info	libkmod/libkmod-elf.c	/^static inline int elf_get_section_info(const struct kmod_elf *elf, uint16_t idx, uint64_t *offset, uint64_t *size, uint32_t *nameoff)$/;"	f	file:
+elf_get_strings_section	libkmod/libkmod-elf.c	/^static const char *elf_get_strings_section(const struct kmod_elf *elf, uint64_t *size)$/;"	f	file:
+elf_get_uint	libkmod/libkmod-elf.c	/^static inline uint64_t elf_get_uint(const struct kmod_elf *elf, uint64_t offset, uint16_t size)$/;"	f	file:
+elf_identify	libkmod/libkmod-elf.c	/^static int elf_identify(const void *memory, uint64_t size)$/;"	f	file:
+elf_identify	testsuite/init_module.c	/^static uint8_t elf_identify(void *mem)$/;"	f	file:
+elf_set_uint	libkmod/libkmod-elf.c	/^static inline int elf_set_uint(struct kmod_elf *elf, uint64_t offset, uint64_t size, uint64_t value)$/;"	f	file:
+entries	libkmod/libkmod-hash.c	/^	struct hash_entry *entries;$/;"	m	struct:hash_bucket	typeref:struct:hash_bucket::hash_entry	file:
+entry	libkmod/libkmod-hash.h	/^	unsigned int entry;$/;"	m	struct:hash_iter
+entry_size	libkmod/libkmod-elf.c	/^			uint16_t entry_size;$/;"	m	struct:kmod_elf::kmod_elf_header::__anon2	file:
+env_config	testsuite/testsuite.c	/^} env_config[_TC_LAST] = {$/;"	v	typeref:struct:_env_config
+env_modprobe_options_append	tools/modprobe.c	/^static void env_modprobe_options_append(const char *value)$/;"	f	file:
+env_vars	testsuite/testsuite.h	/^	const struct keyval *env_vars;$/;"	m	struct:test	typeref:struct:test::keyval
+errcode	testsuite/delete_module.c	/^	int errcode;$/;"	m	struct:mod	file:
+errcode	testsuite/init_module.c	/^	int errcode;$/;"	m	struct:mod	file:
+expected_fail	testsuite/testsuite.h	/^	bool expected_fail;$/;"	m	struct:test
+ext	tools/depmod.c	/^	const char *ext;$/;"	m	struct:kmod_ext	file:
+fatal	libkmod/macro.h	75;"	d
+fd	libkmod/libkmod-file.c	/^	int fd;$/;"	m	struct:kmod_file	file:
+field	tools/modinfo.c	/^static const char *field = NULL;$/;"	v	file:
+file	libkmod/libkmod-index.c	/^	FILE *file;$/;"	m	struct:index_file	file:
+file	libkmod/libkmod-index.c	/^	FILE *file;$/;"	m	struct:index_node_f	file:
+file	libkmod/libkmod-module.c	/^	struct kmod_file *file;$/;"	m	struct:kmod_module	typeref:struct:kmod_module::kmod_file	file:
+file_ops	libkmod/libkmod-file.c	/^struct file_ops {$/;"	s	file:
+files	testsuite/testsuite.h	/^		const struct keyval *files;$/;"	m	struct:test::__anon1	typeref:struct:test::__anon1::keyval
+find_module	testsuite/delete_module.c	/^static struct mod *find_module(struct mod *_modules, const char *modname)$/;"	f	file:
+find_module	testsuite/init_module.c	/^static struct mod *find_module(struct mod *_modules, const char *modname)$/;"	f	file:
+first	libkmod/libkmod-index.c	/^	unsigned char first;	\/* range of child nodes *\/$/;"	m	struct:index_node_f	file:
+first	libkmod/libkmod-index.c	/^	unsigned char first;$/;"	m	struct:index_mm_node	file:
+first	tools/depmod.c	/^	unsigned char first;	\/* range of child nodes *\/$/;"	m	struct:index_node	file:
+first_time	tools/modprobe.c	/^static int first_time = 0;$/;"	v	file:
+fn	libkmod/libkmod.c	/^	const char *fn;$/;"	m	struct:_index_files	file:
+force	tools/modprobe.c	/^static int force = 0;$/;"	v	file:
+free_resources	testsuite/delete_module.c	/^void free_resources(void)$/;"	f
+free_resources	testsuite/init_module.c	/^void free_resources(void)$/;"	f
+free_value	libkmod/libkmod-hash.c	/^	void (*free_value)(void *value);$/;"	m	struct:hash	file:
+from_alias	testsuite/test-new-module.c	/^static int from_alias(const struct test *t)$/;"	f	file:
+from_name	testsuite/test-new-module.c	/^static int from_name(const struct test *t)$/;"	f	file:
+func	testsuite/testsuite.h	/^	testfunc func;$/;"	m	struct:test
+func_append	build-aux/ltmain.sh	/^func_append ()$/;"	f
+func_append	configure	/^func_append ()\\$/;"	f
+func_append_quoted	build-aux/ltmain.sh	/^func_append_quoted ()$/;"	f
+func_append_quoted	configure	/^func_append_quoted ()\\$/;"	f
+func_arith	build-aux/ltmain.sh	/^func_arith ()$/;"	f
+func_arith	configure	/^func_arith ()\\$/;"	f
+func_basename	build-aux/ltmain.sh	/^func_basename ()$/;"	f
+func_basename	configure	/^func_basename ()\\$/;"	f
+func_check_version_match	build-aux/ltmain.sh	/^func_check_version_match ()$/;"	f
+func_cl_dashL	build-aux/compile	/^func_cl_dashL ()$/;"	f
+func_cl_dashl	build-aux/compile	/^func_cl_dashl ()$/;"	f
+func_cl_wrapper	build-aux/compile	/^func_cl_wrapper ()$/;"	f
+func_config	build-aux/ltmain.sh	/^func_config ()$/;"	f
+func_convert_core_file_wine_to_w32	build-aux/ltmain.sh	/^func_convert_core_file_wine_to_w32 ()$/;"	f
+func_convert_core_msys_to_w32	build-aux/ltmain.sh	/^func_convert_core_msys_to_w32 ()$/;"	f
+func_convert_core_path_wine_to_w32	build-aux/ltmain.sh	/^func_convert_core_path_wine_to_w32 ()$/;"	f
+func_convert_file_check	build-aux/ltmain.sh	/^func_convert_file_check ()$/;"	f
+func_convert_file_cygwin_to_w32	build-aux/ltmain.sh	/^func_convert_file_cygwin_to_w32 ()$/;"	f
+func_convert_file_msys_to_cygwin	build-aux/ltmain.sh	/^func_convert_file_msys_to_cygwin ()$/;"	f
+func_convert_file_msys_to_w32	build-aux/ltmain.sh	/^func_convert_file_msys_to_w32 ()$/;"	f
+func_convert_file_nix_to_cygwin	build-aux/ltmain.sh	/^func_convert_file_nix_to_cygwin ()$/;"	f
+func_convert_file_nix_to_w32	build-aux/ltmain.sh	/^func_convert_file_nix_to_w32 ()$/;"	f
+func_convert_file_noop	build-aux/ltmain.sh	/^func_convert_file_noop ()$/;"	f
+func_convert_path_check	build-aux/ltmain.sh	/^func_convert_path_check ()$/;"	f
+func_convert_path_cygwin_to_w32	build-aux/ltmain.sh	/^func_convert_path_cygwin_to_w32 ()$/;"	f
+func_convert_path_front_back_pathsep	build-aux/ltmain.sh	/^func_convert_path_front_back_pathsep ()$/;"	f
+func_convert_path_msys_to_cygwin	build-aux/ltmain.sh	/^func_convert_path_msys_to_cygwin ()$/;"	f
+func_convert_path_msys_to_w32	build-aux/ltmain.sh	/^func_convert_path_msys_to_w32 ()$/;"	f
+func_convert_path_nix_to_cygwin	build-aux/ltmain.sh	/^func_convert_path_nix_to_cygwin ()$/;"	f
+func_convert_path_nix_to_w32	build-aux/ltmain.sh	/^func_convert_path_nix_to_w32 ()$/;"	f
+func_convert_path_noop	build-aux/ltmain.sh	/^func_convert_path_noop ()$/;"	f
+func_cygming_dll_for_implib	build-aux/ltmain.sh	/^func_cygming_dll_for_implib ()$/;"	f
+func_cygming_dll_for_implib_fallback	build-aux/ltmain.sh	/^func_cygming_dll_for_implib_fallback ()$/;"	f
+func_cygming_dll_for_implib_fallback_core	build-aux/ltmain.sh	/^func_cygming_dll_for_implib_fallback_core ()$/;"	f
+func_cygming_gnu_implib_p	build-aux/ltmain.sh	/^func_cygming_gnu_implib_p ()$/;"	f
+func_cygming_ms_implib_p	build-aux/ltmain.sh	/^func_cygming_ms_implib_p ()$/;"	f
+func_cygpath	build-aux/ltmain.sh	/^func_cygpath ()$/;"	f
+func_dirname	build-aux/ltmain.sh	/^func_dirname ()$/;"	f
+func_dirname	configure	/^func_dirname ()\\$/;"	f
+func_dirname_and_basename	build-aux/ltmain.sh	/^func_dirname_and_basename ()$/;"	f
+func_dirname_and_basename	configure	/^func_dirname_and_basename ()\\$/;"	f
+func_echo	build-aux/ltmain.sh	/^func_echo ()$/;"	f
+func_echo_all	build-aux/ltmain.sh	/^func_echo_all ()$/;"	f
+func_echo_all	configure	/^func_echo_all ()$/;"	f
+func_emit_cwrapperexe_src	build-aux/ltmain.sh	/^func_emit_cwrapperexe_src ()$/;"	f
+func_emit_wrapper	build-aux/ltmain.sh	/^func_emit_wrapper ()$/;"	f
+func_enable_tag	build-aux/ltmain.sh	/^func_enable_tag ()$/;"	f
+func_error	build-aux/ltmain.sh	/^func_error ()$/;"	f
+func_exec_program	build-aux/ltmain.sh	/^func_exec_program ()$/;"	f
+func_exec_program_core	build-aux/ltmain.sh	/^func_exec_program_core ()$/;"	f
+func_execute_cmds	build-aux/ltmain.sh	/^func_execute_cmds ()$/;"	f
+func_extract_an_archive	build-aux/ltmain.sh	/^func_extract_an_archive ()$/;"	f
+func_extract_archives	build-aux/ltmain.sh	/^func_extract_archives ()$/;"	f
+func_fallback_echo	build-aux/ltmain.sh	/^func_fallback_echo ()$/;"	f
+func_fallback_echo	configure	/^  func_fallback_echo ()$/;"	f
+func_fallback_echo	configure	/^func_fallback_echo ()$/;"	f
+func_fatal_configuration	build-aux/ltmain.sh	/^func_fatal_configuration ()$/;"	f
+func_fatal_error	build-aux/ltmain.sh	/^func_fatal_error ()$/;"	f
+func_fatal_help	build-aux/ltmain.sh	/^func_fatal_help ()$/;"	f
+func_features	build-aux/ltmain.sh	/^func_features ()$/;"	f
+func_file_conv	build-aux/compile	/^func_file_conv ()$/;"	f
+func_generate_dlsyms	build-aux/ltmain.sh	/^func_generate_dlsyms ()$/;"	f
+func_grep	build-aux/ltmain.sh	/^func_grep ()$/;"	f
+func_help	build-aux/ltmain.sh	/^func_help ()$/;"	f
+func_infer_tag	build-aux/ltmain.sh	/^func_infer_tag ()$/;"	f
+func_init_to_host_path_cmd	build-aux/ltmain.sh	/^func_init_to_host_path_cmd ()$/;"	f
+func_lalib_p	build-aux/ltmain.sh	/^func_lalib_p ()$/;"	f
+func_lalib_unsafe_p	build-aux/ltmain.sh	/^func_lalib_unsafe_p ()$/;"	f
+func_len	build-aux/ltmain.sh	/^func_len ()$/;"	f
+func_len	configure	/^func_len ()\\$/;"	f
+func_lo2o	build-aux/ltmain.sh	/^func_lo2o ()$/;"	f
+func_lo2o	configure	/^func_lo2o ()\\$/;"	f
+func_lt_dump_args	build-aux/ltmain.sh	/^func_lt_dump_args ()$/;"	f
+func_ltwrapper_executable_p	build-aux/ltmain.sh	/^func_ltwrapper_executable_p ()$/;"	f
+func_ltwrapper_p	build-aux/ltmain.sh	/^func_ltwrapper_p ()$/;"	f
+func_ltwrapper_script_p	build-aux/ltmain.sh	/^func_ltwrapper_script_p ()$/;"	f
+func_ltwrapper_scriptname	build-aux/ltmain.sh	/^func_ltwrapper_scriptname ()$/;"	f
+func_missing_arg	build-aux/ltmain.sh	/^func_missing_arg ()$/;"	f
+func_mkdir_p	build-aux/ltmain.sh	/^func_mkdir_p ()$/;"	f
+func_mktempdir	build-aux/ltmain.sh	/^func_mktempdir ()$/;"	f
+func_mode_compile	build-aux/ltmain.sh	/^func_mode_compile ()$/;"	f
+func_mode_execute	build-aux/ltmain.sh	/^func_mode_execute ()$/;"	f
+func_mode_finish	build-aux/ltmain.sh	/^func_mode_finish ()$/;"	f
+func_mode_help	build-aux/ltmain.sh	/^func_mode_help ()$/;"	f
+func_mode_install	build-aux/ltmain.sh	/^func_mode_install ()$/;"	f
+func_mode_link	build-aux/ltmain.sh	/^func_mode_link ()$/;"	f
+func_mode_uninstall	build-aux/ltmain.sh	/^func_mode_uninstall ()$/;"	f
+func_normal_abspath	build-aux/ltmain.sh	/^func_normal_abspath ()$/;"	f
+func_parse_lt_options	build-aux/ltmain.sh	/^func_parse_lt_options ()$/;"	f
+func_quote_for_eval	build-aux/ltmain.sh	/^func_quote_for_eval ()$/;"	f
+func_quote_for_expand	build-aux/ltmain.sh	/^func_quote_for_expand ()$/;"	f
+func_relative_path	build-aux/ltmain.sh	/^func_relative_path ()$/;"	f
+func_replace_sysroot	build-aux/ltmain.sh	/^func_replace_sysroot ()$/;"	f
+func_resolve_sysroot	build-aux/ltmain.sh	/^func_resolve_sysroot ()$/;"	f
+func_show_eval	build-aux/ltmain.sh	/^func_show_eval ()$/;"	f
+func_show_eval_locale	build-aux/ltmain.sh	/^func_show_eval_locale ()$/;"	f
+func_source	build-aux/ltmain.sh	/^func_source ()$/;"	f
+func_split_long_opt	build-aux/ltmain.sh	/^func_split_long_opt ()$/;"	f
+func_split_long_opt	configure	/^func_split_long_opt ()\\$/;"	f
+func_split_short_opt	build-aux/ltmain.sh	/^func_split_short_opt ()$/;"	f
+func_split_short_opt	configure	/^func_split_short_opt ()\\$/;"	f
+func_stripname	build-aux/ltmain.sh	/^func_stripname ()$/;"	f
+func_stripname	configure	/^func_stripname ()\\$/;"	f
+func_to_host_file	build-aux/ltmain.sh	/^func_to_host_file ()$/;"	f
+func_to_host_path	build-aux/ltmain.sh	/^func_to_host_path ()$/;"	f
+func_to_tool_file	build-aux/ltmain.sh	/^func_to_tool_file ()$/;"	f
+func_tr_sh	build-aux/ltmain.sh	/^func_tr_sh ()$/;"	f
+func_usage	build-aux/ltmain.sh	/^func_usage ()$/;"	f
+func_verbose	build-aux/ltmain.sh	/^func_verbose ()$/;"	f
+func_version	build-aux/ltmain.sh	/^func_version ()$/;"	f
+func_warning	build-aux/ltmain.sh	/^func_warning ()$/;"	f
+func_win32_import_lib_p	build-aux/ltmain.sh	/^func_win32_import_lib_p ()$/;"	f
+func_win32_libid	build-aux/ltmain.sh	/^func_win32_libid ()$/;"	f
+func_write_libtool_object	build-aux/ltmain.sh	/^func_write_libtool_object ()$/;"	f
+func_xform	build-aux/ltmain.sh	/^func_xform ()$/;"	f
+func_xform	configure	/^func_xform ()\\$/;"	f
+get_kernel_release	libkmod/libkmod.c	/^static char *get_kernel_release(const char *dirname)$/;"	f	file:
+get_key	libkmod/libkmod-config.c	/^	const char *(*get_key)(const struct kmod_list *l);$/;"	m	struct:kmod_config_iter	file:
+get_libc_func	testsuite/path.c	/^static void *get_libc_func(const char *f)$/;"	f	file:
+get_rootpath	testsuite/path.c	/^static bool get_rootpath(const char *f)$/;"	f	file:
+get_unaligned	libkmod/libkmod-util.h	28;"	d
+get_value	libkmod/libkmod-config.c	/^	const char *(*get_value)(const struct kmod_list *l);$/;"	m	struct:kmod_config_iter	file:
+getline_wrapped	libkmod/libkmod-util.c	/^char *getline_wrapped(FILE *fp, unsigned int *linenum)$/;"	f
+gzf	libkmod/libkmod-file.c	/^	gzFile gzf;$/;"	m	struct:kmod_file	file:
+handle_failed_lookup	tools/modprobe.c	/^static int handle_failed_lookup(struct kmod_ctx *ctx, const char *alias)$/;"	f	file:
+handle_kmod_commands	tools/kmod.c	/^static int handle_kmod_commands(int argc, char *argv[])$/;"	f	file:
+handle_kmod_compat_commands	tools/kmod.c	/^static int handle_kmod_compat_commands(int argc, char *argv[])$/;"	f	file:
+hash	libkmod/libkmod-hash.c	/^struct hash {$/;"	s	file:
+hash	libkmod/libkmod-hash.h	/^	const struct hash *hash;$/;"	m	struct:hash_iter	typeref:struct:hash_iter::hash
+hash_add	libkmod/libkmod-hash.c	/^int hash_add(struct hash *hash, const char *key, const void *value)$/;"	f
+hash_add_unique	libkmod/libkmod-hash.c	/^int hash_add_unique(struct hash *hash, const char *key, const void *value)$/;"	f
+hash_bucket	libkmod/libkmod-hash.c	/^struct hash_bucket {$/;"	s	file:
+hash_del	libkmod/libkmod-hash.c	/^int hash_del(struct hash *hash, const char *key)$/;"	f
+hash_entry	libkmod/libkmod-hash.c	/^struct hash_entry {$/;"	s	file:
+hash_entry_cmp	libkmod/libkmod-hash.c	/^static int hash_entry_cmp(const void *pa, const void *pb)$/;"	f	file:
+hash_find	libkmod/libkmod-hash.c	/^void *hash_find(const struct hash *hash, const char *key)$/;"	f
+hash_free	libkmod/libkmod-hash.c	/^void hash_free(struct hash *hash)$/;"	f
+hash_get_count	libkmod/libkmod-hash.c	/^unsigned int hash_get_count(const struct hash *hash)$/;"	f
+hash_iter	libkmod/libkmod-hash.h	/^struct hash_iter {$/;"	s
+hash_iter_init	libkmod/libkmod-hash.c	/^void hash_iter_init(const struct hash *hash, struct hash_iter *iter)$/;"	f
+hash_iter_next	libkmod/libkmod-hash.c	/^bool hash_iter_next(struct hash_iter *iter, const char **key,$/;"	f
+hash_new	libkmod/libkmod-hash.c	/^struct hash *hash_new(unsigned int n_buckets,$/;"	f
+hash_superfast	libkmod/libkmod-hash.c	/^static inline unsigned int hash_superfast(const char *key, unsigned int len)$/;"	f	file:
+hashkey	libkmod/libkmod-module.c	/^	char *hashkey;$/;"	m	struct:kmod_module	file:
+header	libkmod/libkmod-elf.c	/^	} header;$/;"	m	struct:kmod_elf	typeref:struct:kmod_elf::kmod_elf_header	file:
+help	testsuite/testsuite.c	/^static void help(void)$/;"	f	file:
+help	tools/depmod.c	/^static void help(void)$/;"	f	file:
+help	tools/insmod.c	/^static void help(void)$/;"	f	file:
+help	tools/kmod.h	/^	const char *help;$/;"	m	struct:kmod_cmd
+help	tools/modinfo.c	/^static void help(void)$/;"	f	file:
+help	tools/modprobe.c	/^static void help(void)$/;"	f	file:
+help	tools/rmmod.c	/^static void help(void)$/;"	f	file:
+idx	libkmod/libkmod-index.c	/^	struct index_mm *idx;$/;"	m	struct:index_mm_node	typeref:struct:index_mm_node::index_mm	file:
+idx	tools/depmod.c	/^	uint16_t idx; \/* index in depmod->modules.array *\/$/;"	m	struct:mod	file:
+ignore_commands	tools/modprobe.c	/^static int ignore_commands = 0;$/;"	v	file:
+ignore_loaded	tools/modprobe.c	/^static int ignore_loaded = 0;$/;"	v	file:
+ignorecmd	libkmod/libkmod-module.c	/^	bool ignorecmd : 1;$/;"	m	struct:kmod_module	file:
+index__checkstring	tools/depmod.c	/^static void index__checkstring(const char *str)$/;"	f	file:
+index__haschildren	tools/depmod.c	/^static int index__haschildren(const struct index_node *node)$/;"	f	file:
+index_add_value	tools/depmod.c	/^static int index_add_value(struct index_value **values,$/;"	f	file:
+index_close	libkmod/libkmod-index.c	/^static void index_close(struct index_node_f *node)$/;"	f	file:
+index_create	tools/depmod.c	/^static struct index_node *index_create(void)$/;"	f	file:
+index_destroy	tools/depmod.c	/^static void index_destroy(struct index_node *node)$/;"	f	file:
+index_dump	libkmod/libkmod-index.c	/^void index_dump(struct index_file *in, int fd, const char *prefix)$/;"	f
+index_dump_node	libkmod/libkmod-index.c	/^static void index_dump_node(struct index_node_f *node, struct buffer *buf,$/;"	f	file:
+index_file	libkmod/libkmod-index.c	/^struct index_file {$/;"	s	file:
+index_file_close	libkmod/libkmod-index.c	/^void index_file_close(struct index_file *idx)$/;"	f
+index_file_open	libkmod/libkmod-index.c	/^struct index_file *index_file_open(const char *filename)$/;"	f
+index_files	libkmod/libkmod.c	/^} index_files[] = {$/;"	v	typeref:struct:_index_files	file:
+index_insert	tools/depmod.c	/^static int index_insert(struct index_node *node, const char *key,$/;"	f	file:
+index_mm	libkmod/libkmod-index.c	/^struct index_mm {$/;"	s	file:
+index_mm_close	libkmod/libkmod-index.c	/^void index_mm_close(struct index_mm *idx)$/;"	f
+index_mm_dump	libkmod/libkmod-index.c	/^void index_mm_dump(struct index_mm *idx, int fd, const char *prefix)$/;"	f
+index_mm_dump_node	libkmod/libkmod-index.c	/^static void index_mm_dump_node(struct index_mm_node *node, struct buffer *buf,$/;"	f	file:
+index_mm_free_node	libkmod/libkmod-index.c	/^static void index_mm_free_node(struct index_mm_node *node)$/;"	f	file:
+index_mm_node	libkmod/libkmod-index.c	/^struct index_mm_node {$/;"	s	file:
+index_mm_open	libkmod/libkmod-index.c	/^struct index_mm *index_mm_open(struct kmod_ctx *ctx, const char *filename,$/;"	f
+index_mm_read_node	libkmod/libkmod-index.c	/^static struct index_mm_node *index_mm_read_node(struct index_mm *idx,$/;"	f	file:
+index_mm_readchild	libkmod/libkmod-index.c	/^static struct index_mm_node *index_mm_readchild(const struct index_mm_node *parent,$/;"	f	file:
+index_mm_readroot	libkmod/libkmod-index.c	/^static struct index_mm_node *index_mm_readroot(struct index_mm *idx)$/;"	f	file:
+index_mm_search	libkmod/libkmod-index.c	/^char *index_mm_search(struct index_mm *idx, const char *key)$/;"	f
+index_mm_search_node	libkmod/libkmod-index.c	/^static char *index_mm_search_node(struct index_mm_node *node, const char *key,$/;"	f	file:
+index_mm_searchwild	libkmod/libkmod-index.c	/^struct index_value *index_mm_searchwild(struct index_mm *idx, const char *key)$/;"	f
+index_mm_searchwild_all	libkmod/libkmod-index.c	/^static void index_mm_searchwild_all(struct index_mm_node *node, int j,$/;"	f	file:
+index_mm_searchwild_allvalues	libkmod/libkmod-index.c	/^static void index_mm_searchwild_allvalues(struct index_mm_node *node,$/;"	f	file:
+index_mm_searchwild_node	libkmod/libkmod-index.c	/^static void index_mm_searchwild_node(struct index_mm_node *node,$/;"	f	file:
+index_mm_value	libkmod/libkmod-index.c	/^struct index_mm_value {$/;"	s	file:
+index_mm_value_array	libkmod/libkmod-index.c	/^struct index_mm_value_array {$/;"	s	file:
+index_node	tools/depmod.c	/^struct index_node {$/;"	s	file:
+index_node_f	libkmod/libkmod-index.c	/^struct index_node_f {$/;"	s	file:
+index_read	libkmod/libkmod-index.c	/^static struct index_node_f *index_read(FILE *in, uint32_t offset)$/;"	f	file:
+index_readchild	libkmod/libkmod-index.c	/^static struct index_node_f *index_readchild(const struct index_node_f *parent,$/;"	f	file:
+index_readroot	libkmod/libkmod-index.c	/^static struct index_node_f *index_readroot(struct index_file *in)$/;"	f	file:
+index_search	libkmod/libkmod-index.c	/^char *index_search(struct index_file *in, const char *key)$/;"	f
+index_search__node	libkmod/libkmod-index.c	/^static char *index_search__node(struct index_node_f *node, const char *key, int i)$/;"	f	file:
+index_searchwild	libkmod/libkmod-index.c	/^struct index_value *index_searchwild(struct index_file *in, const char *key)$/;"	f
+index_searchwild__all	libkmod/libkmod-index.c	/^static void index_searchwild__all(struct index_node_f *node, int j,$/;"	f	file:
+index_searchwild__allvalues	libkmod/libkmod-index.c	/^static void index_searchwild__allvalues(struct index_node_f *node,$/;"	f	file:
+index_searchwild__node	libkmod/libkmod-index.c	/^static void index_searchwild__node(struct index_node_f *node,$/;"	f	file:
+index_value	libkmod/libkmod-index.h	/^struct index_value {$/;"	s
+index_value	tools/depmod.c	/^struct index_value {$/;"	s	file:
+index_values_free	libkmod/libkmod-index.c	/^void index_values_free(struct index_value *values)$/;"	f
+index_values_free	tools/depmod.c	/^static void index_values_free(struct index_value *values)$/;"	f	file:
+index_write	tools/depmod.c	/^static void index_write(const struct index_node *node, FILE *out)$/;"	f	file:
+index_write__node	tools/depmod.c	/^static uint32_t index_write__node(const struct index_node *node, FILE *out)$/;"	f	file:
+indexes	libkmod/libkmod.c	/^	struct index_mm *indexes[_KMOD_INDEX_MODULES_SIZE];$/;"	m	struct:kmod_ctx	typeref:struct:kmod_ctx::index_mm	file:
+indexes_stamp	libkmod/libkmod.c	/^	unsigned long long indexes_stamp[_KMOD_INDEX_MODULES_SIZE];$/;"	m	struct:kmod_ctx	file:
+info_list	tools/depmod.c	/^	struct kmod_list *info_list;$/;"	m	struct:mod	typeref:struct:mod::kmod_list	file:
+init	libkmod/libkmod-module.c	/^	} init;$/;"	m	struct:kmod_module	typeref:struct:kmod_module::__anon4	file:
+init_module	testsuite/init_module.c	/^long init_module(void *mem, unsigned long len, const char *args)$/;"	f
+init_retcodes	testsuite/delete_module.c	/^static void init_retcodes(void)$/;"	f	file:
+init_retcodes	testsuite/init_module.c	/^static void init_retcodes(void)$/;"	f	file:
+insmod	tools/modprobe.c	/^static int insmod(struct kmod_ctx *ctx, const char *alias,$/;"	f	file:
+insmod_all	tools/modprobe.c	/^static int insmod_all(struct kmod_ctx *ctx, char **args, int nargs)$/;"	f	file:
+install_commands	libkmod/libkmod-module.c	/^		bool install_commands : 1;$/;"	m	struct:kmod_module::__anon4	file:
+install_commands	libkmod/libkmod-module.c	/^	const char *install_commands;	\/* owned by kmod_config *\/$/;"	m	struct:kmod_module	file:
+install_commands	libkmod/libkmod-private.h	/^	struct kmod_list *install_commands;$/;"	m	struct:kmod_config	typeref:struct:kmod_config::kmod_list
+intermediate	libkmod/libkmod-config.c	/^	bool intermediate;$/;"	m	struct:kmod_config_iter	file:
+is_cache_invalid	libkmod/libkmod.c	/^static bool is_cache_invalid(const char *path, unsigned long long stamp)$/;"	f	file:
+is_module_filename	tools/modinfo.c	/^static bool is_module_filename(const char *name)$/;"	f	file:
+is_single	libkmod/libkmod-config.c	/^	bool is_single;$/;"	m	struct:conf_file	file:
+is_version_number	tools/depmod.c	/^static int is_version_number(const char *version)$/;"	f	file:
+kcmdline_parse_result	libkmod/libkmod-config.c	/^static void kcmdline_parse_result(struct kmod_config *config, char *modname,$/;"	f	file:
+key	libkmod/libkmod-hash.c	/^	const char *key;$/;"	m	struct:hash_entry	file:
+key	libkmod/libkmod-module.c	/^	char *key;$/;"	m	struct:kmod_module_info	file:
+key	testsuite/testsuite.c	/^	const char *key;$/;"	m	struct:_env_config	file:
+key	testsuite/testsuite.h	/^	const char *key;$/;"	m	struct:keyval
+keyval	testsuite/testsuite.h	/^struct keyval {$/;"	s
+kmod	tools/depmod.c	/^	struct kmod_module *kmod;$/;"	m	struct:mod	typeref:struct:mod::kmod_module	file:
+kmod_alias	libkmod/libkmod-config.c	/^struct kmod_alias {$/;"	s	file:
+kmod_alias_get_modname	libkmod/libkmod-config.c	/^const char *kmod_alias_get_modname(const struct kmod_list *l) {$/;"	f
+kmod_alias_get_name	libkmod/libkmod-config.c	/^const char *kmod_alias_get_name(const struct kmod_list *l) {$/;"	f
+kmod_blacklist_get_modname	libkmod/libkmod-config.c	/^const char *kmod_blacklist_get_modname(const struct kmod_list *l)$/;"	f
+kmod_cmd	tools/kmod.h	/^struct kmod_cmd {$/;"	s
+kmod_cmd_compat_depmod	tools/depmod.c	/^const struct kmod_cmd kmod_cmd_compat_depmod = {$/;"	v	typeref:struct:kmod_cmd
+kmod_cmd_compat_insmod	tools/insmod.c	/^const struct kmod_cmd kmod_cmd_compat_insmod = {$/;"	v	typeref:struct:kmod_cmd
+kmod_cmd_compat_lsmod	tools/lsmod.c	/^const struct kmod_cmd kmod_cmd_compat_lsmod = {$/;"	v	typeref:struct:kmod_cmd
+kmod_cmd_compat_modinfo	tools/modinfo.c	/^const struct kmod_cmd kmod_cmd_compat_modinfo = {$/;"	v	typeref:struct:kmod_cmd
+kmod_cmd_compat_modprobe	tools/modprobe.c	/^const struct kmod_cmd kmod_cmd_compat_modprobe = {$/;"	v	typeref:struct:kmod_cmd
+kmod_cmd_compat_rmmod	tools/rmmod.c	/^const struct kmod_cmd kmod_cmd_compat_rmmod = {$/;"	v	typeref:struct:kmod_cmd
+kmod_cmd_help	tools/kmod.c	/^static const struct kmod_cmd kmod_cmd_help = {$/;"	v	typeref:struct:kmod_cmd	file:
+kmod_cmd_help	tools/kmod.c	/^static const struct kmod_cmd kmod_cmd_help;$/;"	v	typeref:struct:kmod_cmd	file:
+kmod_cmd_list	tools/lsmod.c	/^const struct kmod_cmd kmod_cmd_list = {$/;"	v	typeref:struct:kmod_cmd
+kmod_cmds	tools/kmod.c	/^static const struct kmod_cmd *kmod_cmds[] = {$/;"	v	typeref:struct:kmod_cmd	file:
+kmod_command	libkmod/libkmod-config.c	/^struct kmod_command {$/;"	s	file:
+kmod_command_get_command	libkmod/libkmod-config.c	/^const char *kmod_command_get_command(const struct kmod_list *l) {$/;"	f
+kmod_command_get_modname	libkmod/libkmod-config.c	/^const char *kmod_command_get_modname(const struct kmod_list *l) {$/;"	f
+kmod_compat_cmds	tools/kmod.c	/^static const struct kmod_cmd *kmod_compat_cmds[] = {$/;"	v	typeref:struct:kmod_cmd	file:
+kmod_config	libkmod/libkmod-private.h	/^struct kmod_config {$/;"	s
+kmod_config_add_alias	libkmod/libkmod-config.c	/^static int kmod_config_add_alias(struct kmod_config *config,$/;"	f	file:
+kmod_config_add_blacklist	libkmod/libkmod-config.c	/^static int kmod_config_add_blacklist(struct kmod_config *config,$/;"	f	file:
+kmod_config_add_command	libkmod/libkmod-config.c	/^static int kmod_config_add_command(struct kmod_config *config,$/;"	f	file:
+kmod_config_add_options	libkmod/libkmod-config.c	/^static int kmod_config_add_options(struct kmod_config *config,$/;"	f	file:
+kmod_config_add_softdep	libkmod/libkmod-config.c	/^static int kmod_config_add_softdep(struct kmod_config *config,$/;"	f	file:
+kmod_config_free	libkmod/libkmod-config.c	/^void kmod_config_free(struct kmod_config *config)$/;"	f
+kmod_config_free_alias	libkmod/libkmod-config.c	/^static void kmod_config_free_alias(struct kmod_config *config,$/;"	f	file:
+kmod_config_free_blacklist	libkmod/libkmod-config.c	/^static void kmod_config_free_blacklist(struct kmod_config *config,$/;"	f	file:
+kmod_config_free_command	libkmod/libkmod-config.c	/^static void kmod_config_free_command(struct kmod_config *config,$/;"	f	file:
+kmod_config_free_options	libkmod/libkmod-config.c	/^static void kmod_config_free_options(struct kmod_config *config,$/;"	f	file:
+kmod_config_free_softdep	libkmod/libkmod-config.c	/^static void kmod_config_free_softdep(struct kmod_config *config,$/;"	f	file:
+kmod_config_get_aliases	libkmod/libkmod-config.c	/^KMOD_EXPORT struct kmod_config_iter *kmod_config_get_aliases(const struct kmod_ctx *ctx)$/;"	f
+kmod_config_get_blacklists	libkmod/libkmod-config.c	/^KMOD_EXPORT struct kmod_config_iter *kmod_config_get_blacklists(const struct kmod_ctx *ctx)$/;"	f
+kmod_config_get_install_commands	libkmod/libkmod-config.c	/^KMOD_EXPORT struct kmod_config_iter *kmod_config_get_install_commands(const struct kmod_ctx *ctx)$/;"	f
+kmod_config_get_options	libkmod/libkmod-config.c	/^KMOD_EXPORT struct kmod_config_iter *kmod_config_get_options(const struct kmod_ctx *ctx)$/;"	f
+kmod_config_get_remove_commands	libkmod/libkmod-config.c	/^KMOD_EXPORT struct kmod_config_iter *kmod_config_get_remove_commands(const struct kmod_ctx *ctx)$/;"	f
+kmod_config_get_softdeps	libkmod/libkmod-config.c	/^KMOD_EXPORT struct kmod_config_iter *kmod_config_get_softdeps(const struct kmod_ctx *ctx)$/;"	f
+kmod_config_iter	libkmod/libkmod-config.c	/^struct kmod_config_iter {$/;"	s	file:
+kmod_config_iter_free_iter	libkmod/libkmod-config.c	/^KMOD_EXPORT void kmod_config_iter_free_iter(struct kmod_config_iter *iter)$/;"	f
+kmod_config_iter_get_key	libkmod/libkmod-config.c	/^KMOD_EXPORT const char *kmod_config_iter_get_key(const struct kmod_config_iter *iter)$/;"	f
+kmod_config_iter_get_value	libkmod/libkmod-config.c	/^KMOD_EXPORT const char *kmod_config_iter_get_value(const struct kmod_config_iter *iter)$/;"	f
+kmod_config_iter_new	libkmod/libkmod-config.c	/^static struct kmod_config_iter *kmod_config_iter_new(const struct kmod_ctx* ctx,$/;"	f	file:
+kmod_config_iter_next	libkmod/libkmod-config.c	/^KMOD_EXPORT bool kmod_config_iter_next(struct kmod_config_iter *iter)$/;"	f
+kmod_config_new	libkmod/libkmod-config.c	/^int kmod_config_new(struct kmod_ctx *ctx, struct kmod_config **p_config,$/;"	f
+kmod_config_parse	libkmod/libkmod-config.c	/^static int kmod_config_parse(struct kmod_config *config, int fd,$/;"	f	file:
+kmod_config_parse_kcmdline	libkmod/libkmod-config.c	/^static int kmod_config_parse_kcmdline(struct kmod_config *config)$/;"	f	file:
+kmod_config_path	libkmod/libkmod-private.h	/^struct kmod_config_path {$/;"	s
+kmod_ctx	libkmod/libkmod.c	/^struct kmod_ctx {$/;"	s	file:
+kmod_dump_index	libkmod/libkmod.c	/^KMOD_EXPORT int kmod_dump_index(struct kmod_ctx *ctx, enum kmod_index type,$/;"	f
+kmod_elf	libkmod/libkmod-elf.c	/^struct kmod_elf {$/;"	s	file:
+kmod_elf_class	libkmod/libkmod-elf.c	/^enum kmod_elf_class {$/;"	g	file:
+kmod_elf_crc_find	libkmod/libkmod-elf.c	/^static int kmod_elf_crc_find(const struct kmod_elf *elf, const void *versions, uint64_t versionslen, const char *name, uint64_t *crc)$/;"	f	file:
+kmod_elf_get_dependency_symbols	libkmod/libkmod-elf.c	/^int kmod_elf_get_dependency_symbols(const struct kmod_elf *elf, struct kmod_modversion **array)$/;"	f
+kmod_elf_get_memory	libkmod/libkmod-elf.c	/^const void *kmod_elf_get_memory(const struct kmod_elf *elf)$/;"	f
+kmod_elf_get_modversions	libkmod/libkmod-elf.c	/^int kmod_elf_get_modversions(const struct kmod_elf *elf, struct kmod_modversion **array)$/;"	f
+kmod_elf_get_section	libkmod/libkmod-elf.c	/^int kmod_elf_get_section(const struct kmod_elf *elf, const char *section, const void **buf, uint64_t *buf_size)$/;"	f
+kmod_elf_get_strings	libkmod/libkmod-elf.c	/^int kmod_elf_get_strings(const struct kmod_elf *elf, const char *section, char ***array)$/;"	f
+kmod_elf_get_symbols	libkmod/libkmod-elf.c	/^int kmod_elf_get_symbols(const struct kmod_elf *elf, struct kmod_modversion **array)$/;"	f
+kmod_elf_get_symbols_symtab	libkmod/libkmod-elf.c	/^static int kmod_elf_get_symbols_symtab(const struct kmod_elf *elf, struct kmod_modversion **array)$/;"	f	file:
+kmod_elf_header	libkmod/libkmod-elf.c	/^	struct kmod_elf_header {$/;"	s	struct:kmod_elf	file:
+kmod_elf_new	libkmod/libkmod-elf.c	/^struct kmod_elf *kmod_elf_new(const void *memory, off_t size)$/;"	f
+kmod_elf_strip_section	libkmod/libkmod-elf.c	/^int kmod_elf_strip_section(struct kmod_elf *elf, const char *section)$/;"	f
+kmod_elf_strip_vermagic	libkmod/libkmod-elf.c	/^int kmod_elf_strip_vermagic(struct kmod_elf *elf)$/;"	f
+kmod_elf_unref	libkmod/libkmod-elf.c	/^void kmod_elf_unref(struct kmod_elf *elf)$/;"	f
+kmod_ext	tools/depmod.c	/^static const struct kmod_ext {$/;"	s	file:
+kmod_exts	tools/depmod.c	/^} kmod_exts[] = {$/;"	v	typeref:struct:kmod_ext	file:
+kmod_file	libkmod/libkmod-file.c	/^struct kmod_file {$/;"	s	file:
+kmod_file_get_contents	libkmod/libkmod-file.c	/^void *kmod_file_get_contents(const struct kmod_file *file)$/;"	f
+kmod_file_get_elf	libkmod/libkmod-file.c	/^struct kmod_elf *kmod_file_get_elf(struct kmod_file *file)$/;"	f
+kmod_file_get_size	libkmod/libkmod-file.c	/^off_t kmod_file_get_size(const struct kmod_file *file)$/;"	f
+kmod_file_open	libkmod/libkmod-file.c	/^struct kmod_file *kmod_file_open(const struct kmod_ctx *ctx,$/;"	f
+kmod_file_unref	libkmod/libkmod-file.c	/^void kmod_file_unref(struct kmod_file *file)$/;"	f
+kmod_filter	libkmod/libkmod.h	/^enum kmod_filter {$/;"	g
+kmod_get_config	libkmod/libkmod.c	/^const struct kmod_config *kmod_get_config(const struct kmod_ctx *ctx)$/;"	f
+kmod_get_dirname	libkmod/libkmod.c	/^const char *kmod_get_dirname(const struct kmod_ctx *ctx)$/;"	f
+kmod_get_log_priority	libkmod/libkmod.c	/^KMOD_EXPORT int kmod_get_log_priority(const struct kmod_ctx *ctx)$/;"	f
+kmod_get_userdata	libkmod/libkmod.c	/^KMOD_EXPORT void *kmod_get_userdata(const struct kmod_ctx *ctx)$/;"	f
+kmod_help	tools/kmod.c	/^static int kmod_help(int argc, char *argv[])$/;"	f	file:
+kmod_index	libkmod/libkmod.h	/^enum kmod_index {$/;"	g
+kmod_insert	libkmod/libkmod.h	/^enum kmod_insert {$/;"	g
+kmod_list	libkmod/libkmod-private.h	/^struct kmod_list {$/;"	s
+kmod_list_append	libkmod/libkmod-list.c	/^struct kmod_list *kmod_list_append(struct kmod_list *list, const void *data)$/;"	f
+kmod_list_append_list	libkmod/libkmod-list.c	/^struct kmod_list *kmod_list_append_list(struct kmod_list *list1,$/;"	f
+kmod_list_foreach	libkmod/libkmod-private.h	62;"	d
+kmod_list_foreach	libkmod/libkmod-private.h	63;"	d
+kmod_list_foreach	libkmod/libkmod.h	91;"	d
+kmod_list_foreach_reverse	libkmod/libkmod-private.h	69;"	d
+kmod_list_foreach_reverse	libkmod/libkmod-private.h	70;"	d
+kmod_list_foreach_reverse	libkmod/libkmod.h	96;"	d
+kmod_list_insert_after	libkmod/libkmod-list.c	/^struct kmod_list *kmod_list_insert_after(struct kmod_list *list,$/;"	f
+kmod_list_insert_before	libkmod/libkmod-list.c	/^struct kmod_list *kmod_list_insert_before(struct kmod_list *list,$/;"	f
+kmod_list_last	libkmod/libkmod-list.c	/^KMOD_EXPORT struct kmod_list *kmod_list_last(const struct kmod_list *list)$/;"	f
+kmod_list_next	libkmod/libkmod-list.c	/^KMOD_EXPORT struct kmod_list *kmod_list_next(const struct kmod_list *list,$/;"	f
+kmod_list_prepend	libkmod/libkmod-list.c	/^struct kmod_list *kmod_list_prepend(struct kmod_list *list, const void *data)$/;"	f
+kmod_list_prev	libkmod/libkmod-list.c	/^KMOD_EXPORT struct kmod_list *kmod_list_prev(const struct kmod_list *list,$/;"	f
+kmod_list_remove	libkmod/libkmod-list.c	/^struct kmod_list *kmod_list_remove(struct kmod_list *list)$/;"	f
+kmod_list_remove_data	libkmod/libkmod-list.c	/^struct kmod_list *kmod_list_remove_data(struct kmod_list *list,$/;"	f
+kmod_list_remove_n_latest	libkmod/libkmod-list.c	/^struct kmod_list *kmod_list_remove_n_latest(struct kmod_list *list,$/;"	f
+kmod_load_resources	libkmod/libkmod.c	/^KMOD_EXPORT int kmod_load_resources(struct kmod_ctx *ctx)$/;"	f
+kmod_log	libkmod/libkmod.c	/^void kmod_log(const struct kmod_ctx *ctx,$/;"	f
+kmod_log_cond	libkmod/libkmod-private.h	14;"	d
+kmod_log_null	libkmod/libkmod-private.h	/^	kmod_log_null(struct kmod_ctx *ctx, const char *format, ...) {}$/;"	f
+kmod_lookup_alias_from_alias_bin	libkmod/libkmod.c	/^static int kmod_lookup_alias_from_alias_bin(struct kmod_ctx *ctx,$/;"	f	file:
+kmod_lookup_alias_from_aliases_file	libkmod/libkmod.c	/^int kmod_lookup_alias_from_aliases_file(struct kmod_ctx *ctx, const char *name,$/;"	f
+kmod_lookup_alias_from_builtin_file	libkmod/libkmod.c	/^int kmod_lookup_alias_from_builtin_file(struct kmod_ctx *ctx, const char *name,$/;"	f
+kmod_lookup_alias_from_commands	libkmod/libkmod.c	/^int kmod_lookup_alias_from_commands(struct kmod_ctx *ctx, const char *name,$/;"	f
+kmod_lookup_alias_from_config	libkmod/libkmod.c	/^int kmod_lookup_alias_from_config(struct kmod_ctx *ctx, const char *name,$/;"	f
+kmod_lookup_alias_from_moddep_file	libkmod/libkmod.c	/^int kmod_lookup_alias_from_moddep_file(struct kmod_ctx *ctx, const char *name,$/;"	f
+kmod_lookup_alias_from_symbols_file	libkmod/libkmod.c	/^int kmod_lookup_alias_from_symbols_file(struct kmod_ctx *ctx, const char *name,$/;"	f
+kmod_module	libkmod/libkmod-module.c	/^struct kmod_module {$/;"	s	file:
+kmod_module_apply_filter	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_apply_filter(const struct kmod_ctx *ctx,$/;"	f
+kmod_module_dependency_symbol	libkmod/libkmod-module.c	/^struct kmod_module_dependency_symbol {$/;"	s	file:
+kmod_module_dependency_symbol_free	libkmod/libkmod-module.c	/^static void kmod_module_dependency_symbol_free(struct kmod_module_dependency_symbol *dependency_symbol)$/;"	f	file:
+kmod_module_dependency_symbol_get_bind	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_dependency_symbol_get_bind(const struct kmod_list *entry)$/;"	f
+kmod_module_dependency_symbol_get_crc	libkmod/libkmod-module.c	/^KMOD_EXPORT uint64_t kmod_module_dependency_symbol_get_crc(const struct kmod_list *entry)$/;"	f
+kmod_module_dependency_symbol_get_symbol	libkmod/libkmod-module.c	/^KMOD_EXPORT const char *kmod_module_dependency_symbol_get_symbol(const struct kmod_list *entry)$/;"	f
+kmod_module_dependency_symbols_free_list	libkmod/libkmod-module.c	/^KMOD_EXPORT void kmod_module_dependency_symbols_free_list(struct kmod_list *list)$/;"	f
+kmod_module_dependency_symbols_new	libkmod/libkmod-module.c	/^static struct kmod_module_dependency_symbol *kmod_module_dependency_symbols_new(uint64_t crc, uint8_t bind, const char *symbol)$/;"	f	file:
+kmod_module_get_dependencies	libkmod/libkmod-module.c	/^KMOD_EXPORT struct kmod_list *kmod_module_get_dependencies(const struct kmod_module *mod)$/;"	f
+kmod_module_get_dependency_symbols	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_get_dependency_symbols(const struct kmod_module *mod, struct kmod_list **list)$/;"	f
+kmod_module_get_elf	libkmod/libkmod-module.c	/^static struct kmod_elf *kmod_module_get_elf(const struct kmod_module *mod)$/;"	f	file:
+kmod_module_get_filtered_blacklist	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_get_filtered_blacklist(const struct kmod_ctx *ctx,$/;"	f
+kmod_module_get_holders	libkmod/libkmod-module.c	/^KMOD_EXPORT struct kmod_list *kmod_module_get_holders(const struct kmod_module *mod)$/;"	f
+kmod_module_get_info	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_get_info(const struct kmod_module *mod, struct kmod_list **list)$/;"	f
+kmod_module_get_initstate	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_get_initstate(const struct kmod_module *mod)$/;"	f
+kmod_module_get_install_commands	libkmod/libkmod-module.c	/^KMOD_EXPORT const char *kmod_module_get_install_commands(const struct kmod_module *mod)$/;"	f
+kmod_module_get_module	libkmod/libkmod-module.c	/^KMOD_EXPORT struct kmod_module *kmod_module_get_module(const struct kmod_list *entry)$/;"	f
+kmod_module_get_name	libkmod/libkmod-module.c	/^KMOD_EXPORT const char *kmod_module_get_name(const struct kmod_module *mod)$/;"	f
+kmod_module_get_options	libkmod/libkmod-module.c	/^KMOD_EXPORT const char *kmod_module_get_options(const struct kmod_module *mod)$/;"	f
+kmod_module_get_path	libkmod/libkmod-module.c	/^KMOD_EXPORT const char *kmod_module_get_path(const struct kmod_module *mod)$/;"	f
+kmod_module_get_probe_list	libkmod/libkmod-module.c	/^static int kmod_module_get_probe_list(struct kmod_module *mod,$/;"	f	file:
+kmod_module_get_refcnt	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_get_refcnt(const struct kmod_module *mod)$/;"	f
+kmod_module_get_remove_commands	libkmod/libkmod-module.c	/^KMOD_EXPORT const char *kmod_module_get_remove_commands(const struct kmod_module *mod)$/;"	f
+kmod_module_get_sections	libkmod/libkmod-module.c	/^KMOD_EXPORT struct kmod_list *kmod_module_get_sections(const struct kmod_module *mod)$/;"	f
+kmod_module_get_size	libkmod/libkmod-module.c	/^KMOD_EXPORT long kmod_module_get_size(const struct kmod_module *mod)$/;"	f
+kmod_module_get_softdeps	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_get_softdeps(const struct kmod_module *mod,$/;"	f
+kmod_module_get_symbols	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_get_symbols(const struct kmod_module *mod, struct kmod_list **list)$/;"	f
+kmod_module_get_versions	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_get_versions(const struct kmod_module *mod, struct kmod_list **list)$/;"	f
+kmod_module_info	libkmod/libkmod-module.c	/^struct kmod_module_info {$/;"	s	file:
+kmod_module_info_free	libkmod/libkmod-module.c	/^static void kmod_module_info_free(struct kmod_module_info *info)$/;"	f	file:
+kmod_module_info_free_list	libkmod/libkmod-module.c	/^KMOD_EXPORT void kmod_module_info_free_list(struct kmod_list *list)$/;"	f
+kmod_module_info_get_key	libkmod/libkmod-module.c	/^KMOD_EXPORT const char *kmod_module_info_get_key(const struct kmod_list *entry)$/;"	f
+kmod_module_info_get_value	libkmod/libkmod-module.c	/^KMOD_EXPORT const char *kmod_module_info_get_value(const struct kmod_list *entry)$/;"	f
+kmod_module_info_new	libkmod/libkmod-module.c	/^static struct kmod_module_info *kmod_module_info_new(const char *key, size_t keylen, const char *value, size_t valuelen)$/;"	f	file:
+kmod_module_initstate	libkmod/libkmod.h	/^enum kmod_module_initstate {$/;"	g
+kmod_module_initstate_str	libkmod/libkmod-module.c	/^KMOD_EXPORT const char *kmod_module_initstate_str(enum kmod_module_initstate state)$/;"	f
+kmod_module_insert_module	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_insert_module(struct kmod_module *mod,$/;"	f
+kmod_module_new	libkmod/libkmod-module.c	/^static int kmod_module_new(struct kmod_ctx *ctx, const char *key,$/;"	f	file:
+kmod_module_new_from_alias	libkmod/libkmod-module.c	/^int kmod_module_new_from_alias(struct kmod_ctx *ctx, const char *alias,$/;"	f
+kmod_module_new_from_loaded	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_new_from_loaded(struct kmod_ctx *ctx,$/;"	f
+kmod_module_new_from_lookup	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_new_from_lookup(struct kmod_ctx *ctx,$/;"	f
+kmod_module_new_from_name	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_new_from_name(struct kmod_ctx *ctx,$/;"	f
+kmod_module_new_from_path	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_new_from_path(struct kmod_ctx *ctx,$/;"	f
+kmod_module_parse_depline	libkmod/libkmod-module.c	/^int kmod_module_parse_depline(struct kmod_module *mod, char *line)$/;"	f
+kmod_module_probe_insert_module	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_probe_insert_module(struct kmod_module *mod,$/;"	f
+kmod_module_ref	libkmod/libkmod-module.c	/^KMOD_EXPORT struct kmod_module *kmod_module_ref(struct kmod_module *mod)$/;"	f
+kmod_module_remove_module	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_remove_module(struct kmod_module *mod,$/;"	f
+kmod_module_section	libkmod/libkmod-module.c	/^struct kmod_module_section {$/;"	s	file:
+kmod_module_section_free	libkmod/libkmod-module.c	/^static void kmod_module_section_free(struct kmod_module_section *section)$/;"	f	file:
+kmod_module_section_free_list	libkmod/libkmod-module.c	/^KMOD_EXPORT void kmod_module_section_free_list(struct kmod_list *list)$/;"	f
+kmod_module_section_get_address	libkmod/libkmod-module.c	/^KMOD_EXPORT unsigned long kmod_module_section_get_address(const struct kmod_list *entry)$/;"	f
+kmod_module_section_get_name	libkmod/libkmod-module.c	/^KMOD_EXPORT const char *kmod_module_section_get_name(const struct kmod_list *entry)$/;"	f
+kmod_module_set_builtin	libkmod/libkmod-module.c	/^void kmod_module_set_builtin(struct kmod_module *mod, bool builtin)$/;"	f
+kmod_module_set_install_commands	libkmod/libkmod-module.c	/^void kmod_module_set_install_commands(struct kmod_module *mod, const char *cmd)$/;"	f
+kmod_module_set_remove_commands	libkmod/libkmod-module.c	/^void kmod_module_set_remove_commands(struct kmod_module *mod, const char *cmd)$/;"	f
+kmod_module_set_visited	libkmod/libkmod-module.c	/^void kmod_module_set_visited(struct kmod_module *mod, bool visited)$/;"	f
+kmod_module_symbol	libkmod/libkmod-module.c	/^struct kmod_module_symbol {$/;"	s	file:
+kmod_module_symbol_free	libkmod/libkmod-module.c	/^static void kmod_module_symbol_free(struct kmod_module_symbol *symbol)$/;"	f	file:
+kmod_module_symbol_get_crc	libkmod/libkmod-module.c	/^KMOD_EXPORT uint64_t kmod_module_symbol_get_crc(const struct kmod_list *entry)$/;"	f
+kmod_module_symbol_get_symbol	libkmod/libkmod-module.c	/^KMOD_EXPORT const char *kmod_module_symbol_get_symbol(const struct kmod_list *entry)$/;"	f
+kmod_module_symbols_free_list	libkmod/libkmod-module.c	/^KMOD_EXPORT void kmod_module_symbols_free_list(struct kmod_list *list)$/;"	f
+kmod_module_symbols_new	libkmod/libkmod-module.c	/^static struct kmod_module_symbol *kmod_module_symbols_new(uint64_t crc, const char *symbol)$/;"	f	file:
+kmod_module_unref	libkmod/libkmod-module.c	/^KMOD_EXPORT struct kmod_module *kmod_module_unref(struct kmod_module *mod)$/;"	f
+kmod_module_unref_list	libkmod/libkmod-module.c	/^KMOD_EXPORT int kmod_module_unref_list(struct kmod_list *list)$/;"	f
+kmod_module_version	libkmod/libkmod-module.c	/^struct kmod_module_version {$/;"	s	file:
+kmod_module_version_free	libkmod/libkmod-module.c	/^static void kmod_module_version_free(struct kmod_module_version *version)$/;"	f	file:
+kmod_module_version_get_crc	libkmod/libkmod-module.c	/^KMOD_EXPORT uint64_t kmod_module_version_get_crc(const struct kmod_list *entry)$/;"	f
+kmod_module_version_get_symbol	libkmod/libkmod-module.c	/^KMOD_EXPORT const char *kmod_module_version_get_symbol(const struct kmod_list *entry)$/;"	f
+kmod_module_versions_free_list	libkmod/libkmod-module.c	/^KMOD_EXPORT void kmod_module_versions_free_list(struct kmod_list *list)$/;"	f
+kmod_module_versions_new	libkmod/libkmod-module.c	/^static struct kmod_module_version *kmod_module_versions_new(uint64_t crc, const char *symbol)$/;"	f	file:
+kmod_modversion	libkmod/libkmod-private.h	/^struct kmod_modversion {$/;"	s
+kmod_modversion32	libkmod/libkmod-elf.c	/^struct kmod_modversion32 {$/;"	s	file:
+kmod_modversion64	libkmod/libkmod-elf.c	/^struct kmod_modversion64 {$/;"	s	file:
+kmod_new	libkmod/libkmod.c	/^KMOD_EXPORT struct kmod_ctx *kmod_new(const char *dirname,$/;"	f
+kmod_option_get_modname	libkmod/libkmod-config.c	/^const char *kmod_option_get_modname(const struct kmod_list *l) {$/;"	f
+kmod_option_get_options	libkmod/libkmod-config.c	/^const char *kmod_option_get_options(const struct kmod_list *l) {$/;"	f
+kmod_options	libkmod/libkmod-config.c	/^struct kmod_options {$/;"	s	file:
+kmod_pool_add_module	libkmod/libkmod.c	/^void kmod_pool_add_module(struct kmod_ctx *ctx, struct kmod_module *mod,$/;"	f
+kmod_pool_del_module	libkmod/libkmod.c	/^void kmod_pool_del_module(struct kmod_ctx *ctx, struct kmod_module *mod,$/;"	f
+kmod_pool_get_module	libkmod/libkmod.c	/^struct kmod_module *kmod_pool_get_module(struct kmod_ctx *ctx,$/;"	f
+kmod_probe	libkmod/libkmod.h	/^enum kmod_probe {$/;"	g
+kmod_ref	libkmod/libkmod.c	/^KMOD_EXPORT struct kmod_ctx *kmod_ref(struct kmod_ctx *ctx)$/;"	f
+kmod_remove	libkmod/libkmod.h	/^enum kmod_remove {$/;"	g
+kmod_resources	libkmod/libkmod.h	/^enum kmod_resources {$/;"	g
+kmod_search_moddep	libkmod/libkmod.c	/^char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)$/;"	f
+kmod_set_log_fn	libkmod/libkmod.c	/^KMOD_EXPORT void kmod_set_log_fn(struct kmod_ctx *ctx,$/;"	f
+kmod_set_log_priority	libkmod/libkmod.c	/^KMOD_EXPORT void kmod_set_log_priority(struct kmod_ctx *ctx, int priority)$/;"	f
+kmod_set_modules_visited	libkmod/libkmod.c	/^void kmod_set_modules_visited(struct kmod_ctx *ctx, bool visited)$/;"	f
+kmod_set_userdata	libkmod/libkmod.c	/^KMOD_EXPORT void kmod_set_userdata(struct kmod_ctx *ctx, const void *userdata)$/;"	f
+kmod_softdep	libkmod/libkmod-config.c	/^struct kmod_softdep {$/;"	s	file:
+kmod_softdep_get_name	libkmod/libkmod-config.c	/^const char *kmod_softdep_get_name(const struct kmod_list *l) {$/;"	f
+kmod_softdep_get_post	libkmod/libkmod-config.c	/^const char * const *kmod_softdep_get_post(const struct kmod_list *l, unsigned int *count) {$/;"	f
+kmod_softdep_get_pre	libkmod/libkmod-config.c	/^const char * const *kmod_softdep_get_pre(const struct kmod_list *l, unsigned int *count) {$/;"	f
+kmod_symbol_bind	libkmod/libkmod.h	/^enum kmod_symbol_bind {$/;"	g
+kmod_symbol_bind_from_elf	libkmod/libkmod-elf.c	/^static inline uint8_t kmod_symbol_bind_from_elf(uint8_t elf_value)$/;"	f	file:
+kmod_unload_resources	libkmod/libkmod.c	/^KMOD_EXPORT void kmod_unload_resources(struct kmod_ctx *ctx)$/;"	f
+kmod_unref	libkmod/libkmod.c	/^KMOD_EXPORT struct kmod_ctx *kmod_unref(struct kmod_ctx *ctx)$/;"	f
+kmod_validate_resources	libkmod/libkmod.c	/^KMOD_EXPORT int kmod_validate_resources(struct kmod_ctx *ctx)$/;"	f
+kversion	tools/depmod.c	/^	const char *kversion;$/;"	m	struct:cfg	file:
+last	libkmod/libkmod-index.c	/^	unsigned char last;$/;"	m	struct:index_mm_node	file:
+last	libkmod/libkmod-index.c	/^	unsigned char last;$/;"	m	struct:index_node_f	file:
+last	tools/depmod.c	/^	unsigned char last;$/;"	m	struct:index_node	file:
+ldpreload	testsuite/testsuite.c	/^	const char *ldpreload;$/;"	m	struct:_env_config	file:
+len	libkmod/libkmod-index.c	/^	unsigned int len;$/;"	m	struct:index_mm_value	file:
+len	libkmod/libkmod-index.c	/^	unsigned int len;$/;"	m	struct:index_mm_value_array	file:
+len	libkmod/libkmod-index.h	/^	unsigned int len;$/;"	m	struct:index_value
+len	tools/depmod.c	/^	size_t len;$/;"	m	struct:cfg_override	file:
+len	tools/depmod.c	/^	size_t len;$/;"	m	struct:cfg_search	file:
+len	tools/depmod.c	/^	size_t len;$/;"	m	struct:kmod_ext	file:
+list	libkmod/libkmod-config.c	/^	const struct kmod_list *list;$/;"	m	struct:kmod_config_iter	typeref:struct:kmod_config_iter::kmod_list	file:
+list	testsuite/stripped-module.h	/^	struct list_head list;$/;"	m	struct:module	typeref:struct:module::list_head
+list_head	testsuite/stripped-module.h	/^struct list_head {$/;"	s
+list_node	libkmod/libkmod-private.h	/^struct list_node {$/;"	s
+list_node_append	libkmod/libkmod-list.c	/^static inline void list_node_append(struct list_node *list,$/;"	f	file:
+list_node_append_list	libkmod/libkmod-list.c	/^static inline void list_node_append_list(struct list_node *list1,$/;"	f	file:
+list_node_init	libkmod/libkmod-list.c	/^static inline struct list_node *list_node_init(struct list_node *node)$/;"	f	file:
+list_node_insert_after	libkmod/libkmod-list.c	/^static inline void list_node_insert_after(struct list_node *list,$/;"	f	file:
+list_node_insert_before	libkmod/libkmod-list.c	/^static inline void list_node_insert_before(struct list_node *list,$/;"	f	file:
+list_node_next	libkmod/libkmod-list.c	/^static inline struct list_node *list_node_next(const struct list_node *node)$/;"	f	file:
+list_node_prev	libkmod/libkmod-list.c	/^static inline struct list_node *list_node_prev(const struct list_node *node)$/;"	f	file:
+list_node_remove	libkmod/libkmod-list.c	/^static inline struct list_node *list_node_remove(struct list_node *node)$/;"	f	file:
+load	libkmod/libkmod-file.c	/^	int (*load)(struct kmod_file *file);$/;"	m	struct:file_ops	file:
+load_reg	libkmod/libkmod-file.c	/^static int load_reg(struct kmod_file *file)$/;"	f	file:
+load_xz	libkmod/libkmod-file.c	/^static int load_xz(struct kmod_file *file)$/;"	f	file:
+load_zlib	libkmod/libkmod-file.c	/^static int load_zlib(struct kmod_file *file)$/;"	f	file:
+loaded_1	testsuite/test-loaded.c	/^static int loaded_1(const struct test *t)$/;"	f	file:
+log_close	tools/log.c	/^void log_close(void)$/;"	f
+log_data	libkmod/libkmod.c	/^	void *log_data;$/;"	m	struct:kmod_ctx	file:
+log_filep	libkmod/libkmod.c	/^static void log_filep(void *data,$/;"	f	file:
+log_fn	libkmod/libkmod.c	/^	void (*log_fn)(void *data,$/;"	m	struct:kmod_ctx	file:
+log_kmod	tools/log.c	/^static void log_kmod(void *data, int priority, const char *file, int line,$/;"	f	file:
+log_open	tools/log.c	/^void log_open(bool use_syslog)$/;"	f
+log_printf	tools/log.c	/^void log_printf(int prio, const char *fmt, ...)$/;"	f
+log_priority	libkmod/libkmod.c	/^	int log_priority;$/;"	m	struct:kmod_ctx	file:
+log_priority	libkmod/libkmod.c	/^static int log_priority(const char *priority)$/;"	f	file:
+log_priority	tools/log.c	/^static int log_priority = LOG_ERR;$/;"	v	file:
+log_priority	tools/modprobe.c	/^static int log_priority = LOG_CRIT;$/;"	v	file:
+log_setup_kmod_log	tools/log.c	/^void log_setup_kmod_log(struct kmod_ctx *ctx, int priority)$/;"	f
+log_use_syslog	tools/log.c	/^static bool log_use_syslog;$/;"	v	file:
+lookup_only	tools/modprobe.c	/^static int lookup_only = 0;$/;"	v	file:
+lookup_softdep	libkmod/libkmod-module.c	/^static struct kmod_list *lookup_softdep(struct kmod_ctx *ctx, const char * const * array, unsigned int count)$/;"	f	file:
+machine	libkmod/libkmod-elf.c	/^		uint16_t machine;$/;"	m	struct:kmod_elf::kmod_elf_header	file:
+magic_bytes	libkmod/libkmod-file.c	/^	const char *magic_bytes;$/;"	m	struct:comp_type	file:
+magic_size	libkmod/libkmod-file.c	/^	size_t magic_size;$/;"	m	struct:comp_type	file:
+magic_xz	libkmod/libkmod-file.c	/^static const char magic_xz[] = {0xfd, '7', 'z', 'X', 'Z', 0};$/;"	v	file:
+magic_zlib	libkmod/libkmod-file.c	/^static const char magic_zlib[] = {0x1f, 0x8b};$/;"	v	file:
+main	build-aux/config.guess	/^		main()$/;"	f
+main	build-aux/config.guess	/^	main ()$/;"	f
+main	build-aux/config.guess	/^main ()$/;"	f
+main	tools/kmod.c	/^int main(int argc, char *argv[])$/;"	f
+memdup	libkmod/libkmod-util.c	/^inline void *memdup(const void *p, size_t n)$/;"	f
+memory	libkmod/libkmod-elf.c	/^	const uint8_t *memory;$/;"	m	struct:kmod_elf	file:
+memory	libkmod/libkmod-file.c	/^	void *memory;$/;"	m	struct:kmod_file	file:
+mkdir_p	testsuite/mkdir.c	/^TS_EXPORT int mkdir_p(const char *path, mode_t mode)$/;"	f
+mm	libkmod/libkmod-index.c	/^	void *mm;$/;"	m	struct:index_mm	file:
+mod	testsuite/delete_module.c	/^struct mod {$/;"	s	file:
+mod	testsuite/init_module.c	/^struct mod {$/;"	s	file:
+mod	tools/depmod.c	/^struct mod {$/;"	s	file:
+mod_add_dependency	tools/depmod.c	/^static int mod_add_dependency(struct mod *mod, struct symbol *sym)$/;"	f	file:
+mod_cmp	tools/depmod.c	/^static int mod_cmp(const void *pa, const void *pb) {$/;"	f	file:
+mod_count_all_dependencies	tools/depmod.c	/^static size_t mod_count_all_dependencies(const struct mod *mod)$/;"	f	file:
+mod_fill_all_unique_dependencies	tools/depmod.c	/^static int mod_fill_all_unique_dependencies(const struct mod *mod, const struct mod **deps, size_t n_deps, size_t *last)$/;"	f	file:
+mod_free	tools/depmod.c	/^static void mod_free(struct mod *mod)$/;"	f	file:
+mod_get_all_sorted_dependencies	tools/depmod.c	/^static const struct mod **mod_get_all_sorted_dependencies(const struct mod *mod, size_t *n_deps)$/;"	f	file:
+mod_get_compressed_path	tools/depmod.c	/^static inline const char *mod_get_compressed_path(const struct mod *mod)$/;"	f	file:
+mod_strerror	tools/insmod.c	/^static const char *mod_strerror(int err)$/;"	f	file:
+modinfo_alias_do	tools/modinfo.c	/^static int modinfo_alias_do(struct kmod_ctx *ctx, const char *alias)$/;"	f	file:
+modinfo_do	tools/modinfo.c	/^static int modinfo_do(struct kmod_module *mod)$/;"	f	file:
+modinfo_jonsmodules	testsuite/test-modinfo.c	/^static __noreturn int modinfo_jonsmodules(const struct test *t)$/;"	f	file:
+modinfo_params_do	tools/modinfo.c	/^static int modinfo_params_do(const struct kmod_list *list)$/;"	f	file:
+modinfo_path_do	tools/modinfo.c	/^static int modinfo_path_do(struct kmod_ctx *ctx, const char *path)$/;"	f	file:
+modname	libkmod/libkmod-config.c	/^	char modname[];$/;"	m	struct:kmod_alias	file:
+modname	libkmod/libkmod-config.c	/^	char modname[];$/;"	m	struct:kmod_command	file:
+modname	libkmod/libkmod-config.c	/^	char modname[];$/;"	m	struct:kmod_options	file:
+modname	tools/depmod.c	/^	char modname[];$/;"	m	struct:mod	file:
+modname_normalize	libkmod/libkmod-util.c	/^inline char *modname_normalize(const char *modname, char buf[PATH_MAX],$/;"	f
+modnamelen	tools/depmod.c	/^	size_t modnamelen;$/;"	m	struct:mod	file:
+modprobe_builtin	testsuite/test-modprobe.c	/^static __noreturn int modprobe_builtin(const struct test *t)$/;"	f	file:
+modprobe_install_cmd_loop	testsuite/test-modprobe.c	/^static __noreturn int modprobe_install_cmd_loop(const struct test *t)$/;"	f	file:
+modprobe_show_depends	testsuite/test-modprobe.c	/^static __noreturn int modprobe_show_depends(const struct test *t)$/;"	f	file:
+modprobe_show_depends2	testsuite/test-modprobe.c	/^static __noreturn int modprobe_show_depends2(const struct test *t)$/;"	f	file:
+modprobe_softdep_loop	testsuite/test-modprobe.c	/^static __noreturn int modprobe_softdep_loop(const struct test *t)$/;"	f	file:
+module	testsuite/stripped-module.h	/^struct module$/;"	s
+module_do_install_commands	libkmod/libkmod-module.c	/^static int module_do_install_commands(struct kmod_module *mod,$/;"	f	file:
+module_get_dependencies_noref	libkmod/libkmod-module.c	/^static const struct kmod_list *module_get_dependencies_noref(const struct kmod_module *mod)$/;"	f	file:
+module_is_blacklisted	libkmod/libkmod-module.c	/^static bool module_is_blacklisted(struct kmod_module *mod)$/;"	f	file:
+module_is_inkernel	libkmod/libkmod-module.c	/^static inline bool module_is_inkernel(struct kmod_module *mod)$/;"	f	file:
+module_is_inkernel	testsuite/init_module.c	/^static inline bool module_is_inkernel(const char *modname)$/;"	f	file:
+module_options_concat	libkmod/libkmod-module.c	/^static char *module_options_concat(const char *opt, const char *xopt)$/;"	f	file:
+module_state	testsuite/stripped-module.h	/^enum module_state$/;"	g
+modules	testsuite/delete_module.c	/^static struct mod *modules;$/;"	v	typeref:struct:mod	file:
+modules	testsuite/init_module.c	/^static struct mod *modules;$/;"	v	typeref:struct:mod	file:
+modules	tools/depmod.c	/^	struct array modules;$/;"	m	struct:depmod	typeref:struct:depmod::array	file:
+modules_by_name	libkmod/libkmod.c	/^	struct hash *modules_by_name;$/;"	m	struct:kmod_ctx	typeref:struct:kmod_ctx::hash	file:
+modules_by_name	tools/depmod.c	/^	struct hash *modules_by_name;$/;"	m	struct:depmod	typeref:struct:depmod::hash	file:
+modules_by_uncrelpath	tools/depmod.c	/^	struct hash *modules_by_uncrelpath;$/;"	m	struct:depmod	typeref:struct:depmod::hash	file:
+n_buckets	libkmod/libkmod-hash.c	/^	unsigned int n_buckets;$/;"	m	struct:hash	file:
+n_dep	libkmod/libkmod-module.c	/^	int n_dep;$/;"	m	struct:kmod_module	file:
+n_post	libkmod/libkmod-config.c	/^	unsigned int n_post;$/;"	m	struct:kmod_softdep	file:
+n_pre	libkmod/libkmod-config.c	/^	unsigned int n_pre;$/;"	m	struct:kmod_softdep	file:
+name	libkmod/libkmod-config.c	/^	char *name;$/;"	m	struct:kmod_alias	file:
+name	libkmod/libkmod-config.c	/^	char *name;$/;"	m	struct:kmod_softdep	file:
+name	libkmod/libkmod-config.c	/^	char name[];$/;"	m	struct:conf_file	file:
+name	libkmod/libkmod-elf.c	/^	char name[64 - sizeof(uint32_t)];$/;"	m	struct:kmod_modversion32	file:
+name	libkmod/libkmod-elf.c	/^	char name[64 - sizeof(uint64_t)];$/;"	m	struct:kmod_modversion64	file:
+name	libkmod/libkmod-module.c	/^	char *name;$/;"	m	struct:kmod_module	file:
+name	libkmod/libkmod-module.c	/^	char name[];$/;"	m	struct:kmod_module_section	file:
+name	testsuite/delete_module.c	/^	char name[];$/;"	m	struct:mod	file:
+name	testsuite/init_module.c	/^	char name[];$/;"	m	struct:mod	file:
+name	testsuite/stripped-module.h	/^	char name[MODULE_NAME_LEN];$/;"	m	struct:module
+name	testsuite/testsuite.h	/^	const char *name;$/;"	m	struct:test
+name	tools/depmod.c	/^	char name[];$/;"	m	struct:symbol	file:
+name	tools/depmod.c	/^	const char *name;$/;"	m	struct:cfg_file	file:
+name	tools/kmod.h	/^	const char *name;$/;"	m	struct:kmod_cmd
+name	tools/modinfo.c	/^	const char *name;$/;"	m	struct:param	file:
+namelen	tools/depmod.c	/^	size_t namelen;$/;"	m	struct:cfg_file	file:
+namelen	tools/modinfo.c	/^	int namelen;$/;"	m	struct:param	file:
+nameoff	libkmod/libkmod-elf.c	/^			uint32_t nameoff; \/* offset in strings itself *\/$/;"	m	struct:kmod_elf::kmod_elf_header::__anon3	file:
+native_endianess	libkmod/libkmod-elf.c	/^static const enum kmod_elf_class native_endianess = KMOD_ELF_LSB;$/;"	v	typeref:enum:kmod_elf_class	file:
+native_endianess	libkmod/libkmod-elf.c	/^static const enum kmod_elf_class native_endianess = KMOD_ELF_MSB;$/;"	v	typeref:enum:kmod_elf_class	file:
+need_init	testsuite/delete_module.c	/^static bool need_init = true;$/;"	v	file:
+need_init	testsuite/init_module.c	/^static bool need_init = true;$/;"	v	file:
+need_spawn	testsuite/testsuite.h	/^	bool need_spawn;$/;"	m	struct:test
+need_trap	testsuite/path.c	/^static inline bool need_trap(const char *path)$/;"	f	file:
+next	libkmod/libkmod-index.h	/^	struct index_value *next;$/;"	m	struct:index_value	typeref:struct:index_value::index_value
+next	libkmod/libkmod-private.h	/^	struct list_node *next, *prev;$/;"	m	struct:list_node	typeref:struct:list_node::list_node
+next	testsuite/delete_module.c	/^	struct mod *next;$/;"	m	struct:mod	typeref:struct:mod::mod	file:
+next	testsuite/init_module.c	/^	struct mod *next;$/;"	m	struct:mod	typeref:struct:mod::mod	file:
+next	testsuite/stripped-module.h	/^	struct list_head *next, *prev;$/;"	m	struct:list_head	typeref:struct:list_head::list_head
+next	tools/depmod.c	/^	struct cfg_override *next;$/;"	m	struct:cfg_override	typeref:struct:cfg_override::cfg_override	file:
+next	tools/depmod.c	/^	struct cfg_search *next;$/;"	m	struct:cfg_search	typeref:struct:cfg_search::cfg_search	file:
+next	tools/depmod.c	/^	struct index_value *next;$/;"	m	struct:index_value	typeref:struct:index_value::index_value	file:
+next	tools/modinfo.c	/^	struct param *next;$/;"	m	struct:param	typeref:struct:param::param	file:
+nextlib	testsuite/path.c	/^static void *nextlib;$/;"	v	file:
+node	libkmod/libkmod-private.h	/^	struct list_node node;$/;"	m	struct:kmod_list	typeref:struct:kmod_list::list_node
+node_offset	libkmod/libkmod-index.c	/^enum node_offset {$/;"	g	file:
+node_offset	tools/depmod.c	/^enum node_offset {$/;"	g	file:
+now_usec	testsuite/testsuite.c	/^static unsigned long long now_usec(void)$/;"	f	file:
+offset	libkmod/libkmod-elf.c	/^			uint64_t offset;$/;"	m	struct:kmod_elf::kmod_elf_header::__anon2	file:
+offset	libkmod/libkmod-elf.c	/^			uint64_t offset;$/;"	m	struct:kmod_elf::kmod_elf_header::__anon3	file:
+oneshot	testsuite/testsuite.c	/^static int oneshot = 0;$/;"	v	file:
+ops	libkmod/libkmod-file.c	/^	const struct file_ops *ops;$/;"	m	struct:kmod_file	typeref:struct:kmod_file::file_ops	file:
+ops	libkmod/libkmod-file.c	/^	const struct file_ops ops;$/;"	m	struct:comp_type	typeref:struct:comp_type::file_ops	file:
+options	libkmod/libkmod-config.c	/^	char *options;$/;"	m	struct:kmod_options	file:
+options	libkmod/libkmod-module.c	/^		bool options : 1;$/;"	m	struct:kmod_module::__anon4	file:
+options	libkmod/libkmod-module.c	/^	char *options;$/;"	m	struct:kmod_module	file:
+options	libkmod/libkmod-private.h	/^	struct kmod_list *options;$/;"	m	struct:kmod_config	typeref:struct:kmod_config::kmod_list
+options	testsuite/testsuite.c	/^static const struct option options[] = {$/;"	v	typeref:struct:option	file:
+options	tools/kmod.c	/^static const struct option options[] = {$/;"	v	typeref:struct:option	file:
+options_from_array	tools/modprobe.c	/^static int options_from_array(char **args, int nargs, char **output)$/;"	f	file:
+options_s	tools/kmod.c	/^static const char options_s[] = "+hV";$/;"	v	file:
+options_short	testsuite/testsuite.c	/^static const char options_short[] = "lhn";$/;"	v	file:
+output	testsuite/testsuite.h	/^	} output;$/;"	m	struct:test	typeref:struct:test::__anon1
+output_aliases	tools/depmod.c	/^static int output_aliases(struct depmod *depmod, FILE *out)$/;"	f	file:
+output_aliases_bin	tools/depmod.c	/^static int output_aliases_bin(struct depmod *depmod, FILE *out)$/;"	f	file:
+output_builtin_bin	tools/depmod.c	/^static int output_builtin_bin(struct depmod *depmod, FILE *out)$/;"	f	file:
+output_deps	tools/depmod.c	/^static int output_deps(struct depmod *depmod, FILE *out)$/;"	f	file:
+output_deps_bin	tools/depmod.c	/^static int output_deps_bin(struct depmod *depmod, FILE *out)$/;"	f	file:
+output_devname	tools/depmod.c	/^static int output_devname(struct depmod *depmod, FILE *out)$/;"	f	file:
+output_softdeps	tools/depmod.c	/^static int output_softdeps(struct depmod *depmod, FILE *out)$/;"	f	file:
+output_symbols	tools/depmod.c	/^static int output_symbols(struct depmod *depmod, FILE *out)$/;"	f	file:
+output_symbols_bin	tools/depmod.c	/^static int output_symbols_bin(struct depmod *depmod, FILE *out)$/;"	f	file:
+overrides	tools/depmod.c	/^	struct cfg_override *overrides;$/;"	m	struct:cfg	typeref:struct:cfg::cfg_override	file:
+owner	tools/depmod.c	/^	struct mod *owner;$/;"	m	struct:symbol	typeref:struct:symbol::mod	file:
+param	tools/modinfo.c	/^	const char *param;$/;"	m	struct:param	file:
+param	tools/modinfo.c	/^struct param {$/;"	s	file:
+paramlen	tools/modinfo.c	/^	int paramlen;$/;"	m	struct:param	file:
+parse_retcodes	testsuite/delete_module.c	/^static void parse_retcodes(struct mod *_modules, const char *s)$/;"	f	file:
+parse_retcodes	testsuite/init_module.c	/^static void parse_retcodes(struct mod *_modules, const char *s)$/;"	f	file:
+path	libkmod/libkmod-config.c	/^	const char *path;$/;"	m	struct:conf_file	file:
+path	libkmod/libkmod-module.c	/^	char *path;$/;"	m	struct:kmod_module	file:
+path	libkmod/libkmod-private.h	/^	char path[];$/;"	m	struct:kmod_config_path
+path	testsuite/testsuite.h	/^	const char *path;$/;"	m	struct:test
+path	tools/depmod.c	/^	char *path;$/;"	m	struct:mod	file:
+path	tools/depmod.c	/^	char path[];$/;"	m	struct:cfg_file	file:
+path	tools/depmod.c	/^	char path[];$/;"	m	struct:cfg_override	file:
+path	tools/depmod.c	/^	char path[];$/;"	m	struct:cfg_search	file:
+path_is_absolute	libkmod/libkmod-util.c	/^bool path_is_absolute(const char *p)$/;"	f
+path_join	libkmod/libkmod-module.c	/^static inline const char *path_join(const char *path, size_t prefixlen,$/;"	f	file:
+path_make_absolute_cwd	libkmod/libkmod-util.c	/^char *path_make_absolute_cwd(const char *p)$/;"	f
+path_to_modname	libkmod/libkmod-util.c	/^char *path_to_modname(const char *path, char buf[PATH_MAX], size_t *len)$/;"	f
+paths	libkmod/libkmod-private.h	/^	struct kmod_list *paths;$/;"	m	struct:kmod_config	typeref:struct:kmod_config::kmod_list
+post	libkmod/libkmod-config.c	/^	const char **post;$/;"	m	struct:kmod_softdep	file:
+pre	libkmod/libkmod-config.c	/^	const char **pre;$/;"	m	struct:kmod_softdep	file:
+prefix	libkmod/libkmod-index.c	/^	char *prefix;		\/* path compression *\/$/;"	m	struct:index_node_f	file:
+prefix	libkmod/libkmod-index.c	/^	const char *prefix; \/* mmape'd value *\/$/;"	m	struct:index_mm_node	file:
+prefix	libkmod/libkmod.c	/^	const char *prefix;$/;"	m	struct:_index_files	file:
+prefix	tools/depmod.c	/^	char *prefix;		\/* path compression *\/$/;"	m	struct:index_node	file:
+prepend_options_from_env	tools/modprobe.c	/^static char **prepend_options_from_env(int *p_argc, char **orig_argv)$/;"	f	file:
+prepend_path	testsuite/testsuite.c	/^static int prepend_path(const char *extra)$/;"	f	file:
+prev	libkmod/libkmod-private.h	/^	struct list_node *next, *prev;$/;"	m	struct:list_node	typeref:struct:list_node::
+prev	testsuite/stripped-module.h	/^	struct list_head *next, *prev;$/;"	m	struct:list_head	typeref:struct:list_head::
+print_action	tools/modprobe.c	/^static void print_action(struct kmod_module *m, bool install,$/;"	f	file:
+print_unknown	tools/depmod.c	/^	uint8_t print_unknown;$/;"	m	struct:cfg	file:
+prio_to_str	tools/log.c	/^static _always_inline_ const char *prio_to_str(int prio)$/;"	f	file:
+priority	libkmod/libkmod-index.c	/^	unsigned int priority;$/;"	m	struct:index_mm_value	file:
+priority	libkmod/libkmod-index.h	/^	unsigned int priority;$/;"	m	struct:index_value
+priority	tools/depmod.c	/^	unsigned int priority;$/;"	m	struct:index_value	file:
+probe_insert_cb	libkmod/libkmod-module.c	/^struct probe_insert_cb {$/;"	s	file:
+process_parm	tools/modinfo.c	/^static int process_parm(const char *key, const char *value, struct param **params)$/;"	f	file:
+progname	testsuite/testsuite.c	/^static const char *progname;$/;"	v	file:
+prototypes	configure	/^   function prototypes and stuff, but not '\\xHH' hex character constants.$/;"	f
+put_unaligned	libkmod/libkmod-util.h	36;"	d
+quiet_inuse	tools/modprobe.c	/^static int quiet_inuse = 0;$/;"	v	file:
+read_char	libkmod/libkmod-index.c	/^static int read_char(FILE *in)$/;"	f	file:
+read_char_mm	libkmod/libkmod-index.c	/^static inline uint8_t read_char_mm(void **p)$/;"	f	file:
+read_chars_mm	libkmod/libkmod-index.c	/^static inline char *read_chars_mm(void **p, unsigned *rlen)$/;"	f	file:
+read_error	libkmod/libkmod-index.c	/^static void read_error(void)$/;"	f	file:
+read_long	libkmod/libkmod-index.c	/^static uint32_t read_long(FILE *in)$/;"	f	file:
+read_long_mm	libkmod/libkmod-index.c	/^static inline uint32_t read_long_mm(void **p)$/;"	f	file:
+read_str_long	libkmod/libkmod-util.c	/^int read_str_long(int fd, long *value, int base)$/;"	f
+read_str_safe	libkmod/libkmod-util.c	/^ssize_t read_str_safe(int fd, char *buf, size_t buflen)$/;"	f
+read_str_ulong	libkmod/libkmod-util.c	/^int read_str_ulong(int fd, unsigned long *value, int base)$/;"	f
+refcount	libkmod/libkmod-module.c	/^	int refcount;$/;"	m	struct:kmod_module	file:
+refcount	libkmod/libkmod.c	/^	int refcount;$/;"	m	struct:kmod_ctx	file:
+reg_ops	libkmod/libkmod-file.c	/^static const struct file_ops reg_ops = {$/;"	v	typeref:struct:file_ops	file:
+relpath	tools/depmod.c	/^	const char *relpath; \/* path relative to '$ROOT\/lib\/modules\/$VER\/' *\/$/;"	m	struct:mod	file:
+remove_commands	libkmod/libkmod-module.c	/^		bool remove_commands : 1;$/;"	m	struct:kmod_module::__anon4	file:
+remove_commands	libkmod/libkmod-module.c	/^	const char *remove_commands;	\/* owned by kmod_config *\/$/;"	m	struct:kmod_module	file:
+remove_commands	libkmod/libkmod-private.h	/^	struct kmod_list *remove_commands;$/;"	m	struct:kmod_config	typeref:struct:kmod_config::kmod_list
+remove_dependencies	tools/modprobe.c	/^static int remove_dependencies = 0;$/;"	v	file:
+ret	testsuite/delete_module.c	/^	int ret;$/;"	m	struct:mod	file:
+ret	testsuite/init_module.c	/^	int ret;$/;"	m	struct:mod	file:
+rmmod	tools/modprobe.c	/^static int rmmod(struct kmod_ctx *ctx, const char *alias)$/;"	f	file:
+rmmod_all	tools/modprobe.c	/^static int rmmod_all(struct kmod_ctx *ctx, char **args, int nargs)$/;"	f	file:
+rmmod_do_deps_list	tools/modprobe.c	/^static int rmmod_do_deps_list(struct kmod_list *list, bool stop_on_errors)$/;"	f	file:
+rmmod_do_module	tools/modprobe.c	/^static int rmmod_do_module(struct kmod_module *mod, bool do_dependencies)$/;"	f	file:
+rmmod_do_remove_module	tools/modprobe.c	/^static int rmmod_do_remove_module(struct kmod_module *mod)$/;"	f	file:
+root_offset	libkmod/libkmod-index.c	/^	uint32_t root_offset;$/;"	m	struct:index_file	file:
+root_offset	libkmod/libkmod-index.c	/^	uint32_t root_offset;$/;"	m	struct:index_mm	file:
+rootpath	testsuite/path.c	/^static const char *rootpath;$/;"	v	file:
+rootpathlen	testsuite/path.c	/^static size_t rootpathlen;$/;"	v	file:
+run_install	libkmod/libkmod-module.c	/^	int (*run_install)(struct kmod_module *m, const char *cmd, void *data);$/;"	m	struct:probe_insert_cb	file:
+safe_read	testsuite/testsuite.c	/^static inline int safe_read(int fd, void *buf, size_t count)$/;"	f	file:
+sblacklist_1	testsuite/test-blacklist.c	/^static const struct test sblacklist_1 = {$/;"	v	typeref:struct:test	file:
+searches	tools/depmod.c	/^	struct cfg_search *searches;$/;"	m	struct:cfg	typeref:struct:cfg::cfg_search	file:
+section	libkmod/libkmod-elf.c	/^			uint16_t section; \/* index of the strings section *\/$/;"	m	struct:kmod_elf::kmod_elf_header::__anon3	file:
+section	libkmod/libkmod-elf.c	/^		} section;$/;"	m	struct:kmod_elf::kmod_elf_header	typeref:struct:kmod_elf::kmod_elf_header::__anon2	file:
+separator	tools/modinfo.c	/^static char separator = '\\n';$/;"	v	file:
+show_config	tools/modprobe.c	/^static int show_config(struct kmod_ctx *ctx)$/;"	f	file:
+show_modversions	tools/modprobe.c	/^static int show_modversions(struct kmod_ctx *ctx, const char *filename)$/;"	f	file:
+size	libkmod/libkmod-elf.c	/^			uint64_t size;$/;"	m	struct:kmod_elf::kmod_elf_header::__anon3	file:
+size	libkmod/libkmod-elf.c	/^	uint64_t size;$/;"	m	struct:kmod_elf	file:
+size	libkmod/libkmod-file.c	/^	off_t size;$/;"	m	struct:kmod_file	file:
+size	libkmod/libkmod-index.c	/^	size_t size;$/;"	m	struct:index_mm	file:
+size	libkmod/libkmod-index.c	/^	unsigned size;$/;"	m	struct:buffer	file:
+softdep_get_plain_softdep	libkmod/libkmod-config.c	/^static const char *softdep_get_plain_softdep(const struct kmod_list *l)$/;"	f	file:
+softdep_to_char	libkmod/libkmod-config.c	/^static char *softdep_to_char(struct kmod_softdep *dep) {$/;"	f	file:
+softdeps	libkmod/libkmod-private.h	/^	struct kmod_list *softdeps;$/;"	m	struct:kmod_config	typeref:struct:kmod_config::kmod_list
+sort_idx	tools/depmod.c	/^	int sort_idx; \/* sort index using modules.order *\/$/;"	m	struct:mod	file:
+stamp	libkmod/libkmod-private.h	/^	unsigned long long stamp;$/;"	m	struct:kmod_config_path
+stat_mstamp	libkmod/libkmod-util.c	/^unsigned long long stat_mstamp(const struct stat *st)$/;"	f
+state	testsuite/stripped-module.h	/^	enum module_state state;$/;"	m	struct:module	typeref:enum:module::module_state
+stderr	testsuite/testsuite.h	/^		const char *stderr;$/;"	m	struct:test::__anon1
+stdout	testsuite/testsuite.h	/^		const char *stdout;$/;"	m	struct:test::__anon1
+step	libkmod/libkmod-array.h	/^	size_t step;$/;"	m	struct:array
+step	libkmod/libkmod-hash.c	/^	unsigned int step;$/;"	m	struct:hash	file:
+stest_dependencies	testsuite/test-dependencies.c	/^static const struct test stest_dependencies = {$/;"	v	typeref:struct:test	file:
+strchr_replace	libkmod/libkmod-util.c	/^char *strchr_replace(char *s, int c, char r)$/;"	f
+streq	libkmod/libkmod-util.h	11;"	d
+strings	libkmod/libkmod-elf.c	/^		} strings;$/;"	m	struct:kmod_elf::kmod_elf_header	typeref:struct:kmod_elf::kmod_elf_header::__anon3	file:
+strip_modversion	tools/modprobe.c	/^static int strip_modversion = 0;$/;"	v	file:
+strip_vermagic	tools/modprobe.c	/^static int strip_vermagic = 0;$/;"	v	file:
+strstartswith	libkmod/libkmod-util.h	12;"	d
+sym_prefix	tools/depmod.c	/^	char sym_prefix;$/;"	m	struct:cfg	file:
+symbol	libkmod/libkmod-module.c	/^	char symbol[];$/;"	m	struct:kmod_module_dependency_symbol	file:
+symbol	libkmod/libkmod-module.c	/^	char symbol[];$/;"	m	struct:kmod_module_symbol	file:
+symbol	libkmod/libkmod-module.c	/^	char symbol[];$/;"	m	struct:kmod_module_version	file:
+symbol	libkmod/libkmod-private.h	/^	char *symbol;$/;"	m	struct:kmod_modversion
+symbol	tools/depmod.c	/^struct symbol {$/;"	s	file:
+symbol_free	tools/depmod.c	/^static void symbol_free(struct symbol *sym)$/;"	f	file:
+symbols	tools/depmod.c	/^	struct hash *symbols;$/;"	m	struct:depmod	typeref:struct:depmod::hash	file:
+test	testsuite/testsuite.h	/^struct test {$/;"	s
+test_config	testsuite/testsuite.h	/^enum test_config {$/;"	g
+test_dependencies	testsuite/test-dependencies.c	/^static int test_dependencies(const struct test *t)$/;"	f	file:
+test_export_environ	testsuite/testsuite.c	/^static void test_export_environ(const struct test *t)$/;"	f	file:
+test_find	testsuite/testsuite.c	/^const struct test *test_find(const struct test *tests[], const char *name)$/;"	f
+test_init	testsuite/testsuite.c	/^int test_init(int argc, char *const argv[], const struct test *tests[])$/;"	f
+test_initlib	testsuite/test-init.c	/^static __noreturn int test_initlib(const struct test *t)$/;"	f	file:
+test_insert	testsuite/test-init.c	/^static __noreturn int test_insert(const struct test *t)$/;"	f	file:
+test_list	testsuite/testsuite.c	/^static void test_list(const struct test *tests[])$/;"	f	file:
+test_remove	testsuite/test-init.c	/^static __noreturn int test_remove(const struct test *t)$/;"	f	file:
+test_run	testsuite/testsuite.c	/^int test_run(const struct test *t)$/;"	f
+test_run_child	testsuite/testsuite.c	/^static inline int test_run_child(const struct test *t, int fdout[2],$/;"	f	file:
+test_run_parent	testsuite/testsuite.c	/^static inline int test_run_parent(const struct test *t, int fdout[2],$/;"	f	file:
+test_run_parent_check_outputs	testsuite/testsuite.c	/^static inline bool test_run_parent_check_outputs(const struct test *t,$/;"	f	file:
+test_run_spawned	testsuite/testsuite.c	/^static int test_run_spawned(const struct test *t)$/;"	f	file:
+test_spawn_prog	testsuite/testsuite.c	/^int test_spawn_prog(const char *prog, const char *const args[])$/;"	f
+test_spawn_test	testsuite/testsuite.c	/^static int test_spawn_test(const struct test *t)$/;"	f	file:
+test_varargs_macros	configure	/^  test_varargs_macros ();$/;"	f
+testfunc	testsuite/testsuite.h	/^typedef int (*testfunc)(const struct test *t);$/;"	t
+tests	testsuite/test-alias.c	/^TESTSUITE_MAIN(tests);$/;"	v
+tests	testsuite/test-alias.c	/^static const struct test *tests[] = {$/;"	v	typeref:struct:test	file:
+tests	testsuite/test-blacklist.c	/^TESTSUITE_MAIN(tests);$/;"	v
+tests	testsuite/test-blacklist.c	/^static const struct test *tests[] = {$/;"	v	typeref:struct:test	file:
+tests	testsuite/test-dependencies.c	/^TESTSUITE_MAIN(tests);$/;"	v
+tests	testsuite/test-dependencies.c	/^static const struct test *tests[] = {$/;"	v	typeref:struct:test	file:
+tests	testsuite/test-depmod.c	/^TESTSUITE_MAIN(tests);$/;"	v
+tests	testsuite/test-depmod.c	/^static const struct test *tests[] = {$/;"	v	typeref:struct:test	file:
+tests	testsuite/test-init.c	/^TESTSUITE_MAIN(tests);$/;"	v
+tests	testsuite/test-init.c	/^static const struct test *tests[] = {$/;"	v	typeref:struct:test	file:
+tests	testsuite/test-loaded.c	/^TESTSUITE_MAIN(tests);$/;"	v
+tests	testsuite/test-loaded.c	/^static const struct test *tests[] = {$/;"	v	typeref:struct:test	file:
+tests	testsuite/test-modinfo.c	/^TESTSUITE_MAIN(tests);$/;"	v
+tests	testsuite/test-modinfo.c	/^static const struct test *tests[] = {$/;"	v	typeref:struct:test	file:
+tests	testsuite/test-modprobe.c	/^TESTSUITE_MAIN(tests);$/;"	v
+tests	testsuite/test-modprobe.c	/^static const struct test *tests[] = {$/;"	v	typeref:struct:test	file:
+tests	testsuite/test-new-module.c	/^TESTSUITE_MAIN(tests);$/;"	v
+tests	testsuite/test-new-module.c	/^static const struct test *tests[] = {$/;"	v	typeref:struct:test	file:
+tests	testsuite/test-testsuite.c	/^TESTSUITE_MAIN(tests);$/;"	v
+tests	testsuite/test-testsuite.c	/^static const struct test *tests[] = {$/;"	v	typeref:struct:test	file:
+testsuite_rootfs_fopen	testsuite/test-testsuite.c	/^static int testsuite_rootfs_fopen(const struct test *t)$/;"	f	file:
+testsuite_rootfs_open	testsuite/test-testsuite.c	/^static int testsuite_rootfs_open(const struct test *t)$/;"	f	file:
+testsuite_rootfs_opendir	testsuite/test-testsuite.c	/^static int testsuite_rootfs_opendir(const struct test *t)$/;"	f	file:
+testsuite_rootfs_stat_access	testsuite/test-testsuite.c	/^static int testsuite_rootfs_stat_access(const struct test *t)$/;"	f	file:
+testsuite_uname	testsuite/test-testsuite.c	/^static __noreturn int testsuite_uname(const struct test *t)$/;"	f	file:
+total	libkmod/libkmod-array.h	/^	size_t total;$/;"	m	struct:array
+total	libkmod/libkmod-hash.c	/^	unsigned int total;$/;"	m	struct:hash_bucket	file:
+trap_path	testsuite/path.c	/^static const char *trap_path(const char *path, char buf[PATH_MAX * 2])$/;"	f	file:
+ts_usec	libkmod/libkmod-util.c	/^unsigned long long ts_usec(const struct timespec *ts)$/;"	f
+type	libkmod/libkmod-config.c	/^	enum config_type type;$/;"	m	struct:kmod_config_iter	typeref:enum:kmod_config_iter::config_type	file:
+type	tools/modinfo.c	/^	const char *type;$/;"	m	struct:param	file:
+typelen	tools/modinfo.c	/^	int typelen;$/;"	m	struct:param	file:
+uname	testsuite/uname.c	/^TS_EXPORT int uname(struct utsname *u)$/;"	f
+uncrelpath	tools/depmod.c	/^	char *uncrelpath; \/* same as relpath but ending in .ko *\/$/;"	m	struct:mod	file:
+underscores	libkmod/libkmod-config.c	/^static char *underscores(struct kmod_ctx *ctx, char *s)$/;"	f	file:
+underscores2	tools/depmod.c	/^static const char *underscores2(const char *input, char *output, size_t outputlen)$/;"	f	file:
+unload	libkmod/libkmod-file.c	/^	void (*unload)(struct kmod_file *file);$/;"	m	struct:file_ops	file:
+unload_reg	libkmod/libkmod-file.c	/^static void unload_reg(struct kmod_file *file)$/;"	f	file:
+unload_xz	libkmod/libkmod-file.c	/^static void unload_xz(struct kmod_file *file)$/;"	f	file:
+unload_zlib	libkmod/libkmod-file.c	/^static void unload_zlib(struct kmod_file *file)$/;"	f	file:
+use_blacklist	tools/modprobe.c	/^static int use_blacklist = 0;$/;"	v	file:
+use_syslog	tools/modprobe.c	/^static int use_syslog = 0;$/;"	v	file:
+use_syslog	tools/rmmod.c	/^static int use_syslog;$/;"	v	file:
+used	libkmod/libkmod-hash.c	/^	unsigned int used;$/;"	m	struct:hash_bucket	file:
+used	libkmod/libkmod-index.c	/^	unsigned used;$/;"	m	struct:buffer	file:
+userdata	libkmod/libkmod.c	/^	const void *userdata;$/;"	m	struct:kmod_ctx	file:
+users	tools/depmod.c	/^	uint16_t users; \/* how many modules depend on this one *\/$/;"	m	struct:mod	file:
+val	testsuite/testsuite.h	/^	const char *val;$/;"	m	struct:keyval
+value	libkmod/libkmod-hash.c	/^	const void *value;$/;"	m	struct:hash_entry	file:
+value	libkmod/libkmod-index.c	/^	const char *value;$/;"	m	struct:index_mm_value	file:
+value	libkmod/libkmod-index.h	/^	char value[0];$/;"	m	struct:index_value
+value	libkmod/libkmod-module.c	/^	char value[];$/;"	m	struct:kmod_module_info	file:
+value	tools/depmod.c	/^	char value[0];$/;"	m	struct:index_value	file:
+values	libkmod/libkmod-index.c	/^	struct index_mm_value *values;$/;"	m	struct:index_mm_value_array	typeref:struct:index_mm_value_array::index_mm_value	file:
+values	libkmod/libkmod-index.c	/^	struct index_mm_value_array values;$/;"	m	struct:index_mm_node	typeref:struct:index_mm_node::index_mm_value_array	file:
+values	libkmod/libkmod-index.c	/^	struct index_value *values;$/;"	m	struct:index_node_f	typeref:struct:index_node_f::index_value	file:
+values	tools/depmod.c	/^	struct index_value *values;$/;"	m	struct:index_node	typeref:struct:index_node::index_value	file:
+verbose	tools/depmod.c	/^static int verbose = DEFAULT_VERBOSE;$/;"	v	file:
+verbose	tools/modprobe.c	/^static int verbose = DEFAULT_VERBOSE;$/;"	v	file:
+verbose	tools/rmmod.c	/^static int verbose = DEFAULT_VERBOSE;$/;"	v	file:
+visited	libkmod/libkmod-module.c	/^	bool visited : 1;$/;"	m	struct:kmod_module	file:
+warn_dups	tools/depmod.c	/^	uint8_t warn_dups;$/;"	m	struct:cfg	file:
+write_one_line_file	testsuite/init_module.c	/^static int write_one_line_file(const char *fn, const char *line, int len)$/;"	f	file:
+write_str_safe	libkmod/libkmod-util.c	/^ssize_t write_str_safe(int fd, const char *buf, size_t buflen)$/;"	f
+xz_uncompress	libkmod/libkmod-file.c	/^static int xz_uncompress(lzma_stream *strm, struct kmod_file *file)$/;"	f	file:
+xz_uncompress_belch	libkmod/libkmod-file.c	/^static void xz_uncompress_belch(struct kmod_file *file, lzma_ret ret)$/;"	f	file:
+xz_used	libkmod/libkmod-file.c	/^	bool xz_used;$/;"	m	struct:kmod_file	file:

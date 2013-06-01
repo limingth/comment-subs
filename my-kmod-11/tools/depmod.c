@@ -2722,6 +2722,7 @@ cmdline_failed:
 	return EXIT_FAILURE;
 }
 
+// kmod_cmd_compat_xxx.cmt
 const struct kmod_cmd kmod_cmd_compat_depmod = {
 	.name = "depmod",
 	.cmd = do_depmod,
