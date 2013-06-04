@@ -1,6 +1,6 @@
 diff -Nur test/a.c test-subs/a.c
 --- test/a.c	2013-05-23 20:09:15.249053811 +0800
-+++ test-subs/a.c	2013-06-02 00:21:13.848459955 +0800
++++ test-subs/a.c	2013-06-04 07:44:07.314330493 +0800
 @@ -1,2 +1,17 @@
  
 -// 001.cmt
@@ -22,7 +22,7 @@ diff -Nur test/a.c test-subs/a.c
 +
 diff -Nur test/b.c test-subs/b.c
 --- test/b.c	2013-05-23 20:09:15.253053796 +0800
-+++ test-subs/b.c	2013-06-02 00:21:13.980459957 +0800
++++ test-subs/b.c	2013-06-04 07:44:07.478330494 +0800
 @@ -1,7 +1,37 @@
 -// 001.cmt
 +/* 
@@ -65,7 +65,7 @@ diff -Nur test/b.c test-subs/b.c
 + */
 diff -Nur test/dir2/a.c test-subs/dir2/a.c
 --- test/dir2/a.c	2013-06-01 23:47:54.880443621 +0800
-+++ test-subs/dir2/a.c	2013-06-02 00:21:14.524459960 +0800
++++ test-subs/dir2/a.c	2013-06-04 07:44:07.938330498 +0800
 @@ -1,6 +1,51 @@
  
 -// 001.cmt

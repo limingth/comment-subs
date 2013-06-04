@@ -28,6 +28,37 @@
 static bool log_use_syslog;
 static int log_priority = LOG_ERR;
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 
+ * 将优先级 prio 整型数转换成相应的字符串 
+ * 优先级的分类包括
+ *	- FATAL 最高级别 
+ *	- ERROR
+ *	- WARNING
+ *	- NOTICE
+ *	- INFO
+ *	- DEBUG
+ * 详见 /usr/include/i386-linux-gnu/sys/syslog.h
+
+ #define LOG_EMERG       0       /* system is unusable */
+ #define LOG_ALERT       1       /* action must be taken immediately */
+ #define LOG_CRIT        2       /* critical conditions */
+ #define LOG_ERR         3       /* error conditions */
+ #define LOG_WARNING     4       /* warning conditions */
+ #define LOG_NOTICE      5       /* normal but significant condition */
+ #define LOG_INFO        6       /* informational */
+ #define LOG_DEBUG       7       /* debug-level messages */
+
+ */
 static _always_inline_ const char *prio_to_str(int prio)
 {
 	const char *prioname;
@@ -60,6 +91,17 @@ static _always_inline_ const char *prio_to_str(int prio)
 	return prioname;
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 核心日志记录函数，调用了系统的 syslog() 函数，增加了优先级信息打印 */
 static void log_kmod(void *data, int priority, const char *file, int line,
 		     const char *fn, const char *format, va_list args)
 {
@@ -90,6 +132,18 @@ static void log_kmod(void *data, int priority, const char *file, int line,
 	free(str);
 	(void)data;
 }
+
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 打开日志文件, 调用了系统的 openlog() */
 void log_open(bool use_syslog)
 {
 	log_use_syslog = use_syslog;
@@ -98,12 +152,34 @@ void log_open(bool use_syslog)
 		openlog(program_invocation_short_name, LOG_CONS, LOG_DAEMON);
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 关闭日志文件，调用 closelog() */
 void log_close(void)
 {
 	if (log_use_syslog)
 		closelog();
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 带有优先级 prio 的日志打印函数，可以设定日志打印的优先级 */
 void log_printf(int prio, const char *fmt, ...)
 {
 	const char *prioname;

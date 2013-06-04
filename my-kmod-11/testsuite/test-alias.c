@@ -25,6 +25,7 @@
 #include "libkmod-util.h"
 #include "testsuite.h"
 
+// alias_1.cmt
 static int alias_1(const struct test *t)
 {
 	static const char *input[] = {

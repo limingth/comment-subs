@@ -33,6 +33,30 @@
 #undef ERR
 #include "testsuite.h"
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 
+ * 测试模块是否能够正确被 filter （blacklisted） 
+ * 其中需要调用到 libkmod 模块中的以下接口
+ *	- kmod_new()
+ *	- kmod_module_new_from_name()
+ *	- kmod_list_append()
+ *	- kmod_module_apply_filter()
+ *	- kmod_list_foreach()
+ *	- kmod_module_get_module()
+ *	- kmod_module_get_name()
+ *	- kmod_module_unref()
+ *	- kmod_module_unref_list()
+ *	- kmod_unref()
+ */
 static int blacklist_1(const struct test *t)
 {
 	struct kmod_ctx *ctx;

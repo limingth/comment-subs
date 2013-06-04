@@ -1,0 +1,6 @@
+/*
+ * hash entry 表项的数据结构，仅包含 key 和 value 
+ * 其中 key 是 字符串指针
+ * value 是无类型 void * 指针
+ */
+

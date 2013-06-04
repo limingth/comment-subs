@@ -90,6 +90,23 @@ char *getline_wrapped(FILE *fp, unsigned int *linenum)
 	}
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/*
+ * 正规化 alias
+ * 将 alias 别名中 [ ] 中间的部分包含 [ ] 作为返回名称
+ * 名字中间的 '-' 字符，都会被替换为 '_' 下划线
+ * 如果出现 ']' 字符，则直接返回错误 -EINVAL
+ * 最后把 alias 的长度赋值给 *len, 正确返回 0
+ /
 inline int alias_normalize(const char *alias, char buf[PATH_MAX], size_t *len)
 {
 	size_t s;
@@ -129,6 +146,22 @@ finish:
 	return 0;
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/*
+ * 正规化 modname 
+ * 名字中间的 '-' 字符，都会被替换为 '_' 下划线
+ * 如果出现 '.' 字符，则直接截断
+ * 最后把 modname 的长度赋值给 *len, 正确返回 0
+ */
 inline char *modname_normalize(const char *modname, char buf[PATH_MAX],
 								size_t *len)
 {
@@ -152,6 +185,17 @@ inline char *modname_normalize(const char *modname, char buf[PATH_MAX],
 	return buf;
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 从 path 名转换为 modname，并返回 modname 的长度 */
 char *path_to_modname(const char *path, char buf[PATH_MAX], size_t *len)
 {
 	char *modname;
@@ -163,6 +207,17 @@ char *path_to_modname(const char *path, char buf[PATH_MAX], size_t *len)
 	return modname_normalize(modname, buf, len);
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 从指针 p 所指向的内存复制 n 个字节，通过 malloc 分配空间 r，返回 r */  
 inline void *memdup(const void *p, size_t n)
 {
 	void *r = malloc(n);
@@ -173,6 +228,21 @@ inline void *memdup(const void *p, size_t n)
 	return memcpy(r, p, n);
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/*
+ * 从 fd 中读出 buflen 个字符，写入到 buf 指针所指向的内存区域
+ * 确保全部读出后返回，并在 buf 指针的最后补上 '\0'
+ * 成功则 返回 0； 失败则返回 -errno
+ */
 ssize_t read_str_safe(int fd, char *buf, size_t buflen)
 {
 	size_t todo = buflen - 1;
@@ -199,6 +269,20 @@ ssize_t read_str_safe(int fd, char *buf, size_t buflen)
 	return done;
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/*
+ * 将 buf 指针所指向的 buflen 个字符，写入到 fd，确保全部写入后返回
+ * 成功则 返回 0； 失败则返回 -errno
+ */
 ssize_t write_str_safe(int fd, const char *buf, size_t buflen)
 {
 	size_t todo = buflen;
@@ -224,6 +308,21 @@ ssize_t write_str_safe(int fd, const char *buf, size_t buflen)
 	return done;
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 
+ * 从 fd 读入最多 32 个字节到 buf 中，
+ * 并将其转换为 有符号long, 写入 value 指针指向的内存区域 
+ * 采用的进制为 base ，成功则返回 0, 失败则返回 -EINVAL;
+ */
 int read_str_long(int fd, long *value, int base)
 {
 	char buf[32], *end;
@@ -243,6 +342,21 @@ int read_str_long(int fd, long *value, int base)
 	return 0;
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 
+ * 从 fd 读入最多 32 个字节到 buf 中，
+ * 并将其转换为 无符号long, 写入 value 指针指向的内存区域
+ * 采用的进制为 base ，成功则返回 0, 失败则返回 -EINVAL;
+ */
 int read_str_ulong(int fd, unsigned long *value, int base)
 {
 	char buf[32], *end;
@@ -261,6 +375,17 @@ int read_str_ulong(int fd, unsigned long *value, int base)
 	return 0;
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 将字符串 s 中出现的字符 c 替换为 字符 r */
 char *strchr_replace(char *s, int c, char r)
 {
 	char *p;
@@ -272,6 +397,17 @@ char *strchr_replace(char *s, int c, char r)
 	return s;
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 判断 路径 p 是否是绝对路径，如果是返回真，如果不是返回0 */
 bool path_is_absolute(const char *p)
 {
 	assert(p != NULL);
@@ -279,6 +415,16 @@ bool path_is_absolute(const char *p)
 	return p[0] == '/';
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
 char *path_make_absolute_cwd(const char *p)
 {
 	char *cwd, *r;

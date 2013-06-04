@@ -36,11 +36,13 @@ static void *nextlib;
 static const char *rootpath;
 static size_t rootpathlen;
 
+// need_trap.cmt
 static inline bool need_trap(const char *path)
 {
 	return path != NULL && path[0] == '/';
 }
 
+// trap_path.cmt
 static const char *trap_path(const char *path, char buf[PATH_MAX * 2])
 {
 	size_t len;
@@ -60,6 +62,7 @@ static const char *trap_path(const char *path, char buf[PATH_MAX * 2])
 	return buf;
 }
 
+// get_rootpath.cmt
 static bool get_rootpath(const char *f)
 {
 	if (rootpath != NULL)

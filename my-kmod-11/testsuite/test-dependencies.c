@@ -28,6 +28,7 @@
 #include "testsuite.h"
 #define TEST_UNAME "4.0.20-kmod"
 
+// test_dependencies.cmt
 static int test_dependencies(const struct test *t)
 {
 	struct kmod_ctx *ctx;

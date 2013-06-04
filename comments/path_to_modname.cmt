@@ -1,0 +1,1 @@
+/* 从 path 名转换为 modname，并返回 modname 的长度 */

@@ -1,0 +1,4 @@
+/*
+ * hash 表的数据结构，包含 count, step, n_buckets, buckets 指针
+ */
+

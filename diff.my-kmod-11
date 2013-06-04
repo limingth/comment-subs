@@ -1,6 +1,6 @@
 diff -Nur my-kmod-11/libkmod/libkmod-array.c my-kmod-11-subs/libkmod/libkmod-array.c
 --- my-kmod-11/libkmod/libkmod-array.c	2013-05-23 20:45:11.153071419 +0800
-+++ my-kmod-11-subs/libkmod/libkmod-array.c	2013-06-02 00:21:33.532460116 +0800
++++ my-kmod-11-subs/libkmod/libkmod-array.c	2013-06-04 19:57:10.928006097 +0800
 @@ -28,7 +28,17 @@
  
  /* basic pointer array growing in steps */
@@ -132,9 +132,922 @@ diff -Nur my-kmod-11/libkmod/libkmod-array.c my-kmod-11-subs/libkmod/libkmod-arr
  int array_remove_at(struct array *array, unsigned int pos)
  {
  	if (array->count <= pos)
+diff -Nur my-kmod-11/libkmod/libkmod-file.c my-kmod-11-subs/libkmod/libkmod-file.c
+--- my-kmod-11/libkmod/libkmod-file.c	2013-06-04 19:53:49.584004452 +0800
++++ my-kmod-11-subs/libkmod/libkmod-file.c	2013-06-04 19:57:11.200006099 +0800
+@@ -278,7 +278,17 @@
+ 	return file->elf;
+ }
+ 
+-// kmod_file_open.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 打开 filename 文件, 将文件内容读出到 ctx 结构体中 */
+ struct kmod_file *kmod_file_open(const struct kmod_ctx *ctx,
+ 						const char *filename)
+ {
+@@ -344,13 +354,33 @@
+ 	return file;
+ }
+ 
+-// kmod_file_get_contents.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 获得文件内容指针 memory */
+ void *kmod_file_get_contents(const struct kmod_file *file)
+ {
+ 	return file->memory;
+ }
+ 
+-// kmod_file_get_size.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 获得文件大小 */
+ off_t kmod_file_get_size(const struct kmod_file *file)
+ {
+ 	return file->size;
+diff -Nur my-kmod-11/libkmod/libkmod-hash.c my-kmod-11-subs/libkmod/libkmod-hash.c
+--- my-kmod-11/libkmod/libkmod-hash.c	2013-06-04 19:36:54.971996162 +0800
++++ my-kmod-11-subs/libkmod/libkmod-hash.c	2013-06-04 19:57:11.488006102 +0800
+@@ -26,7 +26,22 @@
+ #include <string.h>
+ #include <errno.h>
+ 
+-// hash_entry.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * hash entry 表项的数据结构，仅包含 key 和 value 
++ * 其中 key 是 字符串指针
++ * value 是无类型 void * 指针
++ */
++
+ struct hash_entry {
+ 	const char *key;
+ 	const void *value;
+@@ -38,7 +53,20 @@
+ 	unsigned int total;
+ };
+ 
+-// hash.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * hash 表的数据结构，包含 count, step, n_buckets, buckets 指针
++ */
++
+ struct hash {
+ 	unsigned int count;
+ 	unsigned int step;
+@@ -47,7 +75,17 @@
+ 	struct hash_bucket buckets[];
+ };
+ 
+-// hash_new.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* hash 表的创建，给定 n_buckets 个 */
+ struct hash *hash_new(unsigned int n_buckets,
+ 					void (*free_value)(void *value))
+ {
+@@ -65,7 +103,17 @@
+ 	return hash;
+ }
+ 
+-// hash_free.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* hash 表的销毁 */
+ void hash_free(struct hash *hash)
+ {
+ 	struct hash_bucket *bucket, *bucket_end;
+@@ -88,7 +136,17 @@
+ 	free(hash);
+ }
+ 
+-// hash_superfast.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 计算 hash 值，传入 key 和 key 的长度，返回 hashval */
+ static inline unsigned int hash_superfast(const char *key, unsigned int len)
+ {
+ 	/* Paul Hsieh (http://www.azillionmonkeys.com/qed/hash.html)
+@@ -146,7 +204,17 @@
+  * none of key or value are copied, just references are remembered as is,
+  * make sure they are live while pair exists in hash!
+  */
+-// hash_add.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 从当前的 hash 表 删除一个 key */
+ int hash_add(struct hash *hash, const char *key, const void *value)
+ {
+ 	unsigned int keylen = strlen(key);
+@@ -189,7 +257,17 @@
+ }
+ 
+ /* similar to hash_add(), but fails if key already exists */
+-// hash_add_unique.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 添加一个 key 和 value 进入当前的 hash 表, 如果已经存在则返回失败 */
+ int hash_add_unique(struct hash *hash, const char *key, const void *value)
+ {
+ 	unsigned int keylen = strlen(key);
+@@ -228,7 +306,17 @@
+ 	return 0;
+ }
+ 
+-// hash_entry_cmp.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* hash 比较，基于字符串 strcmp 的比较 key  */
+ static int hash_entry_cmp(const void *pa, const void *pb)
+ {
+ 	const struct hash_entry *a = pa;
+@@ -236,7 +324,21 @@
+ 	return strcmp(a->key, b->key);
+ }
+ 
+-// hash_find.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * hash 查找
++ * 从 hash 指针所指向的 hash 表中，找到元素 key 
++ * 采用二分查找法
++ */
+ void *hash_find(const struct hash *hash, const char *key)
+ {
+ 	unsigned int keylen = strlen(key);
+@@ -255,7 +357,16 @@
+ 	return (void *)entry->value;
+ }
+ 
+-// hash_del.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
+ int hash_del(struct hash *hash, const char *key)
+ {
+ 	unsigned int keylen = strlen(key);
+@@ -299,7 +410,17 @@
+ 	return 0;
+ }
+ 
+-// hash_get_count.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* hash 获得表项数量, 返回 hash->count */
+ unsigned int hash_get_count(const struct hash *hash)
+ {
+ 	return hash->count;
+diff -Nur my-kmod-11/libkmod/libkmod-list.c my-kmod-11-subs/libkmod/libkmod-list.c
+--- my-kmod-11/libkmod/libkmod-list.c	2013-06-04 19:18:57.407987354 +0800
++++ my-kmod-11-subs/libkmod/libkmod-list.c	2013-06-04 19:57:11.992006104 +0800
+@@ -27,7 +27,16 @@
+  * @short_description: general purpose list
+  */
+ 
+-// list_node_init.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
+ static inline struct list_node *list_node_init(struct list_node *node)
+ {
+ 	node->next = node;
+@@ -36,7 +45,17 @@
+ 	return node;
+ }
+ 
+-// list_node_next.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 获得当前链表节点的下一个元素 */
+ static inline struct list_node *list_node_next(const struct list_node *node)
+ {
+ 	if (node == NULL)
+@@ -45,7 +64,17 @@
+ 	return node->next;
+ }
+ 
+-// list_node_prev.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 获得当前链表节点的上一个元素 */
+ static inline struct list_node *list_node_prev(const struct list_node *node)
+ {
+ 	if (node == NULL)
+@@ -54,7 +83,17 @@
+ 	return node->prev;
+ }
+ 
+-// list_node_append.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 将当前链表增添一个节点元素，如原链表为空，则用当前节点元素创建链表 */
+ static inline void list_node_append(struct list_node *list,
+ 							struct list_node *node)
+ {
+@@ -69,7 +108,21 @@
+ 	node->next = list;
+ }
+ 
+-// list_node_remove.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 将当前链表删除一个节点元素
++ * 如原链表只有1个节点，则删除后置为空。
++ * 如原链表不为空，删除节点元素后调整链表相关指针
++ */
+ static inline struct list_node *list_node_remove(struct list_node *node)
+ {
+ 	if (node->prev == node || node->next == node)
+@@ -81,7 +134,21 @@
+ 	return node->next;
+ }
+ 
+-// list_node_insert_after.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 在链表当前节点 list 后插入一个节点元素 node
++ * 如原链表为空，则用插入节点元素创建链表。
++ * 如原链表不为空，插入节点元素后调整链表相关指针
++ */
+ static inline void list_node_insert_after(struct list_node *list,
+ 							struct list_node *node)
+ {
+@@ -96,7 +163,21 @@
+ 	list->next = node;
+ }
+ 
+-// list_node_insert_before.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 在链表当前节点 list 前插入一个节点元素 node
++ * 如原链表为空，则用插入节点元素创建链表。
++ * 如原链表不为空，插入节点元素后调整链表相关指针
++ */
+ static inline void list_node_insert_before(struct list_node *list,
+ 							struct list_node *node)
+ {
+@@ -111,7 +192,20 @@
+ 	list->prev = node;
+ }
+ 
+-// list_node_append_list.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 将链表 list1 后加上append 链表 list2
++ * 如原链表 list1 为空，则用 list2 作为最后的链表
++ */
+ static inline void list_node_append_list(struct list_node *list1,
+ 							struct list_node *list2)
+ {
+@@ -132,7 +226,17 @@
+ 	list2->prev = list1_last;
+ }
+ 
+-// kmod_list_append.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 在当前 kmod list 的后面，新增一个节点 node，数据为 data */
+ struct kmod_list *kmod_list_append(struct kmod_list *list, const void *data)
+ {
+ 	struct kmod_list *new;
+@@ -147,7 +251,21 @@
+ 	return list ? list : new;
+ }
+ 
+-// kmod_list_insert_after.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 在 kmod 链表当前节点 list 后插入一个节点元素 node
++ * 如原链表为空，则用插入节点元素创建链表。
++ * 如原链表不为空，插入节点元素后调整链表相关指针
++ */
+ struct kmod_list *kmod_list_insert_after(struct kmod_list *list,
+ 							const void *data)
+ {
+@@ -166,7 +284,16 @@
+ 	return list;
+ }
+ 
+-// kmod_list_insert_before.cmt_
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
+ struct kmod_list *kmod_list_insert_before(struct kmod_list *list,
+ 							const void *data)
+ {
+@@ -185,7 +312,20 @@
+ 	return new;
+ }
+ 
+-// kmod_list_append_list.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 将 kmod 链表 list1 后加上append 链表 list2
++ * 如原链表 list1 为空，则用 list2 作为最后的链表
++ */
+ struct kmod_list *kmod_list_append_list(struct kmod_list *list1,
+ 						struct kmod_list *list2)
+ {
+@@ -200,7 +340,17 @@
+ 	return list1;
+ }
+ 
+-// kmod_list_prepend.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 将当前 kmod 链表增添一个节点元素，如原链表为空，则用当前节点元素创建链表 */
+ struct kmod_list *kmod_list_prepend(struct kmod_list *list, const void *data)
+ {
+ 	struct kmod_list *new;
+@@ -215,7 +365,21 @@
+ 	return new;
+ }
+ 
+-// kmod_list_remove.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 将当前 kmod 链表删除一个节点元素
++ * 如原链表只有1个节点，则删除后置为空。
++ * 如原链表不为空，删除节点元素后调整链表相关指针
++ */
+ struct kmod_list *kmod_list_remove(struct kmod_list *list)
+ {
+ 	struct list_node *node;
+@@ -232,7 +396,21 @@
+ 	return container_of(node, struct kmod_list, node);
+ }
+ 
+-// kmod_list_remove_data.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 将当前 kmod 链表删除一个节点元素, 该元素的数据为传入参数 data 
++ * 如原链表只有1个节点，则删除后置为空。
++ * 如原链表不为空，删除节点元素后调整链表相关指针
++ */
+ struct kmod_list *kmod_list_remove_data(struct kmod_list *list,
+ 							const void *data)
+ {
+@@ -260,7 +438,17 @@
+  * n must be greater to or equal the number of elements (we don't check the
+  * condition)
+  */
+-// kmod_list_remove_n_latest.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 删除链表上的 最后 n 个节点 */
+ struct kmod_list *kmod_list_remove_n_latest(struct kmod_list *list,
+ 							unsigned int n)
+ {
+@@ -288,7 +476,20 @@
+  * Returns: node previous to @curr or NULL if either this node is the head of
+  * the list or the list is empty.
+  */
+-// kmod_list_prev.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * 返回在当前 kmod 链表 list 中，curr 节点的上一个节点 
++ * 如果链表为空，或者 curr 就是链表的头，则返回空
++ */
+ KMOD_EXPORT struct kmod_list *kmod_list_prev(const struct kmod_list *list,
+ 						const struct kmod_list *curr)
+ {
+@@ -314,7 +515,17 @@
+  * Returns: node next to @curr or NULL if either this node is the last of or
+  * list is empty.
+  */
+-// kmod_list_next.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 返回在当前 kmod 链表 list 中，curr 节点的下一个节点 */
+ KMOD_EXPORT struct kmod_list *kmod_list_next(const struct kmod_list *list,
+ 						const struct kmod_list *curr)
+ {
+@@ -340,7 +551,17 @@
+  *
+  * Returns: last node at @list or NULL if the list is empty.
+  */
+-// kmod_list_last.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 如果链表为空，则返回空，否则返回链表中的最后那个节点 */
+ KMOD_EXPORT struct kmod_list *kmod_list_last(const struct kmod_list *list)
+ {
+ 	if (list == NULL)
+diff -Nur my-kmod-11/libkmod/libkmod-util.c my-kmod-11-subs/libkmod/libkmod-util.c
+--- my-kmod-11/libkmod/libkmod-util.c	2013-06-04 18:46:51.671971612 +0800
++++ my-kmod-11-subs/libkmod/libkmod-util.c	2013-06-04 19:57:12.372006109 +0800
+@@ -90,7 +90,23 @@
+ 	}
+ }
+ 
+-// alias_normalize.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * 正规化 alias
++ * 将 alias 别名中 [ ] 中间的部分包含 [ ] 作为返回名称
++ * 名字中间的 '-' 字符，都会被替换为 '_' 下划线
++ * 如果出现 ']' 字符，则直接返回错误 -EINVAL
++ * 最后把 alias 的长度赋值给 *len, 正确返回 0
++ /
+ inline int alias_normalize(const char *alias, char buf[PATH_MAX], size_t *len)
+ {
+ 	size_t s;
+@@ -130,7 +146,22 @@
+ 	return 0;
+ }
+ 
+-// modname_normalize.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * 正规化 modname 
++ * 名字中间的 '-' 字符，都会被替换为 '_' 下划线
++ * 如果出现 '.' 字符，则直接截断
++ * 最后把 modname 的长度赋值给 *len, 正确返回 0
++ */
+ inline char *modname_normalize(const char *modname, char buf[PATH_MAX],
+ 								size_t *len)
+ {
+@@ -154,7 +185,17 @@
+ 	return buf;
+ }
+ 
+-// path_to_modname.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 从 path 名转换为 modname，并返回 modname 的长度 */
+ char *path_to_modname(const char *path, char buf[PATH_MAX], size_t *len)
+ {
+ 	char *modname;
+@@ -166,7 +207,17 @@
+ 	return modname_normalize(modname, buf, len);
+ }
+ 
+-// memdup.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 从指针 p 所指向的内存复制 n 个字节，通过 malloc 分配空间 r，返回 r */  
+ inline void *memdup(const void *p, size_t n)
+ {
+ 	void *r = malloc(n);
+@@ -177,7 +228,21 @@
+ 	return memcpy(r, p, n);
+ }
+ 
+-// read_str_safe.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * 从 fd 中读出 buflen 个字符，写入到 buf 指针所指向的内存区域
++ * 确保全部读出后返回，并在 buf 指针的最后补上 '\0'
++ * 成功则 返回 0； 失败则返回 -errno
++ */
+ ssize_t read_str_safe(int fd, char *buf, size_t buflen)
+ {
+ 	size_t todo = buflen - 1;
+@@ -204,7 +269,20 @@
+ 	return done;
+ }
+ 
+-// write_str_safe.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * 将 buf 指针所指向的 buflen 个字符，写入到 fd，确保全部写入后返回
++ * 成功则 返回 0； 失败则返回 -errno
++ */
+ ssize_t write_str_safe(int fd, const char *buf, size_t buflen)
+ {
+ 	size_t todo = buflen;
+@@ -230,7 +308,21 @@
+ 	return done;
+ }
+ 
+-// read_str_long.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 从 fd 读入最多 32 个字节到 buf 中，
++ * 并将其转换为 有符号long, 写入 value 指针指向的内存区域 
++ * 采用的进制为 base ，成功则返回 0, 失败则返回 -EINVAL;
++ */
+ int read_str_long(int fd, long *value, int base)
+ {
+ 	char buf[32], *end;
+@@ -250,7 +342,21 @@
+ 	return 0;
+ }
+ 
+-// read_str_ulong.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 从 fd 读入最多 32 个字节到 buf 中，
++ * 并将其转换为 无符号long, 写入 value 指针指向的内存区域
++ * 采用的进制为 base ，成功则返回 0, 失败则返回 -EINVAL;
++ */
+ int read_str_ulong(int fd, unsigned long *value, int base)
+ {
+ 	char buf[32], *end;
+@@ -269,7 +375,17 @@
+ 	return 0;
+ }
+ 
+-// strchr_replace.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 将字符串 s 中出现的字符 c 替换为 字符 r */
+ char *strchr_replace(char *s, int c, char r)
+ {
+ 	char *p;
+@@ -281,7 +397,17 @@
+ 	return s;
+ }
+ 
+-// path_is_absolute.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 判断 路径 p 是否是绝对路径，如果是返回真，如果不是返回0 */
+ bool path_is_absolute(const char *p)
+ {
+ 	assert(p != NULL);
+@@ -289,7 +415,16 @@
+ 	return p[0] == '/';
+ }
+ 
+-// path_make_absolute_cwd.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
+ char *path_make_absolute_cwd(const char *p)
+ {
+ 	char *cwd, *r;
 diff -Nur my-kmod-11/testsuite/delete_module.c my-kmod-11-subs/testsuite/delete_module.c
 --- my-kmod-11/testsuite/delete_module.c	2013-05-31 22:25:40.750338290 +0800
-+++ my-kmod-11-subs/testsuite/delete_module.c	2013-06-02 00:21:34.912460127 +0800
++++ my-kmod-11-subs/testsuite/delete_module.c	2013-06-04 19:57:12.812006113 +0800
 @@ -97,7 +97,17 @@
  	}
  }
@@ -196,9 +1109,214 @@ diff -Nur my-kmod-11/testsuite/delete_module.c my-kmod-11-subs/testsuite/delete_
  void free_resources(void)
  {
  	while (modules) {
+diff -Nur my-kmod-11/testsuite/init_module.c my-kmod-11-subs/testsuite/init_module.c
+--- my-kmod-11/testsuite/init_module.c	2013-06-04 08:20:58.614271459 +0800
++++ my-kmod-11-subs/testsuite/init_module.c	2013-06-04 19:57:12.908006113 +0800
+@@ -225,7 +225,29 @@
+  * This is because we want to be able to pass dummy modules (and not real
+  * ones) and it still work.
+  */
+-// init_module.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * init_module 默认操作是模仿在内核中的 init_module 
++ * 其中主要用到了 kmod_elf 模块的接口
++ *	- kmod_elf_new()
++ *	- kmod_elf_get_section()
++ *	- kmod_elf_unref()
++ * 以下函数是 static 内部实现
++ *	- init_retcodes()
++ *	- elf_identify()
++ *	- find_module()
++ *	- module_is_inkernel()
++ *	- create_sysfs_files()
++ */
+ long init_module(void *mem, unsigned long len, const char *args)
+ {
+ 	const char *modname;
+diff -Nur my-kmod-11/testsuite/mkdir.c my-kmod-11-subs/testsuite/mkdir.c
+--- my-kmod-11/testsuite/mkdir.c	2013-06-04 08:13:48.698267948 +0800
++++ my-kmod-11-subs/testsuite/mkdir.c	2013-06-04 19:57:12.980006113 +0800
+@@ -23,7 +23,17 @@
+ #include "mkdir.h"
+ #include "testsuite.h"
+ 
+-// mkdir_p.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 通过调用系统函数 stat, mkdir 实现 mkdir 功能 */
+ TS_EXPORT int mkdir_p(const char *path, mode_t mode)
+ {
+ 	char *start = strdupa(path);
+diff -Nur my-kmod-11/testsuite/path.c my-kmod-11-subs/testsuite/path.c
+--- my-kmod-11/testsuite/path.c	2013-06-04 08:19:21.266270893 +0800
++++ my-kmod-11-subs/testsuite/path.c	2013-06-04 19:57:13.120006113 +0800
+@@ -36,13 +36,33 @@
+ static const char *rootpath;
+ static size_t rootpathlen;
+ 
+-// need_trap.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 如果路径 path 不为空，并且 path 的第一个字符为 / 也就是绝对路径 */
+ static inline bool need_trap(const char *path)
+ {
+ 	return path != NULL && path[0] == '/';
+ }
+ 
+-// trap_path.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 判断 path 是否是从根目录开始的绝对路径，如果不是则给它添加为绝对路径 */
+ static const char *trap_path(const char *path, char buf[PATH_MAX * 2])
+ {
+ 	size_t len;
+@@ -62,7 +82,17 @@
+ 	return buf;
+ }
+ 
+-// get_rootpath.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 获取环境变量中 S_TC_ROOTFS 的之，赋值给 rootpath 静态变量 */
+ static bool get_rootpath(const char *f)
+ {
+ 	if (rootpath != NULL)
+diff -Nur my-kmod-11/testsuite/test-alias.c my-kmod-11-subs/testsuite/test-alias.c
+--- my-kmod-11/testsuite/test-alias.c	2013-06-04 08:22:04.406272012 +0800
++++ my-kmod-11-subs/testsuite/test-alias.c	2013-06-04 19:57:14.844006130 +0800
+@@ -25,7 +25,17 @@
+ #include "libkmod-util.h"
+ #include "testsuite.h"
+ 
+-// alias_1.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 测试 alias_normalize() 函数是否工作正确 */
+ static int alias_1(const struct test *t)
+ {
+ 	static const char *input[] = {
+diff -Nur my-kmod-11/testsuite/test-blacklist.c my-kmod-11-subs/testsuite/test-blacklist.c
+--- my-kmod-11/testsuite/test-blacklist.c	2013-06-04 08:25:00.714273439 +0800
++++ my-kmod-11-subs/testsuite/test-blacklist.c	2013-06-04 19:57:14.936006129 +0800
+@@ -33,7 +33,30 @@
+ #undef ERR
+ #include "testsuite.h"
+ 
+-// blacklist_1.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 测试模块是否能够正确被 filter （blacklisted） 
++ * 其中需要调用到 libkmod 模块中的以下接口
++ *	- kmod_new()
++ *	- kmod_module_new_from_name()
++ *	- kmod_list_append()
++ *	- kmod_module_apply_filter()
++ *	- kmod_list_foreach()
++ *	- kmod_module_get_module()
++ *	- kmod_module_get_name()
++ *	- kmod_module_unref()
++ *	- kmod_module_unref_list()
++ *	- kmod_unref()
++ */
+ static int blacklist_1(const struct test *t)
+ {
+ 	struct kmod_ctx *ctx;
+diff -Nur my-kmod-11/testsuite/test-dependencies.c my-kmod-11-subs/testsuite/test-dependencies.c
+--- my-kmod-11/testsuite/test-dependencies.c	2013-06-04 08:28:55.278275353 +0800
++++ my-kmod-11-subs/testsuite/test-dependencies.c	2013-06-04 19:57:15.024006131 +0800
+@@ -28,7 +28,29 @@
+ #include "testsuite.h"
+ #define TEST_UNAME "4.0.20-kmod"
+ 
+-// test_dependencies.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 测试模块的 kmod_module_get_dependencies 是否工作正确
++ * 其中需要调用到 libkmod 模块中的以下接口
++ *	- kmod_new()
++ *	- kmod_module_new_from_name()
++ *	- kmod_module_get_dependencies()
++ *	- kmod_list_foreach()
++ *	- kmod_module_get_module()
++ *	- kmod_module_get_name()
++ *	- kmod_module_unref_list()
++ *	- kmod_module_unref()
++ *	- kmod_unref()
++ */
+ static int test_dependencies(const struct test *t)
+ {
+ 	struct kmod_ctx *ctx;
 diff -Nur my-kmod-11/testsuite/test-depmod.c my-kmod-11-subs/testsuite/test-depmod.c
 --- my-kmod-11/testsuite/test-depmod.c	2013-05-31 21:26:37.698309339 +0800
-+++ my-kmod-11-subs/testsuite/test-depmod.c	2013-06-02 00:21:38.548460157 +0800
++++ my-kmod-11-subs/testsuite/test-depmod.c	2013-06-04 19:57:15.144006131 +0800
 @@ -60,5 +60,22 @@
  	NULL,
  };
@@ -225,7 +1343,7 @@ diff -Nur my-kmod-11/testsuite/test-depmod.c my-kmod-11-subs/testsuite/test-depm
  TESTSUITE_MAIN(tests);
 diff -Nur my-kmod-11/testsuite/test-init.c my-kmod-11-subs/testsuite/test-init.c
 --- my-kmod-11/testsuite/test-init.c	2013-05-30 17:34:03.277852621 +0800
-+++ my-kmod-11-subs/testsuite/test-init.c	2013-06-02 00:21:38.816460161 +0800
++++ my-kmod-11-subs/testsuite/test-init.c	2013-06-04 19:57:15.316006132 +0800
 @@ -26,7 +26,22 @@
  
  #include "testsuite.h"
@@ -328,7 +1446,7 @@ diff -Nur my-kmod-11/testsuite/test-init.c my-kmod-11-subs/testsuite/test-init.c
  TESTSUITE_MAIN(tests);
 diff -Nur my-kmod-11/testsuite/test-loaded.c my-kmod-11-subs/testsuite/test-loaded.c
 --- my-kmod-11/testsuite/test-loaded.c	2013-05-30 17:35:40.785853421 +0800
-+++ my-kmod-11-subs/testsuite/test-loaded.c	2013-06-02 00:21:38.984460160 +0800
++++ my-kmod-11-subs/testsuite/test-loaded.c	2013-06-04 19:57:15.424006133 +0800
 @@ -27,7 +27,31 @@
  
  #include "testsuite.h"
@@ -388,7 +1506,7 @@ diff -Nur my-kmod-11/testsuite/test-loaded.c my-kmod-11-subs/testsuite/test-load
  TESTSUITE_MAIN(tests);
 diff -Nur my-kmod-11/testsuite/test-modinfo.c my-kmod-11-subs/testsuite/test-modinfo.c
 --- my-kmod-11/testsuite/test-modinfo.c	2013-05-30 18:43:58.833886908 +0800
-+++ my-kmod-11-subs/testsuite/test-modinfo.c	2013-06-02 00:21:39.104460161 +0800
++++ my-kmod-11-subs/testsuite/test-modinfo.c	2013-06-04 19:57:15.500006134 +0800
 @@ -53,5 +53,22 @@
  	NULL,
  };
@@ -415,7 +1533,7 @@ diff -Nur my-kmod-11/testsuite/test-modinfo.c my-kmod-11-subs/testsuite/test-mod
  TESTSUITE_MAIN(tests);
 diff -Nur my-kmod-11/testsuite/test-modprobe.c my-kmod-11-subs/testsuite/test-modprobe.c
 --- my-kmod-11/testsuite/test-modprobe.c	2013-05-31 21:40:19.830316058 +0800
-+++ my-kmod-11-subs/testsuite/test-modprobe.c	2013-06-02 00:21:39.252460163 +0800
++++ my-kmod-11-subs/testsuite/test-modprobe.c	2013-06-04 19:57:15.604006135 +0800
 @@ -143,5 +143,22 @@
  	NULL,
  };
@@ -442,7 +1560,7 @@ diff -Nur my-kmod-11/testsuite/test-modprobe.c my-kmod-11-subs/testsuite/test-mo
  TESTSUITE_MAIN(tests);
 diff -Nur my-kmod-11/testsuite/test-new-module.c my-kmod-11-subs/testsuite/test-new-module.c
 --- my-kmod-11/testsuite/test-new-module.c	2013-05-30 15:40:01.896852853 +0800
-+++ my-kmod-11-subs/testsuite/test-new-module.c	2013-06-02 00:21:39.512460165 +0800
++++ my-kmod-11-subs/testsuite/test-new-module.c	2013-06-04 19:57:15.736006136 +0800
 @@ -39,7 +39,21 @@
  
  #include "testsuite.h"
@@ -515,7 +1633,7 @@ diff -Nur my-kmod-11/testsuite/test-new-module.c my-kmod-11-subs/testsuite/test-
  TESTSUITE_MAIN(tests);
 diff -Nur my-kmod-11/testsuite/testsuite.c my-kmod-11-subs/testsuite/testsuite.c
 --- my-kmod-11/testsuite/testsuite.c	2013-05-30 17:28:38.781849972 +0800
-+++ my-kmod-11-subs/testsuite/testsuite.c	2013-06-02 00:21:39.660460165 +0800
++++ my-kmod-11-subs/testsuite/testsuite.c	2013-06-04 19:57:15.820006136 +0800
 @@ -640,7 +640,22 @@
  	return r;
  }
@@ -542,7 +1660,7 @@ diff -Nur my-kmod-11/testsuite/testsuite.c my-kmod-11-subs/testsuite/testsuite.c
  	pid_t pid;
 diff -Nur my-kmod-11/testsuite/test-testsuite.c my-kmod-11-subs/testsuite/test-testsuite.c
 --- my-kmod-11/testsuite/test-testsuite.c	2013-05-30 15:25:07.996845547 +0800
-+++ my-kmod-11-subs/testsuite/test-testsuite.c	2013-06-02 00:21:39.812460167 +0800
++++ my-kmod-11-subs/testsuite/test-testsuite.c	2013-06-04 19:57:15.904006137 +0800
 @@ -167,5 +167,22 @@
  	NULL,
  };
@@ -567,9 +1685,36 @@ diff -Nur my-kmod-11/testsuite/test-testsuite.c my-kmod-11-subs/testsuite/test-t
 + *	- exit()
 + */
  TESTSUITE_MAIN(tests);
+diff -Nur my-kmod-11/testsuite/uname.c my-kmod-11-subs/testsuite/uname.c
+--- my-kmod-11/testsuite/uname.c	2013-06-04 07:55:38.826336157 +0800
++++ my-kmod-11-subs/testsuite/uname.c	2013-06-04 19:57:16.008006137 +0800
+@@ -25,7 +25,22 @@
+ 
+ #include "testsuite.h"
+ 
+-// uname.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 自行设计实现的 uname 函数，标准c库中的函数 
++ * 通过调用 dlopen, dlsym 动态库接口函数
++ * 获得 libc.so.6 中的 uname 函数入口地址
++ * 调用其中的 uname() 函数, 完成相关数据 S_TC_UNAME 的赋值
++ */
+ TS_EXPORT int uname(struct utsname *u)
+ {
+ 	static void *nextlib = NULL;
 diff -Nur my-kmod-11/tools/depmod.c my-kmod-11-subs/tools/depmod.c
 --- my-kmod-11/tools/depmod.c	2013-05-29 17:22:55.973317396 +0800
-+++ my-kmod-11-subs/tools/depmod.c	2013-06-02 00:21:40.064460169 +0800
++++ my-kmod-11-subs/tools/depmod.c	2013-06-04 19:57:16.152006140 +0800
 @@ -2722,7 +2722,22 @@
  	return EXIT_FAILURE;
  }
@@ -596,7 +1741,7 @@ diff -Nur my-kmod-11/tools/depmod.c my-kmod-11-subs/tools/depmod.c
  	.cmd = do_depmod,
 diff -Nur my-kmod-11/tools/insmod.c my-kmod-11-subs/tools/insmod.c
 --- my-kmod-11/tools/insmod.c	2013-05-29 17:23:20.089317595 +0800
-+++ my-kmod-11-subs/tools/insmod.c	2013-06-02 00:21:40.332460171 +0800
++++ my-kmod-11-subs/tools/insmod.c	2013-06-04 19:57:16.316006141 +0800
 @@ -33,7 +33,17 @@
  	{NULL, 0, 0, 0}
  };
@@ -689,7 +1834,7 @@ diff -Nur my-kmod-11/tools/insmod.c my-kmod-11-subs/tools/insmod.c
  	.cmd = do_insmod,
 diff -Nur my-kmod-11/tools/kmod.c my-kmod-11-subs/tools/kmod.c
 --- my-kmod-11/tools/kmod.c	2013-05-30 11:34:07.819073601 +0800
-+++ my-kmod-11-subs/tools/kmod.c	2013-06-02 00:21:40.752460175 +0800
++++ my-kmod-11-subs/tools/kmod.c	2013-06-04 19:57:16.552006143 +0800
 @@ -35,13 +35,33 @@
  
  static const struct kmod_cmd kmod_cmd_help;
@@ -820,9 +1965,126 @@ diff -Nur my-kmod-11/tools/kmod.c my-kmod-11-subs/tools/kmod.c
  int main(int argc, char *argv[])
  {
  	int err;
+diff -Nur my-kmod-11/tools/log.c my-kmod-11-subs/tools/log.c
+--- my-kmod-11/tools/log.c	2013-06-04 07:41:06.454345393 +0800
++++ my-kmod-11-subs/tools/log.c	2013-06-04 19:57:16.716006143 +0800
+@@ -28,7 +28,37 @@
+ static bool log_use_syslog;
+ static int log_priority = LOG_ERR;
+ 
+-// prio_to_str.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 将优先级 prio 整型数转换成相应的字符串 
++ * 优先级的分类包括
++ *	- FATAL 最高级别 
++ *	- ERROR
++ *	- WARNING
++ *	- NOTICE
++ *	- INFO
++ *	- DEBUG
++ * 详见 /usr/include/i386-linux-gnu/sys/syslog.h
++
++ #define LOG_EMERG       0       /* system is unusable */
++ #define LOG_ALERT       1       /* action must be taken immediately */
++ #define LOG_CRIT        2       /* critical conditions */
++ #define LOG_ERR         3       /* error conditions */
++ #define LOG_WARNING     4       /* warning conditions */
++ #define LOG_NOTICE      5       /* normal but significant condition */
++ #define LOG_INFO        6       /* informational */
++ #define LOG_DEBUG       7       /* debug-level messages */
++
++ */
+ static _always_inline_ const char *prio_to_str(int prio)
+ {
+ 	const char *prioname;
+@@ -61,7 +91,17 @@
+ 	return prioname;
+ }
+ 
+-// log_kmod.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 核心日志记录函数，调用了系统的 syslog() 函数，增加了优先级信息打印 */
+ static void log_kmod(void *data, int priority, const char *file, int line,
+ 		     const char *fn, const char *format, va_list args)
+ {
+@@ -93,7 +133,17 @@
+ 	(void)data;
+ }
+ 
+-// log_open.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 打开日志文件, 调用了系统的 openlog() */
+ void log_open(bool use_syslog)
+ {
+ 	log_use_syslog = use_syslog;
+@@ -102,14 +152,34 @@
+ 		openlog(program_invocation_short_name, LOG_CONS, LOG_DAEMON);
+ }
+ 
+-// log_close.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 关闭日志文件，调用 closelog() */
+ void log_close(void)
+ {
+ 	if (log_use_syslog)
+ 		closelog();
+ }
+ 
+-// log_printf.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 带有优先级 prio 的日志打印函数，可以设定日志打印的优先级 */
+ void log_printf(int prio, const char *fmt, ...)
+ {
+ 	const char *prioname;
 diff -Nur my-kmod-11/tools/lsmod.c my-kmod-11-subs/tools/lsmod.c
 --- my-kmod-11/tools/lsmod.c	2013-05-29 17:22:34.289317220 +0800
-+++ my-kmod-11-subs/tools/lsmod.c	2013-06-02 00:21:40.972460177 +0800
++++ my-kmod-11-subs/tools/lsmod.c	2013-06-04 19:57:16.800006145 +0800
 @@ -92,7 +92,22 @@
  	.help = "compat lsmod command",
  };
@@ -849,7 +2111,7 @@ diff -Nur my-kmod-11/tools/lsmod.c my-kmod-11-subs/tools/lsmod.c
  	.cmd = do_lsmod,
 diff -Nur my-kmod-11/tools/modinfo.c my-kmod-11-subs/tools/modinfo.c
 --- my-kmod-11/tools/modinfo.c	2013-05-29 17:53:26.861332360 +0800
-+++ my-kmod-11-subs/tools/modinfo.c	2013-06-02 00:21:41.120460178 +0800
++++ my-kmod-11-subs/tools/modinfo.c	2013-06-04 19:57:16.904006146 +0800
 @@ -362,7 +362,28 @@
  	return false;
  }
@@ -906,7 +2168,7 @@ diff -Nur my-kmod-11/tools/modinfo.c my-kmod-11-subs/tools/modinfo.c
  	.cmd = do_modinfo,
 diff -Nur my-kmod-11/tools/modprobe.c my-kmod-11-subs/tools/modprobe.c
 --- my-kmod-11/tools/modprobe.c	2013-05-30 11:25:53.715069562 +0800
-+++ my-kmod-11-subs/tools/modprobe.c	2013-06-02 00:21:41.660460183 +0800
++++ my-kmod-11-subs/tools/modprobe.c	2013-06-04 19:57:17.136006148 +0800
 @@ -285,7 +285,28 @@
  	return ret;
  }
@@ -1130,7 +2392,7 @@ diff -Nur my-kmod-11/tools/modprobe.c my-kmod-11-subs/tools/modprobe.c
  	.cmd = do_modprobe,
 diff -Nur my-kmod-11/tools/rmmod.c my-kmod-11-subs/tools/rmmod.c
 --- my-kmod-11/tools/rmmod.c	2013-05-29 17:32:36.229322140 +0800
-+++ my-kmod-11-subs/tools/rmmod.c	2013-06-02 00:21:41.924460185 +0800
++++ my-kmod-11-subs/tools/rmmod.c	2013-06-04 19:57:17.392006148 +0800
 @@ -45,7 +45,17 @@
  	{NULL, 0, 0, 0}
  };

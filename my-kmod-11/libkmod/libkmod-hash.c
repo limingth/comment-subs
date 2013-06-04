@@ -26,6 +26,7 @@
 #include <string.h>
 #include <errno.h>
 
+// hash_entry.cmt
 struct hash_entry {
 	const char *key;
 	const void *value;
@@ -37,6 +38,7 @@ struct hash_bucket {
 	unsigned int total;
 };
 
+// hash.cmt
 struct hash {
 	unsigned int count;
 	unsigned int step;
@@ -45,6 +47,7 @@ struct hash {
 	struct hash_bucket buckets[];
 };
 
+// hash_new.cmt
 struct hash *hash_new(unsigned int n_buckets,
 					void (*free_value)(void *value))
 {
@@ -62,6 +65,7 @@ struct hash *hash_new(unsigned int n_buckets,
 	return hash;
 }
 
+// hash_free.cmt
 void hash_free(struct hash *hash)
 {
 	struct hash_bucket *bucket, *bucket_end;
@@ -84,6 +88,7 @@ void hash_free(struct hash *hash)
 	free(hash);
 }
 
+// hash_superfast.cmt
 static inline unsigned int hash_superfast(const char *key, unsigned int len)
 {
 	/* Paul Hsieh (http://www.azillionmonkeys.com/qed/hash.html)
@@ -141,6 +146,7 @@ static inline unsigned int hash_superfast(const char *key, unsigned int len)
  * none of key or value are copied, just references are remembered as is,
  * make sure they are live while pair exists in hash!
  */
+// hash_add.cmt
 int hash_add(struct hash *hash, const char *key, const void *value)
 {
 	unsigned int keylen = strlen(key);
@@ -183,6 +189,7 @@ int hash_add(struct hash *hash, const char *key, const void *value)
 }
 
 /* similar to hash_add(), but fails if key already exists */
+// hash_add_unique.cmt
 int hash_add_unique(struct hash *hash, const char *key, const void *value)
 {
 	unsigned int keylen = strlen(key);
@@ -221,6 +228,7 @@ int hash_add_unique(struct hash *hash, const char *key, const void *value)
 	return 0;
 }
 
+// hash_entry_cmp.cmt
 static int hash_entry_cmp(const void *pa, const void *pb)
 {
 	const struct hash_entry *a = pa;
@@ -228,6 +236,7 @@ static int hash_entry_cmp(const void *pa, const void *pb)
 	return strcmp(a->key, b->key);
 }
 
+// hash_find.cmt
 void *hash_find(const struct hash *hash, const char *key)
 {
 	unsigned int keylen = strlen(key);
@@ -246,6 +255,7 @@ void *hash_find(const struct hash *hash, const char *key)
 	return (void *)entry->value;
 }
 
+// hash_del.cmt
 int hash_del(struct hash *hash, const char *key)
 {
 	unsigned int keylen = strlen(key);
@@ -289,6 +299,7 @@ int hash_del(struct hash *hash, const char *key)
 	return 0;
 }
 
+// hash_get_count.cmt
 unsigned int hash_get_count(const struct hash *hash)
 {
 	return hash->count;

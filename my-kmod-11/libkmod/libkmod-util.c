@@ -90,6 +90,7 @@ char *getline_wrapped(FILE *fp, unsigned int *linenum)
 	}
 }
 
+// alias_normalize.cmt
 inline int alias_normalize(const char *alias, char buf[PATH_MAX], size_t *len)
 {
 	size_t s;
@@ -129,6 +130,7 @@ finish:
 	return 0;
 }
 
+// modname_normalize.cmt
 inline char *modname_normalize(const char *modname, char buf[PATH_MAX],
 								size_t *len)
 {
@@ -152,6 +154,7 @@ inline char *modname_normalize(const char *modname, char buf[PATH_MAX],
 	return buf;
 }
 
+// path_to_modname.cmt
 char *path_to_modname(const char *path, char buf[PATH_MAX], size_t *len)
 {
 	char *modname;
@@ -163,6 +166,7 @@ char *path_to_modname(const char *path, char buf[PATH_MAX], size_t *len)
 	return modname_normalize(modname, buf, len);
 }
 
+// memdup.cmt
 inline void *memdup(const void *p, size_t n)
 {
 	void *r = malloc(n);
@@ -173,6 +177,7 @@ inline void *memdup(const void *p, size_t n)
 	return memcpy(r, p, n);
 }
 
+// read_str_safe.cmt
 ssize_t read_str_safe(int fd, char *buf, size_t buflen)
 {
 	size_t todo = buflen - 1;
@@ -199,6 +204,7 @@ ssize_t read_str_safe(int fd, char *buf, size_t buflen)
 	return done;
 }
 
+// write_str_safe.cmt
 ssize_t write_str_safe(int fd, const char *buf, size_t buflen)
 {
 	size_t todo = buflen;
@@ -224,6 +230,7 @@ ssize_t write_str_safe(int fd, const char *buf, size_t buflen)
 	return done;
 }
 
+// read_str_long.cmt
 int read_str_long(int fd, long *value, int base)
 {
 	char buf[32], *end;
@@ -243,6 +250,7 @@ int read_str_long(int fd, long *value, int base)
 	return 0;
 }
 
+// read_str_ulong.cmt
 int read_str_ulong(int fd, unsigned long *value, int base)
 {
 	char buf[32], *end;
@@ -261,6 +269,7 @@ int read_str_ulong(int fd, unsigned long *value, int base)
 	return 0;
 }
 
+// strchr_replace.cmt
 char *strchr_replace(char *s, int c, char r)
 {
 	char *p;
@@ -272,6 +281,7 @@ char *strchr_replace(char *s, int c, char r)
 	return s;
 }
 
+// path_is_absolute.cmt
 bool path_is_absolute(const char *p)
 {
 	assert(p != NULL);
@@ -279,6 +289,7 @@ bool path_is_absolute(const char *p)
 	return p[0] == '/';
 }
 
+// path_make_absolute_cwd.cmt
 char *path_make_absolute_cwd(const char *p)
 {
 	char *cwd, *r;

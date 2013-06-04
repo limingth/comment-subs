@@ -25,6 +25,7 @@
 
 #include "testsuite.h"
 
+// uname.cmt
 TS_EXPORT int uname(struct utsname *u)
 {
 	static void *nextlib = NULL;

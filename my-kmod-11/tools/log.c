@@ -28,6 +28,7 @@
 static bool log_use_syslog;
 static int log_priority = LOG_ERR;
 
+// prio_to_str.cmt
 static _always_inline_ const char *prio_to_str(int prio)
 {
 	const char *prioname;
@@ -60,6 +61,7 @@ static _always_inline_ const char *prio_to_str(int prio)
 	return prioname;
 }
 
+// log_kmod.cmt
 static void log_kmod(void *data, int priority, const char *file, int line,
 		     const char *fn, const char *format, va_list args)
 {
@@ -90,6 +92,8 @@ static void log_kmod(void *data, int priority, const char *file, int line,
 	free(str);
 	(void)data;
 }
+
+// log_open.cmt
 void log_open(bool use_syslog)
 {
 	log_use_syslog = use_syslog;
@@ -98,12 +102,14 @@ void log_open(bool use_syslog)
 		openlog(program_invocation_short_name, LOG_CONS, LOG_DAEMON);
 }
 
+// log_close.cmt
 void log_close(void)
 {
 	if (log_use_syslog)
 		closelog();
 }
 
+// log_printf.cmt
 void log_printf(int prio, const char *fmt, ...)
 {
 	const char *prioname;

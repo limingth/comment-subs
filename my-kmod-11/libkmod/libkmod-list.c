@@ -17,19 +17,6 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-/* 
- * 本注释得到了“核高基”科技重大专项2012年课题的资助
- * 课题名称“开源操作系统内核分析和安全性评估”
- * 课题编号“2012ZX01039-004”
- */
-
-/*
- * 注释添加单位 清华大学--03任务
- * Linux 内核相关通用基础软件包分析 承担单位
- * 注释添加人 李明
- * 注释日期 2013年5月4日
- */
-
 #include <stdlib.h>
 
 #include "libkmod.h"
@@ -40,12 +27,7 @@
  * @short_description: general purpose list
  */
 
-/* 
- * 这个文件中的函数接口主要用于通用的链表操作
- * 包括了初始化链表，插入，删除，获取等接口
- */
-
-/* 链表节点初始化 */
+// list_node_init.cmt
 static inline struct list_node *list_node_init(struct list_node *node)
 {
 	node->next = node;
@@ -54,7 +36,7 @@ static inline struct list_node *list_node_init(struct list_node *node)
 	return node;
 }
 
-/* 获得当前链表节点的下一个元素 */
+// list_node_next.cmt
 static inline struct list_node *list_node_next(const struct list_node *node)
 {
 	if (node == NULL)
@@ -63,7 +45,7 @@ static inline struct list_node *list_node_next(const struct list_node *node)
 	return node->next;
 }
 
-/* 获得当前链表节点的上一个元素 */
+// list_node_prev.cmt
 static inline struct list_node *list_node_prev(const struct list_node *node)
 {
 	if (node == NULL)
@@ -72,7 +54,7 @@ static inline struct list_node *list_node_prev(const struct list_node *node)
 	return node->prev;
 }
 
-/* 将当前链表增添一个节点元素，如原链表为空，则用当前节点元素创建链表 */
+// list_node_append.cmt
 static inline void list_node_append(struct list_node *list,
 							struct list_node *node)
 {
@@ -87,11 +69,7 @@ static inline void list_node_append(struct list_node *list,
 	node->next = list;
 }
 
-/* 
- * 将当前链表删除一个节点元素
- * 如原链表只有1个节点，则删除后置为空。
- * 如原链表不为空，删除节点元素后调整链表相关指针
- */
+// list_node_remove.cmt
 static inline struct list_node *list_node_remove(struct list_node *node)
 {
 	if (node->prev == node || node->next == node)
@@ -103,11 +81,7 @@ static inline struct list_node *list_node_remove(struct list_node *node)
 	return node->next;
 }
 
-/* 
- * 在链表当前节点 list 后插入一个节点元素 node
- * 如原链表为空，则用插入节点元素创建链表。
- * 如原链表不为空，插入节点元素后调整链表相关指针
- */
+// list_node_insert_after.cmt
 static inline void list_node_insert_after(struct list_node *list,
 							struct list_node *node)
 {
@@ -122,11 +96,7 @@ static inline void list_node_insert_after(struct list_node *list,
 	list->next = node;
 }
 
-/* 
- * 在链表当前节点 list 前插入一个节点元素 node
- * 如原链表为空，则用插入节点元素创建链表。
- * 如原链表不为空，插入节点元素后调整链表相关指针
- */
+// list_node_insert_before.cmt
 static inline void list_node_insert_before(struct list_node *list,
 							struct list_node *node)
 {
@@ -141,10 +111,7 @@ static inline void list_node_insert_before(struct list_node *list,
 	list->prev = node;
 }
 
-/* 
- * 将链表 list1 后加上append 链表 list2
- * 如原链表 list1 为空，则用 list2 作为最后的链表
- */
+// list_node_append_list.cmt
 static inline void list_node_append_list(struct list_node *list1,
 							struct list_node *list2)
 {
@@ -165,6 +132,7 @@ static inline void list_node_append_list(struct list_node *list1,
 	list2->prev = list1_last;
 }
 
+// kmod_list_append.cmt
 struct kmod_list *kmod_list_append(struct kmod_list *list, const void *data)
 {
 	struct kmod_list *new;
@@ -179,6 +147,7 @@ struct kmod_list *kmod_list_append(struct kmod_list *list, const void *data)
 	return list ? list : new;
 }
 
+// kmod_list_insert_after.cmt
 struct kmod_list *kmod_list_insert_after(struct kmod_list *list,
 							const void *data)
 {
@@ -197,6 +166,7 @@ struct kmod_list *kmod_list_insert_after(struct kmod_list *list,
 	return list;
 }
 
+// kmod_list_insert_before.cmt_
 struct kmod_list *kmod_list_insert_before(struct kmod_list *list,
 							const void *data)
 {
@@ -215,6 +185,7 @@ struct kmod_list *kmod_list_insert_before(struct kmod_list *list,
 	return new;
 }
 
+// kmod_list_append_list.cmt
 struct kmod_list *kmod_list_append_list(struct kmod_list *list1,
 						struct kmod_list *list2)
 {
@@ -229,6 +200,7 @@ struct kmod_list *kmod_list_append_list(struct kmod_list *list1,
 	return list1;
 }
 
+// kmod_list_prepend.cmt
 struct kmod_list *kmod_list_prepend(struct kmod_list *list, const void *data)
 {
 	struct kmod_list *new;
@@ -243,6 +215,7 @@ struct kmod_list *kmod_list_prepend(struct kmod_list *list, const void *data)
 	return new;
 }
 
+// kmod_list_remove.cmt
 struct kmod_list *kmod_list_remove(struct kmod_list *list)
 {
 	struct list_node *node;
@@ -259,6 +232,7 @@ struct kmod_list *kmod_list_remove(struct kmod_list *list)
 	return container_of(node, struct kmod_list, node);
 }
 
+// kmod_list_remove_data.cmt
 struct kmod_list *kmod_list_remove_data(struct kmod_list *list,
 							const void *data)
 {
@@ -286,6 +260,7 @@ struct kmod_list *kmod_list_remove_data(struct kmod_list *list,
  * n must be greater to or equal the number of elements (we don't check the
  * condition)
  */
+// kmod_list_remove_n_latest.cmt
 struct kmod_list *kmod_list_remove_n_latest(struct kmod_list *list,
 							unsigned int n)
 {
@@ -313,6 +288,7 @@ struct kmod_list *kmod_list_remove_n_latest(struct kmod_list *list,
  * Returns: node previous to @curr or NULL if either this node is the head of
  * the list or the list is empty.
  */
+// kmod_list_prev.cmt
 KMOD_EXPORT struct kmod_list *kmod_list_prev(const struct kmod_list *list,
 						const struct kmod_list *curr)
 {
@@ -338,6 +314,7 @@ KMOD_EXPORT struct kmod_list *kmod_list_prev(const struct kmod_list *list,
  * Returns: node next to @curr or NULL if either this node is the last of or
  * list is empty.
  */
+// kmod_list_next.cmt
 KMOD_EXPORT struct kmod_list *kmod_list_next(const struct kmod_list *list,
 						const struct kmod_list *curr)
 {
@@ -363,6 +340,7 @@ KMOD_EXPORT struct kmod_list *kmod_list_next(const struct kmod_list *list,
  *
  * Returns: last node at @list or NULL if the list is empty.
  */
+// kmod_list_last.cmt
 KMOD_EXPORT struct kmod_list *kmod_list_last(const struct kmod_list *list)
 {
 	if (list == NULL)

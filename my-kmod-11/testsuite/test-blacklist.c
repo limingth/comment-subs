@@ -33,6 +33,7 @@
 #undef ERR
 #include "testsuite.h"
 
+// blacklist_1.cmt
 static int blacklist_1(const struct test *t)
 {
 	struct kmod_ctx *ctx;

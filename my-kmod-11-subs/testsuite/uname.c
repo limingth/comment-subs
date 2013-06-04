@@ -25,6 +25,22 @@
 
 #include "testsuite.h"
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 
+ * 自行设计实现的 uname 函数，标准c库中的函数 
+ * 通过调用 dlopen, dlsym 动态库接口函数
+ * 获得 libc.so.6 中的 uname 函数入口地址
+ * 调用其中的 uname() 函数, 完成相关数据 S_TC_UNAME 的赋值
+ */
 TS_EXPORT int uname(struct utsname *u)
 {
 	static void *nextlib = NULL;

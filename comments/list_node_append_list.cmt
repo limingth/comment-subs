@@ -1,0 +1,4 @@
+/* 
+ * 将链表 list1 后加上append 链表 list2
+ * 如原链表 list1 为空，则用 list2 作为最后的链表
+ */

@@ -23,6 +23,7 @@
 #include "mkdir.h"
 #include "testsuite.h"
 
+// mkdir_p.cmt
 TS_EXPORT int mkdir_p(const char *path, mode_t mode)
 {
 	char *start = strdupa(path);

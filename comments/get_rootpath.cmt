@@ -1,0 +1,1 @@
+/* 获取环境变量中 S_TC_ROOTFS 的之，赋值给 rootpath 静态变量 */

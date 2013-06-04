@@ -278,6 +278,7 @@ struct kmod_elf *kmod_file_get_elf(struct kmod_file *file)
 	return file->elf;
 }
 
+// kmod_file_open.cmt
 struct kmod_file *kmod_file_open(const struct kmod_ctx *ctx,
 						const char *filename)
 {
@@ -343,11 +344,13 @@ error:
 	return file;
 }
 
+// kmod_file_get_contents.cmt
 void *kmod_file_get_contents(const struct kmod_file *file)
 {
 	return file->memory;
 }
 
+// kmod_file_get_size.cmt
 off_t kmod_file_get_size(const struct kmod_file *file)
 {
 	return file->size;

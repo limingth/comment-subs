@@ -225,7 +225,7 @@ TS_EXPORT long init_module(void *mem, unsigned long len, const char *args);
  * This is because we want to be able to pass dummy modules (and not real
  * ones) and it still work.
  */
- // init_module.cmt
+// init_module.cmt
 long init_module(void *mem, unsigned long len, const char *args)
 {
 	const char *modname;
