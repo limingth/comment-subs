@@ -62,6 +62,14 @@ subs_dir()
 	done
 }
 
+if [ "$1" = "commit" ]
+then
+	git add .
+	git commit -a -m "add cmt files"
+	git push
+	exit
+fi
+
 cd $CMT
 cmt_files=`ls *.cmt`
 #echo $cmt_files

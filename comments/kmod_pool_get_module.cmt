@@ -1,0 +1,1 @@
+/* 在 kmod 池中通过 hash_find 查找到键值为 key 的模块 */

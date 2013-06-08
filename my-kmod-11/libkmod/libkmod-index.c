@@ -72,6 +72,7 @@ enum node_offset {
 	INDEX_NODE_MASK     = 0x0FFFFFFF, /* Offset value */
 };
 
+// index_values_free.cmt
 void index_values_free(struct index_value *values)
 {
 	while (values) {
@@ -82,6 +83,7 @@ void index_values_free(struct index_value *values)
 	}
 }
 
+// add_value.cmt
 static int add_value(struct index_value **values,
 		     const char *value, unsigned len, unsigned int priority)
 {
@@ -268,6 +270,7 @@ struct index_node_f {
 	uint32_t children[0];
 };
 
+// index_read.cmt
 static struct index_node_f *index_read(FILE *in, uint32_t offset)
 {
 	struct index_node_f *node;
@@ -331,6 +334,7 @@ static struct index_node_f *index_read(FILE *in, uint32_t offset)
 	return node;
 }
 
+// index_close.cmt
 static void index_close(struct index_node_f *node)
 {
 	free(node->prefix);

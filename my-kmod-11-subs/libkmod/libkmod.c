@@ -70,6 +70,23 @@ static const char *default_config_paths[] = {
  *
  * Opaque object representing the library context.
  */
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/*
+ * kmod_ctx 上下文数据结构
+ * 包含的重要数据成员有
+ *	- config 配置信息
+ *	- hash 表
+ *	- index_mm 
+ */
 struct kmod_ctx {
 	int refcount;
 	int log_priority;
@@ -85,6 +102,22 @@ struct kmod_ctx {
 	unsigned long long indexes_stamp[_KMOD_INDEX_MODULES_SIZE];
 };
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/*
+ * kmod_log 日志输出函数
+ * 根据 priority 优先级进行日志输出
+ *
+ */
+
 void kmod_log(const struct kmod_ctx *ctx,
 		int priority, const char *file, int line, const char *fn,
 		const char *format, ...)
@@ -99,6 +132,20 @@ void kmod_log(const struct kmod_ctx *ctx,
 	va_end(args);
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/*
+ * log_filep
+ * 按特定格式写入文件
+ */
 static void log_filep(void *data,
 			int priority, const char *file, int line,
 			const char *fn, const char *format, va_list args)
@@ -143,6 +190,17 @@ static void log_filep(void *data,
 	vfprintf(fp, format, args);
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 获得 ctx 结构体中的 dirname 信息 */
 const char *kmod_get_dirname(const struct kmod_ctx *ctx)
 {
 	return ctx->dirname;
@@ -157,6 +215,17 @@ const char *kmod_get_dirname(const struct kmod_ctx *ctx)
  *
  * Returns: stored userdata
  */
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 获得 ctx 结构体中的 userdata 信息 */
 KMOD_EXPORT void *kmod_get_userdata(const struct kmod_ctx *ctx)
 {
 	if (ctx == NULL)
@@ -171,6 +240,17 @@ KMOD_EXPORT void *kmod_get_userdata(const struct kmod_ctx *ctx)
  *
  * Store custom @userdata in the library context.
  */
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 设置 ctx 结构体中的 userdata 信息 */
 KMOD_EXPORT void kmod_set_userdata(struct kmod_ctx *ctx, const void *userdata)
 {
 	if (ctx == NULL)
@@ -235,6 +315,25 @@ static char *get_kernel_release(const char *dirname)
  *
  * Returns: a new kmod library context
  */
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/*
+ * kmod_new - 创建 kmod 库上下文
+ * 主要功能： 
+ *	创建 kmod_ctx 结构体，设置mod引用计数为1
+ * 调用函数：
+ *	- get_kernel_release()
+ *	- kmod_config_new()
+ *	- hash_new()
+ */	
 KMOD_EXPORT struct kmod_ctx *kmod_new(const char *dirname,
 					const char * const *config_paths)
 {
@@ -292,6 +391,17 @@ fail:
  *
  * Returns: the passed kmod library context
  */
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* kmod_ref 给 kmod 的引用计数 refcount 加1 */
 KMOD_EXPORT struct kmod_ctx *kmod_ref(struct kmod_ctx *ctx)
 {
 	if (ctx == NULL)
@@ -307,6 +417,17 @@ KMOD_EXPORT struct kmod_ctx *kmod_ref(struct kmod_ctx *ctx)
  * Drop a reference of the kmod library context. If the refcount
  * reaches zero, the resources of the context will be released.
  */
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* kmod_ref 给 kmod 的引用计数 refcount 减1 */
 KMOD_EXPORT struct kmod_ctx *kmod_unref(struct kmod_ctx *ctx)
 {
 	if (ctx == NULL)
@@ -337,6 +458,17 @@ KMOD_EXPORT struct kmod_ctx *kmod_unref(struct kmod_ctx *ctx)
  * overridden by a custom function, to plug log messages
  * into the user's logging functionality.
  */
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 默认的 log 写入 stderr 标准出错，用户可以通过传入一个 log_fn 函数指针，使得 log 信息的输出使用用户指定的日志函数 */
 KMOD_EXPORT void kmod_set_log_fn(struct kmod_ctx *ctx,
 					void (*log_fn)(void *data,
 						int priority, const char *file,
@@ -357,6 +489,17 @@ KMOD_EXPORT void kmod_set_log_fn(struct kmod_ctx *ctx,
  *
  * Returns: the current logging priority
  */
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 返回 log 日志的优先级 priority */
 KMOD_EXPORT int kmod_get_log_priority(const struct kmod_ctx *ctx)
 {
 	if (ctx == NULL)
@@ -372,6 +515,17 @@ KMOD_EXPORT int kmod_get_log_priority(const struct kmod_ctx *ctx)
  * Set the current logging priority. The value controls which messages
  * are logged.
  */
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 设置 log 日志的优先级 priority */
 KMOD_EXPORT void kmod_set_log_priority(struct kmod_ctx *ctx, int priority)
 {
 	if (ctx == NULL)
@@ -379,6 +533,17 @@ KMOD_EXPORT void kmod_set_log_priority(struct kmod_ctx *ctx, int priority)
 	ctx->log_priority = priority;
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 在 kmod 池中通过 hash_find 查找到键值为 key 的模块 */
 struct kmod_module *kmod_pool_get_module(struct kmod_ctx *ctx,
 							const char *key)
 {
@@ -391,6 +556,17 @@ struct kmod_module *kmod_pool_get_module(struct kmod_ctx *ctx,
 	return mod;
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 在 kmod 池中通过 hash_add 添加一个键值为 key 的模块 */
 void kmod_pool_add_module(struct kmod_ctx *ctx, struct kmod_module *mod,
 							const char *key)
 {
@@ -399,6 +575,17 @@ void kmod_pool_add_module(struct kmod_ctx *ctx, struct kmod_module *mod,
 	hash_add(ctx->modules_by_name, key, mod);
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 在 kmod 池中通过 hash_add 删除一个键值为 key 的模块 */
 void kmod_pool_del_module(struct kmod_ctx *ctx, struct kmod_module *mod,
 							const char *key)
 {
@@ -742,6 +929,17 @@ static bool is_cache_invalid(const char *path, unsigned long long stamp)
  * kmod_unload_resources() and kmod_load_resources() or
  * KMOD_RESOURCES_MUST_RECREATE if @ctx must be re-created.
  */
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 检查 index 和 configuration 索引和配置文件是否已经改变 */
 KMOD_EXPORT int kmod_validate_resources(struct kmod_ctx *ctx)
 {
 	struct kmod_list *l;
@@ -787,6 +985,23 @@ KMOD_EXPORT int kmod_validate_resources(struct kmod_ctx *ctx)
  * this function will speedup the searches.
  *
  * Returns: 0 on success or < 0 otherwise.
+ */
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/*
+ * kmod_load_resources
+ * 加载所有的索引
+ * 如果用户会操作多次 lookups, insertions, deletions 操作
+ * 那么最好是先调用这个函数，这样可以加快查找速度
+ *	- index_mm_open()
  */
 KMOD_EXPORT int kmod_load_resources(struct kmod_ctx *ctx)
 {
@@ -834,6 +1049,21 @@ fail:
  *
  * Returns: 0 on success or < 0 otherwise.
  */
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/*
+ * kmod_unload_resources
+ * 卸载所有的索引，之后的查找必须打开和关闭索引 
+ *	- index_mm_close()
+ */
 KMOD_EXPORT void kmod_unload_resources(struct kmod_ctx *ctx)
 {
 	size_t i;
@@ -861,6 +1091,25 @@ KMOD_EXPORT void kmod_unload_resources(struct kmod_ctx *ctx)
  * order.
  *
  * Returns: 0 on success or < 0 otherwise.
+ */
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/*
+ * kmod_dump_index 
+ * dump index 索引给文件描述符 fd 
+ * 其中需要调用 index 模块中的函数接口
+ *	- index_mm_dump()
+ *	- index_file_open()
+ *	- index_dump()
+ *	- index_file_close()
  */
 KMOD_EXPORT int kmod_dump_index(struct kmod_ctx *ctx, enum kmod_index type,
 									int fd)
@@ -895,6 +1144,17 @@ KMOD_EXPORT int kmod_dump_index(struct kmod_ctx *ctx, enum kmod_index type,
 	return 0;
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 获得 kmod ctx 的配置信息，返回 config 成员 */
 const struct kmod_config *kmod_get_config(const struct kmod_ctx *ctx)
 {
 	return ctx->config;

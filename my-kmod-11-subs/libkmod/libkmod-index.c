@@ -72,6 +72,17 @@ enum node_offset {
 	INDEX_NODE_MASK     = 0x0FFFFFFF, /* Offset value */
 };
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 释放整个 index value 链表 */
 void index_values_free(struct index_value *values)
 {
 	while (values) {
@@ -82,6 +93,17 @@ void index_values_free(struct index_value *values)
 	}
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/* 根据 priority 优先级，按顺序在适当位置插入一个新节点 */ 
 static int add_value(struct index_value **values,
 		     const char *value, unsigned len, unsigned int priority)
 {
@@ -268,6 +290,16 @@ struct index_node_f {
 	uint32_t children[0];
 };
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
 static struct index_node_f *index_read(FILE *in, uint32_t offset)
 {
 	struct index_node_f *node;
@@ -331,6 +363,16 @@ static struct index_node_f *index_read(FILE *in, uint32_t offset)
 	return node;
 }
 
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
 static void index_close(struct index_node_f *node)
 {
 	free(node->prefix);

@@ -70,6 +70,7 @@ static const char *default_config_paths[] = {
  *
  * Opaque object representing the library context.
  */
+// kmod_ctx.cmt
 struct kmod_ctx {
 	int refcount;
 	int log_priority;
@@ -85,6 +86,7 @@ struct kmod_ctx {
 	unsigned long long indexes_stamp[_KMOD_INDEX_MODULES_SIZE];
 };
 
+// kmod_log.cmt
 void kmod_log(const struct kmod_ctx *ctx,
 		int priority, const char *file, int line, const char *fn,
 		const char *format, ...)
@@ -99,6 +101,7 @@ void kmod_log(const struct kmod_ctx *ctx,
 	va_end(args);
 }
 
+// log_filep.cmt
 static void log_filep(void *data,
 			int priority, const char *file, int line,
 			const char *fn, const char *format, va_list args)
@@ -143,6 +146,7 @@ static void log_filep(void *data,
 	vfprintf(fp, format, args);
 }
 
+// kmod_get_dirname.cmt
 const char *kmod_get_dirname(const struct kmod_ctx *ctx)
 {
 	return ctx->dirname;
@@ -157,6 +161,7 @@ const char *kmod_get_dirname(const struct kmod_ctx *ctx)
  *
  * Returns: stored userdata
  */
+// kmod_get_userdata.cmt
 KMOD_EXPORT void *kmod_get_userdata(const struct kmod_ctx *ctx)
 {
 	if (ctx == NULL)
@@ -171,6 +176,7 @@ KMOD_EXPORT void *kmod_get_userdata(const struct kmod_ctx *ctx)
  *
  * Store custom @userdata in the library context.
  */
+// kmod_set_userdata.cmt
 KMOD_EXPORT void kmod_set_userdata(struct kmod_ctx *ctx, const void *userdata)
 {
 	if (ctx == NULL)
@@ -235,6 +241,7 @@ static char *get_kernel_release(const char *dirname)
  *
  * Returns: a new kmod library context
  */
+// kmod_new.cmt
 KMOD_EXPORT struct kmod_ctx *kmod_new(const char *dirname,
 					const char * const *config_paths)
 {
@@ -292,6 +299,7 @@ fail:
  *
  * Returns: the passed kmod library context
  */
+// kmod_ref.cmt
 KMOD_EXPORT struct kmod_ctx *kmod_ref(struct kmod_ctx *ctx)
 {
 	if (ctx == NULL)
@@ -307,6 +315,7 @@ KMOD_EXPORT struct kmod_ctx *kmod_ref(struct kmod_ctx *ctx)
  * Drop a reference of the kmod library context. If the refcount
  * reaches zero, the resources of the context will be released.
  */
+// kmod_unref.cmt
 KMOD_EXPORT struct kmod_ctx *kmod_unref(struct kmod_ctx *ctx)
 {
 	if (ctx == NULL)
@@ -337,6 +346,7 @@ KMOD_EXPORT struct kmod_ctx *kmod_unref(struct kmod_ctx *ctx)
  * overridden by a custom function, to plug log messages
  * into the user's logging functionality.
  */
+// kmod_set_log_fn.cmt
 KMOD_EXPORT void kmod_set_log_fn(struct kmod_ctx *ctx,
 					void (*log_fn)(void *data,
 						int priority, const char *file,
@@ -357,6 +367,7 @@ KMOD_EXPORT void kmod_set_log_fn(struct kmod_ctx *ctx,
  *
  * Returns: the current logging priority
  */
+// kmod_get_priority.cmt
 KMOD_EXPORT int kmod_get_log_priority(const struct kmod_ctx *ctx)
 {
 	if (ctx == NULL)
@@ -372,6 +383,7 @@ KMOD_EXPORT int kmod_get_log_priority(const struct kmod_ctx *ctx)
  * Set the current logging priority. The value controls which messages
  * are logged.
  */
+// kmod_set_priority.cmt
 KMOD_EXPORT void kmod_set_log_priority(struct kmod_ctx *ctx, int priority)
 {
 	if (ctx == NULL)
@@ -379,6 +391,7 @@ KMOD_EXPORT void kmod_set_log_priority(struct kmod_ctx *ctx, int priority)
 	ctx->log_priority = priority;
 }
 
+// kmod_pool_get_module.cmt
 struct kmod_module *kmod_pool_get_module(struct kmod_ctx *ctx,
 							const char *key)
 {
@@ -391,6 +404,7 @@ struct kmod_module *kmod_pool_get_module(struct kmod_ctx *ctx,
 	return mod;
 }
 
+// kmod_pool_add_module.cmt
 void kmod_pool_add_module(struct kmod_ctx *ctx, struct kmod_module *mod,
 							const char *key)
 {
@@ -399,6 +413,7 @@ void kmod_pool_add_module(struct kmod_ctx *ctx, struct kmod_module *mod,
 	hash_add(ctx->modules_by_name, key, mod);
 }
 
+// kmod_pool_del_module.cmt
 void kmod_pool_del_module(struct kmod_ctx *ctx, struct kmod_module *mod,
 							const char *key)
 {
@@ -742,6 +757,7 @@ static bool is_cache_invalid(const char *path, unsigned long long stamp)
  * kmod_unload_resources() and kmod_load_resources() or
  * KMOD_RESOURCES_MUST_RECREATE if @ctx must be re-created.
  */
+// kmod_validate_resources.cmt
 KMOD_EXPORT int kmod_validate_resources(struct kmod_ctx *ctx)
 {
 	struct kmod_list *l;
@@ -788,6 +804,7 @@ KMOD_EXPORT int kmod_validate_resources(struct kmod_ctx *ctx)
  *
  * Returns: 0 on success or < 0 otherwise.
  */
+// kmod_load_resources.cmt
 KMOD_EXPORT int kmod_load_resources(struct kmod_ctx *ctx)
 {
 	size_t i;
@@ -834,6 +851,7 @@ fail:
  *
  * Returns: 0 on success or < 0 otherwise.
  */
+// kmod_unload_resources.cmt
 KMOD_EXPORT void kmod_unload_resources(struct kmod_ctx *ctx)
 {
 	size_t i;
@@ -862,6 +880,7 @@ KMOD_EXPORT void kmod_unload_resources(struct kmod_ctx *ctx)
  *
  * Returns: 0 on success or < 0 otherwise.
  */
+// kmod_dump_index.cmt
 KMOD_EXPORT int kmod_dump_index(struct kmod_ctx *ctx, enum kmod_index type,
 									int fd)
 {
@@ -895,6 +914,7 @@ KMOD_EXPORT int kmod_dump_index(struct kmod_ctx *ctx, enum kmod_index type,
 	return 0;
 }
 
+// kmod_get_config.cmt
 const struct kmod_config *kmod_get_config(const struct kmod_ctx *ctx)
 {
 	return ctx->config;
