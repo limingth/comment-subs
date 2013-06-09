@@ -1,0 +1,844 @@
+This is XeTeX, Version 3.1415926-2.2-0.9995.2 (TeX Live 2009/Debian) (format=xelatex 2012.11.3)  9 JUN 2013 18:03
+entering extended mode
+ %&-line parsing enabled.
+**kmod.tex
+(./kmod.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, loaded.
+(/usr/share/texmf-texlive/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/size11.clo
+File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf-texlive/tex/xelatex/fontspec/fontspec.sty
+Package: fontspec 2008/08/09 v1.18 Advanced font selection for XeLaTeX
+
+(/usr/share/texmf-texlive/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2009/01/23 v0.5 Provides ifxetex conditional
+)
+\c@zf@newff=\count88
+\c@zf@index=\count89
+\c@zf@script=\count90
+\c@zf@language=\count91
+
+(/usr/share/texmf-texlive/tex/latex/tools/calc.sty
+Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count92
+\calc@Bcount=\count93
+\calc@Adimen=\dimen103
+\calc@Bdimen=\dimen104
+\calc@Askip=\skip43
+\calc@Bskip=\skip44
+LaTeX Info: Redefining \setlength on input line 76.
+LaTeX Info: Redefining \addtolength on input line 77.
+\calc@Ccount=\count94
+\calc@Cskip=\skip45
+)
+(/usr/share/texmf-texlive/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2008/08/13 v2.6a package option processing (HA)
+
+(/usr/share/texmf-texlive/tex/generic/xkeyval/xkeyval.tex
+\XKV@toks=\toks14
+\XKV@tempa@toks=\toks15
+\XKV@depth=\count95
+File: xkeyval.tex 2008/08/13 v2.6a key=value parser (HA)
+
+(/usr/share/texmf-texlive/tex/generic/xkeyval/keyval.tex)))
+(/usr/share/texmf-texlive/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/usr/share/texmf-texlive/tex/xelatex/euenc/eu1enc.def
+File: eu1enc.def 2008/03/08 v0.1d Experimental unicode font encoding
+)
+LaTeX Font Info:    Try loading font information for EU1+lmr on input line 100.
+
+
+(/usr/share/texmf-texlive/tex/xelatex/euenc/eu1lmr.fd
+File: eu1lmr.fd 2007/01/14 v1.3 Font defs for Latin Modern
+))
+LaTeX Info: Redefining \itshape on input line 1163.
+LaTeX Info: Redefining \slshape on input line 1166.
+LaTeX Info: Redefining \scshape on input line 1169.
+LaTeX Info: Redefining \upshape on input line 1172.
+
+fontspec.cfg loaded.
+(/usr/share/texmf-texlive/tex/xelatex/fontspec/fontspec.cfg))
+\c@zf@famc@AR PL UKai CN=\count96
+Package fontspec Info: Defining font family for 'AR PL UKai CN' with options []
+ on input line 3.
+Package fontspec Info: Could not resolve font AR PL UKai CN/B (it might not exi
+st) on input line 3.
+Package fontspec Info: Could not resolve font AR PL UKai CN/I (it might not exi
+st) on input line 3.
+Package fontspec Info: Could not resolve font AR PL UKai CN/BI (it might not ex
+ist) on input line 3.
+
+(/usr/share/texmf-texlive/tex/xelatex/xunicode/xunicode.sty
+File: xunicode.sty 2008/02/08 v0.91 provides access to latin accents and many o
+ther characters in Unicode lower plane
+)
+(/usr/share/texmf-texlive/tex/xelatex/xltxtra/xltxtra.sty
+Package: xltxtra 2009/09/02 v0.5 Improvements for the "XeLaTeX" format
+
+(/usr/share/texmf-texlive/tex/latex/metalogo/metalogo.sty
+Package: metalogo 2009/09/04 v0.11 Extended TeX logo macros
+
+(/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/etc/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: xetex.def on input line 91.
+
+(/usr/share/texmf-texlive/tex/xelatex/xetex-def/xetex.def
+File: xetex.def 2009/11/22 v0.94 LaTeX color/graphics driver for XeTeX (RRM/JK)
+
+))
+\Gin@req@height=\dimen105
+\Gin@req@width=\dimen106
+)
+\xl@everylogo=\toks16
+\xl@@everylogo=\toks17
+LaTeX Info: Redefining \TeX on input line 193.
+LaTeX Info: Redefining \LaTeX on input line 202.
+LaTeX Info: Redefining \LaTeXe on input line 219.
+)
+(/usr/share/texmf-texlive/tex/latex/etex-pkg/etex.sty
+Package: etex 1998/03/26 v2.0 eTeX basic definition package (PEB)
+\et@xins=\count97
+)
+(/usr/share/texmf-texlive/tex/latex/base/fixltx2e.sty
+Package: fixltx2e 2006/09/13 v1.1m fixes to LaTeX
+LaTeX Info: Redefining \em on input line 420.
+)
+LaTeX Info: Redefining \em on input line 72.
+LaTeX Info: Redefining \emph on input line 81.
+LaTeX Info: Redefining \- on input line 86.
+LaTeX Info: Redefining \textsubscript on input line 105.
+LaTeX Info: Redefining \textsuperscript on input line 107.
+\xxt@tempbox=\box26
+)
+(/usr/share/texmf-texlive/tex/latex/tools/indentfirst.sty
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2009/04/17 v1.2 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/url.sty
+\Urlmuskip=\muskip10
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+(/usr/share/texmf-texlive/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2009/10/09 v6.79a Hypertext links for LaTeX
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in pdf mode not detected.
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/share/texmf-texlive/tex/latex/oberdiek/hycolor.sty
+Package: hycolor 2009/10/02 v1.5 Code for color options of hyperref/bookmark (H
+O)
+
+(/usr/share/texmf-texlive/tex/latex/oberdiek/xcolor-patch.sty
+Package: xcolor-patch 2009/10/02 xcolor patch
+))
+\@linkdim=\dimen107
+\Hy@linkcounter=\count98
+\Hy@pagecounter=\count99
+
+(/usr/share/texmf-texlive/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2007/12/12 v1.2 Prefix for e-TeX command names (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2007/09/09 v1.2 Providing info/warning/message (HO)
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)
+(/usr/share/texmf-texlive/tex/xelatex/xetexconfig/hyperref.cfg
+File: hyperref.cfg 2008/07/11 v1.2 hyperref configuration for XeLaTeX
+)
+(/usr/share/texmf-texlive/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2009/08/13 v3.4 Keyval support for LaTeX options (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2009/07/30 v1.5 Key value parser with default handler suppor
+t (HO)
+))
+Package hyperref Info: Option `setpagesize' set `false' on input line 2864.
+Package hyperref Info: Option `unicode' set `false' on input line 2864.
+
+(/usr/share/texmf-texlive/tex/latex/hyperref/puenc.def
+File: puenc.def 2009/10/09 v6.79a Hyperref: PDF Unicode definition (HO)
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 2864.
+Package hyperref Info: Hyper figures OFF on input line 2975.
+Package hyperref Info: Link nesting OFF on input line 2980.
+Package hyperref Info: Hyper index ON on input line 2983.
+Package hyperref Info: Plain pages OFF on input line 2990.
+Package hyperref Info: Backreferencing OFF on input line 2995.
+
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 3191.
+LaTeX Info: Redefining \url on input line 3428.
+(/usr/share/texmf-texlive/tex/generic/oberdiek/bitset.sty
+Package: bitset 2007/09/28 v1.0 Data type bit set (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/intcalc.sty
+Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/bigintcalc.sty
+Package: bigintcalc 2007/11/11 v1.1 Expandable big integer calculations (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2009/09/23 v0.6 LuaTeX support for pdfTeX utility functions
+ (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2009/08/05 v1.0 Some LaTeX kernel commands for general use (HO
+)
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: pdfTeX >= 1.30 not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+)))
+\Fld@menulength=\count100
+\Field@Width=\dimen108
+\Fld@charsize=\dimen109
+\Field@toks=\toks18
+Package hyperref Info: Hyper figures OFF on input line 4377.
+Package hyperref Info: Link nesting OFF on input line 4382.
+Package hyperref Info: Hyper index ON on input line 4385.
+Package hyperref Info: backreferencing OFF on input line 4392.
+Package hyperref Info: Link coloring ON on input line 4395.
+Package hyperref Info: Link coloring with OCG OFF on input line 4402.
+Package hyperref Info: PDF/A mode OFF on input line 4407.
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
+)
+\Hy@abspage=\count101
+\c@Item=\count102
+\c@Hfootnote=\count103
+)
+*hyperref using driver hdvipdfm*
+(/usr/share/texmf-texlive/tex/latex/hyperref/hdvipdfm.def
+File: hdvipdfm.def 2009/10/09 v6.79a Hyperref driver for dvipdfm
+\pdfm@box=\box27
+\c@Hy@AnnotLevel=\count104
+\HyField@AnnotCount=\count105
+\Fld@listcount=\count106
+)
+Package hyperref Info: Option `breaklinks' set `true' on input line 35.
+
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/framed.sty
+Package: framed 2007/10/04 v 0.95: framed or shaded text with page breaks
+\fb@frw=\dimen110
+\fb@frh=\dimen111
+\FrameRule=\dimen112
+\FrameSep=\dimen113
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/etc/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: xetex.def on input line 130.
+) (./kmod.aux)
+\openout1 = `kmod.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for EU1/lmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid this).
+ on input line 44.
+\symlegacymaths=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 44.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 44.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 44.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 44.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 44.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 44.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 44.
+LaTeX Font Info:    Redeclaring math accent \check on input line 44.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 44.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 44.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 44.
+LaTeX Font Info:    Redeclaring math symbol \colon on input line 44.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 44.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 44.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 44.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 44.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 44.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 44.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 44.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 44.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 44.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 44.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 44.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 44.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 44.
+LaTeX Font Info:    Encoding `OT1' has changed to `EU1' for symbol font
+(Font)              `operators' in the math version `normal' on input line 44.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> EU1/ARPLUKaiCN(0)/m/n on input line 44.
+
+LaTeX Font Info:    Encoding `OT1' has changed to `EU1' for symbol font
+(Font)              `operators' in the math version `bold' on input line 44.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> EU1/ARPLUKaiCN(0)/m/n on input line 44
+.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  EU1/ARPLUKaiCN(0)/m/n --> EU1/ARPLUKaiCN(0)/m/n on inpu
+t line 44.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  EU1/ARPLUKaiCN(0)/m/n --> EU1/ARPLUKaiCN(0)/m/n on inpu
+t line 44.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> EU1/ARPLUKaiCN(0)/m/it on input line 4
+4.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> EU1/ARPLUKaiCN(0)/bx/n on input line 4
+4.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> EU1/lmss/m/n on input line 44.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> EU1/lmtt/m/n on input line 44.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  EU1/ARPLUKaiCN(0)/m/n --> EU1/ARPLUKaiCN(0)/bx/n on inp
+ut line 44.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
+(Font)                  EU1/ARPLUKaiCN(0)/m/n --> EU1/ARPLUKaiCN(0)/bx/n on inp
+ut line 44.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> EU1/ARPLUKaiCN(0)/bx/it on input line
+ 44.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> EU1/lmss/bx/n on input line 44.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> EU1/lmtt/bx/n on input line 44.
+Package hyperref Info: Link coloring ON on input line 44.
+
+(/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
+Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
+
+(/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
+Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
+)
+\c@section@level=\count107
+)
+LaTeX Info: Redefining \ref on input line 44.
+LaTeX Info: Redefining \pageref on input line 44.
+ (./kmod.out)
+(./kmod.out)
+\@outlinefile=\write3
+\openout3 = `kmod.out'.
+
+\AtBeginShipoutBox=\box28
+LaTeX Font Info:    Font shape `EU1/ARPLUKaiCN(0)/bx/n' undefined
+(Font)              using `EU1/ARPLUKaiCN(0)/m/n' instead on input line 46.
+LaTeX Font Info:    Font shape `EU1/ARPLUKaiCN(0)/m/it' undefined
+(Font)              using `EU1/ARPLUKaiCN(0)/m/n' instead on input line 64.
+LaTeX Font Info:    Try loading font information for EU1+lmtt on input line 64.
+
+ (/usr/share/texmf-texlive/tex/xelatex/euenc/eu1lmtt.fd
+File: eu1lmtt.fd 2007/01/14 v1.3 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 64.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 64.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 64.
+ [1
+
+]
+[2]
+Overfull \hbox (9.73616pt too wide) in paragraph at lines 168--168
+[]\EU1/lmtt/m/n/10.95 configure.ac: 10: error: possibly undefined macro: AM_INI
+T_AUTOMAKE[] 
+ []
+
+
+Overfull \hbox (42.41248pt too wide) in paragraph at lines 168--168
+[]      \EU1/lmtt/m/n/10.95 If this token and others are legitimate, please use
+ m4_pattern_allow.[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 180--180
+[]\EU1/lmtt/m/n/10.95 configure: error: cannot find install-
+ []
+
+[3] [4] [5] [6]
+Underfull \hbox (badness 1152) in paragraph at lines 318--318
+[]\EU1/lmtt/m/n/10.95 / usr/ bin/ install: cannot create regular file `/ usr/ l
+ib/
+ []
+
+[7]
+Underfull \hbox (badness 6110) in paragraph at lines 375--375
+[]\EU1/lmtt/m/n/10.95 libtool: install: / usr/ bin/ install - c libkmod/.libs/
+ []
+
+
+Overfull \hbox (42.41241pt too wide) in paragraph at lines 375--375
+[]\EU1/lmtt/m/n/10.95 ---------------------------------------------------------
+-------------[] 
+ []
+
+
+Overfull \hbox (42.41241pt too wide) in paragraph at lines 375--375
+[]\EU1/lmtt/m/n/10.95 ---------------------------------------------------------
+-------------[] 
+ []
+
+[8] [9]
+Overfull \hbox (298.78992pt too wide) in paragraph at lines 434--434
+[]\EU1/lmtt/m/n/10.95 / usr/ bin/ kmod: ELF 32- bit LSB executable, Intel 80386
+, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/
+ []
+
+
+Overfull \hbox (115.22989pt too wide) in paragraph at lines 434--434
+\EU1/lmtt/m/n/10.95 Linux 2.6.24, BuildID[sha1]=0x9d4131d1eb78b1e1852cc5ad44f06
+417ae3caa3c, not stripped[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 434--434
+[]  \EU1/lmtt/m/n/10.95 static- nodes outputs the static-
+ []
+
+[10]
+Missing character: There is no 文 in font [lmmono10-regular]!
+Missing character: There is no 件 in font [lmmono10-regular]!
+Missing character: There is no 内 in font [lmmono10-regular]!
+Missing character: There is no 容 in font [lmmono10-regular]!
+Missing character: There is no 见 in font [lmmono10-regular]!
+Missing character: There is no 下 in font [lmmono10-regular]!
+Missing character: There is no 面 in font [lmmono10-regular]!
+Missing character: There is no 小 in font [lmmono10-regular]!
+Missing character: There is no 节 in font [lmmono10-regular]!
+ [11] [12] [13] [14] [15]
+Overfull \hbox (11.75249pt too wide) in paragraph at lines 978--978
+[] \EU1/lmtt/m/n/10.95 * version 2.1 of the License, or (at your option) any la
+ter version.[] 
+ []
+
+
+Overfull \hbox (7.91997pt too wide) in paragraph at lines 978--978
+[] \EU1/lmtt/m/n/10.95 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+See the GNU[] 
+ []
+
+
+Overfull \hbox (17.50124pt too wide) in paragraph at lines 978--978
+[] \EU1/lmtt/m/n/10.95 * License along with this library; if not, write to the 
+Free Software[] 
+ []
+
+
+Overfull \hbox (55.82623pt too wide) in paragraph at lines 978--978
+[] \EU1/lmtt/m/n/10.95 * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
+ MA  02110-1301  USA[] 
+ []
+
+
+Overfull \hbox (88.40242pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 struct kmod_ctx *kmod_new(const char *dirname, const char
+ * const *config_paths);[] 
+ []
+
+
+Overfull \hbox (13.66869pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 void kmod_set_userdata(struct kmod_ctx *ctx, const void *
+userdata);[] 
+ []
+
+
+Overfull \hbox (38.57994pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 int kmod_dump_index(struct kmod_ctx *ctx, enum kmod_index
+ type, int fd);[] 
+ []
+
+
+Overfull \hbox (30.91495pt too wide) in paragraph at lines 978--978
+[] \EU1/lmtt/m/n/10.95 * access to configuration lists - it allows to get each 
+configuration's[] 
+ []
+
+
+Overfull \hbox (90.31865pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 struct kmod_config_iter *kmod_config_get_blacklists(const
+ struct kmod_ctx *ctx);[] 
+ []
+
+
+Overfull \hbox (124.81114pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 struct kmod_config_iter *kmod_config_get_install_commands
+(const struct kmod_ctx *ctx);[] 
+ []
+
+
+Overfull \hbox (119.0624pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 struct kmod_config_iter *kmod_config_get_remove_commands(
+const struct kmod_ctx *ctx);[] 
+ []
+
+
+Overfull \hbox (73.0724pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 struct kmod_config_iter *kmod_config_get_aliases(const st
+ruct kmod_ctx *ctx);[] 
+ []
+
+
+Overfull \hbox (73.0724pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 struct kmod_config_iter *kmod_config_get_options(const st
+ruct kmod_ctx *ctx);[] 
+ []
+
+
+Overfull \hbox (78.82115pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 struct kmod_config_iter *kmod_config_get_softdeps(const s
+truct kmod_ctx *ctx);[] 
+ []
+
+
+Overfull \hbox (55.82616pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 const char *kmod_config_iter_get_key(const struct kmod_co
+nfig_iter *iter);[] 
+ []
+
+
+Overfull \hbox (67.32365pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 const char *kmod_config_iter_get_value(const struct kmod_
+config_iter *iter);[] 
+ []
+
+
+Overfull \hbox (25.16618pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 int kmod_module_new_from_name(struct kmod_ctx *ctx, const
+ char *name,[] 
+ []
+
+
+Overfull \hbox (25.16618pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 int kmod_module_new_from_path(struct kmod_ctx *ctx, const
+ char *path,[] 
+ []
+
+
+Overfull \hbox (76.90492pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 int kmod_module_new_from_lookup(struct kmod_ctx *ctx, con
+st char *given_alias,[] 
+ []
+
+
+Overfull \hbox (55.82617pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 struct kmod_module *kmod_module_get_module(const struct k
+mod_list *entry);[] 
+ []
+
+
+Overfull \hbox (59.65868pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 int kmod_module_remove_module(struct kmod_module *mod, un
+signed int flags);[] 
+ []
+
+
+Overfull \hbox (53.90993pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 int kmod_module_insert_module(struct kmod_module *mod, un
+signed int flags,[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 978--978
+[]            \EU1/lmtt/m/n/10.95 void (*print_action)
+ []
+
+
+Overfull \hbox (15.58493pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 const char *kmod_module_get_options(const struct kmod_mod
+ule *mod);[] 
+ []
+
+
+Overfull \hbox (67.32367pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 const char *kmod_module_get_install_commands(const struct
+ kmod_module *mod);[] 
+ []
+
+
+Overfull \hbox (61.57492pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 const char *kmod_module_get_remove_commands(const struct 
+kmod_module *mod);[] 
+ []
+
+
+Overfull \hbox (78.82117pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 struct kmod_list *kmod_module_get_dependencies(const stru
+ct kmod_module *mod);[] 
+ []
+
+
+Overfull \hbox (11.75243pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 int kmod_module_get_filtered_blacklist(const struct kmod_
+ctx *ctx,[] 
+ []
+
+
+Overfull \hbox (30.91501pt too wide) in paragraph at lines 978--978
+[]                    \EU1/lmtt/m/n/10.95 struct kmod_list **output) __attribut
+e__ ((deprecated));[] 
+ []
+
+
+Overfull \hbox (57.74246pt too wide) in paragraph at lines 978--978
+[] \EU1/lmtt/m/n/10.95 * Information regarding "live information" from module's
+ state, as returned[] 
+ []
+
+
+Overfull \hbox (46.2449pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 const char *kmod_module_initstate_str(enum kmod_module_in
+itstate state);[] 
+ []
+
+
+Overfull \hbox (50.07742pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 struct kmod_list *kmod_module_get_holders(const struct km
+od_module *mod);[] 
+ []
+
+
+Overfull \hbox (55.82617pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 struct kmod_list *kmod_module_get_sections(const struct k
+mod_module *mod);[] 
+ []
+
+
+Overfull \hbox (44.32867pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 const char *kmod_module_section_get_name(const struct kmo
+d_list *entry);[] 
+ []
+
+
+Overfull \hbox (73.07242pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 unsigned long kmod_module_section_get_address(const struc
+t kmod_list *entry);[] 
+ []
+
+
+Overfull \hbox (92.23492pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 int kmod_module_get_info(const struct kmod_module *mod, s
+truct kmod_list **list);[] 
+ []
+
+
+Overfull \hbox (21.33368pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 const char *kmod_module_info_get_key(const struct kmod_li
+st *entry);[] 
+ []
+
+
+Overfull \hbox (32.83118pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 const char *kmod_module_info_get_value(const struct kmod_
+list *entry);[] 
+ []
+
+
+Overfull \hbox (115.22992pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 int kmod_module_get_versions(const struct kmod_module *mo
+d, struct kmod_list **list);[] 
+ []
+
+
+Overfull \hbox (55.82617pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 const char *kmod_module_version_get_symbol(const struct k
+mod_list *entry);[] 
+ []
+
+
+Overfull \hbox (23.24992pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 uint64_t kmod_module_version_get_crc(const struct kmod_li
+st *entry);[] 
+ []
+
+
+Overfull \hbox (109.48117pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 int kmod_module_get_symbols(const struct kmod_module *mod
+, struct kmod_list **list);[] 
+ []
+
+
+Overfull \hbox (50.07742pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 const char *kmod_module_symbol_get_symbol(const struct km
+od_list *entry);[] 
+ []
+
+
+Overfull \hbox (17.50117pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 uint64_t kmod_module_symbol_get_crc(const struct kmod_lis
+t *entry);[] 
+ []
+
+
+Overfull \hbox (172.7174pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 int kmod_module_get_dependency_symbols(const struct kmod_
+module *mod, struct kmod_list **list);[] 
+ []
+
+
+Overfull \hbox (113.31364pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 const char *kmod_module_dependency_symbol_get_symbol(cons
+t struct kmod_list *entry);[] 
+ []
+
+
+Overfull \hbox (57.74242pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 int kmod_module_dependency_symbol_get_bind(const struct k
+mod_list *entry);[] 
+ []
+
+
+Overfull \hbox (80.73741pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 uint64_t kmod_module_dependency_symbol_get_crc(const stru
+ct kmod_list *entry);[] 
+ []
+
+
+Overfull \hbox (36.66365pt too wide) in paragraph at lines 978--978
+[]\EU1/lmtt/m/n/10.95 void kmod_module_dependency_symbols_free_list(struct kmod
+_list *list);[] 
+ []
+
+[16]
+Underfull \vbox (badness 10000) detected at line 978
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 978
+ []
+
+[17]
+Underfull \vbox (badness 10000) detected at line 978
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 978
+ []
+
+[18]
+Underfull \vbox (badness 10000) detected at line 978
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 978
+ []
+
+[19]
+Underfull \vbox (badness 10000) detected at line 978
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 978
+ []
+
+[20]
+Underfull \vbox (badness 10000) detected at line 978
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 978
+ []
+
+[21] [22] [23]
+Overfull \hbox (21.23375pt too wide) in paragraph at lines 1136--1136
+[]    \EU1/lmtt/m/n/10.95 char *alias; / * only set if this module was created 
+from an alias */[] 
+ []
+
+
+Overfull \hbox (2.17122pt too wide) in paragraph at lines 1136--1136
+[]     \EU1/lmtt/m/n/10.95 * private field used by kmod_module_get_probe_list()
+ to detect[] 
+ []
+
+
+Overfull \hbox (21.3337pt too wide) in paragraph at lines 1136--1136
+[]     \EU1/lmtt/m/n/10.95 * set by kmod_module_get_probe_list: indicates for p
+robe_insert()[] 
+ []
+
+
+Overfull \hbox (25.16623pt too wide) in paragraph at lines 1136--1136
+[]     \EU1/lmtt/m/n/10.95 * if module was created by searching the modules.bui
+ltin file, this[] 
+ []
+
+[24] [25] [26] [27]
+Overfull \vbox (31.74965pt too high) has occurred while \output is active []
+
+
+[28] (./kmod.aux)
+LaTeX Font Info:    Some font shapes were not available, defaults substituted.
+ ) 
+Here is how much of TeX's memory you used:
+ 9406 strings out of 495724
+ 144287 string characters out of 1189346
+ 261746 words of memory out of 3000000
+ 12440 multiletter control sequences out of 15000+50000
+ 6451 words of font info for 32 fonts, out of 3000000 for 9000
+ 28 hyphenation exceptions out of 8191
+ 40i,6n,36p,457b,423s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on kmod.pdf (28 pages).
