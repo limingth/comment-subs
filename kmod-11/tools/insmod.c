@@ -72,6 +72,7 @@ static int do_insmod(int argc, char *argv[])
 	int i, err;
 	const char *null_config = NULL;
 
+	printf("begin to parse para\n");
 	for (;;) {
 		int c, idx = 0;
 		c = getopt_long(argc, argv, cmdopts_s, cmdopts, &idx);
