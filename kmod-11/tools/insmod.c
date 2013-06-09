@@ -92,6 +92,7 @@ static int do_insmod(int argc, char *argv[])
 		case '?':
 			return EXIT_FAILURE;
 		default:
+			printf("no this para\n");
 			ERR("unexpected getopt_long() value '%c'.\n",
 				c);
 			return EXIT_FAILURE;

@@ -942,6 +942,18 @@ kmod 项目的整个架构分为 3 层。最底层是 testsuite, 中间是 libkm
 ----------------
 
 ### insmod 实现流程
+	$ sudo ./kmod-11/tools/rmmod hello-module/hello.ko 
+	$ lsmod | grep hello
+	$ sudo ./kmod-11/tools/insmod hello-module/hello.ko 
+	$ lsmod | grep hello
+	hello                  12415  0 
+	$ sudo ./kmod-11/tools/insmod hello-module/hello.ko 
+	insmod: ERROR: could not insert module hello-module/hello.ko: File exists
+	$ lsmod | grep hello
+	hello                  12415  0 
+	$ sudo ./kmod-11/tools/rmmod hello-module/hello.ko 
+	$ lsmod | grep hello
+	$ 
 
 ### rmsmod 实现流程
 
