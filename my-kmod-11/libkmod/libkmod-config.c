@@ -1037,6 +1037,8 @@ static struct kmod_config_iter *kmod_config_iter_new(const struct kmod_ctx* ctx,
  * Returns: a new iterator over the blacklists or NULL on failure. Free it
  * with kmod_config_iter_free_iter().
  */
+
+// kmod_config_get_blacklists.cmt
 KMOD_EXPORT struct kmod_config_iter *kmod_config_get_blacklists(const struct kmod_ctx *ctx)
 {
 	if (ctx == NULL)
@@ -1057,6 +1059,7 @@ KMOD_EXPORT struct kmod_config_iter *kmod_config_get_blacklists(const struct kmo
  * Returns: a new iterator over the install commands or NULL on failure. Free
  * it with kmod_config_iter_free_iter().
  */
+// kmod_config_get_install_commands.cmt
 KMOD_EXPORT struct kmod_config_iter *kmod_config_get_install_commands(const struct kmod_ctx *ctx)
 {
 	if (ctx == NULL)

@@ -1,0 +1,1 @@
+/* 查找 sections 中名字为 section 的那个，并返回 buf 指针和 buf_size 大小 */

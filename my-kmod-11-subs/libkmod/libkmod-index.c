@@ -300,6 +300,7 @@ struct index_node_f {
  * 注释添加人 李明
  * 注释日期 2013年5月4日
  */
+/* 从 文件 in 中读取 index 记录 */
 static struct index_node_f *index_read(FILE *in, uint32_t offset)
 {
 	struct index_node_f *node;

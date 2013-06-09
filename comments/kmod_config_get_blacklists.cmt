@@ -1,0 +1,11 @@
+/**
+ * kmod_config_get_blacklists:
+ * @ctx: kmod 库上下文
+ *
+ * 获得一个 iterator 指针来处理在库中的 blacklist
+ * 可以通过查看 kmod_config_iter_get_get() 和 kmod_config_iter_get_value()
+ * 以及 kmod_config_iter_next() 来了解更多。
+ *
+ * 返回值： 一个新的 iterator 可以用来处理 blacklists 或者 NULL 表示失败
+ * 释放空间 kmod_config_iter_free_iter() 来释放返回值所代表的空间
+ */

@@ -1,6 +1,4 @@
 3: no cmt file ./my-kmod-11-subs/libkmod/libkmod-config.c
--rw-r--r-- 1 akaedu akaedu 28770 Jun  6 17:52 libkmod-config.c
-4: no cmt file ./my-kmod-11-subs/libkmod/libkmod-elf.c
--rw-r--r-- 1 akaedu akaedu 27449 Jun  6 17:52 libkmod-elf.c
+-rw-r--r-- 1 akaedu akaedu 28770 Jun  9 10:35 libkmod-config.c
 9: no cmt file ./my-kmod-11-subs/libkmod/libkmod-module.c
--rw-r--r-- 1 akaedu akaedu 64603 Jun  6 17:52 libkmod-module.c
+-rw-r--r-- 1 akaedu akaedu 64603 Jun  9 10:35 libkmod-module.c
