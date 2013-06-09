@@ -50,6 +50,7 @@
  *
  * Opaque object representing a module.
  */
+// kmod_module.cmt
 struct kmod_module {
 	struct kmod_ctx *ctx;
 	char *hashkey;
@@ -106,6 +107,7 @@ static inline const char *path_join(const char *path, size_t prefixlen,
 	return buf;
 }
 
+// module_is_inkernel.cmt
 static inline bool module_is_inkernel(struct kmod_module *mod)
 {
 	int state = kmod_module_get_initstate(mod);
@@ -117,6 +119,7 @@ static inline bool module_is_inkernel(struct kmod_module *mod)
 	return false;
 }
 
+// kmod_module_parse_depline.cmt
 int kmod_module_parse_depline(struct kmod_module *mod, char *line)
 {
 	struct kmod_ctx *ctx = mod->ctx;
@@ -227,6 +230,7 @@ void kmod_module_set_builtin(struct kmod_module *mod, bool builtin)
  *
  * @key is "name\alias" or "name" (in which case alias == NULL)
  */
+// kmod_module_new.cmt
 static int kmod_module_new(struct kmod_ctx *ctx, const char *key,
 				const char *name, size_t namelen,
 				const char *alias, size_t aliaslen,
@@ -296,6 +300,7 @@ static int kmod_module_new(struct kmod_ctx *ctx, const char *key,
  * Returns: 0 on success or < 0 otherwise. It fails if name is not a valid
  * module name or if memory allocation failed.
  */
+// kmod_module_new_from_name.cmt
 KMOD_EXPORT int kmod_module_new_from_name(struct kmod_ctx *ctx,
 						const char *name,
 						struct kmod_module **mod)
@@ -425,6 +430,7 @@ KMOD_EXPORT int kmod_module_new_from_path(struct kmod_ctx *ctx,
  * Returns: NULL if @mod is NULL or if the module was released. Otherwise it
  * returns the passed @mod with its refcount decremented.
  */
+// kmod_module_unref.cmt
 KMOD_EXPORT struct kmod_module *kmod_module_unref(struct kmod_module *mod)
 {
 	if (mod == NULL)
@@ -456,6 +462,7 @@ KMOD_EXPORT struct kmod_module *kmod_module_unref(struct kmod_module *mod)
  *
  * Returns: the passed @module with its refcount incremented.
  */
+// kmod_module_ref.cmt
 KMOD_EXPORT struct kmod_module *kmod_module_ref(struct kmod_module *mod)
 {
 	if (mod == NULL)
@@ -568,6 +575,7 @@ fail:
  * Returns: NULL if @mod is NULL or if the module was released. Otherwise it
  * returns the passed @mod with its refcount decremented.
  */
+// kmod_module_unref_list.cmt
 KMOD_EXPORT int kmod_module_unref_list(struct kmod_list *list)
 {
 	for (; list != NULL; list = kmod_list_remove(list))

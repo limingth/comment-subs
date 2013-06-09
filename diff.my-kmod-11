@@ -1,6 +1,6 @@
 diff -Nur my-kmod-11/libkmod/libkmod-array.c my-kmod-11-subs/libkmod/libkmod-array.c
 --- my-kmod-11/libkmod/libkmod-array.c	2013-05-23 20:45:11.153071419 +0800
-+++ my-kmod-11-subs/libkmod/libkmod-array.c	2013-06-09 10:35:25.719812112 +0800
++++ my-kmod-11-subs/libkmod/libkmod-array.c	2013-06-09 12:46:37.722814619 +0800
 @@ -28,7 +28,17 @@
  
  /* basic pointer array growing in steps */
@@ -134,7 +134,7 @@ diff -Nur my-kmod-11/libkmod/libkmod-array.c my-kmod-11-subs/libkmod/libkmod-arr
  	if (array->count <= pos)
 diff -Nur my-kmod-11/libkmod/libkmod.c my-kmod-11-subs/libkmod/libkmod.c
 --- my-kmod-11/libkmod/libkmod.c	2013-06-06 17:03:34.436279833 +0800
-+++ my-kmod-11-subs/libkmod/libkmod.c	2013-06-09 10:35:26.227812117 +0800
++++ my-kmod-11-subs/libkmod/libkmod.c	2013-06-09 12:46:38.382814624 +0800
 @@ -70,7 +70,23 @@
   *
   * Opaque object representing the library context.
@@ -555,9 +555,71 @@ diff -Nur my-kmod-11/libkmod/libkmod.c my-kmod-11-subs/libkmod/libkmod.c
  const struct kmod_config *kmod_get_config(const struct kmod_ctx *ctx)
  {
  	return ctx->config;
+diff -Nur my-kmod-11/libkmod/libkmod-config.c my-kmod-11-subs/libkmod/libkmod-config.c
+--- my-kmod-11/libkmod/libkmod-config.c	2013-06-09 10:49:51.583819183 +0800
++++ my-kmod-11-subs/libkmod/libkmod-config.c	2013-06-09 12:46:38.530814626 +0800
+@@ -1038,7 +1038,27 @@
+  * with kmod_config_iter_free_iter().
+  */
+ 
+-// kmod_config_get_blacklists.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/**
++ * kmod_config_get_blacklists:
++ * @ctx: kmod 库上下文
++ *
++ * 获得一个 iterator 指针来处理在库中的 blacklist
++ * 可以通过查看 kmod_config_iter_get_get() 和 kmod_config_iter_get_value()
++ * 以及 kmod_config_iter_next() 来了解更多。
++ *
++ * 返回值： 一个新的 iterator 可以用来处理 blacklists 或者 NULL 表示失败
++ * 释放空间 kmod_config_iter_free_iter() 来释放返回值所代表的空间
++ */
+ KMOD_EXPORT struct kmod_config_iter *kmod_config_get_blacklists(const struct kmod_ctx *ctx)
+ {
+ 	if (ctx == NULL)
+@@ -1059,7 +1079,28 @@
+  * Returns: a new iterator over the install commands or NULL on failure. Free
+  * it with kmod_config_iter_free_iter().
+  */
+-// kmod_config_get_install_commands.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/**
++ * kmod_config_get_install_commands:
++ * @ctx: kmod 库上下文
++ *
++ * 获得一个 iterator 来处理安装命令
++ * 可以查看 kmod_config_iter_get_key(), kmod_config_iter_get_value() and
++ * kmod_config_iter_next(). 
++ *
++ * 返回值： 一个新的 iterator 可以用来处理 install command 或者 NULL 表示失败
++ * 释放空间 kmod_config_iter_free_iter() 来释放返回值所代表的空间
++ */
++
+ KMOD_EXPORT struct kmod_config_iter *kmod_config_get_install_commands(const struct kmod_ctx *ctx)
+ {
+ 	if (ctx == NULL)
 diff -Nur my-kmod-11/libkmod/libkmod-elf.c my-kmod-11-subs/libkmod/libkmod-elf.c
 --- my-kmod-11/libkmod/libkmod-elf.c	2013-06-09 10:34:26.243811627 +0800
-+++ my-kmod-11-subs/libkmod/libkmod-elf.c	2013-06-09 10:35:26.675812120 +0800
++++ my-kmod-11-subs/libkmod/libkmod-elf.c	2013-06-09 12:46:39.034814630 +0800
 @@ -51,7 +51,17 @@
  static const enum kmod_elf_class native_endianess = KMOD_ELF_LSB;
  #endif
@@ -867,7 +929,7 @@ diff -Nur my-kmod-11/libkmod/libkmod-elf.c my-kmod-11-subs/libkmod/libkmod-elf.c
  	uint64_t versionslen, strtablen, symtablen, str_off, sym_off, ver_off;
 diff -Nur my-kmod-11/libkmod/libkmod-file.c my-kmod-11-subs/libkmod/libkmod-file.c
 --- my-kmod-11/libkmod/libkmod-file.c	2013-06-04 19:53:49.584004452 +0800
-+++ my-kmod-11-subs/libkmod/libkmod-file.c	2013-06-09 10:35:26.779812121 +0800
++++ my-kmod-11-subs/libkmod/libkmod-file.c	2013-06-09 12:46:39.146814631 +0800
 @@ -278,7 +278,17 @@
  	return file->elf;
  }
@@ -925,7 +987,7 @@ diff -Nur my-kmod-11/libkmod/libkmod-file.c my-kmod-11-subs/libkmod/libkmod-file
  	return file->size;
 diff -Nur my-kmod-11/libkmod/libkmod-hash.c my-kmod-11-subs/libkmod/libkmod-hash.c
 --- my-kmod-11/libkmod/libkmod-hash.c	2013-06-04 19:36:54.971996162 +0800
-+++ my-kmod-11-subs/libkmod/libkmod-hash.c	2013-06-09 10:35:27.067812123 +0800
++++ my-kmod-11-subs/libkmod/libkmod-hash.c	2013-06-09 12:46:39.570814635 +0800
 @@ -26,7 +26,22 @@
  #include <string.h>
  #include <errno.h>
@@ -1148,7 +1210,7 @@ diff -Nur my-kmod-11/libkmod/libkmod-hash.c my-kmod-11-subs/libkmod/libkmod-hash
  	return hash->count;
 diff -Nur my-kmod-11/libkmod/libkmod-index.c my-kmod-11-subs/libkmod/libkmod-index.c
 --- my-kmod-11/libkmod/libkmod-index.c	2013-06-06 18:44:57.312329538 +0800
-+++ my-kmod-11-subs/libkmod/libkmod-index.c	2013-06-09 10:35:27.211812124 +0800
++++ my-kmod-11-subs/libkmod/libkmod-index.c	2013-06-09 12:46:40.050814638 +0800
 @@ -72,7 +72,17 @@
  	INDEX_NODE_MASK     = 0x0FFFFFFF, /* Offset value */
  };
@@ -1226,7 +1288,7 @@ diff -Nur my-kmod-11/libkmod/libkmod-index.c my-kmod-11-subs/libkmod/libkmod-ind
  	free(node->prefix);
 diff -Nur my-kmod-11/libkmod/libkmod-list.c my-kmod-11-subs/libkmod/libkmod-list.c
 --- my-kmod-11/libkmod/libkmod-list.c	2013-06-04 19:18:57.407987354 +0800
-+++ my-kmod-11-subs/libkmod/libkmod-list.c	2013-06-09 10:35:27.731812129 +0800
++++ my-kmod-11-subs/libkmod/libkmod-list.c	2013-06-09 12:46:40.726814644 +0800
 @@ -27,7 +27,16 @@
   * @short_description: general purpose list
   */
@@ -1619,9 +1681,180 @@ diff -Nur my-kmod-11/libkmod/libkmod-list.c my-kmod-11-subs/libkmod/libkmod-list
  KMOD_EXPORT struct kmod_list *kmod_list_last(const struct kmod_list *list)
  {
  	if (list == NULL)
+diff -Nur my-kmod-11/libkmod/libkmod-module.c my-kmod-11-subs/libkmod/libkmod-module.c
+--- my-kmod-11/libkmod/libkmod-module.c	2013-06-09 12:05:37.230794514 +0800
++++ my-kmod-11-subs/libkmod/libkmod-module.c	2013-06-09 12:46:41.154814648 +0800
+@@ -50,7 +50,27 @@
+  *
+  * Opaque object representing a module.
+  */
+-// kmod_module.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/*
++ * 最重要的数据结构 kmod_module , 包含了以下主要的成员变量
++ *	- struct kmod_ctx *ctx;		上下文
++ *	- struct kmod_list *dep;	依赖模块的链表
++ *	- struct kmod_file *file;	ko 文件
++ *	- char *name, *path;		名称路径
++ *	- char *hashkey；		哈希键值
++ *	- int refcount;			引用计数
++ *	- int n_dep;			依赖模块计数
++ */
++
+ struct kmod_module {
+ 	struct kmod_ctx *ctx;
+ 	char *hashkey;
+@@ -107,7 +127,17 @@
+ 	return buf;
+ }
+ 
+-// module_is_inkernel.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 判断当前的 mod 是否已经加载到内核中，根据 KMOD_MODULE_LIVE 和 KMOD_MODULE_BUILTIN */
+ static inline bool module_is_inkernel(struct kmod_module *mod)
+ {
+ 	int state = kmod_module_get_initstate(mod);
+@@ -119,7 +149,17 @@
+ 	return false;
+ }
+ 
+-// kmod_module_parse_depline.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 分析依赖关系的字符串, 建立依赖关系的 kmod_list */
+ int kmod_module_parse_depline(struct kmod_module *mod, char *line)
+ {
+ 	struct kmod_ctx *ctx = mod->ctx;
+@@ -230,7 +270,17 @@
+  *
+  * @key is "name\alias" or "name" (in which case alias == NULL)
+  */
+-// kmod_module_new.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 创建 kmod_module 的构造函数 */
+ static int kmod_module_new(struct kmod_ctx *ctx, const char *key,
+ 				const char *name, size_t namelen,
+ 				const char *alias, size_t aliaslen,
+@@ -300,7 +350,17 @@
+  * Returns: 0 on success or < 0 otherwise. It fails if name is not a valid
+  * module name or if memory allocation failed.
+  */
+-// kmod_module_new_from_name.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 先将 name 正规化，然后调用 kmod_module_new() 来创建 kmod_module */
+ KMOD_EXPORT int kmod_module_new_from_name(struct kmod_ctx *ctx,
+ 						const char *name,
+ 						struct kmod_module **mod)
+@@ -430,7 +490,23 @@
+  * Returns: NULL if @mod is NULL or if the module was released. Otherwise it
+  * returns the passed @mod with its refcount decremented.
+  */
+-// kmod_module_unref.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 
++ * 给当前模块的引用计数 refcount--, 如果已经减到0，则卸载该模块。
++ *	- kmod_pool_del_module()
++ *	- kmod_module_unref_list()
++ *	- kmod_file_unref()
++ *	- kmod_unref(ctx)
++ */
+ KMOD_EXPORT struct kmod_module *kmod_module_unref(struct kmod_module *mod)
+ {
+ 	if (mod == NULL)
+@@ -462,7 +538,17 @@
+  *
+  * Returns: the passed @module with its refcount incremented.
+  */
+-// kmod_module_ref.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 给当前模块的引用计数 refcount++ */
+ KMOD_EXPORT struct kmod_module *kmod_module_ref(struct kmod_module *mod)
+ {
+ 	if (mod == NULL)
+@@ -575,7 +661,17 @@
+  * Returns: NULL if @mod is NULL or if the module was released. Otherwise it
+  * returns the passed @mod with its refcount decremented.
+  */
+-// kmod_module_unref_list.cmt
++/* 
++ * 本注释得到了“核高基”科技重大专项2012年课题的资助
++ * 课题名称“开源操作系统内核分析和安全性评估”
++ * 课题编号“2012ZX01039-004”
++ *
++ * 注释添加单位 清华大学--03任务
++ * Linux 内核相关通用基础软件包分析 承担单位
++ * 注释添加人 李明
++ * 注释日期 2013年5月4日
++ */
++/* 删除 kmod list 链表中的每一个节点 */
+ KMOD_EXPORT int kmod_module_unref_list(struct kmod_list *list)
+ {
+ 	for (; list != NULL; list = kmod_list_remove(list))
 diff -Nur my-kmod-11/libkmod/libkmod-util.c my-kmod-11-subs/libkmod/libkmod-util.c
 --- my-kmod-11/libkmod/libkmod-util.c	2013-06-04 18:46:51.671971612 +0800
-+++ my-kmod-11-subs/libkmod/libkmod-util.c	2013-06-09 10:35:28.139812132 +0800
++++ my-kmod-11-subs/libkmod/libkmod-util.c	2013-06-09 12:46:41.518814650 +0800
 @@ -90,7 +90,23 @@
  	}
  }
@@ -1858,7 +2091,7 @@ diff -Nur my-kmod-11/libkmod/libkmod-util.c my-kmod-11-subs/libkmod/libkmod-util
  	char *cwd, *r;
 diff -Nur my-kmod-11/testsuite/delete_module.c my-kmod-11-subs/testsuite/delete_module.c
 --- my-kmod-11/testsuite/delete_module.c	2013-05-31 22:25:40.750338290 +0800
-+++ my-kmod-11-subs/testsuite/delete_module.c	2013-06-09 10:35:28.579812134 +0800
++++ my-kmod-11-subs/testsuite/delete_module.c	2013-06-09 12:46:42.166814655 +0800
 @@ -97,7 +97,17 @@
  	}
  }
@@ -1922,7 +2155,7 @@ diff -Nur my-kmod-11/testsuite/delete_module.c my-kmod-11-subs/testsuite/delete_
  	while (modules) {
 diff -Nur my-kmod-11/testsuite/init_module.c my-kmod-11-subs/testsuite/init_module.c
 --- my-kmod-11/testsuite/init_module.c	2013-06-04 08:20:58.614271459 +0800
-+++ my-kmod-11-subs/testsuite/init_module.c	2013-06-09 10:35:28.671812137 +0800
++++ my-kmod-11-subs/testsuite/init_module.c	2013-06-09 12:46:42.398814656 +0800
 @@ -225,7 +225,29 @@
   * This is because we want to be able to pass dummy modules (and not real
   * ones) and it still work.
@@ -1956,7 +2189,7 @@ diff -Nur my-kmod-11/testsuite/init_module.c my-kmod-11-subs/testsuite/init_modu
  	const char *modname;
 diff -Nur my-kmod-11/testsuite/mkdir.c my-kmod-11-subs/testsuite/mkdir.c
 --- my-kmod-11/testsuite/mkdir.c	2013-06-04 08:13:48.698267948 +0800
-+++ my-kmod-11-subs/testsuite/mkdir.c	2013-06-09 10:35:28.755812137 +0800
++++ my-kmod-11-subs/testsuite/mkdir.c	2013-06-09 12:46:42.594814658 +0800
 @@ -23,7 +23,17 @@
  #include "mkdir.h"
  #include "testsuite.h"
@@ -1978,7 +2211,7 @@ diff -Nur my-kmod-11/testsuite/mkdir.c my-kmod-11-subs/testsuite/mkdir.c
  	char *start = strdupa(path);
 diff -Nur my-kmod-11/testsuite/path.c my-kmod-11-subs/testsuite/path.c
 --- my-kmod-11/testsuite/path.c	2013-06-04 08:19:21.266270893 +0800
-+++ my-kmod-11-subs/testsuite/path.c	2013-06-09 10:35:28.891812138 +0800
++++ my-kmod-11-subs/testsuite/path.c	2013-06-09 12:46:42.970814663 +0800
 @@ -36,13 +36,33 @@
  static const char *rootpath;
  static size_t rootpathlen;
@@ -2036,7 +2269,7 @@ diff -Nur my-kmod-11/testsuite/path.c my-kmod-11-subs/testsuite/path.c
  	if (rootpath != NULL)
 diff -Nur my-kmod-11/testsuite/test-alias.c my-kmod-11-subs/testsuite/test-alias.c
 --- my-kmod-11/testsuite/test-alias.c	2013-06-04 08:22:04.406272012 +0800
-+++ my-kmod-11-subs/testsuite/test-alias.c	2013-06-09 10:35:30.583812152 +0800
++++ my-kmod-11-subs/testsuite/test-alias.c	2013-06-09 12:46:45.522814683 +0800
 @@ -25,7 +25,17 @@
  #include "libkmod-util.h"
  #include "testsuite.h"
@@ -2058,7 +2291,7 @@ diff -Nur my-kmod-11/testsuite/test-alias.c my-kmod-11-subs/testsuite/test-alias
  	static const char *input[] = {
 diff -Nur my-kmod-11/testsuite/test-blacklist.c my-kmod-11-subs/testsuite/test-blacklist.c
 --- my-kmod-11/testsuite/test-blacklist.c	2013-06-04 08:25:00.714273439 +0800
-+++ my-kmod-11-subs/testsuite/test-blacklist.c	2013-06-09 10:35:30.683812153 +0800
++++ my-kmod-11-subs/testsuite/test-blacklist.c	2013-06-09 12:46:45.634814684 +0800
 @@ -33,7 +33,30 @@
  #undef ERR
  #include "testsuite.h"
@@ -2093,7 +2326,7 @@ diff -Nur my-kmod-11/testsuite/test-blacklist.c my-kmod-11-subs/testsuite/test-b
  	struct kmod_ctx *ctx;
 diff -Nur my-kmod-11/testsuite/test-dependencies.c my-kmod-11-subs/testsuite/test-dependencies.c
 --- my-kmod-11/testsuite/test-dependencies.c	2013-06-04 08:28:55.278275353 +0800
-+++ my-kmod-11-subs/testsuite/test-dependencies.c	2013-06-09 10:35:30.771812153 +0800
++++ my-kmod-11-subs/testsuite/test-dependencies.c	2013-06-09 12:46:45.746814685 +0800
 @@ -28,7 +28,29 @@
  #include "testsuite.h"
  #define TEST_UNAME "4.0.20-kmod"
@@ -2127,7 +2360,7 @@ diff -Nur my-kmod-11/testsuite/test-dependencies.c my-kmod-11-subs/testsuite/tes
  	struct kmod_ctx *ctx;
 diff -Nur my-kmod-11/testsuite/test-depmod.c my-kmod-11-subs/testsuite/test-depmod.c
 --- my-kmod-11/testsuite/test-depmod.c	2013-05-31 21:26:37.698309339 +0800
-+++ my-kmod-11-subs/testsuite/test-depmod.c	2013-06-09 10:35:30.847812155 +0800
++++ my-kmod-11-subs/testsuite/test-depmod.c	2013-06-09 12:46:45.902814686 +0800
 @@ -60,5 +60,22 @@
  	NULL,
  };
@@ -2154,7 +2387,7 @@ diff -Nur my-kmod-11/testsuite/test-depmod.c my-kmod-11-subs/testsuite/test-depm
  TESTSUITE_MAIN(tests);
 diff -Nur my-kmod-11/testsuite/test-init.c my-kmod-11-subs/testsuite/test-init.c
 --- my-kmod-11/testsuite/test-init.c	2013-05-30 17:34:03.277852621 +0800
-+++ my-kmod-11-subs/testsuite/test-init.c	2013-06-09 10:35:31.035812155 +0800
++++ my-kmod-11-subs/testsuite/test-init.c	2013-06-09 12:46:46.266814689 +0800
 @@ -26,7 +26,22 @@
  
  #include "testsuite.h"
@@ -2257,7 +2490,7 @@ diff -Nur my-kmod-11/testsuite/test-init.c my-kmod-11-subs/testsuite/test-init.c
  TESTSUITE_MAIN(tests);
 diff -Nur my-kmod-11/testsuite/test-loaded.c my-kmod-11-subs/testsuite/test-loaded.c
 --- my-kmod-11/testsuite/test-loaded.c	2013-05-30 17:35:40.785853421 +0800
-+++ my-kmod-11-subs/testsuite/test-loaded.c	2013-06-09 10:35:31.155812158 +0800
++++ my-kmod-11-subs/testsuite/test-loaded.c	2013-06-09 12:46:46.398814691 +0800
 @@ -27,7 +27,31 @@
  
  #include "testsuite.h"
@@ -2317,7 +2550,7 @@ diff -Nur my-kmod-11/testsuite/test-loaded.c my-kmod-11-subs/testsuite/test-load
  TESTSUITE_MAIN(tests);
 diff -Nur my-kmod-11/testsuite/test-modinfo.c my-kmod-11-subs/testsuite/test-modinfo.c
 --- my-kmod-11/testsuite/test-modinfo.c	2013-05-30 18:43:58.833886908 +0800
-+++ my-kmod-11-subs/testsuite/test-modinfo.c	2013-06-09 10:35:31.247812158 +0800
++++ my-kmod-11-subs/testsuite/test-modinfo.c	2013-06-09 12:46:46.494814691 +0800
 @@ -53,5 +53,22 @@
  	NULL,
  };
@@ -2344,7 +2577,7 @@ diff -Nur my-kmod-11/testsuite/test-modinfo.c my-kmod-11-subs/testsuite/test-mod
  TESTSUITE_MAIN(tests);
 diff -Nur my-kmod-11/testsuite/test-modprobe.c my-kmod-11-subs/testsuite/test-modprobe.c
 --- my-kmod-11/testsuite/test-modprobe.c	2013-05-31 21:40:19.830316058 +0800
-+++ my-kmod-11-subs/testsuite/test-modprobe.c	2013-06-09 10:35:31.335812157 +0800
++++ my-kmod-11-subs/testsuite/test-modprobe.c	2013-06-09 12:46:46.662814693 +0800
 @@ -143,5 +143,22 @@
  	NULL,
  };
@@ -2371,7 +2604,7 @@ diff -Nur my-kmod-11/testsuite/test-modprobe.c my-kmod-11-subs/testsuite/test-mo
  TESTSUITE_MAIN(tests);
 diff -Nur my-kmod-11/testsuite/test-new-module.c my-kmod-11-subs/testsuite/test-new-module.c
 --- my-kmod-11/testsuite/test-new-module.c	2013-05-30 15:40:01.896852853 +0800
-+++ my-kmod-11-subs/testsuite/test-new-module.c	2013-06-09 10:35:31.467812159 +0800
++++ my-kmod-11-subs/testsuite/test-new-module.c	2013-06-09 12:46:46.906814695 +0800
 @@ -39,7 +39,21 @@
  
  #include "testsuite.h"
@@ -2444,7 +2677,7 @@ diff -Nur my-kmod-11/testsuite/test-new-module.c my-kmod-11-subs/testsuite/test-
  TESTSUITE_MAIN(tests);
 diff -Nur my-kmod-11/testsuite/testsuite.c my-kmod-11-subs/testsuite/testsuite.c
 --- my-kmod-11/testsuite/testsuite.c	2013-05-30 17:28:38.781849972 +0800
-+++ my-kmod-11-subs/testsuite/testsuite.c	2013-06-09 10:35:31.543812160 +0800
++++ my-kmod-11-subs/testsuite/testsuite.c	2013-06-09 12:46:47.046814695 +0800
 @@ -640,7 +640,22 @@
  	return r;
  }
@@ -2471,7 +2704,7 @@ diff -Nur my-kmod-11/testsuite/testsuite.c my-kmod-11-subs/testsuite/testsuite.c
  	pid_t pid;
 diff -Nur my-kmod-11/testsuite/test-testsuite.c my-kmod-11-subs/testsuite/test-testsuite.c
 --- my-kmod-11/testsuite/test-testsuite.c	2013-05-30 15:25:07.996845547 +0800
-+++ my-kmod-11-subs/testsuite/test-testsuite.c	2013-06-09 10:35:31.627812161 +0800
++++ my-kmod-11-subs/testsuite/test-testsuite.c	2013-06-09 12:46:47.278814698 +0800
 @@ -167,5 +167,22 @@
  	NULL,
  };
@@ -2498,7 +2731,7 @@ diff -Nur my-kmod-11/testsuite/test-testsuite.c my-kmod-11-subs/testsuite/test-t
  TESTSUITE_MAIN(tests);
 diff -Nur my-kmod-11/testsuite/uname.c my-kmod-11-subs/testsuite/uname.c
 --- my-kmod-11/testsuite/uname.c	2013-06-04 07:55:38.826336157 +0800
-+++ my-kmod-11-subs/testsuite/uname.c	2013-06-09 10:35:31.715812161 +0800
++++ my-kmod-11-subs/testsuite/uname.c	2013-06-09 12:46:47.414814699 +0800
 @@ -25,7 +25,22 @@
  
  #include "testsuite.h"
@@ -2525,7 +2758,7 @@ diff -Nur my-kmod-11/testsuite/uname.c my-kmod-11-subs/testsuite/uname.c
  	static void *nextlib = NULL;
 diff -Nur my-kmod-11/tools/depmod.c my-kmod-11-subs/tools/depmod.c
 --- my-kmod-11/tools/depmod.c	2013-05-29 17:22:55.973317396 +0800
-+++ my-kmod-11-subs/tools/depmod.c	2013-06-09 10:35:31.823812161 +0800
++++ my-kmod-11-subs/tools/depmod.c	2013-06-09 12:46:47.546814699 +0800
 @@ -2722,7 +2722,22 @@
  	return EXIT_FAILURE;
  }
@@ -2552,7 +2785,7 @@ diff -Nur my-kmod-11/tools/depmod.c my-kmod-11-subs/tools/depmod.c
  	.cmd = do_depmod,
 diff -Nur my-kmod-11/tools/insmod.c my-kmod-11-subs/tools/insmod.c
 --- my-kmod-11/tools/insmod.c	2013-05-29 17:23:20.089317595 +0800
-+++ my-kmod-11-subs/tools/insmod.c	2013-06-09 10:35:31.967812164 +0800
++++ my-kmod-11-subs/tools/insmod.c	2013-06-09 12:46:47.770814701 +0800
 @@ -33,7 +33,17 @@
  	{NULL, 0, 0, 0}
  };
@@ -2645,7 +2878,7 @@ diff -Nur my-kmod-11/tools/insmod.c my-kmod-11-subs/tools/insmod.c
  	.cmd = do_insmod,
 diff -Nur my-kmod-11/tools/kmod.c my-kmod-11-subs/tools/kmod.c
 --- my-kmod-11/tools/kmod.c	2013-05-30 11:34:07.819073601 +0800
-+++ my-kmod-11-subs/tools/kmod.c	2013-06-09 10:35:32.219812165 +0800
++++ my-kmod-11-subs/tools/kmod.c	2013-06-09 12:46:48.334814706 +0800
 @@ -35,13 +35,33 @@
  
  static const struct kmod_cmd kmod_cmd_help;
@@ -2778,7 +3011,7 @@ diff -Nur my-kmod-11/tools/kmod.c my-kmod-11-subs/tools/kmod.c
  	int err;
 diff -Nur my-kmod-11/tools/log.c my-kmod-11-subs/tools/log.c
 --- my-kmod-11/tools/log.c	2013-06-04 07:41:06.454345393 +0800
-+++ my-kmod-11-subs/tools/log.c	2013-06-09 10:35:32.383812165 +0800
++++ my-kmod-11-subs/tools/log.c	2013-06-09 12:46:48.670814709 +0800
 @@ -28,7 +28,37 @@
  static bool log_use_syslog;
  static int log_priority = LOG_ERR;
@@ -2895,7 +3128,7 @@ diff -Nur my-kmod-11/tools/log.c my-kmod-11-subs/tools/log.c
  	const char *prioname;
 diff -Nur my-kmod-11/tools/lsmod.c my-kmod-11-subs/tools/lsmod.c
 --- my-kmod-11/tools/lsmod.c	2013-05-29 17:22:34.289317220 +0800
-+++ my-kmod-11-subs/tools/lsmod.c	2013-06-09 10:35:32.475812168 +0800
++++ my-kmod-11-subs/tools/lsmod.c	2013-06-09 12:46:48.858814710 +0800
 @@ -92,7 +92,22 @@
  	.help = "compat lsmod command",
  };
@@ -2922,7 +3155,7 @@ diff -Nur my-kmod-11/tools/lsmod.c my-kmod-11-subs/tools/lsmod.c
  	.cmd = do_lsmod,
 diff -Nur my-kmod-11/tools/modinfo.c my-kmod-11-subs/tools/modinfo.c
 --- my-kmod-11/tools/modinfo.c	2013-05-29 17:53:26.861332360 +0800
-+++ my-kmod-11-subs/tools/modinfo.c	2013-06-09 10:35:32.583812170 +0800
++++ my-kmod-11-subs/tools/modinfo.c	2013-06-09 12:46:49.038814712 +0800
 @@ -362,7 +362,28 @@
  	return false;
  }
@@ -2979,7 +3212,7 @@ diff -Nur my-kmod-11/tools/modinfo.c my-kmod-11-subs/tools/modinfo.c
  	.cmd = do_modinfo,
 diff -Nur my-kmod-11/tools/modprobe.c my-kmod-11-subs/tools/modprobe.c
 --- my-kmod-11/tools/modprobe.c	2013-05-30 11:25:53.715069562 +0800
-+++ my-kmod-11-subs/tools/modprobe.c	2013-06-09 10:35:32.831812170 +0800
++++ my-kmod-11-subs/tools/modprobe.c	2013-06-09 12:46:49.398814714 +0800
 @@ -285,7 +285,28 @@
  	return ret;
  }
@@ -3203,7 +3436,7 @@ diff -Nur my-kmod-11/tools/modprobe.c my-kmod-11-subs/tools/modprobe.c
  	.cmd = do_modprobe,
 diff -Nur my-kmod-11/tools/rmmod.c my-kmod-11-subs/tools/rmmod.c
 --- my-kmod-11/tools/rmmod.c	2013-05-29 17:32:36.229322140 +0800
-+++ my-kmod-11-subs/tools/rmmod.c	2013-06-09 10:35:32.971812172 +0800
++++ my-kmod-11-subs/tools/rmmod.c	2013-06-09 12:46:49.794814718 +0800
 @@ -45,7 +45,17 @@
  	{NULL, 0, 0, 0}
  };

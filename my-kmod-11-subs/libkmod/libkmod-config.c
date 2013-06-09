@@ -1037,6 +1037,28 @@ static struct kmod_config_iter *kmod_config_iter_new(const struct kmod_ctx* ctx,
  * Returns: a new iterator over the blacklists or NULL on failure. Free it
  * with kmod_config_iter_free_iter().
  */
+
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/**
+ * kmod_config_get_blacklists:
+ * @ctx: kmod 库上下文
+ *
+ * 获得一个 iterator 指针来处理在库中的 blacklist
+ * 可以通过查看 kmod_config_iter_get_get() 和 kmod_config_iter_get_value()
+ * 以及 kmod_config_iter_next() 来了解更多。
+ *
+ * 返回值： 一个新的 iterator 可以用来处理 blacklists 或者 NULL 表示失败
+ * 释放空间 kmod_config_iter_free_iter() 来释放返回值所代表的空间
+ */
 KMOD_EXPORT struct kmod_config_iter *kmod_config_get_blacklists(const struct kmod_ctx *ctx)
 {
 	if (ctx == NULL)
@@ -1057,6 +1079,28 @@ KMOD_EXPORT struct kmod_config_iter *kmod_config_get_blacklists(const struct kmo
  * Returns: a new iterator over the install commands or NULL on failure. Free
  * it with kmod_config_iter_free_iter().
  */
+/* 
+ * 本注释得到了“核高基”科技重大专项2012年课题的资助
+ * 课题名称“开源操作系统内核分析和安全性评估”
+ * 课题编号“2012ZX01039-004”
+ *
+ * 注释添加单位 清华大学--03任务
+ * Linux 内核相关通用基础软件包分析 承担单位
+ * 注释添加人 李明
+ * 注释日期 2013年5月4日
+ */
+/**
+ * kmod_config_get_install_commands:
+ * @ctx: kmod 库上下文
+ *
+ * 获得一个 iterator 来处理安装命令
+ * 可以查看 kmod_config_iter_get_key(), kmod_config_iter_get_value() and
+ * kmod_config_iter_next(). 
+ *
+ * 返回值： 一个新的 iterator 可以用来处理 install command 或者 NULL 表示失败
+ * 释放空间 kmod_config_iter_free_iter() 来释放返回值所代表的空间
+ */
+
 KMOD_EXPORT struct kmod_config_iter *kmod_config_get_install_commands(const struct kmod_ctx *ctx)
 {
 	if (ctx == NULL)
