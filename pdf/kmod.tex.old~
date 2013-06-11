@@ -21,6 +21,16 @@
   \fi
 \fi
 \usepackage{url}
+\usepackage{graphicx}
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth]{#1}}
 \ifxetex
   \usepackage[setpagesize=false, % page size defined by xetex
               unicode=false, % unicode breaks when used with xetex
@@ -39,8 +49,6 @@
 \setcounter{secnumdepth}{0}
 
 
-\usepackage{framed,color}
-\definecolor{shadecolor}{gray}{0.95}
 \begin{document}
 
 \section{kmod-Linux内核模块工具}
@@ -1199,6 +1207,12 @@ struct kmod_module {
 kmod 项目的整个架构分为 3 层。最底层是 testsuite, 中间是 libkmod, 上层是
 tools
 
+\begin{figure}[htbp]
+\centering
+\includegraphics{./figures/sys.jpg}
+\caption{libkmod 项目系统结构层次图}
+\end{figure}
+
 \subsubsection{应用层}
 
 \paragraph{insmod 命令}
@@ -1247,21 +1261,9 @@ tools
 
 \subsubsection{log}
 
-\subsection{3. 函数接口分析}
+\subsection{3. 运行流程分析}
 
-\subsubsection{kmod\_new() 接口}
-
-\subsubsection{kmod\_unref() 接口}
-
-\subsubsection{kmod\_module\_new\_from\_path() 接口}
-
-\subsubsection{kmod\_module\_insert\_module() 接口}
-
-\subsubsection{kmod\_module\_unref() 接口}
-
-\subsection{4. 运行流程分析}
-
-\subsubsection{insmod 实现流程}
+\subsubsection{insmod 命令运行流程}
 
 {\begin{shaded}\begin{verbatim}
 $ sudo ./kmod-11/tools/rmmod hello-module/hello.ko 
@@ -1277,7 +1279,13 @@ $ sudo ./kmod-11/tools/rmmod hello-module/hello.ko
 $ lsmod | grep hello
 $ 
 \end{verbatim}\end{shaded}}
-\paragraph{do\_insmod 核心代码}
+\begin{figure}[htbp]
+\centering
+\includegraphics{./figures/insmod.jpg}
+\caption{insmod 调用层次图}
+\end{figure}
+
+\textbf{do\_insmod 核心代码分析}
 
 {\begin{shaded}\begin{verbatim}
 do_insmod()
@@ -1290,7 +1298,7 @@ do_insmod()
     kmod_unref(ctx);
 }
 \end{verbatim}\end{shaded}}
-insmod 命令的实现可以分为5个步骤
+do\_insmod() 的实现可以分为5个步骤
 
 \begin{itemize}
 \item
@@ -1326,7 +1334,96 @@ insmod 命令的实现可以分为5个步骤
     kmod\_module\_unref()
   \end{itemize}
 \end{itemize}
-\paragraph{kmod\_new 代码分析}
+\subsubsection{rmsmod 实现流程}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{./figures/insmod.jpg}
+\caption{insmod 调用层次图}
+\end{figure}
+
+\subsubsection{lsmod 实现流程}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{./figures/insmod.jpg}
+\caption{insmod 调用层次图}
+\end{figure}
+
+\subsubsection{modinfo 实现流程}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{./figures/insmod.jpg}
+\caption{insmod 调用层次图}
+\end{figure}
+
+\subsubsection{depmod 实现流程}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{./figures/insmod.jpg}
+\caption{insmod 调用层次图}
+\end{figure}
+
+\textbf{do\_depmod() 核心代码分析}
+
+{\begin{shaded}\begin{verbatim}
+do_depmod(int argc, char *argv[])
+{
+    ctx = kmod_new(cfg.dirname, &null_kmod_config);
+
+    err = depmod_init(&depmod, &cfg, ctx);
+    err = depmod_load_symvers(&depmod, module_symvers);
+    err = depmod_load_system_map(&depmod, system_map);
+    err = cfg_load(&cfg, config_paths);
+    err = depmod_modules_search(&depmod);
+    err = kmod_module_new_from_path(depmod.ctx, path, &mod);
+    err = depmod_module_add(&depmod, mod);
+    err = depmod_modules_build_array(&depmod);
+    depmod_modules_sort(&depmod);
+    err = depmod_load(&depmod);
+    err = depmod_output(&depmod, out);
+
+    depmod_shutdown(&depmod);
+    cfg_free(&cfg);
+    kmod_unref(ctx);
+}
+\end{verbatim}\end{shaded}}
+\subsubsection{modprobe 实现流程}
+
+\textbf{do\_modprobe() 核心代码分析}
+
+{\begin{shaded}\begin{verbatim}
+do_modprobe(int argc, char *argv[])
+{
+    log_open(use_syslog);
+
+    snprintf(dirname_buf, sizeof(dirname_buf), "%s/lib/modules/%s", root, kversion);
+    dirname = dirname_buf;
+
+    ctx = kmod_new(dirname, config_paths);
+
+    log_setup_kmod_log(ctx, verbose);
+    kmod_load_resources(ctx);
+
+    if (do_xxx)
+        err = show_config(ctx); 
+        err = show_modversions(ctx, args[0]);
+        err = insmod_all(ctx, args, nargs);
+        err = rmmod_all(ctx, args, nargs); 
+
+    err = options_from_array(args, nargs, &opts);
+    err = insmod(ctx, args[0], opts);
+
+    kmod_unref(ctx);
+
+    log_close();
+}
+\end{verbatim}\end{shaded}}
+\subsection{4. 函数接口分析}
+
+\subsubsection{kmod\_new() 核心代码分析}
 
 {\begin{shaded}\begin{verbatim}
 kmod_ctx *kmod_new(char *dirname, char *config_paths)
@@ -1339,7 +1436,13 @@ kmod_ctx *kmod_new(char *dirname, char *config_paths)
     return ctx;
 }
 \end{verbatim}\end{shaded}}
-\paragraph{kmod\_unref 代码分析}
+\begin{figure}[htbp]
+\centering
+\includegraphics{./figures/kmod_new.jpg}
+\caption{kmod\_new 调用层次图}
+\end{figure}
+
+\subsubsection{kmod\_unref() 核心代码分析}
 
 {\begin{shaded}\begin{verbatim}
 kmod_ctx *kmod_unref(kmod_ctx *ctx)
@@ -1352,7 +1455,13 @@ kmod_ctx *kmod_unref(kmod_ctx *ctx)
     return NULL;
 }
 \end{verbatim}\end{shaded}}
-\paragraph{kmod\_module\_new\_from\_path 代码分析}
+\begin{figure}[htbp]
+\centering
+\includegraphics{./figures/kmod_unref.jpg}
+\caption{kmod\_unref 调用层次图}
+\end{figure}
+
+\subsubsection{kmod\_module\_new\_from\_path() 核心代码分析}
 
 {\begin{shaded}\begin{verbatim}
 int kmod_module_new_from_path(kmod_ctx *ctx, char *path, kmod_module **mod)
@@ -1365,7 +1474,13 @@ int kmod_module_new_from_path(kmod_ctx *ctx, char *path, kmod_module **mod)
     return 0;
 }
 \end{verbatim}\end{shaded}}
-\paragraph{kmod\_module\_insert\_module 代码分析}
+\begin{figure}[htbp]
+\centering
+\includegraphics{./figures/kmod_module_new_from_path.jpg}
+\caption{kmod\_module\_new\_from\_path 调用层次图}
+\end{figure}
+
+\subsubsection{kmod\_module\_insert\_module() 核心代码分析}
 
 {\begin{shaded}\begin{verbatim}
 int kmod_module_insert_module(kmod_module *mod, int flags, char *options)
@@ -1382,7 +1497,13 @@ int kmod_module_insert_module(kmod_module *mod, int flags, char *options)
     kmod_file_unref(file);
 }
 \end{verbatim}\end{shaded}}
-\paragraph{kmod\_module\_unref 代码分析}
+\begin{figure}[htbp]
+\centering
+\includegraphics{./figures/kmod_module_insert_module.jpg}
+\caption{kmod\_module\_insert\_module 调用层次图}
+\end{figure}
+
+\subsubsection{kmod\_module\_unref() 核心代码分析}
 
 {\begin{shaded}\begin{verbatim}
 kmod_module *kmod_module_unref(kmod_module *mod)
@@ -1397,7 +1518,13 @@ kmod_module *kmod_module_unref(kmod_module *mod)
     return NULL;
 }
 \end{verbatim}\end{shaded}}
-\paragraph{init\_module 代码分析}
+\begin{figure}[htbp]
+\centering
+\includegraphics{./figures/kmod_module_unref.jpg}
+\caption{kmod\_module\_unref 调用层次图}
+\end{figure}
+
+\subsubsection{init\_module() 核心代码分析}
 
 {\begin{shaded}\begin{verbatim}
 long init_module(void *mem, unsigned long len, const char *args)
@@ -1417,9 +1544,7 @@ long init_module(void *mem, unsigned long len, const char *args)
     return err;
 }
 \end{verbatim}\end{shaded}}
-\subsubsection{rmsmod 实现流程}
-
-\paragraph{do\_rmmod 核心代码}
+\subsubsection{do\_rmmod() 核心代码分析}
 
 {\begin{shaded}\begin{verbatim}
 do_rmmod(int argc, char *argv[])
@@ -1432,7 +1557,7 @@ do_rmmod(int argc, char *argv[])
     kmod_unref(ctx);
 }
 \end{verbatim}\end{shaded}}
-\paragraph{kmod\_module\_remove\_module 代码分析}
+\subsubsection{kmod\_module\_remove\_module() 核心代码分析}
 
 {\begin{shaded}\begin{verbatim}
 int kmod_module_remove_module(kmod_module *mod, int flags)
@@ -1442,7 +1567,7 @@ int kmod_module_remove_module(kmod_module *mod, int flags)
     return err;
 }
 \end{verbatim}\end{shaded}}
-\paragraph{delete\_module 代码分析}
+\subsubsection{delete\_module() 核心代码分析}
 
 {\begin{shaded}\begin{verbatim}
 long init_module(void *mem, int flags)
@@ -1454,12 +1579,106 @@ long init_module(void *mem, int flags)
     return mod->ret;
 }
 \end{verbatim}\end{shaded}}
-\subsubsection{lsmod 实现流程}
+\subsubsection{insmod\_all}
 
-\subsubsection{modinfo 实现流程}
+{\begin{shaded}\begin{verbatim}
+static int insmod_all(struct kmod_ctx *ctx, char **args, int nargs)
+{
+        for (i = 0; i < nargs; i++) 
+        err = insmod(ctx, args[i], NULL);
 
-\subsubsection{depmod 实现流程}
+    return err;
+}
+\end{verbatim}\end{shaded}}
+\paragraph{insmod}
 
-\subsubsection{modprobe 实现流程}
+{\begin{shaded}\begin{verbatim}
+-> kmod_module_probe_insert_module()
+\end{verbatim}\end{shaded}}
+\subsubsection{kmod\_module\_probe\_insert\_module}
+
+{\begin{shaded}\begin{verbatim}
+int kmod_module_probe_insert_module(mod, flags, extra_options, run_install)
+{
+    err = kmod_module_get_probe_list(mod, !!(flags & KMOD_PROBE_IGNORE_COMMAND), &list);
+
+    kmod_list_foreach(l, list) 
+    {
+        struct kmod_module *m = l->data;
+        err = kmod_module_insert_module(m, flags, options);
+    }
+}
+
+-> kmod_module_get_probe_list
+    -> __kmod_module_get_probe_list
+        -> __kmod_module_get_probe_list
+            -> kmod_module_get_dependencies
+                ->  module_get_dependencies_noref
+                    -> kmod_module_parse_depline
+\end{verbatim}\end{shaded}}
+\subsubsection{kmod\_module\_get\_dependencies}
+
+{\begin{shaded}\begin{verbatim}
+kmod_list *kmod_module_get_dependencies(struct kmod_module *mod)
+{
+    module_get_dependencies_noref(mod);
+
+    kmod_list_foreach(l, mod->dep)
+    {
+        l_new = kmod_list_append(list_new, kmod_module_ref(l->data));
+        list_new = l_new;
+    }
+
+    return list_new;
+}
+\end{verbatim}\end{shaded}}
+\subsubsection{module\_get\_dependencies\_noref}
+
+{\begin{shaded}\begin{verbatim}
+kmod_list *module_get_dependencies_noref(struct kmod_module *mod)
+{
+    char *line = kmod_search_moddep(mod->ctx, mod->name);
+
+    kmod_module_parse_depline(mod, line);
+
+    return mod->dep;
+}
+\end{verbatim}\end{shaded}}
+\paragraph{kmod\_search\_moddep}
+
+{\begin{shaded}\begin{verbatim}
+char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
+{
+    // name = nfs;      // modprobe nfs
+    return index_mm_search(ctx->indexes[KMOD_INDEX_MODULES_DEP], name);
+
+    DBG(ctx, "file=%s modname=%s\n", fn, name);
+
+    idx = index_file_open(fn);
+    line = index_search(idx, name);
+    index_file_close(idx);
+
+    return line;
+}
+\end{verbatim}\end{shaded}}
+\paragraph{kmod\_module\_parse\_depline}
+
+{\begin{shaded}\begin{verbatim}
+int kmod_module_parse_depline(struct kmod_module *mod, char *line)
+{
+    for (p = strtok_r(p, " \t", &saveptr); p != NULL;
+         p = strtok_r(NULL, " \t", &saveptr)) 
+    {
+        err = kmod_module_new_from_path(ctx, path, &depmod);
+        list = kmod_list_prepend(list, depmod);
+        n++;
+    }
+
+    mod->dep = list;
+    mod->n_dep = n;
+
+    return n;
+}
+\end{verbatim}\end{shaded}}
 
 \end{document}

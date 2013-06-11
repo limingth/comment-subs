@@ -1,0 +1,28 @@
+digraph G {
+	insmod -> do_insmod;
+
+	do_insmod -> kmod_ctx;
+	do_insmod -> kmod_module;
+
+	kmod_ctx -> kmod_config;
+	kmod_ctx -> hash;
+	kmod_ctx -> log;
+	kmod_ctx -> index_mm;
+
+	kmod_module -> array;
+
+	kmod_module -> kmod_pool;
+	kmod_module -> kmod_file;
+	kmod_module -> kmod_elf;
+	kmod_module -> syscall;
+
+	syscall -> init_module;
+
+	kmod_module -> kmod_list;
+
+	kmod_elf -> elf;
+	kmod_list -> list;
+
+}
+
+

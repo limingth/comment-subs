@@ -37,16 +37,24 @@
 \BOOKMARK [3][-]{section*.45}{list}{section*.35}
 \BOOKMARK [3][-]{section*.46}{array}{section*.35}
 \BOOKMARK [3][-]{section*.47}{log}{section*.35}
-\BOOKMARK [2][-]{section*.48}{3. 函数接口分析}{section*.22}
-\BOOKMARK [3][-]{section*.49}{kmod\137new\(\) 接口}{section*.48}
-\BOOKMARK [3][-]{section*.50}{kmod\137unref\(\) 接口}{section*.48}
-\BOOKMARK [3][-]{section*.51}{kmod\137module\137new\137from\137path\(\) 接口}{section*.48}
-\BOOKMARK [3][-]{section*.52}{kmod\137module\137insert\137module\(\) 接口}{section*.48}
-\BOOKMARK [3][-]{section*.53}{kmod\137module\137unref\(\) 接口}{section*.48}
-\BOOKMARK [2][-]{section*.54}{4. 运行流程分析}{section*.22}
-\BOOKMARK [3][-]{section*.55}{insmod 实现流程}{section*.54}
-\BOOKMARK [3][-]{section*.63}{rmsmod 实现流程}{section*.54}
-\BOOKMARK [3][-]{section*.67}{lsmod 实现流程}{section*.54}
-\BOOKMARK [3][-]{section*.68}{modinfo 实现流程}{section*.54}
-\BOOKMARK [3][-]{section*.69}{depmod 实现流程}{section*.54}
-\BOOKMARK [3][-]{section*.70}{modprobe 实现流程}{section*.54}
+\BOOKMARK [2][-]{section*.48}{3. 运行流程分析}{section*.22}
+\BOOKMARK [3][-]{section*.49}{insmod 命令运行流程}{section*.48}
+\BOOKMARK [3][-]{section*.50}{rmsmod 实现流程}{section*.48}
+\BOOKMARK [3][-]{section*.51}{lsmod 实现流程}{section*.48}
+\BOOKMARK [3][-]{section*.52}{modinfo 实现流程}{section*.48}
+\BOOKMARK [3][-]{section*.53}{depmod 实现流程}{section*.48}
+\BOOKMARK [3][-]{section*.54}{modprobe 实现流程}{section*.48}
+\BOOKMARK [2][-]{section*.55}{4. 函数接口分析}{section*.22}
+\BOOKMARK [3][-]{section*.56}{kmod\137new\(\) 核心代码分析}{section*.55}
+\BOOKMARK [3][-]{section*.57}{kmod\137unref\(\) 核心代码分析}{section*.55}
+\BOOKMARK [3][-]{section*.58}{kmod\137module\137new\137from\137path\(\) 核心代码分析}{section*.55}
+\BOOKMARK [3][-]{section*.59}{kmod\137module\137insert\137module\(\) 核心代码分析}{section*.55}
+\BOOKMARK [3][-]{section*.60}{kmod\137module\137unref\(\) 核心代码分析}{section*.55}
+\BOOKMARK [3][-]{section*.61}{init\137module\(\) 核心代码分析}{section*.55}
+\BOOKMARK [3][-]{section*.62}{do\137rmmod\(\) 核心代码分析}{section*.55}
+\BOOKMARK [3][-]{section*.63}{kmod\137module\137remove\137module\(\) 核心代码分析}{section*.55}
+\BOOKMARK [3][-]{section*.64}{delete\137module\(\) 核心代码分析}{section*.55}
+\BOOKMARK [3][-]{section*.65}{insmod\137all}{section*.55}
+\BOOKMARK [3][-]{section*.67}{kmod\137module\137probe\137insert\137module}{section*.55}
+\BOOKMARK [3][-]{section*.68}{kmod\137module\137get\137dependencies}{section*.55}
+\BOOKMARK [3][-]{section*.69}{module\137get\137dependencies\137noref}{section*.55}

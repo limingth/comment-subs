@@ -1,0 +1,6 @@
+digraph G {
+	kmod_unref -> kmod_unload_resources;
+	kmod_unref -> hash_free;
+	kmod_unref -> kmod_config_free;
+
+}

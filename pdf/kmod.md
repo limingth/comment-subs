@@ -905,7 +905,10 @@ kmod-11 详细分析报告
 
 kmod 项目的整个架构分为 3 层。最底层是 testsuite, 中间是 libkmod, 上层是 tools
 
+![libkmod 项目系统结构层次图](./figures/sys.jpg)
+
 ### 应用层
+
 #### insmod 命令
 #### kmod_ctx 模块
 #### kmod_module 模块
@@ -944,24 +947,11 @@ kmod 项目的整个架构分为 3 层。最底层是 testsuite, 中间是 libkm
 
 ### log
 
-3. 函数接口分析
+
+3. 运行流程分析
 ----------------
 
-### kmod_new() 接口
-
-### kmod_unref() 接口
-
-### kmod_module_new_from_path() 接口
-
-### kmod_module_insert_module() 接口
-
-### kmod_module_unref() 接口
-
-
-4. 运行流程分析
-----------------
-
-### insmod 实现流程
+### insmod 命令运行流程
 	$ sudo ./kmod-11/tools/rmmod hello-module/hello.ko 
 	$ lsmod | grep hello
 	$ sudo ./kmod-11/tools/insmod hello-module/hello.ko 
@@ -975,7 +965,11 @@ kmod 项目的整个架构分为 3 层。最底层是 testsuite, 中间是 libkm
 	$ lsmod | grep hello
 	$ 
 
-#### do_insmod 核心代码
+
+![insmod 调用层次图](./figures/insmod.jpg)
+
+**do_insmod 核心代码分析**
+
 	do_insmod()
 	{
 		opts = argv[x];	// name=value
@@ -986,7 +980,7 @@ kmod 项目的整个架构分为 3 层。最底层是 testsuite, 中间是 libkm
 		kmod_unref(ctx);
 	}
 
-insmod 命令的实现可以分为5个步骤
+do_insmod() 的实现可以分为5个步骤
 
 * 创建模块的上下文 struct kmod_ctx ctx
 * 通过 filename 和 ctx 获得模块 struct kmod_module mod
@@ -1004,124 +998,23 @@ insmod 命令的实现可以分为5个步骤
 	- kmod_module_insert_module()
 	- kmod_module_unref()
 
-#### kmod_new 代码分析
-	kmod_ctx *kmod_new(char *dirname, char *config_paths)
-	{
-		ctx = calloc(1, sizeof(struct kmod_ctx));
-		ctx->dirname = get_kernel_release(dirname);
-		err = kmod_config_new(ctx, &ctx->config, config_paths);
-		ctx->modules_by_name = hash_new(KMOD_HASH_SIZE, NULL);
-
-		return ctx;
-	}
-
-#### kmod_unref 代码分析
-	kmod_ctx *kmod_unref(kmod_ctx *ctx)
-	{
-		kmod_unload_resources(ctx);
-		hash_free(ctx->modules_by_name);
-		kmod_config_free(ctx->config);
-		free(ctx);
-
-		return NULL;
-	}
-
-#### kmod_module_new_from_path 代码分析
-	int kmod_module_new_from_path(kmod_ctx *ctx, char *path, kmod_module **mod)
-	{
-		path_to_modname(path, name, &namelen);
-		m = kmod_pool_get_module(ctx, name);
-		kmod_module_ref(m);
-		err = kmod_module_new(ctx, name, name, namelen, NULL, 0, &m); *
-		*mod = m;
-		return 0;
-	}
-
-#### kmod_module_insert_module 代码分析
-	int kmod_module_insert_module(kmod_module *mod, int flags, char *options)
-	{
-		path = kmod_module_get_path(mod);
-		file = kmod_file_open();
-		size = kmod_file_get_size(file);
-		mem = kmod_file_get_contents(file);
-		elf = kmod_elf_new(mem, size);
-		kmod_elf_strip_section(elf);
-		mem = kmod_elf_get_memory(elf);
-		init_module(mem, size, args);
-		kmod_elf_unref(elf);
-		kmod_file_unref(file);
-	}
-
-#### kmod_module_unref 代码分析
-	kmod_module *kmod_module_unref(kmod_module *mod)
-	{
-		--mod->refcount;
-
-		kmod_pool_del_module(mod->ctx, mod, mod->hashkey);
-		kmod_module_unref_list(mod->dep);
-		kmod_file_unref(mod->file);
-		kmod_unref(mod->ctx);
-
-		return NULL;
-	}
-
-#### init_module 代码分析
-	long init_module(void *mem, unsigned long len, const char *args)
-	{
-		kmod_elf *elf = kmod_elf_new(mem, len);
-
-		err = kmod_elf_get_section(elf, ".gnu.linkonce.this_module", &buf, &bufsize);
-		kmod_elf_unref(elf);
-		mod = find_module(modules, modname);
-		if(mod != NULL)
-		{ 
-		} else if (module_is_inkernel(modname))
-		{
-		} else
-			create_sysfs_files(modname);
-
-		return err;
-	}
-
 ### rmsmod 实现流程
 
-#### do_rmmod 核心代码
-	do_rmmod(int argc, char *argv[])
-	{
-		flags = argv[x];	// -f, -w, 
-		ctx = kmod_new(NULL, &null_config);
-		err = kmod_module_new_from_path(ctx, filename, &mod);
-		err = kmod_module_remove_module(mod, flags);
-		kmod_module_unref(mod);
-		kmod_unref(ctx);
-	}
-
-#### kmod_module_remove_module 代码分析
-	int kmod_module_remove_module(kmod_module *mod, int flags)
-	{
-		err = delete_module(mod->name, flags);
-
-		return err;
-	}
-
-#### delete_module 代码分析
-	long init_module(void *mem, int flags)
-	{
-		struct mod *mod;
-
-		mod = find_module(modules, modname);
-
-		return mod->ret;
-	}
-
+![insmod 调用层次图](./figures/insmod.jpg)
 
 ### lsmod 实现流程
 
+![insmod 调用层次图](./figures/insmod.jpg)
+
 ### modinfo 实现流程
 
-### depmod 实现流程
+![insmod 调用层次图](./figures/insmod.jpg)
 
-#### do_depmod 核心代码
+### depmod 实现流程
+![insmod 调用层次图](./figures/insmod.jpg)
+
+**do_depmod() 核心代码分析**
+
 	do_depmod(int argc, char *argv[])
 	{
 		ctx = kmod_new(cfg.dirname, &null_kmod_config);
@@ -1145,8 +1038,8 @@ insmod 命令的实现可以分为5个步骤
 
 ### modprobe 实现流程
 
+**do_modprobe() 核心代码分析**
 
-#### do_modprobe 核心代码
 	do_modprobe(int argc, char *argv[])
 	{
 		log_open(use_syslog);
@@ -1173,7 +1066,136 @@ insmod 命令的实现可以分为5个步骤
 		log_close();
 	}
 
-#### insmod_all
+4. 函数接口分析
+----------------
+
+### kmod_new() 核心代码分析
+	kmod_ctx *kmod_new(char *dirname, char *config_paths)
+	{
+		ctx = calloc(1, sizeof(struct kmod_ctx));
+		ctx->dirname = get_kernel_release(dirname);
+		err = kmod_config_new(ctx, &ctx->config, config_paths);
+		ctx->modules_by_name = hash_new(KMOD_HASH_SIZE, NULL);
+
+		return ctx;
+	}
+
+![kmod_new 调用层次图](./figures/kmod_new.jpg)
+
+
+### kmod_unref() 核心代码分析
+	kmod_ctx *kmod_unref(kmod_ctx *ctx)
+	{
+		kmod_unload_resources(ctx);
+		hash_free(ctx->modules_by_name);
+		kmod_config_free(ctx->config);
+		free(ctx);
+
+		return NULL;
+	}
+
+![kmod_unref 调用层次图](./figures/kmod_unref.jpg)
+
+
+### kmod_module_new_from_path() 核心代码分析
+	int kmod_module_new_from_path(kmod_ctx *ctx, char *path, kmod_module **mod)
+	{
+		path_to_modname(path, name, &namelen);
+		m = kmod_pool_get_module(ctx, name);
+		kmod_module_ref(m);
+		err = kmod_module_new(ctx, name, name, namelen, NULL, 0, &m); *
+		*mod = m;
+		return 0;
+	}
+
+![kmod_module_new_from_path 调用层次图](./figures/kmod_module_new_from_path.jpg)
+
+
+### kmod_module_insert_module() 核心代码分析
+	int kmod_module_insert_module(kmod_module *mod, int flags, char *options)
+	{
+		path = kmod_module_get_path(mod);
+		file = kmod_file_open();
+		size = kmod_file_get_size(file);
+		mem = kmod_file_get_contents(file);
+		elf = kmod_elf_new(mem, size);
+		kmod_elf_strip_section(elf);
+		mem = kmod_elf_get_memory(elf);
+		init_module(mem, size, args);
+		kmod_elf_unref(elf);
+		kmod_file_unref(file);
+	}
+
+![kmod_module_insert_module 调用层次图](./figures/kmod_module_insert_module.jpg)
+
+
+### kmod_module_unref() 核心代码分析
+	kmod_module *kmod_module_unref(kmod_module *mod)
+	{
+		--mod->refcount;
+
+		kmod_pool_del_module(mod->ctx, mod, mod->hashkey);
+		kmod_module_unref_list(mod->dep);
+		kmod_file_unref(mod->file);
+		kmod_unref(mod->ctx);
+
+		return NULL;
+	}
+
+![kmod_module_unref 调用层次图](./figures/kmod_module_unref.jpg)
+
+
+### init_module() 核心代码分析
+	long init_module(void *mem, unsigned long len, const char *args)
+	{
+		kmod_elf *elf = kmod_elf_new(mem, len);
+
+		err = kmod_elf_get_section(elf, ".gnu.linkonce.this_module", &buf, &bufsize);
+		kmod_elf_unref(elf);
+		mod = find_module(modules, modname);
+		if(mod != NULL)
+		{ 
+		} else if (module_is_inkernel(modname))
+		{
+		} else
+			create_sysfs_files(modname);
+
+		return err;
+	}
+
+
+### do_rmmod() 核心代码分析
+	do_rmmod(int argc, char *argv[])
+	{
+		flags = argv[x];	// -f, -w, 
+		ctx = kmod_new(NULL, &null_config);
+		err = kmod_module_new_from_path(ctx, filename, &mod);
+		err = kmod_module_remove_module(mod, flags);
+		kmod_module_unref(mod);
+		kmod_unref(ctx);
+	}
+
+### kmod_module_remove_module() 核心代码分析
+	int kmod_module_remove_module(kmod_module *mod, int flags)
+	{
+		err = delete_module(mod->name, flags);
+
+		return err;
+	}
+
+### delete_module() 核心代码分析
+	long init_module(void *mem, int flags)
+	{
+		struct mod *mod;
+
+		mod = find_module(modules, modname);
+
+		return mod->ret;
+	}
+
+
+
+### insmod_all
 	static int insmod_all(struct kmod_ctx *ctx, char **args, int nargs)
 	{
 	        for (i = 0; i < nargs; i++) 
@@ -1185,7 +1207,7 @@ insmod 命令的实现可以分为5个步骤
 #### insmod
 	-> kmod_module_probe_insert_module()
 
-#### kmod_module_probe_insert_module
+### kmod_module_probe_insert_module
 	int kmod_module_probe_insert_module(mod, flags, extra_options, run_install)
 	{
 		err = kmod_module_get_probe_list(mod, !!(flags & KMOD_PROBE_IGNORE_COMMAND), &list);
@@ -1204,7 +1226,7 @@ insmod 命令的实现可以分为5个步骤
 					->  module_get_dependencies_noref
 						-> kmod_module_parse_depline
 
-#### kmod_module_get_dependencies
+### kmod_module_get_dependencies
 	kmod_list *kmod_module_get_dependencies(struct kmod_module *mod)
 	{
 		module_get_dependencies_noref(mod);
@@ -1218,7 +1240,7 @@ insmod 命令的实现可以分为5个步骤
 		return list_new;
 	}
 
-#### module_get_dependencies_noref
+### module_get_dependencies_noref
 	kmod_list *module_get_dependencies_noref(struct kmod_module *mod)
 	{
 		char *line = kmod_search_moddep(mod->ctx, mod->name);
@@ -1259,3 +1281,4 @@ insmod 命令的实现可以分为5个步骤
 
 		return n;
 	}
+

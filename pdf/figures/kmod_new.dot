@@ -1,0 +1,6 @@
+digraph G {
+	kmod_new -> calloc;
+	kmod_new -> kmod_config_new;
+	kmod_new -> hash_new;
+
+}

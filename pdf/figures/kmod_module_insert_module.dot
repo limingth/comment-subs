@@ -1,0 +1,10 @@
+digraph G {
+	kmod_module_insert_module ->  kmod_file_open;
+	kmod_module_insert_module ->  kmod_elf_new;
+	kmod_module_insert_module ->  kmod_elf_get_memory;
+	kmod_module_insert_module ->  init_module;
+	kmod_module_insert_module ->  kmod_elf_unref;
+	kmod_module_insert_module ->  kmod_file_unref;
+
+	init_module -> __syscall;
+}
