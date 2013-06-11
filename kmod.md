@@ -906,31 +906,37 @@ kmod-11 详细分析报告
 kmod 项目的整个架构分为 3 层。最底层是 testsuite, 中间是 libkmod, 上层是 tools
 
 ### 应用层
+#### insmod 命令
+#### kmod_ctx 模块
+#### kmod_module 模块
 
 ### 中间层
+#### kmod_config 模块
+#### hash 模块
+
+#### kmod_elf 模块
+#### kmod_file 模块
 
 ### 抽象层
+#### init_module 系统调用模拟
 
 2. 模块分析
 ----------------
 
+### kmod_ctx
 ### kmod_module
 
 ### kmod_elf
-
 ### kmod_file
 
-### kmod_ctx
-
 ### kmod_config
+### hash
 
 ### kmod_list
 
 ### index_mm
 
 ### elf
-
-### hash
 
 ### list
 
@@ -940,6 +946,17 @@ kmod 项目的整个架构分为 3 层。最底层是 testsuite, 中间是 libkm
 
 3. 函数接口分析
 ----------------
+
+### kmod_new() 接口
+
+### kmod_unref() 接口
+
+### kmod_module_new_from_path() 接口
+
+### kmod_module_insert_module() 接口
+
+### kmod_module_unref() 接口
+
 
 4. 运行流程分析
 ----------------
@@ -958,12 +975,16 @@ kmod 项目的整个架构分为 3 层。最底层是 testsuite, 中间是 libkm
 	$ lsmod | grep hello
 	$ 
 
-#### 核心代码
-	ctx = kmod_new(NULL, &null_config);
-	err = kmod_module_new_from_path(ctx, filename, &mod);
-	err = kmod_module_insert_module(mod, 0, opts);
-	kmod_module_unref(mod);
-	kmod_unref(ctx);
+#### do_insmod 核心代码
+	do_insmod()
+	{
+		opts = argv[x];	// name=value
+		ctx = kmod_new(NULL, &null_config);
+		err = kmod_module_new_from_path(ctx, filename, &mod);
+		err = kmod_module_insert_module(mod, 0, opts);
+		kmod_module_unref(mod);
+		kmod_unref(ctx);
+	}
 
 insmod 命令的实现可以分为5个步骤
 
@@ -984,21 +1005,115 @@ insmod 命令的实现可以分为5个步骤
 	- kmod_module_unref()
 
 #### kmod_new 代码分析
+	kmod_ctx *kmod_new(char *dirname, char *config_paths)
+	{
+		ctx = calloc(1, sizeof(struct kmod_ctx));
+		ctx->dirname = get_kernel_release(dirname);
+		err = kmod_config_new(ctx, &ctx->config, config_paths);
+		ctx->modules_by_name = hash_new(KMOD_HASH_SIZE, NULL);
 
+		return ctx;
+	}
 
 #### kmod_unref 代码分析
+	kmod_ctx *kmod_unref(kmod_ctx *ctx)
+	{
+		kmod_unload_resources(ctx);
+		hash_free(ctx->modules_by_name);
+		kmod_config_free(ctx->config);
+		free(ctx);
 
+		return NULL;
+	}
 
 #### kmod_module_new_from_path 代码分析
-
+	int kmod_module_new_from_path(kmod_ctx *ctx, char *path, kmod_module **mod)
+	{
+		path_to_modname(path, name, &namelen);
+		m = kmod_pool_get_module(ctx, name);
+		kmod_module_ref(m);
+		err = kmod_module_new(ctx, name, name, namelen, NULL, 0, &m); *
+		*mod = m;
+		return 0;
+	}
 
 #### kmod_module_insert_module 代码分析
-
+	int kmod_module_insert_module(kmod_module *mod, int flags, char *options)
+	{
+		path = kmod_module_get_path(mod);
+		file = kmod_file_open();
+		size = kmod_file_get_size(file);
+		mem = kmod_file_get_contents(file);
+		elf = kmod_elf_new(mem, size);
+		kmod_elf_strip_section(elf);
+		mem = kmod_elf_get_memory(elf);
+		init_module(mem, size, args);
+		kmod_elf_unref(elf);
+		kmod_file_unref(file);
+	}
 
 #### kmod_module_unref 代码分析
+	kmod_module *kmod_module_unref(kmod_module *mod)
+	{
+		--mod->refcount;
 
+		kmod_pool_del_module(mod->ctx, mod, mod->hashkey);
+		kmod_module_unref_list(mod->dep);
+		kmod_file_unref(mod->file);
+		kmod_unref(mod->ctx);
+
+		return NULL;
+	}
+
+#### init_module 代码分析
+	long init_module(void *mem, unsigned long len, const char *args)
+	{
+		kmod_elf *elf = kmod_elf_new(mem, len);
+
+		err = kmod_elf_get_section(elf, ".gnu.linkonce.this_module", &buf, &bufsize);
+		kmod_elf_unref(elf);
+		mod = find_module(modules, modname);
+		if(mod != NULL)
+		{ 
+		} else if (module_is_inkernel(modname))
+		{
+		} else
+			create_sysfs_files(modname);
+
+		return err;
+	}
 
 ### rmsmod 实现流程
+
+#### do_rmmod 核心代码
+	do_rmmod(int argc, char *argv[])
+	{
+		flags = argv[x];	// -f, -w, 
+		ctx = kmod_new(NULL, &null_config);
+		err = kmod_module_new_from_path(ctx, filename, &mod);
+		err = kmod_module_remove_module(mod, flags);
+		kmod_module_unref(mod);
+		kmod_unref(ctx);
+	}
+
+#### kmod_module_remove_module 代码分析
+	int kmod_module_remove_module(kmod_module *mod, int flags)
+	{
+		err = delete_module(mod->name, flags);
+
+		return err;
+	}
+
+#### delete_module 代码分析
+	long init_module(void *mem, int flags)
+	{
+		struct mod *mod;
+
+		mod = find_module(modules, modname);
+
+		return mod->ret;
+	}
+
 
 ### lsmod 实现流程
 
@@ -1006,7 +1121,141 @@ insmod 命令的实现可以分为5个步骤
 
 ### depmod 实现流程
 
+#### do_depmod 核心代码
+	do_depmod(int argc, char *argv[])
+	{
+		ctx = kmod_new(cfg.dirname, &null_kmod_config);
+
+		err = depmod_init(&depmod, &cfg, ctx);
+		err = depmod_load_symvers(&depmod, module_symvers);
+		err = depmod_load_system_map(&depmod, system_map);
+		err = cfg_load(&cfg, config_paths);
+		err = depmod_modules_search(&depmod);
+		err = kmod_module_new_from_path(depmod.ctx, path, &mod);
+		err = depmod_module_add(&depmod, mod);
+		err = depmod_modules_build_array(&depmod);
+		depmod_modules_sort(&depmod);
+		err = depmod_load(&depmod);
+		err = depmod_output(&depmod, out);
+
+		depmod_shutdown(&depmod);
+		cfg_free(&cfg);
+		kmod_unref(ctx);
+	}
+
 ### modprobe 实现流程
 
 
+#### do_modprobe 核心代码
+	do_modprobe(int argc, char *argv[])
+	{
+		log_open(use_syslog);
 
+		snprintf(dirname_buf, sizeof(dirname_buf), "%s/lib/modules/%s", root, kversion);
+		dirname = dirname_buf;
+
+		ctx = kmod_new(dirname, config_paths);
+
+		log_setup_kmod_log(ctx, verbose);
+		kmod_load_resources(ctx);
+
+		if (do_xxx)
+			err = show_config(ctx);	
+			err = show_modversions(ctx, args[0]);
+			err = insmod_all(ctx, args, nargs);
+			err = rmmod_all(ctx, args, nargs); 
+
+		err = options_from_array(args, nargs, &opts);
+		err = insmod(ctx, args[0], opts);
+
+		kmod_unref(ctx);
+
+		log_close();
+	}
+
+#### insmod_all
+	static int insmod_all(struct kmod_ctx *ctx, char **args, int nargs)
+	{
+	        for (i = 0; i < nargs; i++) 
+			err = insmod(ctx, args[i], NULL);
+
+		return err;
+	}
+
+#### insmod
+	-> kmod_module_probe_insert_module()
+
+#### kmod_module_probe_insert_module
+	int kmod_module_probe_insert_module(mod, flags, extra_options, run_install)
+	{
+		err = kmod_module_get_probe_list(mod, !!(flags & KMOD_PROBE_IGNORE_COMMAND), &list);
+	
+		kmod_list_foreach(l, list) 
+		{
+			struct kmod_module *m = l->data;
+			err = kmod_module_insert_module(m, flags, options);
+		}
+	}
+
+	-> kmod_module_get_probe_list
+		-> __kmod_module_get_probe_list
+			-> __kmod_module_get_probe_list
+				-> kmod_module_get_dependencies
+					->  module_get_dependencies_noref
+						-> kmod_module_parse_depline
+
+#### kmod_module_get_dependencies
+	kmod_list *kmod_module_get_dependencies(struct kmod_module *mod)
+	{
+		module_get_dependencies_noref(mod);
+
+		kmod_list_foreach(l, mod->dep)
+		{
+			l_new = kmod_list_append(list_new, kmod_module_ref(l->data));
+			list_new = l_new;
+		}
+
+		return list_new;
+	}
+
+#### module_get_dependencies_noref
+	kmod_list *module_get_dependencies_noref(struct kmod_module *mod)
+	{
+		char *line = kmod_search_moddep(mod->ctx, mod->name);
+
+		kmod_module_parse_depline(mod, line);
+
+		return mod->dep;
+	}
+
+#### kmod_search_moddep
+	char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
+	{
+		// name = nfs;		// modprobe nfs
+		return index_mm_search(ctx->indexes[KMOD_INDEX_MODULES_DEP], name);
+		
+		DBG(ctx, "file=%s modname=%s\n", fn, name);
+
+		idx = index_file_open(fn);
+		line = index_search(idx, name);
+		index_file_close(idx);
+
+		return line;
+	}
+
+#### kmod_module_parse_depline
+	int kmod_module_parse_depline(struct kmod_module *mod, char *line)
+	{
+		for (p = strtok_r(p, " \t", &saveptr); p != NULL;
+			 p = strtok_r(NULL, " \t", &saveptr)) 
+		{
+			err = kmod_module_new_from_path(ctx, path, &depmod);
+			list = kmod_list_prepend(list, depmod);
+			n++;
+		}
+
+		mod->dep = list;
+		mod->n_dep = n;
+
+		return n;
+	}

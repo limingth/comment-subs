@@ -51,19 +51,7 @@ static const enum kmod_elf_class native_endianess = KMOD_ELF_MSB;
 static const enum kmod_elf_class native_endianess = KMOD_ELF_LSB;
 #endif
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- *  kmod_elf 数据结构，包含 kmod_elf_header, memory 指针
- */
+// kmod_elf.cmt
 struct kmod_elf {
 	const uint8_t *memory;
 	uint8_t *changed;
@@ -107,23 +95,7 @@ static inline void _elf_dbg(const struct kmod_elf *elf, const char *fname, unsig
 #define ELFDBG(elf, ...)
 #endif
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- * 
- * 根据 memory 指针，获得 ELF 文件类型，返回值为
- *	- ELFCLASS32
- *	- ELFCLASS64
- *	- KMOD_ELF_LSB
- *	- KMOD_ELF_MSB
- */
+// elf_identify.cmt
 static int elf_identify(const void *memory, uint64_t size)
 {
 	const uint8_t *p = memory;
@@ -231,19 +203,7 @@ static inline int elf_set_uint(struct kmod_elf *elf, uint64_t offset, uint64_t s
 	return 0;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 获得 elf memory + offset 偏移量之后的位置指针
- */
+// elf_get_mem.cmt
 static inline const void *elf_get_mem(const struct kmod_elf *elf, uint64_t offset)
 {
 	assert(offset < elf->size);
@@ -255,19 +215,7 @@ static inline const void *elf_get_mem(const struct kmod_elf *elf, uint64_t offse
 	return elf->memory + offset;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 获得 elf section header 指针, 需要调用 elf_get_mem()
- */
+// elf_get_section_header.cmt
 static inline const void *elf_get_section_header(const struct kmod_elf *elf, uint16_t idx)
 {
 	assert(idx != SHN_UNDEF);
@@ -281,19 +229,7 @@ static inline const void *elf_get_section_header(const struct kmod_elf *elf, uin
 			   idx * elf->header.section.entry_size);
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 获得 elf section 中第 idx 个 section 的 offset, size, nameoff 信息
- */
+// elf_get_section_info.cmt
 static inline int elf_get_section_info(const struct kmod_elf *elf, uint16_t idx, uint64_t *offset, uint64_t *size, uint32_t *nameoff)
 {
 	const uint8_t *p = elf_get_section_header(elf, idx);
@@ -336,38 +272,14 @@ static inline int elf_get_section_info(const struct kmod_elf *elf, uint16_t idx,
 	return 0;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 获得 elf 文件中 strings table 符号表的偏移指针
- */
+// elf_get_strings_section.cmt
 static const char *elf_get_strings_section(const struct kmod_elf *elf, uint64_t *size)
 {
 	*size = elf->header.strings.size;
 	return elf_get_mem(elf, elf->header.strings.offset);
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 创建一个 struct kmod_elf 结构体并将 size, offset, section.count 填入
- */
+// kmod_elf_new.cmt
 struct kmod_elf *kmod_elf_new(const void *memory, off_t size)
 {
 	struct kmod_elf *elf;
@@ -464,37 +376,13 @@ void kmod_elf_unref(struct kmod_elf *elf)
 	free(elf);
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 获得 elf 文件的 memory 指针
- */
+// kmod_elf_get_memory.cmt
 const void *kmod_elf_get_memory(const struct kmod_elf *elf)
 {
 	return elf->memory;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 查找 sections 中名字为 section 的那个，并返回 buf 指针和 buf_size 大小
- */
+// kmod_elf_get_section.cmt
 int kmod_elf_get_section(const struct kmod_elf *elf, const char *section, const void **buf, uint64_t *buf_size)
 {
 	uint64_t nameslen;
@@ -526,19 +414,7 @@ int kmod_elf_get_section(const struct kmod_elf *elf, const char *section, const 
 }
 
 /* array will be allocated with strings in a single malloc, just free *array */
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 获得名为 section 的 string 并分配空间用来存放
- */
+// kmod_elf_get_strings.cmt
 int kmod_elf_get_strings(const struct kmod_elf *elf, const char *section, char ***array)
 {
 	size_t i, j, count;
@@ -611,19 +487,7 @@ int kmod_elf_get_strings(const struct kmod_elf *elf, const char *section, char *
 }
 
 /* array will be allocated with strings in a single malloc, just free *array */
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 获得名为 __versions 的 string
- */
+// kmod_elf_get_modversions.cmt
 int kmod_elf_get_modversions(const struct kmod_elf *elf, struct kmod_modversion **array)
 {
 	size_t off, offcrc, slen;
@@ -694,19 +558,7 @@ int kmod_elf_get_modversions(const struct kmod_elf *elf, struct kmod_modversion 
 	return count;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 对 section 进行 strip
- */
+// kmod_elf_strip_section.cmt
 int kmod_elf_strip_section(struct kmod_elf *elf, const char *section)
 {
 	uint64_t size, off;
@@ -731,19 +583,7 @@ int kmod_elf_strip_section(struct kmod_elf *elf, const char *section)
 #undef WRITEV
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 对 .modinfo section 中的 vermagic 数据进行 strip
- */
+// kmod_elf_strip_vermagic.cmt
 int kmod_elf_strip_vermagic(struct kmod_elf *elf)
 {
 	uint64_t i, size;
@@ -807,19 +647,7 @@ int kmod_elf_strip_vermagic(struct kmod_elf *elf)
 }
 
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 获得 __ksymtab_strings section 中的 symtab
- */
+// kmod_elf_get_symbols_symtab.cmt
 static int kmod_elf_get_symbols_symtab(const struct kmod_elf *elf, struct kmod_modversion **array)
 {
 	uint64_t i, last, size;
@@ -911,19 +739,7 @@ static inline uint8_t kmod_symbol_bind_from_elf(uint8_t elf_value)
 }
 
 /* array will be allocated with strings in a single malloc, just free *array */
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 获得 .strtab .symtab secion 中的 相关信息 size, nameoff 等
- */
+// kmod_elf_get_symbols.cmt
 int kmod_elf_get_symbols(const struct kmod_elf *elf, struct kmod_modversion **array)
 {
 	static const char crc_str[] = "__crc_";
@@ -1083,19 +899,7 @@ static int kmod_elf_crc_find(const struct kmod_elf *elf, const void *versions, u
 #endif
 
 /* array will be allocated with strings in a single malloc, just free *array */
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 获得 __versions section 中 .strtab .symtab 相关信息
- */
+// kmod_elf_get_dependency_symbols.cmt
 int kmod_elf_get_dependency_symbols(const struct kmod_elf *elf, struct kmod_modversion **array)
 {
 	uint64_t versionslen, strtablen, symtablen, str_off, sym_off, ver_off;

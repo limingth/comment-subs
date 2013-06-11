@@ -551,6 +551,7 @@ char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
 	char fn[PATH_MAX];
 	char *line;
 
+	printf("name = %s\n", name);
 	if (ctx->indexes[KMOD_INDEX_MODULES_DEP]) {
 		DBG(ctx, "use mmaped index '%s' modname=%s\n",
 				index_files[KMOD_INDEX_MODULES_DEP].fn, name);
@@ -562,6 +563,7 @@ char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
 					index_files[KMOD_INDEX_MODULES_DEP].fn);
 
 	DBG(ctx, "file=%s modname=%s\n", fn, name);
+	printf("file=%s modname=%s\n", fn, name);
 
 	idx = index_file_open(fn);
 	if (idx == NULL) {

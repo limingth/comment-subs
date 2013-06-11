@@ -1,3 +1,10 @@
 /*
  * 分析依赖关系的字符串, 建立依赖关系的 kmod_list
+ * @param[in] mod 
+ * @param[in] line 在依赖文件中的字符串
+ *	例如 line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
+ * @return 返回一个 kmod_list 指针，按依赖关系中的各个模块建立
+ * 
+ * @details
+ *
  */

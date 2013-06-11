@@ -1,3 +1,17 @@
 /*
- * kmod_ref 给 kmod 的引用计数 refcount 减1
+ * kmod_unref - 释放 kmod 库上下文
+ * 
+ * 主要功能： 
+ *	给 kmod 的引用计数 refcount 减1
+ *
+ * @param[in] ctx 要释放的库上下文 ctx
+ * @return 返回的是释放之后 ctx 指针
+ * @retval ctx 表示释放时引用计数大于1，仅对引用计数做了减1操作成功
+ * @retval NULL 表示释放时引用计数等于1，释放之后无引用，成功释放
+ *
+ * @see 调用函数：
+ *	- kmod_unload_resources()
+ *	- hash_free()
+ *	- kmod_config_free()
+ *	- free()
  */

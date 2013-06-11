@@ -590,6 +590,7 @@ static int insmod_all(struct kmod_ctx *ctx, char **args, int nargs)
 		int r = insmod(ctx, args[i], NULL);
 		if (r < 0)
 			err = r;
+		printf("i = %d, args[i] = %s\n", i, args[i]);
 	}
 
 	return err;
@@ -919,9 +920,12 @@ static int do_modprobe(int argc, char **orig_argv)
 		err = insmod_all(ctx, args, nargs);
 	else {
 		char *opts;
+		printf("before options args[i] = %s\n", args[0]);
 		err = options_from_array(args, nargs, &opts);
 		if (err == 0) {
 			err = insmod(ctx, args[0], opts);
+
+			printf("0, args[i] = %s\n", args[0]);
 			free(opts);
 		}
 	}

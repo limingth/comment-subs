@@ -1,0 +1,18 @@
+/*
+ * kmod_module_new_from_path - 创建 kmod module
+ *
+ * 主要功能： 
+ *	创建 kmod_module 结构体
+ *
+ * @param[in] ctx 模块所在路径，NULL 表示默认为 /lib/modules/`uname -r`
+ * @param[in] path 配置路径，
+ * @param[out] mod 创建成功后将指针写入 *mod 中
+ * @return 返回的是创建操作是否成功
+ * @retval 0为成功
+ * @retval 负数表示失败
+ *
+ * @see 调用函数：
+ *	- kmod_pool_get_module()
+ *	- kmod_module_ref()
+ *	- kmod_module_new()
+ */	

@@ -35,37 +35,13 @@ static const struct option options[] = {
 
 static const struct kmod_cmd kmod_cmd_help;
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * kmod 命令的主程序
- */
+// kmod_cmds.cmt
 static const struct kmod_cmd *kmod_cmds[] = {
 	&kmod_cmd_help,
 	&kmod_cmd_list,
 };
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * kmod 支持的compat命令 lsmod/rmmod/insmod/modinfo/modprobe/depmod
- */
+// kmod_compat_cmds.cmt
 static const struct kmod_cmd *kmod_compat_cmds[] = {
 	&kmod_cmd_compat_lsmod,
 	&kmod_cmd_compat_rmmod,
@@ -75,19 +51,7 @@ static const struct kmod_cmd *kmod_compat_cmds[] = {
 	&kmod_cmd_compat_depmod,
 };
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * kmod 的帮助提示，运行 kmod help 时显示信息
- */
+// kmod_help.cmt
 static int kmod_help(int argc, char *argv[])
 {
 	size_t i;
@@ -119,38 +83,14 @@ static int kmod_help(int argc, char *argv[])
 	return EXIT_SUCCESS;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * kmod help 帮助命令的数据结构
- */
+// kmod_cmd_help.cmt
 static const struct kmod_cmd kmod_cmd_help = {
 	.name = "help",
 	.cmd = kmod_help,
 	.help = "Show help message",
 };
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 解释 kmod -h -V -? 等命令参数
- */
+// handle_kmod_commands.cmt
 static int handle_kmod_commands(int argc, char *argv[])
 {
 	const char *cmd;
@@ -206,19 +146,7 @@ fail:
 }
 
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 解释 kmod compat 命令
- */
+// handle_kmod_compat_commands.cmt
 static int handle_kmod_compat_commands(int argc, char *argv[])
 {
 	const char *cmd;
@@ -234,19 +162,7 @@ static int handle_kmod_compat_commands(int argc, char *argv[])
 	return -ENOENT;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * kmod 命令的主程序
- */
+// kmod_main.cmt
 int main(int argc, char *argv[])
 {
 	int err;

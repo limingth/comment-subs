@@ -362,28 +362,7 @@ static bool is_module_filename(const char *name)
 	return false;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- * 
- * modinfo 函数的真正实现，通过 getopt_long 分析传入参数，
- * 通过调用 libkmod 的接口，实现 modinfo 命令
- * 主要使用的接口包括
- * - kmod_new()
- * - kmod_unref()
- * 以下接口是在这个函数中调用的，在当前文件内部通过 static 实现的内部函数
- * 	- is_module_filename()
- * 	- modinfo_path_do()
- * 	- modinfo_alias_do()
- */
- 
+// do_modinfo.cmt
 static int do_modinfo(int argc, char *argv[])
 {
 	struct kmod_ctx *ctx;
@@ -486,22 +465,7 @@ static int do_modinfo(int argc, char *argv[])
 	return err >= 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- * 
- * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
- * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
- * 这个结构体中还有一个 cmd 成员，是一个函数指针，
- * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx
- */
+// kmod_cmd_compat_xxx.cmt
 const struct kmod_cmd kmod_cmd_compat_modinfo = {
 	.name = "modinfo",
 	.cmd = do_modinfo,

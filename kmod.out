@@ -22,26 +22,31 @@
 \BOOKMARK [1][-]{section*.22}{kmod-11 详细分析报告}{}
 \BOOKMARK [2][-]{section*.23}{1. 架构分析}{section*.22}
 \BOOKMARK [3][-]{section*.24}{应用层}{section*.23}
-\BOOKMARK [3][-]{section*.25}{中间层}{section*.23}
-\BOOKMARK [3][-]{section*.26}{抽象层}{section*.23}
-\BOOKMARK [2][-]{section*.27}{2. 模块分析}{section*.22}
-\BOOKMARK [3][-]{section*.28}{kmod\137module}{section*.27}
-\BOOKMARK [3][-]{section*.29}{kmod\137elf}{section*.27}
-\BOOKMARK [3][-]{section*.30}{kmod\137file}{section*.27}
-\BOOKMARK [3][-]{section*.31}{kmod\137ctx}{section*.27}
-\BOOKMARK [3][-]{section*.32}{kmod\137config}{section*.27}
-\BOOKMARK [3][-]{section*.33}{kmod\137list}{section*.27}
-\BOOKMARK [3][-]{section*.34}{index\137mm}{section*.27}
-\BOOKMARK [3][-]{section*.35}{elf}{section*.27}
-\BOOKMARK [3][-]{section*.36}{hash}{section*.27}
-\BOOKMARK [3][-]{section*.37}{list}{section*.27}
-\BOOKMARK [3][-]{section*.38}{array}{section*.27}
-\BOOKMARK [3][-]{section*.39}{log}{section*.27}
-\BOOKMARK [2][-]{section*.40}{3. 函数接口分析}{section*.22}
-\BOOKMARK [2][-]{section*.41}{4. 运行流程分析}{section*.22}
-\BOOKMARK [3][-]{section*.42}{insmod 实现流程}{section*.41}
-\BOOKMARK [3][-]{section*.49}{rmsmod 实现流程}{section*.41}
-\BOOKMARK [3][-]{section*.50}{lsmod 实现流程}{section*.41}
-\BOOKMARK [3][-]{section*.51}{modinfo 实现流程}{section*.41}
-\BOOKMARK [3][-]{section*.52}{depmod 实现流程}{section*.41}
-\BOOKMARK [3][-]{section*.53}{modprobe 实现流程}{section*.41}
+\BOOKMARK [3][-]{section*.28}{中间层}{section*.23}
+\BOOKMARK [3][-]{section*.33}{抽象层}{section*.23}
+\BOOKMARK [2][-]{section*.35}{2. 模块分析}{section*.22}
+\BOOKMARK [3][-]{section*.36}{kmod\137ctx}{section*.35}
+\BOOKMARK [3][-]{section*.37}{kmod\137module}{section*.35}
+\BOOKMARK [3][-]{section*.38}{kmod\137elf}{section*.35}
+\BOOKMARK [3][-]{section*.39}{kmod\137file}{section*.35}
+\BOOKMARK [3][-]{section*.40}{kmod\137config}{section*.35}
+\BOOKMARK [3][-]{section*.41}{hash}{section*.35}
+\BOOKMARK [3][-]{section*.42}{kmod\137list}{section*.35}
+\BOOKMARK [3][-]{section*.43}{index\137mm}{section*.35}
+\BOOKMARK [3][-]{section*.44}{elf}{section*.35}
+\BOOKMARK [3][-]{section*.45}{list}{section*.35}
+\BOOKMARK [3][-]{section*.46}{array}{section*.35}
+\BOOKMARK [3][-]{section*.47}{log}{section*.35}
+\BOOKMARK [2][-]{section*.48}{3. 函数接口分析}{section*.22}
+\BOOKMARK [3][-]{section*.49}{kmod\137new\(\) 接口}{section*.48}
+\BOOKMARK [3][-]{section*.50}{kmod\137unref\(\) 接口}{section*.48}
+\BOOKMARK [3][-]{section*.51}{kmod\137module\137new\137from\137path\(\) 接口}{section*.48}
+\BOOKMARK [3][-]{section*.52}{kmod\137module\137insert\137module\(\) 接口}{section*.48}
+\BOOKMARK [3][-]{section*.53}{kmod\137module\137unref\(\) 接口}{section*.48}
+\BOOKMARK [2][-]{section*.54}{4. 运行流程分析}{section*.22}
+\BOOKMARK [3][-]{section*.55}{insmod 实现流程}{section*.54}
+\BOOKMARK [3][-]{section*.63}{rmsmod 实现流程}{section*.54}
+\BOOKMARK [3][-]{section*.67}{lsmod 实现流程}{section*.54}
+\BOOKMARK [3][-]{section*.68}{modinfo 实现流程}{section*.54}
+\BOOKMARK [3][-]{section*.69}{depmod 实现流程}{section*.54}
+\BOOKMARK [3][-]{section*.70}{modprobe 实现流程}{section*.54}

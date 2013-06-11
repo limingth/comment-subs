@@ -129,6 +129,8 @@ int kmod_module_parse_depline(struct kmod_module *mod, char *line)
 	char *p, *saveptr;
 	int err = 0, n = 0;
 	size_t dirnamelen;
+	
+	printf("\nline = %s\n---------------------\n", line);
 
 	if (mod->init.dep)
 		return mod->n_dep;
@@ -165,6 +167,7 @@ int kmod_module_parse_depline(struct kmod_module *mod, char *line)
 		struct kmod_module *depmod;
 		const char *path;
 
+		printf("\np = %s\n---------------------\n", p);
 		path = path_join(p, dirnamelen, buf);
 		if (path == NULL) {
 			ERR(ctx, "could not join path '%s' and '%s'.\n",
@@ -359,6 +362,7 @@ int kmod_module_new_from_alias(struct kmod_ctx *ctx, const char *alias,
  * Returns: 0 on success or < 0 otherwise. It fails if file does not exist, if
  * it's not a valid file for a kmod_module or if memory allocation failed.
  */
+// kmod_module_new_from_path.cmt
 KMOD_EXPORT int kmod_module_new_from_path(struct kmod_ctx *ctx,
 						const char *path,
 						struct kmod_module **mod)
@@ -749,6 +753,7 @@ extern long delete_module(const char *name, unsigned int flags);
  *
  * Returns: 0 on success or < 0 on failure.
  */
+// kmod_module_remove_module.cmt
 KMOD_EXPORT int kmod_module_remove_module(struct kmod_module *mod,
 							unsigned int flags)
 {
@@ -784,6 +789,7 @@ extern long init_module(const void *mem, unsigned long len, const char *args);
  * Returns: 0 on success or < 0 on failure. If module is already loaded it
  * returns -EEXIST.
  */
+// kmod_module_insert_module.cmt
 KMOD_EXPORT int kmod_module_insert_module(struct kmod_module *mod,
 							unsigned int flags,
 							const char *options)

@@ -45,19 +45,7 @@ static const struct option cmdopts[] = {
 	{NULL, 0, 0, 0}
 };
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 负责打印该命令的帮助提示信息，通过 -h 参数可以显示
- */
+// help.cmt
 static void help(void)
 {
 	printf("Usage:\n"
@@ -73,30 +61,7 @@ static void help(void)
 		program_invocation_short_name);
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 检查模块是否正在使用，通过引用计数来帮助判断是否真正需要卸载模块 
- * 主要用到的函数接口
- * - kmod_module_get_initstate()
- * - kmod_module_get_name()
- * - kmod_module_get_holders()
- * - kmod_list_foreach()
- * - kmod_module_get_module()
- * - kmod_module_unref()
- * - kmod_module_unref_list()
- * - kmod_module_get_refcnt()
- * 其中 最后通过 kmod_module_get_refcnt() 函数可以得到模块当前的引用计数
- */
-
+// check_module_inuse.cmt
 static int check_module_inuse(struct kmod_module *mod) {
 	struct kmod_list *holders;
 
@@ -131,30 +96,7 @@ static int check_module_inuse(struct kmod_module *mod) {
 	return 0;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- * 
- * rmmod 函数的真正实现，通过 getopt_long 分析传入参数，
- * 通过调用 libkmod 的接口，实现 rmmod 命令
- * 主要使用的接口包括
- * - log_open()
- * - kmod_new()
- * - log_setup_kmod_log()
- * - kmod_module_new_from_path()
- * - check_module_inuse()
- * - kmod_module_remove_module()
- * - kmod_module_unref()
- * - kmod_unref()
- * - log_close()
- */ 
+// do_rmmod.cmt
 static int do_rmmod(int argc, char *argv[])
 {
 	struct kmod_ctx *ctx;
@@ -252,22 +194,7 @@ done:
 	return r == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- * 
- * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
- * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
- * 这个结构体中还有一个 cmd 成员，是一个函数指针，
- * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx
- */
+// kmod_cmd_compat_xxx.cmt
 const struct kmod_cmd kmod_cmd_compat_rmmod = {
 	.name = "rmmod",
 	.cmd = do_rmmod,

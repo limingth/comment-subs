@@ -868,22 +868,35 @@ struct kmod_module {
 <h2 id="架构分析">1. 架构分析</h2>
 <p>kmod 项目的整个架构分为 3 层。最底层是 testsuite, 中间是 libkmod, 上层是 tools</p>
 <h3 id="应用层">应用层</h3>
+<h4 id="insmod-命令">insmod 命令</h4>
+<h4 id="kmod_ctx-模块">kmod_ctx 模块</h4>
+<h4 id="kmod_module-模块">kmod_module 模块</h4>
 <h3 id="中间层">中间层</h3>
+<h4 id="kmod_config-模块">kmod_config 模块</h4>
+<h4 id="hash-模块">hash 模块</h4>
+<h4 id="kmod_elf-模块">kmod_elf 模块</h4>
+<h4 id="kmod_file-模块">kmod_file 模块</h4>
 <h3 id="抽象层">抽象层</h3>
+<h4 id="init_module-系统调用模拟">init_module 系统调用模拟</h4>
 <h2 id="模块分析">2. 模块分析</h2>
+<h3 id="kmod_ctx">kmod_ctx</h3>
 <h3 id="kmod_module">kmod_module</h3>
 <h3 id="kmod_elf">kmod_elf</h3>
 <h3 id="kmod_file">kmod_file</h3>
-<h3 id="kmod_ctx">kmod_ctx</h3>
 <h3 id="kmod_config">kmod_config</h3>
+<h3 id="hash">hash</h3>
 <h3 id="kmod_list">kmod_list</h3>
 <h3 id="index_mm">index_mm</h3>
 <h3 id="elf">elf</h3>
-<h3 id="hash">hash</h3>
 <h3 id="list">list</h3>
 <h3 id="array">array</h3>
 <h3 id="log">log</h3>
 <h2 id="函数接口分析">3. 函数接口分析</h2>
+<h3 id="kmod_new-接口">kmod_new() 接口</h3>
+<h3 id="kmod_unref-接口">kmod_unref() 接口</h3>
+<h3 id="kmod_module_new_from_path-接口">kmod_module_new_from_path() 接口</h3>
+<h3 id="kmod_module_insert_module-接口">kmod_module_insert_module() 接口</h3>
+<h3 id="kmod_module_unref-接口">kmod_module_unref() 接口</h3>
 <h2 id="运行流程分析">4. 运行流程分析</h2>
 <h3 id="insmod-实现流程">insmod 实现流程</h3>
 <pre><code>$ sudo ./kmod-11/tools/rmmod hello-module/hello.ko 
@@ -898,12 +911,16 @@ hello                  12415  0
 $ sudo ./kmod-11/tools/rmmod hello-module/hello.ko 
 $ lsmod | grep hello
 $ </code></pre>
-<h4 id="核心代码">核心代码</h4>
-<pre><code>ctx = kmod_new(NULL, &amp;null_config);
-err = kmod_module_new_from_path(ctx, filename, &amp;mod);
-err = kmod_module_insert_module(mod, 0, opts);
-kmod_module_unref(mod);
-kmod_unref(ctx);</code></pre>
+<h4 id="do_insmod-核心代码">do_insmod 核心代码</h4>
+<pre><code>do_insmod()
+{
+    opts = argv[x]; // name=value
+    ctx = kmod_new(NULL, &amp;null_config);
+    err = kmod_module_new_from_path(ctx, filename, &amp;mod);
+    err = kmod_module_insert_module(mod, 0, opts);
+    kmod_module_unref(mod);
+    kmod_unref(ctx);
+}</code></pre>
 <p>insmod 命令的实现可以分为5个步骤</p>
 <ul>
 <li>创建模块的上下文 struct kmod_ctx ctx</li>
@@ -927,11 +944,105 @@ kmod_unref(ctx);</code></pre>
 </ul></li>
 </ul>
 <h4 id="kmod_new-代码分析">kmod_new 代码分析</h4>
+<pre><code>kmod_ctx *kmod_new(char *dirname, char *config_paths)
+{
+    ctx = calloc(1, sizeof(struct kmod_ctx));
+    ctx-&gt;dirname = get_kernel_release(dirname);
+    err = kmod_config_new(ctx, &amp;ctx-&gt;config, config_paths);
+    ctx-&gt;modules_by_name = hash_new(KMOD_HASH_SIZE, NULL);
+
+    return ctx;
+}</code></pre>
 <h4 id="kmod_unref-代码分析">kmod_unref 代码分析</h4>
+<pre><code>kmod_ctx *kmod_unref(kmod_ctx *ctx)
+{
+    kmod_unload_resources(ctx);
+    hash_free(ctx-&gt;modules_by_name);
+    kmod_config_free(ctx-&gt;config);
+    free(ctx);
+
+    return NULL;
+}</code></pre>
 <h4 id="kmod_module_new_from_path-代码分析">kmod_module_new_from_path 代码分析</h4>
+<pre><code>int kmod_module_new_from_path(kmod_ctx *ctx, char *path, kmod_module **mod)
+{
+    path_to_modname(path, name, &amp;namelen);
+    m = kmod_pool_get_module(ctx, name);
+    kmod_module_ref(m);
+    err = kmod_module_new(ctx, name, name, namelen, NULL, 0, &amp;m); *
+    *mod = m;
+    return 0;
+}</code></pre>
 <h4 id="kmod_module_insert_module-代码分析">kmod_module_insert_module 代码分析</h4>
+<pre><code>int kmod_module_insert_module(kmod_module *mod, int flags, char *options)
+{
+    path = kmod_module_get_path(mod);
+    file = kmod_file_open();
+    size = kmod_file_get_size(file);
+    mem = kmod_file_get_contents(file);
+    elf = kmod_elf_new(mem, size);
+    kmod_elf_strip_section(elf);
+    mem = kmod_elf_get_memory(elf);
+    init_module(mem, size, args);
+    kmod_elf_unref(elf);
+    kmod_file_unref(file);
+}</code></pre>
 <h4 id="kmod_module_unref-代码分析">kmod_module_unref 代码分析</h4>
+<pre><code>kmod_module *kmod_module_unref(kmod_module *mod)
+{
+    --mod-&gt;refcount;
+
+    kmod_pool_del_module(mod-&gt;ctx, mod, mod-&gt;hashkey);
+    kmod_module_unref_list(mod-&gt;dep);
+    kmod_file_unref(mod-&gt;file);
+    kmod_unref(mod-&gt;ctx);
+
+    return NULL;
+}</code></pre>
+<h4 id="init_module-代码分析">init_module 代码分析</h4>
+<pre><code>long init_module(void *mem, unsigned long len, const char *args)
+{
+    kmod_elf *elf = kmod_elf_new(mem, len);
+
+    err = kmod_elf_get_section(elf, &quot;.gnu.linkonce.this_module&quot;, &amp;buf, &amp;bufsize);
+    kmod_elf_unref(elf);
+    mod = find_module(modules, modname);
+    if(mod != NULL)
+    { 
+    } else if (module_is_inkernel(modname))
+    {
+    } else
+        create_sysfs_files(modname);
+
+    return err;
+}</code></pre>
 <h3 id="rmsmod-实现流程">rmsmod 实现流程</h3>
+<h4 id="do_rmmod-核心代码">do_rmmod 核心代码</h4>
+<pre><code>do_rmmod(int argc, char *argv[])
+{
+    flags = argv[x];    // -f, -w, 
+    ctx = kmod_new(NULL, &amp;null_config);
+    err = kmod_module_new_from_path(ctx, filename, &amp;mod);
+    err = kmod_module_remove_module(mod, flags);
+    kmod_module_unref(mod);
+    kmod_unref(ctx);
+}</code></pre>
+<h4 id="kmod_module_remove_module-代码分析">kmod_module_remove_module 代码分析</h4>
+<pre><code>int kmod_module_remove_module(kmod_module *mod, int flags)
+{
+    err = delete_module(mod-&gt;name, flags);
+
+    return err;
+}</code></pre>
+<h4 id="delete_module-代码分析">delete_module 代码分析</h4>
+<pre><code>long init_module(void *mem, int flags)
+{
+    struct mod *mod;
+
+    mod = find_module(modules, modname);
+
+    return mod-&gt;ret;
+}</code></pre>
 <h3 id="lsmod-实现流程">lsmod 实现流程</h3>
 <h3 id="modinfo-实现流程">modinfo 实现流程</h3>
 <h3 id="depmod-实现流程">depmod 实现流程</h3>

@@ -1,5 +1,16 @@
-/* 
- * 先通过 find_module 找到对应 modname 的 mod 指针，
- * 如果没有这个 modname，则返回值为 0
- * 如果找到了，则返回 mod->ret ，并给 errno 赋值
+/**
+ * delete_module - 模拟内核卸载模块
+ *
+ * @brief 主要功能：
+ *	先通过 find_module 找到对应 modname 的 mod 指针，
+ *	 如果没有这个 modname，则返回值为 0
+ *	 如果找到了，则返回 mod->ret ，并给 errno 赋值
+ * 
+ * @param[in] modname 模块名称，用于查找该模块
+ * @param[in] flags 卸载参数，例如是否强制卸载 -f
+ * @return 返回错误码
+ * @retval 0 表示成功卸载模块
+ * @retval -1 表示卸载模块失败
+ *
+ * 其中主要用到了 find_module 的接口
  */

@@ -1201,11 +1201,29 @@ tools
 
 \subsubsection{应用层}
 
+\paragraph{insmod 命令}
+
+\paragraph{kmod\_ctx 模块}
+
+\paragraph{kmod\_module 模块}
+
 \subsubsection{中间层}
+
+\paragraph{kmod\_config 模块}
+
+\paragraph{hash 模块}
+
+\paragraph{kmod\_elf 模块}
+
+\paragraph{kmod\_file 模块}
 
 \subsubsection{抽象层}
 
+\paragraph{init\_module 系统调用模拟}
+
 \subsection{2. 模块分析}
+
+\subsubsection{kmod\_ctx}
 
 \subsubsection{kmod\_module}
 
@@ -1213,17 +1231,15 @@ tools
 
 \subsubsection{kmod\_file}
 
-\subsubsection{kmod\_ctx}
-
 \subsubsection{kmod\_config}
+
+\subsubsection{hash}
 
 \subsubsection{kmod\_list}
 
 \subsubsection{index\_mm}
 
 \subsubsection{elf}
-
-\subsubsection{hash}
 
 \subsubsection{list}
 
@@ -1232,6 +1248,16 @@ tools
 \subsubsection{log}
 
 \subsection{3. 函数接口分析}
+
+\subsubsection{kmod\_new() 接口}
+
+\subsubsection{kmod\_unref() 接口}
+
+\subsubsection{kmod\_module\_new\_from\_path() 接口}
+
+\subsubsection{kmod\_module\_insert\_module() 接口}
+
+\subsubsection{kmod\_module\_unref() 接口}
 
 \subsection{4. 运行流程分析}
 
@@ -1251,14 +1277,18 @@ $ sudo ./kmod-11/tools/rmmod hello-module/hello.ko
 $ lsmod | grep hello
 $ 
 \end{verbatim}\end{shaded}}
-\paragraph{核心代码}
+\paragraph{do\_insmod 核心代码}
 
 {\begin{shaded}\begin{verbatim}
-ctx = kmod_new(NULL, &null_config);
-err = kmod_module_new_from_path(ctx, filename, &mod);
-err = kmod_module_insert_module(mod, 0, opts);
-kmod_module_unref(mod);
-kmod_unref(ctx);
+do_insmod()
+{
+    opts = argv[x]; // name=value
+    ctx = kmod_new(NULL, &null_config);
+    err = kmod_module_new_from_path(ctx, filename, &mod);
+    err = kmod_module_insert_module(mod, 0, opts);
+    kmod_module_unref(mod);
+    kmod_unref(ctx);
+}
 \end{verbatim}\end{shaded}}
 insmod 命令的实现可以分为5个步骤
 
@@ -1298,16 +1328,132 @@ insmod 命令的实现可以分为5个步骤
 \end{itemize}
 \paragraph{kmod\_new 代码分析}
 
+{\begin{shaded}\begin{verbatim}
+kmod_ctx *kmod_new(char *dirname, char *config_paths)
+{
+    ctx = calloc(1, sizeof(struct kmod_ctx));
+    ctx->dirname = get_kernel_release(dirname);
+    err = kmod_config_new(ctx, &ctx->config, config_paths);
+    ctx->modules_by_name = hash_new(KMOD_HASH_SIZE, NULL);
+
+    return ctx;
+}
+\end{verbatim}\end{shaded}}
 \paragraph{kmod\_unref 代码分析}
 
+{\begin{shaded}\begin{verbatim}
+kmod_ctx *kmod_unref(kmod_ctx *ctx)
+{
+    kmod_unload_resources(ctx);
+    hash_free(ctx->modules_by_name);
+    kmod_config_free(ctx->config);
+    free(ctx);
+
+    return NULL;
+}
+\end{verbatim}\end{shaded}}
 \paragraph{kmod\_module\_new\_from\_path 代码分析}
 
+{\begin{shaded}\begin{verbatim}
+int kmod_module_new_from_path(kmod_ctx *ctx, char *path, kmod_module **mod)
+{
+    path_to_modname(path, name, &namelen);
+    m = kmod_pool_get_module(ctx, name);
+    kmod_module_ref(m);
+    err = kmod_module_new(ctx, name, name, namelen, NULL, 0, &m); *
+    *mod = m;
+    return 0;
+}
+\end{verbatim}\end{shaded}}
 \paragraph{kmod\_module\_insert\_module 代码分析}
 
+{\begin{shaded}\begin{verbatim}
+int kmod_module_insert_module(kmod_module *mod, int flags, char *options)
+{
+    path = kmod_module_get_path(mod);
+    file = kmod_file_open();
+    size = kmod_file_get_size(file);
+    mem = kmod_file_get_contents(file);
+    elf = kmod_elf_new(mem, size);
+    kmod_elf_strip_section(elf);
+    mem = kmod_elf_get_memory(elf);
+    init_module(mem, size, args);
+    kmod_elf_unref(elf);
+    kmod_file_unref(file);
+}
+\end{verbatim}\end{shaded}}
 \paragraph{kmod\_module\_unref 代码分析}
 
+{\begin{shaded}\begin{verbatim}
+kmod_module *kmod_module_unref(kmod_module *mod)
+{
+    --mod->refcount;
+
+    kmod_pool_del_module(mod->ctx, mod, mod->hashkey);
+    kmod_module_unref_list(mod->dep);
+    kmod_file_unref(mod->file);
+    kmod_unref(mod->ctx);
+
+    return NULL;
+}
+\end{verbatim}\end{shaded}}
+\paragraph{init\_module 代码分析}
+
+{\begin{shaded}\begin{verbatim}
+long init_module(void *mem, unsigned long len, const char *args)
+{
+    kmod_elf *elf = kmod_elf_new(mem, len);
+
+    err = kmod_elf_get_section(elf, ".gnu.linkonce.this_module", &buf, &bufsize);
+    kmod_elf_unref(elf);
+    mod = find_module(modules, modname);
+    if(mod != NULL)
+    { 
+    } else if (module_is_inkernel(modname))
+    {
+    } else
+        create_sysfs_files(modname);
+
+    return err;
+}
+\end{verbatim}\end{shaded}}
 \subsubsection{rmsmod 实现流程}
 
+\paragraph{do\_rmmod 核心代码}
+
+{\begin{shaded}\begin{verbatim}
+do_rmmod(int argc, char *argv[])
+{
+    flags = argv[x];    // -f, -w, 
+    ctx = kmod_new(NULL, &null_config);
+    err = kmod_module_new_from_path(ctx, filename, &mod);
+    err = kmod_module_remove_module(mod, flags);
+    kmod_module_unref(mod);
+    kmod_unref(ctx);
+}
+\end{verbatim}\end{shaded}}
+\paragraph{kmod\_module\_remove\_module 代码分析}
+
+{\begin{shaded}\begin{verbatim}
+int kmod_module_remove_module(kmod_module *mod, int flags)
+{
+    err = delete_module(mod->name, flags);
+
+    return err;
+}
+\end{verbatim}\end{shaded}}
+\paragraph{delete\_module 代码分析}
+
+{\begin{shaded}\begin{verbatim}
+long init_module(void *mem, int flags)
+{
+    struct mod *mod;
+
+    mod = find_module(modules, modname);
+
+    return mod->ret;
+}
+\end{verbatim}\end{shaded}}
 \subsubsection{lsmod 实现流程}
 
 \subsubsection{modinfo 实现流程}

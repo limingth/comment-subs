@@ -285,28 +285,7 @@ end:
 	return ret;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- * 
- * 真正能够完成一个模块的卸载操作的函数，也是一个内部的static函数，
- * 此函数是被 rmmod_do_module() 所调用的，因此仅在 modprobe.c 中使用
- * 其中用到了 libkmod 的一些接口，如下
- *	- kmod_module_get_name()
- *	- kmod_module_remove_module()		*
- *	- kmod_module_get_dependencies()
- *	- kmod_module_get_module()
- *	- rmmod_do_remove_module()
- *	- kmod_module_unref();
- *	- kmod_module_unref_list();
- */
+// rmmod_do_remove_module.cmt
 static int rmmod_do_remove_module(struct kmod_module *mod)
 {
 	const char *modname = kmod_module_get_name(mod);
@@ -361,33 +340,7 @@ static int rmmod_do_deps_list(struct kmod_list *list, bool stop_on_errors)
 	return 0;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- * 
- * 真正能够完成一个模块的卸载操作的函数，也是一个内部的static函数，
- * 因此仅在 modprobe.c 中使用
- * 其中用到了 libkmod 的一些接口，如下
- *	- kmod_module_get_module()
- *	- kmod_module_get_softdeps()
- *	- kmod_module_get_remove_commands()
- *	- kmod_module_get_initstate()
- *	- rmmod_do_deps_list()
- *	- kmod_module_get_dependencies()
- *	- kmod_module_get_refcnt()
- *	- rmmod_do_remove_module()		*
- *	- command_do()
- *	- kmod_module_unref_list();
- * 删除/卸载模块的核心调用是 rmmod_do_remove_module() 
- * 这个函数也是在 modprobe 模块内部的一个 static 函数，不对外。
- */
+// rmmod_do_module.cmt
 static int rmmod_do_module(struct kmod_module *mod, bool do_dependencies)
 {
 	const char *modname = kmod_module_get_name(mod);
@@ -463,28 +416,7 @@ error:
 	return err;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- * 
- * 完成一个模块的卸载操作，是一个内部的static函数，
- * 因此仅在 modprobe.c 中使用
- * 其中用到了 libkmod 的一些接口，如下
- *	- kmod_module_new_from_lookup()
- *	- kmod_module_get_module()
- *	- rmmod_do_module()
- *	- kmod_module_unref()
- *	- kmod_module_unref_list();
- * 删除/卸载模块的核心调用是 rmmod_do_module() 
- * 这个函数也是在 rmmod 模块内部的一个 static 函数，不对外。
- */
+// rmmod.cmt
 static int rmmod(struct kmod_ctx *ctx, const char *alias)
 {
 	struct kmod_list *l, *list = NULL;
@@ -511,19 +443,7 @@ static int rmmod(struct kmod_ctx *ctx, const char *alias)
 	return err;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 根据传入的 argv[] 参数，依次卸载 nargs 个模块
- */ 
+// rmmod_all.cmt
 static int rmmod_all(struct kmod_ctx *ctx, char **args, int nargs)
 {
 	int i, err = 0;
@@ -585,27 +505,7 @@ static void print_action(struct kmod_module *m, bool install,
 		printf("insmod %s %s\n", kmod_module_get_path(m), options);
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- * 
- * 完成一个模块的插入操作，是一个内部的static函数，
- * 因此仅在 modprobe.c 中使用
- * 其中用到了 libkmod 的一些接口，如下
- *	- kmod_module_new_from_lookup()
- *	- kmod_module_get_module()
- *	- kmod_module_get_name()
- *	- kmod_module_probe_insert_module()
- *	- kmod_module_unref()
- *	- kmod_module_unref_list()
- */
+// insmod.cmt
 static int insmod(struct kmod_ctx *ctx, const char *alias,
 						const char *extra_options)
 {
@@ -681,19 +581,7 @@ static int insmod(struct kmod_ctx *ctx, const char *alias,
 	return err;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- *
- * 根据传入的 argv[] 参数，依次插入 nargs 个模块
- */ 
+// insmod_all.cmt
 static int insmod_all(struct kmod_ctx *ctx, char **args, int nargs)
 {
 	int i, err = 0;
@@ -852,33 +740,7 @@ static char **prepend_options_from_env(int *p_argc, char **orig_argv)
 	return new_argv;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- * 
- * modprobe 函数的真正实现，通过 getopt_long 分析传入参数，
- * 通过调用 libkmod 的接口，实现 modprobe 命令
- * 主要使用的接口包括
- * - log_open()
- * - kmod_new()
- * - log_setup_kmod_log()
- * - kmod_load_resources()
- * - kmod_unref()
- * - log_close()
- * 以下接口是在这个函数中调用的，在当前文件内部通过 static 实现的内部函数
- * 	- show_config()
- * 	- show_modversion()
- * 	- insmod_all()
- * 	- rmmod_all()
- *	- insmod()
- */ 
+// do_modprobe.cmt
 static int do_modprobe(int argc, char **orig_argv)
 {
 	struct kmod_ctx *ctx;
@@ -1077,22 +939,7 @@ done:
 	return err >= 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
-
-/**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
- * 
- * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
- * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
- * 这个结构体中还有一个 cmd 成员，是一个函数指针，
- * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx
- */
+// kmod_cmd_compat_xxx.cmt
 const struct kmod_cmd kmod_cmd_compat_modprobe = {
 	.name = "modprobe",
 	.cmd = do_modprobe,

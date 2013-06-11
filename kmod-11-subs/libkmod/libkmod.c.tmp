@@ -1032,6 +1032,7 @@ KMOD_EXPORT int kmod_validate_resources(struct kmod_ctx *ctx)
  *
  * Returns: 0 on success or < 0 otherwise.
  */
+// kmod_load_resources.cmt
 
 /**
  * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估

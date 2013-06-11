@@ -1,0 +1,26 @@
+/*
+ * kmod_module_insert_module - 插入 kmod module 
+ *
+ * 主要功能： 
+ *	打开 elf 格式的模块文件，插入 kmod_module 结构体
+ *
+ * @param[in] mod 要插入的 kmod module 模块指针
+ * @param[in] flags 插入时候的参数，例如是否强制插入
+ * @param[in] options 插入选项, 就是给 init_module 系统调用的选项,name=value
+ * @return 返回的是插入操作是否成功
+ * @retval 0 表示成功
+ * @retval <0 表示失败
+ * @retval -EEXIST 表示模块已经插入在内核中了
+ *
+ * @see 调用函数：
+ 	- path = kmod_module_get_path(mod)
+	- file = kmod_file_open()
+	- size = kmod_file_get_size(file)
+	- mem = kmod_file_get_contents(file)
+	- elf = kmod_elf_new(mem, size)
+	- kmod_elf_strip_section(elf)
+	- mem = kmod_elf_get_memory(elf)
+	- init_module(mem, size, args) 
+	- kmod_elf_unref(elf)
+	- kmod_file_unref(file)
+ */

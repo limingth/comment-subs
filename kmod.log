@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.2-0.9995.2 (TeX Live 2009/Debian) (format=xelatex 2012.11.3)  11 JUN 2013 12:24
+This is XeTeX, Version 3.1415926-2.2-0.9995.2 (TeX Live 2009/Debian) (format=xelatex 2012.11.3)  11 JUN 2013 15:54
 entering extended mode
  %&-line parsing enabled.
 **kmod.tex
@@ -826,20 +826,38 @@ ltin file, this[]
  []
 
 [24] [25] [26] [27]
-Underfull \hbox (badness 3735) in paragraph at lines 1253--1253
+Underfull \hbox (badness 3735) in paragraph at lines 1279--1279
 []\EU1/lmtt/m/n/10.95 insmod: ERROR: could not insert module hello- module/
  []
 
-[28] [29] [30] (./kmod.aux)
+[28] [29] [30]
+Overfull \hbox (59.65868pt too wide) in paragraph at lines 1367--1367
+[]\EU1/lmtt/m/n/10.95 int kmod_module_new_from_path(kmod_ctx *ctx, char *path, 
+kmod_module **mod)[] 
+ []
+
+
+Overfull \hbox (48.16118pt too wide) in paragraph at lines 1384--1384
+[]\EU1/lmtt/m/n/10.95 int kmod_module_insert_module(kmod_module *mod, int flags
+, char *options)[] 
+ []
+
+[31]
+Overfull \hbox (88.40242pt too wide) in paragraph at lines 1419--1419
+[]    \EU1/lmtt/m/n/10.95 err = kmod_elf_get_section(elf, ".gnu.linkonce.this_m
+odule", &buf, &bufsize);[] 
+ []
+
+[32] [33] [34] (./kmod.aux)
 LaTeX Font Info:    Some font shapes were not available, defaults substituted.
  ) 
 Here is how much of TeX's memory you used:
- 9406 strings out of 495724
- 144287 string characters out of 1189346
+ 9407 strings out of 495724
+ 144300 string characters out of 1189346
  261746 words of memory out of 3000000
- 12440 multiletter control sequences out of 15000+50000
+ 12441 multiletter control sequences out of 15000+50000
  6451 words of font info for 32 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  40i,6n,36p,457b,423s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on kmod.pdf (30 pages).
+Output written on kmod.pdf (34 pages).
