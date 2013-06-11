@@ -30,6 +30,7 @@ subs_files()
 		sed '/'$cmt_file'/r cmt.tmp2' $FILE > $FILE.tmp
 		sed '/'$cmt_file'/d' $FILE.tmp > $FILE
 		rm cmt.tmp
+		rm cmt.tmp2
 		#echo " ok!" 
 	done
 

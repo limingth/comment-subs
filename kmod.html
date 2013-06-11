@@ -883,11 +883,56 @@ struct kmod_module {
 <h3 id="list">list</h3>
 <h3 id="array">array</h3>
 <h3 id="log">log</h3>
-<h2 id="运行流程分析">3. 运行流程分析</h2>
+<h2 id="函数接口分析">3. 函数接口分析</h2>
+<h2 id="运行流程分析">4. 运行流程分析</h2>
 <h3 id="insmod-实现流程">insmod 实现流程</h3>
+<pre><code>$ sudo ./kmod-11/tools/rmmod hello-module/hello.ko 
+$ lsmod | grep hello
+$ sudo ./kmod-11/tools/insmod hello-module/hello.ko 
+$ lsmod | grep hello
+hello                  12415  0 
+$ sudo ./kmod-11/tools/insmod hello-module/hello.ko 
+insmod: ERROR: could not insert module hello-module/hello.ko: File exists
+$ lsmod | grep hello
+hello                  12415  0 
+$ sudo ./kmod-11/tools/rmmod hello-module/hello.ko 
+$ lsmod | grep hello
+$ </code></pre>
+<h4 id="核心代码">核心代码</h4>
+<pre><code>ctx = kmod_new(NULL, &amp;null_config);
+err = kmod_module_new_from_path(ctx, filename, &amp;mod);
+err = kmod_module_insert_module(mod, 0, opts);
+kmod_module_unref(mod);
+kmod_unref(ctx);</code></pre>
+<p>insmod 命令的实现可以分为5个步骤</p>
+<ul>
+<li>创建模块的上下文 struct kmod_ctx ctx</li>
+<li>通过 filename 和 ctx 获得模块 struct kmod_module mod</li>
+<li>将 mod 插入到当前模块列表中, 完成真正的插入内核功能</li>
+<li>释放 mod</li>
+<li>释放 ctx</li>
+</ul>
+<p>涉及到两个模块的5个接口，两个模块是</p>
+<ul>
+<li>libkmod/libkmod.c
+<ul>
+<li>kmod_new()</li>
+<li>kmod_unref()</li>
+</ul></li>
+<li>libkmod/libkmod-module.c
+<ul>
+<li>kmod_module_new_from_path()</li>
+<li>kmod_module_insert_module()</li>
+<li>kmod_module_unref()</li>
+</ul></li>
+</ul>
+<h4 id="kmod_new-代码分析">kmod_new 代码分析</h4>
+<h4 id="kmod_unref-代码分析">kmod_unref 代码分析</h4>
+<h4 id="kmod_module_new_from_path-代码分析">kmod_module_new_from_path 代码分析</h4>
+<h4 id="kmod_module_insert_module-代码分析">kmod_module_insert_module 代码分析</h4>
+<h4 id="kmod_module_unref-代码分析">kmod_module_unref 代码分析</h4>
 <h3 id="rmsmod-实现流程">rmsmod 实现流程</h3>
 <h3 id="lsmod-实现流程">lsmod 实现流程</h3>
 <h3 id="modinfo-实现流程">modinfo 实现流程</h3>
 <h3 id="depmod-实现流程">depmod 实现流程</h3>
 <h3 id="modprobe-实现流程">modprobe 实现流程</h3>
-<h2 id="函数接口分析">4. 函数接口分析</h2>

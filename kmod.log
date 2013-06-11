@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.2-0.9995.2 (TeX Live 2009/Debian) (format=xelatex 2012.11.3)  9 JUN 2013 18:03
+This is XeTeX, Version 3.1415926-2.2-0.9995.2 (TeX Live 2009/Debian) (format=xelatex 2012.11.3)  11 JUN 2013 12:24
 entering extended mode
  %&-line parsing enabled.
 **kmod.tex
@@ -826,10 +826,11 @@ ltin file, this[]
  []
 
 [24] [25] [26] [27]
-Overfull \vbox (31.74965pt too high) has occurred while \output is active []
+Underfull \hbox (badness 3735) in paragraph at lines 1253--1253
+[]\EU1/lmtt/m/n/10.95 insmod: ERROR: could not insert module hello- module/
+ []
 
-
-[28] (./kmod.aux)
+[28] [29] [30] (./kmod.aux)
 LaTeX Font Info:    Some font shapes were not available, defaults substituted.
  ) 
 Here is how much of TeX's memory you used:
@@ -841,4 +842,4 @@ Here is how much of TeX's memory you used:
  28 hyphenation exceptions out of 8191
  40i,6n,36p,457b,423s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on kmod.pdf (28 pages).
+Output written on kmod.pdf (30 pages).

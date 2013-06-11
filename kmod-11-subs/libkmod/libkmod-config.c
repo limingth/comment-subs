@@ -1040,14 +1040,14 @@ static struct kmod_config_iter *kmod_config_iter_new(const struct kmod_ctx* ctx,
 
 
 /**
- * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
- *
- * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- *
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
  * @author 注释添加人员： 李明
+ * @date 2013-6-1
  *
- * @details 注释详细内容:
+ * @note 注释详细内容:
  **
  * kmod_config_get_blacklists:
  * @ctx: kmod 库上下文
@@ -1081,14 +1081,14 @@ KMOD_EXPORT struct kmod_config_iter *kmod_config_get_blacklists(const struct kmo
  */
 
 /**
- * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
- *
- * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- *
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
  * @author 注释添加人员： 李明
+ * @date 2013-6-1
  *
- * @details 注释详细内容:
+ * @note 注释详细内容:
  **
  * kmod_config_get_install_commands:
  * @ctx: kmod 库上下文

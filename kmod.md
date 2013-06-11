@@ -938,7 +938,10 @@ kmod 项目的整个架构分为 3 层。最底层是 testsuite, 中间是 libkm
 
 ### log
 
-3. 运行流程分析
+3. 函数接口分析
+----------------
+
+4. 运行流程分析
 ----------------
 
 ### insmod 实现流程
@@ -962,6 +965,39 @@ kmod 项目的整个架构分为 3 层。最底层是 testsuite, 中间是 libkm
 	kmod_module_unref(mod);
 	kmod_unref(ctx);
 
+insmod 命令的实现可以分为5个步骤
+
+* 创建模块的上下文 struct kmod_ctx ctx
+* 通过 filename 和 ctx 获得模块 struct kmod_module mod
+* 将 mod 插入到当前模块列表中, 完成真正的插入内核功能
+* 释放 mod 
+* 释放 ctx
+
+涉及到两个模块的5个接口，两个模块是
+
+* libkmod/libkmod.c
+	- kmod_new() 
+	- kmod_unref()
+* libkmod/libkmod-module.c
+	- kmod_module_new_from_path()
+	- kmod_module_insert_module()
+	- kmod_module_unref()
+
+#### kmod_new 代码分析
+
+
+#### kmod_unref 代码分析
+
+
+#### kmod_module_new_from_path 代码分析
+
+
+#### kmod_module_insert_module 代码分析
+
+
+#### kmod_module_unref 代码分析
+
+
 ### rmsmod 实现流程
 
 ### lsmod 实现流程
@@ -972,8 +1008,5 @@ kmod 项目的整个架构分为 3 层。最底层是 testsuite, 中间是 libkm
 
 ### modprobe 实现流程
 
-
-4. 函数接口分析
-----------------
 
 

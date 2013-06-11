@@ -1,0 +1,75 @@
+./s.sh kmod-11
+kmod-11-subs
+     1: subs file ./kmod-11-subs/libkmod/libkmod-array.c
+		 find [array_init.cmt array_append.cmt array_append_unique.cmt array_pop.cmt array_free_array.cmt array_sort.cmt array_remove_at.cmt] in libkmod-array.c
+     2: subs file ./kmod-11-subs/libkmod/libkmod.c
+		 find [kmod_ctx.cmt kmod_log.cmt log_filep.cmt kmod_get_dirname.cmt kmod_get_userdata.cmt kmod_set_userdata.cmt kmod_new.cmt kmod_ref.cmt kmod_unref.cmt kmod_set_log_fn.cmt kmod_get_priority.cmt kmod_set_priority.cmt kmod_pool_get_module.cmt kmod_pool_add_module.cmt kmod_pool_del_module.cmt kmod_validate_resources.cmt kmod_load_resources.cmt kmod_unload_resources.cmt kmod_dump_index.cmt kmod_get_config.cmt] in libkmod.c
+     3: subs file ./kmod-11-subs/libkmod/libkmod-config.c
+		 find [kmod_config_get_blacklists.cmt kmod_config_get_install_commands.cmt] in libkmod-config.c
+     4: subs file ./kmod-11-subs/libkmod/libkmod-elf.c
+		 find [kmod_elf.cmt elf_identify.cmt elf_get_mem.cmt elf_get_section_header.cmt elf_get_section_info.cmt elf_get_strings_section.cmt kmod_elf_new.cmt kmod_elf_get_memory.cmt kmod_elf_get_section.cmt kmod_elf_get_strings.cmt kmod_elf_get_modversions.cmt kmod_elf_strip_section.cmt kmod_elf_strip_vermagic.cmt kmod_elf_get_symbols_symtab.cmt kmod_elf_get_symbols.cmt kmod_elf_get_dependency_symbols.cmt] in libkmod-elf.c
+     5: subs file ./kmod-11-subs/libkmod/libkmod-file.c
+		 find [kmod_file_open.cmt kmod_file_get_contents.cmt kmod_file_get_size.cmt] in libkmod-file.c
+     6: subs file ./kmod-11-subs/libkmod/libkmod-hash.c
+		 find [hash_entry.cmt hash.cmt hash_new.cmt hash_free.cmt hash_superfast.cmt hash_add.cmt hash_add_unique.cmt hash_entry_cmp.cmt hash_find.cmt hash_del.cmt hash_get_count.cmt] in libkmod-hash.c
+     7: subs file ./kmod-11-subs/libkmod/libkmod-index.c
+		 find [index_values_free.cmt add_value.cmt index_read.cmt index_close.cmt] in libkmod-index.c
+     8: subs file ./kmod-11-subs/libkmod/libkmod-list.c
+		 find [list_node_init.cmt list_node_next.cmt list_node_prev.cmt list_node_append.cmt list_node_remove.cmt list_node_insert_after.cmt list_node_insert_before.cmt list_node_append_list.cmt kmod_list_append.cmt kmod_list_insert_after.cmt kmod_list_insert_before.cmt_ kmod_list_append_list.cmt kmod_list_prepend.cmt kmod_list_remove.cmt kmod_list_remove_data.cmt kmod_list_remove_n_latest.cmt kmod_list_prev.cmt kmod_list_next.cmt kmod_list_last.cmt] in libkmod-list.c
+     9: subs file ./kmod-11-subs/libkmod/libkmod-module.c
+		 find [kmod_module.cmt module_is_inkernel.cmt kmod_module_parse_depline.cmt kmod_module_new.cmt kmod_module_new_from_name.cmt kmod_module_unref.cmt kmod_module_ref.cmt kmod_module_unref_list.cmt] in libkmod-module.c
+     10: subs file ./kmod-11-subs/libkmod/libkmod-util.c
+		 find [alias_normalize.cmt modname_normalize.cmt path_to_modname.cmt memdup.cmt read_str_safe.cmt write_str_safe.cmt read_str_long.cmt read_str_ulong.cmt strchr_replace.cmt path_is_absolute.cmt path_make_absolute_cwd.cmt] in libkmod-util.c
+     11: subs file ./kmod-11-subs/testsuite/delete_module.c
+		 find [find_module.cmt delete_module.cmt free_resources.cmt] in delete_module.c
+     12: subs file ./kmod-11-subs/testsuite/init_module.c
+		 find [init_module.cmt] in init_module.c
+     13: subs file ./kmod-11-subs/testsuite/mkdir.c
+		 find [mkdir_p.cmt] in mkdir.c
+     14: subs file ./kmod-11-subs/testsuite/path.c
+		 find [need_trap.cmt trap_path.cmt get_rootpath.cmt] in path.c
+     15: subs file ./kmod-11-subs/testsuite/test-alias.c
+		 find [alias_1.cmt] in test-alias.c
+     16: subs file ./kmod-11-subs/testsuite/test-blacklist.c
+		 find [blacklist_1.cmt] in test-blacklist.c
+     17: subs file ./kmod-11-subs/testsuite/test-dependencies.c
+		 find [test_dependencies.cmt] in test-dependencies.c
+     18: subs file ./kmod-11-subs/testsuite/test-depmod.c
+		 find [TESTSUITE_MAIN.cmt] in test-depmod.c
+     19: subs file ./kmod-11-subs/testsuite/test-init.c
+		 find [test_initlib.cmt test_insert.cmt test_remove.cmt TESTSUITE_MAIN.cmt] in test-init.c
+     20: subs file ./kmod-11-subs/testsuite/test-loaded.c
+		 find [loaded_1.cmt TESTSUITE_MAIN.cmt] in test-loaded.c
+     21: subs file ./kmod-11-subs/testsuite/test-modinfo.c
+		 find [TESTSUITE_MAIN.cmt] in test-modinfo.c
+     22: subs file ./kmod-11-subs/testsuite/test-modprobe.c
+		 find [TESTSUITE_MAIN.cmt] in test-modprobe.c
+     23: subs file ./kmod-11-subs/testsuite/test-new-module.c
+		 find [from_name.cmt from_alias.cmt TESTSUITE_MAIN.cmt] in test-new-module.c
+     24: subs file ./kmod-11-subs/testsuite/testsuite.c
+		 find [test_run.cmt] in testsuite.c
+     25: subs file ./kmod-11-subs/testsuite/test-testsuite.c
+		 find [TESTSUITE_MAIN.cmt] in test-testsuite.c
+     26: subs file ./kmod-11-subs/testsuite/uname.c
+		 find [uname.cmt] in uname.c
+     27: subs file ./kmod-11-subs/tools/depmod.c
+		 find [kmod_cmd_compat_xxx.cmt] in depmod.c
+     28: subs file ./kmod-11-subs/tools/insmod.c
+		 find [help.cmt mod_strerror.cmt do_insmod.cmt kmod_cmd_compat_xxx.cmt] in insmod.c
+     29: subs file ./kmod-11-subs/tools/kmod.c
+		 find [kmod_cmds.cmt kmod_compat_cmds.cmt kmod_help.cmt kmod_cmd_help.cmt handle_kmod_commands.cmt handle_kmod_compat_commands.cmt kmod_main.cmt] in kmod.c
+     30: subs file ./kmod-11-subs/tools/log.c
+		 find [prio_to_str.cmt log_kmod.cmt log_open.cmt log_close.cmt log_printf.cmt] in log.c
+     31: subs file ./kmod-11-subs/tools/lsmod.c
+		 find [kmod_cmd_compat_xxx.cmt] in lsmod.c
+     32: subs file ./kmod-11-subs/tools/modinfo.c
+		 find [do_modinfo.cmt kmod_cmd_compat_xxx.cmt] in modinfo.c
+     33: subs file ./kmod-11-subs/tools/modprobe.c
+		 find [rmmod_do_remove_module.cmt rmmod_do_module.cmt rmmod.cmt rmmod_all.cmt insmod.cmt insmod_all.cmt do_modprobe.cmt kmod_cmd_compat_xxx.cmt] in modprobe.c
+     34: subs file ./kmod-11-subs/tools/rmmod.c
+		 find [help.cmt check_module_inuse.cmt do_rmmod.cmt kmod_cmd_compat_xxx.cmt] in rmmod.c
+-----
+Total 0 uncmt.log files need to comment
+Total 34 *.c files
+-rw-rw-r-- 1 akaedu akaedu 121313 Jun 11 12:00 diff.kmod-11
+35447	comments

@@ -1231,9 +1231,80 @@ tools
 
 \subsubsection{log}
 
-\subsection{3. 运行流程分析}
+\subsection{3. 函数接口分析}
+
+\subsection{4. 运行流程分析}
 
 \subsubsection{insmod 实现流程}
+
+{\begin{shaded}\begin{verbatim}
+$ sudo ./kmod-11/tools/rmmod hello-module/hello.ko 
+$ lsmod | grep hello
+$ sudo ./kmod-11/tools/insmod hello-module/hello.ko 
+$ lsmod | grep hello
+hello                  12415  0 
+$ sudo ./kmod-11/tools/insmod hello-module/hello.ko 
+insmod: ERROR: could not insert module hello-module/hello.ko: File exists
+$ lsmod | grep hello
+hello                  12415  0 
+$ sudo ./kmod-11/tools/rmmod hello-module/hello.ko 
+$ lsmod | grep hello
+$ 
+\end{verbatim}\end{shaded}}
+\paragraph{核心代码}
+
+{\begin{shaded}\begin{verbatim}
+ctx = kmod_new(NULL, &null_config);
+err = kmod_module_new_from_path(ctx, filename, &mod);
+err = kmod_module_insert_module(mod, 0, opts);
+kmod_module_unref(mod);
+kmod_unref(ctx);
+\end{verbatim}\end{shaded}}
+insmod 命令的实现可以分为5个步骤
+
+\begin{itemize}
+\item
+  创建模块的上下文 struct kmod\_ctx ctx
+\item
+  通过 filename 和 ctx 获得模块 struct kmod\_module mod
+\item
+  将 mod 插入到当前模块列表中, 完成真正的插入内核功能
+\item
+  释放 mod
+\item
+  释放 ctx
+\end{itemize}
+涉及到两个模块的5个接口，两个模块是
+
+\begin{itemize}
+\item
+  libkmod/libkmod.c
+  \begin{itemize}
+  \item
+    kmod\_new()
+  \item
+    kmod\_unref()
+  \end{itemize}
+\item
+  libkmod/libkmod-module.c
+  \begin{itemize}
+  \item
+    kmod\_module\_new\_from\_path()
+  \item
+    kmod\_module\_insert\_module()
+  \item
+    kmod\_module\_unref()
+  \end{itemize}
+\end{itemize}
+\paragraph{kmod\_new 代码分析}
+
+\paragraph{kmod\_unref 代码分析}
+
+\paragraph{kmod\_module\_new\_from\_path 代码分析}
+
+\paragraph{kmod\_module\_insert\_module 代码分析}
+
+\paragraph{kmod\_module\_unref 代码分析}
 
 \subsubsection{rmsmod 实现流程}
 
@@ -1244,7 +1315,5 @@ tools
 \subsubsection{depmod 实现流程}
 
 \subsubsection{modprobe 实现流程}
-
-\subsection{4. 函数接口分析}
 
 \end{document}
