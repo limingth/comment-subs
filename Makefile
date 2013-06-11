@@ -1,4 +1,10 @@
 
+all:
+	./s.sh kmod-11
+
+build:
+	make -C kmod-11
+
 %: 
 	echo making $@.md to $@.pdf
 	pandoc -s $@.md -o $@.tex

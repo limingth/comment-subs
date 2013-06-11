@@ -955,6 +955,13 @@ kmod 项目的整个架构分为 3 层。最底层是 testsuite, 中间是 libkm
 	$ lsmod | grep hello
 	$ 
 
+#### 核心代码
+	ctx = kmod_new(NULL, &null_config);
+	err = kmod_module_new_from_path(ctx, filename, &mod);
+	err = kmod_module_insert_module(mod, 0, opts);
+	kmod_module_unref(mod);
+	kmod_unref(ctx);
+
 ### rmsmod 实现流程
 
 ### lsmod 实现流程

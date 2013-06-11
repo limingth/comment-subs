@@ -33,16 +33,19 @@ static const struct option cmdopts[] = {
 	{NULL, 0, 0, 0}
 };
 
-/* 
- * 本注释得到了“核高基”科技重大专项2012年课题的资助
- * 课题名称“开源操作系统内核分析和安全性评估”
- * 课题编号“2012ZX01039-004”
- *
- * 注释添加单位 清华大学--03任务
- * Linux 内核相关通用基础软件包分析 承担单位
- * 注释添加人 李明
- * 注释日期 2013年5月4日
- */
+
+/**
+* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+*（课题编号：2012ZX01039-004）”的资助。
+*
+* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+*
+* @author 注释添加人员： 李明
+
+* @details 注释详细内容:
+* 
+*/
+
 /* 负责打印该命令的帮助提示信息，通过 -h 参数可以显示 */
 static void help(void)
 {
@@ -54,16 +57,19 @@ static void help(void)
 		program_invocation_short_name);
 }
 
-/* 
- * 本注释得到了“核高基”科技重大专项2012年课题的资助
- * 课题名称“开源操作系统内核分析和安全性评估”
- * 课题编号“2012ZX01039-004”
- *
- * 注释添加单位 清华大学--03任务
- * Linux 内核相关通用基础软件包分析 承担单位
- * 注释添加人 李明
- * 注释日期 2013年5月4日
- */
+
+/**
+* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+*（课题编号：2012ZX01039-004）”的资助。
+*
+* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+*
+* @author 注释添加人员： 李明
+
+* @details 注释详细内容:
+* 
+*/
+
 /* 根据传入 err 的值，打印出错信息 */
 static const char *mod_strerror(int err)
 {
@@ -81,16 +87,19 @@ static const char *mod_strerror(int err)
 	}
 }
 
-/* 
- * 本注释得到了“核高基”科技重大专项2012年课题的资助
- * 课题名称“开源操作系统内核分析和安全性评估”
- * 课题编号“2012ZX01039-004”
- *
- * 注释添加单位 清华大学--03任务
- * Linux 内核相关通用基础软件包分析 承担单位
- * 注释添加人 李明
- * 注释日期 2013年5月4日
- */
+
+/**
+* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+*（课题编号：2012ZX01039-004）”的资助。
+*
+* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+*
+* @author 注释添加人员： 李明
+
+* @details 注释详细内容:
+* 
+*/
+
 /* 
  * insmod 函数的真正实现，通过 getopt_long 分析传入参数，
  * 通过调用 libkmod 的接口，实现 insmod 命令
@@ -111,9 +120,11 @@ static int do_insmod(int argc, char *argv[])
 	int i, err;
 	const char *null_config = NULL;
 
+	printf("begin to parse para\n");
 	for (;;) {
 		int c, idx = 0;
 		c = getopt_long(argc, argv, cmdopts_s, cmdopts, &idx);
+		printf("c = %d\n", c);
 		if (c == -1)
 			break;
 		switch (c) {
@@ -131,6 +142,7 @@ static int do_insmod(int argc, char *argv[])
 		case '?':
 			return EXIT_FAILURE;
 		default:
+			printf("no this para\n");
 			ERR("unexpected getopt_long() value '%c'.\n",
 				c);
 			return EXIT_FAILURE;
@@ -193,16 +205,19 @@ end:
 	return err >= 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
-/* 
- * 本注释得到了“核高基”科技重大专项2012年课题的资助
- * 课题名称“开源操作系统内核分析和安全性评估”
- * 课题编号“2012ZX01039-004”
- *
- * 注释添加单位 清华大学--03任务
- * Linux 内核相关通用基础软件包分析 承担单位
- * 注释添加人 李明
- * 注释日期 2013年5月4日
- */
+
+/**
+* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+*（课题编号：2012ZX01039-004）”的资助。
+*
+* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+*
+* @author 注释添加人员： 李明
+
+* @details 注释详细内容:
+* 
+*/
+
 /* 
  * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
  * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令

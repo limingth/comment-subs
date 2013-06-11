@@ -76,6 +76,7 @@ static int do_insmod(int argc, char *argv[])
 	for (;;) {
 		int c, idx = 0;
 		c = getopt_long(argc, argv, cmdopts_s, cmdopts, &idx);
+		printf("c = %d\n", c);
 		if (c == -1)
 			break;
 		switch (c) {

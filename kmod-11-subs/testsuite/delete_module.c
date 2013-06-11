@@ -97,16 +97,19 @@ static void parse_retcodes(struct mod *_modules, const char *s)
 	}
 }
 
-/* 
- * 本注释得到了“核高基”科技重大专项2012年课题的资助
- * 课题名称“开源操作系统内核分析和安全性评估”
- * 课题编号“2012ZX01039-004”
- *
- * 注释添加单位 清华大学--03任务
- * Linux 内核相关通用基础软件包分析 承担单位
- * 注释添加人 李明
- * 注释日期 2013年5月4日
- */
+
+/**
+* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+*（课题编号：2012ZX01039-004）”的资助。
+*
+* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+*
+* @author 注释添加人员： 李明
+
+* @details 注释详细内容:
+* 
+*/
+
 /* 根据 modname 从 _modules 开始，找到匹配名字的模块指针 mod 返回 */
 static struct mod *find_module(struct mod *_modules, const char *modname)
 {
@@ -145,16 +148,19 @@ TS_EXPORT long delete_module(const char *name, unsigned int flags);
  * Default behavior is to exit successfully. If this is not the intended
  * behavior, set TESTSUITE_DELETE_MODULE_RETCODES env var.
  */
-/* 
- * 本注释得到了“核高基”科技重大专项2012年课题的资助
- * 课题名称“开源操作系统内核分析和安全性评估”
- * 课题编号“2012ZX01039-004”
- *
- * 注释添加单位 清华大学--03任务
- * Linux 内核相关通用基础软件包分析 承担单位
- * 注释添加人 李明
- * 注释日期 2013年5月4日
- */
+
+/**
+* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+*（课题编号：2012ZX01039-004）”的资助。
+*
+* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+*
+* @author 注释添加人员： 李明
+
+* @details 注释详细内容:
+* 
+*/
+
 /* 
  * 先通过 find_module 找到对应 modname 的 mod 指针，
  * 如果没有这个 modname，则返回值为 0
@@ -175,16 +181,19 @@ long delete_module(const char *modname, unsigned int flags)
 
 /* the test is going away anyway, but lets keep valgrind happy */
 void free_resources(void) __attribute__((destructor));
-/* 
- * 本注释得到了“核高基”科技重大专项2012年课题的资助
- * 课题名称“开源操作系统内核分析和安全性评估”
- * 课题编号“2012ZX01039-004”
- *
- * 注释添加单位 清华大学--03任务
- * Linux 内核相关通用基础软件包分析 承担单位
- * 注释添加人 李明
- * 注释日期 2013年5月4日
- */
+
+/**
+* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+*（课题编号：2012ZX01039-004）”的资助。
+*
+* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+*
+* @author 注释添加人员： 李明
+
+* @details 注释详细内容:
+* 
+*/
+
 /* 从 modules 指针开始，通过 free 释放所有 mod 指针空间 */
 void free_resources(void)
 {
