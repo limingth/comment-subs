@@ -26,7 +26,8 @@ subs_files()
 	do
 		#echo -n "\t\t" -\> substitute $cmt_file ...
 		cat $CMT/$PUBCMT $CMT/$cmt_file > cmt.tmp
-		sed '/'$cmt_file'/r cmt.tmp' $FILE > $FILE.tmp
+		sed ':label;N;s/ \*\/\n\// /;b label' cmt.tmp > cmt.tmp2
+		sed '/'$cmt_file'/r cmt.tmp2' $FILE > $FILE.tmp
 		sed '/'$cmt_file'/d' $FILE.tmp > $FILE
 		rm cmt.tmp
 		#echo " ok!" 

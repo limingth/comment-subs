@@ -33,8 +33,9 @@
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 通过调用系统函数 stat, mkdir 实现 mkdir 功能
  */
-/* 通过调用系统函数 stat, mkdir 实现 mkdir 功能 */
 TS_EXPORT int mkdir_p(const char *path, mode_t mode)
 {
 	char *start = strdupa(path);

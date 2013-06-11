@@ -1048,8 +1048,7 @@ static struct kmod_config_iter *kmod_config_iter_new(const struct kmod_ctx* ctx,
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/**
+ **
  * kmod_config_get_blacklists:
  * @ctx: kmod 库上下文
  *
@@ -1090,8 +1089,7 @@ KMOD_EXPORT struct kmod_config_iter *kmod_config_get_blacklists(const struct kmo
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/**
+ **
  * kmod_config_get_install_commands:
  * @ctx: kmod 库上下文
  *

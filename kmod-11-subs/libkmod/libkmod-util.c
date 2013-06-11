@@ -100,8 +100,7 @@ char *getline_wrapped(FILE *fp, unsigned int *linenum)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * 正规化 alias
  * 将 alias 别名中 [ ] 中间的部分包含 [ ] 作为返回名称
  * 名字中间的 '-' 字符，都会被替换为 '_' 下划线
@@ -157,8 +156,7 @@ finish:
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * 正规化 modname 
  * 名字中间的 '-' 字符，都会被替换为 '_' 下划线
  * 如果出现 '.' 字符，则直接截断
@@ -197,8 +195,9 @@ inline char *modname_normalize(const char *modname, char buf[PATH_MAX],
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 从 path 名转换为 modname，并返回 modname 的长度
  */
-/* 从 path 名转换为 modname，并返回 modname 的长度 */
 char *path_to_modname(const char *path, char buf[PATH_MAX], size_t *len)
 {
 	char *modname;
@@ -220,8 +219,9 @@ char *path_to_modname(const char *path, char buf[PATH_MAX], size_t *len)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 从指针 p 所指向的内存复制 n 个字节，通过 malloc 分配空间 r，返回 r */  
+ *
+ * 从指针 p 所指向的内存复制 n 个字节，通过 malloc 分配空间 r，返回 r
+ */  
 inline void *memdup(const void *p, size_t n)
 {
 	void *r = malloc(n);
@@ -242,8 +242,7 @@ inline void *memdup(const void *p, size_t n)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * 从 fd 中读出 buflen 个字符，写入到 buf 指针所指向的内存区域
  * 确保全部读出后返回，并在 buf 指针的最后补上 '\0'
  * 成功则 返回 0； 失败则返回 -errno
@@ -284,8 +283,7 @@ ssize_t read_str_safe(int fd, char *buf, size_t buflen)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * 将 buf 指针所指向的 buflen 个字符，写入到 fd，确保全部写入后返回
  * 成功则 返回 0； 失败则返回 -errno
  */
@@ -324,8 +322,7 @@ ssize_t write_str_safe(int fd, const char *buf, size_t buflen)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 
+ * 
  * 从 fd 读入最多 32 个字节到 buf 中，
  * 并将其转换为 有符号long, 写入 value 指针指向的内存区域 
  * 采用的进制为 base ，成功则返回 0, 失败则返回 -EINVAL;
@@ -359,8 +356,7 @@ int read_str_long(int fd, long *value, int base)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 
+ * 
  * 从 fd 读入最多 32 个字节到 buf 中，
  * 并将其转换为 无符号long, 写入 value 指针指向的内存区域
  * 采用的进制为 base ，成功则返回 0, 失败则返回 -EINVAL;
@@ -393,8 +389,9 @@ int read_str_ulong(int fd, unsigned long *value, int base)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 将字符串 s 中出现的字符 c 替换为 字符 r
  */
-/* 将字符串 s 中出现的字符 c 替换为 字符 r */
 char *strchr_replace(char *s, int c, char r)
 {
 	char *p;
@@ -416,8 +413,9 @@ char *strchr_replace(char *s, int c, char r)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 判断 路径 p 是否是绝对路径，如果是返回真，如果不是返回0
  */
-/* 判断 路径 p 是否是绝对路径，如果是返回真，如果不是返回0 */
 bool path_is_absolute(const char *p)
 {
 	assert(p != NULL);

@@ -1,1 +1,3 @@
-/* 计算 hash 值，传入 key 和 key 的长度，返回 hashval */
+/*
+ * 计算 hash 值，传入 key 和 key 的长度，返回 hashval
+ */

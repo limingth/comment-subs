@@ -650,8 +650,7 @@ static int prepend_path(const char *extra)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 
+ * 
  * 测试运行
  * 通过 pipe 创建管道，通过 fork 创建子进程，
  * 父进程通过 test_run_parent() 

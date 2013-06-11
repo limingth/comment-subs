@@ -55,8 +55,9 @@ static const struct option cmdopts[] = {
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 负责打印该命令的帮助提示信息，通过 -h 参数可以显示
  */
-/* 负责打印该命令的帮助提示信息，通过 -h 参数可以显示 */
 static void help(void)
 {
 	printf("Usage:\n"
@@ -82,8 +83,7 @@ static void help(void)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * 检查模块是否正在使用，通过引用计数来帮助判断是否真正需要卸载模块 
  * 主要用到的函数接口
  * - kmod_module_get_initstate()
@@ -141,8 +141,7 @@ static int check_module_inuse(struct kmod_module *mod) {
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 
+ * 
  * rmmod 函数的真正实现，通过 getopt_long 分析传入参数，
  * 通过调用 libkmod 的接口，实现 rmmod 命令
  * 主要使用的接口包括
@@ -263,8 +262,7 @@ done:
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 
+ * 
  * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
  * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
  * 这个结构体中还有一个 cmd 成员，是一个函数指针，

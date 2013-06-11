@@ -38,8 +38,7 @@
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 
+ * 
  * 测试模块的 kmod_module_get_dependencies 是否工作正确
  * 其中需要调用到 libkmod 模块中的以下接口
  *	- kmod_new()

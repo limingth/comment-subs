@@ -1,1 +1,3 @@
-/* hash 获得表项数量, 返回 hash->count */
+/*
+ * hash 获得表项数量, 返回 hash->count
+ */

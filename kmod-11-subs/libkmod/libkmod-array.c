@@ -38,8 +38,9 @@
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * array 结构体初始化
  */
-/* array 结构体初始化 */
 void array_init(struct array *array, size_t step)
 {
 	assert(step > 0);
@@ -59,8 +60,9 @@ void array_init(struct array *array, size_t step)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * array 结构体添加元素
  */
-/* array 结构体添加元素 */
 int array_append(struct array *array, const void *element)
 {
 	size_t idx;
@@ -90,8 +92,9 @@ int array_append(struct array *array, const void *element)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * array 结构体添加新元素，确保之前不存在才执行添加操作
  */
-/* array 结构体添加新元素，确保之前不存在才执行添加操作 */
 int array_append_unique(struct array *array, const void *element)
 {
 	void **itr = array->array;
@@ -112,8 +115,9 @@ int array_append_unique(struct array *array, const void *element)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * array 出栈操作
  */
-/* array 出栈操作 */
 void array_pop(struct array *array) {
 	array->count--;
 	if (array->count + array->step < array->total) {
@@ -137,8 +141,9 @@ void array_pop(struct array *array) {
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * array 释放内层空间操作
  */
-/* array 释放内层空间操作 */
 void array_free_array(struct array *array) {
 	free(array->array);
 	array->count = 0;
@@ -156,8 +161,9 @@ void array_free_array(struct array *array) {
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * array 元素的排序操作，采用 qsort 快速排序
  */
-/* array 元素的排序操作，采用 qsort 快速排序 */
 void array_sort(struct array *array, int (*cmp)(const void *a, const void *b))
 {
 	qsort(array->array, array->count, sizeof(void *), cmp);
@@ -173,8 +179,9 @@ void array_sort(struct array *array, int (*cmp)(const void *a, const void *b))
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * array 删除节点操作，可以删除在指定位置 pos 的元素
  */
-/* array 删除节点操作，可以删除在指定位置 pos 的元素 */
 int array_remove_at(struct array *array, unsigned int pos)
 {
 	if (array->count <= pos)

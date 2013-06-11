@@ -36,8 +36,7 @@
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * hash entry 表项的数据结构，仅包含 key 和 value 
  * 其中 key 是 字符串指针
  * value 是无类型 void * 指针
@@ -64,8 +63,7 @@ struct hash_bucket {
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * hash 表的数据结构，包含 count, step, n_buckets, buckets 指针
  */
 
@@ -87,8 +85,9 @@ struct hash {
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * hash 表的创建，给定 n_buckets 个
  */
-/* hash 表的创建，给定 n_buckets 个 */
 struct hash *hash_new(unsigned int n_buckets,
 					void (*free_value)(void *value))
 {
@@ -116,8 +115,9 @@ struct hash *hash_new(unsigned int n_buckets,
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * hash 表的销毁
  */
-/* hash 表的销毁 */
 void hash_free(struct hash *hash)
 {
 	struct hash_bucket *bucket, *bucket_end;
@@ -150,8 +150,9 @@ void hash_free(struct hash *hash)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 计算 hash 值，传入 key 和 key 的长度，返回 hashval
  */
-/* 计算 hash 值，传入 key 和 key 的长度，返回 hashval */
 static inline unsigned int hash_superfast(const char *key, unsigned int len)
 {
 	/* Paul Hsieh (http://www.azillionmonkeys.com/qed/hash.html)
@@ -219,8 +220,9 @@ static inline unsigned int hash_superfast(const char *key, unsigned int len)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 从当前的 hash 表 删除一个 key
  */
-/* 从当前的 hash 表 删除一个 key */
 int hash_add(struct hash *hash, const char *key, const void *value)
 {
 	unsigned int keylen = strlen(key);
@@ -273,8 +275,9 @@ int hash_add(struct hash *hash, const char *key, const void *value)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 添加一个 key 和 value 进入当前的 hash 表, 如果已经存在则返回失败
  */
-/* 添加一个 key 和 value 进入当前的 hash 表, 如果已经存在则返回失败 */
 int hash_add_unique(struct hash *hash, const char *key, const void *value)
 {
 	unsigned int keylen = strlen(key);
@@ -323,8 +326,9 @@ int hash_add_unique(struct hash *hash, const char *key, const void *value)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * hash 比较，基于字符串 strcmp 的比较 key 
  */
-/* hash 比较，基于字符串 strcmp 的比较 key  */
 static int hash_entry_cmp(const void *pa, const void *pb)
 {
 	const struct hash_entry *a = pa;
@@ -342,8 +346,7 @@ static int hash_entry_cmp(const void *pa, const void *pb)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 
+ * 
  * hash 查找
  * 从 hash 指针所指向的 hash 表中，找到元素 key 
  * 采用二分查找法
@@ -430,8 +433,9 @@ int hash_del(struct hash *hash, const char *key)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * hash 获得表项数量, 返回 hash->count
  */
-/* hash 获得表项数量, 返回 hash->count */
 unsigned int hash_get_count(const struct hash *hash)
 {
 	return hash->count;

@@ -61,8 +61,9 @@ static const enum kmod_elf_class native_endianess = KMOD_ELF_LSB;
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ *  kmod_elf 数据结构，包含 kmod_elf_header, memory 指针
  */
-/*  kmod_elf 数据结构，包含 kmod_elf_header, memory 指针 */
 struct kmod_elf {
 	const uint8_t *memory;
 	uint8_t *changed;
@@ -116,8 +117,7 @@ static inline void _elf_dbg(const struct kmod_elf *elf, const char *fname, unsig
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 
+ * 
  * 根据 memory 指针，获得 ELF 文件类型，返回值为
  *	- ELFCLASS32
  *	- ELFCLASS64
@@ -241,8 +241,9 @@ static inline int elf_set_uint(struct kmod_elf *elf, uint64_t offset, uint64_t s
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 获得 elf memory + offset 偏移量之后的位置指针
  */
-/* 获得 elf memory + offset 偏移量之后的位置指针 */
 static inline const void *elf_get_mem(const struct kmod_elf *elf, uint64_t offset)
 {
 	assert(offset < elf->size);
@@ -264,8 +265,9 @@ static inline const void *elf_get_mem(const struct kmod_elf *elf, uint64_t offse
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 获得 elf section header 指针, 需要调用 elf_get_mem()
  */
-/* 获得 elf section header 指针, 需要调用 elf_get_mem() */
 static inline const void *elf_get_section_header(const struct kmod_elf *elf, uint16_t idx)
 {
 	assert(idx != SHN_UNDEF);
@@ -289,8 +291,9 @@ static inline const void *elf_get_section_header(const struct kmod_elf *elf, uin
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 获得 elf section 中第 idx 个 section 的 offset, size, nameoff 信息
  */
-/* 获得 elf section 中第 idx 个 section 的 offset, size, nameoff 信息 */
 static inline int elf_get_section_info(const struct kmod_elf *elf, uint16_t idx, uint64_t *offset, uint64_t *size, uint32_t *nameoff)
 {
 	const uint8_t *p = elf_get_section_header(elf, idx);
@@ -343,8 +346,9 @@ static inline int elf_get_section_info(const struct kmod_elf *elf, uint16_t idx,
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 获得 elf 文件中 strings table 符号表的偏移指针
  */
-/* 获得 elf 文件中 strings table 符号表的偏移指针 */
 static const char *elf_get_strings_section(const struct kmod_elf *elf, uint64_t *size)
 {
 	*size = elf->header.strings.size;
@@ -361,8 +365,9 @@ static const char *elf_get_strings_section(const struct kmod_elf *elf, uint64_t 
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 创建一个 struct kmod_elf 结构体并将 size, offset, section.count 填入
  */
-/* 创建一个 struct kmod_elf 结构体并将 size, offset, section.count 填入 */
 struct kmod_elf *kmod_elf_new(const void *memory, off_t size)
 {
 	struct kmod_elf *elf;
@@ -469,8 +474,9 @@ void kmod_elf_unref(struct kmod_elf *elf)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 获得 elf 文件的 memory 指针
  */
-/* 获得 elf 文件的 memory 指针 */
 const void *kmod_elf_get_memory(const struct kmod_elf *elf)
 {
 	return elf->memory;
@@ -486,8 +492,9 @@ const void *kmod_elf_get_memory(const struct kmod_elf *elf)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 查找 sections 中名字为 section 的那个，并返回 buf 指针和 buf_size 大小
  */
-/* 查找 sections 中名字为 section 的那个，并返回 buf 指针和 buf_size 大小 */
 int kmod_elf_get_section(const struct kmod_elf *elf, const char *section, const void **buf, uint64_t *buf_size)
 {
 	uint64_t nameslen;
@@ -529,8 +536,9 @@ int kmod_elf_get_section(const struct kmod_elf *elf, const char *section, const 
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 获得名为 section 的 string 并分配空间用来存放
  */
-/* 获得名为 section 的 string 并分配空间用来存放 */
 int kmod_elf_get_strings(const struct kmod_elf *elf, const char *section, char ***array)
 {
 	size_t i, j, count;
@@ -613,8 +621,9 @@ int kmod_elf_get_strings(const struct kmod_elf *elf, const char *section, char *
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 获得名为 __versions 的 string
  */
-/* 获得名为 __versions 的 string */
 int kmod_elf_get_modversions(const struct kmod_elf *elf, struct kmod_modversion **array)
 {
 	size_t off, offcrc, slen;
@@ -695,8 +704,9 @@ int kmod_elf_get_modversions(const struct kmod_elf *elf, struct kmod_modversion 
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 对 section 进行 strip
  */
-/* 对 section 进行 strip */
 int kmod_elf_strip_section(struct kmod_elf *elf, const char *section)
 {
 	uint64_t size, off;
@@ -731,8 +741,9 @@ int kmod_elf_strip_section(struct kmod_elf *elf, const char *section)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 对 .modinfo section 中的 vermagic 数据进行 strip
  */
-/* 对 .modinfo section 中的 vermagic 数据进行 strip */
 int kmod_elf_strip_vermagic(struct kmod_elf *elf)
 {
 	uint64_t i, size;
@@ -806,8 +817,9 @@ int kmod_elf_strip_vermagic(struct kmod_elf *elf)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 获得 __ksymtab_strings section 中的 symtab
  */
-/* 获得 __ksymtab_strings section 中的 symtab */
 static int kmod_elf_get_symbols_symtab(const struct kmod_elf *elf, struct kmod_modversion **array)
 {
 	uint64_t i, last, size;
@@ -909,8 +921,9 @@ static inline uint8_t kmod_symbol_bind_from_elf(uint8_t elf_value)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 获得 .strtab .symtab secion 中的 相关信息 size, nameoff 等
  */
-/* 获得 .strtab .symtab secion 中的 相关信息 size, nameoff 等 */
 int kmod_elf_get_symbols(const struct kmod_elf *elf, struct kmod_modversion **array)
 {
 	static const char crc_str[] = "__crc_";
@@ -1080,8 +1093,9 @@ static int kmod_elf_crc_find(const struct kmod_elf *elf, const void *versions, u
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 获得 __versions section 中 .strtab .symtab 相关信息
  */
-/* 获得 __versions section 中 .strtab .symtab 相关信息 */
 int kmod_elf_get_dependency_symbols(const struct kmod_elf *elf, struct kmod_modversion **array)
 {
 	uint64_t versionslen, strtablen, symtablen, str_off, sym_off, ver_off;

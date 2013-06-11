@@ -288,8 +288,9 @@ struct kmod_elf *kmod_file_get_elf(struct kmod_file *file)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 打开 filename 文件, 将文件内容读出到 ctx 结构体中
  */
-/* 打开 filename 文件, 将文件内容读出到 ctx 结构体中 */
 struct kmod_file *kmod_file_open(const struct kmod_ctx *ctx,
 						const char *filename)
 {
@@ -365,8 +366,9 @@ error:
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 获得文件内容指针 memory
  */
-/* 获得文件内容指针 memory */
 void *kmod_file_get_contents(const struct kmod_file *file)
 {
 	return file->memory;
@@ -382,8 +384,9 @@ void *kmod_file_get_contents(const struct kmod_file *file)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 获得文件大小
  */
-/* 获得文件大小 */
 off_t kmod_file_get_size(const struct kmod_file *file)
 {
 	return file->size;

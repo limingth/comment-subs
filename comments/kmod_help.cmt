@@ -1,1 +1,3 @@
-/* kmod 的帮助提示，运行 kmod help 时显示信息 */
+/*
+ * kmod 的帮助提示，运行 kmod help 时显示信息
+ */

@@ -60,8 +60,7 @@
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * 最重要的数据结构 kmod_module , 包含了以下主要的成员变量
  *	- struct kmod_ctx *ctx;		上下文
  *	- struct kmod_list *dep;	依赖模块的链表
@@ -138,8 +137,9 @@ static inline const char *path_join(const char *path, size_t prefixlen,
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 判断当前的 mod 是否已经加载到内核中，根据 KMOD_MODULE_LIVE 和 KMOD_MODULE_BUILTIN
  */
-/* 判断当前的 mod 是否已经加载到内核中，根据 KMOD_MODULE_LIVE 和 KMOD_MODULE_BUILTIN */
 static inline bool module_is_inkernel(struct kmod_module *mod)
 {
 	int state = kmod_module_get_initstate(mod);
@@ -161,8 +161,9 @@ static inline bool module_is_inkernel(struct kmod_module *mod)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 分析依赖关系的字符串, 建立依赖关系的 kmod_list
  */
-/* 分析依赖关系的字符串, 建立依赖关系的 kmod_list */
 int kmod_module_parse_depline(struct kmod_module *mod, char *line)
 {
 	struct kmod_ctx *ctx = mod->ctx;
@@ -283,8 +284,9 @@ void kmod_module_set_builtin(struct kmod_module *mod, bool builtin)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 创建 kmod_module 的构造函数
  */
-/* 创建 kmod_module 的构造函数 */
 static int kmod_module_new(struct kmod_ctx *ctx, const char *key,
 				const char *name, size_t namelen,
 				const char *alias, size_t aliaslen,
@@ -364,8 +366,9 @@ static int kmod_module_new(struct kmod_ctx *ctx, const char *key,
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 先将 name 正规化，然后调用 kmod_module_new() 来创建 kmod_module
  */
-/* 先将 name 正规化，然后调用 kmod_module_new() 来创建 kmod_module */
 KMOD_EXPORT int kmod_module_new_from_name(struct kmod_ctx *ctx,
 						const char *name,
 						struct kmod_module **mod)
@@ -505,8 +508,7 @@ KMOD_EXPORT int kmod_module_new_from_path(struct kmod_ctx *ctx,
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 
+ * 
  * 给当前模块的引用计数 refcount--, 如果已经减到0，则卸载该模块。
  *	- kmod_pool_del_module()
  *	- kmod_module_unref_list()
@@ -554,8 +556,9 @@ KMOD_EXPORT struct kmod_module *kmod_module_unref(struct kmod_module *mod)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 给当前模块的引用计数 refcount++
  */
-/* 给当前模块的引用计数 refcount++ */
 KMOD_EXPORT struct kmod_module *kmod_module_ref(struct kmod_module *mod)
 {
 	if (mod == NULL)
@@ -678,8 +681,9 @@ fail:
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 删除 kmod list 链表中的每一个节点
  */
-/* 删除 kmod list 链表中的每一个节点 */
 KMOD_EXPORT int kmod_module_unref_list(struct kmod_list *list)
 {
 	for (; list != NULL; list = kmod_list_remove(list))

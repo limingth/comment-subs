@@ -46,8 +46,9 @@ static size_t rootpathlen;
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 如果路径 path 不为空，并且 path 的第一个字符为 / 也就是绝对路径
  */
-/* 如果路径 path 不为空，并且 path 的第一个字符为 / 也就是绝对路径 */
 static inline bool need_trap(const char *path)
 {
 	return path != NULL && path[0] == '/';
@@ -63,8 +64,9 @@ static inline bool need_trap(const char *path)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 判断 path 是否是从根目录开始的绝对路径，如果不是则给它添加为绝对路径
  */
-/* 判断 path 是否是从根目录开始的绝对路径，如果不是则给它添加为绝对路径 */
 static const char *trap_path(const char *path, char buf[PATH_MAX * 2])
 {
 	size_t len;
@@ -94,8 +96,9 @@ static const char *trap_path(const char *path, char buf[PATH_MAX * 2])
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 获取环境变量中 S_TC_ROOTFS 的之，赋值给 rootpath 静态变量
  */
-/* 获取环境变量中 S_TC_ROOTFS 的之，赋值给 rootpath 静态变量 */
 static bool get_rootpath(const char *f)
 {
 	if (rootpath != NULL)

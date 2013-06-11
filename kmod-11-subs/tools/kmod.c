@@ -45,8 +45,9 @@ static const struct kmod_cmd kmod_cmd_help;
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * kmod 命令的主程序
  */
-/* kmod 命令的主程序 */
 static const struct kmod_cmd *kmod_cmds[] = {
 	&kmod_cmd_help,
 	&kmod_cmd_list,
@@ -62,8 +63,9 @@ static const struct kmod_cmd *kmod_cmds[] = {
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * kmod 支持的compat命令 lsmod/rmmod/insmod/modinfo/modprobe/depmod
  */
-/* kmod 支持的compat命令 lsmod/rmmod/insmod/modinfo/modprobe/depmod */
 static const struct kmod_cmd *kmod_compat_cmds[] = {
 	&kmod_cmd_compat_lsmod,
 	&kmod_cmd_compat_rmmod,
@@ -83,8 +85,9 @@ static const struct kmod_cmd *kmod_compat_cmds[] = {
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * kmod 的帮助提示，运行 kmod help 时显示信息
  */
-/* kmod 的帮助提示，运行 kmod help 时显示信息 */
 static int kmod_help(int argc, char *argv[])
 {
 	size_t i;
@@ -126,8 +129,9 @@ static int kmod_help(int argc, char *argv[])
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * kmod help 帮助命令的数据结构
  */
-/* kmod help 帮助命令的数据结构 */
 static const struct kmod_cmd kmod_cmd_help = {
 	.name = "help",
 	.cmd = kmod_help,
@@ -144,8 +148,9 @@ static const struct kmod_cmd kmod_cmd_help = {
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 解释 kmod -h -V -? 等命令参数
  */
-/* 解释 kmod -h -V -? 等命令参数 */
 static int handle_kmod_commands(int argc, char *argv[])
 {
 	const char *cmd;
@@ -211,8 +216,9 @@ fail:
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 解释 kmod compat 命令
  */
-/* 解释 kmod compat 命令 */
 static int handle_kmod_compat_commands(int argc, char *argv[])
 {
 	const char *cmd;
@@ -238,8 +244,9 @@ static int handle_kmod_compat_commands(int argc, char *argv[])
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * kmod 命令的主程序
  */
-/* kmod 命令的主程序 */
 int main(int argc, char *argv[])
 {
 	int err;

@@ -35,8 +35,7 @@
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 
+ * 
  * 自行设计实现的 uname 函数，标准c库中的函数 
  * 通过调用 dlopen, dlsym 动态库接口函数
  * 获得 libc.so.6 中的 uname 函数入口地址

@@ -82,8 +82,9 @@ enum node_offset {
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 释放整个 index value 链表
  */
-/* 释放整个 index value 链表 */
 void index_values_free(struct index_value *values)
 {
 	while (values) {
@@ -104,8 +105,9 @@ void index_values_free(struct index_value *values)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 根据 priority 优先级，按顺序在适当位置插入一个新节点 */ 
+ *
+ * 根据 priority 优先级，按顺序在适当位置插入一个新节点
+ */ 
 static int add_value(struct index_value **values,
 		     const char *value, unsigned len, unsigned int priority)
 {
@@ -302,8 +304,9 @@ struct index_node_f {
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 从 文件 in 中读取 index 记录
  */
-/* 从 文件 in 中读取 index 记录 */
 static struct index_node_f *index_read(FILE *in, uint32_t offset)
 {
 	struct index_node_f *node;

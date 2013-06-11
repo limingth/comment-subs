@@ -107,8 +107,9 @@ static void parse_retcodes(struct mod *_modules, const char *s)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 根据 modname 从 _modules 开始，找到匹配名字的模块指针 mod 返回
  */
-/* 根据 modname 从 _modules 开始，找到匹配名字的模块指针 mod 返回 */
 static struct mod *find_module(struct mod *_modules, const char *modname)
 {
 	struct mod *mod;
@@ -156,8 +157,7 @@ TS_EXPORT long delete_module(const char *name, unsigned int flags);
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 
+ * 
  * 先通过 find_module 找到对应 modname 的 mod 指针，
  * 如果没有这个 modname，则返回值为 0
  * 如果找到了，则返回 mod->ret ，并给 errno 赋值
@@ -187,8 +187,9 @@ void free_resources(void) __attribute__((destructor));
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 从 modules 指针开始，通过 free 释放所有 mod 指针空间
  */
-/* 从 modules 指针开始，通过 free 释放所有 mod 指针空间 */
 void free_resources(void)
 {
 	while (modules) {

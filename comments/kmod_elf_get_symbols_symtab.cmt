@@ -1,1 +1,3 @@
-/* 获得 __ksymtab_strings section 中的 symtab */
+/*
+ * 获得 __ksymtab_strings section 中的 symtab
+ */

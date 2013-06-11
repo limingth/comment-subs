@@ -1,1 +1,3 @@
-/* 获得 elf section 中第 idx 个 section 的 offset, size, nameoff 信息 */
+/*
+ * 获得 elf section 中第 idx 个 section 的 offset, size, nameoff 信息
+ */

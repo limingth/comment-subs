@@ -37,8 +37,7 @@
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 
+ * 
  * 测试 list 模块功能 
  * 其中用到了如下 libkmod 函数
  *	- kmod_new()
@@ -129,8 +128,7 @@ static const struct test *tests[] = {
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * 这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
  * 基本的实现原理是通过宏定义，调用了如下函数
  *	- test_init()

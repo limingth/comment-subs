@@ -1,1 +1,3 @@
-/* 获得 kmod ctx 的配置信息，返回 config 成员 */
+/*
+ * 获得 kmod ctx 的配置信息，返回 config 成员
+ */

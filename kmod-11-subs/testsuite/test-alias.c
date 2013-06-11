@@ -35,8 +35,9 @@
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 测试 alias_normalize() 函数是否工作正确
  */
-/* 测试 alias_normalize() 函数是否工作正确 */
 static int alias_1(const struct test *t)
 {
 	static const char *input[] = {

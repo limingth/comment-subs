@@ -43,8 +43,7 @@
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 
+ * 
  * 测试模块是否能够正确被 filter （blacklisted） 
  * 其中需要调用到 libkmod 模块中的以下接口
  *	- kmod_new()

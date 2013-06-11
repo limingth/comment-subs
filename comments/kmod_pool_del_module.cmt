@@ -1,1 +1,3 @@
-/* 在 kmod 池中通过 hash_add 删除一个键值为 key 的模块 */
+/*
+ * 在 kmod 池中通过 hash_add 删除一个键值为 key 的模块
+ */

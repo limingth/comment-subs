@@ -235,8 +235,7 @@ TS_EXPORT long init_module(void *mem, unsigned long len, const char *args);
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * init_module 默认操作是模仿在内核中的 init_module 
  * 其中主要用到了 kmod_elf 模块的接口
  *	- kmod_elf_new()

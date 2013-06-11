@@ -43,8 +43,9 @@ static const struct option cmdopts[] = {
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 负责打印该命令的帮助提示信息，通过 -h 参数可以显示
  */
-/* 负责打印该命令的帮助提示信息，通过 -h 参数可以显示 */
 static void help(void)
 {
 	printf("Usage:\n"
@@ -65,8 +66,9 @@ static void help(void)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 根据传入 err 的值，打印出错信息
  */
-/* 根据传入 err 的值，打印出错信息 */
 static const char *mod_strerror(int err)
 {
 	switch (err) {
@@ -93,8 +95,7 @@ static const char *mod_strerror(int err)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 
+ * 
  * insmod 函数的真正实现，通过 getopt_long 分析传入参数，
  * 通过调用 libkmod 的接口，实现 insmod 命令
  * 主要使用的接口包括
@@ -209,8 +210,7 @@ end:
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/* 
+ * 
  * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
  * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
  * 这个结构体中还有一个 cmd 成员，是一个函数指针，

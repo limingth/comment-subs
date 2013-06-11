@@ -80,8 +80,7 @@ static const char *default_config_paths[] = {
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * kmod_ctx 上下文数据结构
  * 包含的重要数据成员有
  *	- config 配置信息
@@ -113,8 +112,7 @@ struct kmod_ctx {
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * kmod_log 日志输出函数
  * 根据 priority 优先级进行日志输出
  *
@@ -144,8 +142,7 @@ void kmod_log(const struct kmod_ctx *ctx,
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * log_filep
  * 按特定格式写入文件
  */
@@ -203,8 +200,9 @@ static void log_filep(void *data,
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 获得 ctx 结构体中的 dirname 信息
  */
-/* 获得 ctx 结构体中的 dirname 信息 */
 const char *kmod_get_dirname(const struct kmod_ctx *ctx)
 {
 	return ctx->dirname;
@@ -229,8 +227,9 @@ const char *kmod_get_dirname(const struct kmod_ctx *ctx)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 获得 ctx 结构体中的 userdata 信息
  */
-/* 获得 ctx 结构体中的 userdata 信息 */
 KMOD_EXPORT void *kmod_get_userdata(const struct kmod_ctx *ctx)
 {
 	if (ctx == NULL)
@@ -255,8 +254,9 @@ KMOD_EXPORT void *kmod_get_userdata(const struct kmod_ctx *ctx)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 设置 ctx 结构体中的 userdata 信息
  */
-/* 设置 ctx 结构体中的 userdata 信息 */
 KMOD_EXPORT void kmod_set_userdata(struct kmod_ctx *ctx, const void *userdata)
 {
 	if (ctx == NULL)
@@ -331,8 +331,7 @@ static char *get_kernel_release(const char *dirname)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * kmod_new - 创建 kmod 库上下文
  * 主要功能： 
  *	创建 kmod_ctx 结构体，设置mod引用计数为1
@@ -408,8 +407,9 @@ fail:
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * kmod_ref 给 kmod 的引用计数 refcount 加1
  */
-/* kmod_ref 给 kmod 的引用计数 refcount 加1 */
 KMOD_EXPORT struct kmod_ctx *kmod_ref(struct kmod_ctx *ctx)
 {
 	if (ctx == NULL)
@@ -435,8 +435,9 @@ KMOD_EXPORT struct kmod_ctx *kmod_ref(struct kmod_ctx *ctx)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * kmod_ref 给 kmod 的引用计数 refcount 减1
  */
-/* kmod_ref 给 kmod 的引用计数 refcount 减1 */
 KMOD_EXPORT struct kmod_ctx *kmod_unref(struct kmod_ctx *ctx)
 {
 	if (ctx == NULL)
@@ -477,8 +478,9 @@ KMOD_EXPORT struct kmod_ctx *kmod_unref(struct kmod_ctx *ctx)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 默认的 log 写入 stderr 标准出错，用户可以通过传入一个 log_fn 函数指针，使得 log 信息的输出使用用户指定的日志函数
  */
-/* 默认的 log 写入 stderr 标准出错，用户可以通过传入一个 log_fn 函数指针，使得 log 信息的输出使用用户指定的日志函数 */
 KMOD_EXPORT void kmod_set_log_fn(struct kmod_ctx *ctx,
 					void (*log_fn)(void *data,
 						int priority, const char *file,
@@ -509,8 +511,9 @@ KMOD_EXPORT void kmod_set_log_fn(struct kmod_ctx *ctx,
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 返回 log 日志的优先级 priority
  */
-/* 返回 log 日志的优先级 priority */
 KMOD_EXPORT int kmod_get_log_priority(const struct kmod_ctx *ctx)
 {
 	if (ctx == NULL)
@@ -536,8 +539,9 @@ KMOD_EXPORT int kmod_get_log_priority(const struct kmod_ctx *ctx)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 设置 log 日志的优先级 priority
  */
-/* 设置 log 日志的优先级 priority */
 KMOD_EXPORT void kmod_set_log_priority(struct kmod_ctx *ctx, int priority)
 {
 	if (ctx == NULL)
@@ -555,8 +559,9 @@ KMOD_EXPORT void kmod_set_log_priority(struct kmod_ctx *ctx, int priority)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 在 kmod 池中通过 hash_find 查找到键值为 key 的模块
  */
-/* 在 kmod 池中通过 hash_find 查找到键值为 key 的模块 */
 struct kmod_module *kmod_pool_get_module(struct kmod_ctx *ctx,
 							const char *key)
 {
@@ -579,8 +584,9 @@ struct kmod_module *kmod_pool_get_module(struct kmod_ctx *ctx,
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 在 kmod 池中通过 hash_add 添加一个键值为 key 的模块
  */
-/* 在 kmod 池中通过 hash_add 添加一个键值为 key 的模块 */
 void kmod_pool_add_module(struct kmod_ctx *ctx, struct kmod_module *mod,
 							const char *key)
 {
@@ -599,8 +605,9 @@ void kmod_pool_add_module(struct kmod_ctx *ctx, struct kmod_module *mod,
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 在 kmod 池中通过 hash_add 删除一个键值为 key 的模块
  */
-/* 在 kmod 池中通过 hash_add 删除一个键值为 key 的模块 */
 void kmod_pool_del_module(struct kmod_ctx *ctx, struct kmod_module *mod,
 							const char *key)
 {
@@ -954,8 +961,9 @@ static bool is_cache_invalid(const char *path, unsigned long long stamp)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 检查 index 和 configuration 索引和配置文件是否已经改变
  */
-/* 检查 index 和 configuration 索引和配置文件是否已经改变 */
 KMOD_EXPORT int kmod_validate_resources(struct kmod_ctx *ctx)
 {
 	struct kmod_list *l;
@@ -1012,8 +1020,7 @@ KMOD_EXPORT int kmod_validate_resources(struct kmod_ctx *ctx)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * kmod_load_resources
  * 加载所有的索引
  * 如果用户会操作多次 lookups, insertions, deletions 操作
@@ -1076,8 +1083,7 @@ fail:
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * kmod_unload_resources
  * 卸载所有的索引，之后的查找必须打开和关闭索引 
  *	- index_mm_close()
@@ -1120,8 +1126,7 @@ KMOD_EXPORT void kmod_unload_resources(struct kmod_ctx *ctx)
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
- */
-/*
+ *
  * kmod_dump_index 
  * dump index 索引给文件描述符 fd 
  * 其中需要调用 index 模块中的函数接口
@@ -1173,8 +1178,9 @@ KMOD_EXPORT int kmod_dump_index(struct kmod_ctx *ctx, enum kmod_index type,
  * @author 注释添加人员： 李明
  *
  * @details 注释详细内容:
+ *
+ * 获得 kmod ctx 的配置信息，返回 config 成员
  */
-/* 获得 kmod ctx 的配置信息，返回 config 成员 */
 const struct kmod_config *kmod_get_config(const struct kmod_ctx *ctx)
 {
 	return ctx->config;
