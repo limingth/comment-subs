@@ -50,16 +50,15 @@
  *
  * Opaque object representing a module.
  */
-
 /**
- * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
- *
- * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- *
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
  * @author 注释添加人员： 李明
+ * @date 2013-6-1
  *
- * @details 注释详细内容:
+ * @note 注释详细内容:
  *
  * 最重要的数据结构 kmod_module , 包含了以下主要的成员变量
  *	- struct kmod_ctx *ctx;		上下文
@@ -127,16 +126,15 @@ static inline const char *path_join(const char *path, size_t prefixlen,
 	return buf;
 }
 
-
 /**
- * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
- *
- * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- *
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
  * @author 注释添加人员： 李明
+ * @date 2013-6-1
  *
- * @details 注释详细内容:
+ * @note 注释详细内容:
  *
  * 判断当前的 mod 是否已经加载到内核中，根据 KMOD_MODULE_LIVE 和 KMOD_MODULE_BUILTIN
  */
@@ -151,16 +149,15 @@ static inline bool module_is_inkernel(struct kmod_module *mod)
 	return false;
 }
 
-
 /**
- * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
- *
- * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- *
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
  * @author 注释添加人员： 李明
+ * @date 2013-6-1
  *
- * @details 注释详细内容:
+ * @note 注释详细内容:
  *
  * 分析依赖关系的字符串, 建立依赖关系的 kmod_list
  * @param[in] mod 
@@ -284,16 +281,15 @@ void kmod_module_set_builtin(struct kmod_module *mod, bool builtin)
  *
  * @key is "name\alias" or "name" (in which case alias == NULL)
  */
-
 /**
- * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
- *
- * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- *
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
  * @author 注释添加人员： 李明
+ * @date 2013-6-1
  *
- * @details 注释详细内容:
+ * @note 注释详细内容:
  *
  * 创建 kmod_module 的构造函数
  */
@@ -366,16 +362,15 @@ static int kmod_module_new(struct kmod_ctx *ctx, const char *key,
  * Returns: 0 on success or < 0 otherwise. It fails if name is not a valid
  * module name or if memory allocation failed.
  */
-
 /**
- * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
- *
- * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- *
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
  * @author 注释添加人员： 李明
+ * @date 2013-6-1
  *
- * @details 注释详细内容:
+ * @note 注释详细内容:
  *
  * 先将 name 正规化，然后调用 kmod_module_new() 来创建 kmod_module
  */
@@ -437,16 +432,15 @@ int kmod_module_new_from_alias(struct kmod_ctx *ctx, const char *alias,
  * Returns: 0 on success or < 0 otherwise. It fails if file does not exist, if
  * it's not a valid file for a kmod_module or if memory allocation failed.
  */
-
 /**
- * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
- *
- * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- *
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
  * @author 注释添加人员： 李明
+ * @date 2013-6-1
  *
- * @details 注释详细内容:
+ * @note 注释详细内容:
  *
  * kmod_module_new_from_path - 创建 kmod module
  *
@@ -536,16 +530,15 @@ KMOD_EXPORT int kmod_module_new_from_path(struct kmod_ctx *ctx,
  * Returns: NULL if @mod is NULL or if the module was released. Otherwise it
  * returns the passed @mod with its refcount decremented.
  */
-
 /**
- * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
- *
- * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- *
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
  * @author 注释添加人员： 李明
+ * @date 2013-6-1
  *
- * @details 注释详细内容:
+ * @note 注释详细内容:
  * 
  * 给当前模块的引用计数 refcount--, 如果已经减到0，则卸载该模块。
  *	- kmod_pool_del_module()
@@ -584,16 +577,15 @@ KMOD_EXPORT struct kmod_module *kmod_module_unref(struct kmod_module *mod)
  *
  * Returns: the passed @module with its refcount incremented.
  */
-
 /**
- * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
- *
- * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- *
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
  * @author 注释添加人员： 李明
+ * @date 2013-6-1
  *
- * @details 注释详细内容:
+ * @note 注释详细内容:
  *
  * 给当前模块的引用计数 refcount++
  */
@@ -709,16 +701,15 @@ fail:
  * Returns: NULL if @mod is NULL or if the module was released. Otherwise it
  * returns the passed @mod with its refcount decremented.
  */
-
 /**
- * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
- *
- * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- *
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
  * @author 注释添加人员： 李明
+ * @date 2013-6-1
  *
- * @details 注释详细内容:
+ * @note 注释详细内容:
  *
  * 删除 kmod list 链表中的每一个节点
  */
@@ -895,16 +886,15 @@ extern long delete_module(const char *name, unsigned int flags);
  *
  * Returns: 0 on success or < 0 on failure.
  */
-
 /**
- * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
- *
- * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- *
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
  * @author 注释添加人员： 李明
+ * @date 2013-6-1
  *
- * @details 注释详细内容:
+ * @note 注释详细内容:
  */
 KMOD_EXPORT int kmod_module_remove_module(struct kmod_module *mod,
 							unsigned int flags)
@@ -941,16 +931,15 @@ extern long init_module(const void *mem, unsigned long len, const char *args);
  * Returns: 0 on success or < 0 on failure. If module is already loaded it
  * returns -EEXIST.
  */
-
 /**
- * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
- *
- * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
- *
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
  * @author 注释添加人员： 李明
+ * @date 2013-6-1
  *
- * @details 注释详细内容:
+ * @note 注释详细内容:
  *
  * kmod_module_insert_module - 插入 kmod module 
  *
