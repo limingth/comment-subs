@@ -37,17 +37,15 @@ static const struct kmod_cmd kmod_cmd_help;
 
 
 /**
-* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
-*（课题编号：2012ZX01039-004）”的资助。
-*
-* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
-*
-* @author 注释添加人员： 李明
-
-* @details 注释详细内容:
-* 
-*/
-
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ */
 /* kmod 命令的主程序 */
 static const struct kmod_cmd *kmod_cmds[] = {
 	&kmod_cmd_help,
@@ -56,17 +54,15 @@ static const struct kmod_cmd *kmod_cmds[] = {
 
 
 /**
-* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
-*（课题编号：2012ZX01039-004）”的资助。
-*
-* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
-*
-* @author 注释添加人员： 李明
-
-* @details 注释详细内容:
-* 
-*/
-
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ */
 /* kmod 支持的compat命令 lsmod/rmmod/insmod/modinfo/modprobe/depmod */
 static const struct kmod_cmd *kmod_compat_cmds[] = {
 	&kmod_cmd_compat_lsmod,
@@ -79,17 +75,15 @@ static const struct kmod_cmd *kmod_compat_cmds[] = {
 
 
 /**
-* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
-*（课题编号：2012ZX01039-004）”的资助。
-*
-* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
-*
-* @author 注释添加人员： 李明
-
-* @details 注释详细内容:
-* 
-*/
-
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ */
 /* kmod 的帮助提示，运行 kmod help 时显示信息 */
 static int kmod_help(int argc, char *argv[])
 {
@@ -124,17 +118,15 @@ static int kmod_help(int argc, char *argv[])
 
 
 /**
-* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
-*（课题编号：2012ZX01039-004）”的资助。
-*
-* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
-*
-* @author 注释添加人员： 李明
-
-* @details 注释详细内容:
-* 
-*/
-
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ */
 /* kmod help 帮助命令的数据结构 */
 static const struct kmod_cmd kmod_cmd_help = {
 	.name = "help",
@@ -144,17 +136,15 @@ static const struct kmod_cmd kmod_cmd_help = {
 
 
 /**
-* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
-*（课题编号：2012ZX01039-004）”的资助。
-*
-* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
-*
-* @author 注释添加人员： 李明
-
-* @details 注释详细内容:
-* 
-*/
-
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ */
 /* 解释 kmod -h -V -? 等命令参数 */
 static int handle_kmod_commands(int argc, char *argv[])
 {
@@ -213,17 +203,15 @@ fail:
 
 
 /**
-* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
-*（课题编号：2012ZX01039-004）”的资助。
-*
-* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
-*
-* @author 注释添加人员： 李明
-
-* @details 注释详细内容:
-* 
-*/
-
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ */
 /* 解释 kmod compat 命令 */
 static int handle_kmod_compat_commands(int argc, char *argv[])
 {
@@ -242,17 +230,15 @@ static int handle_kmod_compat_commands(int argc, char *argv[])
 
 
 /**
-* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
-*（课题编号：2012ZX01039-004）”的资助。
-*
-* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
-*
-* @author 注释添加人员： 李明
-
-* @details 注释详细内容:
-* 
-*/
-
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ */
 /* kmod 命令的主程序 */
 int main(int argc, char *argv[])
 {

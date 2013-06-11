@@ -280,17 +280,15 @@ struct kmod_elf *kmod_file_get_elf(struct kmod_file *file)
 
 
 /**
-* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
-*（课题编号：2012ZX01039-004）”的资助。
-*
-* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
-*
-* @author 注释添加人员： 李明
-
-* @details 注释详细内容:
-* 
-*/
-
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ */
 /* 打开 filename 文件, 将文件内容读出到 ctx 结构体中 */
 struct kmod_file *kmod_file_open(const struct kmod_ctx *ctx,
 						const char *filename)
@@ -359,17 +357,15 @@ error:
 
 
 /**
-* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
-*（课题编号：2012ZX01039-004）”的资助。
-*
-* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
-*
-* @author 注释添加人员： 李明
-
-* @details 注释详细内容:
-* 
-*/
-
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ */
 /* 获得文件内容指针 memory */
 void *kmod_file_get_contents(const struct kmod_file *file)
 {
@@ -378,17 +374,15 @@ void *kmod_file_get_contents(const struct kmod_file *file)
 
 
 /**
-* @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
-*（课题编号：2012ZX01039-004）”的资助。
-*
-* @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
-*
-* @author 注释添加人员： 李明
-
-* @details 注释详细内容:
-* 
-*/
-
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ */
 /* 获得文件大小 */
 off_t kmod_file_get_size(const struct kmod_file *file)
 {

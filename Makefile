@@ -16,7 +16,7 @@ build:
 	xelatex $@.tex
 	gnome-open $@.pdf
 
-commit: 
+c commit: 
 	git add .
 	git commit -a -m "M kmod.md"
 	git push
