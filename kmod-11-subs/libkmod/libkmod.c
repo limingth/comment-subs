@@ -767,6 +767,7 @@ char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
 	char fn[PATH_MAX];
 	char *line;
 
+	printf("name = %s\n", name);
 	if (ctx->indexes[KMOD_INDEX_MODULES_DEP]) {
 		DBG(ctx, "use mmaped index '%s' modname=%s\n",
 				index_files[KMOD_INDEX_MODULES_DEP].fn, name);
@@ -778,6 +779,7 @@ char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
 					index_files[KMOD_INDEX_MODULES_DEP].fn);
 
 	DBG(ctx, "file=%s modname=%s\n", fn, name);
+	printf("file=%s modname=%s\n", fn, name);
 
 	idx = index_file_open(fn);
 	if (idx == NULL) {
@@ -1095,7 +1097,21 @@ fail:
  *
  * Returns: 0 on success or < 0 otherwise.
  */
-// kmod_unload_resources.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ *
+ * kmod_unload_resources
+ * 卸载所有的索引，之后的查找必须打开和关闭索引 
+ *	- index_mm_close()
+ */
 KMOD_EXPORT void kmod_unload_resources(struct kmod_ctx *ctx)
 {
 	size_t i;
@@ -1124,7 +1140,25 @@ KMOD_EXPORT void kmod_unload_resources(struct kmod_ctx *ctx)
  *
  * Returns: 0 on success or < 0 otherwise.
  */
-// kmod_dump_index.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ *
+ * kmod_dump_index 
+ * dump index 索引给文件描述符 fd 
+ * 其中需要调用 index 模块中的函数接口
+ *	- index_mm_dump()
+ *	- index_file_open()
+ *	- index_dump()
+ *	- index_file_close()
+ */
 KMOD_EXPORT int kmod_dump_index(struct kmod_ctx *ctx, enum kmod_index type,
 									int fd)
 {
@@ -1158,7 +1192,19 @@ KMOD_EXPORT int kmod_dump_index(struct kmod_ctx *ctx, enum kmod_index type,
 	return 0;
 }
 
-// kmod_get_config.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ *
+ * 获得 kmod ctx 的配置信息，返回 config 成员
+ */
 const struct kmod_config *kmod_get_config(const struct kmod_ctx *ctx)
 {
 	return ctx->config;

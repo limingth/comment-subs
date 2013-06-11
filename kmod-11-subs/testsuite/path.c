@@ -36,13 +36,37 @@ static void *nextlib;
 static const char *rootpath;
 static size_t rootpathlen;
 
-// need_trap.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ *
+ * 如果路径 path 不为空，并且 path 的第一个字符为 / 也就是绝对路径
+ */
 static inline bool need_trap(const char *path)
 {
 	return path != NULL && path[0] == '/';
 }
 
-// trap_path.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ *
+ * 判断 path 是否是从根目录开始的绝对路径，如果不是则给它添加为绝对路径
+ */
 static const char *trap_path(const char *path, char buf[PATH_MAX * 2])
 {
 	size_t len;
@@ -62,7 +86,19 @@ static const char *trap_path(const char *path, char buf[PATH_MAX * 2])
 	return buf;
 }
 
-// get_rootpath.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ *
+ * 获取环境变量中 S_TC_ROOTFS 的之，赋值给 rootpath 静态变量
+ */
 static bool get_rootpath(const char *f)
 {
 	if (rootpath != NULL)

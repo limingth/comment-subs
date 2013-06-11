@@ -50,7 +50,27 @@
  *
  * Opaque object representing a module.
  */
-// kmod_module.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ *
+ * 最重要的数据结构 kmod_module , 包含了以下主要的成员变量
+ *	- struct kmod_ctx *ctx;		上下文
+ *	- struct kmod_list *dep;	依赖模块的链表
+ *	- struct kmod_file *file;	ko 文件
+ *	- char *name, *path;		名称路径
+ *	- char *hashkey；		哈希键值
+ *	- int refcount;			引用计数
+ *	- int n_dep;			依赖模块计数
+ */
+
 struct kmod_module {
 	struct kmod_ctx *ctx;
 	char *hashkey;
@@ -107,7 +127,19 @@ static inline const char *path_join(const char *path, size_t prefixlen,
 	return buf;
 }
 
-// module_is_inkernel.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ *
+ * 判断当前的 mod 是否已经加载到内核中，根据 KMOD_MODULE_LIVE 和 KMOD_MODULE_BUILTIN
+ */
 static inline bool module_is_inkernel(struct kmod_module *mod)
 {
 	int state = kmod_module_get_initstate(mod);
@@ -119,7 +151,26 @@ static inline bool module_is_inkernel(struct kmod_module *mod)
 	return false;
 }
 
-// kmod_module_parse_depline.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ *
+ * 分析依赖关系的字符串, 建立依赖关系的 kmod_list
+ * @param[in] mod 
+ * @param[in] line 在依赖文件中的字符串
+ *	例如 line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
+ * @return 返回一个 kmod_list 指针，按依赖关系中的各个模块建立
+ * 
+ * @details
+ *
+ */
 int kmod_module_parse_depline(struct kmod_module *mod, char *line)
 {
 	struct kmod_ctx *ctx = mod->ctx;
@@ -129,8 +180,9 @@ int kmod_module_parse_depline(struct kmod_module *mod, char *line)
 	char *p, *saveptr;
 	int err = 0, n = 0;
 	size_t dirnamelen;
+	
+	printf("\nline = %s\n---------------------\n", line);
 
-	printf("---------------------\n");
 	if (mod->init.dep)
 		return mod->n_dep;
 	assert(mod->dep == NULL);
@@ -166,6 +218,7 @@ int kmod_module_parse_depline(struct kmod_module *mod, char *line)
 		struct kmod_module *depmod;
 		const char *path;
 
+		printf("\np = %s\n---------------------\n", p);
 		path = path_join(p, dirnamelen, buf);
 		if (path == NULL) {
 			ERR(ctx, "could not join path '%s' and '%s'.\n",
@@ -231,7 +284,19 @@ void kmod_module_set_builtin(struct kmod_module *mod, bool builtin)
  *
  * @key is "name\alias" or "name" (in which case alias == NULL)
  */
-// kmod_module_new.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ *
+ * 创建 kmod_module 的构造函数
+ */
 static int kmod_module_new(struct kmod_ctx *ctx, const char *key,
 				const char *name, size_t namelen,
 				const char *alias, size_t aliaslen,
@@ -301,7 +366,19 @@ static int kmod_module_new(struct kmod_ctx *ctx, const char *key,
  * Returns: 0 on success or < 0 otherwise. It fails if name is not a valid
  * module name or if memory allocation failed.
  */
-// kmod_module_new_from_name.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ *
+ * 先将 name 正规化，然后调用 kmod_module_new() 来创建 kmod_module
+ */
 KMOD_EXPORT int kmod_module_new_from_name(struct kmod_ctx *ctx,
 						const char *name,
 						struct kmod_module **mod)
@@ -360,7 +437,34 @@ int kmod_module_new_from_alias(struct kmod_ctx *ctx, const char *alias,
  * Returns: 0 on success or < 0 otherwise. It fails if file does not exist, if
  * it's not a valid file for a kmod_module or if memory allocation failed.
  */
-// kmod_module_new_from_path.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ *
+ * kmod_module_new_from_path - 创建 kmod module
+ *
+ * 主要功能： 
+ *	创建 kmod_module 结构体
+ *
+ * @param[in] ctx 模块所在路径，NULL 表示默认为 /lib/modules/`uname -r`
+ * @param[in] path 配置路径，
+ * @param[out] mod 创建成功后将指针写入 *mod 中
+ * @return 返回的是创建操作是否成功
+ * @retval 0为成功
+ * @retval 负数表示失败
+ *
+ * @see 调用函数：
+ *	- kmod_pool_get_module()
+ *	- kmod_module_ref()
+ *	- kmod_module_new()
+ */	
 KMOD_EXPORT int kmod_module_new_from_path(struct kmod_ctx *ctx,
 						const char *path,
 						struct kmod_module **mod)
@@ -432,7 +536,23 @@ KMOD_EXPORT int kmod_module_new_from_path(struct kmod_ctx *ctx,
  * Returns: NULL if @mod is NULL or if the module was released. Otherwise it
  * returns the passed @mod with its refcount decremented.
  */
-// kmod_module_unref.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ * 
+ * 给当前模块的引用计数 refcount--, 如果已经减到0，则卸载该模块。
+ *	- kmod_pool_del_module()
+ *	- kmod_module_unref_list()
+ *	- kmod_file_unref()
+ *	- kmod_unref(ctx)
+ */
 KMOD_EXPORT struct kmod_module *kmod_module_unref(struct kmod_module *mod)
 {
 	if (mod == NULL)
@@ -464,7 +584,19 @@ KMOD_EXPORT struct kmod_module *kmod_module_unref(struct kmod_module *mod)
  *
  * Returns: the passed @module with its refcount incremented.
  */
-// kmod_module_ref.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ *
+ * 给当前模块的引用计数 refcount++
+ */
 KMOD_EXPORT struct kmod_module *kmod_module_ref(struct kmod_module *mod)
 {
 	if (mod == NULL)
@@ -577,7 +709,19 @@ fail:
  * Returns: NULL if @mod is NULL or if the module was released. Otherwise it
  * returns the passed @mod with its refcount decremented.
  */
-// kmod_module_unref_list.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ *
+ * 删除 kmod list 链表中的每一个节点
+ */
 KMOD_EXPORT int kmod_module_unref_list(struct kmod_list *list)
 {
 	for (; list != NULL; list = kmod_list_remove(list))
@@ -751,7 +895,17 @@ extern long delete_module(const char *name, unsigned int flags);
  *
  * Returns: 0 on success or < 0 on failure.
  */
-// kmod_module_remove_module.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ */
 KMOD_EXPORT int kmod_module_remove_module(struct kmod_module *mod,
 							unsigned int flags)
 {
@@ -787,7 +941,42 @@ extern long init_module(const void *mem, unsigned long len, const char *args);
  * Returns: 0 on success or < 0 on failure. If module is already loaded it
  * returns -EEXIST.
  */
-// kmod_module_insert_module.cmt
+
+/**
+ * @topic 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+ *
+ * @group 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ *
+ * @author 注释添加人员： 李明
+ *
+ * @details 注释详细内容:
+ *
+ * kmod_module_insert_module - 插入 kmod module 
+ *
+ * 主要功能： 
+ *	打开 elf 格式的模块文件，插入 kmod_module 结构体
+ *
+ * @param[in] mod 要插入的 kmod module 模块指针
+ * @param[in] flags 插入时候的参数，例如是否强制插入
+ * @param[in] options 插入选项, 就是给 init_module 系统调用的选项,name=value
+ * @return 返回的是插入操作是否成功
+ * @retval 0 表示成功
+ * @retval <0 表示失败
+ * @retval -EEXIST 表示模块已经插入在内核中了
+ *
+ * @see 调用函数：
+ 	- path = kmod_module_get_path(mod)
+	- file = kmod_file_open()
+	- size = kmod_file_get_size(file)
+	- mem = kmod_file_get_contents(file)
+	- elf = kmod_elf_new(mem, size)
+	- kmod_elf_strip_section(elf)
+	- mem = kmod_elf_get_memory(elf)
+	- init_module(mem, size, args) 
+	- kmod_elf_unref(elf)
+	- kmod_file_unref(file)
+ */
 KMOD_EXPORT int kmod_module_insert_module(struct kmod_module *mod,
 							unsigned int flags,
 							const char *options)
