@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.2-0.9995.2 (TeX Live 2009/Debian) (format=xelatex 2012.11.3)  12 JUN 2013 06:11
+This is XeTeX, Version 3.1415926-2.2-0.9995.2 (TeX Live 2009/Debian) (format=xelatex 2012.11.3)  13 JUN 2013 19:10
 entering extended mode
  %&-line parsing enabled.
 **kmod.tex
@@ -825,111 +825,245 @@ Overfull \hbox (25.16623pt too wide) in paragraph at lines 1146--1146
 ltin file, this[] 
  []
 
-[24] [25]
+[24] [25] [26]
+File: ./figures/0-overview.jpg Graphic file (type QTm)
+ <use  "./figures/0-overview.jpg" >
+File: ./figures/1-app.jpg Graphic file (type QTm)
+
+<use  "./figures/1-app.jpg" > [27] [28]
+Underfull \hbox (badness 1389) in paragraph at lines 1325--1325
+[]\EU1/lmtt/m/n/10.95 If no arguments (except options) are given, "depmod -
+ []
+
+
+Overfull \hbox (28.99872pt too wide) in paragraph at lines 1325--1325
+[]\EU1/lmtt/m/n/10.95 depmod will output a dependency list suitable for the mod
+probe utility.[] 
+ []
+
+
+Overfull \hbox (9.8362pt too wide) in paragraph at lines 1325--1325
+[]\EU1/lmtt/m/n/10.95 The following options are useful for people managing dist
+ributions:[] 
+ []
+
+[29]
+Overfull \hbox (15.38504pt too wide) in paragraph at lines 1375--1375
+[]        \EU1/lmtt/m/n/10.95 -- first- time            Fail if module already 
+inserted or removed[] 
+ []
+
+
+Overfull \hbox (9.53625pt too wide) in paragraph at lines 1375--1375
+[]    \EU1/lmtt/m/n/10.95 - D, -- show- depends          Only print module depe
+ndencies and exit[] 
+ []
+
+
+Overfull \hbox (9.53629pt too wide) in paragraph at lines 1375--1375
+[]    \EU1/lmtt/m/n/10.95 - n, -- dry- run               Do not execute operati
+ons, just print out[] 
+ []
+
+
+Overfull \hbox (11.55252pt too wide) in paragraph at lines 1375--1375
+[]    \EU1/lmtt/m/n/10.95 - C, -- config=FILE           Use FILE instead of def
+ault search paths[] 
+ []
+
+[30]
+File: ./figures/2-core.jpg Graphic file (type QTm)
+ <use  "./figures/2-core.jpg" >
+File: ./figures/2-base.jpg Graphic file (type QTm)
+ <use  "./figures/2-base.jpg" > [31]
+[32]
+File: ./figures/3-syscall.jpg Graphic file (type QTm)
+ <use  "./figures/3-syscall.jpg" >
 File: ./figures/sys.jpg Graphic file (type QTm)
- <use  "./figures/sys.jpg" > [26] [27]
-Underfull \hbox (badness 3735) in paragraph at lines 1283--1283
+ <use  "./figures/sys.jpg" > [33]
+[34] [35]
+Underfull \hbox (badness 10000) in paragraph at lines 1540--1540
+[]\EU1/lmtt/m/n/10.95 make - C / usr/ src/ linux- headers-3.2.0-29- generic-
+ []
+
+
+Underfull \hbox (badness 1565) in paragraph at lines 1540--1540
+\EU1/lmtt/m/n/10.95 pae/    SUBDIRS=/ home/ akaedu/ Github/ comment- subs/ hell
+o-
+ []
+
+[36] [37]
+Underfull \hbox (badness 10000) in paragraph at lines 1608--1608
+[]\EU1/lmtt/m/n/10.95 [350778.217886] usb 2-2.1: new full-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1608--1608
+[]\EU1/lmtt/m/n/10.95 [352049.254135] usb 2-2.1: new full-
+ []
+
+
+Underfull \hbox (badness 3735) in paragraph at lines 1616--1616
 []\EU1/lmtt/m/n/10.95 insmod: ERROR: could not insert module hello- module/
  []
 
-[28]
+Missing character: There is no （ in font [lmmono10-regular]!
+Missing character: There is no 命 in font [lmmono10-regular]!
+Missing character: There is no 令 in font [lmmono10-regular]!
+Missing character: There is no 的 in font [lmmono10-regular]!
+Missing character: There is no 执 in font [lmmono10-regular]!
+Missing character: There is no 行 in font [lmmono10-regular]!
+Missing character: There is no ， in font [lmmono10-regular]!
+Missing character: There is no 运 in font [lmmono10-regular]!
+Missing character: There is no 行 in font [lmmono10-regular]!
+Missing character: There is no 在 in font [lmmono10-regular]!
+Missing character: There is no 的 in font [lmmono10-regular]!
+Missing character: There is no 后 in font [lmmono10-regular]!
+Missing character: There is no 面 in font [lmmono10-regular]!
+Missing character: There is no 加 in font [lmmono10-regular]!
+Missing character: There is no 上 in font [lmmono10-regular]!
+Missing character: There is no 的 in font [lmmono10-regular]!
+Missing character: There is no 后 in font [lmmono10-regular]!
+Missing character: There is no 缀 in font [lmmono10-regular]!
+Missing character: There is no ， in font [lmmono10-regular]!
+Missing character: There is no 这 in font [lmmono10-regular]!
+Missing character: There is no 个 in font [lmmono10-regular]!
+Missing character: There is no 和 in font [lmmono10-regular]!
+Missing character: There is no 以 in font [lmmono10-regular]!
+Missing character: There is no 前 in font [lmmono10-regular]!
+Missing character: There is no 的 in font [lmmono10-regular]!
+Missing character: There is no 命 in font [lmmono10-regular]!
+Missing character: There is no 令 in font [lmmono10-regular]!
+Missing character: There is no 有 in font [lmmono10-regular]!
+Missing character: There is no 所 in font [lmmono10-regular]!
+Missing character: There is no 不 in font [lmmono10-regular]!
+Missing character: There is no 同 in font [lmmono10-regular]!
+Missing character: There is no ） in font [lmmono10-regular]!
+[38]
+Missing character: There is no （ in font [lmmono10-regular]!
+Missing character: There is no 可 in font [lmmono10-regular]!
+Missing character: There is no 以 in font [lmmono10-regular]!
+Missing character: There is no 看 in font [lmmono10-regular]!
+Missing character: There is no 到 in font [lmmono10-regular]!
+Missing character: There is no 上 in font [lmmono10-regular]!
+Missing character: There is no 面 in font [lmmono10-regular]!
+Missing character: There is no 命 in font [lmmono10-regular]!
+Missing character: There is no 令 in font [lmmono10-regular]!
+Missing character: There is no 的 in font [lmmono10-regular]!
+Missing character: There is no 执 in font [lmmono10-regular]!
+Missing character: There is no 行 in font [lmmono10-regular]!
+Missing character: There is no 结 in font [lmmono10-regular]!
+Missing character: There is no 果 in font [lmmono10-regular]!
+Missing character: There is no 没 in font [lmmono10-regular]!
+Missing character: There is no 有 in font [lmmono10-regular]!
+Missing character: There is no 任 in font [lmmono10-regular]!
+Missing character: There is no 何 in font [lmmono10-regular]!
+Missing character: There is no 输 in font [lmmono10-regular]!
+Missing character: There is no 出 in font [lmmono10-regular]!
+Missing character: There is no 信 in font [lmmono10-regular]!
+Missing character: There is no 息 in font [lmmono10-regular]!
+Missing character: There is no ） in font [lmmono10-regular]!
+
+Underfull \hbox (badness 10000) in paragraph at lines 1642--1642
+[]\EU1/lmtt/m/n/10.95 [352049.254135] usb 2-2.1: new full-
+ []
+
 File: ./figures/insmod.jpg Graphic file (type QTm)
- <use  "./figures/insmod.jpg" > [29]
+<use  "./figures/insmod.jpg" > [39]
 File: ./figures/insmod.jpg Graphic file (type QTm)
  <use  "./figures/insmod.jpg" >
 File: ./figures/insmod.jpg Graphic file (type QTm)
 
 <use  "./figures/insmod.jpg" >
 File: ./figures/insmod.jpg Graphic file (type QTm)
- <use  "./figures/insmod.jpg" >
+ <use  "./figures/insmod.jpg" > [40]
 File: ./figures/insmod.jpg Graphic file (type QTm)
 
-<use  "./figures/insmod.jpg" > [30] [31]
+<use  "./figures/insmod.jpg" > [41] [42]
 File: ./figures/kmod_new.jpg Graphic file (type QTm)
  <use  "./figures/kmod_new.jpg" >
-[32]
+[43]
 File: ./figures/kmod_unref.jpg Graphic file (type QTm)
  <use  "./figures/kmod_unref.jpg" >
-Overfull \hbox (59.65868pt too wide) in paragraph at lines 1478--1478
+Overfull \hbox (59.65868pt too wide) in paragraph at lines 1841--1841
 []\EU1/lmtt/m/n/10.95 int kmod_module_new_from_path(kmod_ctx *ctx, char *path, 
 kmod_module **mod)[] 
  []
 
-[33]
 File: ./figures/kmod_module_new_from_path.jpg Graphic file (type QTm)
- <use  "./figures/kmod_module_new_from_path.jpg" >
-Overfull \hbox (48.16118pt too wide) in paragraph at lines 1501--1501
+<use  "./figures/kmod_module_new_from_path.jpg" > [44]
+Overfull \hbox (48.16118pt too wide) in paragraph at lines 1864--1864
 []\EU1/lmtt/m/n/10.95 int kmod_module_insert_module(kmod_module *mod, int flags
 , char *options)[] 
  []
 
 File: ./figures/kmod_module_insert_module.jpg Graphic file (type QTm)
-<use  "./figures/kmod_module_insert_module.jpg" > [34]
+<use  "./figures/kmod_module_insert_module.jpg" >
 File: ./figures/kmod_module_unref.jpg Graphic file (type QTm)
 
-<use  "./figures/kmod_module_unref.jpg" >
-Overfull \hbox (88.40242pt too wide) in paragraph at lines 1548--1548
+<use  "./figures/kmod_module_unref.jpg" > [45]
+Overfull \hbox (88.40242pt too wide) in paragraph at lines 1911--1911
 []    \EU1/lmtt/m/n/10.95 err = kmod_elf_get_section(elf, ".gnu.linkonce.this_m
 odule", &buf, &bufsize);[] 
  []
 
-[35] [36]
-Overfull \hbox (9.8362pt too wide) in paragraph at lines 1594--1594
+[46]
+Overfull \hbox (9.8362pt too wide) in paragraph at lines 1957--1957
 []\EU1/lmtt/m/n/10.95 static int insmod_all(struct kmod_ctx *ctx, char **args, 
 int nargs)[] 
  []
 
-
-Overfull \hbox (63.49115pt too wide) in paragraph at lines 1620--1620
+[47]
+Overfull \hbox (63.49115pt too wide) in paragraph at lines 1983--1983
 []\EU1/lmtt/m/n/10.95 int kmod_module_probe_insert_module(mod, flags, extra_opt
 ions, run_install)[] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1620--1620
+Underfull \hbox (badness 10000) in paragraph at lines 1983--1983
 []    \EU1/lmtt/m/n/10.95 err = kmod_module_get_probe_list(mod, !!
  []
 
-[37]
-Overfull \hbox (2.17117pt too wide) in paragraph at lines 1636--1636
+
+Overfull \hbox (2.17117pt too wide) in paragraph at lines 1999--1999
 []\EU1/lmtt/m/n/10.95 kmod_list *kmod_module_get_dependencies(struct kmod_modul
 e *mod)[] 
  []
 
 
-Overfull \hbox (15.58495pt too wide) in paragraph at lines 1636--1636
+Overfull \hbox (15.58495pt too wide) in paragraph at lines 1999--1999
 []        \EU1/lmtt/m/n/10.95 l_new = kmod_list_append(list_new, kmod_module_re
 f(l->data));[] 
  []
 
-
-Overfull \hbox (7.91992pt too wide) in paragraph at lines 1648--1648
+[48]
+Overfull \hbox (7.91992pt too wide) in paragraph at lines 2011--2011
 []\EU1/lmtt/m/n/10.95 kmod_list *module_get_dependencies_noref(struct kmod_modu
 le *mod)[] 
  []
 
 
-Overfull \hbox (36.66367pt too wide) in paragraph at lines 1665--1665
+Overfull \hbox (36.66367pt too wide) in paragraph at lines 2028--2028
 []    \EU1/lmtt/m/n/10.95 return index_mm_search(ctx->indexes[KMOD_INDEX_MODULE
 S_DEP], name);[] 
  []
 
-[38]
-Overfull \hbox (9.83618pt too wide) in paragraph at lines 1684--1684
+
+Overfull \hbox (9.83618pt too wide) in paragraph at lines 2047--2047
 []\EU1/lmtt/m/n/10.95 int kmod_module_parse_depline(struct kmod_module *mod, ch
 ar *line)[] 
  []
 
-[39] (./kmod.aux)
+[49] [50] (./kmod.aux)
 LaTeX Font Info:    Some font shapes were not available, defaults substituted.
  ) 
 Here is how much of TeX's memory you used:
- 9429 strings out of 495724
- 144684 string characters out of 1189346
+ 9440 strings out of 495724
+ 144859 string characters out of 1189346
  261772 words of memory out of 3000000
- 12453 multiletter control sequences out of 15000+50000
+ 12459 multiletter control sequences out of 15000+50000
  6451 words of font info for 32 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  40i,6n,36p,457b,423s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on kmod.pdf (39 pages).
+Output written on kmod.pdf (50 pages).

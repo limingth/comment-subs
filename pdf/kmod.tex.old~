@@ -1204,36 +1204,232 @@ struct kmod_module {
 
 \subsection{1. 架构分析}
 
-kmod 项目的整个架构分为 3 层。最底层是 testsuite, 中间是 libkmod, 上层是
-tools
+kmod-11
+项目的整个技术架构分为3层。最上层是tools目录下的6个命令，中间是libkmod库所提供的各种编程接口，最下层是testsuite所包含的系统调用抽象层，便于在用户空间进行接口测试。
+
+kmod-11 项目系统层次结构如图
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{./figures/0-overview.jpg}
+\caption{kmod-11 项目系统结构层次图}
+\end{figure}
+
+下面按照这样的三层架构，按照应用层，库接口层，抽象层的顺序，依次分析。
+
+\subsubsection{应用层}
+
+应用层实现了6个常用的用户命令，分别是 insmod, rmmod, lsmod, modinfo,
+depmod, modprobe.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{./figures/1-app.jpg}
+\caption{kmod-11 项目应用层结构图}
+\end{figure}
+
+\paragraph{insmod 命令}
+
+该命令的功能是: 向Linux内核中插入一个模块
+
+{\begin{shaded}\begin{verbatim}
+$ ./kmod-11/tools/insmod -h
+
+Usage:
+    insmod [options] filename [args]
+Options:
+    -V, --version     show version
+    -h, --help        show this help
+\end{verbatim}\end{shaded}}
+\paragraph{rmmod 命令}
+
+该命令的功能是: 删除内核中的模块
+
+{\begin{shaded}\begin{verbatim}
+$ ./kmod-11/tools/rmmod -h
+Usage:
+    rmmod [options] modulename ...
+Options:
+    -f, --force       forces a module unload and may crash your
+                  machine. This requires Forced Module Removal
+                  option in your kernel. DANGEROUS
+    -s, --syslog      print to syslog, not stderr
+    -v, --verbose     enables more messages
+    -V, --version     show version
+    -h, --help        show this help
+\end{verbatim}\end{shaded}}
+\paragraph{lsmod 命令}
+
+该命令的功能是: 列出内核已载入模块的状态
+
+{\begin{shaded}\begin{verbatim}
+$ ./kmod-11/tools/lsmod -h
+Usage: ./kmod-11/tools/lsmod
+\end{verbatim}\end{shaded}}
+\paragraph{modinfo 命令}
+
+该命令的功能是: 显示内核模块的信息
+
+{\begin{shaded}\begin{verbatim}
+$ ./kmod-11/tools/modinfo -h
+Usage:
+    modinfo [options] filename [args]
+Options:
+    -a, --author                Print only 'author'
+    -d, --description           Print only 'description'
+    -l, --license               Print only 'license'
+    -p, --parameters            Print only 'parm'
+    -n, --filename              Print only 'filename'
+    -0, --null                  Use \0 instead of \n
+    -F, --field=FIELD           Print only provided FIELD
+    -k, --set-version=VERSION   Use VERSION instead of `uname -r`
+    -b, --basedir=DIR           Use DIR as filesystem root for /lib/modules
+    -V, --version               Show version
+    -h, --help                  Show this help
+$ 
+\end{verbatim}\end{shaded}}
+\paragraph{depmod 命令}
+
+该命令的功能是: 分析可加载模块的依赖性，生成modules.dep文件和映射文件。
+
+{\begin{shaded}\begin{verbatim}
+$ ./kmod-11/tools/depmod -h
+Usage:
+    depmod -[aA] [options] [forced_version]
+
+If no arguments (except options) are given, "depmod -a" is assumed
+
+depmod will output a dependency list suitable for the modprobe utility.
+
+Options:
+    -a, --all            Probe all modules
+    -A, --quick          Only does the work if there's a new module
+    -e, --errsyms        Report not supplied symbols
+    -n, --show           Write the dependency file on stdout only
+    -P, --symbol-prefix  Architecture symbol prefix
+    -C, --config=PATH    Read configuration from PATH
+    -v, --verbose        Enable verbose mode
+    -w, --warn           Warn on duplicates
+    -V, --version        show version
+    -h, --help           show this help
+
+The following options are useful for people managing distributions:
+    -b, --basedir=DIR    Use an image of a module tree.
+    -F, --filesyms=FILE  Use the file instead of the
+                     current kernel symbols.
+    -E, --symvers=FILE   Use Module.symvers file to check
+                     symbol versions.
+$ 
+\end{verbatim}\end{shaded}}
+\paragraph{modprobe 命令}
+
+该命令的功能是: Linux内核添加或者删除模块
+
+{\begin{shaded}\begin{verbatim}
+$ ./kmod-11/tools/modprobe -h
+Usage:
+    modprobe [options] [-i] [-b] modulename
+    modprobe [options] -a [-i] [-b] modulename [modulename...]
+    modprobe [options] -r [-i] modulename
+    modprobe [options] -r -a [-i] modulename [modulename...]
+    modprobe [options] -c
+    modprobe [options] --dump-modversions filename
+Management Options:
+    -a, --all                   Consider every non-argument to
+                            be a module name to be inserted
+                            or removed (-r)
+    -r, --remove                Remove modules instead of inserting
+        --remove-dependencies   Also remove modules depending on it
+    -R, --resolve-alias         Only lookup and print alias and exit
+        --first-time            Fail if module already inserted or removed
+    -i, --ignore-install        Ignore install commands
+    -i, --ignore-remove         Ignore remove commands
+    -b, --use-blacklist         Apply blacklist to resolved alias.
+    -f, --force                 Force module insertion or removal.
+                            implies --force-modversions and
+                            --force-vermagic
+        --force-modversion      Ignore module's version
+        --force-vermagic        Ignore module's version magic
+
+Query Options:
+    -D, --show-depends          Only print module dependencies and exit
+    -c, --showconfig            Print out known configuration and exit
+    -c, --show-config           Same as --showconfig
+        --show-modversions      Dump module symbol version and exit
+        --dump-modversions      Same as --show-modversions
+
+General Options:
+    -n, --dry-run               Do not execute operations, just print out
+    -n, --show                  Same as --dry-run
+    -C, --config=FILE           Use FILE instead of default search paths
+    -d, --dirname=DIR           Use DIR as filesystem root for /lib/modules
+    -S, --set-version=VERSION   Use VERSION instead of `uname -r`
+    -s, --syslog                print to syslog, not stderr
+    -q, --quiet                 disable messages
+    -v, --verbose               enables more messages
+    -V, --version               show version
+    -h, --help                  show this help
+$ 
+\end{verbatim}\end{shaded}}
+\subsubsection{库接口层}
+
+库接口层包含了 libkmod 目录下的形如 libkmod-xxx.c
+的模块文件，其中涉及用到的编程接口将近100个，形如 kmod\_xxx\_xxx\_xxx
+的接口函数。
+
+按照这些接口函数的归属模块划分，我们经过代码分析，可以将它们分为6个重要的核心子模块，分别是
+kmod\_ctx, kmod\_module, kmod\_config, kmod\_list, kmod\_elf,
+kmod\_file。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{./figures/2-core.jpg}
+\caption{kmod-11 项目库接口层核心子模块结构图}
+\end{figure}
+
+另外还有6个属于基础类的子模块，为以上6个核心子模块提供支持，分别是 hash,
+index\_mm，elf，list，array，log。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{./figures/2-base.jpg}
+\caption{kmod-11 项目库接口层基础子模块结构图}
+\end{figure}
+
+以下在模块分析小节将分别对这12个模块进行详细说明。
+
+\subsubsection{系统调用抽象层}
+
+系统调用抽象层的实现代码主要集中在 testsuite
+目录下，其中最重要的2个实现包含 init\_module 系统调用和 delete\_module
+系统调用的模拟实现。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{./figures/3-syscall.jpg}
+\caption{kmod-11 项目系统调用抽象层结构图}
+\end{figure}
+
+\subsubsection{各层之间相互关系图}
+
+以上的命令，库，核心子模块，基础子模块以及系统调用抽象层，之间的关系并不是明显分开的，而是互相之间有交错的关系。为了更清楚的说明整个系统各个层次之间的调用关系，我们以下图为例，做简要说明。
 
 \begin{figure}[htbp]
 \centering
 \includegraphics{./figures/sys.jpg}
-\caption{libkmod 项目系统结构层次图}
+\caption{kmod-11 项目系统各层结构关系图}
 \end{figure}
 
-\subsubsection{应用层}
+其中命令层就是应用层，一般命令的实现都会首先使用 kmod\_ctx 和
+kmod\_module 两个核心子模块的接口，其中 kmod\_ctx 调用了 kmod\_config
+核心子模块和 hash, log, index\_mm 基础子模块的接口功能，kmod\_module
+调用了 kmod\_file, kmod\_elf, kmod\_list
+这3个核心子模块的接口功能，以及简介调用了 elf, list
+这2个基础子模块的接口功能，同时还使用了模拟层中有关系统调用模拟实现的接口。
 
-\paragraph{insmod 命令}
-
-\paragraph{kmod\_ctx 模块}
-
-\paragraph{kmod\_module 模块}
-
-\subsubsection{中间层}
-
-\paragraph{kmod\_config 模块}
-
-\paragraph{hash 模块}
-
-\paragraph{kmod\_elf 模块}
-
-\paragraph{kmod\_file 模块}
-
-\subsubsection{抽象层}
-
-\paragraph{init\_module 系统调用模拟}
+因此在我们所列出的6个核心子模块中，kmod\_ctx 和 kmod\_module
+这2个核心子模块占据着更为重要的作用，是整个 libkmod
+库的核心中的核心。在下面的分析中，我们还会详细论述它们的功能。
 
 \subsection{2. 模块分析}
 
@@ -1261,24 +1457,191 @@ tools
 
 \subsubsection{log}
 
-\subsection{3. 运行流程分析}
+\subsection{3. 运行时调试图}
 
-\subsubsection{insmod 命令运行流程}
+\subsubsection{insmod 命令运行时调试图}
+
+\paragraph{编写测试用内核模块源码 hello.c}
 
 {\begin{shaded}\begin{verbatim}
-$ sudo ./kmod-11/tools/rmmod hello-module/hello.ko 
-$ lsmod | grep hello
+$ cat hello.c 
+
+#include <linux/module.h>
+#include <linux/kernel.h>
+
+MODULE_AUTHOR("AKAEDU");
+MODULE_DESCRIPTION("module example ");
+MODULE_LICENSE("GPL");
+
+int global = 100;
+
+int __init 
+akae_init (void)
+{
+    int local = 200;
+    printk ("Hello, akaedu\n");
+
+    printk(".text = %p\n", akae_init);
+    printk(".data = %p\n", &global);
+    printk(".stack = %p\n", &local);
+    return 0;
+}
+
+void __exit
+akae_exit (void)
+{
+    int local = 300;
+    printk ("module exit\n");
+
+    printk(".text = %p\n", akae_exit);
+    printk(".data = %p\n", &global);
+    printk(".stack = %p\n", &local);
+    return ;
+}
+
+module_init(akae_init);
+module_exit(akae_exit);
+$ 
+\end{verbatim}\end{shaded}}
+\paragraph{编写测试用内核模块的 Makefile 文件 Makefile}
+
+{\begin{shaded}\begin{verbatim}
+$ cat Makefile 
+
+obj-m := hello.o
+
+KDIR := /usr/src/linux-headers-3.2.0-29-generic-pae/
+
+all:
+    make -C $(KDIR) SUBDIRS=$(PWD)  modules
+
+clean:
+    rm -rf *.o *.ko *.mod.* *.cmd 
+    rm -rf .*
+
+$ 
+\end{verbatim}\end{shaded}}
+\paragraph{编译内核模块 hello.ko}
+
+{\begin{shaded}\begin{verbatim}
+$ cd hello-module/ 
+$ make
+make -C /usr/src/linux-headers-3.2.0-29-generic-pae/    SUBDIRS=/home/akaedu/Github/comment-subs/hello-module   modules
+make[1]: Entering directory `/usr/src/linux-headers-3.2.0-29-generic-pae'
+  CC [M]  /home/akaedu/Github/comment-subs/hello-module/hello.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/akaedu/Github/comment-subs/hello-module/hello.mod.o
+  LD [M]  /home/akaedu/Github/comment-subs/hello-module/hello.ko
+make[1]: Leaving directory `/usr/src/linux-headers-3.2.0-29-generic-pae'
+$ 
+\end{verbatim}\end{shaded}}
+\paragraph{编译生成测试用工具 insmod}
+
+{\begin{shaded}\begin{verbatim}
+$ cd kmod-11/ 
+$ make
+make --no-print-directory all-recursive
+Making all in .
+  CC       libkmod/libkmod.lo
+  CC       libkmod/libkmod-list.lo
+  CC       libkmod/libkmod-config.lo
+  CC       libkmod/libkmod-index.lo
+  CC       libkmod/libkmod-module.lo
+  CC       libkmod/libkmod-file.lo
+  CC       libkmod/libkmod-elf.lo
+  CC       libkmod/libkmod-hash.lo
+  CC       libkmod/libkmod-array.lo
+  CC       libkmod/libkmod-util.lo
+  CCLD     libkmod/libkmod-util.la
+  CCLD     libkmod/libkmod.la
+  CCLD     libkmod/libkmod-private.la
+  CC       tools/kmod.o
+  CC       tools/lsmod.o
+  CC       tools/rmmod.o
+  CC       tools/insmod.o
+  CC       tools/modinfo.o
+  CC       tools/modprobe.o
+  CC       tools/depmod.o
+  CC       tools/log.o
+  CCLD     tools/kmod
+  CCLD     tools/kmod-nolib
+  GEN      libkmod/libkmod.pc
+Making all in libkmod/docs
+make[2]: Nothing to be done for `all'.
+Making all in man
+  GEN      depmod.d.5
+  GEN      modprobe.d.5
+  GEN      modules.dep.5
+  GEN      depmod.8
+  GEN      insmod.8
+  GEN      lsmod.8
+  GEN      rmmod.8
+  GEN      modprobe.8
+  GEN      modinfo.8
+$ 
+\end{verbatim}\end{shaded}}
+\paragraph{使用测试用工具 insmod 插入内核模块}
+
+{\begin{shaded}\begin{verbatim}
 $ sudo ./kmod-11/tools/insmod hello-module/hello.ko 
+\end{verbatim}\end{shaded}}
+\paragraph{查看插入内核模块后的打印结果}
+
+{\begin{shaded}\begin{verbatim}
 $ lsmod | grep hello
 hello                  12415  0 
+$ dmesg | tail
+[350775.859640] usb 2-2.1: USB disconnect, device number 14
+[350777.611134] Bluetooth: hci0 urb c7304180 submission failed
+[350778.217886] usb 2-2.1: new full-speed USB device number 15 using uhci_hcd
+[352048.604051] usb 2-2.1: USB disconnect, device number 15
+[352048.630829] Bluetooth: hci0 urb dd3d3000 submission failed
+[352049.254135] usb 2-2.1: new full-speed USB device number 16 using uhci_hcd
+[352111.505217] Hello, akaedu
+[352111.505223] .text = e0844000
+[352111.505225] .data = e0c03000
+[352111.505227] .stack = df6e3f54
+$ 
+\end{verbatim}\end{shaded}}
+\paragraph{重复插入同样的内核模块系统会报错}
+
+{\begin{shaded}\begin{verbatim}
 $ sudo ./kmod-11/tools/insmod hello-module/hello.ko 
 insmod: ERROR: could not insert module hello-module/hello.ko: File exists
 $ lsmod | grep hello
 hello                  12415  0 
-$ sudo ./kmod-11/tools/rmmod hello-module/hello.ko 
+\end{verbatim}\end{shaded}}
+\subsubsection{rmmod 命令运行时调试图}
+
+\paragraph{使用测试用工具 rmmod 卸载内核模块}
+
+{\begin{shaded}\begin{verbatim}
+$ sudo ./kmod-11/tools/rmmod hello-module/hello.ko
+$ （rmmod 命令的执行，运行在 hello 的后面加上 .ko 的后缀，这个和以前的命令有所不同）
+\end{verbatim}\end{shaded}}
+\paragraph{查看卸载内核模块后的打印结果}
+
+{\begin{shaded}\begin{verbatim}
 $ lsmod | grep hello
+$ （可以看到上面命令的执行结果没有任何输出信息）
+$ dmesg | tail
+[352048.630829] Bluetooth: hci0 urb dd3d3000 submission failed
+[352049.254135] usb 2-2.1: new full-speed USB device number 16 using uhci_hcd
+[352111.505217] Hello, akaedu
+[352111.505223] .text = e0844000
+[352111.505225] .data = e0c03000
+[352111.505227] .stack = df6e3f54
+[352365.795618] module exit
+[352365.795624] .text = e0c01000
+[352365.795626] .data = e0c03000
+[352365.795628] .stack = dd197f40
 $ 
 \end{verbatim}\end{shaded}}
+\subsection{4. 运行流程分析}
+
+\subsubsection{insmod 命令实现流程}
+
 \begin{figure}[htbp]
 \centering
 \includegraphics{./figures/insmod.jpg}
@@ -1334,7 +1697,7 @@ do\_insmod() 的实现可以分为5个步骤
     kmod\_module\_unref()
   \end{itemize}
 \end{itemize}
-\subsubsection{rmsmod 实现流程}
+\subsubsection{rmsmod 命令实现流程}
 
 \begin{figure}[htbp]
 \centering
@@ -1342,7 +1705,7 @@ do\_insmod() 的实现可以分为5个步骤
 \caption{insmod 调用层次图}
 \end{figure}
 
-\subsubsection{lsmod 实现流程}
+\subsubsection{lsmod 命令实现流程}
 
 \begin{figure}[htbp]
 \centering
@@ -1350,7 +1713,7 @@ do\_insmod() 的实现可以分为5个步骤
 \caption{insmod 调用层次图}
 \end{figure}
 
-\subsubsection{modinfo 实现流程}
+\subsubsection{modinfo 命令实现流程}
 
 \begin{figure}[htbp]
 \centering
@@ -1358,7 +1721,7 @@ do\_insmod() 的实现可以分为5个步骤
 \caption{insmod 调用层次图}
 \end{figure}
 
-\subsubsection{depmod 实现流程}
+\subsubsection{depmod 命令实现流程}
 
 \begin{figure}[htbp]
 \centering
@@ -1390,7 +1753,7 @@ do_depmod(int argc, char *argv[])
     kmod_unref(ctx);
 }
 \end{verbatim}\end{shaded}}
-\subsubsection{modprobe 实现流程}
+\subsubsection{modprobe 命令实现流程}
 
 \textbf{do\_modprobe() 核心代码分析}
 
@@ -1421,7 +1784,7 @@ do_modprobe(int argc, char *argv[])
     log_close();
 }
 \end{verbatim}\end{shaded}}
-\subsection{4. 函数接口分析}
+\subsection{5. 函数接口分析}
 
 \subsubsection{kmod\_new() 核心代码分析}
 

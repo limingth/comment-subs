@@ -1,5 +1,7 @@
 digraph G {
 
+	size="8, 8";  
+
 	commands -> kmod_ctx;
 	commands -> kmod_module;
 

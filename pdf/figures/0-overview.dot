@@ -1,0 +1,9 @@
+digraph G {
+
+	应用层 -> 库接口层 -> 系统调用抽象层;
+	应用层 [shape=box];
+	库接口层 [shape=box];
+	系统调用抽象层 [shape=box];
+
+}
+

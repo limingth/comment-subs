@@ -1,0 +1,14 @@
+digraph G {
+
+	应用层 [shape=box];
+
+	应用层 -> insmod;
+	应用层 -> rmmod;
+	应用层 -> lsmod;
+	应用层 -> modinfo;
+	应用层 -> depmod;
+	应用层 -> modprobe;
+
+}
+
+

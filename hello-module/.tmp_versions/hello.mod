@@ -1,2 +1,2 @@
-/home/akaedu/Github/LASO.codes/ldd/3-kmod-hello/hello.ko
-/home/akaedu/Github/LASO.codes/ldd/3-kmod-hello/hello.o
+/home/akaedu/Github/comment-subs/hello-module/hello.ko
+/home/akaedu/Github/comment-subs/hello-module/hello.o

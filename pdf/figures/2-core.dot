@@ -1,0 +1,16 @@
+digraph G {
+
+	库接口层 [shape=box];
+
+	库接口层 -> 核心子模块; 
+
+	核心子模块 -> kmod_ctx;
+	核心子模块 -> kmod_module;
+	核心子模块 -> kmod_config;
+	核心子模块 -> kmod_list;
+	核心子模块 -> kmod_file;
+	核心子模块 -> kmod_elf;
+
+}
+
+
