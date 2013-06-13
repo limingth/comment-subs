@@ -1,0 +1,9 @@
+digraph G {
+
+	"kmod.c::main()" -> "kmod.c::handle_kmod_compat_commands()" [label="argc, argv"];
+	"kmod.c::handle_kmod_compat_commands()" -> "insmod.c::kmod_cmd_compat_insmod" [label="kmod_compat_cmds[]"];
+
+	"insmod.c::kmod_cmd_compat_insmod" -> "insmod.c::do_insmod()" [label=".cmd, .name"];
+
+}
+

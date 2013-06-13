@@ -43,7 +43,7 @@
 \BOOKMARK [3][-]{section*.56}{rmmod 命令运行时调试图}{section*.47}
 \BOOKMARK [2][-]{section*.59}{4. 运行流程分析}{section*.22}
 \BOOKMARK [3][-]{section*.60}{insmod 命令实现流程}{section*.59}
-\BOOKMARK [3][-]{section*.61}{rmsmod 命令实现流程}{section*.59}
+\BOOKMARK [3][-]{section*.61}{rmmod 命令实现流程}{section*.59}
 \BOOKMARK [3][-]{section*.62}{lsmod 命令实现流程}{section*.59}
 \BOOKMARK [3][-]{section*.63}{modinfo 命令实现流程}{section*.59}
 \BOOKMARK [3][-]{section*.64}{depmod 命令实现流程}{section*.59}

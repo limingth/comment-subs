@@ -1279,8 +1279,6 @@ hash, index_mm，elf，list，array，log。
 
 ### insmod 命令实现流程
 
-![insmod 调用层次图](./figures/insmod.jpg)
-
 insmod 命令和其他所有命令一样，都是采用了一个统一的调用方法。实现了一个 struct kmod_cmd 的数据结构，这个数据结构定义在 kmod-11/tools/kmod.h 文件中。
 
 	struct kmod_cmd {
@@ -1298,7 +1296,7 @@ insmod 命令和其他所有命令一样，都是采用了一个统一的调用�
 	164         .help = "compat insmod command",
 	165 };
 
-在 kmod-11/tools/kmod.c 文件中，实现了一个通用的 main 方法
+在 kmod-11/tools/kmod.c 文件中，实现了一个通用的 main 方法。
 
 	166 int main(int argc, char *argv[])
 	167 {
@@ -1311,7 +1309,40 @@ insmod 命令和其他所有命令一样，都是采用了一个统一的调用�
 	174 
 	175         return err;
 	176 }
+
+在这个main函数中，调用了 handle_kmod_compat_commands 函数。
+
+	149 
+	150 static int handle_kmod_compat_commands(int argc, char *argv[])
+	151 {
+	152         const char *cmd;
+	153         size_t i;
+	154 
+	155         cmd = basename(argv[0]);
+	156 
+	157         for (i = 0; i < ARRAY_SIZE(kmod_compat_cmds); i++) {
+	158                 if (strcmp(kmod_compat_cmds[i]->name, cmd) == 0)
+	159                         return kmod_compat_cmds[i]->cmd(argc, argv);
+	160         }
+	161 
+	162         return -ENOENT;
+	163 }
+	164 
 	
+handle_kmod_compat_commands 这个函数很简单，就是一个for循环遍历整个 kmod_compat_cmds，找出每一个 kmod_compat_cmds[i] 来进行名称 name 匹配，如果匹配上了，就调用相应的函数指针 cmd 来执行该操作。
+
+kmod_compat_cmds 这个数组目前有6个元素，分别就是在 insmod.c rmmod.c lsmod.c modinfo.c depmod.c modprobe.c 这6个文件中定义的全局结构体。
+
+	 44
+	 45 static const struct kmod_cmd *kmod_compat_cmds[] = {
+	 46         &kmod_cmd_compat_lsmod,
+	 47         &kmod_cmd_compat_rmmod,
+	 48         &kmod_cmd_compat_insmod,
+	 49         &kmod_cmd_compat_modinfo,
+	 50         &kmod_cmd_compat_modprobe,
+	 51         &kmod_cmd_compat_depmod,
+	 52 };
+
 最后所有 tools 目录下的可执行文件，都是以软链接的方式，链接到唯一的一个可执行文件 kmod-nolib 上。
 		     
 	$ ls kmod-11/tools/ -l | grep ^l
@@ -1323,13 +1354,13 @@ insmod 命令和其他所有命令一样，都是采用了一个统一的调用�
 	lrwxrwxrwx 1 akaedu akaedu     10 Jun  9 19:23 rmmod -> kmod-nolib
 	$ 
 
+我们可以用一张图来表示这些文件和数据结构之间的关系。
 
-
-
-
-
+![命令实现结构图](./figures/cmd.jpg)
 
 **do_insmod 核心代码分析**
+
+分析到这里，我们就进入到了 insmod 命令实现最核心的部分 do_insmod() 函数，后面的其他几个命令也都是类似的方法，进入到 do_xxx() 中，之后的分析关于这部分不再赘述。下面我们来看看 do_insmod() 函数实现中最核心的部分代码摘要。
 
 	do_insmod()
 	{
@@ -1340,6 +1371,10 @@ insmod 命令和其他所有命令一样，都是采用了一个统一的调用�
 		kmod_module_unref(mod);
 		kmod_unref(ctx);
 	}
+
+注意这个小节中后面的绝大部分代码都不是原代码的引用，而是将其中最核心的函数调用和传入传出的参数整理到函数体内部，为便于查看函数调用关系而做了简化。
+
+![insmod 调用层次图](./figures/insmod.jpg)
 
 do_insmod() 的实现可以分为5个步骤
 
@@ -1359,9 +1394,46 @@ do_insmod() 的实现可以分为5个步骤
 	- kmod_module_insert_module()
 	- kmod_module_unref()
 
-### rmsmod 命令实现流程
+### rmmod 命令实现流程
 
-![insmod 调用层次图](./figures/insmod.jpg)
+**do_rmmod 核心代码分析**
+
+下面我们来看看 do_rmmod() 函数实现中最核心的部分代码摘要。
+
+	do_rmmod()
+	{
+		log_open(use_syslog);
+		ctx = kmod_new(NULL, &null_config);
+		log_setup_kmod_log(ctx, verbose);
+		arg = argv[i];
+		err = kmod_module_new_from_path(ctx, arg, &mod);
+		err = kmod_module_new_from_name(ctx, arg, &mod);
+		check_module_inuse(mod);
+		err = kmod_module_remove_module(mod, flags);
+		kmod_module_unref(mod);
+		kmod_unref(ctx);
+		log_close();
+	}
+
+![rmmod 调用层次图](./figures/rmmod.jpg)
+
+do_rmmod() 的实现可以分为5个步骤
+
+* 创建模块的上下文 struct kmod_ctx ctx
+* 通过 filename 和 ctx 获得模块 struct kmod_module mod
+* 将 mod 插入到当前模块列表中, 完成真正的插入内核功能
+* 释放 mod 
+* 释放 ctx
+
+涉及到两个模块的5个接口，两个模块是
+
+* libkmod/libkmod.c
+	- kmod_new() 
+	- kmod_unref()
+* libkmod/libkmod-module.c
+	- kmod_module_new_from_path()
+	- kmod_module_insert_module()
+	- kmod_module_unref()
 
 ### lsmod 命令实现流程
 

@@ -5,7 +5,7 @@ all:
 	@for i in $(dotname) ;\
 	do \
 		echo + $$i.jpg		;\
-		dot -Tjpg $$i.dot -o $$i.jpg	;\
+		dot -Grankdir=LR -Tjpg $$i.dot -o $$i.jpg	;\
 	done
 
 %:

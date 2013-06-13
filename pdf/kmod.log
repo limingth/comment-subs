@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.2-0.9995.2 (TeX Live 2009/Debian) (format=xelatex 2012.11.3)  13 JUN 2013 19:10
+This is XeTeX, Version 3.1415926-2.2-0.9995.2 (TeX Live 2009/Debian) (format=xelatex 2012.11.3)  13 JUN 2013 21:49
 entering extended mode
  %&-line parsing enabled.
 **kmod.tex
@@ -830,7 +830,7 @@ File: ./figures/0-overview.jpg Graphic file (type QTm)
  <use  "./figures/0-overview.jpg" >
 File: ./figures/1-app.jpg Graphic file (type QTm)
 
-<use  "./figures/1-app.jpg" > [27] [28]
+<use  "./figures/1-app.jpg" > [27] [28] [29]
 Underfull \hbox (badness 1389) in paragraph at lines 1325--1325
 []\EU1/lmtt/m/n/10.95 If no arguments (except options) are given, "depmod -
  []
@@ -847,7 +847,7 @@ Overfull \hbox (9.8362pt too wide) in paragraph at lines 1325--1325
 ributions:[] 
  []
 
-[29]
+[30]
 Overfull \hbox (15.38504pt too wide) in paragraph at lines 1375--1375
 []        \EU1/lmtt/m/n/10.95 -- first- time            Fail if module already 
 inserted or removed[] 
@@ -871,17 +871,17 @@ Overfull \hbox (11.55252pt too wide) in paragraph at lines 1375--1375
 ault search paths[] 
  []
 
-[30]
+[31]
 File: ./figures/2-core.jpg Graphic file (type QTm)
  <use  "./figures/2-core.jpg" >
 File: ./figures/2-base.jpg Graphic file (type QTm)
- <use  "./figures/2-base.jpg" > [31]
-[32]
+ <use  "./figures/2-base.jpg" > [32]
 File: ./figures/3-syscall.jpg Graphic file (type QTm)
- <use  "./figures/3-syscall.jpg" >
+
+<use  "./figures/3-syscall.jpg" >
 File: ./figures/sys.jpg Graphic file (type QTm)
- <use  "./figures/sys.jpg" > [33]
-[34] [35]
+ <use  "./figures/sys.jpg" > [33] [34]
+[35] [36]
 Underfull \hbox (badness 10000) in paragraph at lines 1540--1540
 []\EU1/lmtt/m/n/10.95 make - C / usr/ src/ linux- headers-3.2.0-29- generic-
  []
@@ -892,7 +892,7 @@ Underfull \hbox (badness 1565) in paragraph at lines 1540--1540
 o-
  []
 
-[36] [37]
+[37] [38]
 Underfull \hbox (badness 10000) in paragraph at lines 1608--1608
 []\EU1/lmtt/m/n/10.95 [350778.217886] usb 2-2.1: new full-
  []
@@ -939,7 +939,7 @@ Missing character: There is no 所 in font [lmmono10-regular]!
 Missing character: There is no 不 in font [lmmono10-regular]!
 Missing character: There is no 同 in font [lmmono10-regular]!
 Missing character: There is no ） in font [lmmono10-regular]!
-[38]
+[39]
 Missing character: There is no （ in font [lmmono10-regular]!
 Missing character: There is no 可 in font [lmmono10-regular]!
 Missing character: There is no 以 in font [lmmono10-regular]!
@@ -968,102 +968,119 @@ Underfull \hbox (badness 10000) in paragraph at lines 1642--1642
 []\EU1/lmtt/m/n/10.95 [352049.254135] usb 2-2.1: new full-
  []
 
+[40]
+Overfull \hbox (7.91994pt too wide) in paragraph at lines 1702--1702
+[]\EU1/lmtt/m/n/10.95 150 static int handle_kmod_compat_commands(int argc, char
+ *argv[])[] 
+ []
+
+
+Overfull \hbox (2.1713pt too wide) in paragraph at lines 1702--1702
+[]\EU1/lmtt/m/n/10.95 159                         return kmod_compat_cmds[i]->c
+md(argc, argv);[] 
+ []
+
+[41] [42]
+File: ./figures/cmd.jpg Graphic file (type QTm)
+ <use  "./figures/cmd.jpg" >
 File: ./figures/insmod.jpg Graphic file (type QTm)
-<use  "./figures/insmod.jpg" > [39]
+ <use  "./figures/insmod.jpg" > [43]
+[44]
+File: ./figures/rmmod.jpg Graphic file (type QTm)
+ <use  "./figures/rmmod.jpg" > [45]
 File: ./figures/insmod.jpg Graphic file (type QTm)
  <use  "./figures/insmod.jpg" >
 File: ./figures/insmod.jpg Graphic file (type QTm)
 
 <use  "./figures/insmod.jpg" >
 File: ./figures/insmod.jpg Graphic file (type QTm)
- <use  "./figures/insmod.jpg" > [40]
-File: ./figures/insmod.jpg Graphic file (type QTm)
-
-<use  "./figures/insmod.jpg" > [41] [42]
+ <use  "./figures/insmod.jpg" > [46] [47]
+[48]
 File: ./figures/kmod_new.jpg Graphic file (type QTm)
  <use  "./figures/kmod_new.jpg" >
-[43]
 File: ./figures/kmod_unref.jpg Graphic file (type QTm)
  <use  "./figures/kmod_unref.jpg" >
-Overfull \hbox (59.65868pt too wide) in paragraph at lines 1841--1841
+Overfull \hbox (59.65868pt too wide) in paragraph at lines 2000--2000
 []\EU1/lmtt/m/n/10.95 int kmod_module_new_from_path(kmod_ctx *ctx, char *path, 
 kmod_module **mod)[] 
  []
 
+[49]
 File: ./figures/kmod_module_new_from_path.jpg Graphic file (type QTm)
-<use  "./figures/kmod_module_new_from_path.jpg" > [44]
-Overfull \hbox (48.16118pt too wide) in paragraph at lines 1864--1864
+ <use  "./figures/kmod_module_new_from_path.jpg" >
+Overfull \hbox (48.16118pt too wide) in paragraph at lines 2023--2023
 []\EU1/lmtt/m/n/10.95 int kmod_module_insert_module(kmod_module *mod, int flags
 , char *options)[] 
  []
 
+[50]
 File: ./figures/kmod_module_insert_module.jpg Graphic file (type QTm)
-<use  "./figures/kmod_module_insert_module.jpg" >
+ <use  "./figures/kmod_module_insert_module.jpg" >
 File: ./figures/kmod_module_unref.jpg Graphic file (type QTm)
 
-<use  "./figures/kmod_module_unref.jpg" > [45]
-Overfull \hbox (88.40242pt too wide) in paragraph at lines 1911--1911
+<use  "./figures/kmod_module_unref.jpg" > [51]
+Overfull \hbox (88.40242pt too wide) in paragraph at lines 2070--2070
 []    \EU1/lmtt/m/n/10.95 err = kmod_elf_get_section(elf, ".gnu.linkonce.this_m
 odule", &buf, &bufsize);[] 
  []
 
-[46]
-Overfull \hbox (9.8362pt too wide) in paragraph at lines 1957--1957
+[52]
+Overfull \hbox (9.8362pt too wide) in paragraph at lines 2116--2116
 []\EU1/lmtt/m/n/10.95 static int insmod_all(struct kmod_ctx *ctx, char **args, 
 int nargs)[] 
  []
 
-[47]
-Overfull \hbox (63.49115pt too wide) in paragraph at lines 1983--1983
+[53]
+Overfull \hbox (63.49115pt too wide) in paragraph at lines 2142--2142
 []\EU1/lmtt/m/n/10.95 int kmod_module_probe_insert_module(mod, flags, extra_opt
 ions, run_install)[] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1983--1983
+Underfull \hbox (badness 10000) in paragraph at lines 2142--2142
 []    \EU1/lmtt/m/n/10.95 err = kmod_module_get_probe_list(mod, !!
  []
 
 
-Overfull \hbox (2.17117pt too wide) in paragraph at lines 1999--1999
+Overfull \hbox (2.17117pt too wide) in paragraph at lines 2158--2158
 []\EU1/lmtt/m/n/10.95 kmod_list *kmod_module_get_dependencies(struct kmod_modul
 e *mod)[] 
  []
 
 
-Overfull \hbox (15.58495pt too wide) in paragraph at lines 1999--1999
+Overfull \hbox (15.58495pt too wide) in paragraph at lines 2158--2158
 []        \EU1/lmtt/m/n/10.95 l_new = kmod_list_append(list_new, kmod_module_re
 f(l->data));[] 
  []
 
-[48]
-Overfull \hbox (7.91992pt too wide) in paragraph at lines 2011--2011
+[54]
+Overfull \hbox (7.91992pt too wide) in paragraph at lines 2170--2170
 []\EU1/lmtt/m/n/10.95 kmod_list *module_get_dependencies_noref(struct kmod_modu
 le *mod)[] 
  []
 
 
-Overfull \hbox (36.66367pt too wide) in paragraph at lines 2028--2028
+Overfull \hbox (36.66367pt too wide) in paragraph at lines 2187--2187
 []    \EU1/lmtt/m/n/10.95 return index_mm_search(ctx->indexes[KMOD_INDEX_MODULE
 S_DEP], name);[] 
  []
 
-
-Overfull \hbox (9.83618pt too wide) in paragraph at lines 2047--2047
+[55]
+Overfull \hbox (9.83618pt too wide) in paragraph at lines 2206--2206
 []\EU1/lmtt/m/n/10.95 int kmod_module_parse_depline(struct kmod_module *mod, ch
 ar *line)[] 
  []
 
-[49] [50] (./kmod.aux)
+[56] (./kmod.aux)
 LaTeX Font Info:    Some font shapes were not available, defaults substituted.
  ) 
 Here is how much of TeX's memory you used:
- 9440 strings out of 495724
- 144859 string characters out of 1189346
+ 9444 strings out of 495724
+ 144911 string characters out of 1189346
  261772 words of memory out of 3000000
- 12459 multiletter control sequences out of 15000+50000
+ 12461 multiletter control sequences out of 15000+50000
  6451 words of font info for 32 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  40i,6n,36p,457b,423s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on kmod.pdf (50 pages).
+Output written on kmod.pdf (56 pages).

@@ -10,7 +10,6 @@ digraph G {
 	kmod_ctx -> log;
 	kmod_ctx -> index_mm;
 
-	kmod_module -> kmod_pool;
 	kmod_module -> kmod_file;
 	kmod_module -> kmod_elf;
 	kmod_module -> syscall;
