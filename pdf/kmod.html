@@ -1340,11 +1340,12 @@ $ </code></pre>
 </div>
 <h3 id="depmod-命令实现流程">depmod 命令实现流程</h3>
 <div class="figure">
-<img src="./figures/insmod.jpg" alt="insmod 调用层次图" /><p class="caption">insmod 调用层次图</p>
+<img src="./figures/depmod.jpg" alt="depmod 调用层次图" /><p class="caption">depmod 调用层次图</p>
 </div>
 <p><strong>do_depmod() 核心代码分析</strong></p>
 <pre><code>do_depmod(int argc, char *argv[])
 {
+    out = stdout;       
     ctx = kmod_new(cfg.dirname, &amp;null_kmod_config);
 
     err = depmod_init(&amp;depmod, &amp;cfg, ctx);
@@ -1357,12 +1358,150 @@ $ </code></pre>
     err = depmod_modules_build_array(&amp;depmod);
     depmod_modules_sort(&amp;depmod);
     err = depmod_load(&amp;depmod);
-    err = depmod_output(&amp;depmod, out);
 
+    err = depmod_output(&amp;depmod, out);
     depmod_shutdown(&amp;depmod);
     cfg_free(&amp;cfg);
     kmod_unref(ctx);
 }</code></pre>
+<p>下面根据这个核心代码，将在一层逻辑过程中调用到的函数，做一个简要的说明。 所有这些函数可以分为3类，分别形如 kmod_xxx，depmod_xxx, cfg_xxx 开头的。</p>
+<p><strong>kmod_xxx</strong> 包含 kmod_new, kmod_module_new_from_path, kmod_unref 这3个在之前的代码分析中介绍过。</p>
+<p><strong>depmod_xxx</strong> 这些函数都被声明为 static 的类型，说明仅仅只是为 depmod 命令的实现而服务的，不属于 libkmod 库要提供的接口。 * depmod 内部子模块上层接口 - depmod_init - depmod_load_symvers - depmod_load_system_map - depmod_modules_search - depmod_module_add - depmod_modules_build_array - depmod_modules_sort - depmod_shutdown</p>
+<ul>
+<li><p>围绕上面这些函数，还需要调用到如下接口</p>
+<p>static int depmod_init(struct depmod *depmod, struct cfg *cfg, struct kmod_ctx *ctx) { array_init(&amp;depmod-&gt;modules, 128);</p>
+<pre><code>depmod-&gt;modules_by_uncrelpath = hash_new(512, NULL);
+depmod-&gt;modules_by_name = hash_new(512, NULL);
+depmod-&gt;symbols = hash_new(2048, (void (*)(void *))symbol_free);
+
+hash_free(depmod-&gt;modules_by_name);
+hash_free(depmod-&gt;modules_by_uncrelpath);
+
+return err;</code></pre>
+<p>}</p>
+<p>static int depmod_load_symvers(struct depmod *depmod, const char *filename) { fp = fopen(filename, &quot;r&quot;); while (fgets(line, sizeof(line), fp) != NULL) { ver = strtok(line, &quot; &quot;);</p>
+<pre><code>depmod_symbol_add(depmod, sym, crc, NULL);
+depmod_add_fake_syms(depmod);
+
+fclose(fp);
+return 0;</code></pre>
+<p>}</p>
+<p>static int depmod_load_system_map(struct depmod *depmod, const char *filename) { fp = fopen(filename, &quot;r&quot;); while (fgets(line, sizeof(line), fp) != NULL) { p = strchr(line, ' '); depmod_symbol_add(depmod, p + ksymstr_len, 0, NULL); depmod_add_fake_syms(depmod); fclose(fp); return 0; }</p>
+<p>static int depmod_modules_search(struct depmod *depmod) { DIR *d = opendir(depmod-&gt;cfg-&gt;dirname); err = depmod_modules_search_dir(depmod, d, baselen, path); closedir(d); return err; }</p>
+<p>static int depmod_module_add(struct depmod *depmod, struct kmod_module *kmod) { modname = kmod_module_get_name(kmod);</p>
+<pre><code>mod = calloc(1, sizeof(struct mod) + modnamelen);
+
+array_init(&amp;mod-&gt;deps, 4);
+
+err = hash_add_unique(depmod-&gt;modules_by_name, mod-&gt;modname, mod);
+
+return 0;</code></pre>
+<p>}</p>
+<p>static int depmod_modules_build_array(struct depmod *depmod) { hash_iter_init(depmod-&gt;modules_by_name, &amp;module_iter);</p>
+<pre><code>while (hash_iter_next(&amp;module_iter, NULL, &amp;v)) {
+        struct mod *mod = (struct mod *) v;
+        mod-&gt;idx = depmod-&gt;modules.count;
+        err = array_append(&amp;depmod-&gt;modules, mod);
+        if (err &lt; 0)
+                return err;
+}
+return 0;</code></pre>
+<p>}</p>
+<p>static void depmod_modules_sort(struct depmod *depmod) { snprintf(order_file, sizeof(order_file), &quot;%s/modules.order&quot;, depmod-&gt;cfg-&gt;dirname); fp = fopen(order_file, &quot;r&quot;);</p>
+<pre><code>while (fgets(line, sizeof(line), fp) != NULL) {
+    mod = hash_find(depmod-&gt;modules_by_uncrelpath, line);
+}
+
+array_sort(&amp;depmod-&gt;modules, mod_cmp);
+
+for (idx = 0; idx &lt; depmod-&gt;modules.count; idx++) {
+        struct mod *m = depmod-&gt;modules.array[idx];
+        m-&gt;idx = idx;
+}</code></pre>
+<p>}</p>
+<p>static void depmod_shutdown(struct depmod *depmod) { hash_free(depmod-&gt;symbols);</p>
+<pre><code>hash_free(depmod-&gt;modules_by_uncrelpath);
+
+hash_free(depmod-&gt;modules_by_name);
+
+for (i = 0; i &lt; depmod-&gt;modules.count; i++)
+        mod_free(depmod-&gt;modules.array[i]);
+
+array_free_array(&amp;depmod-&gt;modules);
+
+kmod_unref(depmod-&gt;ctx);</code></pre>
+<p>}</p></li>
+</ul>
+<p><strong>cfg_xxx</strong></p>
+<pre><code>static int cfg_load(struct cfg *cfg, const char * const *cfg_paths)
+{
+    for (i = 0; cfg_paths[i] != NULL; i++)
+            cfg_files_list(&amp;files, &amp;n_files, cfg_paths[i]);
+
+    for (i = 0; i &lt; n_files; i++) {
+            struct cfg_file *f = files[i];
+            cfg_file_parse(cfg, f-&gt;path);
+            cfg_file_free(f);
+    }
+    free(files);
+
+    if (cfg-&gt;searches == NULL)
+            cfg_search_add(cfg, &quot;updates&quot;, 0);
+
+    return 0;
+}
+
+static void cfg_free(struct cfg *cfg)
+{
+    while (cfg-&gt;overrides) {
+            struct cfg_override *tmp = cfg-&gt;overrides;
+            cfg-&gt;overrides = cfg-&gt;overrides-&gt;next;
+            cfg_override_free(tmp);
+    }
+
+    while (cfg-&gt;searches) {
+            struct cfg_search *tmp = cfg-&gt;searches;
+            cfg-&gt;searches = cfg-&gt;searches-&gt;next;
+            cfg_search_free(tmp);
+    }
+}</code></pre>
+<p>在 depmod.c 文件的实现中，depmod_output 负责最后各类文件的输出功能。</p>
+<pre><code>2161 static int depmod_output(struct depmod *depmod, FILE *out)
+2162 {
+2163         static const struct depfile {
+2164                 const char *name;
+2165                 int (*cb)(struct depmod *depmod, FILE *out);
+2166         } *itr, depfiles[] = {
+2167                 { &quot;modules.dep&quot;, output_deps },
+2168                 { &quot;modules.dep.bin&quot;, output_deps_bin },
+2169                 { &quot;modules.alias&quot;, output_aliases },
+2170                 { &quot;modules.alias.bin&quot;, output_aliases_bin },
+2171                 { &quot;modules.softdep&quot;, output_softdeps },
+2172                 { &quot;modules.symbols&quot;, output_symbols },
+2173                 { &quot;modules.symbols.bin&quot;, output_symbols_bin },
+2174                 { &quot;modules.builtin.bin&quot;, output_builtin_bin },
+2175                 { &quot;modules.devname&quot;, output_devname },
+2176                 { }
+2177         };</code></pre>
+<p>其中输出到 /lib/modules/3.2.0-29-generic-pae/modules.dep 文件的输出函数是 output_deps 通过修改如下 fprintf(out, ...) 函数，增添输出到标准输出 stdout 的 fprintf(stdout, ...) 则可以在屏幕上看到运行 depmod 命令时候的全部输出结果，这个结果和 modules.dep 文件中的内容是完全一样的。</p>
+<pre><code>1790 static int output_deps(struct depmod *depmod, FILE *out)
+1791 {
+1792         size_t i;
+1793 
+1794         for (i = 0; i &lt; depmod-&gt;modules.count; i++) {
+1795                 const struct mod **deps, *mod = depmod-&gt;modules.array[i];
+...
+1804                 fprintf(out, &quot;%s:&quot;, p);
+1805                 fprintf(stdout, &quot;%s:&quot;, p);
+...
+1824                         fprintf(out, &quot; %s&quot;, mod_get_compressed_path(d));
+1825                         fprintf(stdout, &quot; %s&quot;, mod_get_compressed_path(d));
+...
+1828         end:
+1829                 putc(&#39;\n&#39;, out);
+1830                 putc(&#39;\n&#39;, stdout);
+... 
+1834 }</code></pre>
 <h3 id="modprobe-命令实现流程">modprobe 命令实现流程</h3>
 <p><strong>do_modprobe() 核心代码分析</strong></p>
 <pre><code>do_modprobe(int argc, char *argv[])
@@ -1389,6 +1528,86 @@ $ </code></pre>
     kmod_unref(ctx);
 
     log_close();
+}</code></pre>
+<h4 id="insmod_all">insmod_all</h4>
+<pre><code>static int insmod_all(struct kmod_ctx *ctx, char **args, int nargs)
+{
+        for (i = 0; i &lt; nargs; i++) 
+        err = insmod(ctx, args[i], NULL);
+
+    return err;
+}</code></pre>
+<h4 id="insmod">insmod</h4>
+<pre><code>-&gt; kmod_module_probe_insert_module()</code></pre>
+<h4 id="kmod_module_probe_insert_module">kmod_module_probe_insert_module</h4>
+<pre><code>int kmod_module_probe_insert_module(mod, flags, extra_options, run_install)
+{
+    err = kmod_module_get_probe_list(mod, !!(flags &amp; KMOD_PROBE_IGNORE_COMMAND), &amp;list);
+
+    kmod_list_foreach(l, list) 
+    {
+        struct kmod_module *m = l-&gt;data;
+        err = kmod_module_insert_module(m, flags, options);
+    }
+}
+
+-&gt; kmod_module_get_probe_list
+    -&gt; __kmod_module_get_probe_list
+        -&gt; __kmod_module_get_probe_list
+            -&gt; kmod_module_get_dependencies
+                -&gt;  module_get_dependencies_noref
+                    -&gt; kmod_module_parse_depline</code></pre>
+<h4 id="kmod_module_get_dependencies">kmod_module_get_dependencies</h4>
+<pre><code>kmod_list *kmod_module_get_dependencies(struct kmod_module *mod)
+{
+    module_get_dependencies_noref(mod);
+
+    kmod_list_foreach(l, mod-&gt;dep)
+    {
+        l_new = kmod_list_append(list_new, kmod_module_ref(l-&gt;data));
+        list_new = l_new;
+    }
+
+    return list_new;
+}</code></pre>
+<h4 id="module_get_dependencies_noref">module_get_dependencies_noref</h4>
+<pre><code>kmod_list *module_get_dependencies_noref(struct kmod_module *mod)
+{
+    char *line = kmod_search_moddep(mod-&gt;ctx, mod-&gt;name);
+
+    kmod_module_parse_depline(mod, line);
+
+    return mod-&gt;dep;
+}</code></pre>
+<h4 id="kmod_search_moddep">kmod_search_moddep</h4>
+<pre><code>char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
+{
+    // name = nfs;      // modprobe nfs
+    return index_mm_search(ctx-&gt;indexes[KMOD_INDEX_MODULES_DEP], name);
+
+    DBG(ctx, &quot;file=%s modname=%s\n&quot;, fn, name);
+
+    idx = index_file_open(fn);
+    line = index_search(idx, name);
+    index_file_close(idx);
+
+    return line;
+}</code></pre>
+<h4 id="kmod_module_parse_depline">kmod_module_parse_depline</h4>
+<pre><code>int kmod_module_parse_depline(struct kmod_module *mod, char *line)
+{
+    for (p = strtok_r(p, &quot; \t&quot;, &amp;saveptr); p != NULL;
+         p = strtok_r(NULL, &quot; \t&quot;, &amp;saveptr)) 
+    {
+        err = kmod_module_new_from_path(ctx, path, &amp;depmod);
+        list = kmod_list_prepend(list, depmod);
+        n++;
+    }
+
+    mod-&gt;dep = list;
+    mod-&gt;n_dep = n;
+
+    return n;
 }</code></pre>
 <h2 id="函数接口分析">5. 函数接口分析</h2>
 <h3 id="kmod_new-核心代码分析">kmod_new() 核心代码分析</h3>
@@ -1504,84 +1723,4 @@ $ </code></pre>
     mod = find_module(modules, modname);
 
     return mod-&gt;ret;
-}</code></pre>
-<h3 id="insmod_all">insmod_all</h3>
-<pre><code>static int insmod_all(struct kmod_ctx *ctx, char **args, int nargs)
-{
-        for (i = 0; i &lt; nargs; i++) 
-        err = insmod(ctx, args[i], NULL);
-
-    return err;
-}</code></pre>
-<h4 id="insmod">insmod</h4>
-<pre><code>-&gt; kmod_module_probe_insert_module()</code></pre>
-<h3 id="kmod_module_probe_insert_module">kmod_module_probe_insert_module</h3>
-<pre><code>int kmod_module_probe_insert_module(mod, flags, extra_options, run_install)
-{
-    err = kmod_module_get_probe_list(mod, !!(flags &amp; KMOD_PROBE_IGNORE_COMMAND), &amp;list);
-
-    kmod_list_foreach(l, list) 
-    {
-        struct kmod_module *m = l-&gt;data;
-        err = kmod_module_insert_module(m, flags, options);
-    }
-}
-
--&gt; kmod_module_get_probe_list
-    -&gt; __kmod_module_get_probe_list
-        -&gt; __kmod_module_get_probe_list
-            -&gt; kmod_module_get_dependencies
-                -&gt;  module_get_dependencies_noref
-                    -&gt; kmod_module_parse_depline</code></pre>
-<h3 id="kmod_module_get_dependencies">kmod_module_get_dependencies</h3>
-<pre><code>kmod_list *kmod_module_get_dependencies(struct kmod_module *mod)
-{
-    module_get_dependencies_noref(mod);
-
-    kmod_list_foreach(l, mod-&gt;dep)
-    {
-        l_new = kmod_list_append(list_new, kmod_module_ref(l-&gt;data));
-        list_new = l_new;
-    }
-
-    return list_new;
-}</code></pre>
-<h3 id="module_get_dependencies_noref">module_get_dependencies_noref</h3>
-<pre><code>kmod_list *module_get_dependencies_noref(struct kmod_module *mod)
-{
-    char *line = kmod_search_moddep(mod-&gt;ctx, mod-&gt;name);
-
-    kmod_module_parse_depline(mod, line);
-
-    return mod-&gt;dep;
-}</code></pre>
-<h4 id="kmod_search_moddep">kmod_search_moddep</h4>
-<pre><code>char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
-{
-    // name = nfs;      // modprobe nfs
-    return index_mm_search(ctx-&gt;indexes[KMOD_INDEX_MODULES_DEP], name);
-
-    DBG(ctx, &quot;file=%s modname=%s\n&quot;, fn, name);
-
-    idx = index_file_open(fn);
-    line = index_search(idx, name);
-    index_file_close(idx);
-
-    return line;
-}</code></pre>
-<h4 id="kmod_module_parse_depline">kmod_module_parse_depline</h4>
-<pre><code>int kmod_module_parse_depline(struct kmod_module *mod, char *line)
-{
-    for (p = strtok_r(p, &quot; \t&quot;, &amp;saveptr); p != NULL;
-         p = strtok_r(NULL, &quot; \t&quot;, &amp;saveptr)) 
-    {
-        err = kmod_module_new_from_path(ctx, path, &amp;depmod);
-        list = kmod_list_prepend(list, depmod);
-        n++;
-    }
-
-    mod-&gt;dep = list;
-    mod-&gt;n_dep = n;
-
-    return n;
 }</code></pre>

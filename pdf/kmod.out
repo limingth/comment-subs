@@ -48,17 +48,13 @@
 \BOOKMARK [3][-]{section*.63}{modinfo 命令实现流程}{section*.59}
 \BOOKMARK [3][-]{section*.64}{depmod 命令实现流程}{section*.59}
 \BOOKMARK [3][-]{section*.65}{modprobe 命令实现流程}{section*.59}
-\BOOKMARK [2][-]{section*.66}{5. 函数接口分析}{section*.22}
-\BOOKMARK [3][-]{section*.67}{kmod\137new\(\) 核心代码分析}{section*.66}
-\BOOKMARK [3][-]{section*.68}{kmod\137unref\(\) 核心代码分析}{section*.66}
-\BOOKMARK [3][-]{section*.69}{kmod\137module\137new\137from\137path\(\) 核心代码分析}{section*.66}
-\BOOKMARK [3][-]{section*.70}{kmod\137module\137insert\137module\(\) 核心代码分析}{section*.66}
-\BOOKMARK [3][-]{section*.71}{kmod\137module\137unref\(\) 核心代码分析}{section*.66}
-\BOOKMARK [3][-]{section*.72}{init\137module\(\) 核心代码分析}{section*.66}
-\BOOKMARK [3][-]{section*.73}{do\137rmmod\(\) 核心代码分析}{section*.66}
-\BOOKMARK [3][-]{section*.74}{kmod\137module\137remove\137module\(\) 核心代码分析}{section*.66}
-\BOOKMARK [3][-]{section*.75}{delete\137module\(\) 核心代码分析}{section*.66}
-\BOOKMARK [3][-]{section*.76}{insmod\137all}{section*.66}
-\BOOKMARK [3][-]{section*.78}{kmod\137module\137probe\137insert\137module}{section*.66}
-\BOOKMARK [3][-]{section*.79}{kmod\137module\137get\137dependencies}{section*.66}
-\BOOKMARK [3][-]{section*.80}{module\137get\137dependencies\137noref}{section*.66}
+\BOOKMARK [2][-]{section*.73}{5. 函数接口分析}{section*.22}
+\BOOKMARK [3][-]{section*.74}{kmod\137new\(\) 核心代码分析}{section*.73}
+\BOOKMARK [3][-]{section*.75}{kmod\137unref\(\) 核心代码分析}{section*.73}
+\BOOKMARK [3][-]{section*.76}{kmod\137module\137new\137from\137path\(\) 核心代码分析}{section*.73}
+\BOOKMARK [3][-]{section*.77}{kmod\137module\137insert\137module\(\) 核心代码分析}{section*.73}
+\BOOKMARK [3][-]{section*.78}{kmod\137module\137unref\(\) 核心代码分析}{section*.73}
+\BOOKMARK [3][-]{section*.79}{init\137module\(\) 核心代码分析}{section*.73}
+\BOOKMARK [3][-]{section*.80}{do\137rmmod\(\) 核心代码分析}{section*.73}
+\BOOKMARK [3][-]{section*.81}{kmod\137module\137remove\137module\(\) 核心代码分析}{section*.73}
+\BOOKMARK [3][-]{section*.82}{delete\137module\(\) 核心代码分析}{section*.73}

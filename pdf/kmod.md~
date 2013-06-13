@@ -1417,7 +1417,7 @@ do_insmod() 的实现可以分为5个步骤
 
 ![rmmod 调用层次图](./figures/rmmod.jpg)
 
-do_insmod() 的实现可以分为5个步骤
+do_rmmod() 的实现可以分为5个步骤
 
 * 创建模块的上下文 struct kmod_ctx ctx
 * 通过 filename 和 ctx 获得模块 struct kmod_module mod
@@ -1444,14 +1444,15 @@ do_insmod() 的实现可以分为5个步骤
 ![insmod 调用层次图](./figures/insmod.jpg)
 
 ### depmod 命令实现流程
-![insmod 调用层次图](./figures/insmod.jpg)
+![depmod 调用层次图](./figures/depmod.jpg)
 
 **do_depmod() 核心代码分析**
 
 	do_depmod(int argc, char *argv[])
 	{
+		out = stdout;		
 		ctx = kmod_new(cfg.dirname, &null_kmod_config);
-
+		
 		err = depmod_init(&depmod, &cfg, ctx);
 		err = depmod_load_symvers(&depmod, module_symvers);
 		err = depmod_load_system_map(&depmod, system_map);
@@ -1462,12 +1463,218 @@ do_insmod() 的实现可以分为5个步骤
 		err = depmod_modules_build_array(&depmod);
 		depmod_modules_sort(&depmod);
 		err = depmod_load(&depmod);
-		err = depmod_output(&depmod, out);
 
+		err = depmod_output(&depmod, out);
 		depmod_shutdown(&depmod);
 		cfg_free(&cfg);
 		kmod_unref(ctx);
 	}
+
+下面根据这个核心代码，将在一层逻辑过程中调用到的函数，做一个简要的说明。
+所有这些函数可以分为3类，分别形如 kmod_xxx，depmod_xxx, cfg_xxx 开头的。
+
+**kmod_xxx**
+包含 kmod_new, kmod_module_new_from_path, kmod_unref 这3个在之前的代码分析中介绍过。
+
+**depmod_xxx**
+这些函数都被声明为 static 的类型，说明仅仅只是为 depmod 命令的实现而服务的，不属于 libkmod 库要提供的接口。
+* depmod 内部子模块上层接口
+	- depmod_init
+	- depmod_load_symvers
+	- depmod_load_system_map
+	- depmod_modules_search
+	- depmod_module_add
+	- depmod_modules_build_array
+	- depmod_modules_sort
+	- depmod_shutdown
+
+* 围绕上面这些函数，还需要调用到如下接口
+
+	static int depmod_init(struct depmod *depmod, struct cfg *cfg,
+                                                        struct kmod_ctx *ctx)
+	{
+		array_init(&depmod->modules, 128);
+
+		depmod->modules_by_uncrelpath = hash_new(512, NULL);
+		depmod->modules_by_name = hash_new(512, NULL);
+		depmod->symbols = hash_new(2048, (void (*)(void *))symbol_free);
+
+		hash_free(depmod->modules_by_name);
+		hash_free(depmod->modules_by_uncrelpath);
+
+		return err;
+	}
+
+	static int depmod_load_symvers(struct depmod *depmod, const char *filename)
+	{
+		fp = fopen(filename, "r");
+		while (fgets(line, sizeof(line), fp) != NULL) {
+		ver = strtok(line, " \t");
+
+		depmod_symbol_add(depmod, sym, crc, NULL);
+		depmod_add_fake_syms(depmod);
+
+		fclose(fp);
+		return 0;
+	}
+
+	static int depmod_load_system_map(struct depmod *depmod, const char *filename)
+	{
+		fp = fopen(filename, "r");
+		while (fgets(line, sizeof(line), fp) != NULL) {
+		p = strchr(line, ' ');
+		depmod_symbol_add(depmod, p + ksymstr_len, 0, NULL);
+		depmod_add_fake_syms(depmod);
+		fclose(fp);
+		return 0;
+	}
+
+	static int depmod_modules_search(struct depmod *depmod)
+	{
+		DIR *d = opendir(depmod->cfg->dirname);
+		err = depmod_modules_search_dir(depmod, d, baselen, path);
+		closedir(d);
+		return err;
+	}
+
+	static int depmod_module_add(struct depmod *depmod, struct kmod_module *kmod)
+	{
+		modname = kmod_module_get_name(kmod);
+
+		mod = calloc(1, sizeof(struct mod) + modnamelen);
+
+		array_init(&mod->deps, 4);
+
+		err = hash_add_unique(depmod->modules_by_name, mod->modname, mod);
+
+		return 0;
+	}
+
+	static int depmod_modules_build_array(struct depmod *depmod)
+	{
+		hash_iter_init(depmod->modules_by_name, &module_iter);
+
+		while (hash_iter_next(&module_iter, NULL, &v)) {
+		        struct mod *mod = (struct mod *) v;
+		        mod->idx = depmod->modules.count;
+		        err = array_append(&depmod->modules, mod);
+		        if (err < 0)
+		                return err;
+		}
+		return 0;
+	}
+
+	static void depmod_modules_sort(struct depmod *depmod)
+	{
+		snprintf(order_file, sizeof(order_file), "%s/modules.order",
+				 depmod->cfg->dirname);
+			fp = fopen(order_file, "r");
+
+		while (fgets(line, sizeof(line), fp) != NULL) {
+			mod = hash_find(depmod->modules_by_uncrelpath, line);
+		}
+
+		array_sort(&depmod->modules, mod_cmp);
+
+		for (idx = 0; idx < depmod->modules.count; idx++) {
+		        struct mod *m = depmod->modules.array[idx];
+		        m->idx = idx;
+		}
+	}
+
+	static void depmod_shutdown(struct depmod *depmod)
+	{
+		hash_free(depmod->symbols);
+
+		hash_free(depmod->modules_by_uncrelpath);
+
+		hash_free(depmod->modules_by_name);
+
+		for (i = 0; i < depmod->modules.count; i++)
+		        mod_free(depmod->modules.array[i]);
+
+		array_free_array(&depmod->modules);
+
+		kmod_unref(depmod->ctx);
+	}
+
+**cfg_xxx**
+
+	static int cfg_load(struct cfg *cfg, const char * const *cfg_paths)
+	{
+		for (i = 0; cfg_paths[i] != NULL; i++)
+		        cfg_files_list(&files, &n_files, cfg_paths[i]);
+
+		for (i = 0; i < n_files; i++) {
+		        struct cfg_file *f = files[i];
+		        cfg_file_parse(cfg, f->path);
+		        cfg_file_free(f);
+		}
+		free(files);
+
+		if (cfg->searches == NULL)
+		        cfg_search_add(cfg, "updates", 0);
+	
+		return 0;
+	}
+		      
+	static void cfg_free(struct cfg *cfg)
+	{
+		while (cfg->overrides) {
+		        struct cfg_override *tmp = cfg->overrides;
+		        cfg->overrides = cfg->overrides->next;
+		        cfg_override_free(tmp);
+		}
+
+		while (cfg->searches) {
+		        struct cfg_search *tmp = cfg->searches;
+		        cfg->searches = cfg->searches->next;
+		        cfg_search_free(tmp);
+		}
+	}
+
+在 depmod.c 文件的实现中，depmod_output 负责最后各类文件的输出功能。
+
+	2161 static int depmod_output(struct depmod *depmod, FILE *out)
+	2162 {
+	2163         static const struct depfile {
+	2164                 const char *name;
+	2165                 int (*cb)(struct depmod *depmod, FILE *out);
+	2166         } *itr, depfiles[] = {
+	2167                 { "modules.dep", output_deps },
+	2168                 { "modules.dep.bin", output_deps_bin },
+	2169                 { "modules.alias", output_aliases },
+	2170                 { "modules.alias.bin", output_aliases_bin },
+	2171                 { "modules.softdep", output_softdeps },
+	2172                 { "modules.symbols", output_symbols },
+	2173                 { "modules.symbols.bin", output_symbols_bin },
+	2174                 { "modules.builtin.bin", output_builtin_bin },
+	2175                 { "modules.devname", output_devname },
+	2176                 { }
+	2177         };
+
+其中输出到 /lib/modules/3.2.0-29-generic-pae/modules.dep 文件的输出函数是 output_deps
+通过修改如下 fprintf(out, ...) 函数，增添输出到标准输出 stdout 的 fprintf(stdout, ...)
+则可以在屏幕上看到运行 depmod 命令时候的全部输出结果，这个结果和 modules.dep 文件中的内容是完全一样的。
+
+	1790 static int output_deps(struct depmod *depmod, FILE *out)
+	1791 {
+	1792         size_t i;
+	1793 
+	1794         for (i = 0; i < depmod->modules.count; i++) {
+	1795                 const struct mod **deps, *mod = depmod->modules.array[i];
+	...
+	1804                 fprintf(out, "%s:", p);
+	1805                 fprintf(stdout, "%s:", p);
+	...
+	1824                         fprintf(out, " %s", mod_get_compressed_path(d));
+	1825                         fprintf(stdout, " %s", mod_get_compressed_path(d));
+	...
+	1828         end:
+	1829                 putc('\n', out);
+	1830                 putc('\n', stdout);
+	... 
+	1834 }
 
 ### modprobe 命令实现流程
 

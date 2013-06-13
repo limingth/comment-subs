@@ -1802,6 +1802,7 @@ static int output_deps(struct depmod *depmod, FILE *out)
 		}
 
 		fprintf(out, "%s:", p);
+		fprintf(stdout, "%s:", p);
 
 		if (mod->deps.count == 0)
 			goto end;
@@ -1821,10 +1822,12 @@ static int output_deps(struct depmod *depmod, FILE *out)
 				continue;
 			}
 			fprintf(out, " %s", mod_get_compressed_path(d));
+			fprintf(stdout, " %s", mod_get_compressed_path(d));
 		}
 		free(deps);
 	end:
 		putc('\n', out);
+		putc('\n', stdout);
 	}
 
 	return 0;
