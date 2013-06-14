@@ -7,6 +7,7 @@ all:
 
 s subs:
 	./s.sh kmod-11
+	cp kmod-11-subs ../doxygen/ -R
 
 b build:
 	make -C kmod-11

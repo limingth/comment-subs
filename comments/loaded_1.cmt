@@ -1,5 +1,5 @@
 /* 
- * 测试 list 模块功能 
+ * @brief  测试 list 模块功能 
  * 其中用到了如下 libkmod 函数
  *	- kmod_new()
  *	- kmod_module_new_from_loaded()

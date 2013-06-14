@@ -197,6 +197,8 @@ static int modinfo_do(struct kmod_module *mod)
 		const char *value = kmod_module_info_get_value(l);
 		int keylen;
 
+		printf("<mydebug> %s\n", field);
+
 		if (field != NULL) {
 			if (strcmp(field, key) != 0)
 				continue;
@@ -218,6 +220,7 @@ static int modinfo_do(struct kmod_module *mod)
 		}
 
 		keylen = strlen(key);
+			printf("<mydebug> k %s\n", key);
 		printf("%s:%-*s%s%c", key, 15 - keylen, "", value, separator);
 	}
 

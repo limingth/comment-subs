@@ -1,3 +1,3 @@
 /*
- * array 元素的排序操作，采用 qsort 快速排序
+ * @brief  array 元素的排序操作，采用 qsort 快速排序
  */

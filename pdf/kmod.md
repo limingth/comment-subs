@@ -1081,18 +1081,96 @@ hash, index_mm，elf，list，array，log。
 2. 模块分析
 ----------------
 
-### kmod_ctx
-### kmod_module
+### kmod_ctx 库上下文
+该模块主要的实现代码都在 libkmod/libkmod.c，比较常用的数据结构和接口有
 
-### kmod_elf
-### kmod_file
+	struct kmod_ctx;
 
-### kmod_config
-### hash
+以下函数接口在 tools 下的6个命令中都有用到，是必须的基础类的调用。
 
-### kmod_list
+	struct kmod_ctx *kmod_new(const char *dirname, const char * const *config_paths);
+	struct kmod_ctx *kmod_ref(struct kmod_ctx *ctx);
+	struct kmod_ctx *kmod_unref(struct kmod_ctx *ctx);
+	void kmod_set_log_fn(struct kmod_ctx *ctx,
+		                void (*log_fn)(void *log_data,
+		                                int priority, const char *file, int line,
+		                                const char *fn, const char *format,
+		                                va_list args),
+		                const void *data);
 
-### index_mm
+以下函数接口在 modprobe 命令中有用到。
+
+	int kmod_load_resources(struct kmod_ctx *ctx);
+	void kmod_unload_resources(struct kmod_ctx *ctx);
+
+### kmod_module 内核模块核心操作
+该模块主要的实现代码都在 libkmod/libkmod-module.c，比较常用的数据结构和接口有
+
+	struct kmod_module;
+
+以下函数接口在 tools 下的6个命令中都有用到，是必须的基础类的调用。
+
+	int kmod_module_new_from_name(struct kmod_ctx *ctx, const char *name,
+		                                        struct kmod_module **mod);
+	int kmod_module_new_from_path(struct kmod_ctx *ctx, const char *path,
+		                                        struct kmod_module **mod);
+	int kmod_module_new_from_lookup(struct kmod_ctx *ctx, const char *given_alias,
+		                                        struct kmod_list **list);
+	int kmod_module_new_from_loaded(struct kmod_ctx *ctx,
+		                                        struct kmod_list **list);
+
+	struct kmod_module *kmod_module_ref(struct kmod_module *mod);
+	struct kmod_module *kmod_module_unref(struct kmod_module *mod);
+	int kmod_module_unref_list(struct kmod_list *list);
+	struct kmod_module *kmod_module_get_module(const struct kmod_list *entry);
+
+以下函数接口主要用 insmod/rmmod 命令的实现。
+
+	int kmod_module_remove_module(struct kmod_module *mod, unsigned int flags);
+	int kmod_module_insert_module(struct kmod_module *mod, unsigned int flags,
+	
+以下函数接口主要用 modprobe 命令的实现。	
+                                                const char *options);
+	int kmod_module_probe_insert_module(struct kmod_module *mod,
+		                unsigned int flags, const char *extra_options,
+		                int (*run_install)(struct kmod_module *m,
+		                                        const char *cmdline, void *data),
+		                const void *data,
+		                void (*print_action)(struct kmod_module *m, bool install,
+		                                        const char *options));
+
+以下函数接口主要用 lsmod 命令的实现。
+
+	const char *kmod_module_get_name(const struct kmod_module *mod);
+	const char *kmod_module_get_path(const struct kmod_module *mod);
+	const char *kmod_module_get_options(const struct kmod_module *mod);
+	const char *kmod_module_get_install_commands(const struct kmod_module *mod);
+	const char *kmod_module_get_remove_commands(const struct kmod_module *mod);
+	struct kmod_list *kmod_module_get_dependencies(const struct kmod_module *mod);
+	int kmod_module_get_softdeps(const struct kmod_module *mod,
+		                        struct kmod_list **pre, struct kmod_list **post);
+	
+以下函数接口主要用 modinfo 命令的实现。
+
+	int kmod_module_get_info(const struct kmod_module *mod, struct kmod_list **list);
+	const char *kmod_module_info_get_key(const struct kmod_list *entry);
+	const char *kmod_module_info_get_value(const struct kmod_list *entry);
+	void kmod_module_info_free_list(struct kmod_list *list);
+
+
+### kmod_elf 内核模块elf文件操作
+
+	struct kmod_elf *kmod_elf_new (const void *memory, off_t size)
+	
+
+### kmod_file 内核模块文件操作
+
+### kmod_config 内核模块配置
+### hash 哈希表
+
+### kmod_list 内核模块列表
+
+### index_mm 
 
 ### elf
 
@@ -1394,6 +1472,9 @@ do_insmod() 的实现可以分为5个步骤
 	- kmod_module_insert_module()
 	- kmod_module_unref()
 
+可以看出，这里真正最后完成插入操作的函数是 kmod_module_insert_module(mod, 0, opts);
+这个函数在我们下面的函数接口分析中还会详细阐述。
+
 ### rmmod 命令实现流程
 
 **do_rmmod 核心代码分析**
@@ -1437,14 +1518,114 @@ do_rmmod() 的实现可以分为5个步骤
 
 ### lsmod 命令实现流程
 
-![insmod 调用层次图](./figures/insmod.jpg)
+**do_lsmod() 核心代码分析**
+
+	static int do_lsmod(int argc, char *argv[])
+	{
+		ctx = kmod_new(NULL, &null_config);	
+		err = kmod_module_new_from_loaded(ctx, &list);
+		puts("Module                  Size  Used by");
+
+		kmod_list_foreach(itr, list) {
+		        struct kmod_module *mod = kmod_module_get_module(itr);
+		        const char *name = kmod_module_get_name(mod);
+		        int use_count = kmod_module_get_refcnt(mod);
+		        long size = kmod_module_get_size(mod);
+			holders = kmod_module_get_holders(mod);
+		        kmod_list_foreach(hitr, holders) {
+		                struct kmod_module *hm = kmod_module_get_module(hitr);
+		                fputs(kmod_module_get_name(hm), stdout);
+		                kmod_module_unref(hm);
+		        }
+		       
+			kmod_module_unref_list(holders);
+		        kmod_module_unref(mod);
+		}
+		kmod_module_unref_list(list);
+		kmod_unref(ctx);
+
+		return EXIT_SUCCESS;
+	}
+
+![lsmod 调用层次图](./figures/lsmod.jpg)
 
 ### modinfo 命令实现流程
 
-![insmod 调用层次图](./figures/insmod.jpg)
+**do_modinfo() 核心代码分析**
+
+	static int do_modinfo(int argc, char *argv[])
+	{
+		ctx = kmod_new(dirname, &null_config);
+		
+		for (i = optind; i < argc; i++) {
+		        const char *name = argv[i];
+		        if (is_module_filename(name))
+		                r = modinfo_path_do(ctx, name);
+		        else
+		                r = modinfo_alias_do(ctx, name);
+
+		        if (r < 0)
+		                err = r;
+		}   
+
+		kmod_unref(ctx);
+		return err >= 0 ? EXIT_SUCCESS : EXIT_FAILURE;
+	}
+
+![modinfo 调用层次图](./figures/modinfo.jpg)
+
+	static int modinfo_path_do(struct kmod_ctx *ctx, const char *path)
+	{
+		struct kmod_module *mod;
+		int err = kmod_module_new_from_path(ctx, path, &mod);
+		err = modinfo_do(mod);
+		kmod_module_unref(mod);
+		return err;
+	}
+
+	static int modinfo_alias_do(struct kmod_ctx *ctx, const char *alias)
+	{
+		struct kmod_list *l, *filtered, *list = NULL;
+		int err = kmod_module_new_from_lookup(ctx, alias, &list);
+		
+		err = kmod_module_apply_filter(ctx, KMOD_FILTER_BUILTIN, list, &filtered);
+		kmod_module_unref_list(list);
+		
+		kmod_list_foreach(l, filtered) {
+		        struct kmod_module *mod = kmod_module_get_module(l);
+		        int r = modinfo_do(mod);
+		        kmod_module_unref(mod);
+		        if (r < 0)
+		                err = r;
+		}
+		kmod_module_unref_list(filtered);
+		return err;
+	}
+
+	static int modinfo_do(struct kmod_module *mod)
+	{
+		struct kmod_list *l, *list = NULL;
+		struct param *params = NULL;
+
+		printf("%s%c", kmod_module_get_path(mod), separator);
+		err = kmod_module_get_info(mod, &list);
+		kmod_module_get_name(mod), strerror(-err));
+	       
+		kmod_list_foreach(l, list) {
+		        const char *key = kmod_module_info_get_key(l);
+		        const char *value = kmod_module_info_get_value(l);
+		        
+			process_parm(key, value, &params);
+		  
+		        printf("%s:%-*s%s%c", key, 15 - keylen, "", value, separator);
+		}
+
+		kmod_module_info_free_list(list);
+
+		return err;
+	}
 
 ### depmod 命令实现流程
-![depmod 调用层次图](./figures/depmod.jpg)
 
 **do_depmod() 核心代码分析**
 
@@ -1470,11 +1651,36 @@ do_rmmod() 的实现可以分为5个步骤
 		kmod_unref(ctx);
 	}
 
+![depmod 调用层次图](./figures/depmod.jpg)
+
+do_depmod() 的实现可以分为7个步骤
+
+* 创建模块的上下文 struct kmod_ctx ctx
+* 调用 depmod_xxx 接口，完成从 /lib/modules/`uname -r` 目录下找到所有模块
+* 调用 kmod_module_new_from_path 接口，生成动态的 mod
+* 调用 dep_module_add 和 dep_modules_build_array，生成数组 array
+* 调用 dep_modules_sort 接口，对 array 进行排序
+* 调用 depmod_output 接口，对排序后的结果，进行文件输出
+* 释放相关的动态分配内存，结束 depmod 操作
+
+
 下面根据这个核心代码，将在一层逻辑过程中调用到的函数，做一个简要的说明。
 所有这些函数可以分为3类，分别形如 kmod_xxx，depmod_xxx, cfg_xxx 开头的。
 
 **kmod_xxx**
 包含 kmod_new, kmod_module_new_from_path, kmod_unref 这3个在之前的代码分析中介绍过。
+其中用到了3个接口，分别是
+
+* libkmod/libkmod.c
+	- kmod_new() 
+	- kmod_unref()
+* libkmod/libkmod-module.c
+	- kmod_module_new_from_path()
+
+另外，在当前文件内部，还构建了两个新的子模块 depmod 和 cfg
+* tools/depmod.c
+	- depmod_xxx
+	- cfg_xxx
 
 **depmod_xxx**
 这些函数都被声明为 static 的类型，说明仅仅只是为 depmod 命令的实现而服务的，不属于 libkmod 库要提供的接口。
@@ -1676,6 +1882,10 @@ do_rmmod() 的实现可以分为5个步骤
 	... 
 	1834 }
 
+总的来说，depmod 命令的实现，并没有太多依赖于 libkmod 库所提供的接口，而是自己内部实现了2个子模块来完成。
+其中 depmod_xxx 模块主要完成分析模块文件之间关系，形成依赖列表，并将这个依赖列表写入到所需要的文件中去。
+cfg_xxx 模块主要完成对 cfg 配置文件的分析，
+
 ### modprobe 命令实现流程
 
 **do_modprobe() 核心代码分析**
@@ -1706,8 +1916,13 @@ do_rmmod() 的实现可以分为5个步骤
 		log_close();
 	}
 
+![modprobe 调用层次图](./figures/modprobe.jpg)
 
-#### insmod_all
+从上面的代码分析可以看出，modprobe 主要是依靠 insmod_all 和 insmod 两个子函数来完成加载内核模块的。
+而 insmod_all 这个函数其实也是靠一个 for 循环来调用 insmod 完成加载全部模块的操作。
+因此只要分析清楚 insmod 函数，就能够理解整个 modprobe 函数的实现原理。
+
+#### insmod_all()
 	static int insmod_all(struct kmod_ctx *ctx, char **args, int nargs)
 	{
 	        for (i = 0; i < nargs; i++) 
@@ -1716,8 +1931,43 @@ do_rmmod() 的实现可以分为5个步骤
 		return err;
 	}
 
-#### insmod
-	-> kmod_module_probe_insert_module()
+#### insmod()
+static int insmod(struct kmod_ctx *ctx, const char *alias,
+                                                const char *extra_options)
+{
+        struct kmod_list *l, *list = NULL;
+        int err, flags = 0;
+
+        void (*show)(struct kmod_module *m, bool install,
+                                                const char *options) = NULL;
+
+        err = kmod_module_new_from_lookup(ctx, alias, &list);
+   
+        kmod_list_foreach(l, list) {
+                struct kmod_module *mod = kmod_module_get_module(l);
+
+                if (lookup_only)
+                        printf("%s\n", kmod_module_get_name(mod));
+                else {
+                        err = kmod_module_probe_insert_module(mod, flags,
+                                        extra_options, NULL, NULL, show);
+                }
+
+                kmod_module_unref(mod);
+        }
+
+        kmod_module_unref_list(list);
+        return err;
+}
+
+从上面的代码分析可以看出，insmod 函数是依靠调用 kmod_module_probe_insert_module() 来完成模块加载的。
+为什么这里的 insmod 没有调用之前分析过的 kmod_module_insert_module() 来实现呢？
+是因为 kmod_module_insert_module() 只负责插入当前这个 .ko 内核模块，并不负责检查依赖关系。
+而这里的 insmod 是需要根据当前 .ko 的依赖关系列表，决定要把多少个 .ko 依次一起插入进来。
+所以 kmod_module_probe_insert_module() 是可以完成根据依赖关系插入模块的 libkmod 中的重要接口。
+
+当然这两个函数之间也是有相互关系的，表现为 kmod_module_probe_insert_module() 函数会调用 kmod_module_insert_module()，
+而在此之前，还需要通过 kmod_module_get_probe_list() 函数来得到一个 probe_list 也就是加载模块列表。
 
 #### kmod_module_probe_insert_module
 	int kmod_module_probe_insert_module(mod, flags, extra_options, run_install)
@@ -1729,69 +1979,6 @@ do_rmmod() 的实现可以分为5个步骤
 			struct kmod_module *m = l->data;
 			err = kmod_module_insert_module(m, flags, options);
 		}
-	}
-
-	-> kmod_module_get_probe_list
-		-> __kmod_module_get_probe_list
-			-> __kmod_module_get_probe_list
-				-> kmod_module_get_dependencies
-					->  module_get_dependencies_noref
-						-> kmod_module_parse_depline
-
-#### kmod_module_get_dependencies
-	kmod_list *kmod_module_get_dependencies(struct kmod_module *mod)
-	{
-		module_get_dependencies_noref(mod);
-
-		kmod_list_foreach(l, mod->dep)
-		{
-			l_new = kmod_list_append(list_new, kmod_module_ref(l->data));
-			list_new = l_new;
-		}
-
-		return list_new;
-	}
-
-#### module_get_dependencies_noref
-	kmod_list *module_get_dependencies_noref(struct kmod_module *mod)
-	{
-		char *line = kmod_search_moddep(mod->ctx, mod->name);
-
-		kmod_module_parse_depline(mod, line);
-
-		return mod->dep;
-	}
-
-#### kmod_search_moddep
-	char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
-	{
-		// name = nfs;		// modprobe nfs
-		return index_mm_search(ctx->indexes[KMOD_INDEX_MODULES_DEP], name);
-		
-		DBG(ctx, "file=%s modname=%s\n", fn, name);
-
-		idx = index_file_open(fn);
-		line = index_search(idx, name);
-		index_file_close(idx);
-
-		return line;
-	}
-
-#### kmod_module_parse_depline
-	int kmod_module_parse_depline(struct kmod_module *mod, char *line)
-	{
-		for (p = strtok_r(p, " \t", &saveptr); p != NULL;
-			 p = strtok_r(NULL, " \t", &saveptr)) 
-		{
-			err = kmod_module_new_from_path(ctx, path, &depmod);
-			list = kmod_list_prepend(list, depmod);
-			n++;
-		}
-
-		mod->dep = list;
-		mod->n_dep = n;
-
-		return n;
 	}
 
 5. 函数接口分析
@@ -1823,7 +2010,6 @@ do_rmmod() 的实现可以分为5个步骤
 	}
 
 ![kmod_unref 调用层次图](./figures/kmod_unref.jpg)
-
 
 ### kmod_module_new_from_path() 核心代码分析
 	int kmod_module_new_from_path(kmod_ctx *ctx, char *path, kmod_module **mod)
@@ -1921,6 +2107,82 @@ do_rmmod() 的实现可以分为5个步骤
 		return mod->ret;
 	}
 
+
+### kmod_module_probe_insert_module
+	int kmod_module_probe_insert_module(mod, flags, extra_options, run_install)
+	{
+		err = kmod_module_get_probe_list(mod, !!(flags & KMOD_PROBE_IGNORE_COMMAND), &list);
+	
+		kmod_list_foreach(l, list) 
+		{
+			struct kmod_module *m = l->data;
+			err = kmod_module_insert_module(m, flags, options);
+		}
+	}
+
+### kmod_module_get_probe_list 函数调用流程
+
+	-> kmod_module_get_probe_list
+		-> __kmod_module_get_probe_list
+			-> kmod_module_get_dependencies
+				->  module_get_dependencies_noref
+					-> kmod_module_parse_depline
+
+#### kmod_module_get_dependencies
+	kmod_list *kmod_module_get_dependencies(struct kmod_module *mod)
+	{
+		module_get_dependencies_noref(mod);
+
+		kmod_list_foreach(l, mod->dep)
+		{
+			l_new = kmod_list_append(list_new, kmod_module_ref(l->data));
+			list_new = l_new;
+		}
+
+		return list_new;
+	}
+
+#### module_get_dependencies_noref
+	kmod_list *module_get_dependencies_noref(struct kmod_module *mod)
+	{
+		char *line = kmod_search_moddep(mod->ctx, mod->name);
+
+		kmod_module_parse_depline(mod, line);
+
+		return mod->dep;
+	}
+
+#### kmod_search_moddep
+	char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
+	{
+		// name = nfs;		// modprobe nfs
+		return index_mm_search(ctx->indexes[KMOD_INDEX_MODULES_DEP], name);
+		
+		DBG(ctx, "file=%s modname=%s\n", fn, name);
+
+		idx = index_file_open(fn);
+		line = index_search(idx, name);
+		index_file_close(idx);
+
+		return line;
+	}
+
+#### kmod_module_parse_depline
+	int kmod_module_parse_depline(struct kmod_module *mod, char *line)
+	{
+		for (p = strtok_r(p, " \t", &saveptr); p != NULL;
+			 p = strtok_r(NULL, " \t", &saveptr)) 
+		{
+			err = kmod_module_new_from_path(ctx, path, &depmod);
+			list = kmod_list_prepend(list, depmod);
+			n++;
+		}
+
+		mod->dep = list;
+		mod->n_dep = n;
+
+		return n;
+	}
 
 
 

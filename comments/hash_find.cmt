@@ -1,5 +1,5 @@
 /* 
- * hash 查找
+ * @brief  hash 查找
  * 从 hash 指针所指向的 hash 表中，找到元素 key 
  * 采用二分查找法
  */

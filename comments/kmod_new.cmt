@@ -1,5 +1,5 @@
 /*
- * kmod_new - 创建 kmod 库上下文
+ * @brief  kmod_new - 创建 kmod 库上下文
  *
  * 主要功能： 
  *	创建 kmod_ctx 结构体，设置mod引用计数为1

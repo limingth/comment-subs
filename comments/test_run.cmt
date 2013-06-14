@@ -1,5 +1,5 @@
 /* 
- * 测试运行
+ * @brief  测试运行
  * 通过 pipe 创建管道，通过 fork 创建子进程，
  * 父进程通过 test_run_parent() 
  * 子进程通过 test_run_child() 

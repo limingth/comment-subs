@@ -1,5 +1,5 @@
 /* 
- * 测试 initlib 模块功能 
+ * @brief  测试 initlib 模块功能 
  * 其中用到了如下 libkmod 函数
  *	- kmod_new()
  *	- kmod_unref()

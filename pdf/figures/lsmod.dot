@@ -1,0 +1,25 @@
+digraph G {
+
+	size="8, 8";  
+
+	lsmod -> do_lsmod;
+
+	do_lsmod -> kmod_ctx;
+	do_lsmod -> kmod_module;
+
+	kmod_ctx -> kmod_new;
+	kmod_ctx -> kmod_unref;
+
+	kmod_module -> kmod_module_new_from_loaded;
+
+	kmod_module -> kmod_module_get_module;
+	kmod_module -> kmod_module_get_name;
+	kmod_module -> kmod_module_get_refcnt;
+	kmod_module -> kmod_module_get_size;
+	kmod_module -> kmod_module_get_holders;
+	kmod_module -> kmod_module_unref_list;
+	kmod_module -> kmod_module_unref;
+
+}
+
+

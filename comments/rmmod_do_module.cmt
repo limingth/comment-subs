@@ -1,5 +1,5 @@
 /* 
- * 真正能够完成一个模块的卸载操作的函数，也是一个内部的static函数，
+ * @brief  真正能够完成一个模块的卸载操作的函数，也是一个内部的static函数，
  * 因此仅在 modprobe.c 中使用
  * 其中用到了 libkmod 的一些接口，如下
  *	- kmod_module_get_module()

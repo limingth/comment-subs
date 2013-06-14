@@ -1,3 +1,3 @@
 /*
- * 先将 alias 补齐，然后调用 kmod_module_new() 来创建 kmod_module
+ * @brief  先将 alias 补齐，然后调用 kmod_module_new() 来创建 kmod_module
  */

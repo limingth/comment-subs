@@ -1,3 +1,3 @@
 /*
- * kmod 支持的compat命令 lsmod/rmmod/insmod/modinfo/modprobe/depmod
+ * @brief  kmod 支持的compat命令 lsmod/rmmod/insmod/modinfo/modprobe/depmod
  */

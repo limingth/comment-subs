@@ -1,4 +1,4 @@
 /*
- * log_filep
+ * @brief  log_filep
  * 按特定格式写入文件
  */

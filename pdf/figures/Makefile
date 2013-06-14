@@ -1,11 +1,19 @@
 SRC=$(wildcard *.dot)
+JPG=$(SRC:%.dot=%.jpg) 
 dotname=$(SRC:%.dot=%) 
 
-all:
+
+all: $(JPG)
+	
+
+%.jpg : %.dot
+	dot -Grankdir=LR -Tjpg $< -o $@
+
+loop:
 	@for i in $(dotname) ;\
 	do \
 		echo + $$i.jpg		;\
-		dot -Grankdir=LR -Tjpg $$i.dot -o $$i.jpg	;\
+		make $$i.jpg	;\
 	done
 
 %:

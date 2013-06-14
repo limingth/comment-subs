@@ -27,7 +27,7 @@
 #include <errno.h>
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -36,7 +36,7 @@
  *
  * @note 注释详细内容:
  *
- * hash entry 表项的数据结构，仅包含 key 和 value 
+ * @brief  hash entry 表项的数据结构，仅包含 key 和 value 
  * 其中 key 是 字符串指针
  * value 是无类型 void * 指针
  */
@@ -53,7 +53,7 @@ struct hash_bucket {
 };
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -62,7 +62,7 @@ struct hash_bucket {
  *
  * @note 注释详细内容:
  *
- * hash 表的数据结构，包含 count, step, n_buckets, buckets 指针
+ * @brief  hash 表的数据结构，包含 count, step, n_buckets, buckets 指针
  */
 
 struct hash {
@@ -74,7 +74,7 @@ struct hash {
 };
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -83,7 +83,7 @@ struct hash {
  *
  * @note 注释详细内容:
  *
- * hash 表的创建，给定 n_buckets 个
+ * @brief  hash 表的创建，给定 n_buckets 个
  */
 struct hash *hash_new(unsigned int n_buckets,
 					void (*free_value)(void *value))
@@ -103,7 +103,7 @@ struct hash *hash_new(unsigned int n_buckets,
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -112,7 +112,7 @@ struct hash *hash_new(unsigned int n_buckets,
  *
  * @note 注释详细内容:
  *
- * hash 表的销毁
+ * @brief  hash 表的销毁
  */
 void hash_free(struct hash *hash)
 {
@@ -137,7 +137,7 @@ void hash_free(struct hash *hash)
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -146,7 +146,7 @@ void hash_free(struct hash *hash)
  *
  * @note 注释详细内容:
  *
- * 计算 hash 值，传入 key 和 key 的长度，返回 hashval
+ * @brief  计算 hash 值，传入 key 和 key 的长度，返回 hashval
  */
 static inline unsigned int hash_superfast(const char *key, unsigned int len)
 {
@@ -206,7 +206,7 @@ static inline unsigned int hash_superfast(const char *key, unsigned int len)
  * make sure they are live while pair exists in hash!
  */
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -215,7 +215,7 @@ static inline unsigned int hash_superfast(const char *key, unsigned int len)
  *
  * @note 注释详细内容:
  *
- * 从当前的 hash 表 删除一个 key
+ * @brief  从当前的 hash 表 删除一个 key
  */
 int hash_add(struct hash *hash, const char *key, const void *value)
 {
@@ -260,7 +260,7 @@ int hash_add(struct hash *hash, const char *key, const void *value)
 
 /* similar to hash_add(), but fails if key already exists */
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -269,7 +269,7 @@ int hash_add(struct hash *hash, const char *key, const void *value)
  *
  * @note 注释详细内容:
  *
- * 添加一个 key 和 value 进入当前的 hash 表, 如果已经存在则返回失败
+ * @brief  添加一个 key 和 value 进入当前的 hash 表, 如果已经存在则返回失败
  */
 int hash_add_unique(struct hash *hash, const char *key, const void *value)
 {
@@ -310,7 +310,7 @@ int hash_add_unique(struct hash *hash, const char *key, const void *value)
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -319,7 +319,7 @@ int hash_add_unique(struct hash *hash, const char *key, const void *value)
  *
  * @note 注释详细内容:
  *
- * hash 比较，基于字符串 strcmp 的比较 key 
+ * @brief  hash 比较，基于字符串 strcmp 的比较 key 
  */
 static int hash_entry_cmp(const void *pa, const void *pb)
 {
@@ -329,7 +329,7 @@ static int hash_entry_cmp(const void *pa, const void *pb)
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -338,7 +338,7 @@ static int hash_entry_cmp(const void *pa, const void *pb)
  *
  * @note 注释详细内容:
  * 
- * hash 查找
+ * @brief  hash 查找
  * 从 hash 指针所指向的 hash 表中，找到元素 key 
  * 采用二分查找法
  */
@@ -361,7 +361,7 @@ void *hash_find(const struct hash *hash, const char *key)
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -414,7 +414,7 @@ int hash_del(struct hash *hash, const char *key)
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -423,7 +423,7 @@ int hash_del(struct hash *hash, const char *key)
  *
  * @note 注释详细内容:
  *
- * hash 获得表项数量, 返回 hash->count
+ * @brief  hash 获得表项数量, 返回 hash->count
  */
 unsigned int hash_get_count(const struct hash *hash)
 {

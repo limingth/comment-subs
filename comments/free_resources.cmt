@@ -1,3 +1,3 @@
 /*
- * 从 modules 指针开始，通过 free 释放所有 mod 指针空间
+ * @brief  从 modules 指针开始，通过 free 释放所有 mod 指针空间
  */

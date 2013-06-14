@@ -1,28 +1,32 @@
 digraph G {
-	insmod -> do_insmod;
 
-	do_insmod -> kmod_ctx;
-	do_insmod -> kmod_module;
+	size="8, 8";  
 
-	kmod_ctx -> kmod_config;
-	kmod_ctx -> hash;
-	kmod_ctx -> log;
-	kmod_ctx -> index_mm;
+	depmod -> do_depmod;
 
-	kmod_module -> array;
+	do_depmod -> kmod_ctx;
+	do_depmod -> kmod_module;
+	do_depmod -> depmod_xxx;
+	do_depmod -> cfg_xxx;
 
-	kmod_module -> kmod_pool;
-	kmod_module -> kmod_file;
-	kmod_module -> kmod_elf;
-	kmod_module -> syscall;
+	kmod_ctx -> kmod_new;
+	kmod_ctx -> kmod_unref;
 
-	syscall -> init_module;
+	kmod_module -> kmod_module_new_from_path;
 
-	kmod_module -> kmod_list;
+	depmod_xxx -> depmod_init;
+	depmod_xxx -> depmod_load_symvers;
+	depmod_xxx -> depmod_load_system_map;
+	depmod_xxx -> depmod_modules_search;
+	depmod_xxx -> depmod_module_add;
+	depmod_xxx -> depmod_modules_build_array;
+	depmod_xxx -> depmod_modules_sort;
+	depmod_xxx -> depmod_load;
+	depmod_xxx -> depmod_output;
+	depmod_xxx -> depmod_shutdown;
 
-	kmod_elf -> elf;
-	kmod_list -> list;
-
+	cfg_xxx -> cfg_load;
+	cfg_xxx -> cfg_free;
 }
 
 

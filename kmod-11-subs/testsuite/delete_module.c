@@ -98,7 +98,7 @@ static void parse_retcodes(struct mod *_modules, const char *s)
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -107,7 +107,7 @@ static void parse_retcodes(struct mod *_modules, const char *s)
  *
  * @note 注释详细内容:
  *
- * 根据 modname 从 _modules 开始，找到匹配名字的模块指针 mod 返回
+ * @brief  根据 modname 从 _modules 开始，找到匹配名字的模块指针 mod 返回
  */
 static struct mod *find_module(struct mod *_modules, const char *modname)
 {
@@ -147,7 +147,7 @@ TS_EXPORT long delete_module(const char *name, unsigned int flags);
  * behavior, set TESTSUITE_DELETE_MODULE_RETCODES env var.
  */
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -156,7 +156,7 @@ TS_EXPORT long delete_module(const char *name, unsigned int flags);
  *
  * @note 注释详细内容:
  **
- * delete_module - 模拟内核卸载模块
+ * @brief  delete_module - 模拟内核卸载模块
  *
  * @brief 主要功能：
  *	先通过 find_module 找到对应 modname 的 mod 指针，
@@ -187,7 +187,7 @@ long delete_module(const char *modname, unsigned int flags)
 /* the test is going away anyway, but lets keep valgrind happy */
 void free_resources(void) __attribute__((destructor));
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -196,7 +196,7 @@ void free_resources(void) __attribute__((destructor));
  *
  * @note 注释详细内容:
  *
- * 从 modules 指针开始，通过 free 释放所有 mod 指针空间
+ * @brief  从 modules 指针开始，通过 free 释放所有 mod 指针空间
  */
 void free_resources(void)
 {

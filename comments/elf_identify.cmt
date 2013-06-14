@@ -1,5 +1,5 @@
 /* 
- * 根据 memory 指针，获得 ELF 文件类型，返回值为
+ * @brief  根据 memory 指针，获得 ELF 文件类型，返回值为
  *	- ELFCLASS32
  *	- ELFCLASS64
  *	- KMOD_ELF_LSB

@@ -1,5 +1,5 @@
 /*
- * kmod_dump_index 
+ * @brief  kmod_dump_index 
  * dump index 索引给文件描述符 fd 
  * 其中需要调用 index 模块中的函数接口
  *	- index_mm_dump()

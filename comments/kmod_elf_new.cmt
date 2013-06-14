@@ -1,3 +1,3 @@
 /*
- * 创建一个 struct kmod_elf 结构体并将 size, offset, section.count 填入
+ * @brief  创建一个 struct kmod_elf 结构体并将 size, offset, section.count 填入
  */

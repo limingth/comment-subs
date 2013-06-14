@@ -1,5 +1,5 @@
 /*
- * init_module - 模拟内核插入模块
+ * @brief  init_module - 模拟内核插入模块
  *
  * @brief 主要功能：
  *	默认操作是模仿在内核中的 init_module 

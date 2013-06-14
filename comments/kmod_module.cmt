@@ -1,5 +1,5 @@
 /*
- * 最重要的数据结构 kmod_module , 包含了以下主要的成员变量
+ * @brief  最重要的数据结构 kmod_module , 包含了以下主要的成员变量
  *	- struct kmod_ctx *ctx;		上下文
  *	- struct kmod_list *dep;	依赖模块的链表
  *	- struct kmod_file *file;	ko 文件

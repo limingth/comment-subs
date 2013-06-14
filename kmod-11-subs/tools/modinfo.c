@@ -197,6 +197,8 @@ static int modinfo_do(struct kmod_module *mod)
 		const char *value = kmod_module_info_get_value(l);
 		int keylen;
 
+		printf("<mydebug> %s\n", field);
+
 		if (field != NULL) {
 			if (strcmp(field, key) != 0)
 				continue;
@@ -218,6 +220,7 @@ static int modinfo_do(struct kmod_module *mod)
 		}
 
 		keylen = strlen(key);
+			printf("<mydebug> k %s\n", key);
 		printf("%s:%-*s%s%c", key, 15 - keylen, "", value, separator);
 	}
 
@@ -363,7 +366,7 @@ static bool is_module_filename(const char *name)
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -372,7 +375,7 @@ static bool is_module_filename(const char *name)
  *
  * @note 注释详细内容:
  * 
- * modinfo 函数的真正实现，通过 getopt_long 分析传入参数，
+ * @brief  modinfo 函数的真正实现，通过 getopt_long 分析传入参数，
  * 通过调用 libkmod 的接口，实现 modinfo 命令
  * 主要使用的接口包括
  * - kmod_new()
@@ -486,7 +489,7 @@ static int do_modinfo(int argc, char *argv[])
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -495,7 +498,7 @@ static int do_modinfo(int argc, char *argv[])
  *
  * @note 注释详细内容:
  * 
- * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
+ * @brief  用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
  * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
  * 这个结构体中还有一个 cmd 成员，是一个函数指针，
  * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx

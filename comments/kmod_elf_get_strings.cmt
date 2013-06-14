@@ -1,3 +1,3 @@
 /*
- * 获得名为 section 的 string 并分配空间用来存放
+ * @brief  获得名为 section 的 string 并分配空间用来存放
  */

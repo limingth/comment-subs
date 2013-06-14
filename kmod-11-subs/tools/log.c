@@ -29,7 +29,7 @@ static bool log_use_syslog;
 static int log_priority = LOG_ERR;
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -38,7 +38,7 @@ static int log_priority = LOG_ERR;
  *
  * @note 注释详细内容:
  * 
- * 将优先级 prio 整型数转换成相应的字符串 
+ * @brief  将优先级 prio 整型数转换成相应的字符串 
  * 优先级的分类包括
  *	- FATAL 最高级别 
  *	- ERROR
@@ -91,7 +91,7 @@ static _always_inline_ const char *prio_to_str(int prio)
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -100,7 +100,7 @@ static _always_inline_ const char *prio_to_str(int prio)
  *
  * @note 注释详细内容:
  *
- * 核心日志记录函数，调用了系统的 syslog() 函数，增加了优先级信息打印
+ * @brief  核心日志记录函数，调用了系统的 syslog() 函数，增加了优先级信息打印
  */
 static void log_kmod(void *data, int priority, const char *file, int line,
 		     const char *fn, const char *format, va_list args)
@@ -134,7 +134,7 @@ static void log_kmod(void *data, int priority, const char *file, int line,
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -143,7 +143,7 @@ static void log_kmod(void *data, int priority, const char *file, int line,
  *
  * @note 注释详细内容:
  *
- * 打开日志文件, 调用了系统的 openlog()
+ * @brief  打开日志文件, 调用了系统的 openlog()
  */
 void log_open(bool use_syslog)
 {
@@ -154,7 +154,7 @@ void log_open(bool use_syslog)
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -163,7 +163,7 @@ void log_open(bool use_syslog)
  *
  * @note 注释详细内容:
  *
- * 关闭日志文件，调用 closelog()
+ * @brief  关闭日志文件，调用 closelog()
  */
 void log_close(void)
 {
@@ -172,7 +172,7 @@ void log_close(void)
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -181,7 +181,7 @@ void log_close(void)
  *
  * @note 注释详细内容:
  *
- * 带有优先级 prio 的日志打印函数，可以设定日志打印的优先级
+ * @brief  带有优先级 prio 的日志打印函数，可以设定日志打印的优先级
  */
 void log_printf(int prio, const char *fmt, ...)
 {

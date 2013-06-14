@@ -1,5 +1,5 @@
 /**
- * delete_module - 模拟内核卸载模块
+ * @brief  delete_module - 模拟内核卸载模块
  *
  * @brief 主要功能：
  *	先通过 find_module 找到对应 modname 的 mod 指针，

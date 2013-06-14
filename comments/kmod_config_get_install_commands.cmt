@@ -1,5 +1,5 @@
 /**
- * kmod_config_get_install_commands:
+ * @brief  kmod_config_get_install_commands:
  * @ctx: kmod 库上下文
  *
  * 获得一个 iterator 来处理安装命令

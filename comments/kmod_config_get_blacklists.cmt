@@ -1,5 +1,5 @@
 /**
- * kmod_config_get_blacklists:
+ * @brief  kmod_config_get_blacklists:
  * @ctx: kmod 库上下文
  *
  * 获得一个 iterator 指针来处理在库中的 blacklist

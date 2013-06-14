@@ -29,7 +29,7 @@
 /* basic pointer array growing in steps */
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -38,7 +38,7 @@
  *
  * @note 注释详细内容:
  *
- * array 结构体初始化
+ * @brief  array 结构体初始化
  */
 void array_init(struct array *array, size_t step)
 {
@@ -50,7 +50,7 @@ void array_init(struct array *array, size_t step)
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -59,7 +59,7 @@ void array_init(struct array *array, size_t step)
  *
  * @note 注释详细内容:
  *
- * array 结构体添加元素
+ * @brief  array 结构体添加元素
  */
 int array_append(struct array *array, const void *element)
 {
@@ -81,7 +81,7 @@ int array_append(struct array *array, const void *element)
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -90,7 +90,7 @@ int array_append(struct array *array, const void *element)
  *
  * @note 注释详细内容:
  *
- * array 结构体添加新元素，确保之前不存在才执行添加操作
+ * @brief  array 结构体添加新元素，确保之前不存在才执行添加操作
  */
 int array_append_unique(struct array *array, const void *element)
 {
@@ -103,7 +103,7 @@ int array_append_unique(struct array *array, const void *element)
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -112,7 +112,7 @@ int array_append_unique(struct array *array, const void *element)
  *
  * @note 注释详细内容:
  *
- * array 出栈操作
+ * @brief  array 出栈操作
  */
 void array_pop(struct array *array) {
 	array->count--;
@@ -128,7 +128,7 @@ void array_pop(struct array *array) {
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -137,7 +137,7 @@ void array_pop(struct array *array) {
  *
  * @note 注释详细内容:
  *
- * array 释放内层空间操作
+ * @brief  array 释放内层空间操作
  */
 void array_free_array(struct array *array) {
 	free(array->array);
@@ -147,7 +147,7 @@ void array_free_array(struct array *array) {
 
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -156,7 +156,7 @@ void array_free_array(struct array *array) {
  *
  * @note 注释详细内容:
  *
- * array 元素的排序操作，采用 qsort 快速排序
+ * @brief  array 元素的排序操作，采用 qsort 快速排序
  */
 void array_sort(struct array *array, int (*cmp)(const void *a, const void *b))
 {
@@ -164,7 +164,7 @@ void array_sort(struct array *array, int (*cmp)(const void *a, const void *b))
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -173,7 +173,7 @@ void array_sort(struct array *array, int (*cmp)(const void *a, const void *b))
  *
  * @note 注释详细内容:
  *
- * array 删除节点操作，可以删除在指定位置 pos 的元素
+ * @brief  array 删除节点操作，可以删除在指定位置 pos 的元素
  */
 int array_remove_at(struct array *array, unsigned int pos)
 {

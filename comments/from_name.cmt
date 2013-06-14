@@ -1,5 +1,5 @@
 /*
- * 通过名字新建一个模块
+ * @brief  通过名字新建一个模块
  * 成功则返回 EXIT_SUCCESS
  * 失败则返回 EXIT_FAILURE
  */

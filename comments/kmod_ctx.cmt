@@ -1,5 +1,5 @@
 /*
- * kmod_ctx 上下文数据结构
+ * @brief  kmod_ctx 上下文数据结构
  * 包含的重要数据成员有
  *	- config 配置信息
  *	- hash 表

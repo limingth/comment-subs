@@ -1802,6 +1802,7 @@ static int output_deps(struct depmod *depmod, FILE *out)
 		}
 
 		fprintf(out, "%s:", p);
+		fprintf(stdout, "%s:", p);
 
 		if (mod->deps.count == 0)
 			goto end;
@@ -1821,10 +1822,12 @@ static int output_deps(struct depmod *depmod, FILE *out)
 				continue;
 			}
 			fprintf(out, " %s", mod_get_compressed_path(d));
+			fprintf(stdout, " %s", mod_get_compressed_path(d));
 		}
 		free(deps);
 	end:
 		putc('\n', out);
+		putc('\n', stdout);
 	}
 
 	return 0;
@@ -2723,7 +2726,7 @@ cmdline_failed:
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2732,7 +2735,7 @@ cmdline_failed:
  *
  * @note 注释详细内容:
  * 
- * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
+ * @brief  用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
  * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
  * 这个结构体中还有一个 cmd 成员，是一个函数指针，
  * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx

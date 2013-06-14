@@ -29,7 +29,7 @@
 #define TEST_UNAME "4.0.20-kmod"
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -38,7 +38,7 @@
  *
  * @note 注释详细内容:
  * 
- * 测试模块的 kmod_module_get_dependencies 是否工作正确
+ * @brief  测试模块的 kmod_module_get_dependencies 是否工作正确
  * 其中需要调用到 libkmod 模块中的以下接口
  *	- kmod_new()
  *	- kmod_module_new_from_name()

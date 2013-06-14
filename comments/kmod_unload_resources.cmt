@@ -1,5 +1,5 @@
 /*
- * kmod_unload_resources
+ * @brief  kmod_unload_resources
  * 卸载所有的索引，之后的查找必须打开和关闭索引 
  *	- index_mm_close()
  */

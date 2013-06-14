@@ -1,13 +1,13 @@
 diff -Nur kmod-11/libkmod/libkmod-array.c kmod-11-subs/libkmod/libkmod-array.c
 --- kmod-11/libkmod/libkmod-array.c	2013-05-23 20:45:11.153071419 +0800
-+++ kmod-11-subs/libkmod/libkmod-array.c	2013-06-12 06:11:28.904479873 +0800
++++ kmod-11-subs/libkmod/libkmod-array.c	2013-06-14 11:27:48.286704562 +0800
 @@ -28,7 +28,18 @@
  
  /* basic pointer array growing in steps */
  
 -// array_init.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -16,7 +16,7 @@ diff -Nur kmod-11/libkmod/libkmod-array.c kmod-11-subs/libkmod/libkmod-array.c
 + *
 + * @note 注释详细内容:
 + *
-+ * array 结构体初始化
++ * @brief  array 结构体初始化
 + */
  void array_init(struct array *array, size_t step)
  {
@@ -27,7 +27,7 @@ diff -Nur kmod-11/libkmod/libkmod-array.c kmod-11-subs/libkmod/libkmod-array.c
  
 -// array_append.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -36,7 +36,7 @@ diff -Nur kmod-11/libkmod/libkmod-array.c kmod-11-subs/libkmod/libkmod-array.c
 + *
 + * @note 注释详细内容:
 + *
-+ * array 结构体添加元素
++ * @brief  array 结构体添加元素
 + */
  int array_append(struct array *array, const void *element)
  {
@@ -47,7 +47,7 @@ diff -Nur kmod-11/libkmod/libkmod-array.c kmod-11-subs/libkmod/libkmod-array.c
  
 -// array_append_unique.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -56,7 +56,7 @@ diff -Nur kmod-11/libkmod/libkmod-array.c kmod-11-subs/libkmod/libkmod-array.c
 + *
 + * @note 注释详细内容:
 + *
-+ * array 结构体添加新元素，确保之前不存在才执行添加操作
++ * @brief  array 结构体添加新元素，确保之前不存在才执行添加操作
 + */
  int array_append_unique(struct array *array, const void *element)
  {
@@ -67,7 +67,7 @@ diff -Nur kmod-11/libkmod/libkmod-array.c kmod-11-subs/libkmod/libkmod-array.c
  
 -// array_pop.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -76,7 +76,7 @@ diff -Nur kmod-11/libkmod/libkmod-array.c kmod-11-subs/libkmod/libkmod-array.c
 + *
 + * @note 注释详细内容:
 + *
-+ * array 出栈操作
++ * @brief  array 出栈操作
 + */
  void array_pop(struct array *array) {
  	array->count--;
@@ -87,7 +87,7 @@ diff -Nur kmod-11/libkmod/libkmod-array.c kmod-11-subs/libkmod/libkmod-array.c
  
 -// array_free_array.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -96,7 +96,7 @@ diff -Nur kmod-11/libkmod/libkmod-array.c kmod-11-subs/libkmod/libkmod-array.c
 + *
 + * @note 注释详细内容:
 + *
-+ * array 释放内层空间操作
++ * @brief  array 释放内层空间操作
 + */
  void array_free_array(struct array *array) {
  	free(array->array);
@@ -107,7 +107,7 @@ diff -Nur kmod-11/libkmod/libkmod-array.c kmod-11-subs/libkmod/libkmod-array.c
  
 -// array_sort.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -116,7 +116,7 @@ diff -Nur kmod-11/libkmod/libkmod-array.c kmod-11-subs/libkmod/libkmod-array.c
 + *
 + * @note 注释详细内容:
 + *
-+ * array 元素的排序操作，采用 qsort 快速排序
++ * @brief  array 元素的排序操作，采用 qsort 快速排序
 + */
  void array_sort(struct array *array, int (*cmp)(const void *a, const void *b))
  {
@@ -125,7 +125,7 @@ diff -Nur kmod-11/libkmod/libkmod-array.c kmod-11-subs/libkmod/libkmod-array.c
  
 -// array_remove_at.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -134,21 +134,21 @@ diff -Nur kmod-11/libkmod/libkmod-array.c kmod-11-subs/libkmod/libkmod-array.c
 + *
 + * @note 注释详细内容:
 + *
-+ * array 删除节点操作，可以删除在指定位置 pos 的元素
++ * @brief  array 删除节点操作，可以删除在指定位置 pos 的元素
 + */
  int array_remove_at(struct array *array, unsigned int pos)
  {
  	if (array->count <= pos)
 diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 --- kmod-11/libkmod/libkmod.c	2013-06-11 17:00:15.626224608 +0800
-+++ kmod-11-subs/libkmod/libkmod.c	2013-06-12 06:11:29.600479878 +0800
++++ kmod-11-subs/libkmod/libkmod.c	2013-06-14 11:27:49.094704568 +0800
 @@ -70,7 +70,22 @@
   *
   * Opaque object representing the library context.
   */
 -// kmod_ctx.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -157,7 +157,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * kmod_ctx 上下文数据结构
++ * @brief  kmod_ctx 上下文数据结构
 + * 包含的重要数据成员有
 + *	- config 配置信息
 + *	- hash 表
@@ -172,7 +172,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
  
 -// kmod_log.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -181,7 +181,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * kmod_log 日志输出函数
++ * @brief  kmod_log 日志输出函数
 + * 根据 priority 优先级进行日志输出
 + *
 + */
@@ -195,7 +195,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
  
 -// log_filep.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -204,7 +204,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * log_filep
++ * @brief  log_filep
 + * 按特定格式写入文件
 + */
  static void log_filep(void *data,
@@ -216,7 +216,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
  
 -// kmod_get_dirname.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -225,7 +225,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得 ctx 结构体中的 dirname 信息
++ * @brief  获得 ctx 结构体中的 dirname 信息
 + */
  const char *kmod_get_dirname(const struct kmod_ctx *ctx)
  {
@@ -236,7 +236,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
   */
 -// kmod_get_userdata.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -245,7 +245,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得 ctx 结构体中的 userdata 信息
++ * @brief  获得 ctx 结构体中的 userdata 信息
 + */
  KMOD_EXPORT void *kmod_get_userdata(const struct kmod_ctx *ctx)
  {
@@ -256,7 +256,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
   */
 -// kmod_set_userdata.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -265,7 +265,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 设置 ctx 结构体中的 userdata 信息
++ * @brief  设置 ctx 结构体中的 userdata 信息
 + */
  KMOD_EXPORT void kmod_set_userdata(struct kmod_ctx *ctx, const void *userdata)
  {
@@ -276,7 +276,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
   */
 -// kmod_new.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -285,7 +285,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * kmod_new - 创建 kmod 库上下文
++ * @brief  kmod_new - 创建 kmod 库上下文
 + *
 + * 主要功能： 
 + *	创建 kmod_ctx 结构体，设置mod引用计数为1
@@ -310,7 +310,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
   */
 -// kmod_ref.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -319,7 +319,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * kmod_ref 给 kmod 的引用计数 refcount 加1
++ * @brief  kmod_ref 给 kmod 的引用计数 refcount 加1
 + */
  KMOD_EXPORT struct kmod_ctx *kmod_ref(struct kmod_ctx *ctx)
  {
@@ -330,7 +330,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
   */
 -// kmod_unref.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -339,7 +339,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * kmod_unref - 释放 kmod 库上下文
++ * @brief  kmod_unref - 释放 kmod 库上下文
 + * 
 + * 主要功能： 
 + *	给 kmod 的引用计数 refcount 减1
@@ -364,7 +364,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
   */
 -// kmod_set_log_fn.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -373,7 +373,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 默认的 log 写入 stderr 标准出错，用户可以通过传入一个 log_fn 函数指针，使得 log 信息的输出使用用户指定的日志函数
++ * @brief  默认的 log 写入 stderr 标准出错，用户可以通过传入一个 log_fn 函数指针，使得 log 信息的输出使用用户指定的日志函数
 + */
  KMOD_EXPORT void kmod_set_log_fn(struct kmod_ctx *ctx,
  					void (*log_fn)(void *data,
@@ -384,7 +384,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
   */
 -// kmod_get_priority.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -393,7 +393,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 返回 log 日志的优先级 priority
++ * @brief  返回 log 日志的优先级 priority
 + */
  KMOD_EXPORT int kmod_get_log_priority(const struct kmod_ctx *ctx)
  {
@@ -404,7 +404,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
   */
 -// kmod_set_priority.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -413,7 +413,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 设置 log 日志的优先级 priority
++ * @brief  设置 log 日志的优先级 priority
 + */
  KMOD_EXPORT void kmod_set_log_priority(struct kmod_ctx *ctx, int priority)
  {
@@ -424,7 +424,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
  
 -// kmod_pool_get_module.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -433,7 +433,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 在 kmod 池中通过 hash_find 查找到键值为 key 的模块
++ * @brief  在 kmod 池中通过 hash_find 查找到键值为 key 的模块
 + */
  struct kmod_module *kmod_pool_get_module(struct kmod_ctx *ctx,
  							const char *key)
@@ -444,7 +444,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
  
 -// kmod_pool_add_module.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -453,7 +453,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 在 kmod 池中通过 hash_add 添加一个键值为 key 的模块
++ * @brief  在 kmod 池中通过 hash_add 添加一个键值为 key 的模块
 + */
  void kmod_pool_add_module(struct kmod_ctx *ctx, struct kmod_module *mod,
  							const char *key)
@@ -464,7 +464,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
  
 -// kmod_pool_del_module.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -473,7 +473,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 在 kmod 池中通过 hash_add 删除一个键值为 key 的模块
++ * @brief  在 kmod 池中通过 hash_add 删除一个键值为 key 的模块
 + */
  void kmod_pool_del_module(struct kmod_ctx *ctx, struct kmod_module *mod,
  							const char *key)
@@ -484,7 +484,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
   */
 -// kmod_validate_resources.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -493,7 +493,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 检查 index 和 configuration 索引和配置文件是否已经改变
++ * @brief  检查 index 和 configuration 索引和配置文件是否已经改变
 + */
  KMOD_EXPORT int kmod_validate_resources(struct kmod_ctx *ctx)
  {
@@ -504,7 +504,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
   */
 -// kmod_load_resources.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -513,7 +513,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * kmod_load_resources
++ * @brief  kmod_load_resources
 + * 加载所有的索引
 + * 如果用户会操作多次 lookups, insertions, deletions 操作
 + * 那么最好是先调用这个函数，这样可以加快查找速度
@@ -528,7 +528,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
   */
 -// kmod_unload_resources.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -537,7 +537,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * kmod_unload_resources
++ * @brief  kmod_unload_resources
 + * 卸载所有的索引，之后的查找必须打开和关闭索引 
 + *	- index_mm_close()
 + */
@@ -550,7 +550,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
   */
 -// kmod_dump_index.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -559,7 +559,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * kmod_dump_index 
++ * @brief  kmod_dump_index 
 + * dump index 索引给文件描述符 fd 
 + * 其中需要调用 index 模块中的函数接口
 + *	- index_mm_dump()
@@ -576,7 +576,7 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
  
 -// kmod_get_config.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -585,21 +585,21 @@ diff -Nur kmod-11/libkmod/libkmod.c kmod-11-subs/libkmod/libkmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得 kmod ctx 的配置信息，返回 config 成员
++ * @brief  获得 kmod ctx 的配置信息，返回 config 成员
 + */
  const struct kmod_config *kmod_get_config(const struct kmod_ctx *ctx)
  {
  	return ctx->config;
 diff -Nur kmod-11/libkmod/libkmod-config.c kmod-11-subs/libkmod/libkmod-config.c
 --- kmod-11/libkmod/libkmod-config.c	2013-06-09 10:49:51.583819183 +0800
-+++ kmod-11-subs/libkmod/libkmod-config.c	2013-06-12 06:11:29.728479879 +0800
++++ kmod-11-subs/libkmod/libkmod-config.c	2013-06-14 11:27:49.258704569 +0800
 @@ -1038,7 +1038,26 @@
   * with kmod_config_iter_free_iter().
   */
  
 -// kmod_config_get_blacklists.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -608,7 +608,7 @@ diff -Nur kmod-11/libkmod/libkmod-config.c kmod-11-subs/libkmod/libkmod-config.c
 + *
 + * @note 注释详细内容:
 + **
-+ * kmod_config_get_blacklists:
++ * @brief  kmod_config_get_blacklists:
 + * @ctx: kmod 库上下文
 + *
 + * 获得一个 iterator 指针来处理在库中的 blacklist
@@ -627,7 +627,7 @@ diff -Nur kmod-11/libkmod/libkmod-config.c kmod-11-subs/libkmod/libkmod-config.c
   */
 -// kmod_config_get_install_commands.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -636,7 +636,7 @@ diff -Nur kmod-11/libkmod/libkmod-config.c kmod-11-subs/libkmod/libkmod-config.c
 + *
 + * @note 注释详细内容:
 + **
-+ * kmod_config_get_install_commands:
++ * @brief  kmod_config_get_install_commands:
 + * @ctx: kmod 库上下文
 + *
 + * 获得一个 iterator 来处理安装命令
@@ -652,14 +652,14 @@ diff -Nur kmod-11/libkmod/libkmod-config.c kmod-11-subs/libkmod/libkmod-config.c
  	if (ctx == NULL)
 diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 --- kmod-11/libkmod/libkmod-elf.c	2013-06-09 10:34:26.243811627 +0800
-+++ kmod-11-subs/libkmod/libkmod-elf.c	2013-06-12 06:11:30.288479883 +0800
++++ kmod-11-subs/libkmod/libkmod-elf.c	2013-06-14 11:27:49.854704574 +0800
 @@ -51,7 +51,18 @@
  static const enum kmod_elf_class native_endianess = KMOD_ELF_LSB;
  #endif
  
 -// kmod_elf.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -668,7 +668,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 + *
 + * @note 注释详细内容:
 + *
-+ *  kmod_elf 数据结构，包含 kmod_elf_header, memory 指针
++ * @brief   kmod_elf 数据结构，包含 kmod_elf_header, memory 指针
 + */
  struct kmod_elf {
  	const uint8_t *memory;
@@ -679,7 +679,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
  
 -// elf_identify.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -688,7 +688,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 根据 memory 指针，获得 ELF 文件类型，返回值为
++ * @brief  根据 memory 指针，获得 ELF 文件类型，返回值为
 + *	- ELFCLASS32
 + *	- ELFCLASS64
 + *	- KMOD_ELF_LSB
@@ -703,7 +703,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
  
 -// elf_get_mem.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -712,7 +712,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得 elf memory + offset 偏移量之后的位置指针
++ * @brief  获得 elf memory + offset 偏移量之后的位置指针
 + */
  static inline const void *elf_get_mem(const struct kmod_elf *elf, uint64_t offset)
  {
@@ -723,7 +723,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
  
 -// elf_get_section_header.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -732,7 +732,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得 elf section header 指针, 需要调用 elf_get_mem()
++ * @brief  获得 elf section header 指针, 需要调用 elf_get_mem()
 + */
  static inline const void *elf_get_section_header(const struct kmod_elf *elf, uint16_t idx)
  {
@@ -743,7 +743,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
  
 -// elf_get_section_info.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -752,7 +752,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得 elf section 中第 idx 个 section 的 offset, size, nameoff 信息
++ * @brief  获得 elf section 中第 idx 个 section 的 offset, size, nameoff 信息
 + */
  static inline int elf_get_section_info(const struct kmod_elf *elf, uint16_t idx, uint64_t *offset, uint64_t *size, uint32_t *nameoff)
  {
@@ -763,7 +763,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
  
 -// elf_get_strings_section.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -772,7 +772,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得 elf 文件中 strings table 符号表的偏移指针
++ * @brief  获得 elf 文件中 strings table 符号表的偏移指针
 + */
  static const char *elf_get_strings_section(const struct kmod_elf *elf, uint64_t *size)
  {
@@ -782,7 +782,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
  
 -// kmod_elf_new.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -791,7 +791,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 创建一个 struct kmod_elf 结构体并将 size, offset, section.count 填入
++ * @brief  创建一个 struct kmod_elf 结构体并将 size, offset, section.count 填入
 + */
  struct kmod_elf *kmod_elf_new(const void *memory, off_t size)
  {
@@ -802,7 +802,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
  
 -// kmod_elf_get_memory.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -811,7 +811,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得 elf 文件的 memory 指针
++ * @brief  获得 elf 文件的 memory 指针
 + */
  const void *kmod_elf_get_memory(const struct kmod_elf *elf)
  {
@@ -820,7 +820,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
  
 -// kmod_elf_get_section.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -829,7 +829,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 查找 sections 中名字为 section 的那个，并返回 buf 指针和 buf_size 大小
++ * @brief  查找 sections 中名字为 section 的那个，并返回 buf 指针和 buf_size 大小
 + */
  int kmod_elf_get_section(const struct kmod_elf *elf, const char *section, const void **buf, uint64_t *buf_size)
  {
@@ -840,7 +840,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
  /* array will be allocated with strings in a single malloc, just free *array */
 -// kmod_elf_get_strings.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -849,7 +849,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得名为 section 的 string 并分配空间用来存放
++ * @brief  获得名为 section 的 string 并分配空间用来存放
 + */
  int kmod_elf_get_strings(const struct kmod_elf *elf, const char *section, char ***array)
  {
@@ -860,7 +860,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
  /* array will be allocated with strings in a single malloc, just free *array */
 -// kmod_elf_get_modversions.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -869,7 +869,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得名为 __versions 的 string
++ * @brief  获得名为 __versions 的 string
 + */
  int kmod_elf_get_modversions(const struct kmod_elf *elf, struct kmod_modversion **array)
  {
@@ -880,7 +880,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
  
 -// kmod_elf_strip_section.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -889,7 +889,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 对 section 进行 strip
++ * @brief  对 section 进行 strip
 + */
  int kmod_elf_strip_section(struct kmod_elf *elf, const char *section)
  {
@@ -900,7 +900,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
  
 -// kmod_elf_strip_vermagic.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -909,7 +909,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 对 .modinfo section 中的 vermagic 数据进行 strip
++ * @brief  对 .modinfo section 中的 vermagic 数据进行 strip
 + */
  int kmod_elf_strip_vermagic(struct kmod_elf *elf)
  {
@@ -920,7 +920,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
  
 -// kmod_elf_get_symbols_symtab.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -929,7 +929,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得 __ksymtab_strings section 中的 symtab
++ * @brief  获得 __ksymtab_strings section 中的 symtab
 + */
  static int kmod_elf_get_symbols_symtab(const struct kmod_elf *elf, struct kmod_modversion **array)
  {
@@ -940,7 +940,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
  /* array will be allocated with strings in a single malloc, just free *array */
 -// kmod_elf_get_symbols.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -949,7 +949,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得 .strtab .symtab secion 中的 相关信息 size, nameoff 等
++ * @brief  获得 .strtab .symtab secion 中的 相关信息 size, nameoff 等
 + */
  int kmod_elf_get_symbols(const struct kmod_elf *elf, struct kmod_modversion **array)
  {
@@ -960,7 +960,7 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
  /* array will be allocated with strings in a single malloc, just free *array */
 -// kmod_elf_get_dependency_symbols.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -969,21 +969,21 @@ diff -Nur kmod-11/libkmod/libkmod-elf.c kmod-11-subs/libkmod/libkmod-elf.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得 __versions section 中 .strtab .symtab 相关信息
++ * @brief  获得 __versions section 中 .strtab .symtab 相关信息
 + */
  int kmod_elf_get_dependency_symbols(const struct kmod_elf *elf, struct kmod_modversion **array)
  {
  	uint64_t versionslen, strtablen, symtablen, str_off, sym_off, ver_off;
 diff -Nur kmod-11/libkmod/libkmod-file.c kmod-11-subs/libkmod/libkmod-file.c
 --- kmod-11/libkmod/libkmod-file.c	2013-06-04 19:53:49.584004452 +0800
-+++ kmod-11-subs/libkmod/libkmod-file.c	2013-06-12 06:11:30.444479884 +0800
++++ kmod-11-subs/libkmod/libkmod-file.c	2013-06-14 11:27:50.010704575 +0800
 @@ -278,7 +278,18 @@
  	return file->elf;
  }
  
 -// kmod_file_open.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -992,7 +992,7 @@ diff -Nur kmod-11/libkmod/libkmod-file.c kmod-11-subs/libkmod/libkmod-file.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 打开 filename 文件, 将文件内容读出到 ctx 结构体中
++ * @brief  打开 filename 文件, 将文件内容读出到 ctx 结构体中
 + */
  struct kmod_file *kmod_file_open(const struct kmod_ctx *ctx,
  						const char *filename)
@@ -1003,7 +1003,7 @@ diff -Nur kmod-11/libkmod/libkmod-file.c kmod-11-subs/libkmod/libkmod-file.c
  
 -// kmod_file_get_contents.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1012,7 +1012,7 @@ diff -Nur kmod-11/libkmod/libkmod-file.c kmod-11-subs/libkmod/libkmod-file.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得文件内容指针 memory
++ * @brief  获得文件内容指针 memory
 + */
  void *kmod_file_get_contents(const struct kmod_file *file)
  {
@@ -1021,7 +1021,7 @@ diff -Nur kmod-11/libkmod/libkmod-file.c kmod-11-subs/libkmod/libkmod-file.c
  
 -// kmod_file_get_size.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1030,21 +1030,21 @@ diff -Nur kmod-11/libkmod/libkmod-file.c kmod-11-subs/libkmod/libkmod-file.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得文件大小
++ * @brief  获得文件大小
 + */
  off_t kmod_file_get_size(const struct kmod_file *file)
  {
  	return file->size;
 diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
 --- kmod-11/libkmod/libkmod-hash.c	2013-06-04 19:36:54.971996162 +0800
-+++ kmod-11-subs/libkmod/libkmod-hash.c	2013-06-12 06:11:30.904479889 +0800
++++ kmod-11-subs/libkmod/libkmod-hash.c	2013-06-14 11:27:50.474704579 +0800
 @@ -26,7 +26,21 @@
  #include <string.h>
  #include <errno.h>
  
 -// hash_entry.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1053,7 +1053,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
 + *
 + * @note 注释详细内容:
 + *
-+ * hash entry 表项的数据结构，仅包含 key 和 value 
++ * @brief  hash entry 表项的数据结构，仅包含 key 和 value 
 + * 其中 key 是 字符串指针
 + * value 是无类型 void * 指针
 + */
@@ -1067,7 +1067,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
  
 -// hash.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1076,7 +1076,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
 + *
 + * @note 注释详细内容:
 + *
-+ * hash 表的数据结构，包含 count, step, n_buckets, buckets 指针
++ * @brief  hash 表的数据结构，包含 count, step, n_buckets, buckets 指针
 + */
 +
  struct hash {
@@ -1088,7 +1088,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
  
 -// hash_new.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1097,7 +1097,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
 + *
 + * @note 注释详细内容:
 + *
-+ * hash 表的创建，给定 n_buckets 个
++ * @brief  hash 表的创建，给定 n_buckets 个
 + */
  struct hash *hash_new(unsigned int n_buckets,
  					void (*free_value)(void *value))
@@ -1108,7 +1108,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
  
 -// hash_free.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1117,7 +1117,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
 + *
 + * @note 注释详细内容:
 + *
-+ * hash 表的销毁
++ * @brief  hash 表的销毁
 + */
  void hash_free(struct hash *hash)
  {
@@ -1128,7 +1128,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
  
 -// hash_superfast.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1137,7 +1137,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 计算 hash 值，传入 key 和 key 的长度，返回 hashval
++ * @brief  计算 hash 值，传入 key 和 key 的长度，返回 hashval
 + */
  static inline unsigned int hash_superfast(const char *key, unsigned int len)
  {
@@ -1148,7 +1148,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
   */
 -// hash_add.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1157,7 +1157,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 从当前的 hash 表 删除一个 key
++ * @brief  从当前的 hash 表 删除一个 key
 + */
  int hash_add(struct hash *hash, const char *key, const void *value)
  {
@@ -1168,7 +1168,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
  /* similar to hash_add(), but fails if key already exists */
 -// hash_add_unique.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1177,7 +1177,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 添加一个 key 和 value 进入当前的 hash 表, 如果已经存在则返回失败
++ * @brief  添加一个 key 和 value 进入当前的 hash 表, 如果已经存在则返回失败
 + */
  int hash_add_unique(struct hash *hash, const char *key, const void *value)
  {
@@ -1188,7 +1188,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
  
 -// hash_entry_cmp.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1197,7 +1197,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
 + *
 + * @note 注释详细内容:
 + *
-+ * hash 比较，基于字符串 strcmp 的比较 key 
++ * @brief  hash 比较，基于字符串 strcmp 的比较 key 
 + */
  static int hash_entry_cmp(const void *pa, const void *pb)
  {
@@ -1208,7 +1208,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
  
 -// hash_find.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1217,7 +1217,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * hash 查找
++ * @brief  hash 查找
 + * 从 hash 指针所指向的 hash 表中，找到元素 key 
 + * 采用二分查找法
 + */
@@ -1230,7 +1230,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
  
 -// hash_del.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1248,7 +1248,7 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
  
 -// hash_get_count.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1257,21 +1257,21 @@ diff -Nur kmod-11/libkmod/libkmod-hash.c kmod-11-subs/libkmod/libkmod-hash.c
 + *
 + * @note 注释详细内容:
 + *
-+ * hash 获得表项数量, 返回 hash->count
++ * @brief  hash 获得表项数量, 返回 hash->count
 + */
  unsigned int hash_get_count(const struct hash *hash)
  {
  	return hash->count;
 diff -Nur kmod-11/libkmod/libkmod-index.c kmod-11-subs/libkmod/libkmod-index.c
 --- kmod-11/libkmod/libkmod-index.c	2013-06-06 18:44:57.312329538 +0800
-+++ kmod-11-subs/libkmod/libkmod-index.c	2013-06-12 06:11:31.104479891 +0800
++++ kmod-11-subs/libkmod/libkmod-index.c	2013-06-14 11:27:50.718704581 +0800
 @@ -72,7 +72,18 @@
  	INDEX_NODE_MASK     = 0x0FFFFFFF, /* Offset value */
  };
  
 -// index_values_free.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1280,7 +1280,7 @@ diff -Nur kmod-11/libkmod/libkmod-index.c kmod-11-subs/libkmod/libkmod-index.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 释放整个 index value 链表
++ * @brief  释放整个 index value 链表
 + */
  void index_values_free(struct index_value *values)
  {
@@ -1291,7 +1291,7 @@ diff -Nur kmod-11/libkmod/libkmod-index.c kmod-11-subs/libkmod/libkmod-index.c
  
 -// add_value.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1300,7 +1300,7 @@ diff -Nur kmod-11/libkmod/libkmod-index.c kmod-11-subs/libkmod/libkmod-index.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 根据 priority 优先级，按顺序在适当位置插入一个新节点
++ * @brief  根据 priority 优先级，按顺序在适当位置插入一个新节点
 + */ 
  static int add_value(struct index_value **values,
  		     const char *value, unsigned len, unsigned int priority)
@@ -1311,7 +1311,7 @@ diff -Nur kmod-11/libkmod/libkmod-index.c kmod-11-subs/libkmod/libkmod-index.c
  
 -// index_read.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1320,7 +1320,7 @@ diff -Nur kmod-11/libkmod/libkmod-index.c kmod-11-subs/libkmod/libkmod-index.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 从 文件 in 中读取 index 记录
++ * @brief  从 文件 in 中读取 index 记录
 + */
  static struct index_node_f *index_read(FILE *in, uint32_t offset)
  {
@@ -1331,7 +1331,7 @@ diff -Nur kmod-11/libkmod/libkmod-index.c kmod-11-subs/libkmod/libkmod-index.c
  
 -// index_close.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1345,14 +1345,14 @@ diff -Nur kmod-11/libkmod/libkmod-index.c kmod-11-subs/libkmod/libkmod-index.c
  	free(node->prefix);
 diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 --- kmod-11/libkmod/libkmod-list.c	2013-06-04 19:18:57.407987354 +0800
-+++ kmod-11-subs/libkmod/libkmod-list.c	2013-06-12 06:11:31.872479896 +0800
++++ kmod-11-subs/libkmod/libkmod-list.c	2013-06-14 11:27:51.470704587 +0800
 @@ -27,7 +27,16 @@
   * @short_description: general purpose list
   */
  
 -// list_node_init.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1370,7 +1370,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
  
 -// list_node_next.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1379,7 +1379,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得当前链表节点的下一个元素
++ * @brief  获得当前链表节点的下一个元素
 + */
  static inline struct list_node *list_node_next(const struct list_node *node)
  {
@@ -1390,7 +1390,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
  
 -// list_node_prev.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1399,7 +1399,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获得当前链表节点的上一个元素
++ * @brief  获得当前链表节点的上一个元素
 + */
  static inline struct list_node *list_node_prev(const struct list_node *node)
  {
@@ -1410,7 +1410,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
  
 -// list_node_append.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1419,7 +1419,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 将当前链表增添一个节点元素，如原链表为空，则用当前节点元素创建链表
++ * @brief  将当前链表增添一个节点元素，如原链表为空，则用当前节点元素创建链表
 + */
  static inline void list_node_append(struct list_node *list,
  							struct list_node *node)
@@ -1430,7 +1430,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
  
 -// list_node_remove.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1439,7 +1439,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 将当前链表删除一个节点元素
++ * @brief  将当前链表删除一个节点元素
 + * 如原链表只有1个节点，则删除后置为空。
 + * 如原链表不为空，删除节点元素后调整链表相关指针
 + */
@@ -1452,7 +1452,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
  
 -// list_node_insert_after.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1461,7 +1461,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 在链表当前节点 list 后插入一个节点元素 node
++ * @brief  在链表当前节点 list 后插入一个节点元素 node
 + * 如原链表为空，则用插入节点元素创建链表。
 + * 如原链表不为空，插入节点元素后调整链表相关指针
 + */
@@ -1474,7 +1474,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
  
 -// list_node_insert_before.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1483,7 +1483,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 在链表当前节点 list 前插入一个节点元素 node
++ * @brief  在链表当前节点 list 前插入一个节点元素 node
 + * 如原链表为空，则用插入节点元素创建链表。
 + * 如原链表不为空，插入节点元素后调整链表相关指针
 + */
@@ -1496,7 +1496,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
  
 -// list_node_append_list.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1505,7 +1505,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 将链表 list1 后加上append 链表 list2
++ * @brief  将链表 list1 后加上append 链表 list2
 + * 如原链表 list1 为空，则用 list2 作为最后的链表
 + */
  static inline void list_node_append_list(struct list_node *list1,
@@ -1517,7 +1517,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
  
 -// kmod_list_append.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1526,7 +1526,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 在当前 kmod list 的后面，新增一个节点 node，数据为 data
++ * @brief  在当前 kmod list 的后面，新增一个节点 node，数据为 data
 + */
  struct kmod_list *kmod_list_append(struct kmod_list *list, const void *data)
  {
@@ -1537,7 +1537,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
  
 -// kmod_list_insert_after.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1546,7 +1546,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 在 kmod 链表当前节点 list 后插入一个节点元素 node
++ * @brief  在 kmod 链表当前节点 list 后插入一个节点元素 node
 + * 如原链表为空，则用插入节点元素创建链表。
 + * 如原链表不为空，插入节点元素后调整链表相关指针
 + */
@@ -1559,7 +1559,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
  
 -// kmod_list_insert_before.cmt_
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1577,7 +1577,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
  
 -// kmod_list_append_list.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1586,7 +1586,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 将 kmod 链表 list1 后加上append 链表 list2
++ * @brief  将 kmod 链表 list1 后加上append 链表 list2
 + * 如原链表 list1 为空，则用 list2 作为最后的链表
 + */
  struct kmod_list *kmod_list_append_list(struct kmod_list *list1,
@@ -1598,7 +1598,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
  
 -// kmod_list_prepend.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1607,7 +1607,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 将当前 kmod 链表增添一个节点元素，如原链表为空，则用当前节点元素创建链表
++ * @brief  将当前 kmod 链表增添一个节点元素，如原链表为空，则用当前节点元素创建链表
 + */
  struct kmod_list *kmod_list_prepend(struct kmod_list *list, const void *data)
  {
@@ -1618,7 +1618,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
  
 -// kmod_list_remove.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1627,7 +1627,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 将当前 kmod 链表删除一个节点元素
++ * @brief  将当前 kmod 链表删除一个节点元素
 + * 如原链表只有1个节点，则删除后置为空。
 + * 如原链表不为空，删除节点元素后调整链表相关指针
 + */
@@ -1640,7 +1640,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
  
 -// kmod_list_remove_data.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1649,7 +1649,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 将当前 kmod 链表删除一个节点元素, 该元素的数据为传入参数 data 
++ * @brief  将当前 kmod 链表删除一个节点元素, 该元素的数据为传入参数 data 
 + * 如原链表只有1个节点，则删除后置为空。
 + * 如原链表不为空，删除节点元素后调整链表相关指针
 + */
@@ -1662,7 +1662,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
   */
 -// kmod_list_remove_n_latest.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1671,7 +1671,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 删除链表上的 最后 n 个节点
++ * @brief  删除链表上的 最后 n 个节点
 + */
  struct kmod_list *kmod_list_remove_n_latest(struct kmod_list *list,
  							unsigned int n)
@@ -1682,7 +1682,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
   */
 -// kmod_list_prev.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1691,7 +1691,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 返回在当前 kmod 链表 list 中，curr 节点的上一个节点 
++ * @brief  返回在当前 kmod 链表 list 中，curr 节点的上一个节点 
 + * 如果链表为空，或者 curr 就是链表的头，则返回空
 + */
  KMOD_EXPORT struct kmod_list *kmod_list_prev(const struct kmod_list *list,
@@ -1703,7 +1703,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
   */
 -// kmod_list_next.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1712,7 +1712,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 返回在当前 kmod 链表 list 中，curr 节点的下一个节点
++ * @brief  返回在当前 kmod 链表 list 中，curr 节点的下一个节点
 + */
  KMOD_EXPORT struct kmod_list *kmod_list_next(const struct kmod_list *list,
  						const struct kmod_list *curr)
@@ -1723,7 +1723,7 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
   */
 -// kmod_list_last.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1732,21 +1732,21 @@ diff -Nur kmod-11/libkmod/libkmod-list.c kmod-11-subs/libkmod/libkmod-list.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 如果链表为空，则返回空，否则返回链表中的最后那个节点
++ * @brief  如果链表为空，则返回空，否则返回链表中的最后那个节点
 + */
  KMOD_EXPORT struct kmod_list *kmod_list_last(const struct kmod_list *list)
  {
  	if (list == NULL)
 diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
 --- kmod-11/libkmod/libkmod-module.c	2013-06-11 16:44:03.498216660 +0800
-+++ kmod-11-subs/libkmod/libkmod-module.c	2013-06-12 06:11:32.372479900 +0800
++++ kmod-11-subs/libkmod/libkmod-module.c	2013-06-14 11:27:52.254704594 +0800
 @@ -50,7 +50,26 @@
   *
   * Opaque object representing a module.
   */
 -// kmod_module.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1755,7 +1755,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 最重要的数据结构 kmod_module , 包含了以下主要的成员变量
++ * @brief  最重要的数据结构 kmod_module , 包含了以下主要的成员变量
 + *	- struct kmod_ctx *ctx;		上下文
 + *	- struct kmod_list *dep;	依赖模块的链表
 + *	- struct kmod_file *file;	ko 文件
@@ -1774,7 +1774,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
  
 -// module_is_inkernel.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1783,7 +1783,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 判断当前的 mod 是否已经加载到内核中，根据 KMOD_MODULE_LIVE 和 KMOD_MODULE_BUILTIN
++ * @brief  判断当前的 mod 是否已经加载到内核中，根据 KMOD_MODULE_LIVE 和 KMOD_MODULE_BUILTIN
 + */
  static inline bool module_is_inkernel(struct kmod_module *mod)
  {
@@ -1794,7 +1794,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
  
 -// kmod_module_parse_depline.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1803,7 +1803,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 分析依赖关系的字符串, 建立依赖关系的 kmod_list
++ * @brief  分析依赖关系的字符串, 建立依赖关系的 kmod_list
 + * @param[in] mod 
 + * @param[in] line 在依赖文件中的字符串
 + *	例如 line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
@@ -1821,7 +1821,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
   */
 -// kmod_module_new.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1830,7 +1830,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 创建 kmod_module 的构造函数
++ * @brief  创建 kmod_module 的构造函数
 + */
  static int kmod_module_new(struct kmod_ctx *ctx, const char *key,
  				const char *name, size_t namelen,
@@ -1841,7 +1841,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
   */
 -// kmod_module_new_from_name.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1850,7 +1850,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 先将 name 正规化，然后调用 kmod_module_new() 来创建 kmod_module
++ * @brief  先将 name 正规化，然后调用 kmod_module_new() 来创建 kmod_module
 + */
  KMOD_EXPORT int kmod_module_new_from_name(struct kmod_ctx *ctx,
  						const char *name,
@@ -1861,7 +1861,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
   */
 -// kmod_module_new_from_path.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1870,7 +1870,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
 + *
 + * @note 注释详细内容:
 + *
-+ * kmod_module_new_from_path - 创建 kmod module
++ * @brief  kmod_module_new_from_path - 创建 kmod module
 + *
 + * 主要功能： 
 + *	创建 kmod_module 结构体
@@ -1896,7 +1896,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
   */
 -// kmod_module_unref.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1905,7 +1905,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 给当前模块的引用计数 refcount--, 如果已经减到0，则卸载该模块。
++ * @brief  给当前模块的引用计数 refcount--, 如果已经减到0，则卸载该模块。
 + *	- kmod_pool_del_module()
 + *	- kmod_module_unref_list()
 + *	- kmod_file_unref()
@@ -1920,7 +1920,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
   */
 -// kmod_module_ref.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1929,7 +1929,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 给当前模块的引用计数 refcount++
++ * @brief  给当前模块的引用计数 refcount++
 + */
  KMOD_EXPORT struct kmod_module *kmod_module_ref(struct kmod_module *mod)
  {
@@ -1940,7 +1940,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
   */
 -// kmod_module_unref_list.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1949,7 +1949,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 删除 kmod list 链表中的每一个节点
++ * @brief  删除 kmod list 链表中的每一个节点
 + */
  KMOD_EXPORT int kmod_module_unref_list(struct kmod_list *list)
  {
@@ -1960,7 +1960,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
   */
 -// kmod_module_remove_module.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1978,7 +1978,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
   */
 -// kmod_module_insert_module.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1987,7 +1987,7 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
 + *
 + * @note 注释详细内容:
 + *
-+ * kmod_module_insert_module - 插入 kmod module 
++ * @brief  kmod_module_insert_module - 插入 kmod module 
 + *
 + * 主要功能： 
 + *	打开 elf 格式的模块文件，插入 kmod_module 结构体
@@ -2017,14 +2017,14 @@ diff -Nur kmod-11/libkmod/libkmod-module.c kmod-11-subs/libkmod/libkmod-module.c
  							const char *options)
 diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
 --- kmod-11/libkmod/libkmod-util.c	2013-06-04 18:46:51.671971612 +0800
-+++ kmod-11-subs/libkmod/libkmod-util.c	2013-06-12 06:11:32.820479905 +0800
++++ kmod-11-subs/libkmod/libkmod-util.c	2013-06-14 11:27:52.698704597 +0800
 @@ -90,7 +90,22 @@
  	}
  }
  
 -// alias_normalize.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2033,7 +2033,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 正规化 alias
++ * @brief  正规化 alias
 + * 将 alias 别名中 [ ] 中间的部分包含 [ ] 作为返回名称
 + * 名字中间的 '-' 字符，都会被替换为 '_' 下划线
 + * 如果出现 ']' 字符，则直接返回错误 -EINVAL
@@ -2048,7 +2048,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
  
 -// modname_normalize.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2057,7 +2057,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 正规化 modname 
++ * @brief  正规化 modname 
 + * 名字中间的 '-' 字符，都会被替换为 '_' 下划线
 + * 如果出现 '.' 字符，则直接截断
 + * 最后把 modname 的长度赋值给 *len, 正确返回 0
@@ -2071,7 +2071,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
  
 -// path_to_modname.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2080,7 +2080,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 从 path 名转换为 modname，并返回 modname 的长度
++ * @brief  从 path 名转换为 modname，并返回 modname 的长度
 + */
  char *path_to_modname(const char *path, char buf[PATH_MAX], size_t *len)
  {
@@ -2091,7 +2091,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
  
 -// memdup.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2100,7 +2100,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 从指针 p 所指向的内存复制 n 个字节，通过 malloc 分配空间 r，返回 r
++ * @brief  从指针 p 所指向的内存复制 n 个字节，通过 malloc 分配空间 r，返回 r
 + */  
  inline void *memdup(const void *p, size_t n)
  {
@@ -2111,7 +2111,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
  
 -// read_str_safe.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2120,7 +2120,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 从 fd 中读出 buflen 个字符，写入到 buf 指针所指向的内存区域
++ * @brief  从 fd 中读出 buflen 个字符，写入到 buf 指针所指向的内存区域
 + * 确保全部读出后返回，并在 buf 指针的最后补上 '\0'
 + * 成功则 返回 0； 失败则返回 -errno
 + */
@@ -2133,7 +2133,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
  
 -// write_str_safe.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2142,7 +2142,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 将 buf 指针所指向的 buflen 个字符，写入到 fd，确保全部写入后返回
++ * @brief  将 buf 指针所指向的 buflen 个字符，写入到 fd，确保全部写入后返回
 + * 成功则 返回 0； 失败则返回 -errno
 + */
  ssize_t write_str_safe(int fd, const char *buf, size_t buflen)
@@ -2154,7 +2154,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
  
 -// read_str_long.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2163,7 +2163,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 从 fd 读入最多 32 个字节到 buf 中，
++ * @brief  从 fd 读入最多 32 个字节到 buf 中，
 + * 并将其转换为 有符号long, 写入 value 指针指向的内存区域 
 + * 采用的进制为 base ，成功则返回 0, 失败则返回 -EINVAL;
 + */
@@ -2176,7 +2176,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
  
 -// read_str_ulong.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2185,7 +2185,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 从 fd 读入最多 32 个字节到 buf 中，
++ * @brief  从 fd 读入最多 32 个字节到 buf 中，
 + * 并将其转换为 无符号long, 写入 value 指针指向的内存区域
 + * 采用的进制为 base ，成功则返回 0, 失败则返回 -EINVAL;
 + */
@@ -2198,7 +2198,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
  
 -// strchr_replace.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2207,7 +2207,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 将字符串 s 中出现的字符 c 替换为 字符 r
++ * @brief  将字符串 s 中出现的字符 c 替换为 字符 r
 + */
  char *strchr_replace(char *s, int c, char r)
  {
@@ -2218,7 +2218,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
  
 -// path_is_absolute.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2227,7 +2227,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 判断 路径 p 是否是绝对路径，如果是返回真，如果不是返回0
++ * @brief  判断 路径 p 是否是绝对路径，如果是返回真，如果不是返回0
 + */
  bool path_is_absolute(const char *p)
  {
@@ -2238,7 +2238,7 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
  
 -// path_make_absolute_cwd.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2252,14 +2252,14 @@ diff -Nur kmod-11/libkmod/libkmod-util.c kmod-11-subs/libkmod/libkmod-util.c
  	char *cwd, *r;
 diff -Nur kmod-11/testsuite/delete_module.c kmod-11-subs/testsuite/delete_module.c
 --- kmod-11/testsuite/delete_module.c	2013-06-11 15:44:06.634187270 +0800
-+++ kmod-11-subs/testsuite/delete_module.c	2013-06-12 06:11:33.304479909 +0800
++++ kmod-11-subs/testsuite/delete_module.c	2013-06-14 11:27:53.218704602 +0800
 @@ -97,7 +97,18 @@
  	}
  }
  
 -// find_module.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2268,7 +2268,7 @@ diff -Nur kmod-11/testsuite/delete_module.c kmod-11-subs/testsuite/delete_module
 + *
 + * @note 注释详细内容:
 + *
-+ * 根据 modname 从 _modules 开始，找到匹配名字的模块指针 mod 返回
++ * @brief  根据 modname 从 _modules 开始，找到匹配名字的模块指针 mod 返回
 + */
  static struct mod *find_module(struct mod *_modules, const char *modname)
  {
@@ -2279,7 +2279,7 @@ diff -Nur kmod-11/testsuite/delete_module.c kmod-11-subs/testsuite/delete_module
   */
 -// delete_module.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2288,7 +2288,7 @@ diff -Nur kmod-11/testsuite/delete_module.c kmod-11-subs/testsuite/delete_module
 + *
 + * @note 注释详细内容:
 + **
-+ * delete_module - 模拟内核卸载模块
++ * @brief  delete_module - 模拟内核卸载模块
 + *
 + * @brief 主要功能：
 + *	先通过 find_module 找到对应 modname 的 mod 指针，
@@ -2312,7 +2312,7 @@ diff -Nur kmod-11/testsuite/delete_module.c kmod-11-subs/testsuite/delete_module
  void free_resources(void) __attribute__((destructor));
 -// free_resources.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2321,21 +2321,21 @@ diff -Nur kmod-11/testsuite/delete_module.c kmod-11-subs/testsuite/delete_module
 + *
 + * @note 注释详细内容:
 + *
-+ * 从 modules 指针开始，通过 free 释放所有 mod 指针空间
++ * @brief  从 modules 指针开始，通过 free 释放所有 mod 指针空间
 + */
  void free_resources(void)
  {
  	while (modules) {
 diff -Nur kmod-11/testsuite/init_module.c kmod-11-subs/testsuite/init_module.c
 --- kmod-11/testsuite/init_module.c	2013-06-04 08:20:58.614271459 +0800
-+++ kmod-11-subs/testsuite/init_module.c	2013-06-12 06:11:33.400479909 +0800
++++ kmod-11-subs/testsuite/init_module.c	2013-06-14 11:27:53.310704602 +0800
 @@ -225,7 +225,39 @@
   * This is because we want to be able to pass dummy modules (and not real
   * ones) and it still work.
   */
 -// init_module.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2344,7 +2344,7 @@ diff -Nur kmod-11/testsuite/init_module.c kmod-11-subs/testsuite/init_module.c
 + *
 + * @note 注释详细内容:
 + *
-+ * init_module - 模拟内核插入模块
++ * @brief  init_module - 模拟内核插入模块
 + *
 + * @brief 主要功能：
 + *	默认操作是模仿在内核中的 init_module 
@@ -2372,14 +2372,14 @@ diff -Nur kmod-11/testsuite/init_module.c kmod-11-subs/testsuite/init_module.c
  	const char *modname;
 diff -Nur kmod-11/testsuite/mkdir.c kmod-11-subs/testsuite/mkdir.c
 --- kmod-11/testsuite/mkdir.c	2013-06-04 08:13:48.698267948 +0800
-+++ kmod-11-subs/testsuite/mkdir.c	2013-06-12 06:11:33.504479908 +0800
++++ kmod-11-subs/testsuite/mkdir.c	2013-06-14 11:27:53.398704603 +0800
 @@ -23,7 +23,18 @@
  #include "mkdir.h"
  #include "testsuite.h"
  
 -// mkdir_p.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2388,21 +2388,21 @@ diff -Nur kmod-11/testsuite/mkdir.c kmod-11-subs/testsuite/mkdir.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 通过调用系统函数 stat, mkdir 实现 mkdir 功能
++ * @brief  通过调用系统函数 stat, mkdir 实现 mkdir 功能
 + */
  TS_EXPORT int mkdir_p(const char *path, mode_t mode)
  {
  	char *start = strdupa(path);
 diff -Nur kmod-11/testsuite/path.c kmod-11-subs/testsuite/path.c
 --- kmod-11/testsuite/path.c	2013-06-04 08:19:21.266270893 +0800
-+++ kmod-11-subs/testsuite/path.c	2013-06-12 06:11:33.660479912 +0800
++++ kmod-11-subs/testsuite/path.c	2013-06-14 11:27:53.558704604 +0800
 @@ -36,13 +36,35 @@
  static const char *rootpath;
  static size_t rootpathlen;
  
 -// need_trap.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2411,7 +2411,7 @@ diff -Nur kmod-11/testsuite/path.c kmod-11-subs/testsuite/path.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 如果路径 path 不为空，并且 path 的第一个字符为 / 也就是绝对路径
++ * @brief  如果路径 path 不为空，并且 path 的第一个字符为 / 也就是绝对路径
 + */
  static inline bool need_trap(const char *path)
  {
@@ -2420,7 +2420,7 @@ diff -Nur kmod-11/testsuite/path.c kmod-11-subs/testsuite/path.c
  
 -// trap_path.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2429,7 +2429,7 @@ diff -Nur kmod-11/testsuite/path.c kmod-11-subs/testsuite/path.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 判断 path 是否是从根目录开始的绝对路径，如果不是则给它添加为绝对路径
++ * @brief  判断 path 是否是从根目录开始的绝对路径，如果不是则给它添加为绝对路径
 + */
  static const char *trap_path(const char *path, char buf[PATH_MAX * 2])
  {
@@ -2440,7 +2440,7 @@ diff -Nur kmod-11/testsuite/path.c kmod-11-subs/testsuite/path.c
  
 -// get_rootpath.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2449,21 +2449,21 @@ diff -Nur kmod-11/testsuite/path.c kmod-11-subs/testsuite/path.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 获取环境变量中 S_TC_ROOTFS 的之，赋值给 rootpath 静态变量
++ * @brief  获取环境变量中 S_TC_ROOTFS 的之，赋值给 rootpath 静态变量
 + */
  static bool get_rootpath(const char *f)
  {
  	if (rootpath != NULL)
 diff -Nur kmod-11/testsuite/test-alias.c kmod-11-subs/testsuite/test-alias.c
 --- kmod-11/testsuite/test-alias.c	2013-06-04 08:22:04.406272012 +0800
-+++ kmod-11-subs/testsuite/test-alias.c	2013-06-12 06:11:35.356479925 +0800
++++ kmod-11-subs/testsuite/test-alias.c	2013-06-14 11:27:55.282704618 +0800
 @@ -25,7 +25,18 @@
  #include "libkmod-util.h"
  #include "testsuite.h"
  
 -// alias_1.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2472,21 +2472,21 @@ diff -Nur kmod-11/testsuite/test-alias.c kmod-11-subs/testsuite/test-alias.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 测试 alias_normalize() 函数是否工作正确
++ * @brief  测试 alias_normalize() 函数是否工作正确
 + */
  static int alias_1(const struct test *t)
  {
  	static const char *input[] = {
 diff -Nur kmod-11/testsuite/test-blacklist.c kmod-11-subs/testsuite/test-blacklist.c
 --- kmod-11/testsuite/test-blacklist.c	2013-06-04 08:25:00.714273439 +0800
-+++ kmod-11-subs/testsuite/test-blacklist.c	2013-06-12 06:11:35.440479926 +0800
++++ kmod-11-subs/testsuite/test-blacklist.c	2013-06-14 11:27:55.382704619 +0800
 @@ -33,7 +33,29 @@
  #undef ERR
  #include "testsuite.h"
  
 -// blacklist_1.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2495,7 +2495,7 @@ diff -Nur kmod-11/testsuite/test-blacklist.c kmod-11-subs/testsuite/test-blackli
 + *
 + * @note 注释详细内容:
 + * 
-+ * 测试模块是否能够正确被 filter （blacklisted） 
++ * @brief  测试模块是否能够正确被 filter （blacklisted） 
 + * 其中需要调用到 libkmod 模块中的以下接口
 + *	- kmod_new()
 + *	- kmod_module_new_from_name()
@@ -2513,14 +2513,14 @@ diff -Nur kmod-11/testsuite/test-blacklist.c kmod-11-subs/testsuite/test-blackli
  	struct kmod_ctx *ctx;
 diff -Nur kmod-11/testsuite/test-dependencies.c kmod-11-subs/testsuite/test-dependencies.c
 --- kmod-11/testsuite/test-dependencies.c	2013-06-04 08:28:55.278275353 +0800
-+++ kmod-11-subs/testsuite/test-dependencies.c	2013-06-12 06:11:35.540479926 +0800
++++ kmod-11-subs/testsuite/test-dependencies.c	2013-06-14 11:27:55.470704620 +0800
 @@ -28,7 +28,28 @@
  #include "testsuite.h"
  #define TEST_UNAME "4.0.20-kmod"
  
 -// test_dependencies.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2529,7 +2529,7 @@ diff -Nur kmod-11/testsuite/test-dependencies.c kmod-11-subs/testsuite/test-depe
 + *
 + * @note 注释详细内容:
 + * 
-+ * 测试模块的 kmod_module_get_dependencies 是否工作正确
++ * @brief  测试模块的 kmod_module_get_dependencies 是否工作正确
 + * 其中需要调用到 libkmod 模块中的以下接口
 + *	- kmod_new()
 + *	- kmod_module_new_from_name()
@@ -2546,14 +2546,14 @@ diff -Nur kmod-11/testsuite/test-dependencies.c kmod-11-subs/testsuite/test-depe
  	struct kmod_ctx *ctx;
 diff -Nur kmod-11/testsuite/test-depmod.c kmod-11-subs/testsuite/test-depmod.c
 --- kmod-11/testsuite/test-depmod.c	2013-05-31 21:26:37.698309339 +0800
-+++ kmod-11-subs/testsuite/test-depmod.c	2013-06-12 06:11:35.644479927 +0800
++++ kmod-11-subs/testsuite/test-depmod.c	2013-06-14 11:27:55.558704621 +0800
 @@ -60,5 +60,21 @@
  	NULL,
  };
  
 -// TESTSUITE_MAIN.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2562,7 +2562,7 @@ diff -Nur kmod-11/testsuite/test-depmod.c kmod-11-subs/testsuite/test-depmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
++ * @brief  这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
 + * 基本的实现原理是通过宏定义，调用了如下函数
 + *	- test_init()
 + *	- test_find()
@@ -2572,14 +2572,14 @@ diff -Nur kmod-11/testsuite/test-depmod.c kmod-11-subs/testsuite/test-depmod.c
  TESTSUITE_MAIN(tests);
 diff -Nur kmod-11/testsuite/test-init.c kmod-11-subs/testsuite/test-init.c
 --- kmod-11/testsuite/test-init.c	2013-05-30 17:34:03.277852621 +0800
-+++ kmod-11-subs/testsuite/test-init.c	2013-06-12 06:11:35.812479929 +0800
++++ kmod-11-subs/testsuite/test-init.c	2013-06-14 11:27:55.738704622 +0800
 @@ -26,7 +26,21 @@
  
  #include "testsuite.h"
  
 -// test_initlib.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2588,7 +2588,7 @@ diff -Nur kmod-11/testsuite/test-init.c kmod-11-subs/testsuite/test-init.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 测试 initlib 模块功能 
++ * @brief  测试 initlib 模块功能 
 + * 其中用到了如下 libkmod 函数
 + *	- kmod_new()
 + *	- kmod_unref()
@@ -2602,7 +2602,7 @@ diff -Nur kmod-11/testsuite/test-init.c kmod-11-subs/testsuite/test-init.c
  
 -// test_insert.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2611,7 +2611,7 @@ diff -Nur kmod-11/testsuite/test-init.c kmod-11-subs/testsuite/test-init.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 测试 insert 模块功能 
++ * @brief  测试 insert 模块功能 
 + * 其中用到了如下 libkmod 函数
 + *	- kmod_new()
 + *	- kmod_module_new_from_path()
@@ -2627,7 +2627,7 @@ diff -Nur kmod-11/testsuite/test-init.c kmod-11-subs/testsuite/test-init.c
  
 -// test_remove.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2636,7 +2636,7 @@ diff -Nur kmod-11/testsuite/test-init.c kmod-11-subs/testsuite/test-init.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 测试 remove 模块功能 
++ * @brief  测试 remove 模块功能 
 + * 其中用到了如下 libkmod 函数
 + *	- kmod_new()
 + *	- kmod_module_new_from_name()
@@ -2652,7 +2652,7 @@ diff -Nur kmod-11/testsuite/test-init.c kmod-11-subs/testsuite/test-init.c
  
 -// TESTSUITE_MAIN.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2661,7 +2661,7 @@ diff -Nur kmod-11/testsuite/test-init.c kmod-11-subs/testsuite/test-init.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
++ * @brief  这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
 + * 基本的实现原理是通过宏定义，调用了如下函数
 + *	- test_init()
 + *	- test_find()
@@ -2671,14 +2671,14 @@ diff -Nur kmod-11/testsuite/test-init.c kmod-11-subs/testsuite/test-init.c
  TESTSUITE_MAIN(tests);
 diff -Nur kmod-11/testsuite/test-loaded.c kmod-11-subs/testsuite/test-loaded.c
 --- kmod-11/testsuite/test-loaded.c	2013-05-30 17:35:40.785853421 +0800
-+++ kmod-11-subs/testsuite/test-loaded.c	2013-06-12 06:11:35.928479930 +0800
++++ kmod-11-subs/testsuite/test-loaded.c	2013-06-14 11:27:55.862704623 +0800
 @@ -27,7 +27,30 @@
  
  #include "testsuite.h"
  
 -// loaded_1.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2687,7 +2687,7 @@ diff -Nur kmod-11/testsuite/test-loaded.c kmod-11-subs/testsuite/test-loaded.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 测试 list 模块功能 
++ * @brief  测试 list 模块功能 
 + * 其中用到了如下 libkmod 函数
 + *	- kmod_new()
 + *	- kmod_module_new_from_loaded()
@@ -2710,7 +2710,7 @@ diff -Nur kmod-11/testsuite/test-loaded.c kmod-11-subs/testsuite/test-loaded.c
  
 -// TESTSUITE_MAIN.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2719,7 +2719,7 @@ diff -Nur kmod-11/testsuite/test-loaded.c kmod-11-subs/testsuite/test-loaded.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
++ * @brief  这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
 + * 基本的实现原理是通过宏定义，调用了如下函数
 + *	- test_init()
 + *	- test_find()
@@ -2729,14 +2729,14 @@ diff -Nur kmod-11/testsuite/test-loaded.c kmod-11-subs/testsuite/test-loaded.c
  TESTSUITE_MAIN(tests);
 diff -Nur kmod-11/testsuite/test-modinfo.c kmod-11-subs/testsuite/test-modinfo.c
 --- kmod-11/testsuite/test-modinfo.c	2013-05-30 18:43:58.833886908 +0800
-+++ kmod-11-subs/testsuite/test-modinfo.c	2013-06-12 06:11:36.008479930 +0800
++++ kmod-11-subs/testsuite/test-modinfo.c	2013-06-14 11:27:55.942704624 +0800
 @@ -53,5 +53,21 @@
  	NULL,
  };
  
 -// TESTSUITE_MAIN.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2745,7 +2745,7 @@ diff -Nur kmod-11/testsuite/test-modinfo.c kmod-11-subs/testsuite/test-modinfo.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
++ * @brief  这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
 + * 基本的实现原理是通过宏定义，调用了如下函数
 + *	- test_init()
 + *	- test_find()
@@ -2755,14 +2755,14 @@ diff -Nur kmod-11/testsuite/test-modinfo.c kmod-11-subs/testsuite/test-modinfo.c
  TESTSUITE_MAIN(tests);
 diff -Nur kmod-11/testsuite/test-modprobe.c kmod-11-subs/testsuite/test-modprobe.c
 --- kmod-11/testsuite/test-modprobe.c	2013-05-31 21:40:19.830316058 +0800
-+++ kmod-11-subs/testsuite/test-modprobe.c	2013-06-12 06:11:36.092479932 +0800
++++ kmod-11-subs/testsuite/test-modprobe.c	2013-06-14 11:27:56.034704625 +0800
 @@ -143,5 +143,21 @@
  	NULL,
  };
  
 -// TESTSUITE_MAIN.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2771,7 +2771,7 @@ diff -Nur kmod-11/testsuite/test-modprobe.c kmod-11-subs/testsuite/test-modprobe
 + *
 + * @note 注释详细内容:
 + *
-+ * 这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
++ * @brief  这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
 + * 基本的实现原理是通过宏定义，调用了如下函数
 + *	- test_init()
 + *	- test_find()
@@ -2781,14 +2781,14 @@ diff -Nur kmod-11/testsuite/test-modprobe.c kmod-11-subs/testsuite/test-modprobe
  TESTSUITE_MAIN(tests);
 diff -Nur kmod-11/testsuite/test-new-module.c kmod-11-subs/testsuite/test-new-module.c
 --- kmod-11/testsuite/test-new-module.c	2013-05-30 15:40:01.896852853 +0800
-+++ kmod-11-subs/testsuite/test-new-module.c	2013-06-12 06:11:36.240479933 +0800
++++ kmod-11-subs/testsuite/test-new-module.c	2013-06-14 11:27:56.178704627 +0800
 @@ -39,7 +39,20 @@
  
  #include "testsuite.h"
  
 -// from_name.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2797,7 +2797,7 @@ diff -Nur kmod-11/testsuite/test-new-module.c kmod-11-subs/testsuite/test-new-mo
 + *
 + * @note 注释详细内容:
 + *
-+ * 通过名字新建一个模块
++ * @brief  通过名字新建一个模块
 + * 成功则返回 EXIT_SUCCESS
 + * 失败则返回 EXIT_FAILURE
 + */
@@ -2810,7 +2810,7 @@ diff -Nur kmod-11/testsuite/test-new-module.c kmod-11-subs/testsuite/test-new-mo
  
 -// from_alias.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2819,7 +2819,7 @@ diff -Nur kmod-11/testsuite/test-new-module.c kmod-11-subs/testsuite/test-new-mo
 + *
 + * @note 注释详细内容:
 + *
-+ * 通过alias新建一个模块
++ * @brief  通过alias新建一个模块
 + * 成功则返回 EXIT_SUCCESS
 + * 失败则返回 EXIT_FAILURE
 + */
@@ -2832,7 +2832,7 @@ diff -Nur kmod-11/testsuite/test-new-module.c kmod-11-subs/testsuite/test-new-mo
  
 -// TESTSUITE_MAIN.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2841,7 +2841,7 @@ diff -Nur kmod-11/testsuite/test-new-module.c kmod-11-subs/testsuite/test-new-mo
 + *
 + * @note 注释详细内容:
 + *
-+ * 这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
++ * @brief  这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
 + * 基本的实现原理是通过宏定义，调用了如下函数
 + *	- test_init()
 + *	- test_find()
@@ -2851,14 +2851,14 @@ diff -Nur kmod-11/testsuite/test-new-module.c kmod-11-subs/testsuite/test-new-mo
  TESTSUITE_MAIN(tests);
 diff -Nur kmod-11/testsuite/testsuite.c kmod-11-subs/testsuite/testsuite.c
 --- kmod-11/testsuite/testsuite.c	2013-05-30 17:28:38.781849972 +0800
-+++ kmod-11-subs/testsuite/testsuite.c	2013-06-12 06:11:36.328479933 +0800
++++ kmod-11-subs/testsuite/testsuite.c	2013-06-14 11:27:56.282704627 +0800
 @@ -640,7 +640,21 @@
  	return r;
  }
  
 -// test_run.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2867,7 +2867,7 @@ diff -Nur kmod-11/testsuite/testsuite.c kmod-11-subs/testsuite/testsuite.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 测试运行
++ * @brief  测试运行
 + * 通过 pipe 创建管道，通过 fork 创建子进程，
 + * 父进程通过 test_run_parent() 
 + * 子进程通过 test_run_child() 
@@ -2877,14 +2877,14 @@ diff -Nur kmod-11/testsuite/testsuite.c kmod-11-subs/testsuite/testsuite.c
  	pid_t pid;
 diff -Nur kmod-11/testsuite/test-testsuite.c kmod-11-subs/testsuite/test-testsuite.c
 --- kmod-11/testsuite/test-testsuite.c	2013-05-30 15:25:07.996845547 +0800
-+++ kmod-11-subs/testsuite/test-testsuite.c	2013-06-12 06:11:36.416479934 +0800
++++ kmod-11-subs/testsuite/test-testsuite.c	2013-06-14 11:27:56.386704627 +0800
 @@ -167,5 +167,21 @@
  	NULL,
  };
  
 -// TESTSUITE_MAIN.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2893,7 +2893,7 @@ diff -Nur kmod-11/testsuite/test-testsuite.c kmod-11-subs/testsuite/test-testsui
 + *
 + * @note 注释详细内容:
 + *
-+ * 这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
++ * @brief  这个宏解决了所有 testsuite 里的文件所需要的 main 函数 
 + * 基本的实现原理是通过宏定义，调用了如下函数
 + *	- test_init()
 + *	- test_find()
@@ -2903,14 +2903,14 @@ diff -Nur kmod-11/testsuite/test-testsuite.c kmod-11-subs/testsuite/test-testsui
  TESTSUITE_MAIN(tests);
 diff -Nur kmod-11/testsuite/uname.c kmod-11-subs/testsuite/uname.c
 --- kmod-11/testsuite/uname.c	2013-06-04 07:55:38.826336157 +0800
-+++ kmod-11-subs/testsuite/uname.c	2013-06-12 06:11:36.512479934 +0800
++++ kmod-11-subs/testsuite/uname.c	2013-06-14 11:27:56.478704628 +0800
 @@ -25,7 +25,21 @@
  
  #include "testsuite.h"
  
 -// uname.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2919,7 +2919,7 @@ diff -Nur kmod-11/testsuite/uname.c kmod-11-subs/testsuite/uname.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 自行设计实现的 uname 函数，标准c库中的函数 
++ * @brief  自行设计实现的 uname 函数，标准c库中的函数 
 + * 通过调用 dlopen, dlsym 动态库接口函数
 + * 获得 libc.so.6 中的 uname 函数入口地址
 + * 调用其中的 uname() 函数, 完成相关数据 S_TC_UNAME 的赋值
@@ -2928,15 +2928,15 @@ diff -Nur kmod-11/testsuite/uname.c kmod-11-subs/testsuite/uname.c
  {
  	static void *nextlib = NULL;
 diff -Nur kmod-11/tools/depmod.c kmod-11-subs/tools/depmod.c
---- kmod-11/tools/depmod.c	2013-05-29 17:22:55.973317396 +0800
-+++ kmod-11-subs/tools/depmod.c	2013-06-12 06:11:36.632479935 +0800
-@@ -2722,7 +2722,21 @@
+--- kmod-11/tools/depmod.c	2013-06-13 22:38:07.842866804 +0800
++++ kmod-11-subs/tools/depmod.c	2013-06-14 11:27:56.638704630 +0800
+@@ -2725,7 +2725,21 @@
  	return EXIT_FAILURE;
  }
  
 -// kmod_cmd_compat_xxx.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2945,7 +2945,7 @@ diff -Nur kmod-11/tools/depmod.c kmod-11-subs/tools/depmod.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
++ * @brief  用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
 + * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
 + * 这个结构体中还有一个 cmd 成员，是一个函数指针，
 + * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx
@@ -2955,14 +2955,14 @@ diff -Nur kmod-11/tools/depmod.c kmod-11-subs/tools/depmod.c
  	.cmd = do_depmod,
 diff -Nur kmod-11/tools/insmod.c kmod-11-subs/tools/insmod.c
 --- kmod-11/tools/insmod.c	2013-06-09 19:52:07.138386104 +0800
-+++ kmod-11-subs/tools/insmod.c	2013-06-12 06:11:36.828479937 +0800
++++ kmod-11-subs/tools/insmod.c	2013-06-14 11:27:56.834704631 +0800
 @@ -33,7 +33,18 @@
  	{NULL, 0, 0, 0}
  };
  
 -// help.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2971,7 +2971,7 @@ diff -Nur kmod-11/tools/insmod.c kmod-11-subs/tools/insmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 负责打印该命令的帮助提示信息，通过 -h 参数可以显示
++ * @brief  @brief 负责打印该命令的帮助提示信息，通过 -h 参数可以显示
 + */
  static void help(void)
  {
@@ -2982,7 +2982,7 @@ diff -Nur kmod-11/tools/insmod.c kmod-11-subs/tools/insmod.c
  
 -// mod_strerror.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -2991,7 +2991,7 @@ diff -Nur kmod-11/tools/insmod.c kmod-11-subs/tools/insmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 根据传入 err 的值，打印出错信息
++ * @brief  根据传入 err 的值，打印出错信息
 + */
  static const char *mod_strerror(int err)
  {
@@ -3002,7 +3002,7 @@ diff -Nur kmod-11/tools/insmod.c kmod-11-subs/tools/insmod.c
  
 -// do_insmod.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3011,7 +3011,7 @@ diff -Nur kmod-11/tools/insmod.c kmod-11-subs/tools/insmod.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * insmod 函数的真正实现，通过 getopt_long 分析传入参数，
++ * @brief  insmod 函数的真正实现，通过 getopt_long 分析传入参数，
 + * 通过调用 libkmod 的接口，实现 insmod 命令
 + * 主要使用的接口包括
 + * - kmod_new()
@@ -3029,7 +3029,7 @@ diff -Nur kmod-11/tools/insmod.c kmod-11-subs/tools/insmod.c
  
 -// kmod_cmd_compat_xxx.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3038,7 +3038,7 @@ diff -Nur kmod-11/tools/insmod.c kmod-11-subs/tools/insmod.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
++ * @brief  用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
 + * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
 + * 这个结构体中还有一个 cmd 成员，是一个函数指针，
 + * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx
@@ -3048,14 +3048,14 @@ diff -Nur kmod-11/tools/insmod.c kmod-11-subs/tools/insmod.c
  	.cmd = do_insmod,
 diff -Nur kmod-11/tools/kmod.c kmod-11-subs/tools/kmod.c
 --- kmod-11/tools/kmod.c	2013-05-30 11:34:07.819073601 +0800
-+++ kmod-11-subs/tools/kmod.c	2013-06-12 06:11:37.344479941 +0800
++++ kmod-11-subs/tools/kmod.c	2013-06-14 11:27:57.134704634 +0800
 @@ -35,13 +35,35 @@
  
  static const struct kmod_cmd kmod_cmd_help;
  
 -// kmod_cmds.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3064,7 +3064,7 @@ diff -Nur kmod-11/tools/kmod.c kmod-11-subs/tools/kmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * kmod 命令的主程序
++ * @brief  kmod 命令的主程序
 + */
  static const struct kmod_cmd *kmod_cmds[] = {
  	&kmod_cmd_help,
@@ -3073,7 +3073,7 @@ diff -Nur kmod-11/tools/kmod.c kmod-11-subs/tools/kmod.c
  
 -// kmod_compat_cmds.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3082,7 +3082,7 @@ diff -Nur kmod-11/tools/kmod.c kmod-11-subs/tools/kmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * kmod 支持的compat命令 lsmod/rmmod/insmod/modinfo/modprobe/depmod
++ * @brief  kmod 支持的compat命令 lsmod/rmmod/insmod/modinfo/modprobe/depmod
 + */
  static const struct kmod_cmd *kmod_compat_cmds[] = {
  	&kmod_cmd_compat_lsmod,
@@ -3093,7 +3093,7 @@ diff -Nur kmod-11/tools/kmod.c kmod-11-subs/tools/kmod.c
  
 -// kmod_help.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3102,7 +3102,7 @@ diff -Nur kmod-11/tools/kmod.c kmod-11-subs/tools/kmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * kmod 的帮助提示，运行 kmod help 时显示信息
++ * @brief  kmod 的帮助提示，运行 kmod help 时显示信息
 + */
  static int kmod_help(int argc, char *argv[])
  {
@@ -3113,7 +3113,7 @@ diff -Nur kmod-11/tools/kmod.c kmod-11-subs/tools/kmod.c
  
 -// kmod_cmd_help.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3122,7 +3122,7 @@ diff -Nur kmod-11/tools/kmod.c kmod-11-subs/tools/kmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * kmod help 帮助命令的数据结构
++ * @brief  kmod help 帮助命令的数据结构
 + */
  static const struct kmod_cmd kmod_cmd_help = {
  	.name = "help",
@@ -3132,7 +3132,7 @@ diff -Nur kmod-11/tools/kmod.c kmod-11-subs/tools/kmod.c
  
 -// handle_kmod_commands.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3141,7 +3141,7 @@ diff -Nur kmod-11/tools/kmod.c kmod-11-subs/tools/kmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 解释 kmod -h -V -? 等命令参数
++ * @brief  解释 kmod -h -V -? 等命令参数
 + */
  static int handle_kmod_commands(int argc, char *argv[])
  {
@@ -3152,7 +3152,7 @@ diff -Nur kmod-11/tools/kmod.c kmod-11-subs/tools/kmod.c
  
 -// handle_kmod_compat_commands.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3161,7 +3161,7 @@ diff -Nur kmod-11/tools/kmod.c kmod-11-subs/tools/kmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 解释 kmod compat 命令
++ * @brief  解释 kmod compat 命令
 + */
  static int handle_kmod_compat_commands(int argc, char *argv[])
  {
@@ -3172,7 +3172,7 @@ diff -Nur kmod-11/tools/kmod.c kmod-11-subs/tools/kmod.c
  
 -// kmod_main.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3181,21 +3181,21 @@ diff -Nur kmod-11/tools/kmod.c kmod-11-subs/tools/kmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * kmod 命令的主程序
++ * @brief  kmod 命令的主程序
 + */
  int main(int argc, char *argv[])
  {
  	int err;
 diff -Nur kmod-11/tools/log.c kmod-11-subs/tools/log.c
 --- kmod-11/tools/log.c	2013-06-04 07:41:06.454345393 +0800
-+++ kmod-11-subs/tools/log.c	2013-06-12 06:11:37.576479943 +0800
++++ kmod-11-subs/tools/log.c	2013-06-14 11:27:57.410704636 +0800
 @@ -28,7 +28,36 @@
  static bool log_use_syslog;
  static int log_priority = LOG_ERR;
  
 -// prio_to_str.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3204,7 +3204,7 @@ diff -Nur kmod-11/tools/log.c kmod-11-subs/tools/log.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 将优先级 prio 整型数转换成相应的字符串 
++ * @brief  将优先级 prio 整型数转换成相应的字符串 
 + * 优先级的分类包括
 + *	- FATAL 最高级别 
 + *	- ERROR
@@ -3233,7 +3233,7 @@ diff -Nur kmod-11/tools/log.c kmod-11-subs/tools/log.c
  
 -// log_kmod.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3242,7 +3242,7 @@ diff -Nur kmod-11/tools/log.c kmod-11-subs/tools/log.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 核心日志记录函数，调用了系统的 syslog() 函数，增加了优先级信息打印
++ * @brief  核心日志记录函数，调用了系统的 syslog() 函数，增加了优先级信息打印
 + */
  static void log_kmod(void *data, int priority, const char *file, int line,
  		     const char *fn, const char *format, va_list args)
@@ -3253,7 +3253,7 @@ diff -Nur kmod-11/tools/log.c kmod-11-subs/tools/log.c
  
 -// log_open.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3262,7 +3262,7 @@ diff -Nur kmod-11/tools/log.c kmod-11-subs/tools/log.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 打开日志文件, 调用了系统的 openlog()
++ * @brief  打开日志文件, 调用了系统的 openlog()
 + */
  void log_open(bool use_syslog)
  {
@@ -3273,7 +3273,7 @@ diff -Nur kmod-11/tools/log.c kmod-11-subs/tools/log.c
  
 -// log_close.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3282,7 +3282,7 @@ diff -Nur kmod-11/tools/log.c kmod-11-subs/tools/log.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 关闭日志文件，调用 closelog()
++ * @brief  关闭日志文件，调用 closelog()
 + */
  void log_close(void)
  {
@@ -3292,7 +3292,7 @@ diff -Nur kmod-11/tools/log.c kmod-11-subs/tools/log.c
  
 -// log_printf.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3301,21 +3301,21 @@ diff -Nur kmod-11/tools/log.c kmod-11-subs/tools/log.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 带有优先级 prio 的日志打印函数，可以设定日志打印的优先级
++ * @brief  带有优先级 prio 的日志打印函数，可以设定日志打印的优先级
 + */
  void log_printf(int prio, const char *fmt, ...)
  {
  	const char *prioname;
 diff -Nur kmod-11/tools/lsmod.c kmod-11-subs/tools/lsmod.c
 --- kmod-11/tools/lsmod.c	2013-05-29 17:22:34.289317220 +0800
-+++ kmod-11-subs/tools/lsmod.c	2013-06-12 06:11:37.688479944 +0800
++++ kmod-11-subs/tools/lsmod.c	2013-06-14 11:27:57.522704637 +0800
 @@ -92,7 +92,21 @@
  	.help = "compat lsmod command",
  };
  
 -// kmod_cmd_compat_xxx.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3324,7 +3324,7 @@ diff -Nur kmod-11/tools/lsmod.c kmod-11-subs/tools/lsmod.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
++ * @brief  用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
 + * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
 + * 这个结构体中还有一个 cmd 成员，是一个函数指针，
 + * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx
@@ -3333,15 +3333,15 @@ diff -Nur kmod-11/tools/lsmod.c kmod-11-subs/tools/lsmod.c
  	.name = "list",
  	.cmd = do_lsmod,
 diff -Nur kmod-11/tools/modinfo.c kmod-11-subs/tools/modinfo.c
---- kmod-11/tools/modinfo.c	2013-05-29 17:53:26.861332360 +0800
-+++ kmod-11-subs/tools/modinfo.c	2013-06-12 06:11:37.820479946 +0800
-@@ -362,7 +362,27 @@
+--- kmod-11/tools/modinfo.c	2013-06-14 09:02:12.390778508 +0800
++++ kmod-11-subs/tools/modinfo.c	2013-06-14 11:27:57.666704638 +0800
+@@ -365,7 +365,27 @@
  	return false;
  }
  
 -// do_modinfo.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3350,7 +3350,7 @@ diff -Nur kmod-11/tools/modinfo.c kmod-11-subs/tools/modinfo.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * modinfo 函数的真正实现，通过 getopt_long 分析传入参数，
++ * @brief  modinfo 函数的真正实现，通过 getopt_long 分析传入参数，
 + * 通过调用 libkmod 的接口，实现 modinfo 命令
 + * 主要使用的接口包括
 + * - kmod_new()
@@ -3364,13 +3364,13 @@ diff -Nur kmod-11/tools/modinfo.c kmod-11-subs/tools/modinfo.c
  static int do_modinfo(int argc, char *argv[])
  {
  	struct kmod_ctx *ctx;
-@@ -465,7 +485,21 @@
+@@ -468,7 +488,21 @@
  	return err >= 0 ? EXIT_SUCCESS : EXIT_FAILURE;
  }
  
 -// kmod_cmd_compat_xxx.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3379,7 +3379,7 @@ diff -Nur kmod-11/tools/modinfo.c kmod-11-subs/tools/modinfo.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
++ * @brief  用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
 + * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
 + * 这个结构体中还有一个 cmd 成员，是一个函数指针，
 + * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx
@@ -3389,14 +3389,14 @@ diff -Nur kmod-11/tools/modinfo.c kmod-11-subs/tools/modinfo.c
  	.cmd = do_modinfo,
 diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
 --- kmod-11/tools/modprobe.c	2013-06-11 17:19:50.498234206 +0800
-+++ kmod-11-subs/tools/modprobe.c	2013-06-12 06:11:38.140479948 +0800
++++ kmod-11-subs/tools/modprobe.c	2013-06-14 11:27:57.994704641 +0800
 @@ -285,7 +285,27 @@
  	return ret;
  }
  
 -// rmmod_do_remove_module.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3405,7 +3405,7 @@ diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 真正能够完成一个模块的卸载操作的函数，也是一个内部的static函数，
++ * @brief  真正能够完成一个模块的卸载操作的函数，也是一个内部的static函数，
 + * 此函数是被 rmmod_do_module() 所调用的，因此仅在 modprobe.c 中使用
 + * 其中用到了 libkmod 的一些接口，如下
 + *	- kmod_module_get_name()
@@ -3425,7 +3425,7 @@ diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
  
 -// rmmod_do_module.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3434,7 +3434,7 @@ diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 真正能够完成一个模块的卸载操作的函数，也是一个内部的static函数，
++ * @brief  真正能够完成一个模块的卸载操作的函数，也是一个内部的static函数，
 + * 因此仅在 modprobe.c 中使用
 + * 其中用到了 libkmod 的一些接口，如下
 + *	- kmod_module_get_module()
@@ -3459,7 +3459,7 @@ diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
  
 -// rmmod.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3468,7 +3468,7 @@ diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 完成一个模块的卸载操作，是一个内部的static函数，
++ * @brief  完成一个模块的卸载操作，是一个内部的static函数，
 + * 因此仅在 modprobe.c 中使用
 + * 其中用到了 libkmod 的一些接口，如下
 + *	- kmod_module_new_from_lookup()
@@ -3488,7 +3488,7 @@ diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
  
 -// rmmod_all.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3497,7 +3497,7 @@ diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 根据传入的 argv[] 参数，依次卸载 nargs 个模块
++ * @brief  根据传入的 argv[] 参数，依次卸载 nargs 个模块
 + */ 
  static int rmmod_all(struct kmod_ctx *ctx, char **args, int nargs)
  {
@@ -3508,7 +3508,7 @@ diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
  
 -// insmod.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3517,7 +3517,7 @@ diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 完成一个模块的插入操作，是一个内部的static函数，
++ * @brief  完成一个模块的插入操作，是一个内部的static函数，
 + * 因此仅在 modprobe.c 中使用
 + * 其中用到了 libkmod 的一些接口，如下
 + *	- kmod_module_new_from_lookup()
@@ -3536,7 +3536,7 @@ diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
  
 -// insmod_all.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3545,7 +3545,7 @@ diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 根据传入的 argv[] 参数，依次插入 nargs 个模块
++ * @brief  根据传入的 argv[] 参数，依次插入 nargs 个模块
 + */ 
  static int insmod_all(struct kmod_ctx *ctx, char **args, int nargs)
  {
@@ -3556,7 +3556,7 @@ diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
  
 -// do_modprobe.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3565,7 +3565,7 @@ diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * modprobe 函数的真正实现，通过 getopt_long 分析传入参数，
++ * @brief  modprobe 函数的真正实现，通过 getopt_long 分析传入参数，
 + * 通过调用 libkmod 的接口，实现 modprobe 命令
 + * 主要使用的接口包括
 + * - log_open()
@@ -3590,7 +3590,7 @@ diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
  
 -// kmod_cmd_compat_xxx.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3599,7 +3599,7 @@ diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
++ * @brief  用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
 + * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
 + * 这个结构体中还有一个 cmd 成员，是一个函数指针，
 + * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx
@@ -3609,14 +3609,14 @@ diff -Nur kmod-11/tools/modprobe.c kmod-11-subs/tools/modprobe.c
  	.cmd = do_modprobe,
 diff -Nur kmod-11/tools/rmmod.c kmod-11-subs/tools/rmmod.c
 --- kmod-11/tools/rmmod.c	2013-06-11 15:35:51.938183226 +0800
-+++ kmod-11-subs/tools/rmmod.c	2013-06-12 06:11:38.336479949 +0800
++++ kmod-11-subs/tools/rmmod.c	2013-06-14 11:27:58.194704642 +0800
 @@ -45,7 +45,18 @@
  	{NULL, 0, 0, 0}
  };
  
 -// help.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3625,7 +3625,7 @@ diff -Nur kmod-11/tools/rmmod.c kmod-11-subs/tools/rmmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 负责打印该命令的帮助提示信息，通过 -h 参数可以显示
++ * @brief  @brief 负责打印该命令的帮助提示信息，通过 -h 参数可以显示
 + */
  static void help(void)
  {
@@ -3636,7 +3636,7 @@ diff -Nur kmod-11/tools/rmmod.c kmod-11-subs/tools/rmmod.c
  
 -// check_module_inuse.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3645,7 +3645,7 @@ diff -Nur kmod-11/tools/rmmod.c kmod-11-subs/tools/rmmod.c
 + *
 + * @note 注释详细内容:
 + *
-+ * 检查模块是否正在使用，通过引用计数来帮助判断是否真正需要卸载模块 
++ * @brief  检查模块是否正在使用，通过引用计数来帮助判断是否真正需要卸载模块 
 + * 主要用到的函数接口
 + * - kmod_module_get_initstate()
 + * - kmod_module_get_name()
@@ -3667,7 +3667,7 @@ diff -Nur kmod-11/tools/rmmod.c kmod-11-subs/tools/rmmod.c
  
 -// do_rmmod.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3676,7 +3676,7 @@ diff -Nur kmod-11/tools/rmmod.c kmod-11-subs/tools/rmmod.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * rmmod 函数的真正实现，通过 getopt_long 分析传入参数，
++ * @brief  rmmod 函数的真正实现，通过 getopt_long 分析传入参数，
 + * 通过调用 libkmod 的接口，实现 rmmod 命令
 + * 主要使用的接口包括
 + * - log_open()
@@ -3698,7 +3698,7 @@ diff -Nur kmod-11/tools/rmmod.c kmod-11-subs/tools/rmmod.c
  
 -// kmod_cmd_compat_xxx.cmt
 +/**
-+ * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
++ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
 + *（课题编号：2012ZX01039-004）”的资助。
 +
 + * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -3707,7 +3707,7 @@ diff -Nur kmod-11/tools/rmmod.c kmod-11-subs/tools/rmmod.c
 + *
 + * @note 注释详细内容:
 + * 
-+ * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
++ * @brief  用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
 + * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
 + * 这个结构体中还有一个 cmd 成员，是一个函数指针，
 + * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx

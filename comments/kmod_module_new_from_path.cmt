@@ -1,5 +1,5 @@
 /*
- * kmod_module_new_from_path - 创建 kmod module
+ * @brief  kmod_module_new_from_path - 创建 kmod module
  *
  * 主要功能： 
  *	创建 kmod_module 结构体

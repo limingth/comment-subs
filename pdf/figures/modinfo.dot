@@ -1,0 +1,43 @@
+digraph G {
+
+	subgraph modinfo_do
+	{
+		"modinfo_do()" [shape=box style="filled" gradientangle=90];
+
+		"modinfo_do()"-> process_parm;
+
+		"modinfo_do()" -> kmod_module ;
+		kmod_module -> kmod_module_get_path;
+		kmod_module -> kmod_module_get_info;
+		kmod_module -> kmod_module_get_name;
+
+		kmod_module -> kmod_module_info_get_key;
+		kmod_module -> kmod_module_info_get_value;
+		kmod_module -> kmod_module_info_free_list;
+
+		node [shape=box style="filled" gradientangle=90]
+			modinfo_do;
+
+	}
+	
+	size="8, 8";  
+
+	modinfo -> do_modinfo;
+
+	do_modinfo -> is_module_filename;
+	do_modinfo -> modinfo_path_do;
+	do_modinfo -> modinfo_alias_do;
+
+	modinfo_path_do -> kmod_module_new_from_path;
+	modinfo_path_do -> modinfo_do;
+	modinfo_path_do -> kmod_module_unref;
+
+	modinfo_alias_do -> kmod_module_new_from_lookup;
+	modinfo_alias_do -> kmod_module_apply_filter;
+	modinfo_alias_do -> kmod_module_unref_list;
+	modinfo_alias_do -> kmod_list_foreach;
+	modinfo_alias_do -> kmod_module_get_module;
+	modinfo_alias_do -> modinfo_do;
+	modinfo_alias_do -> kmod_module_unref;
+
+}

@@ -1,5 +1,5 @@
 /*
- * kmod_module_insert_module - 插入 kmod module 
+ * @brief  kmod_module_insert_module - 插入 kmod module 
  *
  * 主要功能： 
  *	打开 elf 格式的模块文件，插入 kmod_module 结构体

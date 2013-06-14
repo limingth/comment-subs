@@ -1,0 +1,36 @@
+digraph G {
+
+	subgraph kmod_module_4_insmod 
+	{
+	"insmod()" [shape=box style="filled" gradientangle=90];
+
+	"insmod()" -> kmod_module ;
+
+	kmod_module -> kmod_module_new_from_lookup;
+	kmod_module -> kmod_module_get_module;
+	kmod_module -> kmod_module_probe_insert_module;
+	kmod_module -> kmod_module_unref;
+	kmod_module -> kmod_module_unref_list;
+
+	node [shape=box style="filled" gradientangle=90]
+			insmod;
+	}
+
+	size="8, 8";  
+
+	modprobe -> do_modprobe;
+
+	do_modprobe -> log;
+	log -> log_open;
+	log -> log_close;
+
+	do_modprobe -> kmod_ctx;
+	kmod_ctx -> kmod_new;
+	kmod_ctx -> kmod_load_resources;
+	kmod_ctx -> kmod_unref;
+
+	do_modprobe -> insmod_all;
+	do_modprobe -> insmod;
+	insmod_all -> insmod;
+
+} 

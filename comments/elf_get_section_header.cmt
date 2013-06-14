@@ -1,3 +1,3 @@
 /*
- * 获得 elf section header 指针, 需要调用 elf_get_mem()
+ * @brief  获得 elf section header 指针, 需要调用 elf_get_mem()
  */

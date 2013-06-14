@@ -286,7 +286,7 @@ end:
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -295,7 +295,7 @@ end:
  *
  * @note 注释详细内容:
  * 
- * 真正能够完成一个模块的卸载操作的函数，也是一个内部的static函数，
+ * @brief  真正能够完成一个模块的卸载操作的函数，也是一个内部的static函数，
  * 此函数是被 rmmod_do_module() 所调用的，因此仅在 modprobe.c 中使用
  * 其中用到了 libkmod 的一些接口，如下
  *	- kmod_module_get_name()
@@ -361,7 +361,7 @@ static int rmmod_do_deps_list(struct kmod_list *list, bool stop_on_errors)
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -370,7 +370,7 @@ static int rmmod_do_deps_list(struct kmod_list *list, bool stop_on_errors)
  *
  * @note 注释详细内容:
  * 
- * 真正能够完成一个模块的卸载操作的函数，也是一个内部的static函数，
+ * @brief  真正能够完成一个模块的卸载操作的函数，也是一个内部的static函数，
  * 因此仅在 modprobe.c 中使用
  * 其中用到了 libkmod 的一些接口，如下
  *	- kmod_module_get_module()
@@ -462,7 +462,7 @@ error:
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -471,7 +471,7 @@ error:
  *
  * @note 注释详细内容:
  * 
- * 完成一个模块的卸载操作，是一个内部的static函数，
+ * @brief  完成一个模块的卸载操作，是一个内部的static函数，
  * 因此仅在 modprobe.c 中使用
  * 其中用到了 libkmod 的一些接口，如下
  *	- kmod_module_new_from_lookup()
@@ -509,7 +509,7 @@ static int rmmod(struct kmod_ctx *ctx, const char *alias)
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -518,7 +518,7 @@ static int rmmod(struct kmod_ctx *ctx, const char *alias)
  *
  * @note 注释详细内容:
  *
- * 根据传入的 argv[] 参数，依次卸载 nargs 个模块
+ * @brief  根据传入的 argv[] 参数，依次卸载 nargs 个模块
  */ 
 static int rmmod_all(struct kmod_ctx *ctx, char **args, int nargs)
 {
@@ -582,7 +582,7 @@ static void print_action(struct kmod_module *m, bool install,
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -591,7 +591,7 @@ static void print_action(struct kmod_module *m, bool install,
  *
  * @note 注释详细内容:
  * 
- * 完成一个模块的插入操作，是一个内部的static函数，
+ * @brief  完成一个模块的插入操作，是一个内部的static函数，
  * 因此仅在 modprobe.c 中使用
  * 其中用到了 libkmod 的一些接口，如下
  *	- kmod_module_new_from_lookup()
@@ -677,7 +677,7 @@ static int insmod(struct kmod_ctx *ctx, const char *alias,
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -686,7 +686,7 @@ static int insmod(struct kmod_ctx *ctx, const char *alias,
  *
  * @note 注释详细内容:
  *
- * 根据传入的 argv[] 参数，依次插入 nargs 个模块
+ * @brief  根据传入的 argv[] 参数，依次插入 nargs 个模块
  */ 
 static int insmod_all(struct kmod_ctx *ctx, char **args, int nargs)
 {
@@ -848,7 +848,7 @@ static char **prepend_options_from_env(int *p_argc, char **orig_argv)
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -857,7 +857,7 @@ static char **prepend_options_from_env(int *p_argc, char **orig_argv)
  *
  * @note 注释详细内容:
  * 
- * modprobe 函数的真正实现，通过 getopt_long 分析传入参数，
+ * @brief  modprobe 函数的真正实现，通过 getopt_long 分析传入参数，
  * 通过调用 libkmod 的接口，实现 modprobe 命令
  * 主要使用的接口包括
  * - log_open()
@@ -1075,7 +1075,7 @@ done:
 }
 
 /**
- * @brief 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1084,7 +1084,7 @@ done:
  *
  * @note 注释详细内容:
  * 
- * 用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
+ * @brief  用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
  * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
  * 这个结构体中还有一个 cmd 成员，是一个函数指针，
  * 通过这个函数指针，可以调用到真正的命令实现函数 do_xxx
