@@ -71,7 +71,7 @@ static const char *default_config_paths[] = {
  * Opaque object representing the library context.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -102,7 +102,7 @@ struct kmod_ctx {
 };
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -131,7 +131,7 @@ void kmod_log(const struct kmod_ctx *ctx,
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -188,7 +188,7 @@ static void log_filep(void *data,
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -214,7 +214,7 @@ const char *kmod_get_dirname(const struct kmod_ctx *ctx)
  * Returns: stored userdata
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -240,7 +240,7 @@ KMOD_EXPORT void *kmod_get_userdata(const struct kmod_ctx *ctx)
  * Store custom @userdata in the library context.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -316,7 +316,7 @@ static char *get_kernel_release(const char *dirname)
  * Returns: a new kmod library context
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -399,7 +399,7 @@ fail:
  * Returns: the passed kmod library context
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -426,7 +426,7 @@ KMOD_EXPORT struct kmod_ctx *kmod_ref(struct kmod_ctx *ctx)
  * reaches zero, the resources of the context will be released.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -482,7 +482,7 @@ KMOD_EXPORT struct kmod_ctx *kmod_unref(struct kmod_ctx *ctx)
  * into the user's logging functionality.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -514,7 +514,7 @@ KMOD_EXPORT void kmod_set_log_fn(struct kmod_ctx *ctx,
  * Returns: the current logging priority
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -541,7 +541,7 @@ KMOD_EXPORT int kmod_get_log_priority(const struct kmod_ctx *ctx)
  * are logged.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -560,7 +560,7 @@ KMOD_EXPORT void kmod_set_log_priority(struct kmod_ctx *ctx, int priority)
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -584,7 +584,7 @@ struct kmod_module *kmod_pool_get_module(struct kmod_ctx *ctx,
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -604,7 +604,7 @@ void kmod_pool_add_module(struct kmod_ctx *ctx, struct kmod_module *mod,
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -961,7 +961,7 @@ static bool is_cache_invalid(const char *path, unsigned long long stamp)
  * KMOD_RESOURCES_MUST_RECREATE if @ctx must be re-created.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1019,7 +1019,7 @@ KMOD_EXPORT int kmod_validate_resources(struct kmod_ctx *ctx)
  * Returns: 0 on success or < 0 otherwise.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1081,7 +1081,7 @@ fail:
  * Returns: 0 on success or < 0 otherwise.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1123,7 +1123,7 @@ KMOD_EXPORT void kmod_unload_resources(struct kmod_ctx *ctx)
  * Returns: 0 on success or < 0 otherwise.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1174,7 +1174,7 @@ KMOD_EXPORT int kmod_dump_index(struct kmod_ctx *ctx, enum kmod_index type,
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位

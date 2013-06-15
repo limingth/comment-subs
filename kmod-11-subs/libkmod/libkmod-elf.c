@@ -52,7 +52,7 @@ static const enum kmod_elf_class native_endianess = KMOD_ELF_LSB;
 #endif
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -107,7 +107,7 @@ static inline void _elf_dbg(const struct kmod_elf *elf, const char *fname, unsig
 #endif
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -230,7 +230,7 @@ static inline int elf_set_uint(struct kmod_elf *elf, uint64_t offset, uint64_t s
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -253,7 +253,7 @@ static inline const void *elf_get_mem(const struct kmod_elf *elf, uint64_t offse
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -278,7 +278,7 @@ static inline const void *elf_get_section_header(const struct kmod_elf *elf, uin
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -332,7 +332,7 @@ static inline int elf_get_section_info(const struct kmod_elf *elf, uint16_t idx,
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -350,7 +350,7 @@ static const char *elf_get_strings_section(const struct kmod_elf *elf, uint64_t 
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -458,7 +458,7 @@ void kmod_elf_unref(struct kmod_elf *elf)
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -475,7 +475,7 @@ const void *kmod_elf_get_memory(const struct kmod_elf *elf)
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -518,7 +518,7 @@ int kmod_elf_get_section(const struct kmod_elf *elf, const char *section, const 
 
 /* array will be allocated with strings in a single malloc, just free *array */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -602,7 +602,7 @@ int kmod_elf_get_strings(const struct kmod_elf *elf, const char *section, char *
 
 /* array will be allocated with strings in a single malloc, just free *array */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -684,7 +684,7 @@ int kmod_elf_get_modversions(const struct kmod_elf *elf, struct kmod_modversion 
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -720,7 +720,7 @@ int kmod_elf_strip_section(struct kmod_elf *elf, const char *section)
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -795,7 +795,7 @@ int kmod_elf_strip_vermagic(struct kmod_elf *elf)
 
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -898,7 +898,7 @@ static inline uint8_t kmod_symbol_bind_from_elf(uint8_t elf_value)
 
 /* array will be allocated with strings in a single malloc, just free *array */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -1069,7 +1069,7 @@ static int kmod_elf_crc_find(const struct kmod_elf *elf, const void *versions, u
 
 /* array will be allocated with strings in a single malloc, just free *array */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位

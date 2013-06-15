@@ -51,7 +51,7 @@
  * Opaque object representing a module.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -127,7 +127,7 @@ static inline const char *path_join(const char *path, size_t prefixlen,
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -150,7 +150,7 @@ static inline bool module_is_inkernel(struct kmod_module *mod)
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -282,7 +282,7 @@ void kmod_module_set_builtin(struct kmod_module *mod, bool builtin)
  * @key is "name\alias" or "name" (in which case alias == NULL)
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -363,7 +363,7 @@ static int kmod_module_new(struct kmod_ctx *ctx, const char *key,
  * module name or if memory allocation failed.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -433,7 +433,7 @@ int kmod_module_new_from_alias(struct kmod_ctx *ctx, const char *alias,
  * it's not a valid file for a kmod_module or if memory allocation failed.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -531,7 +531,7 @@ KMOD_EXPORT int kmod_module_new_from_path(struct kmod_ctx *ctx,
  * returns the passed @mod with its refcount decremented.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -578,7 +578,7 @@ KMOD_EXPORT struct kmod_module *kmod_module_unref(struct kmod_module *mod)
  * Returns: the passed @module with its refcount incremented.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -702,7 +702,7 @@ fail:
  * returns the passed @mod with its refcount decremented.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -887,7 +887,7 @@ extern long delete_module(const char *name, unsigned int flags);
  * Returns: 0 on success or < 0 on failure.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -932,7 +932,7 @@ extern long init_module(const void *mem, unsigned long len, const char *args);
  * returns -EEXIST.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位

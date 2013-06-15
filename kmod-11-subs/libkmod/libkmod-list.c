@@ -28,7 +28,7 @@
  */
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -46,7 +46,7 @@ static inline struct list_node *list_node_init(struct list_node *node)
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -66,7 +66,7 @@ static inline struct list_node *list_node_next(const struct list_node *node)
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -86,7 +86,7 @@ static inline struct list_node *list_node_prev(const struct list_node *node)
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -112,7 +112,7 @@ static inline void list_node_append(struct list_node *list,
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -137,7 +137,7 @@ static inline struct list_node *list_node_remove(struct list_node *node)
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -165,7 +165,7 @@ static inline void list_node_insert_after(struct list_node *list,
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -193,7 +193,7 @@ static inline void list_node_insert_before(struct list_node *list,
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -226,7 +226,7 @@ static inline void list_node_append_list(struct list_node *list1,
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -252,7 +252,7 @@ struct kmod_list *kmod_list_append(struct kmod_list *list, const void *data)
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -284,7 +284,7 @@ struct kmod_list *kmod_list_insert_after(struct kmod_list *list,
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -312,7 +312,7 @@ struct kmod_list *kmod_list_insert_before(struct kmod_list *list,
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -339,7 +339,7 @@ struct kmod_list *kmod_list_append_list(struct kmod_list *list1,
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -365,7 +365,7 @@ struct kmod_list *kmod_list_prepend(struct kmod_list *list, const void *data)
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -395,7 +395,7 @@ struct kmod_list *kmod_list_remove(struct kmod_list *list)
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -436,7 +436,7 @@ struct kmod_list *kmod_list_remove_data(struct kmod_list *list,
  * condition)
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -475,7 +475,7 @@ struct kmod_list *kmod_list_remove_n_latest(struct kmod_list *list,
  * the list or the list is empty.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -513,7 +513,7 @@ KMOD_EXPORT struct kmod_list *kmod_list_prev(const struct kmod_list *list,
  * list is empty.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -550,7 +550,7 @@ KMOD_EXPORT struct kmod_list *kmod_list_next(const struct kmod_list *list,
  * Returns: last node at @list or NULL if the list is empty.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位

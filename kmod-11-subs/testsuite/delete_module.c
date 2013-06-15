@@ -98,7 +98,7 @@ static void parse_retcodes(struct mod *_modules, const char *s)
 }
 
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -147,7 +147,7 @@ TS_EXPORT long delete_module(const char *name, unsigned int flags);
  * behavior, set TESTSUITE_DELETE_MODULE_RETCODES env var.
  */
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
@@ -187,7 +187,7 @@ long delete_module(const char *modname, unsigned int flags)
 /* the test is going away anyway, but lets keep valgrind happy */
 void free_resources(void) __attribute__((destructor));
 /**
- * @brief  本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
 
  * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位

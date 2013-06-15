@@ -1433,30 +1433,529 @@ kmod\_module 两个核心子模块的接口，其中 kmod\_ctx 调用了 kmod\_c
 
 \subsection{2. 模块分析}
 
-\subsubsection{kmod\_ctx}
+整个 kmod
+项目的核心设计思想，是采用面向对象的编程模型，以C语言的结构体为数据结构的核心，将结构体作为对象来看待，围绕结构体来组织相应的函数接口。
+这些函数接口，大多具有较强的可读性，从它们的命名中，就能看出是属于哪个对象的什么方法。因为
+C 语言中没有对象的概念，我们取而代之以模块来进行论述和分析。
 
-\subsubsection{kmod\_module}
+\subsubsection{kmod\_ctx 库上下文}
 
-\subsubsection{kmod\_elf}
+该模块的主要功能，是为 kmod module
+提供一个执行环境，也就是通常所说的上下文 context
+的概念。数据结构的设计，用了 ctx 来表示这个上下文的英文缩写。
 
-\subsubsection{kmod\_file}
+该模块主要的实现代码都在 libkmod/libkmod.c，比较常用的数据结构和接口有
 
-\subsubsection{kmod\_config}
+{\begin{shaded}\begin{verbatim}
+struct kmod_ctx;
 
-\subsubsection{hash}
+struct kmod_ctx {
+    int refcount;
+    int log_priority;
+    void (*log_fn)(void *data,
+                    int priority, const char *file, int line,
+                    const char *fn, const char *format, va_list args);
+    void *log_data;
+    const void *userdata;
+    char *dirname;
+    struct kmod_config *config;
+    struct hash *modules_by_name;
+    struct index_mm *indexes[_KMOD_INDEX_MODULES_SIZE];
+    unsigned long long indexes_stamp[_KMOD_INDEX_MODULES_SIZE];
+};
+\end{verbatim}\end{shaded}}
+以下函数接口在 tools 下的6个命令中都有用到，是必须的基础类的调用。
 
-\subsubsection{kmod\_list}
+{\begin{shaded}\begin{verbatim}
+struct kmod_ctx *kmod_new(const char *dirname, const char * const *config_paths);
+struct kmod_ctx *kmod_ref(struct kmod_ctx *ctx);
+struct kmod_ctx *kmod_unref(struct kmod_ctx *ctx);
+void kmod_set_log_fn(struct kmod_ctx *ctx,
+                    void (*log_fn)(void *log_data,
+                                    int priority, const char *file, int line,
+                                    const char *fn, const char *format,
+                                    va_list args),
+                    const void *data);
+\end{verbatim}\end{shaded}}
+以下函数接口在 modprobe 命令中有用到。
 
-\subsubsection{index\_mm}
+{\begin{shaded}\begin{verbatim}
+int kmod_load_resources(struct kmod_ctx *ctx);
+void kmod_unload_resources(struct kmod_ctx *ctx);
+\end{verbatim}\end{shaded}}
+可以看出这些接口的传入参数和传出的返回值，都是与 struct kmod\_ctx
+相关的。而在这个数据结构中，有几个重要的成员变量，例如 refcount, dirname,
+hash表引用等，这些都是和具体什么模块无关的抽象数据，代表着任何一个模块在运行时，都必须具备的属性。因此在后面的
+struct kmod\_module 核心数据结构中，将 struct kmod\_ctx *ctx
+作为首要包含的第一个成员变量，这也是和 ctx 的重要性分不开的。
 
-\subsubsection{elf}
+\subsubsection{kmod\_module 内核模块核心操作}
 
-\subsubsection{list}
+kmod\_module
+是所有模块中最重要和最核心的模块。该模块的主要功能是抽象了一个对所有内核模块进行操作的对象，它是真正可以代表一个具体的已经被加载到内核，或者即将被加载到内核的模块对象。其中，除了包含刚才所说的
+kmod\_ctx
+上下文的模块，作为该模块运行时环境的一个引用之外，还包含有其他两个重要的数据结构
+struct kmod\_list *dep 和 struct kmod\_file *file，其中 dep
+代表着已经被加载到内核中的这个模块所需要的依赖关系，也就是为了要加载这个模块，需要用到的需要提前加载的其他模块列表，这样的模块可能有很多，所以采用了一个链表的方式来记录。file
+代表着当前这个被加载模块，在磁盘上所对应的文件。这个结构体在下面还会详细解释，其中最重要的信息包括文件的大小，文件的内容在内存中的指针，以及该文件对应的
+ELF 格式的文件内容。
 
-\subsubsection{array}
+该模块主要的实现代码都在
+libkmod/libkmod-module.c，比较常用的数据结构和接口有
 
-\subsubsection{log}
+{\begin{shaded}\begin{verbatim}
+struct kmod_module;
 
+struct kmod_module {
+        struct kmod_ctx *ctx;
+        char *hashkey;
+        char *name;
+        char *path;
+        struct kmod_list *dep;
+        char *options;
+        const char *install_commands;   /* owned by kmod_config */
+        const char *remove_commands;    /* owned by kmod_config */
+        char *alias; /* only set if this module was created from an alias */
+        struct kmod_file *file;
+        int n_dep;
+        int refcount;
+        struct {
+            bool dep : 1;
+            bool options : 1;
+            bool install_commands : 1;
+            bool remove_commands : 1;
+        } init;
+
+        bool visited : 1;
+        bool ignorecmd : 1;
+        bool builtin : 1;
+    };
+\end{verbatim}\end{shaded}}
+以下函数接口在 tools 下的6个命令中都有用到，是必须的基础类的调用。其中
+初始化的方法有4个，前两个 new\_from\_name 和 new\_from\_path
+是以所提供的模块文件名来创建单个模块。path
+代表着从根目录开始的绝对路径方式，name
+代表着从当前目录的相对路径方式。另外两个 new\_from\_lookup 和
+new\_from\_loaded，分别是以所提供的别名来创建链表，或者直接从已经加载的依赖关系数组中动态创建链表。
+
+{\begin{shaded}\begin{verbatim}
+int kmod_module_new_from_name(struct kmod_ctx *ctx, const char *name,
+                                            struct kmod_module **mod);
+int kmod_module_new_from_path(struct kmod_ctx *ctx, const char *path,
+                                            struct kmod_module **mod);
+int kmod_module_new_from_lookup(struct kmod_ctx *ctx, const char *given_alias,
+                                            struct kmod_list **list);
+int kmod_module_new_from_loaded(struct kmod_ctx *ctx,
+                                            struct kmod_list **list);
+
+struct kmod_module *kmod_module_ref(struct kmod_module *mod);
+struct kmod_module *kmod_module_unref(struct kmod_module *mod);
+int kmod_module_unref_list(struct kmod_list *list);
+struct kmod_module *kmod_module_get_module(const struct kmod_list *entry);
+\end{verbatim}\end{shaded}}
+以下函数接口主要用 insmod/rmmod 命令的实现。这2个接口是实现 insmod 和
+rmmod 这两个命令时所用到的最主要的 libkmod 库接口。
+
+{\begin{shaded}\begin{verbatim}
+int kmod_module_remove_module(struct kmod_module *mod, unsigned int flags);
+int kmod_module_insert_module(struct kmod_module *mod, unsigned int flags,
+\end{verbatim}\end{shaded}}
+以下函数接口 kmod\_module\_probe\_insert\_module 主要用于 modprobe
+命令的实现。这个接口和上面的 kmod\_module\_insert\_module
+所不同的是，它可以支持分析依赖关系，把当前要加载模块的依赖模块，也同时加载进来，省得用户自己去一个一个加载。
+
+{\begin{shaded}\begin{verbatim}
+int kmod_module_probe_insert_module(struct kmod_module *mod,
+                    unsigned int flags, const char *extra_options,
+                    int (*run_install)(struct kmod_module *m,
+                                            const char *cmdline, void *data),
+                    const void *data,
+                    void (*print_action)(struct kmod_module *m, bool install,
+                                            const char *options));
+\end{verbatim}\end{shaded}}
+以下函数接口主要用 lsmod 命令的实现。
+
+{\begin{shaded}\begin{verbatim}
+const char *kmod_module_get_name(const struct kmod_module *mod);
+const char *kmod_module_get_path(const struct kmod_module *mod);
+const char *kmod_module_get_options(const struct kmod_module *mod);
+const char *kmod_module_get_install_commands(const struct kmod_module *mod);
+const char *kmod_module_get_remove_commands(const struct kmod_module *mod);
+struct kmod_list *kmod_module_get_dependencies(const struct kmod_module *mod);
+int kmod_module_get_softdeps(const struct kmod_module *mod,
+                            struct kmod_list **pre, struct kmod_list **post);
+\end{verbatim}\end{shaded}}
+以下函数接口主要用 modinfo 命令的实现。其中 kmod\_module\_info\_get\_key
+和 kmod\_module\_info\_get\_value 是最重要的两个接口，modinfo
+命令所显示的信息冒号左侧的是 key，冒号右侧的是
+value，因此，可以说这2个接口是专为 modinfo 命令而准备的。
+
+{\begin{shaded}\begin{verbatim}
+int kmod_module_get_info(const struct kmod_module *mod, struct kmod_list **list);
+const char *kmod_module_info_get_key(const struct kmod_list *entry);
+const char *kmod_module_info_get_value(const struct kmod_list *entry);
+void kmod_module_info_free_list(struct kmod_list *list);
+\end{verbatim}\end{shaded}}
+\subsubsection{kmod\_file 内核模块文件操作}
+
+该模块是隶属于 kmod\_module 模块的一个成员变量，用来支持 kmod\_module
+模块的实现。每一个需要加载的模块，都对应于磁盘上的一个文件，要插入一个模块，首先需要从磁盘上把这个文件读出来读到内存中，并且获得文件的大小和指向文件内容的内存指针，用这些数据再构建出一个
+ELF 文件的 section 信息，并获得其中有关用模块的 modinfo 内容。
+
+该模块主要的实现代码都在
+libkmod/libkmod-file.c，比较常用的数据结构和接口有
+
+{\begin{shaded}\begin{verbatim}
+struct kmod_file;
+
+struct kmod_file {
+#ifdef ENABLE_XZ
+    bool xz_used;
+#endif
+#ifdef ENABLE_ZLIB
+    gzFile gzf;
+#endif
+    int fd; 
+    off_t size;
+    void *memory;
+    const struct file_ops *ops;
+    const struct kmod_ctx *ctx;
+    struct kmod_elf *elf;
+};
+\end{verbatim}\end{shaded}}
+以下函数接口是这个模块中最重要的接口。
+
+{\begin{shaded}\begin{verbatim}
+struct kmod_file *kmod_file_open(const struct kmod_ctx *ctx, const char *filename)  
+off_t kmod_file_get_size(const struct kmod_file *file)
+void *kmod_file_get_contents(const struct kmod_file *file)
+void kmod_file_unref(struct kmod_file *file)
+\end{verbatim}\end{shaded}}
+\subsubsection{kmod\_elf 内核模块elf文件操作}
+
+该模块是隶属于 kmod\_file 模块的一个成员变量，用来支持 kmod\_file
+模块的实现。从层次结构上来说，它是高于 kmod\_file
+的，因为这个模块的创建，需要依赖于 kmod\_file 模块提供的 get\_contents 和
+get\_size 接口所获得的返回值。但是从数据结构的隶属关系上，它是属于
+kmod\_file 内部的一个成员。
+
+该模块主要的实现代码都在 libkmod/libkmod-elf.c
+，这个模块所围绕的数据结构是 kmod\_elf，其中所包含的最重要的成员是 memory
+和 size, 在 kmod\_module\_insert\_module
+函数接口中，需要用到这2个数据来创建一个 kmod\_elf 变量，因此
+kmod\_elf\_new 函数的2个参数也就是用的这2个变量。
+
+{\begin{shaded}\begin{verbatim}
+struct kmod_elf;
+
+struct kmod_elf {
+    const uint8_t *memory;
+    uint8_t *changed;
+    uint64_t size;
+    enum kmod_elf_class class;
+    struct kmod_elf_header {
+            struct {
+                    uint64_t offset;
+                    uint16_t count;
+                    uint16_t entry_size;
+            } section;
+            struct {
+                    uint16_t section; /* index of the strings section */
+                    uint64_t size;
+                    uint64_t offset;
+                    uint32_t nameoff; /* offset in strings itself */
+            } strings;   
+            uint16_t machine;
+    } header;    
+};
+\end{verbatim}\end{shaded}}
+以下函数接口是这个模块中最重要的接口。kmod\_elf\_get\_memory
+函数是一个典型的面向对象的封装，它实际上就是简单的返回成员变量 memory
+的值，但设计者并没有采用直接用指针 elf-\textgreater{}memory
+的方式来获取成员变量，而是通过接口来访问数据。这个 memory 指针是整个
+kmod\_elf 数据结构中，最重要的一个成员，它代表着 elf
+文件从磁盘被加载到内存之后的内存指针，这个信息在 init\_module
+系统调用的时候，将被传给内核，由内核完成真正把模块插入到内核空间的工作。
+
+{\begin{shaded}\begin{verbatim}
+struct kmod_elf *kmod_elf_new (const void *memory, off_t size)
+int kmod_elf_strip_section(struct kmod_elf *elf, const char *section)
+const void *kmod_elf_get_memory(const struct kmod_elf *elf)
+void kmod_elf_unref(struct kmod_elf *elf)
+\end{verbatim}\end{shaded}}
+\subsubsection{kmod\_list 内核模块列表}
+
+该模块是隶属于 kmod\_module 模块的一个成员变量，用来支持 kmod\_module
+模块的实现。每一个被加载的模块，有的是不依赖于任何其他模块就可以被加载，但也有很多是需要依赖于其他模块被加载后，才能被加载。kmod\_list
+为这些模块提供了一个索引，通过这个 list
+可以获得所有和当前被加载模块有依赖关系的模块列表，然后在这个列表中，这些需要提前被加载的模块也按照依赖关系排好顺序，加载的时候只需要遍历链表，依次加载每个模块，最后再加载当前模块就可以了。这个功能的实现可以参考
+modprobe 命令实现流程分析。这个模块在 kmod\_module，kmod\_config
+中都有用到。
+
+该模块主要的实现代码都在 libkmod/libkmod-list.c，其中结构体的定义在
+kmod-11/libkmod/libkmod-private.h 中。
+
+{\begin{shaded}\begin{verbatim}
+struct kmod_list {
+    struct list_node node;
+    void *data;
+};
+
+struct kmod_list *kmod_list_append(struct kmod_list *list, const void *data) _must_check_ __attribute__((nonnull(2)));
+struct kmod_list *kmod_list_prepend(struct kmod_list *list, const void *data) _must_check_ __attribute__((nonnull(2)));
+struct kmod_list *kmod_list_remove(struct kmod_list *list) _must_check_;
+struct kmod_list *kmod_list_remove_data(struct kmod_list *list,
+                                    const void *data) _must_check_ __attribute__((nonnull(2)));
+struct kmod_list *kmod_list_remove_n_latest(struct kmod_list *list,
+                                            unsigned int n) _must_check_;
+struct kmod_list *kmod_list_insert_after(struct kmod_list *list, const void *data) __attribute__((nonnull(2)));
+struct kmod_list *kmod_list_insert_before(struct kmod_list *list, const void *data) __attribute__((nonnull(2)));
+struct kmod_list *kmod_list_append_list(struct kmod_list *list1, struct kmod_list *list2) _must_check_;
+
+#define kmod_list_foreach(list_entry, first_entry) \
+    for (list_entry = ((first_entry) == NULL) ? NULL : (first_entry); \
+            list_entry != NULL; \
+            list_entry = (list_entry->node.next == &((first_entry)->node)) ? NULL : \
+            container_of(list_entry->node.next, struct kmod_list, node))
+\end{verbatim}\end{shaded}}
+\subsubsection{kmod\_config 内核模块配置}
+
+该模块是隶属于 kmod\_ctx 模块的一个成员变量，用来支持 kmod\_ctx
+模块的实现。在 kmod\_new 函数的实现中，需要传递一个 config\_paths
+字符串变量，这个变量将作为 kmod\_config\_new 的参数，创建出一个
+kmod\_config 变量，用来填充 kmod\_ctx 数据结构中的
+*config，表示配置文件所在的路径。如果默认是NULL，则会到以下3个路径中去寻找
+/run/modprobe.d/， /lib/modprobe.d/， /etc/modprobe.d/ ， 否则，则会将
+config\_paths 作为一个指针数组的基地址，用 config\_paths{[}i{]}
+来遍历整个指针数组，获得每一个路径 char * path =
+config\_paths{[}i{]}，然后用 path 来创建 conf\_files\_list 。
+
+该模块主要的实现代码在 libkmod/libkmod-config.c, 其中结构体的定义在
+kmod-11/libkmod/libkmod-private.h 中。
+
+{\begin{shaded}\begin{verbatim}
+struct kmod_config;
+
+struct kmod_config {
+    struct kmod_ctx *ctx;
+    struct kmod_list *aliases;
+    struct kmod_list *blacklists;
+    struct kmod_list *options;
+    struct kmod_list *remove_commands;
+    struct kmod_list *install_commands;
+    struct kmod_list *softdeps;
+
+    struct kmod_list *paths;
+};
+
+int kmod_config_new(struct kmod_ctx *ctx, struct kmod_config **p_config, const char * const *config_paths)
+void kmod_config_free(struct kmod_config *config)
+\end{verbatim}\end{shaded}}
+\subsubsection{hash 哈希表模块}
+
+该模块是隶属于 kmod\_ctx 模块的一个成员变量，用来支持 kmod\_ctx
+模块的实现。
+
+该模块主要的实现代码都在 libkmod/libkmod-hash.c。
+
+{\begin{shaded}\begin{verbatim}
+struct hash;
+
+struct hash {
+    unsigned int count;
+    unsigned int step;
+    unsigned int n_buckets;
+    void (*free_value)(void *value);
+    struct hash_bucket buckets[];
+};
+
+struct hash *hash_new(unsigned int n_buckets, void (*free_value)(void *value));
+void hash_free(struct hash *hash);
+int hash_add(struct hash *hash, const char *key, const void *value);
+int hash_add_unique(struct hash *hash, const char *key, const void *value);
+int hash_del(struct hash *hash, const char *key);
+void *hash_find(const struct hash *hash, const char *key);
+unsigned int hash_get_count(const struct hash *hash);
+void hash_iter_init(const struct hash *hash, struct hash_iter *iter);
+bool hash_iter_next(struct hash_iter *iter, const char **key,
+                                                    const void **value);
+\end{verbatim}\end{shaded}}
+\subsubsection{index\_mm 索引查找模块}
+
+该模块是隶属于 kmod\_ctx 模块的一个成员变量，用来支持 kmod\_ctx
+模块的实现。
+
+该模块主要的实现代码都在 libkmod/libkmod-index.c
+
+{\begin{shaded}\begin{verbatim}
+struct index_mm;
+
+struct index_mm {
+    struct kmod_ctx *ctx;
+    void *mm;
+    uint32_t root_offset;
+    size_t size;
+};
+
+struct index_file *index_file_open(const char *filename);
+void index_file_close(struct index_file *idx);
+char *index_search(struct index_file *idx, const char *key);
+void index_dump(struct index_file *in, int fd, const char *prefix);
+struct index_value *index_searchwild(struct index_file *idx, const char *key);
+
+void index_values_free(struct index_value *values);
+
+/* Implementation using mmap */
+struct index_mm *index_mm_open(struct kmod_ctx *ctx, const char *filename,
+                                            unsigned long long *stamp);
+void index_mm_close(struct index_mm *index);        
+char *index_mm_search(struct index_mm *idx, const char *key);
+struct index_value *index_mm_searchwild(struct index_mm *idx, const char *key);
+void index_mm_dump(struct index_mm *idx, int fd, const char *prefix);
+\end{verbatim}\end{shaded}}
+\subsubsection{elf 文件分析模块}
+
+该模块是一个在 kmod\_elf
+内部实现的一系列接口的统称，本身并没有一个同名的数据结构，其中比较具有相关性的一个数据结构就是
+kmod\_elf\_header。这个数据结构隶属于 kmod\_elf，用来支持 kmod\_elf
+模块的实现。
+
+{\begin{shaded}\begin{verbatim}
+struct kmod_elf_header {
+        struct {
+                uint64_t offset;
+                uint16_t count;
+                uint16_t entry_size;
+        } section;
+        struct {
+                uint16_t section; /* index of the strings section */
+                uint64_t size;
+                uint64_t offset;
+                uint32_t nameoff; /* offset in strings itself */
+        } strings;
+        uint16_t machine;
+} header;
+
+
+enum kmod_elf_class {
+    KMOD_ELF_32 = (1 << 1),
+    KMOD_ELF_64 = (1 << 2),
+    KMOD_ELF_LSB = (1 << 3),
+    KMOD_ELF_MSB = (1 << 4)
+};
+\end{verbatim}\end{shaded}}
+elf 模块的接口主要包含 elf\_get\_mem, elf\_get\_section\_header,
+elf\_get\_strings\_section 这几个常用的，用来分析 elf 文件的内部结构。
+
+{\begin{shaded}\begin{verbatim}
+static int elf_identify (const void *memory, uint64_t size)
+static uint64_t elf_get_uint (const struct kmod_elf *elf, uint64_t offset, uint16_t size)
+static int elf_set_uint (struct kmod_elf *elf, uint64_t offset, uint64_t size, uint64_t value)
+static const void *elf_get_mem (const struct kmod_elf *elf, uint64_t offset)
+static const void *elf_get_section_header (const struct kmod_elf *elf, uint16_t idx)
+static int elf_get_section_info (const struct kmod_elf *elf, uint16_t idx, uint64_t *offset, uint64_t *size, uint32_t *nameoff)
+static const char * elf_get_strings_section (const struct kmod_elf *elf, uint64_t *size)
+\end{verbatim}\end{shaded}}
+\subsubsection{list 链表模块}
+
+该模块是一个基础类的功能模块，它是一个抽象的数据结构 list
+的实现。可以用来支持 kmod\_list，等于是用 kmod\_list 对 list
+做了一层封装，也相当于是一个抽象层的概念，然后在这个项目中，更多的使用
+kmod\_list 来支持其他的数据结构。例如 kmod\_config，kmod\_module
+中都是直接使用了 kmod\_list 数据结构，而不是 list。
+
+其中结构体 struct link\_node 的定义在 kmod-11/libkmod/libkmod-private.h
+中。
+
+{\begin{shaded}\begin{verbatim}
+struct list_node {
+    struct list_node *next, *prev;
+};
+
+static struct list_node * list_node_init (struct list_node *node)
+static struct list_node * list_node_next (const struct list_node *node)
+static struct list_node * list_node_prev (const struct list_node *node)
+static void list_node_append (struct list_node *list, struct list_node *node)
+static struct list_node * list_node_remove (struct list_node *node)
+static void list_node_insert_after (struct list_node *list, struct list_node *node)
+static void list_node_insert_before (struct list_node *list, struct list_node *node)
+static void list_node_append_list (struct list_node *list1, struct list_node *list2)
+\end{verbatim}\end{shaded}}
+\subsubsection{array 动态数组模块}
+
+该模块的主要功能是实现一个动态数组，完成动态数组所需要的初始化init,
+插入append，删除remove\_at，排序sort 等几个重要的操作。在 depmod
+命令的实现中，array
+至关重要，正是通过构建了这个动态数组，完成了对这个数组的 sort
+排序操作，才得以最终输出 modules.dep 文件，为 modprobe 命令做好了准备。
+
+通过 grep 命令 grep -rns ``array\_init'' kmod-11/* 可以看出，在整个 kmod
+项目中，只有 depmod 命令用到了 array
+的支持，其他地方都没有用到。但这个模块是一个通用模块，值得我们学习和研究。
+
+该模块主要的实现代码都在 libkmod/libkmod-array.c, 其中结构体 struct
+array 的定义在 kmod-11/libkmod/libkmod-array.h 中。
+
+{\begin{shaded}\begin{verbatim}
+struct array {
+    void **array;
+    size_t count;
+    size_t total;
+    size_t step;
+};
+
+void array_init(struct array *array, size_t step);
+int array_append(struct array *array, const void *element);
+int array_append_unique(struct array *array, const void *element);
+void array_pop(struct array *array);
+void array_free_array(struct array *array);
+void array_sort(struct array *array, int (*cmp)(const void *a, const void *b));
+int array_remove_at(struct array *array, unsigned int pos); 
+\end{verbatim}\end{shaded}}
+\subsubsection{log 日志记录模块}
+
+该模块的主要功能是实现一个日志记录打印输出功能，这个模块中最核心的函数就是
+kmod\_log ，该函数的实现代码都在 libkmod/libkmod-list.c 。
+
+{\begin{shaded}\begin{verbatim}
+void kmod_log(const struct kmod_ctx *ctx,
+          int priority, const char *file, int line, const char *fn,
+          const char *format, ...)
+\end{verbatim}\end{shaded}}
+但是，这个函数并不是直接被调用，而是通过一个宏定义 kmod\_log\_cond
+间接调用，这个宏定义引入了打印优先级 prio
+的概念，使得所有日志打印输出都是根据优先级的有条件输出。另外还有一个
+kmod\_log\_null 是一个空打印函数。有关这个部分的实现可以参考
+kmod-11/libkmod/libkmod-private.h 文件。
+
+{\begin{shaded}\begin{verbatim}
+ 14 #define kmod_log_cond(ctx, prio, arg...) \
+ 15         do { \
+ 16                 if (kmod_get_log_priority(ctx) >= prio) \
+ 17                 kmod_log(ctx, prio, __FILE__, __LINE__, __func__, ## arg);\
+ 18         } while (0)
+
+ 11 static _always_inline_ _printf_format_(2, 3) void
+ 12         kmod_log_null(struct kmod_ctx *ctx, const char *format, ...) {}
+ 13
+\end{verbatim}\end{shaded}}
+以下实现的 DGB(), INFO(), ERR() 在各个模块中都有用到。
+
+{\begin{shaded}\begin{verbatim}
+ 20 #ifdef ENABLE_LOGGING
+ 21 #  ifdef ENABLE_DEBUG
+ 22 #    define DBG(ctx, arg...) kmod_log_cond(ctx, LOG_DEBUG, ## arg)
+ 23 #  else
+ 24 #    define DBG(ctx, arg...) kmod_log_null(ctx, ## arg)
+ 25 #  endif
+ 26 #  define INFO(ctx, arg...) kmod_log_cond(ctx, LOG_INFO, ## arg)
+ 27 #  define ERR(ctx, arg...) kmod_log_cond(ctx, LOG_ERR, ## arg)
+ 28 #else
+ 29 #  define DBG(ctx, arg...) kmod_log_null(ctx, ## arg)
+ 30 #  define INFO(ctx, arg...) kmod_log_null(ctx, ## arg)
+ 31 #  define ERR(ctx, arg...) kmod_log_null(ctx, ## arg)
+ 32 #endif
+\end{verbatim}\end{shaded}}
 \subsection{3. 运行时调试图}
 
 \subsubsection{insmod 命令运行时调试图}
@@ -1636,6 +2135,191 @@ $ dmesg | tail
 [352365.795624] .text = e0c01000
 [352365.795626] .data = e0c03000
 [352365.795628] .stack = dd197f40
+$ 
+\end{verbatim}\end{shaded}}
+\subsubsection{lsmod 命令运行时调试图}
+
+该命令不支持带参数，因此后面如果跟某个模块名称，只会显示 usage
+，不会显示模块的信息。
+
+{\begin{shaded}\begin{verbatim}
+$ ./kmod-11/tools/lsmod ufs
+Usage: ./kmod-11/tools/lsmod
+$
+\end{verbatim}\end{shaded}}
+不加参数，直接运行 lsmod ，可以显示出当前在内核中的模块情况。
+
+{\begin{shaded}\begin{verbatim}
+$ ./kmod-11/tools/lsmod 
+Module                  Size  Used by
+nls_iso8859_1          12617  0 
+nls_cp437              12751  0 
+usb_storage            39646  0 
+btrfs                 638208  0 
+zlib_deflate           26622  1 btrfs
+libcrc32c              12543  1 btrfs
+ufs                    78131  0 
+qnx4                   13309  0 
+hfsplus                83507  0 
+hfs                    49479  0 
+minix                  31418  0 
+ntfs                  100171  0 
+vfat                   17308  0 
+msdos                  17132  0 
+fat                    55605  2 msdos,vfat
+jfs                   175085  0 
+xfs                   747494  0 
+reiserfs              230896  0 
+ext2                   67987  0 
+usblp                  17885  0 
+vmwgfx                102138  2 
+ttm                    65344  1 vmwgfx
+drm                   197692  3 ttm,vmwgfx
+acpiphp                23535  0 
+vmw_balloon            12700  0 
+psmouse                72919  0 
+serio_raw              13027  0 
+btusb                  17912  2 
+joydev                 17393  0 
+rfcomm                 38139  0 
+bnep                   17830  2 
+bluetooth             158438  13 bnep,rfcomm,btusb
+ppdev                  12849  0 
+nfsd                  229850  13 
+nfs                   307376  0 
+lockd                  78804  2 nfs,nfsd
+fscache                50642  1 nfs
+i2c_piix4              13093  0 
+auth_rpcgss            39597  2 nfs,nfsd
+nfs_acl                12771  2 nfs,nfsd
+sunrpc                205647  19 nfs_acl,auth_rpcgss,lockd,nfs,nfsd
+parport_pc             32114  1 
+shpchp                 32325  0 
+mac_hid                13077  0 
+snd_ens1371            24819  4 
+gameport               15060  1 snd_ens1371
+snd_rawmidi            25424  1 snd_ens1371
+snd_seq_device         14172  1 snd_rawmidi
+snd_ac97_codec        106082  1 snd_ens1371
+ac97_bus               12642  1 snd_ac97_codec
+snd_pcm                80845  3 snd_ac97_codec,snd_ens1371
+snd_timer              28931  2 snd_pcm
+snd                    62064  12 snd_timer,snd_pcm,snd_ac97_codec,snd_seq_device,snd_rawmidi,snd_ens1371
+soundcore              14635  1 snd
+snd_page_alloc         14108  1 snd_pcm
+lp                     17455  0 
+parport                40930  3 lp,parport_pc,ppdev
+pcnet32                41110  0 
+usbhid                 41906  0 
+hid                    77367  1 usbhid
+mptspi                 22474  2 
+mptscsih               39530  1 mptspi
+mptbase                96852  2 mptscsih,mptspi
+floppy                 60310  0 
+vmw_pvscsi             18334  0 
+vmxnet3                44924  0 
+$ 
+\end{verbatim}\end{shaded}}
+\subsubsection{modinfo 命令运行时调试图}
+
+对于没有依赖关系的单个 .ko 内核模块，使用 modinfo
+可以直接显示出模块的信息。
+
+{\begin{shaded}\begin{verbatim}
+$ ./kmod-11/tools/modinfo ./hello-module/hello.ko 
+filename:       ./hello-module/hello.ko
+license:        GPL
+description:    module example 
+author:         AKAEDU
+srcversion:     C928237C5C93794C5E0EF9C
+depends:        
+vermagic:       3.2.0-29-generic-pae SMP mod_unload modversions 686 
+$ 
+\end{verbatim}\end{shaded}}
+对于有依赖关系的单个 .ko 内核模块，使用 modinfo
+可以显示出模块的依赖关系信息depends，同时也可以显示出模块加载时的参数信息parm。这个参数信息是在编译内核模块的时候，源码中通过用
+MODULE\_PARM\_DESC() 宏来指定的。
+
+{\begin{shaded}\begin{verbatim}
+$ modinfo /lib/modules/3.2.0-29-generic-pae/kernel/fs/nfs/nfs.ko 
+filename:       /lib/modules/3.2.0-29-generic-pae/kernel/fs/nfs/nfs.ko
+license:        GPL
+author:         Olaf Kirch <okir@monad.swb.de>
+srcversion:     BB0605CB0AF0BA47415CBEC
+depends:        fscache,sunrpc,lockd,auth_rpcgss,nfs_acl
+intree:         Y
+vermagic:       3.2.0-29-generic-pae SMP mod_unload modversions 686 
+parm:           callback_tcpport:portnr
+parm:           cache_getent:Path to the client cache upcall program (string)
+parm:           cache_getent_timeout:Timeout (in seconds) after which the cache upcall is assumed to have failed (ulong)
+parm:           enable_ino64:bool
+parm:           nfs4_disable_idmapping:Turn off NFSv4 idmapping when using 'sec=sys' (bool)
+$ 
+\end{verbatim}\end{shaded}}
+对于可以使用别名的内核模块，也可以用它的别名 alias
+来查看模块信息。别名是在 /lib/modules/3.2.0-29-generic-pae/modules.alias
+描述的模块名称的简单形式。
+
+{\begin{shaded}\begin{verbatim}
+$ head /lib/modules/3.2.0-29-generic-pae/modules.alias
+# Aliases extracted from modules themselves.
+alias pci:v00008086d00003422sv*sd*bc*sc*i* mce_xeon75xx
+alias char-major-10-134 apm
+alias devname:cpu/microcode microcode
+alias char-major-10-184 microcode
+alias aes-asm aes_i586
+alias aes aes_i586
+alias twofish-asm twofish_i586
+alias twofish twofish_i586
+alias salsa20-asm salsa20_i586
+$ 
+\end{verbatim}\end{shaded}}
+但是在这个文件中，别名为 aes 的模块，还有很多个，通过 grep ``alias aes''
+可以看出一共有3个别名都是 aes 的模块，分别是 aes\_i586, aesni\_intel,
+padlock\_aes。
+
+{\begin{shaded}\begin{verbatim}
+$ cat /lib/modules/3.2.0-29-generic-pae/modules.alias | grep "alias aes"
+alias aes-asm aes_i586
+alias aes aes_i586
+alias aes aesni_intel
+alias aes padlock_aes
+$ 
+\end{verbatim}\end{shaded}}
+通过 modinfo 来查看 aes
+这个别名所对应的模块信息，可以看到这3个模块所对应的模块文件
+crypto/aes-i586.ko，aesni-intel.ko，padlock-aes.ko 的详细信息。
+
+{\begin{shaded}\begin{verbatim}
+$ ./kmod-11/tools/modinfo aes 
+filename:       /lib/modules/3.2.0-29-generic-pae/kernel/arch/x86/crypto/aes-i586.ko
+alias:          aes-asm
+alias:          aes
+license:        GPL
+description:    Rijndael (AES) Cipher Algorithm, asm optimized
+srcversion:     24373C7FF739526E8AAF1B0
+depends:        
+intree:         Y
+vermagic:       3.2.0-29-generic-pae SMP mod_unload modversions 686 
+
+filename:       /lib/modules/3.2.0-29-generic-pae/kernel/arch/x86/crypto/aesni-intel.ko
+alias:          aes
+license:        GPL
+description:    Rijndael (AES) Cipher Algorithm, Intel AES-NI instructions optimized
+srcversion:     E0B859CB1FF480D0B70F6F2
+depends:        cryptd,aes-i586
+intree:         Y
+vermagic:       3.2.0-29-generic-pae SMP mod_unload modversions 686 
+
+filename:       /lib/modules/3.2.0-29-generic-pae/kernel/drivers/crypto/padlock-aes.ko
+alias:          aes
+author:         Michal Ludvig
+license:        GPL
+description:    VIA PadLock AES algorithm support
+srcversion:     6842B20FF8E68314ED45103
+depends:        
+intree:         Y
+vermagic:       3.2.0-29-generic-pae SMP mod_unload modversions 686 
 $ 
 \end{verbatim}\end{shaded}}
 \subsection{4. 运行流程分析}
@@ -1875,6 +2559,7 @@ do\_rmmod() 的实现可以分为5个步骤
 {\begin{shaded}\begin{verbatim}
 static int do_lsmod(int argc, char *argv[])
 {
+    struct kmod_list *list, *itr;
     ctx = kmod_new(NULL, &null_config); 
     err = kmod_module_new_from_loaded(ctx, &list);
     puts("Module                  Size  Used by");
@@ -1884,6 +2569,8 @@ static int do_lsmod(int argc, char *argv[])
             const char *name = kmod_module_get_name(mod);
             int use_count = kmod_module_get_refcnt(mod);
             long size = kmod_module_get_size(mod);
+
+        printf("%-19s %8ld  %d ", name, size, use_count);
         holders = kmod_module_get_holders(mod);
             kmod_list_foreach(hitr, holders) {
                     struct kmod_module *hm = kmod_module_get_module(hitr);
@@ -1905,6 +2592,16 @@ static int do_lsmod(int argc, char *argv[])
 \includegraphics{./figures/lsmod.jpg}
 \caption{lsmod 调用层次图}
 \end{figure}
+
+lsmod 命令的实现代码中，最重要的一个调用，就是
+kmod\_module\_new\_from\_loaded，这个函数主要通过分析 /proc/modules
+文件的输出，将已经加载到内存中的内核模块按照 kmod\_list
+的数据结构，依次添加到 list 链表中，完成 list 中数据的组装。
+
+后面的实现部分，主要是通过 kmod\_list\_foreach
+的宏，遍历整个链表，取出每一个模块 mod =
+kmod\_module\_get\_module(itr)，获得模块的名字name,
+引用计数refcnt，以及模块的大小size，把这3个最重要的信息打印出来，并按照一定的格式进行显示输出。
 
 \subsubsection{modinfo 命令实现流程}
 
@@ -1936,6 +2633,13 @@ static int do_modinfo(int argc, char *argv[])
 \caption{modinfo 调用层次图}
 \end{figure}
 
+modinfo 命令中最重要的调用就是 modinfo\_path\_do 和 modinfo\_alias\_do
+，这2个接口，其中前者是直接根据模块的绝对路径来找到模块文件并读出其中的相关信息，后者是通过
+alias 别名来查找到所有别名为 alias 的模块（可能1个，也可能是很多个），通过
+modules.alias
+文件中的别名和真实文件名的对应关系，找到所有对应的模块文件，并逐一显示每一个模块的信息。有关于此的操作，在上面的
+modinfo 命令运行时调试图小节中已经阐述过，这里不再赘述。
+
 {\begin{shaded}\begin{verbatim}
 static int modinfo_path_do(struct kmod_ctx *ctx, const char *path)
 {
@@ -1964,30 +2668,16 @@ static int modinfo_alias_do(struct kmod_ctx *ctx, const char *alias)
     kmod_module_unref_list(filtered);
     return err;
 }
-
-static int modinfo_do(struct kmod_module *mod)
-{
-    struct kmod_list *l, *list = NULL;
-    struct param *params = NULL;
-
-    printf("%s%c", kmod_module_get_path(mod), separator);
-    err = kmod_module_get_info(mod, &list);
-    kmod_module_get_name(mod), strerror(-err));
-
-    kmod_list_foreach(l, list) {
-            const char *key = kmod_module_info_get_key(l);
-            const char *value = kmod_module_info_get_value(l);
-
-        process_parm(key, value, &params);
-
-            printf("%s:%-*s%s%c", key, 15 - keylen, "", value, separator);
-    }
-
-    kmod_module_info_free_list(list);
-
-    return err;
-}
 \end{verbatim}\end{shaded}}
+从上面的代码可以看出，通过 modinfo\_path\_do 只会找到一个 mod
+进行输出，而通过 modinfo\_alias\_do 会根据 alias 找到一个 mod 的 list
+然后逐一输出。无论那种方式，最终都是调用 modinfo\_do 来对单个模块 mod
+的信息进行输出，因此 modinfo\_do 可以看成是实现 modinfo
+命令的核心函数，从调用层次图中不难看出，这个函数主要使用了 kmod\_module
+模块提供的各种 get
+功能调用来完成对模块信息的提取。在后面的核心代码分析章节中，我们会对这个函数
+modinfo\_do 来进行详细的分析。
+
 \subsubsection{depmod 命令实现流程}
 
 \textbf{do\_depmod() 核心代码分析}
@@ -2538,6 +3228,95 @@ long init_module(void *mem, int flags)
     mod = find_module(modules, modname);
 
     return mod->ret;
+}
+\end{verbatim}\end{shaded}}
+\subsubsection{kmod\_module\_new\_from\_loaded 核心代码分析}
+
+{\begin{shaded}\begin{verbatim}
+KMOD_EXPORT int kmod_module_new_from_loaded(struct kmod_ctx *ctx,
+                        struct kmod_list **list)
+{
+    struct kmod_list *l = NULL;
+    FILE *fp;
+    char line[4096];
+
+    if (ctx == NULL || list == NULL)
+        return -ENOENT;
+
+    fp = fopen("/proc/modules", "re");
+
+    while (fgets(line, sizeof(line), fp)) {
+        struct kmod_module *m;
+        struct kmod_list *node;
+        int err;
+        char *saveptr, *name = strtok_r(line, " \t", &saveptr);
+
+        err = kmod_module_new_from_name(ctx, name, &m);
+
+        node = kmod_list_append(l, m);
+        if (node)
+            l = node;
+        else {
+            ERR(ctx, "out of memory\n");
+            kmod_module_unref(m);
+        }
+    }
+
+    fclose(fp);
+    *list = l;
+
+    return 0;
+}
+\end{verbatim}\end{shaded}}
+\subsubsection{kmod\_module\_new\_from\_lookup 核心代码分析}
+
+{\begin{shaded}\begin{verbatim}
+KMOD_EXPORT int kmod_module_new_from_lookup(struct kmod_ctx *ctx,
+                        const char *given_alias,
+                        struct kmod_list **list)
+{
+    int err;
+    char alias[PATH_MAX];
+    if (alias_normalize(given_alias, alias, NULL) < 0) {
+        DBG(ctx, "invalid alias: %s\n", given_alias);
+        return -EINVAL;
+    }
+
+    /* Aliases from config file override all the others */
+    err = kmod_lookup_alias_from_config(ctx, alias, list);
+    err = kmod_lookup_alias_from_moddep_file(ctx, alias, list);
+    err = kmod_lookup_alias_from_symbols_file(ctx, alias, list);
+    err = kmod_lookup_alias_from_commands(ctx, alias, list);
+    err = kmod_lookup_alias_from_aliases_file(ctx, alias, list);
+    err = kmod_lookup_alias_from_builtin_file(ctx, alias, list);
+
+    return err;
+}
+\end{verbatim}\end{shaded}}
+\subsubsection{modinfo\_do 核心代码分析}
+
+{\begin{shaded}\begin{verbatim}
+static int modinfo_do(struct kmod_module *mod)
+{
+    struct kmod_list *l, *list = NULL;
+    struct param *params = NULL;
+
+    printf("%s%c", kmod_module_get_path(mod), separator);
+    err = kmod_module_get_info(mod, &list);
+    kmod_module_get_name(mod), strerror(-err));
+
+    kmod_list_foreach(l, list) {
+            const char *key = kmod_module_info_get_key(l);
+            const char *value = kmod_module_info_get_value(l);
+
+        process_parm(key, value, &params);
+
+            printf("%s:%-*s%s%c", key, 15 - keylen, "", value, separator);
+    }
+
+    kmod_module_info_free_list(list);
+
+    return err;
 }
 \end{verbatim}\end{shaded}}
 \subsubsection{kmod\_module\_probe\_insert\_module}

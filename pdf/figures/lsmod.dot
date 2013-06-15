@@ -10,7 +10,7 @@ digraph G {
 	kmod_ctx -> kmod_new;
 	kmod_ctx -> kmod_unref;
 
-	kmod_module -> kmod_module_new_from_loaded;
+	kmod_module -> kmod_module_new_from_loaded -> "/proc/modules";
 
 	kmod_module -> kmod_module_get_module;
 	kmod_module -> kmod_module_get_name;

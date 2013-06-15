@@ -4,20 +4,21 @@ digraph G {
 
 	commands -> kmod_ctx;
 	commands -> kmod_module;
+	depmod -> array;
 
-	kmod_ctx -> kmod_config;
+	kmod_ctx -> kmod_config -> kmod_list;
 	kmod_ctx -> hash;
 	kmod_ctx -> log;
 	kmod_ctx -> index_mm;
 
 	kmod_module -> kmod_file;
-	kmod_module -> kmod_elf;
 	kmod_module -> syscall;
 
 	syscall -> init_module;
 
 	kmod_module -> kmod_list;
 
+	kmod_file -> kmod_elf;
 	kmod_elf -> elf;
 	kmod_list -> list;
 
