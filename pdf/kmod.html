@@ -1666,8 +1666,102 @@ depends:
 intree:         Y
 vermagic:       3.2.0-29-generic-pae SMP mod_unload modversions 686 
 $ </code></pre>
+<h3 id="depmod-命令运行时调试图">depmod 命令运行时调试图</h3>
+<pre><code>$ ./kmod-11/tools/depmod | wc -l
+3529
+
+$ vi ./kmod-11/tools/depmod.c
+修改源码文件，在 output_deps 函数中间插入打印函数，打印输出到标准输出 stdout。
+
+1790 static int output_deps(struct depmod *depmod, FILE *out)
+1791 {
+1792         size_t i;
+1793 
+1794         fprintf(stdout, &quot;total count %d&quot;, depmod-&gt;modules.count);
+1795 ...
+1798                 const char *p = mod_get_compressed_path(mod);
+1799                 size_t j, n_deps;
+1800 
+1801                 if (mod-&gt;dep_loop) {
+1802                         DBG(&quot;Ignored %s due dependency loops\n&quot;, p);
+1803                         continue;
+1804                 }
+1805 
+1806                 fprintf(out, &quot;%s:&quot;, p);
+1807                 fprintf(stdout, &quot;%s:&quot;, p);
+
+$ make -C kmod-11
+make[1]: Entering directory `/home/akaedu/Github/comment-subs/kmod-11&#39;
+make --no-print-directory all-recursive
+Making all in .
+  CC       tools/depmod.o
+  CCLD     tools/kmod
+  CCLD     tools/kmod-nolib
+Making all in libkmod/docs
+make[3]: Nothing to be done for `all&#39;.
+Making all in man
+make[3]: Nothing to be done for `all&#39;.
+make[1]: Leaving directory `/home/akaedu/Github/comment-subs/kmod-11&#39;
+
+$ sudo ./kmod-11/tools/depmod | head
+total count 3529
+kernel/arch/x86/kernel/cpu/mcheck/mce-xeon75xx.ko:
+kernel/arch/x86/kernel/cpu/mcheck/mce-inject.ko:
+kernel/arch/x86/kernel/msr.ko:
+kernel/arch/x86/kernel/cpuid.ko:
+kernel/arch/x86/kernel/apm.ko:
+kernel/arch/x86/kernel/microcode.ko:
+kernel/arch/x86/crypto/aes-i586.ko:
+kernel/arch/x86/crypto/twofish-i586.ko: kernel/crypto/twofish_common.ko
+kernel/arch/x86/crypto/salsa20-i586.ko:
+kernel/arch/x86/crypto/aesni-intel.ko: kernel/arch/x86/crypto/aes-i586.ko kernel/crypto/cryptd.ko
+$ </code></pre>
+<h3 id="modprobe-命令运行时调试图">modprobe 命令运行时调试图</h3>
+<pre><code>$ sudo ./kmod-11/tools/modprobe -r nfs
+name = nfs
+
+line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
+---------------------
+
+p = kernel/fs/nfs_common/nfs_acl.ko
+---------------------
+
+p = kernel/net/sunrpc/auth_gss/auth_rpcgss.ko
+---------------------
+
+p = kernel/fs/fscache/fscache.ko
+---------------------
+
+p = kernel/fs/lockd/lockd.ko
+---------------------
+
+p = kernel/net/sunrpc/sunrpc.ko
+---------------------
+$ 
+
+$ sudo ./kmod-11/tools/modprobe nfs
+name = nfs
+
+line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
+---------------------
+
+p = kernel/fs/nfs_common/nfs_acl.ko
+---------------------
+
+p = kernel/net/sunrpc/auth_gss/auth_rpcgss.ko
+---------------------
+
+p = kernel/fs/fscache/fscache.ko
+---------------------
+
+p = kernel/fs/lockd/lockd.ko
+---------------------
+
+p = kernel/net/sunrpc/sunrpc.ko
+---------------------
+$ </code></pre>
 <h2 id="运行流程分析">4. 运行流程分析</h2>
-<h3 id="insmod-命令实现流程">insmod 命令实现流程</h3>
+<h3 id="命令实现流程概述">命令实现流程概述</h3>
 <p>insmod 命令和其他所有命令一样，都是采用了一个统一的调用方法。实现了一个 struct kmod_cmd 的数据结构，这个数据结构定义在 kmod-11/tools/kmod.h 文件中。</p>
 <pre><code>struct kmod_cmd {
     const char *name;
@@ -1734,6 +1828,8 @@ $ </code></pre>
 <div class="figure">
 <img src="./figures/cmd.jpg" alt="命令实现结构图" /><p class="caption">命令实现结构图</p>
 </div>
+<p>以下内容为分析6个命令的实现流程，为了做到重点突出，逻辑明晰，仅对每个命令实现代码中的第一层和第二层函数调用进行分析。 对于第三层的重要函数的实现分析，将放到核心代码分析章节中，不在本章节中展开。这样做的目的，主要是希望能够在有限的篇幅中， 把实现每个命令所调用的最重要的库函数接口体现出来，避免在繁冗复杂的函数接口列表中无重点的分析。</p>
+<h3 id="insmod-命令实现流程">insmod 命令实现流程</h3>
 <p><strong>do_insmod 核心代码分析</strong></p>
 <p>分析到这里，我们就进入到了 insmod 命令实现最核心的部分 do_insmod() 函数，后面的其他几个命令也都是类似的方法，进入到 do_xxx() 中，之后的分析关于这部分不再赘述。下面我们来看看 do_insmod() 函数实现中最核心的部分代码摘要。</p>
 <pre><code>do_insmod()
@@ -1901,7 +1997,31 @@ static int modinfo_alias_do(struct kmod_ctx *ctx, const char *alias)
     kmod_module_unref_list(filtered);
     return err;
 }</code></pre>
-<p>从上面的代码可以看出，通过 modinfo_path_do 只会找到一个 mod 进行输出，而通过 modinfo_alias_do 会根据 alias 找到一个 mod 的 list 然后逐一输出。无论那种方式，最终都是调用 modinfo_do 来对单个模块 mod 的信息进行输出，因此 modinfo_do 可以看成是实现 modinfo 命令的核心函数，从调用层次图中不难看出，这个函数主要使用了 kmod_module 模块提供的各种 get 功能调用来完成对模块信息的提取。在后面的核心代码分析章节中，我们会对这个函数 modinfo_do 来进行详细的分析。</p>
+<p>从上面的代码可以看出，通过 modinfo_path_do 只会找到一个 mod 进行输出，而通过 modinfo_alias_do 会根据 alias 找到一个 mod 的 list 然后逐一输出。无论那种方式，最终都是调用 modinfo_do 来对单个模块 mod 的信息进行输出，因此 modinfo_do 可以看成是实现 modinfo 命令的核心函数，从调用层次图中不难看出，这个函数主要使用了 kmod_module 模块提供的各种 get 功能调用来完成对模块信息的提取。</p>
+<p><strong>modinfo_do() 核心代码分析</strong> 该函数是实现 modinfo 命令的重要函数，模块信息的主要表示方式就是 key : value ，例如 author ： tsinghuaer</p>
+<pre><code>static int modinfo_do(struct kmod_module *mod)
+{
+    struct kmod_list *l, *list = NULL;
+    struct param *params = NULL;
+
+    printf(&quot;%s%c&quot;, kmod_module_get_path(mod), separator);
+    err = kmod_module_get_info(mod, &amp;list);
+    kmod_module_get_name(mod), strerror(-err));
+
+    kmod_list_foreach(l, list) {
+            const char *key = kmod_module_info_get_key(l);
+            const char *value = kmod_module_info_get_value(l);
+
+        process_parm(key, value, &amp;params);
+
+            printf(&quot;%s:%-*s%s%c&quot;, key, 15 - keylen, &quot;&quot;, value, separator);
+    }
+
+    kmod_module_info_free_list(list);
+
+    return err;
+}</code></pre>
+<p>在后面的核心代码分析章节中，我们会对这个函数 kmod_module_get_info 来进行详细的分析。</p>
 <h3 id="depmod-命令实现流程">depmod 命令实现流程</h3>
 <p><strong>do_depmod() 核心代码分析</strong></p>
 <pre><code>do_depmod(int argc, char *argv[])
@@ -1939,7 +2059,8 @@ static int modinfo_alias_do(struct kmod_ctx *ctx, const char *alias)
 <li>释放相关的动态分配内存，结束 depmod 操作</li>
 </ul>
 <p>下面根据这个核心代码，将在一层逻辑过程中调用到的函数，做一个简要的说明。 所有这些函数可以分为3类，分别形如 kmod_xxx，depmod_xxx, cfg_xxx 开头的。</p>
-<p><strong>kmod_xxx</strong> 包含 kmod_new, kmod_module_new_from_path, kmod_unref 这3个在之前的代码分析中介绍过。 其中用到了3个接口，分别是</p>
+<p><strong>kmod_xxx</strong></p>
+<p>包含 kmod_new, kmod_module_new_from_path, kmod_unref 这3个在之前的代码分析中介绍过。 其中用到了3个接口，分别是</p>
 <ul>
 <li>libkmod/libkmod.c
 <ul>
@@ -1952,8 +2073,20 @@ static int modinfo_alias_do(struct kmod_ctx *ctx, const char *alias)
 </ul></li>
 </ul>
 <p>另外，在当前文件内部，还构建了两个新的子模块 depmod 和 cfg * tools/depmod.c - depmod_xxx - cfg_xxx</p>
-<p><strong>depmod_xxx</strong> 这些函数都被声明为 static 的类型，说明仅仅只是为 depmod 命令的实现而服务的，不属于 libkmod 库要提供的接口。 * depmod 内部子模块上层接口 - depmod_init - depmod_load_symvers - depmod_load_system_map - depmod_modules_search - depmod_module_add - depmod_modules_build_array - depmod_modules_sort - depmod_shutdown</p>
+<p><strong>depmod_xxx</strong></p>
+<p>这些函数都被声明为 static 的类型，说明仅仅只是为 depmod 命令的实现而服务的，不属于 libkmod 库要提供的接口。</p>
 <ul>
+<li>depmod 内部子模块上层接口
+<ul>
+<li>depmod_init</li>
+<li>depmod_load_symvers</li>
+<li>depmod_load_system_map</li>
+<li>depmod_modules_search</li>
+<li>depmod_module_add</li>
+<li>depmod_modules_build_array</li>
+<li>depmod_modules_sort</li>
+<li>depmod_shutdown</li>
+</ul></li>
 <li><p>围绕上面这些函数，还需要调用到如下接口</p>
 <p>static int depmod_init(struct depmod *depmod, struct cfg *cfg, struct kmod_ctx *ctx) { array_init(&amp;depmod-&gt;modules, 128);</p>
 <pre><code>depmod-&gt;modules_by_uncrelpath = hash_new(512, NULL);
@@ -2088,7 +2221,7 @@ static void cfg_free(struct cfg *cfg)
 1830                 putc(&#39;\n&#39;, stdout);
 ... 
 1834 }</code></pre>
-<p>总的来说，depmod 命令的实现，并没有太多依赖于 libkmod 库所提供的接口，而是自己内部实现了2个子模块来完成。 其中 depmod_xxx 模块主要完成分析模块文件之间关系，形成依赖列表，并将这个依赖列表写入到所需要的文件中去。 cfg_xxx 模块主要完成对 cfg 配置文件的分析，</p>
+<p>总的来说，depmod 命令的实现，并没有太多依赖于 libkmod 库所提供的接口，而是自己内部实现了2个子模块来完成。 其中 depmod_xxx 模块主要完成分析模块文件之间关系，形成依赖列表，并将这个依赖列表写入到所需要的文件中去。 cfg_xxx 模块主要完成对 config 配置文件的分析，</p>
 <h3 id="modprobe-命令实现流程">modprobe 命令实现流程</h3>
 <p><strong>do_modprobe() 核心代码分析</strong></p>
 <pre><code>do_modprobe(int argc, char *argv[])
@@ -2129,8 +2262,13 @@ static void cfg_free(struct cfg *cfg)
     return err;
 }</code></pre>
 <h4 id="insmod">insmod()</h4>
-<p>static int insmod(struct kmod_ctx *ctx, const char *alias, const char *extra_options) { struct kmod_list *l, *list = NULL; int err, flags = 0;</p>
-<pre><code>    void (*show)(struct kmod_module *m, bool install,
+<pre><code>static int insmod(struct kmod_ctx *ctx, const char *alias,
+                                            const char *extra_options)
+{
+    struct kmod_list *l, *list = NULL;
+    int err, flags = 0;
+
+    void (*show)(struct kmod_module *m, bool install,
                                             const char *options) = NULL;
 
     err = kmod_module_new_from_lookup(ctx, alias, &amp;list);
@@ -2149,8 +2287,8 @@ static void cfg_free(struct cfg *cfg)
     }
 
     kmod_module_unref_list(list);
-    return err;</code></pre>
-<p>}</p>
+    return err;
+}</code></pre>
 <p>从上面的代码分析可以看出，insmod 函数是依靠调用 kmod_module_probe_insert_module() 来完成模块加载的。 为什么这里的 insmod 没有调用之前分析过的 kmod_module_insert_module() 来实现呢？ 是因为 kmod_module_insert_module() 只负责插入当前这个 .ko 内核模块，并不负责检查依赖关系。 而这里的 insmod 是需要根据当前 .ko 的依赖关系列表，决定要把多少个 .ko 依次一起插入进来。 所以 kmod_module_probe_insert_module() 是可以完成根据依赖关系插入模块的 libkmod 中的重要接口。</p>
 <p>当然这两个函数之间也是有相互关系的，表现为 kmod_module_probe_insert_module() 函数会调用 kmod_module_insert_module()， 而在此之前，还需要通过 kmod_module_get_probe_list() 函数来得到一个 probe_list 也就是加载模块列表。</p>
 <h4 id="kmod_module_probe_insert_module">kmod_module_probe_insert_module</h4>
@@ -2166,6 +2304,15 @@ static void cfg_free(struct cfg *cfg)
 }</code></pre>
 <h2 id="函数接口分析">5. 函数接口分析</h2>
 <h3 id="kmod_new-核心代码分析">kmod_new() 核心代码分析</h3>
+<p>kmod_new 函数通过调用 calloc 动态内存分配一个 struct kmod_ctx 结构体，并将获得的指针作为返回值。 在这个 ctx 结构体里面，有3个重要的成员变量需要赋值，dirname ，config 和 modules_by_name 分别对应着3个重要的函数接口。</p>
+<ul>
+<li>get_kernel_release</li>
+<li>kmod_config_new</li>
+<li>hash_new</li>
+</ul>
+<div class="figure">
+<img src="./figures/kmod_new.jpg" alt="kmod_new 调用层次图" /><p class="caption">kmod_new 调用层次图</p>
+</div>
 <pre><code>kmod_ctx *kmod_new(char *dirname, char *config_paths)
 {
     ctx = calloc(1, sizeof(struct kmod_ctx));
@@ -2175,10 +2322,15 @@ static void cfg_free(struct cfg *cfg)
 
     return ctx;
 }</code></pre>
-<div class="figure">
-<img src="./figures/kmod_new.jpg" alt="kmod_new 调用层次图" /><p class="caption">kmod_new 调用层次图</p>
-</div>
 <h3 id="kmod_unref-核心代码分析">kmod_unref() 核心代码分析</h3>
+<p>kmod_unref 是 kmod_new 的反操作，一般都是配套使用。该函数的主要功能是释放通过 callac 和 xxx_new 函数分配的空间。 和之前分配空间的函数相对应的，有2个释放空间的函数。另外还调用了 kmod_unload_resources 来释放相关资源。</p>
+<ul>
+<li>hash_free</li>
+<li>kmod_config_free</li>
+</ul>
+<div class="figure">
+<img src="./figures/kmod_unref.jpg" alt="kmod_unref 调用层次图" /><p class="caption">kmod_unref 调用层次图</p>
+</div>
 <pre><code>kmod_ctx *kmod_unref(kmod_ctx *ctx)
 {
     kmod_unload_resources(ctx);
@@ -2188,10 +2340,11 @@ static void cfg_free(struct cfg *cfg)
 
     return NULL;
 }</code></pre>
-<div class="figure">
-<img src="./figures/kmod_unref.jpg" alt="kmod_unref 调用层次图" /><p class="caption">kmod_unref 调用层次图</p>
-</div>
 <h3 id="kmod_module_new_from_path-核心代码分析">kmod_module_new_from_path() 核心代码分析</h3>
+<p>kmod_module_new_from_path 首先将传进来的 path 绝对路径转换为 modname 也就是去掉路径信息，然后进行正规化操作。 modname_normalize 正规化函数的实现，主要是将文件名称中的 ‘-’ 转换成下划线 ‘_' ，同时名字中不允许出现小数点 '.'。</p>
+<div class="figure">
+<img src="./figures/kmod_module_new_from_path.jpg" alt="kmod_module_new_from_path 调用层次图" /><p class="caption">kmod_module_new_from_path 调用层次图</p>
+</div>
 <pre><code>int kmod_module_new_from_path(kmod_ctx *ctx, char *path, kmod_module **mod)
 {
     path_to_modname(path, name, &amp;namelen);
@@ -2200,15 +2353,118 @@ static void cfg_free(struct cfg *cfg)
     err = kmod_module_new(ctx, name, name, namelen, NULL, 0, &amp;m); *
     *mod = m;
     return 0;
-}</code></pre>
+}
+
+157 // kmod-11/libkmod/libkmod-util.c 
+158 char *path_to_modname(const char *path, char buf[PATH_MAX], size_t *len)
+159 {
+160         char *modname;
+161 
+162         modname = basename(path);
+163         if (modname == NULL || modname[0] == &#39;\0&#39;)
+164                 return NULL;
+165 
+166         return modname_normalize(modname, buf, len);
+167 }
+
+133 // kmod-11/libkmod/libkmod-util.c 
+134 inline char *modname_normalize(const char *modname, char buf[PATH_MAX],
+135                                                                 size_t *len)
+136 {
+137         size_t s;
+138 
+139         for (s = 0; s &lt; PATH_MAX - 1; s++) {
+140                 const char c = modname[s];
+141                 if (c == &#39;-&#39;)
+142                         buf[s] = &#39;_&#39;;
+143                 else if (c == &#39;\0&#39; || c == &#39;.&#39;)
+144                         break;
+145                 else
+146                         buf[s] = c;
+147         }
+148 
+149         buf[s] = &#39;\0&#39;;
+150 
+151         if (len)
+152                 *len = s;
+153 
+154         return buf;
+155 }</code></pre>
+<h3 id="kmod_module_new_from_name-核心代码分析">kmod_module_new_from_name() 核心代码分析</h3>
+<p>kmod_module_new_from_name 是首先把模块的名字进行正规化，然后调用 kmod_module_new 来完成最终的操作。</p>
 <div class="figure">
-<img src="./figures/kmod_module_new_from_path.jpg" alt="kmod_module_new_from_path 调用层次图" /><p class="caption">kmod_module_new_from_path 调用层次图</p>
+<img src="./figures/kmod_module_new_from_name.jpg" alt="kmod_module_new_from_name 调用层次图" /><p class="caption">kmod_module_new_from_name 调用层次图</p>
 </div>
+<pre><code>KMOD_EXPORT int kmod_module_new_from_name(struct kmod_ctx *ctx,
+                                            const char *name,
+                                            struct kmod_module **mod)
+{
+    size_t namelen;
+    char name_norm[PATH_MAX];
+
+    if (ctx == NULL || name == NULL || mod == NULL)
+            return -ENOENT;
+
+    modname_normalize(name, name_norm, &amp;namelen);
+
+    return kmod_module_new(ctx, name_norm, name_norm, namelen, NULL, 0, mod);
+}</code></pre>
+<h3 id="kmod_module_new-核心代码分析">kmod_module_new() 核心代码分析</h3>
+<p>kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针，通过 malloc 生成一个 kmod_module ，并将指针作为传出参数赋值给 *mod。 其中涉及到的几个函数调用接口的实现主要都在 ./kmod-11/libkmod/libkmod.c 文件中，代码实现的主要思路如下：</p>
+<ul>
+<li>kmod_pool_get_module(ctx, key)
+<ul>
+<li>hash_find(ctx-&gt;modules_by_name, key)</li>
+</ul></li>
+<li>kmod_pool_add_module(ctx, m, m-&gt;hashkey)
+<ul>
+<li>hash_add(ctx-&gt;modules_by_name, m, m-&gt;hashkey)</li>
+</ul></li>
+<li>kmod_ref(ctx)
+<ul>
+<li>ctx-&gt;refcount++</li>
+</ul></li>
+</ul>
+<p>在这里就不详细论述，感兴趣的可以再往深入的地方看下去。</p>
+<div class="figure">
+<img src="./figures/kmod_module_new.jpg" alt="kmod_module_new 调用层次图" /><p class="caption">kmod_module_new 调用层次图</p>
+</div>
+<pre><code>static int kmod_module_new(struct kmod_ctx *ctx, const char *key,
+                            const char *name, size_t namelen,
+                            const char *alias, size_t aliaslen,
+                            struct kmod_module **mod)
+{
+    struct kmod_module *m;
+    size_t keylen;
+
+    m = kmod_pool_get_module(ctx, key);
+    *mod = kmod_module_ref(m);
+
+    m = malloc(sizeof(*m) + (alias == NULL ? 1 : 2) * (keylen + 1));
+    m-&gt;ctx = kmod_ref(ctx);
+    m-&gt;name = (char *)m + sizeof(*m);
+    memcpy(m-&gt;name, key, keylen + 1);
+
+    m-&gt;name[namelen] = &#39;\0&#39;;
+    m-&gt;alias = m-&gt;name + namelen + 1;
+    m-&gt;hashkey = m-&gt;name + keylen + 1;
+    memcpy(m-&gt;hashkey, key, keylen + 1);
+
+    m-&gt;refcount = 1;
+    kmod_pool_add_module(ctx, m, m-&gt;hashkey);
+    *mod = m;
+
+    return 0;
+}</code></pre>
 <h3 id="kmod_module_insert_module-核心代码分析">kmod_module_insert_module() 核心代码分析</h3>
+<p>该函数是实现 insmod 命令最核心的函数，实现代码的逻辑结构非常清晰。主要涉及到了2个核心模块 kmod_file, kmod_elf ，也正是在这个函数的实现中，简单而又不失重要性的展示了 命令 -&gt; 库 -&gt; 系统调用 这3个层次上的相互调用关系，程序设计的分层艺术也非常完美的体现在这个函数中。</p>
+<div class="figure">
+<img src="./figures/kmod_module_insert_module.jpg" alt="kmod_module_insert_module 调用层次图" /><p class="caption">kmod_module_insert_module 调用层次图</p>
+</div>
 <pre><code>int kmod_module_insert_module(kmod_module *mod, int flags, char *options)
 {
     path = kmod_module_get_path(mod);
-    file = kmod_file_open();
+    file = kmod_file_open(mod-&gt;ctx, path);
     size = kmod_file_get_size(file);
     mem = kmod_file_get_contents(file);
     elf = kmod_elf_new(mem, size);
@@ -2218,10 +2474,12 @@ static void cfg_free(struct cfg *cfg)
     kmod_elf_unref(elf);
     kmod_file_unref(file);
 }</code></pre>
-<div class="figure">
-<img src="./figures/kmod_module_insert_module.jpg" alt="kmod_module_insert_module 调用层次图" /><p class="caption">kmod_module_insert_module 调用层次图</p>
-</div>
 <h3 id="kmod_module_unref-核心代码分析">kmod_module_unref() 核心代码分析</h3>
+<p>该函数是 kmod_module_new 操作的反操作，主要功能是释放 new 函数中分配的内存空间。 通过调用 kmod_pool_del_module 在 kmod_pool 池中删除该模块的hash键值。 同时减少对该模块的引用计数 --mod-&gt;refcount; 如果减1后计数为0，则需要彻底将该模块从内核中清除。</p>
+<p>首先，把它从 kmod_pool 中删除 kmod_pool_del_module(mod-&gt;ctx, mod, mod-&gt;hashkey); 对于该模块所依赖的模块列表中的所有模块的引用计数也需要进行减1操作 kmod_module_unref_list(mod-&gt;dep)。 释放该模块对应的 kmod_file 也就是 kmod_file_unref(mod-&gt;file); 释放该模块对应的 kmod_ctx 也就是 kmod_unref(mod-&gt;ctx);</p>
+<div class="figure">
+<img src="./figures/kmod_module_unref.jpg" alt="kmod_module_unref 调用层次图" /><p class="caption">kmod_module_unref 调用层次图</p>
+</div>
 <pre><code>kmod_module *kmod_module_unref(kmod_module *mod)
 {
     --mod-&gt;refcount;
@@ -2233,9 +2491,6 @@ static void cfg_free(struct cfg *cfg)
 
     return NULL;
 }</code></pre>
-<div class="figure">
-<img src="./figures/kmod_module_unref.jpg" alt="kmod_module_unref 调用层次图" /><p class="caption">kmod_module_unref 调用层次图</p>
-</div>
 <h3 id="init_module-核心代码分析">init_module() 核心代码分析</h3>
 <pre><code>long init_module(void *mem, unsigned long len, const char *args)
 {
@@ -2253,25 +2508,8 @@ static void cfg_free(struct cfg *cfg)
 
     return err;
 }</code></pre>
-<h3 id="do_rmmod-核心代码分析">do_rmmod() 核心代码分析</h3>
-<pre><code>do_rmmod(int argc, char *argv[])
-{
-    flags = argv[x];    // -f, -w, 
-    ctx = kmod_new(NULL, &amp;null_config);
-    err = kmod_module_new_from_path(ctx, filename, &amp;mod);
-    err = kmod_module_remove_module(mod, flags);
-    kmod_module_unref(mod);
-    kmod_unref(ctx);
-}</code></pre>
-<h3 id="kmod_module_remove_module-核心代码分析">kmod_module_remove_module() 核心代码分析</h3>
-<pre><code>int kmod_module_remove_module(kmod_module *mod, int flags)
-{
-    err = delete_module(mod-&gt;name, flags);
-
-    return err;
-}</code></pre>
 <h3 id="delete_module-核心代码分析">delete_module() 核心代码分析</h3>
-<pre><code>long init_module(void *mem, int flags)
+<pre><code>long delete_module(void *mem, int flags)
 {
     struct mod *mod;
 
@@ -2279,7 +2517,16 @@ static void cfg_free(struct cfg *cfg)
 
     return mod-&gt;ret;
 }</code></pre>
+<h3 id="kmod_module_remove_module-核心代码分析">kmod_module_remove_module() 核心代码分析</h3>
+<p>该函数是实现 rmmod 的最主要的函数，它的实现也很简单，就是调用 delete_module 系统调用。</p>
+<pre><code>int kmod_module_remove_module(kmod_module *mod, int flags)
+{
+    err = delete_module(mod-&gt;name, flags);
+
+    return err;
+}</code></pre>
 <h3 id="kmod_module_new_from_loaded-核心代码分析">kmod_module_new_from_loaded 核心代码分析</h3>
+<p>该函数是实现 lsmod 命令的重要函数，通过读取 /proc/modules 文件的每一行，构建一个 kmod_list 列表，然后给 *list 赋值作为传出参数返回。 通过 cat 命令，查看 /proc/modules 文件的内容，格式不是很整齐，排列参差不齐。通过 lsmod 命令输出的信息，格式对齐，看起来信息也比较清晰。</p>
 <pre><code>KMOD_EXPORT int kmod_module_new_from_loaded(struct kmod_ctx *ctx,
                         struct kmod_list **list)
 {
@@ -2314,7 +2561,11 @@ static void cfg_free(struct cfg *cfg)
 
     return 0;
 }</code></pre>
+<div class="figure">
+<img src="./figures/kmod_module_new_from_loaded.jpg" alt="kmod_module_new_from_loaded 调用层次图" /><p class="caption">kmod_module_new_from_loaded 调用层次图</p>
+</div>
 <h3 id="kmod_module_new_from_lookup-核心代码分析">kmod_module_new_from_lookup 核心代码分析</h3>
+<p>该函数主要用于在 modprobe 中插入模块前所使用，根据用户给出的 alias 来完成构建 kmod_list 的操作，最后给 *list 赋值作为传出参数返回。</p>
 <pre><code>KMOD_EXPORT int kmod_module_new_from_lookup(struct kmod_ctx *ctx,
                         const char *given_alias,
                         struct kmod_list **list)
@@ -2336,30 +2587,9 @@ static void cfg_free(struct cfg *cfg)
 
     return err;
 }</code></pre>
-<h3 id="modinfo_do-核心代码分析">modinfo_do 核心代码分析</h3>
-<pre><code>static int modinfo_do(struct kmod_module *mod)
-{
-    struct kmod_list *l, *list = NULL;
-    struct param *params = NULL;
-
-    printf(&quot;%s%c&quot;, kmod_module_get_path(mod), separator);
-    err = kmod_module_get_info(mod, &amp;list);
-    kmod_module_get_name(mod), strerror(-err));
-
-    kmod_list_foreach(l, list) {
-            const char *key = kmod_module_info_get_key(l);
-            const char *value = kmod_module_info_get_value(l);
-
-        process_parm(key, value, &amp;params);
-
-            printf(&quot;%s:%-*s%s%c&quot;, key, 15 - keylen, &quot;&quot;, value, separator);
-    }
-
-    kmod_module_info_free_list(list);
-
-    return err;
-}</code></pre>
 <h3 id="kmod_module_probe_insert_module-1">kmod_module_probe_insert_module</h3>
+<p>该函数主要用于在 modprobe 时真正完成 probe insert 操作，这个函数最终还是要调用 kmod_module_insert_module 函数来实现插入操作。 所不同的是，在插入之前需要生成一个 probe_list ，这个链表是用来标明 probe 一共需要插入的模块有多少，而且保证按照依赖关系从弱到强的顺序排列。</p>
+<p>其中 kmod_module_get_probe_list 是整个 modprobe 操作中最难部分，体现为需要从 depmod 命令生成的 modules.dep 文件中，读取该模块的依赖关系列表。 并由此生成一个 list ，用于之后通过这个 list 来依次插入每一个所需要的内核模块。</p>
 <pre><code>int kmod_module_probe_insert_module(mod, flags, extra_options, run_install)
 {
     err = kmod_module_get_probe_list(mod, !!(flags &amp; KMOD_PROBE_IGNORE_COMMAND), &amp;list);
@@ -2370,13 +2600,19 @@ static void cfg_free(struct cfg *cfg)
         err = kmod_module_insert_module(m, flags, options);
     }
 }</code></pre>
+<div class="figure">
+<img src="./figures/kmod_module_probe_insert_module.jpg" alt="kmod_module_probe_insert_module 调用层次图" /><p class="caption">kmod_module_probe_insert_module 调用层次图</p>
+</div>
 <h3 id="kmod_module_get_probe_list-函数调用流程">kmod_module_get_probe_list 函数调用流程</h3>
 <pre><code>-&gt; kmod_module_get_probe_list
     -&gt; __kmod_module_get_probe_list
         -&gt; kmod_module_get_dependencies
             -&gt;  module_get_dependencies_noref
                 -&gt; kmod_module_parse_depline</code></pre>
-<h4 id="kmod_module_get_dependencies">kmod_module_get_dependencies</h4>
+<div class="figure">
+<img src="./figures/kmod_module_get_probe_list.jpg" alt="kmod_module_get_probe_list 调用层次图" /><p class="caption">kmod_module_get_probe_list 调用层次图</p>
+</div>
+<h4 id="kmod_module_get_dependencies-核心代码分析">kmod_module_get_dependencies 核心代码分析</h4>
 <pre><code>kmod_list *kmod_module_get_dependencies(struct kmod_module *mod)
 {
     module_get_dependencies_noref(mod);
@@ -2389,8 +2625,11 @@ static void cfg_free(struct cfg *cfg)
 
     return list_new;
 }</code></pre>
-<h4 id="module_get_dependencies_noref">module_get_dependencies_noref</h4>
-<pre><code>kmod_list *module_get_dependencies_noref(struct kmod_module *mod)
+<h4 id="module_get_dependencies_noref-核心代码分析">module_get_dependencies_noref 核心代码分析</h4>
+<p>找到 mod-&gt;name 所在的行，得到该模块的依赖关系字符串到 line 中，然后对这个 line 进行 parse 操作，获得每一个依赖模块逐一加载。 举例： $ ./kmod-11/tools/modprobe nfs</p>
+<pre><code>line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
+
+kmod_list *module_get_dependencies_noref(struct kmod_module *mod)
 {
     char *line = kmod_search_moddep(mod-&gt;ctx, mod-&gt;name);
 
@@ -2398,7 +2637,8 @@ static void cfg_free(struct cfg *cfg)
 
     return mod-&gt;dep;
 }</code></pre>
-<h4 id="kmod_search_moddep">kmod_search_moddep</h4>
+<h4 id="kmod_search_moddep-核心代码分析">kmod_search_moddep 核心代码分析</h4>
+<p>该函数是实现从模块名字到模块依赖关系字符串的转换，简单来说就是实现 name -&gt; line 的转换。</p>
 <pre><code>char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
 {
     // name = nfs;      // modprobe nfs
@@ -2412,12 +2652,38 @@ static void cfg_free(struct cfg *cfg)
 
     return line;
 }</code></pre>
-<h4 id="kmod_module_parse_depline">kmod_module_parse_depline</h4>
-<pre><code>int kmod_module_parse_depline(struct kmod_module *mod, char *line)
+<div class="figure">
+<img src="./figures/kmod_search_moddep.jpg" alt="kmod_search_moddep 调用层次图" /><p class="caption">kmod_search_moddep 调用层次图</p>
+</div>
+<h4 id="kmod_module_parse_depline-核心代码分析">kmod_module_parse_depline 核心代码分析</h4>
+<p>从 line 中根据冒号作为间隔符，冒号左边是要加载的模块，冒号右边是依赖关系列表，列表中的各个模块是以 path 的方式存储的，两个之间用空格或者 间隔，因此需要通过 strtok 函数来依次获得每一个模块的字符串，通过这个字符串 path，调用 kmod_module_new_from_path 来得到一个 kmod_list。</p>
+<div class="figure">
+<img src="./figures/kmod_module_parse_depline.jpg" alt="kmod_module_parse_depline 调用层次图" /><p class="caption">kmod_module_parse_depline 调用层次图</p>
+</div>
+<p>举例：</p>
+<pre><code>$ ./kmod-11/tools/modprobe nfs
+
+line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
+
+p = kernel/fs/nfs_common/nfs_acl.ko
+
+p = kernel/net/sunrpc/auth_gss/auth_rpcgss.ko
+
+p = kernel/fs/fscache/fscache.ko
+
+p = kernel/fs/lockd/lockd.ko
+
+p = kernel/net/sunrpc/sunrpc.ko
+
+int kmod_module_parse_depline(struct kmod_module *mod, char *line)
 {
+    p = strchr(line, &#39;:&#39;);
+
     for (p = strtok_r(p, &quot; \t&quot;, &amp;saveptr); p != NULL;
          p = strtok_r(NULL, &quot; \t&quot;, &amp;saveptr)) 
     {
+        path = path_join(p, dirnamelen, buf);
+
         err = kmod_module_new_from_path(ctx, path, &amp;depmod);
         list = kmod_list_prepend(list, depmod);
         n++;
@@ -2428,3 +2694,48 @@ static void cfg_free(struct cfg *cfg)
 
     return n;
 }</code></pre>
+<h2 id="总结">5. 总结</h2>
+<p>kmod-11 的项目分析，对于我们未来设计类似的软件架构，有如下启示：</p>
+<p>1）kmod-11 采用了 libabc 的库项目框架，这个项目是一个开源项目，项目的参考代码可以在 github 上找到。</p>
+<p>https://github.com/bitbckt/libabc</p>
+<p>https://git.kernel.org/cgit/linux/kernel/git/kay/libabc.git</p>
+<p>libabc 项目发源于2002年，在2011年发布了 version 4。目前最近一次提交是2013.3.11。</p>
+<p>整个项目的框架和目前我们所分析的，有很多类似的地方。特别是 ctx 环境上下文这个数据结构的引入。</p>
+<p>我们可以看一个来自 libabc 中的简单的例子 test-libabc.c。</p>
+<pre><code>#include &lt;libabc.h&gt;
+
+int main(int argc, char *argv[])
+{
+    struct abc_ctx *ctx;
+    struct abc_thing *thing = NULL;
+    int err;
+
+    err = abc_new(&amp;ctx);
+    if (err &lt; 0)
+        exit(EXIT_FAILURE);
+
+    printf(&quot;version %s\n&quot;, VERSION);
+
+    err = abc_thing_new_from_string(ctx, &quot;foo&quot;, &amp;thing);
+    if (err &gt;= 0)
+        abc_thing_unref(thing);
+
+    abc_unref(ctx);
+    return EXIT_SUCCESS;
+}</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>基础类的数据结构和算法，是写一个大型项目所必须具备的知识储备。</li>
+</ol>
+<p>在 kmod-11 项目中，6个基础类的子模块，</p>
+<ul>
+<li>hash 哈希表模块</li>
+<li>list 链表模块</li>
+<li>array 动态数组模块</li>
+<li>index_mm 索引查找模块</li>
+<li>log 日志记录模块</li>
+<li>elf 文件分析模块</li>
+</ul>
+<p>这几个模块并非是 kmod 项目所独有的，完全可以作为未来开发项目的基础类库得以复用。</p>
+<ol start="3" style="list-style-type: decimal">
+<li>系统调用模拟层的设计理念。因为内核模块会经常需要和内核打交道，无论插入和删除，一不小心可能会造成内核崩溃，只能靠 reset 重启来进行调试。因此引入关于系统调用函数的应用层实现，就可以在用户空间模拟系统调用后发生的行为，进行调试和验证。</li>
+</ol>

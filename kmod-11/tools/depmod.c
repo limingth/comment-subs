@@ -1791,6 +1791,8 @@ static int output_deps(struct depmod *depmod, FILE *out)
 {
 	size_t i;
 
+	fprintf(stdout, "total count %d", depmod->modules.count);
+
 	for (i = 0; i < depmod->modules.count; i++) {
 		const struct mod **deps, *mod = depmod->modules.array[i];
 		const char *p = mod_get_compressed_path(mod);

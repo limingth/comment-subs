@@ -4,6 +4,11 @@ dotname=$(SRC:%.dot=%)
 
 
 all: $(JPG)
+	dot -Tjpg kmod_module_get_probe_list.dot -o kmod_module_get_probe_list.jpg
+	dot -Tjpg 0-overview.dot -o 0-overview.jpg
+	dot -Tjpg 1-app.dot -o 1-app.jpg
+	dot -Tjpg kmod_module_probe_insert_module.dot -o kmod_module_probe_insert_module.jpg
+
 	
 
 %.jpg : %.dot
@@ -20,5 +25,5 @@ loop:
 	dot -Tjpg $@.dot -o $@.jpg
 #	gnome-open $@.jpg
 	
-c clean:
-	rm *.jpg
+	c clean:
+	am *.jpg

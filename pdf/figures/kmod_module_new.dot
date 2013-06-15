@@ -1,0 +1,10 @@
+digraph G {
+	kmod_module_new -> kmod_pool_get_module;
+	kmod_module_new -> kmod_ref;
+	kmod_module_new -> kmod_pool_add_module;
+
+	kmod_pool_get_module -> hash_find;
+	kmod_ref -> "mod->refcount++";
+	kmod_pool_add_module -> hash_add;
+}
+

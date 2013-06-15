@@ -13,7 +13,7 @@ b build:
 	make -C kmod-11
 
 .PHONY: pdf
-p pdf:
+p pdf: f
 	make -C pdf kmod
 
 f figure:

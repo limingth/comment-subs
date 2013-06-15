@@ -1,0 +1,11 @@
+digraph G
+{
+	kmod_module_probe_insert_module -> kmod_module_get_probe_list;
+	kmod_module_probe_insert_module -> kmod_list_foreach;
+	kmod_module_probe_insert_module -> kmod_module_insert_module;
+
+	kmod_module_get_probe_list -> kmod_module_get_dependencies;
+	kmod_module_get_dependencies -> module_get_dependencies_noref;
+	module_get_dependencies_noref -> kmod_module_parse_depline;
+
+}

@@ -1,0 +1,10 @@
+digraph G
+{
+	kmod_search_moddep -> index_mm_search;
+
+	kmod_search_moddep -> index_file_open;
+	kmod_search_moddep -> index_search;
+	kmod_search_moddep -> index_file_close;
+
+}
+

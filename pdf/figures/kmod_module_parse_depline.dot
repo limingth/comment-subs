@@ -1,0 +1,9 @@
+digraph G
+{
+	kmod_module_parse_depline -> "strchr :";
+	kmod_module_parse_depline -> "strtok_r ' \t'";
+	kmod_module_parse_depline -> path_join;
+	kmod_module_parse_depline -> kmod_module_new_from_path;
+	kmod_module_parse_depline -> kmod_list_prepend;
+
+}

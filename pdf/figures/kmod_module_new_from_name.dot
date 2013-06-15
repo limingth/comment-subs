@@ -1,0 +1,9 @@
+digraph G {
+	kmod_module_new_from_name -> modname_normalize;
+	kmod_module_new_from_name -> kmod_module_new;
+
+	kmod_module_new -> kmod_pool_get_module;
+	kmod_module_new -> kmod_pool_add_module;
+	kmod_module_new -> kmod_module_ref;
+}
+
