@@ -13,14 +13,14 @@
  * @retval -EEXIST 表示模块已经插入在内核中了
  *
  * @see 调用函数：
- 	- path = kmod_module_get_path(mod)
+ 	- path = kmod_module_get_path()
 	- file = kmod_file_open()
-	- size = kmod_file_get_size(file)
-	- mem = kmod_file_get_contents(file)
-	- elf = kmod_elf_new(mem, size)
-	- kmod_elf_strip_section(elf)
-	- mem = kmod_elf_get_memory(elf)
-	- init_module(mem, size, args) 
-	- kmod_elf_unref(elf)
-	- kmod_file_unref(file)
+	- size = kmod_file_get_size()
+	- mem = kmod_file_get_contents()
+	- elf = kmod_elf_new()
+	- kmod_elf_strip_section()
+	- mem = kmod_elf_get_memory()
+	- init_module() 
+	- kmod_elf_unref()
+	- kmod_file_unref()
  */

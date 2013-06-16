@@ -8,15 +8,19 @@ MODULE_LICENSE("GPL");
 
 int global = 100;
 
+//extern unsigned int jiffies;
+
 int __init 
 akae_init (void)
 {
 	int local = 200;
 	printk ("Hello, akaedu\n");
+	jiffies = 0;
 
 	printk(".text = %p\n", akae_init);
 	printk(".data = %p\n", &global);
 	printk(".stack = %p\n", &local);
+	printk("jiffies =%d \n", jiffies);
 	return 0;
 }
 

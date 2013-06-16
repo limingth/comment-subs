@@ -258,29 +258,6 @@ void kmod_module_set_builtin(struct kmod_module *mod, bool builtin)
 	mod->builtin = builtin;
 }
 
-/*
- * Memory layout with alias:
- *
- * struct kmod_module {
- *        hashkey -----.
- *        alias -----. |
- *        name ----. | |
- * }               | | |
- * name <----------' | |
- * alias <-----------' |
- * name\alias <--------'
- *
- * Memory layout without alias:
- *
- * struct kmod_module {
- *        hashkey ---.
- *        alias -----|----> NULL
- *        name ----. |
- * }               | |
- * name <----------'-'
- *
- * @key is "name\alias" or "name" (in which case alias == NULL)
- */
 /**
  * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
  *（课题编号：2012ZX01039-004）”的资助。
@@ -941,7 +918,7 @@ extern long init_module(const void *mem, unsigned long len, const char *args);
  *
  * @note 注释详细内容:
  *
- * @brief  kmod_module_insert_module - 插入 kmod module 
+ * @brief  插入 kmod module 
  *
  * 主要功能： 
  *	打开 elf 格式的模块文件，插入 kmod_module 结构体
@@ -955,16 +932,16 @@ extern long init_module(const void *mem, unsigned long len, const char *args);
  * @retval -EEXIST 表示模块已经插入在内核中了
  *
  * @see 调用函数：
- 	- path = kmod_module_get_path(mod)
+ 	- path = kmod_module_get_path()
 	- file = kmod_file_open()
-	- size = kmod_file_get_size(file)
-	- mem = kmod_file_get_contents(file)
-	- elf = kmod_elf_new(mem, size)
-	- kmod_elf_strip_section(elf)
-	- mem = kmod_elf_get_memory(elf)
-	- init_module(mem, size, args) 
-	- kmod_elf_unref(elf)
-	- kmod_file_unref(file)
+	- size = kmod_file_get_size()
+	- mem = kmod_file_get_contents()
+	- elf = kmod_elf_new()
+	- kmod_elf_strip_section()
+	- mem = kmod_elf_get_memory()
+	- init_module() 
+	- kmod_elf_unref()
+	- kmod_file_unref()
  */
 KMOD_EXPORT int kmod_module_insert_module(struct kmod_module *mod,
 							unsigned int flags,

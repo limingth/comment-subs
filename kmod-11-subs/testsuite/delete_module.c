@@ -156,7 +156,7 @@ TS_EXPORT long delete_module(const char *name, unsigned int flags);
  *
  * @note 注释详细内容:
  **
- * @brief  delete_module - 模拟内核卸载模块
+ * @brief  模拟内核卸载模块
  *
  * @brief 主要功能：
  *	先通过 find_module 找到对应 modname 的 mod 指针，

@@ -210,29 +210,6 @@ void kmod_module_set_builtin(struct kmod_module *mod, bool builtin)
 	mod->builtin = builtin;
 }
 
-/*
- * Memory layout with alias:
- *
- * struct kmod_module {
- *        hashkey -----.
- *        alias -----. |
- *        name ----. | |
- * }               | | |
- * name <----------' | |
- * alias <-----------' |
- * name\alias <--------'
- *
- * Memory layout without alias:
- *
- * struct kmod_module {
- *        hashkey ---.
- *        alias -----|----> NULL
- *        name ----. |
- * }               | |
- * name <----------'-'
- *
- * @key is "name\alias" or "name" (in which case alias == NULL)
- */
 // kmod_module_new.cmt
 static int kmod_module_new(struct kmod_ctx *ctx, const char *key,
 				const char *name, size_t namelen,

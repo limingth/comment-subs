@@ -971,7 +971,7 @@ kmod-11 项目系统层次结构如图
 
 
 #### depmod 命令
-该命令的功能是: 分析可加载模块的依赖性，生成modules.dep文件和映射文件。
+该命令的功能是: 分析可加载模块的依赖性，生成 /lib/modules/3.2.0-29-generic-pae/modules.dep 文件和映射文件。
 
 	$ ./kmod-11/tools/depmod -h
 	Usage:
@@ -1932,7 +1932,9 @@ elf 模块的接口主要包含 elf_get_mem, elf_get_section_header, elf_get_str
 
 ### 命令实现流程概述
 
-insmod 命令和其他所有命令一样，都是采用了一个统一的调用方法。实现了一个 struct kmod_cmd 的数据结构，这个数据结构定义在 kmod-11/tools/kmod.h 文件中。
+因为所有命令的实现机制是相同的，都是采用了一个统一的调用方法，所以我们以 insmod 命令为例，介绍一下命令实现流程。
+
+每一个命令，都定义实现了一个 struct kmod_cmd 的数据结构，这个数据结构定义在 kmod-11/tools/kmod.h 文件中。
 
 	struct kmod_cmd {
 		const char *name;
