@@ -922,7 +922,7 @@ Options:
     -h, --help                  Show this help
 $ </code></pre>
 <h4 id="depmod-命令">depmod 命令</h4>
-<p>该命令的功能是: 分析可加载模块的依赖性，生成modules.dep文件和映射文件。</p>
+<p>该命令的功能是: 分析可加载模块的依赖性，生成 /lib/modules/3.2.0-29-generic-pae/modules.dep 文件和映射文件。</p>
 <pre><code>$ ./kmod-11/tools/depmod -h
 Usage:
     depmod -[aA] [options] [forced_version]
@@ -1762,7 +1762,8 @@ p = kernel/net/sunrpc/sunrpc.ko
 $ </code></pre>
 <h2 id="运行流程分析">4. 运行流程分析</h2>
 <h3 id="命令实现流程概述">命令实现流程概述</h3>
-<p>insmod 命令和其他所有命令一样，都是采用了一个统一的调用方法。实现了一个 struct kmod_cmd 的数据结构，这个数据结构定义在 kmod-11/tools/kmod.h 文件中。</p>
+<p>因为所有命令的实现机制是相同的，都是采用了一个统一的调用方法，所以我们以 insmod 命令为例，介绍一下命令实现流程。</p>
+<p>每一个命令，都定义实现了一个 struct kmod_cmd 的数据结构，这个数据结构定义在 kmod-11/tools/kmod.h 文件中。</p>
 <pre><code>struct kmod_cmd {
     const char *name;
     int (*cmd)(int argc, char *argv[]);
@@ -2739,3 +2740,188 @@ int main(int argc, char *argv[])
 <ol start="3" style="list-style-type: decimal">
 <li>系统调用模拟层的设计理念。因为内核模块会经常需要和内核打交道，无论插入和删除，一不小心可能会造成内核崩溃，只能靠 reset 重启来进行调试。因此引入关于系统调用函数的应用层实现，就可以在用户空间模拟系统调用后发生的行为，进行调试和验证。</li>
 </ol>
+<table>
+<thead>
+<tr class="header">
+<th align="left">a</th>
+<th align="center">b</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">aaa</td>
+<td align="center">bbb</td>
+</tr>
+</tbody>
+</table>
+<table>
+   <tr>
+         <td>
+用例标识
+</td>
+           <td>
+THU-12-1
+</td>
+                 <td>
+用例名称
+</td>
+                   <td>
+Kmod-11下载
+</td>
+                     <td>
+测试项编号
+</td>
+                       <td>
+THU-12-1
+</td>
+                          </tr>
+                         <tr>
+                               <td>
+测试用例说明
+</td>
+                                 <td>
+本用例用于测试在 uBuntu 12.04 上，如何下载安装 kmod-11 项目。
+</td>
+                                </tr>
+                                   <tr>
+                                         <td>
+初始化要求
+</td>
+                                           <td>
+硬件环境 型号：Macbook Air 笔记本电脑 CPU：Intel Core 2 Duo 1.4GHz 内存：2GB DDR3 硬盘：64GB
+</td>
+                                          </tr>
+                                             <tr>
+                                               <td>
+软件环境 已安装 Vmware Fusion 虚拟机 5.0.3, 虚拟机安装有Ubuntu 12.04.2 LTS，其中安装有GCC版本 4.6.3
+</td>
+                                                  </tr>
+                                                 <tr>
+                                                       <td>
+前提和约束
+</td>
+                                                         <td>
+无
+</td>
+                                                        </tr>
+                                                           <tr>
+                                                                 <td>
+测试过程
+</td>
+                                                                </tr>
+                                                               <tr>
+                                                                     <td>
+序号
+</td>
+                                                                       <td>
+测试过程
+</td>
+                                                                             <td>
+备注
+</td>
+                                                                            </tr>
+                                                                           <tr>
+                                                                                 <td>
+1
+</td>
+                                                                                   <td>
+详细步骤
+</td>
+                                                                                         <td>
+修改gcc编译选项，使其不生成.note.gnu.build-id段
+</td>
+                                                                                           <td></td>
+                                                                                          </tr>
+                                                                                             <tr>
+                                                                                               <td>
+输入数据
+</td>
+                                                                                                     <td>
+CC=&quot;gcc -Wl,--build-id=none&quot; ./configure --prefix=/opt/grub/
+</td>
+                                                                                                    </tr>
+                                                                                                   <tr>
+                                                                                                         <td>
+预期结果
+</td>
+                                                                                                           <td>
+在GRUB源代码目录下生成Makefile文件
+</td>
+                                                                                                              </tr>
+                                                                                                             <tr>
+                                                                                                                   <td>
+2
+</td>
+                                                                                                                     <td>
+详细步骤
+</td>
+                                                                                                                       <td>
+输入make命令，构建二进制文件
+</td>
+                                                                                                                             <td></td>
+                                                                                                                            </tr>
+                                                                                                                           <tr>
+                                                                                                                                 <td>
+输入数据
+</td>
+                                                                                                                                   <td>
+make
+</td>
+                                                                                                                                      </tr>
+                                                                                                                                     <tr>
+                                                                                                                                           <td>
+预期结果
+</td>
+                                                                                                                                             <td>
+生成stage1，stage1_5（e2fs_stage1_5， fat_stage1_5， ffs_stage1_5， iso9660_stage1_5， jfs_stage1_5， minix_stage1_5， reiserfs_stage1_5 ，ufs2_stage1_5， vstafs_stage1_5， xfs_stage1_5），以及stage2这些二进制映像。
+</td>
+                                                                                                                                            </tr>
+                                                                                                                                               <tr>
+                                                                                                                                                     <td>
+3
+</td>
+                                                                                                                                                       <td>
+详细步骤
+</td>
+                                                                                                                                                         <td>
+输入make install命令，将二进制文件安装到指定目录
+</td>
+                                                                                                                                                           <td></td>
+                                                                                                                                                              </tr>
+                                                                                                                                                             <tr>
+                                                                                                                                                                   <td>
+输入数据
+</td>
+                                                                                                                                                                     <td>
+make install
+</td>
+                                                                                                                                                                    </tr>
+                                                                                                                                                                       <tr>
+                                                                                                                                                                             <td>
+预期结果
+</td>
+                                                                                                                                                                               <td>
+在/opt/grub/下生成以下目录：bin， info， lib， man，sbin
+</td>
+                                                                                                                                                                              </tr>
+                                                                                                                                                                                 <tr>
+                                                                                                                                                                                   <td>
+过程终止条件
+</td>
+                                                                                                                                                                                         <td>
+make install成功并在/opt/grub/下生成以下目录：bin， info， lib， man，sbin
+</td>
+                                                                                                                                                                                        </tr>
+                                                                                                                                                                                       <tr>
+                                                                                                                                                                                             <td>
+结果判定标准
+</td>
+                                                                                                                                                                                               <td>
+以上各步骤都成功，并没有错误产生。
+</td>
+                                                                                                                                                                                                  </tr>
+                                                                                                                                                                                              </table>
+
+
+
+

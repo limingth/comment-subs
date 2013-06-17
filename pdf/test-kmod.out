@@ -1,0 +1,30 @@
+\BOOKMARK [1][-]{section*.1}{kmod-11 测试}{}
+\BOOKMARK [2][-]{section*.2}{THU-12-1 下载编译源码包}{section*.1}
+\BOOKMARK [3][-]{section*.3}{下载源码包}{section*.2}
+\BOOKMARK [3][-]{section*.4}{解压源码包}{section*.2}
+\BOOKMARK [3][-]{section*.5}{编译项目源码}{section*.2}
+\BOOKMARK [2][-]{section*.6}{THU-12-2 测试 insmod 命令}{section*.1}
+\BOOKMARK [3][-]{section*.7}{编写测试用内核模块源码 hello.c}{section*.6}
+\BOOKMARK [3][-]{section*.8}{编写测试用内核模块的 Makefile 文件}{section*.6}
+\BOOKMARK [3][-]{section*.9}{编译内核模块 hello.ko}{section*.6}
+\BOOKMARK [3][-]{section*.10}{使用测试用工具 insmod 插入内核模块}{section*.6}
+\BOOKMARK [3][-]{section*.11}{查看插入内核模块后的打印结果}{section*.6}
+\BOOKMARK [3][-]{section*.12}{重复插入同样的内核模块系统会报错}{section*.6}
+\BOOKMARK [2][-]{section*.13}{THU-12-3 测试 rmmod 命令}{section*.1}
+\BOOKMARK [3][-]{section*.14}{使用测试用工具 rmmod 卸载内核模块}{section*.13}
+\BOOKMARK [3][-]{section*.15}{查看卸载内核模块后的打印结果}{section*.13}
+\BOOKMARK [2][-]{section*.16}{THU-12-4 测试 lsmod 命令}{section*.1}
+\BOOKMARK [3][-]{section*.17}{lsmod 命令运行}{section*.16}
+\BOOKMARK [3][-]{section*.18}{lsmod 命令运行参数}{section*.16}
+\BOOKMARK [2][-]{section*.19}{THU-12-5 测试 modinfo 命令}{section*.1}
+\BOOKMARK [3][-]{section*.20}{modinfo 命令运行参数}{section*.19}
+\BOOKMARK [3][-]{section*.21}{modinfo 命令检查依赖关系}{section*.19}
+\BOOKMARK [3][-]{section*.22}{查看别名信息 alias}{section*.19}
+\BOOKMARK [3][-]{section*.23}{使用 modinfo 查看各个依赖模块信息}{section*.19}
+\BOOKMARK [2][-]{section*.24}{THU-12-6 测试 depmod 命令}{section*.1}
+\BOOKMARK [3][-]{section*.25}{depmod 命令运行时调试图}{section*.24}
+\BOOKMARK [2][-]{section*.26}{THU-12-7 测试 depmod 命令}{section*.1}
+\BOOKMARK [3][-]{section*.27}{modprobe 命令运行时调试图}{section*.26}
+\BOOKMARK [2][-]{section*.28}{THU-12-8 编译生成 testsuite 命令集}{section*.1}
+\BOOKMARK [3][-]{section*.29}{}{section*.28}
+\BOOKMARK [3][-]{section*.30}{}{section*.28}

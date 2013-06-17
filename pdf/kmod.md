@@ -1,5 +1,5 @@
 
-kmod-Linux内核模块工具
+kmod-Linux内核模块工具简介
 ======================
 
 1. 项目背景分析
@@ -898,7 +898,7 @@ kmod 是一个工具，可以实现内核模块的 list 和 打印输出已经�
 
 
 kmod-11 详细分析报告
-======================
+==================
 
 1. 架构分析
 ----------------
@@ -1491,440 +1491,6 @@ elf 模块的接口主要包含 elf_get_mem, elf_get_section_header, elf_get_str
 
 3. 运行时调试图
 ----------------
-
-### insmod 命令运行时调试图
-
-#### 编写测试用内核模块源码 hello.c 
-
-	$ cat hello.c 
-
-	#include <linux/module.h>
-	#include <linux/kernel.h>
-
-	MODULE_AUTHOR("AKAEDU");
-	MODULE_DESCRIPTION("module example ");
-	MODULE_LICENSE("GPL");
-
-	int global = 100;
-
-	int __init 
-	akae_init (void)
-	{
-		int local = 200;
-		printk ("Hello, akaedu\n");
-
-		printk(".text = %p\n", akae_init);
-		printk(".data = %p\n", &global);
-		printk(".stack = %p\n", &local);
-		return 0;
-	}
-
-	void __exit
-	akae_exit (void)
-	{
-		int local = 300;
-		printk ("module exit\n");
-
-		printk(".text = %p\n", akae_exit);
-		printk(".data = %p\n", &global);
-		printk(".stack = %p\n", &local);
-		return ;
-	}
-
-	module_init(akae_init);
-	module_exit(akae_exit);
-	$ 
-
-#### 编写测试用内核模块的 Makefile 文件 Makefile 
-
-	$ cat Makefile 
-
-	obj-m := hello.o
-
-	KDIR := /usr/src/linux-headers-3.2.0-29-generic-pae/
-
-	all:
-		make -C $(KDIR)	SUBDIRS=$(PWD) 	modules
-
-	clean:
-		rm -rf *.o *.ko *.mod.* *.cmd 
-		rm -rf .*
-
-	$ 
-
-#### 编译内核模块 hello.ko
-
-	$ cd hello-module/ 
-	$ make
-	make -C /usr/src/linux-headers-3.2.0-29-generic-pae/	SUBDIRS=/home/akaedu/Github/comment-subs/hello-module 	modules
-	make[1]: Entering directory `/usr/src/linux-headers-3.2.0-29-generic-pae'
-	  CC [M]  /home/akaedu/Github/comment-subs/hello-module/hello.o
-	  Building modules, stage 2.
-	  MODPOST 1 modules
-	  CC      /home/akaedu/Github/comment-subs/hello-module/hello.mod.o
-	  LD [M]  /home/akaedu/Github/comment-subs/hello-module/hello.ko
-	make[1]: Leaving directory `/usr/src/linux-headers-3.2.0-29-generic-pae'
-	$ 
-
-#### 编译生成测试用工具 insmod 
-
-	$ cd kmod-11/ 
-	$ make
-	make --no-print-directory all-recursive
-	Making all in .
-	  CC       libkmod/libkmod.lo
-	  CC       libkmod/libkmod-list.lo
-	  CC       libkmod/libkmod-config.lo
-	  CC       libkmod/libkmod-index.lo
-	  CC       libkmod/libkmod-module.lo
-	  CC       libkmod/libkmod-file.lo
-	  CC       libkmod/libkmod-elf.lo
-	  CC       libkmod/libkmod-hash.lo
-	  CC       libkmod/libkmod-array.lo
-	  CC       libkmod/libkmod-util.lo
-	  CCLD     libkmod/libkmod-util.la
-	  CCLD     libkmod/libkmod.la
-	  CCLD     libkmod/libkmod-private.la
-	  CC       tools/kmod.o
-	  CC       tools/lsmod.o
-	  CC       tools/rmmod.o
-	  CC       tools/insmod.o
-	  CC       tools/modinfo.o
-	  CC       tools/modprobe.o
-	  CC       tools/depmod.o
-	  CC       tools/log.o
-	  CCLD     tools/kmod
-	  CCLD     tools/kmod-nolib
-	  GEN      libkmod/libkmod.pc
-	Making all in libkmod/docs
-	make[2]: Nothing to be done for `all'.
-	Making all in man
-	  GEN      depmod.d.5
-	  GEN      modprobe.d.5
-	  GEN      modules.dep.5
-	  GEN      depmod.8
-	  GEN      insmod.8
-	  GEN      lsmod.8
-	  GEN      rmmod.8
-	  GEN      modprobe.8
-	  GEN      modinfo.8
-	$ 
-
-#### 使用测试用工具 insmod 插入内核模块
-
-	$ sudo ./kmod-11/tools/insmod hello-module/hello.ko 
-	
-#### 查看插入内核模块后的打印结果
-
-	$ lsmod | grep hello
-	hello                  12415  0 
-	$ dmesg | tail
-	[350775.859640] usb 2-2.1: USB disconnect, device number 14
-	[350777.611134] Bluetooth: hci0 urb c7304180 submission failed
-	[350778.217886] usb 2-2.1: new full-speed USB device number 15 using uhci_hcd
-	[352048.604051] usb 2-2.1: USB disconnect, device number 15
-	[352048.630829] Bluetooth: hci0 urb dd3d3000 submission failed
-	[352049.254135] usb 2-2.1: new full-speed USB device number 16 using uhci_hcd
-	[352111.505217] Hello, akaedu
-	[352111.505223] .text = e0844000
-	[352111.505225] .data = e0c03000
-	[352111.505227] .stack = df6e3f54
-	$ 
-
-#### 重复插入同样的内核模块系统会报错
-
-	$ sudo ./kmod-11/tools/insmod hello-module/hello.ko 
-	insmod: ERROR: could not insert module hello-module/hello.ko: File exists
-	$ lsmod | grep hello
-	hello                  12415  0 
-	
-
-### rmmod 命令运行时调试图
-
-#### 使用测试用工具 rmmod 卸载内核模块
-	$ sudo ./kmod-11/tools/rmmod hello-module/hello.ko
-	$ （rmmod 命令的执行，运行在 hello 的后面加上 .ko 的后缀，这个和以前的命令有所不同）
-
-#### 查看卸载内核模块后的打印结果
-	$ lsmod | grep hello
-	$ （可以看到上面命令的执行结果没有任何输出信息）
-	$ dmesg | tail
-	[352048.630829] Bluetooth: hci0 urb dd3d3000 submission failed
-	[352049.254135] usb 2-2.1: new full-speed USB device number 16 using uhci_hcd
-	[352111.505217] Hello, akaedu
-	[352111.505223] .text = e0844000
-	[352111.505225] .data = e0c03000
-	[352111.505227] .stack = df6e3f54
-	[352365.795618] module exit
-	[352365.795624] .text = e0c01000
-	[352365.795626] .data = e0c03000
-	[352365.795628] .stack = dd197f40
-	$ 
-
-### lsmod 命令运行时调试图
-
-该命令不支持带参数，因此后面如果跟某个模块名称，只会显示 usage ，不会显示模块的信息。
-
-	$ ./kmod-11/tools/lsmod ufs
-	Usage: ./kmod-11/tools/lsmod
-	$
-
-不加参数，直接运行 lsmod ，可以显示出当前在内核中的模块情况。
-
-	$ ./kmod-11/tools/lsmod 
-	Module                  Size  Used by
-	nls_iso8859_1          12617  0 
-	nls_cp437              12751  0 
-	usb_storage            39646  0 
-	btrfs                 638208  0 
-	zlib_deflate           26622  1 btrfs
-	libcrc32c              12543  1 btrfs
-	ufs                    78131  0 
-	qnx4                   13309  0 
-	hfsplus                83507  0 
-	hfs                    49479  0 
-	minix                  31418  0 
-	ntfs                  100171  0 
-	vfat                   17308  0 
-	msdos                  17132  0 
-	fat                    55605  2 msdos,vfat
-	jfs                   175085  0 
-	xfs                   747494  0 
-	reiserfs              230896  0 
-	ext2                   67987  0 
-	usblp                  17885  0 
-	vmwgfx                102138  2 
-	ttm                    65344  1 vmwgfx
-	drm                   197692  3 ttm,vmwgfx
-	acpiphp                23535  0 
-	vmw_balloon            12700  0 
-	psmouse                72919  0 
-	serio_raw              13027  0 
-	btusb                  17912  2 
-	joydev                 17393  0 
-	rfcomm                 38139  0 
-	bnep                   17830  2 
-	bluetooth             158438  13 bnep,rfcomm,btusb
-	ppdev                  12849  0 
-	nfsd                  229850  13 
-	nfs                   307376  0 
-	lockd                  78804  2 nfs,nfsd
-	fscache                50642  1 nfs
-	i2c_piix4              13093  0 
-	auth_rpcgss            39597  2 nfs,nfsd
-	nfs_acl                12771  2 nfs,nfsd
-	sunrpc                205647  19 nfs_acl,auth_rpcgss,lockd,nfs,nfsd
-	parport_pc             32114  1 
-	shpchp                 32325  0 
-	mac_hid                13077  0 
-	snd_ens1371            24819  4 
-	gameport               15060  1 snd_ens1371
-	snd_rawmidi            25424  1 snd_ens1371
-	snd_seq_device         14172  1 snd_rawmidi
-	snd_ac97_codec        106082  1 snd_ens1371
-	ac97_bus               12642  1 snd_ac97_codec
-	snd_pcm                80845  3 snd_ac97_codec,snd_ens1371
-	snd_timer              28931  2 snd_pcm
-	snd                    62064  12 snd_timer,snd_pcm,snd_ac97_codec,snd_seq_device,snd_rawmidi,snd_ens1371
-	soundcore              14635  1 snd
-	snd_page_alloc         14108  1 snd_pcm
-	lp                     17455  0 
-	parport                40930  3 lp,parport_pc,ppdev
-	pcnet32                41110  0 
-	usbhid                 41906  0 
-	hid                    77367  1 usbhid
-	mptspi                 22474  2 
-	mptscsih               39530  1 mptspi
-	mptbase                96852  2 mptscsih,mptspi
-	floppy                 60310  0 
-	vmw_pvscsi             18334  0 
-	vmxnet3                44924  0 
-	$ 
-
-### modinfo 命令运行时调试图
-对于没有依赖关系的单个 .ko 内核模块，使用 modinfo 可以直接显示出模块的信息。
-
-	$ ./kmod-11/tools/modinfo ./hello-module/hello.ko 
-	filename:       ./hello-module/hello.ko
-	license:        GPL
-	description:    module example 
-	author:         AKAEDU
-	srcversion:     C928237C5C93794C5E0EF9C
-	depends:        
-	vermagic:       3.2.0-29-generic-pae SMP mod_unload modversions 686 
-	$ 
-
-对于有依赖关系的单个 .ko 内核模块，使用 modinfo 可以显示出模块的依赖关系信息depends，同时也可以显示出模块加载时的参数信息parm。这个参数信息是在编译内核模块的时候，源码中通过用 MODULE_PARM_DESC() 宏来指定的。
-
-	$ modinfo /lib/modules/3.2.0-29-generic-pae/kernel/fs/nfs/nfs.ko 
-	filename:       /lib/modules/3.2.0-29-generic-pae/kernel/fs/nfs/nfs.ko
-	license:        GPL
-	author:         Olaf Kirch <okir@monad.swb.de>
-	srcversion:     BB0605CB0AF0BA47415CBEC
-	depends:        fscache,sunrpc,lockd,auth_rpcgss,nfs_acl
-	intree:         Y
-	vermagic:       3.2.0-29-generic-pae SMP mod_unload modversions 686 
-	parm:           callback_tcpport:portnr
-	parm:           cache_getent:Path to the client cache upcall program (string)
-	parm:           cache_getent_timeout:Timeout (in seconds) after which the cache upcall is assumed to have failed (ulong)
-	parm:           enable_ino64:bool
-	parm:           nfs4_disable_idmapping:Turn off NFSv4 idmapping when using 'sec=sys' (bool)
-	$ 
-
-对于可以使用别名的内核模块，也可以用它的别名 alias 来查看模块信息。别名是在 /lib/modules/3.2.0-29-generic-pae/modules.alias 描述的模块名称的简单形式。
-
-	$ head /lib/modules/3.2.0-29-generic-pae/modules.alias
-	# Aliases extracted from modules themselves.
-	alias pci:v00008086d00003422sv*sd*bc*sc*i* mce_xeon75xx
-	alias char-major-10-134 apm
-	alias devname:cpu/microcode microcode
-	alias char-major-10-184 microcode
-	alias aes-asm aes_i586
-	alias aes aes_i586
-	alias twofish-asm twofish_i586
-	alias twofish twofish_i586
-	alias salsa20-asm salsa20_i586
-	$ 
-
-但是在这个文件中，别名为 aes 的模块，还有很多个，通过 grep "alias aes" 可以看出一共有3个别名都是 aes 的模块，分别是 aes_i586, aesni_intel, padlock_aes。
-
-	$ cat /lib/modules/3.2.0-29-generic-pae/modules.alias | grep "alias aes"
-	alias aes-asm aes_i586
-	alias aes aes_i586
-	alias aes aesni_intel
-	alias aes padlock_aes
-	$ 
-
-通过 modinfo 来查看 aes 这个别名所对应的模块信息，可以看到这3个模块所对应的模块文件 crypto/aes-i586.ko，aesni-intel.ko，padlock-aes.ko 的详细信息。
-
-	$ ./kmod-11/tools/modinfo aes 
-	filename:       /lib/modules/3.2.0-29-generic-pae/kernel/arch/x86/crypto/aes-i586.ko
-	alias:          aes-asm
-	alias:          aes
-	license:        GPL
-	description:    Rijndael (AES) Cipher Algorithm, asm optimized
-	srcversion:     24373C7FF739526E8AAF1B0
-	depends:        
-	intree:         Y
-	vermagic:       3.2.0-29-generic-pae SMP mod_unload modversions 686 
-
-	filename:       /lib/modules/3.2.0-29-generic-pae/kernel/arch/x86/crypto/aesni-intel.ko
-	alias:          aes
-	license:        GPL
-	description:    Rijndael (AES) Cipher Algorithm, Intel AES-NI instructions optimized
-	srcversion:     E0B859CB1FF480D0B70F6F2
-	depends:        cryptd,aes-i586
-	intree:         Y
-	vermagic:       3.2.0-29-generic-pae SMP mod_unload modversions 686 
-
-	filename:       /lib/modules/3.2.0-29-generic-pae/kernel/drivers/crypto/padlock-aes.ko
-	alias:          aes
-	author:         Michal Ludvig
-	license:        GPL
-	description:    VIA PadLock AES algorithm support
-	srcversion:     6842B20FF8E68314ED45103
-	depends:        
-	intree:         Y
-	vermagic:       3.2.0-29-generic-pae SMP mod_unload modversions 686 
-	$ 
-
-### depmod 命令运行时调试图
-
-	$ ./kmod-11/tools/depmod | wc -l
-	3529
-
-	$ vi ./kmod-11/tools/depmod.c
-	修改源码文件，在 output_deps 函数中间插入打印函数，打印输出到标准输出 stdout。
-
-	1790 static int output_deps(struct depmod *depmod, FILE *out)
-	1791 {
-	1792         size_t i;
-	1793 
-	1794         fprintf(stdout, "total count %d", depmod->modules.count);
-	1795 ...
-	1798                 const char *p = mod_get_compressed_path(mod);
-	1799                 size_t j, n_deps;
-	1800 
-	1801                 if (mod->dep_loop) {
-	1802                         DBG("Ignored %s due dependency loops\n", p);
-	1803                         continue;
-	1804                 }
-	1805 
-	1806                 fprintf(out, "%s:", p);
-	1807                 fprintf(stdout, "%s:", p);
-
-	$ make -C kmod-11
-	make[1]: Entering directory `/home/akaedu/Github/comment-subs/kmod-11'
-	make --no-print-directory all-recursive
-	Making all in .
-	  CC       tools/depmod.o
-	  CCLD     tools/kmod
-	  CCLD     tools/kmod-nolib
-	Making all in libkmod/docs
-	make[3]: Nothing to be done for `all'.
-	Making all in man
-	make[3]: Nothing to be done for `all'.
-	make[1]: Leaving directory `/home/akaedu/Github/comment-subs/kmod-11'
-	
-	$ sudo ./kmod-11/tools/depmod | head
-	total count 3529
-	kernel/arch/x86/kernel/cpu/mcheck/mce-xeon75xx.ko:
-	kernel/arch/x86/kernel/cpu/mcheck/mce-inject.ko:
-	kernel/arch/x86/kernel/msr.ko:
-	kernel/arch/x86/kernel/cpuid.ko:
-	kernel/arch/x86/kernel/apm.ko:
-	kernel/arch/x86/kernel/microcode.ko:
-	kernel/arch/x86/crypto/aes-i586.ko:
-	kernel/arch/x86/crypto/twofish-i586.ko: kernel/crypto/twofish_common.ko
-	kernel/arch/x86/crypto/salsa20-i586.ko:
-	kernel/arch/x86/crypto/aesni-intel.ko: kernel/arch/x86/crypto/aes-i586.ko kernel/crypto/cryptd.ko
-	$ 
-
-### modprobe 命令运行时调试图
-
-	$ sudo ./kmod-11/tools/modprobe -r nfs
-	name = nfs
-
-	line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
-	---------------------
-
-	p = kernel/fs/nfs_common/nfs_acl.ko
-	---------------------
-
-	p = kernel/net/sunrpc/auth_gss/auth_rpcgss.ko
-	---------------------
-
-	p = kernel/fs/fscache/fscache.ko
-	---------------------
-
-	p = kernel/fs/lockd/lockd.ko
-	---------------------
-
-	p = kernel/net/sunrpc/sunrpc.ko
-	---------------------
-	$ 
-
-	$ sudo ./kmod-11/tools/modprobe nfs
-	name = nfs
-
-	line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
-	---------------------
-
-	p = kernel/fs/nfs_common/nfs_acl.ko
-	---------------------
-
-	p = kernel/net/sunrpc/auth_gss/auth_rpcgss.ko
-	---------------------
-
-	p = kernel/fs/fscache/fscache.ko
-	---------------------
-
-	p = kernel/fs/lockd/lockd.ko
-	---------------------
-
-	p = kernel/net/sunrpc/sunrpc.ko
-	---------------------
-	$ 
 
 
 4. 运行流程分析
@@ -3061,7 +2627,93 @@ libabc 项目发源于2002年，在2011年发布了 version 4。目前最近一�
 
 3) 系统调用模拟层的设计理念。因为内核模块会经常需要和内核打交道，无论插入和删除，一不小心可能会造成内核崩溃，只能靠 reset 重启来进行调试。因此引入关于系统调用函数的应用层实现，就可以在用户空间模拟系统调用后发生的行为，进行调试和验证。
 
+a	 b
+---	---
+aaa	 bbb 
+---	---	
 
-
+<table>
+   <tr>
+         <td>用例标识</td>
+	       <td>THU-12-1</td>
+	             <td>用例名称</td>
+		           <td>Kmod-11下载</td>
+			         <td>测试项编号</td>
+				       <td>THU-12-1</td>
+				          </tr>
+					     <tr>
+					           <td>测试用例说明</td>
+						         <td>本用例用于测试在 uBuntu 12.04 上，如何下载安装 kmod-11 项目。</td>
+							    </tr>
+							       <tr>
+							             <td>初始化要求</td>
+								           <td>硬件环境&#8232;型号：Macbook Air 笔记本电脑   CPU：Intel Core 2 Duo 1.4GHz&#8232;内存：2GB DDR3   硬盘：64GB</td>
+									      </tr>
+									         <tr>
+										       <td>软件环境&#8232;已安装 Vmware Fusion 虚拟机 5.0.3, 虚拟机安装有Ubuntu 12.04.2 LTS，其中安装有GCC版本  4.6.3 </td>
+										          </tr>
+											     <tr>
+											           <td>前提和约束</td>
+												         <td>无</td>
+													    </tr>
+													       <tr>
+													             <td>测试过程</td>
+														        </tr>
+															   <tr>
+															         <td>序号</td>
+																       <td>测试过程</td>
+																             <td>备注</td>
+																	        </tr>
+																		   <tr>
+																		         <td>1</td>
+																			       <td>详细步骤</td>
+																			             <td>修改gcc编译选项，使其不生成.note.gnu.build-id段</td>
+																				           <td></td>
+																					      </tr>
+																					         <tr>
+																						       <td>输入数据</td>
+																						             <td>CC="gcc -Wl,--build-id=none" ./configure --prefix=/opt/grub/</td>
+																							        </tr>
+																								   <tr>
+																								         <td>预期结果</td>
+																									       <td>在GRUB源代码目录下生成Makefile文件</td>
+																									          </tr>
+																										     <tr>
+																										           <td>2</td>
+																											         <td>详细步骤</td>
+																												       <td>输入make命令，构建二进制文件</td>
+																												             <td></td>
+																													        </tr>
+																														   <tr>
+																														         <td>输入数据</td>
+																															       <td>make</td>
+																															          </tr>
+																																     <tr>
+																																           <td>预期结果</td>
+																																	         <td>生成stage1，stage1_5（e2fs_stage1_5， fat_stage1_5， ffs_stage1_5， iso9660_stage1_5， jfs_stage1_5， minix_stage1_5， reiserfs_stage1_5 ，ufs2_stage1_5， vstafs_stage1_5， xfs_stage1_5），以及stage2这些二进制映像。</td>
+																																		    </tr>
+																																		       <tr>
+																																		             <td>3</td>
+																																			           <td>详细步骤</td>
+																																				         <td>输入make install命令，将二进制文件安装到指定目录</td>
+																																					       <td></td>
+																																					          </tr>
+																																						     <tr>
+																																						           <td>输入数据</td>
+																																							         <td>make install</td>
+																																								    </tr>
+																																								       <tr>
+																																								             <td>预期结果</td>
+																																									           <td>在/opt/grub/下生成以下目录：bin， info， lib， man，sbin</td>
+																																										      </tr>
+																																										         <tr>
+																																											       <td>过程终止条件</td>
+																																											             <td>make install成功并在/opt/grub/下生成以下目录：bin， info， lib， man，sbin</td>
+																																												        </tr>
+																																													   <tr>
+																																													         <td>结果判定标准</td>
+																																														       <td>以上各步骤都成功，并没有错误产生。</td>
+																																														          </tr>
+																																															  </table>
 
 
