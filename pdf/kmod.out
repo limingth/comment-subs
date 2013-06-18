@@ -1,4 +1,4 @@
-\BOOKMARK [1][-]{section*.1}{kmod-Linux内核模块工具}{}
+\BOOKMARK [1][-]{section*.1}{kmod-Linux内核模块工具简介}{}
 \BOOKMARK [2][-]{section*.2}{1. 项目背景分析}{section*.1}
 \BOOKMARK [3][-]{section*.3}{项目建立时间}{section*.2}
 \BOOKMARK [3][-]{section*.4}{项目创建者和维护者}{section*.2}
@@ -23,7 +23,7 @@
 \BOOKMARK [2][-]{section*.23}{1. 架构分析}{section*.22}
 \BOOKMARK [3][-]{section*.24}{应用层}{section*.23}
 \BOOKMARK [3][-]{section*.31}{库接口层}{section*.23}
-\BOOKMARK [3][-]{section*.32}{系统调用抽象层}{section*.23}
+\BOOKMARK [3][-]{section*.32}{系统调用模拟层}{section*.23}
 \BOOKMARK [3][-]{section*.33}{各层之间相互关系图}{section*.23}
 \BOOKMARK [2][-]{section*.34}{2. 模块分析}{section*.22}
 \BOOKMARK [3][-]{section*.35}{kmod\137ctx 库上下文}{section*.34}
@@ -39,33 +39,27 @@
 \BOOKMARK [3][-]{section*.45}{array 动态数组模块}{section*.34}
 \BOOKMARK [3][-]{section*.46}{log 日志记录模块}{section*.34}
 \BOOKMARK [2][-]{section*.47}{3. 运行时调试图}{section*.22}
-\BOOKMARK [3][-]{section*.48}{insmod 命令运行时调试图}{section*.47}
-\BOOKMARK [3][-]{section*.56}{rmmod 命令运行时调试图}{section*.47}
-\BOOKMARK [3][-]{section*.59}{lsmod 命令运行时调试图}{section*.47}
-\BOOKMARK [3][-]{section*.60}{modinfo 命令运行时调试图}{section*.47}
-\BOOKMARK [3][-]{section*.61}{depmod 命令运行时调试图}{section*.47}
-\BOOKMARK [3][-]{section*.62}{modprobe 命令运行时调试图}{section*.47}
-\BOOKMARK [2][-]{section*.63}{4. 运行流程分析}{section*.22}
-\BOOKMARK [3][-]{section*.64}{命令实现流程概述}{section*.63}
-\BOOKMARK [3][-]{section*.65}{insmod 命令实现流程}{section*.63}
-\BOOKMARK [3][-]{section*.66}{rmmod 命令实现流程}{section*.63}
-\BOOKMARK [3][-]{section*.67}{lsmod 命令实现流程}{section*.63}
-\BOOKMARK [3][-]{section*.68}{modinfo 命令实现流程}{section*.63}
-\BOOKMARK [3][-]{section*.69}{depmod 命令实现流程}{section*.63}
-\BOOKMARK [3][-]{section*.70}{modprobe 命令实现流程}{section*.63}
-\BOOKMARK [2][-]{section*.74}{5. 函数接口分析}{section*.22}
-\BOOKMARK [3][-]{section*.75}{kmod\137new\(\) 核心代码分析}{section*.74}
-\BOOKMARK [3][-]{section*.76}{kmod\137unref\(\) 核心代码分析}{section*.74}
-\BOOKMARK [3][-]{section*.77}{kmod\137module\137new\137from\137path\(\) 核心代码分析}{section*.74}
-\BOOKMARK [3][-]{section*.78}{kmod\137module\137new\137from\137name\(\) 核心代码分析}{section*.74}
-\BOOKMARK [3][-]{section*.79}{kmod\137module\137new\(\) 核心代码分析}{section*.74}
-\BOOKMARK [3][-]{section*.80}{kmod\137module\137insert\137module\(\) 核心代码分析}{section*.74}
-\BOOKMARK [3][-]{section*.81}{kmod\137module\137unref\(\) 核心代码分析}{section*.74}
-\BOOKMARK [3][-]{section*.82}{init\137module\(\) 核心代码分析}{section*.74}
-\BOOKMARK [3][-]{section*.83}{delete\137module\(\) 核心代码分析}{section*.74}
-\BOOKMARK [3][-]{section*.84}{kmod\137module\137remove\137module\(\) 核心代码分析}{section*.74}
-\BOOKMARK [3][-]{section*.85}{kmod\137module\137new\137from\137loaded 核心代码分析}{section*.74}
-\BOOKMARK [3][-]{section*.86}{kmod\137module\137new\137from\137lookup 核心代码分析}{section*.74}
-\BOOKMARK [3][-]{section*.87}{kmod\137module\137probe\137insert\137module}{section*.74}
-\BOOKMARK [3][-]{section*.88}{kmod\137module\137get\137probe\137list 函数调用流程}{section*.74}
-\BOOKMARK [2][-]{section*.93}{5. 总结}{section*.22}
+\BOOKMARK [2][-]{section*.48}{4. 运行流程分析}{section*.22}
+\BOOKMARK [3][-]{section*.49}{命令实现流程概述}{section*.48}
+\BOOKMARK [3][-]{section*.50}{insmod 命令实现流程}{section*.48}
+\BOOKMARK [3][-]{section*.51}{rmmod 命令实现流程}{section*.48}
+\BOOKMARK [3][-]{section*.52}{lsmod 命令实现流程}{section*.48}
+\BOOKMARK [3][-]{section*.53}{modinfo 命令实现流程}{section*.48}
+\BOOKMARK [3][-]{section*.54}{depmod 命令实现流程}{section*.48}
+\BOOKMARK [3][-]{section*.55}{modprobe 命令实现流程}{section*.48}
+\BOOKMARK [2][-]{section*.59}{5. 函数接口分析}{section*.22}
+\BOOKMARK [3][-]{section*.60}{kmod\137new\(\) 核心代码分析}{section*.59}
+\BOOKMARK [3][-]{section*.61}{kmod\137unref\(\) 核心代码分析}{section*.59}
+\BOOKMARK [3][-]{section*.62}{kmod\137module\137new\137from\137path\(\) 核心代码分析}{section*.59}
+\BOOKMARK [3][-]{section*.63}{kmod\137module\137new\137from\137name\(\) 核心代码分析}{section*.59}
+\BOOKMARK [3][-]{section*.64}{kmod\137module\137new\(\) 核心代码分析}{section*.59}
+\BOOKMARK [3][-]{section*.65}{kmod\137module\137insert\137module\(\) 核心代码分析}{section*.59}
+\BOOKMARK [3][-]{section*.66}{kmod\137module\137unref\(\) 核心代码分析}{section*.59}
+\BOOKMARK [3][-]{section*.67}{init\137module\(\) 核心代码分析}{section*.59}
+\BOOKMARK [3][-]{section*.68}{delete\137module\(\) 核心代码分析}{section*.59}
+\BOOKMARK [3][-]{section*.69}{kmod\137module\137remove\137module\(\) 核心代码分析}{section*.59}
+\BOOKMARK [3][-]{section*.70}{kmod\137module\137new\137from\137loaded 核心代码分析}{section*.59}
+\BOOKMARK [3][-]{section*.71}{kmod\137module\137new\137from\137lookup 核心代码分析}{section*.59}
+\BOOKMARK [3][-]{section*.72}{kmod\137module\137probe\137insert\137module}{section*.59}
+\BOOKMARK [3][-]{section*.73}{kmod\137module\137get\137probe\137list 函数调用流程}{section*.59}
+\BOOKMARK [2][-]{section*.78}{5. 总结}{section*.22}

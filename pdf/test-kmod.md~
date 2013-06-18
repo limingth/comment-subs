@@ -417,10 +417,66 @@
 
 ## THU-12-6 测试 depmod 命令
 
-### depmod 命令运行时调试图
+### 直接运行 depmod 命令
 
-	$ ./kmod-11/tools/depmod | wc -l
-	3529
+	$ ./kmod-11/tools/depmod 
+	
+### 查看生成的 modules.dep 文件
+
+	$ cat /lib/modules/3.2.0-29-generic-pae/modules.dep
+	$ cat /lib/modules/3.2.0-29-generic-pae/modules.dep | head
+	kernel/arch/x86/kernel/cpu/mcheck/mce-xeon75xx.ko:
+	kernel/arch/x86/kernel/cpu/mcheck/mce-inject.ko:
+	kernel/arch/x86/kernel/msr.ko:
+	kernel/arch/x86/kernel/cpuid.ko:
+	kernel/arch/x86/kernel/apm.ko:
+	kernel/arch/x86/kernel/microcode.ko:
+	kernel/arch/x86/crypto/aes-i586.ko:
+	kernel/arch/x86/crypto/twofish-i586.ko: kernel/crypto/twofish_common.ko
+	kernel/arch/x86/crypto/salsa20-i586.ko:
+	kernel/arch/x86/crypto/aesni-intel.ko: kernel/arch/x86/crypto/aes-i586.ko kernel/crypto/cryptd.ko
+	$ 
+
+## THU-12-7 测试 modprobe 命令
+
+### 直接运行 modprobe 命令，加 -D 参数查看依赖关系
+
+	$ sudo ./kmod-11/tools/modprobe -D nfs
+	insmod /lib/modules/3.2.0-29-generic-pae/kernel/net/sunrpc/sunrpc.ko 
+	insmod /lib/modules/3.2.0-29-generic-pae/kernel/fs/lockd/lockd.ko 
+	insmod /lib/modules/3.2.0-29-generic-pae/kernel/fs/fscache/fscache.ko 
+	insmod /lib/modules/3.2.0-29-generic-pae/kernel/net/sunrpc/auth_gss/auth_rpcgss.ko 
+	insmod /lib/modules/3.2.0-29-generic-pae/kernel/fs/nfs_common/nfs_acl.ko 
+	insmod /lib/modules/3.2.0-29-generic-pae/kernel/fs/nfs/nfs.ko 
+
+### 使用 modprobe nfs 加载 nfs 内核模块和相关依赖模块
+	$ sudo ./kmod-11/tools/modprobe nfs
+	$ lsmod | grep nfs
+	nfsd                  229850  13 
+	nfs                   307376  0 
+	nfs_acl                12771  2 nfsd,nfs
+	auth_rpcgss            39597  2 nfsd,nfs
+	fscache                50642  1 nfs
+	lockd                  78804  2 nfsd,nfs
+	sunrpc                205647  19 nfsd,nfs,nfs_acl,auth_rpcgss,lockd
+	$ 
+
+### 使用 modprobe -r nfs 卸载 nfs 内核模块和相关依赖模块
+	$ sudo ./kmod-11/tools/modprobe -r  nfs
+	[sudo] password for akaedu: 
+	
+	$ lsmod | grep nfs
+	nfsd                  229850  13 
+	nfs_acl                12771  1 nfsd
+	auth_rpcgss            39597  1 nfsd
+	lockd                  78804  1 nfsd
+	sunrpc                205647  18 nfsd,nfs_acl,auth_rpcgss,lockd
+	$ 
+
+
+## THU-12-9 修改调试 depmod 命令
+
+### 修改源码，插入打印函数
 
 	$ vi ./kmod-11/tools/depmod.c
 	修改源码文件，在 output_deps 函数中间插入打印函数，打印输出到标准输出 stdout。
@@ -442,6 +498,8 @@
 	1806                 fprintf(out, "%s:", p);
 	1807                 fprintf(stdout, "%s:", p);
 
+### 重新编译生成新的 depmod
+
 	$ make -C kmod-11
 	make[1]: Entering directory `/home/akaedu/Github/comment-subs/kmod-11'
 	make --no-print-directory all-recursive
@@ -454,7 +512,9 @@
 	Making all in man
 	make[3]: Nothing to be done for `all'.
 	make[1]: Leaving directory `/home/akaedu/Github/comment-subs/kmod-11'
-	
+
+### 再次执行 depmod，观察从标准输出的打印信息
+
 	$ sudo ./kmod-11/tools/depmod | head
 	total count 3529
 	kernel/arch/x86/kernel/cpu/mcheck/mce-xeon75xx.ko:
@@ -470,194 +530,927 @@
 	$ 
 
 
-## THU-12-7 测试 depmod 命令
+## THU-12-10 修改调试 modprobe 命令
 
-### modprobe 命令运行时调试图
+	$ vi kmod-11/tools/modprobe.c 
+	跟踪 modprobe 函数执行过程，最后在 libkmod-module.c 中找到构建模块依赖关系的代码
 
-	$ sudo ./kmod-11/tools/modprobe -r nfs
-	name = nfs
+	$ vi kmod-11/libkmod/libkmod-module.c +600
+	600 static const struct kmod_list *module_get_dependencies_noref(const struct kmod_module *mod)
+	601 {
+	602         if (!mod->init.dep) {
+	603                 /* lazy init */
+	604                 char *line = kmod_search_moddep(mod->ctx, mod->name);
+	605 
+	606                 if (line == NULL)
+	607                         return NULL;
+	608 
+	609                 kmod_module_parse_depline((struct kmod_module *)mod, line);
+	610                 free(line);
+	611 
+	612                 if (!mod->init.dep)
+	613                         return NULL;
+	614         }
+	615 
+	616         return mod->dep;
+	617 }
 
-	line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
-	---------------------
+	$ vi kmod-11/libkmod/libkmod-module.c +120
+	120 int kmod_module_parse_depline(struct kmod_module *mod, char *line)
+	121 {
+	122         struct kmod_ctx *ctx = mod->ctx;
+	123         struct kmod_list *list = NULL;
+	124         const char *dirname;
+	125         char buf[PATH_MAX];
+	126         char *p, *saveptr;
+	127         int err = 0, n = 0;
+	128         size_t dirnamelen;
+	129 
+	130         printf("<mydebug> line = %s\n", line);
+	131 
+	132         if (mod->init.dep)
+	133                 return mod->n_dep;
+	134         assert(mod->dep == NULL);
+	135         mod->init.dep = true;
+	136 
+	137         p = strchr(line, ':');
+	138         if (p == NULL)
+	139                 return 0;
+	140 
 
-	p = kernel/fs/nfs_common/nfs_acl.ko
-	---------------------
+### 插入130行的打印 line 的语句
 
-	p = kernel/net/sunrpc/auth_gss/auth_rpcgss.ko
-	---------------------
+	130         printf("<mydebug> line = %s\n", line);
 
-	p = kernel/fs/fscache/fscache.ko
-	---------------------
-
-	p = kernel/fs/lockd/lockd.ko
-	---------------------
-
-	p = kernel/net/sunrpc/sunrpc.ko
-	---------------------
+### 重新编译生成新的 modprobe
+	
+	$ make -C kmod-11/
+	make: Entering directory `/home/akaedu/Github/test-kmod-11/kmod-11'
+	make --no-print-directory all-recursive
+	Making all in .
+	  CC       libkmod/libkmod-module.lo
+	  CCLD     libkmod/libkmod.la
+	  CCLD     libkmod/libkmod-private.la
+	  CCLD     tools/kmod
+	  CCLD     tools/kmod-nolib
+	Making all in libkmod/docs
+	make[2]: Nothing to be done for `all'.
+	Making all in man
+	make[2]: Nothing to be done for `all'.
+	make: Leaving directory `/home/akaedu/Github/test-kmod-11/kmod-11'
 	$ 
 
-	$ sudo ./kmod-11/tools/modprobe nfs
-	name = nfs
+### 运行 modprobe nfs 
 
-	line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
-	---------------------
+	$ ./kmod-11/tools/modprobe nfs
+	<mydebug> line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
+	$ 
 
-	p = kernel/fs/nfs_common/nfs_acl.ko
-	---------------------
+### 插入167行打印语句
+	$ vi kmod-11/libkmod/libkmod-module.c +161
+	161         p++;
+	162         for (p = strtok_r(p, " \t", &saveptr); p != NULL;
+	163                                         p = strtok_r(NULL, " \t", &saveptr)     ) {
+	164                 struct kmod_module *depmod;
+	165                 const char *path;
+	166 
+	167                 printf("<mydebug> p = %s\n", p);
+	168                 path = path_join(p, dirnamelen, buf);
+	169                 if (path == NULL) {
+	170                         ERR(ctx, "could not join path '%s' and '%s'.\n",
+	171                             dirname, p);
+	172                         goto fail;
+	173                 }
 
-	p = kernel/net/sunrpc/auth_gss/auth_rpcgss.ko
-	---------------------
 
-	p = kernel/fs/fscache/fscache.ko
-	---------------------
+### 重新编译生成新的 modprobe
+	
+	$ make -C kmod-11/
+	make: Entering directory `/home/akaedu/Github/test-kmod-11/kmod-11'
+	make --no-print-directory all-recursive
+	Making all in .
+	  CC       libkmod/libkmod-module.lo
+	  CCLD     libkmod/libkmod.la
+	  CCLD     libkmod/libkmod-private.la
+	  CCLD     tools/kmod
+	  CCLD     tools/kmod-nolib
+	Making all in libkmod/docs
+	make[2]: Nothing to be done for `all'.
+	Making all in man
+	make[2]: Nothing to be done for `all'.
+	make: Leaving directory `/home/akaedu/Github/test-kmod-11/kmod-11'
+	$ 
 
-	p = kernel/fs/lockd/lockd.ko
-	---------------------
+### 运行 modprobe nfs 
 
-	p = kernel/net/sunrpc/sunrpc.ko
-	---------------------
+	$ ./kmod-11/tools/modprobe nfs
+	<mydebug> line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
+	<mydebug> p = kernel/fs/nfs_common/nfs_acl.ko
+	<mydebug> p = kernel/net/sunrpc/auth_gss/auth_rpcgss.ko
+	<mydebug> p = kernel/fs/fscache/fscache.ko
+	<mydebug> p = kernel/fs/lockd/lockd.ko
+	<mydebug> p = kernel/net/sunrpc/sunrpc.ko
+
+## THU-12-11 编译生成 testsuite 命令集
+
+### make check 编译并运行集成测试
+
+	$ make check
+	Making check in .
+	  GEN      rootfs
+	make --no-print-directory testsuite/uname.la testsuite/path.la testsuite/init_module.la testsuite/delete_module.la testsuite/libtestsuite.la testsuite/test-init testsuite/test-testsuite testsuite/test-loaded testsuite/test-modinfo testsuite/test-alias testsuite/test-new-module testsuite/test-modprobe testsuite/test-blacklist testsuite/test-dependencies testsuite/test-depmod
+	  CC       testsuite/uname.lo
+	  CCLD     testsuite/uname.la
+	  CC       testsuite/path.lo
+	  CCLD     testsuite/path.la
+	  CC       testsuite/init_module.lo
+	  CC       testsuite/mkdir.lo
+	  CCLD     testsuite/init_module.la
+	  CC       testsuite/delete_module.lo
+	  CCLD     testsuite/delete_module.la
+	  CC       testsuite/testsuite_libtestsuite_la-testsuite.lo
+	  CCLD     testsuite/libtestsuite.la
+	  CC       testsuite/testsuite_test_init-test-init.o
+	  CCLD     testsuite/test-init
+	  CC       testsuite/testsuite_test_testsuite-test-testsuite.o
+	  CCLD     testsuite/test-testsuite
+	  CC       testsuite/testsuite_test_loaded-test-loaded.o
+	  CCLD     testsuite/test-loaded
+	  CC       testsuite/testsuite_test_modinfo-test-modinfo.o
+	  CCLD     testsuite/test-modinfo
+	  CC       testsuite/testsuite_test_alias-test-alias.o
+	  CCLD     testsuite/test-alias
+	  CC       testsuite/testsuite_test_new_module-test-new-module.o
+	  CCLD     testsuite/test-new-module
+	  CC       testsuite/testsuite_test_modprobe-test-modprobe.o
+	  CCLD     testsuite/test-modprobe
+	  CC       testsuite/testsuite_test_blacklist-test-blacklist.o
+	  CCLD     testsuite/test-blacklist
+	  CC       testsuite/testsuite_test_dependencies-test-dependencies.o
+	  CCLD     testsuite/test-dependencies
+	  CC       testsuite/testsuite_test_depmod-test-depmod.o
+	  CCLD     testsuite/test-depmod
+	make --no-print-directory check-TESTS
+	TESTSUITE: running test_initlib, in forked context
+	TESTSUITE: 'test_initlib' [20196] exited with return code 0
+	TESTSUITE: PASSED: test_initlib
+	TESTSUITE: running test_insert, in forked context
+	TESTSUITE: 'test_insert' [20197] exited with return code 0
+	TESTSUITE: PASSED: test_insert
+	TESTSUITE: running test_remove, in forked context
+	TESTSUITE: 'test_remove' [20198] exited with return code 0
+	TESTSUITE: PASSED: test_remove
+	PASS: testsuite/test-init
+	TESTSUITE: running testsuite_uname, in forked context
+	TRAP uname(): missing export TESTSUITE_UNAME_R?
+	TESTSUITE: 'testsuite_uname' [20202] exited with return code 0
+	TESTSUITE: PASSED: testsuite_uname
+	TESTSUITE: running testsuite_rootfs_fopen, in forked context
+	TESTSUITE: 'testsuite_rootfs_fopen' [20203] exited with return code 0
+	TESTSUITE: PASSED: testsuite_rootfs_fopen
+	TESTSUITE: running testsuite_rootfs_open, in forked context
+	TESTSUITE: 'testsuite_rootfs_open' [20204] exited with return code 0
+	TESTSUITE: PASSED: testsuite_rootfs_open
+	TESTSUITE: running testsuite_rootfs_stat_access, in forked context
+	TESTSUITE: 'testsuite_rootfs_stat_access' [20205] exited with return code 0
+	TESTSUITE: PASSED: testsuite_rootfs_stat_access
+	TESTSUITE: running testsuite_rootfs_opendir, in forked context
+	TESTSUITE: 'testsuite_rootfs_opendir' [20206] exited with return code 0
+	TESTSUITE: PASSED: testsuite_rootfs_opendir
+	PASS: testsuite/test-testsuite
+	TESTSUITE: running loaded_1, in forked context
+	TESTSUITE: 'loaded_1' [20210] exited with return code 0
+	TESTSUITE: PASSED: loaded_1
+	PASS: testsuite/test-loaded
+	TESTSUITE: running modinfo_jonsmodules, in forked context
+	TESTSUITE: 'modinfo_jonsmodules' [20214] exited with return code 0
+	TESTSUITE: PASSED: modinfo_jonsmodules
+	PASS: testsuite/test-modinfo
+	TESTSUITE: running alias_1, in forked context
+	TESTSUITE: 'alias_1' [20218] exited with return code 0
+	TESTSUITE: PASSED: alias_1
+	PASS: testsuite/test-alias
+	TESTSUITE: running from_name, in forked context
+	TESTSUITE: 'from_name' [20222] exited with return code 0
+	TESTSUITE: PASSED: from_name
+	TESTSUITE: running from_alias, in forked context
+	TESTSUITE: 'from_alias' [20223] exited with return code 0
+	TESTSUITE: PASSED: from_alias
+	PASS: testsuite/test-new-module
+	TESTSUITE: running modprobe_show_depends, in forked context
+	TESTSUITE: 'modprobe_show_depends' [20227] exited with return code 0
+	TESTSUITE: PASSED: modprobe_show_depends
+	TESTSUITE: running modprobe_show_depends2, in forked context
+	TESTSUITE: 'modprobe_show_depends2' [20228] exited with return code 0
+	TESTSUITE: PASSED: modprobe_show_depends2
+	TESTSUITE: running modprobe_builtin, in forked context
+	TESTSUITE: 'modprobe_builtin' [20229] exited with return code 0
+	TESTSUITE: PASSED: modprobe_builtin
+	TESTSUITE: running modprobe_softdep_loop, in forked context
+	TESTSUITE: 'modprobe_softdep_loop' [20230] exited with return code 0
+	TESTSUITE: PASSED: modprobe_softdep_loop
+	TESTSUITE: running modprobe_install_cmd_loop, in forked context
+	TESTSUITE: ERR: Test 'modprobe_install_cmd_loop' timed out, killing 20231
+	TESTSUITE: ERR: 'modprobe_install_cmd_loop' [20231] terminated by signal 9 (Killed)
+	FAIL: testsuite/test-modprobe
+	TESTSUITE: running blacklist_1, in forked context
+	TESTSUITE: 'blacklist_1' [20283] exited with return code 0
+	TESTSUITE: PASSED: blacklist_1
+	PASS: testsuite/test-blacklist
+	TESTSUITE: running test_dependencies, in forked context
+	TRAP uname(): missing export TESTSUITE_UNAME_R?
+	TESTSUITE: 'test_dependencies' [20287] exited with return code 0
+	TESTSUITE: PASSED: test_dependencies
+	PASS: testsuite/test-dependencies
+	TESTSUITE: running depmod_modules_order_for_compressed, in forked context
+	TESTSUITE: 'depmod_modules_order_for_compressed' [20291] exited with return code 0
+	TESTSUITE: ERR: sizes do not match /home/akaedu/Github/test-kmod-11/kmod-11/testsuite/rootfs/test-depmod/modules-order-compressed/lib/modules/3.5.4-1-ARCH/correct-modules.alias /home/akaedu/Github/test-kmod-11/kmod-11/testsuite/rootfs/test-depmod/modules-order-compressed/lib/modules/3.5.4-1-ARCH/modules.alias
+	TESTSUITE: ERR: FAILED: exit ok but outputs do not match: depmod_modules_order_for_compressed
+	FAIL: testsuite/test-depmod
+	==============================================
+	2 of 10 tests failed
+	Please report to linux-modules@vger.kernel.org
+	==============================================
+	make[2]: *** [check-TESTS] Error 1
+	make[1]: *** [check-am] Error 2
+	make: *** [check-recursive] Error 1
+	$ Killed
+
+	$ 
+
+### 单独创建根文件系统
+	$ sudo make rootfs
+	[sudo] password for akaedu: 
+	akaeduSorry, try again.
+	[sudo] password for akaedu: 
+	  GEN      rootfs
+
+### 查看生成的 rootfs 
+
+	$ ls testsuite/rootfs
+	test-alias         test-depmod  test-modinfo     test-remove
+	test-blacklist     test-init    test-modprobe    test-rootfs
+	test-dependencies  test-loaded  test-new-module
+	$ 
+
+### 确认没有此时 rootfs/test-init/ 下没有生成 sys 子目录
+	$ cat testsuite/rootfs/test-init/
+	correct.txt     ext4-ppc64.ko   ext4-x86_64.ko  
+	ext4-i686.ko    ext4-s390x.ko   
+
+### 运行 test-init 命令
+	$ sudo ./testsuite/test-init 
+	TESTSUITE: running test_initlib, in forked context
+	TESTSUITE: 'test_initlib' [32704] exited with return code 0
+	TESTSUITE: PASSED: test_initlib
+	TESTSUITE: running test_insert, in forked context
+	TESTSUITE: 'test_insert' [32705] exited with return code 0
+	TESTSUITE: PASSED: test_insert
+	TESTSUITE: running test_remove, in forked context
+	TESTSUITE: 'test_remove' [32706] exited with return code 0
+	TESTSUITE: PASSED: test_remove
+
+### 查看 rootfs/test-init/ 已经产生 sys 子目录
+	$ cat testsuite/rootfs/test-init/
+	correct.txt     ext4-ppc64.ko   ext4-x86_64.ko
+	ext4-i686.ko    ext4-s390x.ko   sys/
+  
+### 查看 initstate 文件的内容为 "live" 字符串
+	$ cat testsuite/rootfs/test-init/sys/module/ext4/initstate 
+	live
 	$ 
 
 
+## THU-12-12 编译 Debug 版 
 
-## THU-12-8 编译生成 testsuite 命令集
+### 配置时加上 --enable-debug, --enable-logging 参数
+	$ ./configure CFLAGS="-g -O2" --prefix=/usr --sysconfdir=/etc --libdir=/usr/lib --enable-debug --enable-logging
+	checking for a BSD-compatible install... /usr/bin/install -c
+	checking whether build environment is sane... yes
+	checking for a thread-safe mkdir -p... /bin/mkdir -p
+	checking for gawk... no
+	checking for mawk... mawk
+	checking whether make sets $(MAKE)... yes
+	checking whether make supports nested variables... yes
+	checking how to create a pax tar archive... gnutar
+	checking for style of include used by make... GNU
+	checking for gcc... gcc
+	checking whether the C compiler works... yes
+	checking for C compiler default output file name... a.out
+	checking for suffix of executables... 
+	checking whether we are cross compiling... no
+	checking for suffix of object files... o
+	checking whether we are using the GNU C compiler... yes
+	checking whether gcc accepts -g... yes
+	checking for gcc option to accept ISO C89... none needed
+	checking dependency style of gcc... gcc3
+	checking for gcc option to accept ISO C99... -std=gnu99
+	checking for gcc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+	checking how to run the C preprocessor... gcc -std=gnu99 -E
+	checking for grep that handles long lines and -e... /bin/grep
+	checking for egrep... /bin/grep -E
+	checking for ANSI C header files... yes
+	checking for sys/types.h... yes
+	checking for sys/stat.h... yes
+	checking for stdlib.h... yes
+	checking for string.h... yes
+	checking for memory.h... yes
+	checking for strings.h... yes
+	checking for inttypes.h... yes
+	checking for stdint.h... yes
+	checking for unistd.h... yes
+	checking minix/config.h usability... no
+	checking minix/config.h presence... no
+	checking for minix/config.h... no
+	checking whether it is safe to define __EXTENSIONS__... yes
+	checking for special C compiler options needed for large files... no
+	checking for _FILE_OFFSET_BITS value needed for large files... 64
+	checking whether make supports nested variables... (cached) yes
+	checking build system type... i686-pc-linux-gnu
+	checking host system type... i686-pc-linux-gnu
+	checking how to print strings... printf
+	checking for a sed that does not truncate output... /bin/sed
+	checking for fgrep... /bin/grep -F
+	checking for ld used by gcc -std=gnu99... /usr/bin/ld
+	checking if the linker (/usr/bin/ld) is GNU ld... yes
+	checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+	checking the name lister (/usr/bin/nm -B) interface... BSD nm
+	checking whether ln -s works... yes
+	checking the maximum length of command line arguments... 1572864
+	checking whether the shell understands some XSI constructs... yes
+	checking whether the shell understands "+="... yes
+	checking how to convert i686-pc-linux-gnu file names to i686-pc-linux-gnu format... func_convert_file_noop
+	checking how to convert i686-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+	checking for /usr/bin/ld option to reload object files... -r
+	checking for objdump... objdump
+	checking how to recognize dependent libraries... pass_all
+	checking for dlltool... no
+	checking how to associate runtime and link libraries... printf %s\n
+	checking for ar... ar
+	checking for archiver @FILE support... @
+	checking for strip... strip
+	checking for ranlib... ranlib
+	checking command to parse /usr/bin/nm -B output from gcc -std=gnu99 object... ok
+	checking for sysroot... no
+	checking for mt... mt
+	checking if mt is a manifest tool... no
+	checking for dlfcn.h... yes
+	checking for objdir... .libs
+	checking if gcc -std=gnu99 supports -fno-rtti -fno-exceptions... no
+	checking for gcc -std=gnu99 option to produce PIC... -fPIC -DPIC
+	checking if gcc -std=gnu99 PIC flag -fPIC -DPIC works... yes
+	checking if gcc -std=gnu99 static flag -static works... yes
+	checking if gcc -std=gnu99 supports -c -o file.o... yes
+	checking if gcc -std=gnu99 supports -c -o file.o... (cached) yes
+	checking whether the gcc -std=gnu99 linker (/usr/bin/ld) supports shared libraries... yes
+	checking whether -lc should be explicitly linked in... no
+	checking dynamic linker characteristics... GNU/Linux ld.so
+	checking how to hardcode library paths into programs... immediate
+	checking whether stripping libraries is possible... yes
+	checking if libtool supports shared libraries... yes
+	checking whether to build shared libraries... yes
+	checking whether to build static libraries... no
+	checking for gcc... (cached) gcc
+	checking whether we are using the GNU C compiler... (cached) yes
+	checking whether gcc accepts -g... (cached) yes
+	checking for gcc option to accept ISO C89... (cached) none needed
+	checking dependency style of gcc... (cached) gcc3
+	checking for gcc option to accept ISO C99... (cached) -std=gnu99
+	checking for typeof syntax and keyword spelling... typeof
+	checking whether gcc -std=gnu99 and cc understand -c and -o together... yes
+	checking whether gcc -std=gnu99 needs -traditional... no
+	checking whether byte ordering is bigendian... no
+	checking for a sed that does not truncate output... (cached) /bin/sed
+	checking for pkg-config... /usr/bin/pkg-config
+	checking pkg-config is at least version 0.9.0... yes
+	checking for __xstat... yes
+	checking for struct stat.st_mtim... yes
+	configure: Xz support not requested
+	configure: zlib support not requested
+	checking for xsltproc... /usr/bin/xsltproc
+	checking for gtkdoc-check... no
+	checking for gtkdoc-rebase... no
+	checking for gtkdoc-mkpdf... no
+	checking whether to build gtk-doc documentation... no
+	checking if gcc -std=gnu99 supports flag -pipe in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -DANOTHER_BRICK_IN_THE in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wall in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -W in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wextra in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wno-inline in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wvla in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wundef in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wformat=2 in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wlogical-op in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wsign-compare in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wformat-security in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wmissing-include-dirs in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wformat-nonliteral in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wold-style-definition in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wpointer-arith in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Winit-self in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wdeclaration-after-statement in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wfloat-equal in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wmissing-prototypes in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wstrict-prototypes in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wredundant-decls in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wmissing-declarations in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wmissing-noreturn in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wshadow in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wendif-labels in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wstrict-aliasing=2 in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wwrite-strings in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wno-long-long in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wno-overlength-strings in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wno-unused-parameter in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wno-missing-field-initializers in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wno-unused-result in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wnested-externs in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wchar-subscripts in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wtype-limits in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wuninitialized in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -fno-common in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -fdiagnostics-show-option in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -fvisibility=hidden in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -ffunction-sections in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -fdata-sections in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wl,--as-needed in envvar LDFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wl,--gc-sections in envvar LDFLAGS... yes
+	checking that generated files are newer than configure... done
+	configure: creating ./config.status
+	config.status: creating Makefile
+	config.status: creating man/Makefile
+	config.status: creating libkmod/docs/Makefile
+	config.status: creating libkmod/docs/version.xml
+	config.status: creating config.h
+	config.status: executing depfiles commands
 
-### 
+	config.status: executing libtool commands
 
-$ make check
-Making check in .
-  GEN      rootfs
-make --no-print-directory testsuite/uname.la testsuite/path.la testsuite/init_module.la testsuite/delete_module.la testsuite/libtestsuite.la testsuite/test-init testsuite/test-testsuite testsuite/test-loaded testsuite/test-modinfo testsuite/test-alias testsuite/test-new-module testsuite/test-modprobe testsuite/test-blacklist testsuite/test-dependencies testsuite/test-depmod
-  CC       testsuite/uname.lo
-  CCLD     testsuite/uname.la
-  CC       testsuite/path.lo
-  CCLD     testsuite/path.la
-  CC       testsuite/init_module.lo
-  CC       testsuite/mkdir.lo
-  CCLD     testsuite/init_module.la
-  CC       testsuite/delete_module.lo
-  CCLD     testsuite/delete_module.la
-  CC       testsuite/testsuite_libtestsuite_la-testsuite.lo
-  CCLD     testsuite/libtestsuite.la
-  CC       testsuite/testsuite_test_init-test-init.o
-  CCLD     testsuite/test-init
-  CC       testsuite/testsuite_test_testsuite-test-testsuite.o
-  CCLD     testsuite/test-testsuite
-  CC       testsuite/testsuite_test_loaded-test-loaded.o
-  CCLD     testsuite/test-loaded
-  CC       testsuite/testsuite_test_modinfo-test-modinfo.o
-  CCLD     testsuite/test-modinfo
-  CC       testsuite/testsuite_test_alias-test-alias.o
-  CCLD     testsuite/test-alias
-  CC       testsuite/testsuite_test_new_module-test-new-module.o
-  CCLD     testsuite/test-new-module
-  CC       testsuite/testsuite_test_modprobe-test-modprobe.o
-  CCLD     testsuite/test-modprobe
-  CC       testsuite/testsuite_test_blacklist-test-blacklist.o
-  CCLD     testsuite/test-blacklist
-  CC       testsuite/testsuite_test_dependencies-test-dependencies.o
-  CCLD     testsuite/test-dependencies
-  CC       testsuite/testsuite_test_depmod-test-depmod.o
-  CCLD     testsuite/test-depmod
-make --no-print-directory check-TESTS
-TESTSUITE: running test_initlib, in forked context
-TESTSUITE: 'test_initlib' [20196] exited with return code 0
-TESTSUITE: PASSED: test_initlib
-TESTSUITE: running test_insert, in forked context
-TESTSUITE: 'test_insert' [20197] exited with return code 0
-TESTSUITE: PASSED: test_insert
-TESTSUITE: running test_remove, in forked context
-TESTSUITE: 'test_remove' [20198] exited with return code 0
-TESTSUITE: PASSED: test_remove
-PASS: testsuite/test-init
-TESTSUITE: running testsuite_uname, in forked context
-TRAP uname(): missing export TESTSUITE_UNAME_R?
-TESTSUITE: 'testsuite_uname' [20202] exited with return code 0
-TESTSUITE: PASSED: testsuite_uname
-TESTSUITE: running testsuite_rootfs_fopen, in forked context
-TESTSUITE: 'testsuite_rootfs_fopen' [20203] exited with return code 0
-TESTSUITE: PASSED: testsuite_rootfs_fopen
-TESTSUITE: running testsuite_rootfs_open, in forked context
-TESTSUITE: 'testsuite_rootfs_open' [20204] exited with return code 0
-TESTSUITE: PASSED: testsuite_rootfs_open
-TESTSUITE: running testsuite_rootfs_stat_access, in forked context
-TESTSUITE: 'testsuite_rootfs_stat_access' [20205] exited with return code 0
-TESTSUITE: PASSED: testsuite_rootfs_stat_access
-TESTSUITE: running testsuite_rootfs_opendir, in forked context
-TESTSUITE: 'testsuite_rootfs_opendir' [20206] exited with return code 0
-TESTSUITE: PASSED: testsuite_rootfs_opendir
-PASS: testsuite/test-testsuite
-TESTSUITE: running loaded_1, in forked context
-TESTSUITE: 'loaded_1' [20210] exited with return code 0
-TESTSUITE: PASSED: loaded_1
-PASS: testsuite/test-loaded
-TESTSUITE: running modinfo_jonsmodules, in forked context
-TESTSUITE: 'modinfo_jonsmodules' [20214] exited with return code 0
-TESTSUITE: PASSED: modinfo_jonsmodules
-PASS: testsuite/test-modinfo
-TESTSUITE: running alias_1, in forked context
-TESTSUITE: 'alias_1' [20218] exited with return code 0
-TESTSUITE: PASSED: alias_1
-PASS: testsuite/test-alias
-TESTSUITE: running from_name, in forked context
-TESTSUITE: 'from_name' [20222] exited with return code 0
-TESTSUITE: PASSED: from_name
-TESTSUITE: running from_alias, in forked context
-TESTSUITE: 'from_alias' [20223] exited with return code 0
-TESTSUITE: PASSED: from_alias
-PASS: testsuite/test-new-module
-TESTSUITE: running modprobe_show_depends, in forked context
-TESTSUITE: 'modprobe_show_depends' [20227] exited with return code 0
-TESTSUITE: PASSED: modprobe_show_depends
-TESTSUITE: running modprobe_show_depends2, in forked context
-TESTSUITE: 'modprobe_show_depends2' [20228] exited with return code 0
-TESTSUITE: PASSED: modprobe_show_depends2
-TESTSUITE: running modprobe_builtin, in forked context
-TESTSUITE: 'modprobe_builtin' [20229] exited with return code 0
-TESTSUITE: PASSED: modprobe_builtin
-TESTSUITE: running modprobe_softdep_loop, in forked context
-TESTSUITE: 'modprobe_softdep_loop' [20230] exited with return code 0
-TESTSUITE: PASSED: modprobe_softdep_loop
-TESTSUITE: running modprobe_install_cmd_loop, in forked context
-TESTSUITE: ERR: Test 'modprobe_install_cmd_loop' timed out, killing 20231
-TESTSUITE: ERR: 'modprobe_install_cmd_loop' [20231] terminated by signal 9 (Killed)
-FAIL: testsuite/test-modprobe
-TESTSUITE: running blacklist_1, in forked context
-TESTSUITE: 'blacklist_1' [20283] exited with return code 0
-TESTSUITE: PASSED: blacklist_1
-PASS: testsuite/test-blacklist
-TESTSUITE: running test_dependencies, in forked context
-TRAP uname(): missing export TESTSUITE_UNAME_R?
-TESTSUITE: 'test_dependencies' [20287] exited with return code 0
-TESTSUITE: PASSED: test_dependencies
-PASS: testsuite/test-dependencies
-TESTSUITE: running depmod_modules_order_for_compressed, in forked context
-TESTSUITE: 'depmod_modules_order_for_compressed' [20291] exited with return code 0
-TESTSUITE: ERR: sizes do not match /home/akaedu/Github/test-kmod-11/kmod-11/testsuite/rootfs/test-depmod/modules-order-compressed/lib/modules/3.5.4-1-ARCH/correct-modules.alias /home/akaedu/Github/test-kmod-11/kmod-11/testsuite/rootfs/test-depmod/modules-order-compressed/lib/modules/3.5.4-1-ARCH/modules.alias
-TESTSUITE: ERR: FAILED: exit ok but outputs do not match: depmod_modules_order_for_compressed
-FAIL: testsuite/test-depmod
-==============================================
-2 of 10 tests failed
-Please report to linux-modules@vger.kernel.org
-==============================================
-make[2]: *** [check-TESTS] Error 1
-make[1]: *** [check-am] Error 2
-make: *** [check-recursive] Error 1
-$ Killed
+		kmod 11
+		======
 
-$ 
+		prefix:			/usr
+		sysconfdir:		/etc
+		libdir:			/usr/lib
+		rootlibdir:		/usr/lib
+		includedir:		${prefix}/include
+		bindir:			${exec_prefix}/bin
+
+		compiler:		gcc -std=gnu99
+		cflags:			 -pipe -DANOTHER_BRICK_IN_THE -Wall -W -Wextra -Wno-inline -Wvla -Wundef -Wformat=2 -Wlogical-op -Wsign-compare -Wformat-security -Wmissing-include-dirs -Wformat-nonliteral -Wold-style-definition -Wpointer-arith -Winit-self -Wdeclaration-after-statement -Wfloat-equal -Wmissing-prototypes -Wstrict-prototypes -Wredundant-decls -Wmissing-declarations -Wmissing-noreturn -Wshadow -Wendif-labels -Wstrict-aliasing=2 -Wwrite-strings -Wno-long-long -Wno-overlength-strings -Wno-unused-parameter -Wno-missing-field-initializers -Wno-unused-result -Wnested-externs -Wchar-subscripts -Wtype-limits -Wuninitialized -fno-common -fdiagnostics-show-option -fvisibility=hidden -ffunction-sections -fdata-sections -g -O2
+		ldflags:		 -Wl,--as-needed -Wl,--gc-sections 
+
+		tools:			yes
+		logging:		yes
+		compression:		xz=no  zlib=no
+		debug:			yes
+		doc:			no
+		man:			yes
+
+### make clean && make 重新编译
+	$ make clean && make
+
+### 设置日志优先级 KMOD_LOG=7
+	$ export KMOD_LOG=7
+
+### 重新运行 lsmod 命令，观察调试信息输出
+	$ ./tools/lsmod 
+	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x9c4f008 created
+	libkmod: DEBUG libkmod/libkmod.c:276 kmod_new: log_priority=7
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='vmwgfx' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c4f088 key='vmwgfx'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='ttm' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c4fec8 key='ttm'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='drm' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c4ff60 key='drm'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='acpiphp' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c4fff8 key='acpiphp'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='vmw_balloon' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50090 key='vmw_balloon'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='psmouse' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50130 key='psmouse'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='serio_raw' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c501c8 key='serio_raw'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='joydev' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50268 key='joydev'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='btusb' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50300 key='btusb'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='nfsd' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50398 key='nfsd'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='i2c_piix4' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50430 key='i2c_piix4'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='bnep' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c504d0 key='bnep'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='shpchp' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50568 key='shpchp'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='rfcomm' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50600 key='rfcomm'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='nfs' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50698 key='nfs'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='bluetooth' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50730 key='bluetooth'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='mac_hid' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c507d0 key='mac_hid'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='parport_pc' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50868 key='parport_pc'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='ppdev' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50908 key='ppdev'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='nfs_acl' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c509a0 key='nfs_acl'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='auth_rpcgss' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50a38 key='auth_rpcgss'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='fscache' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50ad8 key='fscache'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='lockd' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50b70 key='lockd'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='sunrpc' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50c08 key='sunrpc'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_ens1371' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50ca0 key='snd_ens1371'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_ac97_codec' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50d40 key='snd_ac97_codec'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='ac97_bus' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50de0 key='ac97_bus'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='gameport' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50e80 key='gameport'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_rawmidi' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50f20 key='snd_rawmidi'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_seq_device' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c50f78 key='snd_seq_device'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_pcm' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c51018 key='snd_pcm'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_page_alloc' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c510b0 key='snd_page_alloc'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_timer' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c51150 key='snd_timer'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c511f0 key='snd'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='soundcore' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c51288 key='soundcore'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='lp' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c512e0 key='lp'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='parport' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c51378 key='parport'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='usbhid' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c51410 key='usbhid'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='pcnet32' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c514a8 key='pcnet32'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='hid' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c514f8 key='hid'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='mptspi' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c51590 key='mptspi'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='mptscsih' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c51628 key='mptscsih'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='mptbase' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c516c8 key='mptbase'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='floppy' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c51760 key='floppy'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='vmw_pvscsi' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c517f8 key='vmw_pvscsi'
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='vmxnet3' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9c51898 key='vmxnet3'
+	Module                  Size  Used by
+	vmwgfx                102138  2 
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='vmwgfx' found=0x9c4f088
+	ttm                    65344  1 vmwgfx
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='ttm' found=0x9c4fec8
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='vmwgfx' found=0x9c4f088
+	drm                   197692  3 ttm,vmwgfx
+	acpiphp                23535  0 
+	vmw_balloon            12700  0 
+	psmouse                72919  0 
+	serio_raw              13027  0 
+	joydev                 17393  0 
+	btusb                  17912  2 
+	nfsd                  229850  13 
+	i2c_piix4              13093  0 
+	bnep                   17830  2 
+	shpchp                 32325  0 
+	rfcomm                 38139  0 
+	nfs                   307376  0 
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='rfcomm' found=0x9c50600
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='bnep' found=0x9c504d0
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='btusb' found=0x9c50300
+	bluetooth             158438  11 rfcomm,bnep,btusb
+	mac_hid                13077  0 
+	parport_pc             32114  1 
+	ppdev                  12849  0 
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='nfs' found=0x9c50698
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='nfsd' found=0x9c50398
+	nfs_acl                12771  2 nfs,nfsd
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='nfs' found=0x9c50698
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='nfsd' found=0x9c50398
+	auth_rpcgss            39597  2 nfs,nfsd
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='nfs' found=0x9c50698
+	fscache                50642  1 nfs
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='nfs' found=0x9c50698
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='nfsd' found=0x9c50398
+	lockd                  78804  2 nfs,nfsd
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='lockd' found=0x9c50b70
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='auth_rpcgss' found=0x9c50a38
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='nfs_acl' found=0x9c509a0
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='nfs' found=0x9c50698
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='nfsd' found=0x9c50398
+	sunrpc                205647  19 lockd,auth_rpcgss,nfs_acl,nfs,nfsd
+	snd_ens1371            24819  2 
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_ens1371' found=0x9c50ca0
+	snd_ac97_codec        106082  1 snd_ens1371
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_ac97_codec' found=0x9c50d40
+	ac97_bus               12642  1 snd_ac97_codec
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_ens1371' found=0x9c50ca0
+	gameport               15060  1 snd_ens1371
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_ens1371' found=0x9c50ca0
+	snd_rawmidi            25424  1 snd_ens1371
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_rawmidi' found=0x9c50f20
+	snd_seq_device         14172  1 snd_rawmidi
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_ac97_codec' found=0x9c50d40
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_ens1371' found=0x9c50ca0
+	snd_pcm                80845  2 snd_ac97_codec,snd_ens1371
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_pcm' found=0x9c51018
+	snd_page_alloc         14108  1 snd_pcm
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_pcm' found=0x9c51018
+	snd_timer              28931  1 snd_pcm
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_timer' found=0x9c51150
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_pcm' found=0x9c51018
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_seq_device' found=0x9c50f78
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_rawmidi' found=0x9c50f20
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_ac97_codec' found=0x9c50d40
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd_ens1371' found=0x9c50ca0
+	snd                    62064  10 snd_timer,snd_pcm,snd_seq_device,snd_rawmidi,snd_ac97_codec,snd_ens1371
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='snd' found=0x9c511f0
+	soundcore              14635  1 snd
+	lp                     17455  0 
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='lp' found=0x9c512e0
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='ppdev' found=0x9c50908
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='parport_pc' found=0x9c50868
+	parport                40930  3 lp,ppdev,parport_pc
+	usbhid                 41906  0 
+	pcnet32                41110  0 
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='usbhid' found=0x9c51410
+	hid                    77367  1 usbhid
+	mptspi                 22474  2 
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='mptspi' found=0x9c51590
+	mptscsih               39530  1 mptspi
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='mptscsih' found=0x9c51628
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='mptspi' found=0x9c51590
+	mptbase                96852  2 mptscsih,mptspi
+	floppy                 60310  0 
+	vmw_pvscsi             18334  0 
+	vmxnet3                44924  0 
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c4f088 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c4f088 key='vmwgfx'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c4fec8 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c4fec8 key='ttm'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c4ff60 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c4ff60 key='drm'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c4fff8 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c4fff8 key='acpiphp'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50090 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50090 key='vmw_balloon'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50130 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50130 key='psmouse'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c501c8 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c501c8 key='serio_raw'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50268 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50268 key='joydev'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50300 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50300 key='btusb'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50398 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50398 key='nfsd'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50430 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50430 key='i2c_piix4'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c504d0 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c504d0 key='bnep'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50568 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50568 key='shpchp'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50600 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50600 key='rfcomm'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50698 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50698 key='nfs'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50730 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50730 key='bluetooth'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c507d0 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c507d0 key='mac_hid'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50868 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50868 key='parport_pc'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50908 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50908 key='ppdev'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c509a0 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c509a0 key='nfs_acl'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50a38 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50a38 key='auth_rpcgss'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50ad8 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50ad8 key='fscache'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50b70 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50b70 key='lockd'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50c08 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50c08 key='sunrpc'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50ca0 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50ca0 key='snd_ens1371'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50d40 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50d40 key='snd_ac97_codec'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50de0 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50de0 key='ac97_bus'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50e80 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50e80 key='gameport'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50f20 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50f20 key='snd_rawmidi'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c50f78 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c50f78 key='snd_seq_device'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c51018 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c51018 key='snd_pcm'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c510b0 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c510b0 key='snd_page_alloc'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c51150 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c51150 key='snd_timer'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c511f0 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c511f0 key='snd'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c51288 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c51288 key='soundcore'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c512e0 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c512e0 key='lp'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c51378 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c51378 key='parport'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c51410 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c51410 key='usbhid'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c514a8 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c514a8 key='pcnet32'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c514f8 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c514f8 key='hid'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c51590 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c51590 key='mptspi'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c51628 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c51628 key='mptscsih'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c516c8 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c516c8 key='mptbase'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c51760 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c51760 key='floppy'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c517f8 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c517f8 key='vmw_pvscsi'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9c51898 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9c51898 key='vmxnet3'
+	libkmod: INFO libkmod/libkmod.c:318 kmod_unref: context 0x9c4f008 released
+	$ 
+
+### 设置日志输出级别为6
+
+	$ export KMOD_LOG=6
+	$ ./tools/lsmod 
+	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x99cf008 created
+	Module                  Size  Used by
+	vmwgfx                102138  2 
+	ttm                    65344  1 vmwgfx
+	drm                   197692  3 ttm,vmwgfx
+	acpiphp                23535  0 
+	vmw_balloon            12700  0 
+	psmouse                72919  0 
+	serio_raw              13027  0 
+	joydev                 17393  0 
+	btusb                  17912  2 
+	nfsd                  229850  13 
+	i2c_piix4              13093  0 
+	bnep                   17830  2 
+	shpchp                 32325  0 
+	rfcomm                 38139  0 
+	nfs                   307376  0 
+	bluetooth             158438  11 rfcomm,bnep,btusb
+	mac_hid                13077  0 
+	parport_pc             32114  1 
+	ppdev                  12849  0 
+	nfs_acl                12771  2 nfs,nfsd
+	auth_rpcgss            39597  2 nfs,nfsd
+	fscache                50642  1 nfs
+	lockd                  78804  2 nfs,nfsd
+	sunrpc                205647  19 lockd,auth_rpcgss,nfs_acl,nfs,nfsd
+	snd_ens1371            24819  2 
+	snd_ac97_codec        106082  1 snd_ens1371
+	ac97_bus               12642  1 snd_ac97_codec
+	gameport               15060  1 snd_ens1371
+	snd_rawmidi            25424  1 snd_ens1371
+	snd_seq_device         14172  1 snd_rawmidi
+	snd_pcm                80845  2 snd_ac97_codec,snd_ens1371
+	snd_page_alloc         14108  1 snd_pcm
+	snd_timer              28931  1 snd_pcm
+	snd                    62064  10 snd_timer,snd_pcm,snd_seq_device,snd_rawmidi,snd_ac97_codec,snd_ens1371
+	soundcore              14635  1 snd
+	lp                     17455  0 
+	parport                40930  3 lp,ppdev,parport_pc
+	usbhid                 41906  0 
+	pcnet32                41110  0 
+	hid                    77367  1 usbhid
+	mptspi                 22474  2 
+	mptscsih               39530  1 mptspi
+	mptbase                96852  2 mptscsih,mptspi
+	floppy                 60310  0 
+	vmw_pvscsi             18334  0 
+	vmxnet3                44924  0 
+	libkmod: INFO libkmod/libkmod.c:318 kmod_unref: context 0x99cf008 released
+	$ 
+
+### 设置日志输出级别为5
+
+	$ export KMOD_LOG=5
+	$ ./tools/lsmod 
+	Module                  Size  Used by
+	vmwgfx                102138  2 
+	ttm                    65344  1 vmwgfx
+	drm                   197692  3 ttm,vmwgfx
+	acpiphp                23535  0 
+	vmw_balloon            12700  0 
+	psmouse                72919  0 
+	serio_raw              13027  0 
+	joydev                 17393  0 
+	btusb                  17912  2 
+	nfsd                  229850  13 
+	i2c_piix4              13093  0 
+	bnep                   17830  2 
+	shpchp                 32325  0 
+	rfcomm                 38139  0 
+	nfs                   307376  0 
+	bluetooth             158438  11 rfcomm,bnep,btusb
+	mac_hid                13077  0 
+	parport_pc             32114  1 
+	ppdev                  12849  0 
+	nfs_acl                12771  2 nfs,nfsd
+	auth_rpcgss            39597  2 nfs,nfsd
+	fscache                50642  1 nfs
+	lockd                  78804  2 nfs,nfsd
+	sunrpc                205647  19 lockd,auth_rpcgss,nfs_acl,nfs,nfsd
+	snd_ens1371            24819  2 
+	snd_ac97_codec        106082  1 snd_ens1371
+	ac97_bus               12642  1 snd_ac97_codec
+	gameport               15060  1 snd_ens1371
+	snd_rawmidi            25424  1 snd_ens1371
+	snd_seq_device         14172  1 snd_rawmidi
+	snd_pcm                80845  2 snd_ac97_codec,snd_ens1371
+	snd_page_alloc         14108  1 snd_pcm
+	snd_timer              28931  1 snd_pcm
+	snd                    62064  10 snd_timer,snd_pcm,snd_seq_device,snd_rawmidi,snd_ac97_codec,snd_ens1371
+	soundcore              14635  1 snd
+	lp                     17455  0 
+	parport                40930  3 lp,ppdev,parport_pc
+	usbhid                 41906  0 
+	pcnet32                41110  0 
+	hid                    77367  1 usbhid
+	mptspi                 22474  2 
+	mptscsih               39530  1 mptspi
+	mptbase                96852  2 mptscsih,mptspi
+	floppy                 60310  0 
+	vmw_pvscsi             18334  0 
+	vmxnet3                44924  0 
+	$ 
+
+## insmod 命令执行流程
+	$ export KMOD_LOG=7
+	$ ./tools/insmod ../hello-module/hello.ko 
+	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x8b64008 created
+	libkmod: DEBUG libkmod/libkmod.c:276 kmod_new: log_priority=7
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='hello' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='hello' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x8b64d50 key='hello'
+	libkmod: DEBUG libkmod/libkmod-module.c:714 kmod_module_get_path: name='hello' path='/home/akaedu/Github/test-kmod-11/kmod-11/../hello-module/hello.ko'
+	libkmod: INFO libkmod/libkmod-module.c:834 kmod_module_insert_module: Failed to insert module '/home/akaedu/Github/test-kmod-11/kmod-11/../hello-module/hello.ko': Operation not permitted
+	insmod: ERROR: could not insert module ../hello-module/hello.ko: Operation not permitted
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x8b64d50 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x8b64d50 key='hello'
+	libkmod: INFO libkmod/libkmod.c:318 kmod_unref: context 0x8b64008 released
+	$ 
+
+### 如果用 sudo 则必须重新传递 KMOD_LOG=7 
+	$ sudo KMOD_LOG=7 ./tools/insmod ../hello-module/hello.ko 
+	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x9ee5008 created
+	libkmod: DEBUG libkmod/libkmod.c:276 kmod_new: log_priority=7
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='hello' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='hello' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9ee5088 key='hello'
+	libkmod: DEBUG libkmod/libkmod-module.c:714 kmod_module_get_path: name='hello' path='/home/akaedu/Github/test-kmod-11/kmod-11/../hello-module/hello.ko'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x9ee5088 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9ee5088 key='hello'
+	libkmod: INFO libkmod/libkmod.c:318 kmod_unref: context 0x9ee5008 released
+	$ 
 
 
-
-### 
-
-
-
-
-
-
-
-
+## modinf 命令
+	$ ./tools/modinfo ../hello-module/hello.ko 
+	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x90b7008 created
+	libkmod: DEBUG libkmod/libkmod.c:276 kmod_new: log_priority=7
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='hello' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='hello' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x90b7d50 key='hello'
+	libkmod: DEBUG libkmod/libkmod-module.c:714 kmod_module_get_path: name='hello' path='/home/akaedu/Github/test-kmod-11/kmod-11/../hello-module/hello.ko'
+	filename:       /home/akaedu/Github/test-kmod-11/kmod-11/../hello-module/hello.ko
+	libkmod: DEBUG libkmod/libkmod-module.c:714 kmod_module_get_path: name='hello' path='/home/akaedu/Github/test-kmod-11/kmod-11/../hello-module/hello.ko'
+	license:        GPL
+	description:    module example 
+	author:         AKAEDU
+	srcversion:     49A755BEBF4FF5E99BDBD01
+	depends:        
+	vermagic:       3.2.0-29-generic-pae SMP mod_unload modversions 686 
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x90b7d50 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x90b7d50 key='hello'
+	libkmod: INFO libkmod/libkmod.c:318 kmod_unref: context 0x90b7008 released
+	$ 
 
 
 

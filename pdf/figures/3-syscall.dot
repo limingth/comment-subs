@@ -5,5 +5,6 @@ digraph G {
 	系统调用抽象层 -> init_module;
 	系统调用抽象层 -> delete_module;
 
+	init_module -> create_sysfs_files -> "/sys/module/ext4/initstate";
 }
 	

@@ -909,7 +909,7 @@ kmod-11 项目系统层次结构如图
 
 ![kmod-11 项目系统结构层次图](./figures/0-overview.jpg)
 
-下面按照这样的三层架构，按照应用层，库接口层，抽象层的顺序，依次分析。
+下面按照这样的三层架构，按照应用层，库接口层，系统调用模拟层的顺序，依次分析。
 
 ### 应用层
 应用层实现了6个常用的用户命令，分别是 insmod, rmmod, lsmod, modinfo, depmod, modprobe. 
@@ -1063,14 +1063,19 @@ hash, index_mm，elf，list，array，log。
 
 以下在模块分析小节将分别对这12个模块进行详细说明。
 
-### 系统调用抽象层
-系统调用抽象层的实现代码主要集中在 testsuite 目录下，其中最重要的2个实现包含 init_module 系统调用和 delete_module 系统调用的模拟实现。
+### 系统调用模拟层
+系统调用模拟层的实现代码主要集中在 testsuite 目录下，其中最重要的2个实现包含 init_module 系统调用和 delete_module 系统调用的模拟实现。
+在这个目录下，也包含了一系列名为 test-xxx.c 的代码，这些代码其实是属于上层用于测试系统调用模拟层实现的功能，本质上还是为了验证 libkmod 库的接口是否正确。
+系统调用模拟层的实现，主要是采用了通过文件来模拟内核空间行为的方法。
 
-![kmod-11 项目系统调用抽象层结构图](./figures/3-syscall.jpg)
+例如 init_module 调用 create_sysfs_files 创建了 /sys/module/ 目录下的 initstate 文件，文件内容仅仅就是一个 live 字符串表示该模块已经插入到内核中了。有关这个文件，可以参考如下路径 kmod-11/testsuite/rootfs/test-init/sys/module/ext4/initstate （需要 make rootfs）
+
+
+![kmod-11 项目系统调用模拟层结构图](./figures/3-syscall.jpg)
 
 ### 各层之间相互关系图
 
-以上的命令，库，核心子模块，基础子模块以及系统调用抽象层，之间的关系并不是明显分开的，而是互相之间有交错的关系。为了更清楚的说明整个系统各个层次之间的调用关系，我们以下图为例，做简要说明。
+以上的命令，库，核心子模块，基础子模块以及系统调用模拟层，之间的关系并不是明显分开的，而是互相之间有交错的关系。为了更清楚的说明整个系统各个层次之间的调用关系，我们以下图为例，做简要说明。
 
 ![kmod-11 项目系统各层结构关系图](./figures/sys.jpg)
 
@@ -2164,9 +2169,16 @@ kmod_new 函数通过调用 calloc 动态内存分配一个 struct kmod_ctx 结�
 
 	kmod_ctx *kmod_new(char *dirname, char *config_paths)
 	{
+		// 分配空间给 ctx 指针
 		ctx = calloc(1, sizeof(struct kmod_ctx));
+
+		// 得到模块所在的路径名称
 		ctx->dirname = get_kernel_release(dirname);
+
+		// 通过传入2个参数 ctx, config_paths ，传出 ctx->config 指针
 		err = kmod_config_new(ctx, &ctx->config, config_paths);
+
+		// 调用 hash_new 分配一个 struct hash 指针
 		ctx->modules_by_name = hash_new(KMOD_HASH_SIZE, NULL);
 
 		return ctx;
@@ -2183,9 +2195,16 @@ kmod_unref 是 kmod_new 的反操作，一般都是配套使用。该函数的�
 
 	kmod_ctx *kmod_unref(kmod_ctx *ctx)
 	{
+		// 释放 ctx 所占用的资源
 		kmod_unload_resources(ctx);
+
+		// 释放 struct hash * ctx->modules_by_name 指针内存空间 
 		hash_free(ctx->modules_by_name);
+
+		// 释放 struct kmod_config * ctx->config 指针内存空间 
 		kmod_config_free(ctx->config);
+
+		// 释放 struct kmod_ctx * ctx 指针内存空间 
 		free(ctx);
 
 		return NULL;
@@ -2200,15 +2219,25 @@ modname_normalize 正规化函数的实现，主要是将文件名称中的 ‘-
 
 	int kmod_module_new_from_path(kmod_ctx *ctx, char *path, kmod_module **mod)
 	{
+		// 从路径名称中分离出模块名称，例如 ./tools/insmod ../hello-module/hello.ko
+		//  name='hello' path='/home/akaedu/Github/test-kmod-11/kmod-11/../hello-module/hello.ko'
 		path_to_modname(path, name, &namelen);
+
+		// 从 name 名称中得到指向该模块的指针 m
 		m = kmod_pool_get_module(ctx, name);
+
+		// 增加该模块的引用计数
 		kmod_module_ref(m);
-		err = kmod_module_new(ctx, name, name, namelen, NULL, 0, &m); *
+
+		// 根据 name 创建一个新的模块
+		err = kmod_module_new(ctx, name, name, namelen, NULL, 0, &m); 
+		
+		// 将模块指针 m 作为返回值通过 *mod 返回
 		*mod = m;
 		return 0;
 	}
 
-	157 // kmod-11/libkmod/libkmod-util.c 
+	157 // 详见 kmod-11/libkmod/libkmod-util.c 
 	158 char *path_to_modname(const char *path, char buf[PATH_MAX], size_t *len)
 	159 {
 	160         char *modname;
@@ -2220,7 +2249,7 @@ modname_normalize 正规化函数的实现，主要是将文件名称中的 ‘-
 	166         return modname_normalize(modname, buf, len);
 	167 }
 
-	133 // kmod-11/libkmod/libkmod-util.c 
+	133 // 详见 kmod-11/libkmod/libkmod-util.c 
 	134 inline char *modname_normalize(const char *modname, char buf[PATH_MAX],
 	135                                                                 size_t *len)
 	136 {
@@ -2259,8 +2288,10 @@ kmod_module_new_from_name 是首先把模块的名字进行正规化，然后调
 		if (ctx == NULL || name == NULL || mod == NULL)
 		        return -ENOENT;
 
+		// 模块名称的正规化操作
 		modname_normalize(name, name_norm, &namelen);
 
+		// 最终还是依靠调用 kmod_module_new 完成模块的创建操作
 		return kmod_module_new(ctx, name_norm, name_norm, namelen, NULL, 0, mod);
 	}
 
@@ -2314,6 +2345,7 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 
 	int kmod_module_insert_module(kmod_module *mod, int flags, char *options)
 	{
+		// 从模块名获得完整路径名
 		path = kmod_module_get_path(mod);
 		file = kmod_file_open(mod->ctx, path);
 		size = kmod_file_get_size(file);
@@ -2627,93 +2659,5 @@ libabc 项目发源于2002年，在2011年发布了 version 4。目前最近一�
 
 3) 系统调用模拟层的设计理念。因为内核模块会经常需要和内核打交道，无论插入和删除，一不小心可能会造成内核崩溃，只能靠 reset 重启来进行调试。因此引入关于系统调用函数的应用层实现，就可以在用户空间模拟系统调用后发生的行为，进行调试和验证。
 
-a	 b
----	---
-aaa	 bbb 
----	---	
-
-<table>
-   <tr>
-         <td>用例标识</td>
-	       <td>THU-12-1</td>
-	             <td>用例名称</td>
-		           <td>Kmod-11下载</td>
-			         <td>测试项编号</td>
-				       <td>THU-12-1</td>
-				          </tr>
-					     <tr>
-					           <td>测试用例说明</td>
-						         <td>本用例用于测试在 uBuntu 12.04 上，如何下载安装 kmod-11 项目。</td>
-							    </tr>
-							       <tr>
-							             <td>初始化要求</td>
-								           <td>硬件环境&#8232;型号：Macbook Air 笔记本电脑   CPU：Intel Core 2 Duo 1.4GHz&#8232;内存：2GB DDR3   硬盘：64GB</td>
-									      </tr>
-									         <tr>
-										       <td>软件环境&#8232;已安装 Vmware Fusion 虚拟机 5.0.3, 虚拟机安装有Ubuntu 12.04.2 LTS，其中安装有GCC版本  4.6.3 </td>
-										          </tr>
-											     <tr>
-											           <td>前提和约束</td>
-												         <td>无</td>
-													    </tr>
-													       <tr>
-													             <td>测试过程</td>
-														        </tr>
-															   <tr>
-															         <td>序号</td>
-																       <td>测试过程</td>
-																             <td>备注</td>
-																	        </tr>
-																		   <tr>
-																		         <td>1</td>
-																			       <td>详细步骤</td>
-																			             <td>修改gcc编译选项，使其不生成.note.gnu.build-id段</td>
-																				           <td></td>
-																					      </tr>
-																					         <tr>
-																						       <td>输入数据</td>
-																						             <td>CC="gcc -Wl,--build-id=none" ./configure --prefix=/opt/grub/</td>
-																							        </tr>
-																								   <tr>
-																								         <td>预期结果</td>
-																									       <td>在GRUB源代码目录下生成Makefile文件</td>
-																									          </tr>
-																										     <tr>
-																										           <td>2</td>
-																											         <td>详细步骤</td>
-																												       <td>输入make命令，构建二进制文件</td>
-																												             <td></td>
-																													        </tr>
-																														   <tr>
-																														         <td>输入数据</td>
-																															       <td>make</td>
-																															          </tr>
-																																     <tr>
-																																           <td>预期结果</td>
-																																	         <td>生成stage1，stage1_5（e2fs_stage1_5， fat_stage1_5， ffs_stage1_5， iso9660_stage1_5， jfs_stage1_5， minix_stage1_5， reiserfs_stage1_5 ，ufs2_stage1_5， vstafs_stage1_5， xfs_stage1_5），以及stage2这些二进制映像。</td>
-																																		    </tr>
-																																		       <tr>
-																																		             <td>3</td>
-																																			           <td>详细步骤</td>
-																																				         <td>输入make install命令，将二进制文件安装到指定目录</td>
-																																					       <td></td>
-																																					          </tr>
-																																						     <tr>
-																																						           <td>输入数据</td>
-																																							         <td>make install</td>
-																																								    </tr>
-																																								       <tr>
-																																								             <td>预期结果</td>
-																																									           <td>在/opt/grub/下生成以下目录：bin， info， lib， man，sbin</td>
-																																										      </tr>
-																																										         <tr>
-																																											       <td>过程终止条件</td>
-																																											             <td>make install成功并在/opt/grub/下生成以下目录：bin， info， lib， man，sbin</td>
-																																												        </tr>
-																																													   <tr>
-																																													         <td>结果判定标准</td>
-																																														       <td>以上各步骤都成功，并没有错误产生。</td>
-																																														          </tr>
-																																															  </table>
 
 
