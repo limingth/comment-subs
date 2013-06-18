@@ -1,3 +1,3 @@
 /*
- * @brief  打开 filename 文件, 将文件内容读出到 ctx 结构体中
+ * @brief  通过模块的上下文和完整的路径，打开 filename 文件, 返回文件指针
  */

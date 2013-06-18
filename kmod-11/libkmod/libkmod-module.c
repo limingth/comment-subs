@@ -674,6 +674,7 @@ KMOD_EXPORT struct kmod_module *kmod_module_get_module(const struct kmod_list *e
  *
  * Returns: the name of this kmod module.
  */
+// kmod_module_get_name.cmt
 KMOD_EXPORT const char *kmod_module_get_name(const struct kmod_module *mod)
 {
 	if (mod == NULL)
@@ -693,6 +694,7 @@ KMOD_EXPORT const char *kmod_module_get_name(const struct kmod_module *mod)
  * Returns: the path of this kmod module or NULL if such information is not
  * available.
  */
+// kmod_module_get_path.cmt
 KMOD_EXPORT const char *kmod_module_get_path(const struct kmod_module *mod)
 {
 	char *line;

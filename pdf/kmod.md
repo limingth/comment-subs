@@ -2318,9 +2318,11 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 		struct kmod_module *m;
 		size_t keylen;
 
+		// 从 kmod pool 中通过 hash_find 获取模块指针 m
 		m = kmod_pool_get_module(ctx, key);
 		*mod = kmod_module_ref(m);
 		
+		// 通过 malloc 分配一个 struct module 结构体
 		m = malloc(sizeof(*m) + (alias == NULL ? 1 : 2) * (keylen + 1));
 		m->ctx = kmod_ref(ctx);
 		m->name = (char *)m + sizeof(*m);
@@ -2331,7 +2333,10 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 		m->hashkey = m->name + keylen + 1;
 		memcpy(m->hashkey, key, keylen + 1);
 
+		// 设置当前模块 m 的引用计数为 1
 		m->refcount = 1;
+
+		// 在 kmod 池中通过 hash_add 添加一个键值为 m-hashkey 的模块
 		kmod_pool_add_module(ctx, m, m->hashkey);
 		*mod = m;
 
@@ -2345,8 +2350,10 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 
 	int kmod_module_insert_module(kmod_module *mod, int flags, char *options)
 	{
-		// 从模块名获得完整路径名
+		// 从模块指针获得模块的完整路径名
 		path = kmod_module_get_path(mod);
+
+		// 通过模块的上下文和完整的路径，打开这个文件, 将文件内容读出到 ctx 结构体中
 		file = kmod_file_open(mod->ctx, path);
 		size = kmod_file_get_size(file);
 		mem = kmod_file_get_contents(file);
