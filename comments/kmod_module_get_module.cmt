@@ -1,0 +1,5 @@
+/*
+ * @brief 从链表节点的数据区域 获得 kmod module 指针
+ * 
+ * 先将得到 entry->data ，然后调用 kmod_module_ref() 返回 mod 指针
+ */

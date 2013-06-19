@@ -166,6 +166,7 @@ end:
 	return err;
 }
 
+// modinfo_do.cmt
 static int modinfo_do(struct kmod_module *mod)
 {
 	struct kmod_list *l, *list = NULL;

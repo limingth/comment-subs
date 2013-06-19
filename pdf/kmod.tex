@@ -1989,24 +1989,44 @@ insmod 命令为例，介绍一下命令实现流程。
 
 {\begin{shaded}\begin{verbatim}
 struct kmod_cmd {
+    // name 表示执行的命令，以字符串的方式存储，用于匹配命令
     const char *name;
+    // cmd 表示该命令所对应的 main 函数指针
     int (*cmd)(int argc, char *argv[]);
+    // help 表示该命令的功能作用的字符串
     const char *help;
 };
 \end{verbatim}\end{shaded}}
-在 kmod-11/tools/insmod.c 文件中，用这个结构体定义了
+在 kmod-11/tools/insmod.c 文件中，用这个结构体定义了一个
+kmod\_cmd\_compat\_insmod
+变量，最后这个变量会添加到整个项目所支持的命令集
+kmod\_compat\_cmds数组中。
 
 {\begin{shaded}\begin{verbatim}
-160 
+160 // insmod 命令所需要提供的数据结构
 161 const struct kmod_cmd kmod_cmd_compat_insmod = {
 162         .name = "insmod",
 163         .cmd = do_insmod,
 164         .help = "compat insmod command",
 165 };
 \end{verbatim}\end{shaded}}
-在 kmod-11/tools/kmod.c 文件中，实现了一个通用的 main 方法。
+在 kmod-11/tools/kmod.c 文件中，实现了一个通用的 main 方法。在这个 main
+函数中，实现了所有命令调用的真正入口。 其中用到了一个
+program\_invocation\_short\_name
+变量，是一个全局变量，它代表了当前程序执行时候的可执行文件名。 通过查看
+man program\_invocation\_short\_name 帮助，可以看到其实一共有 2
+个全局变量，名字很接近，其中一个是长路径，另一个是当前可执行文件名称。
 
 {\begin{shaded}\begin{verbatim}
+#define _GNU_SOURCE         /* See feature_test_macros(7) */
+#include <errno.h>
+
+// 这个变量是长路径名 program_invocation_name = ./kmod-11/tools/lsmod
+extern char *program_invocation_name;
+
+// 这个变量是可执行文件名 program_invocation_short_name = lsmod
+extern char *program_invocation_short_name;
+
 166 int main(int argc, char *argv[])
 167 {
 168         int err;
@@ -2019,7 +2039,11 @@ struct kmod_cmd {
 175         return err;
 176 }
 \end{verbatim}\end{shaded}}
-在这个main函数中，调用了 handle\_kmod\_compat\_commands 函数。
+在这个main函数中，调用了 handle\_kmod\_commands 和
+handle\_kmod\_compat\_commands 这2个函数。 其中第一个支持 kmod
+系统命令，这个 kmod 命令目前暂时只支持 kmod help 和 kmod list 两个子命令，
+第二个支持早期的 insmod/rmmod/modinfo/lsmod/depmod/modprobe 这6个 compat
+兼容命令。
 
 {\begin{shaded}\begin{verbatim}
 149 
@@ -2083,6 +2107,9 @@ $
 对于第三层的重要函数的实现分析，将放到核心代码分析章节中，不在本章节中展开。这样做的目的，主要是希望能够在有限的篇幅中，
 把实现每个命令所调用的最重要的库函数接口体现出来，避免在繁冗复杂的函数接口列表中无重点的分析。
 
+注意这个小节中后面的绝大部分代码都不是原代码的直接引用，而是将其中最核心的函数调用和传入传出的参数整理到函数体内部，为便于查看函数调用关系而做了简化。
+因此可能有的变量没有清楚的定义，有的函数没有给出参数和返回值，也包括有的逻辑关系做了删减。但重要的调用关系都保留下来。
+
 \subsubsection{insmod 命令实现流程}
 
 \textbf{do\_insmod 核心代码分析}
@@ -2095,16 +2122,25 @@ $
 {\begin{shaded}\begin{verbatim}
 do_insmod()
 {
+    // 将 insmod 命令的参数传给 opts 指针
     opts = argv[x]; // name=value
+
+    // 创建 kmod 库上下文
     ctx = kmod_new(NULL, &null_config);
+
+    // 从路径名 path 创建 kmod module
     err = kmod_module_new_from_path(ctx, filename, &mod);
+
+    // 插入 kmod module 单个文件，不包含依赖关系
     err = kmod_module_insert_module(mod, 0, opts);
+
+    // 释放当前模块，给当前模块的引用计数减1
     kmod_module_unref(mod);
+
+    // 释放 kmod 库上下文
     kmod_unref(ctx);
 }
 \end{verbatim}\end{shaded}}
-注意这个小节中后面的绝大部分代码都不是原代码的引用，而是将其中最核心的函数调用和传入传出的参数整理到函数体内部，为便于查看函数调用关系而做了简化。
-
 \begin{figure}[htbp]
 \centering
 \includegraphics{./figures/insmod.jpg}
@@ -2119,7 +2155,8 @@ do\_insmod() 的实现可以分为5个步骤
 \item
   通过 filename 和 ctx 获得模块 struct kmod\_module mod
 \item
-  将 mod 插入到当前模块列表中, 完成真正的插入内核功能
+  将 mod 插入到当前模块列表中, 通过 kmod\_module\_insert\_module
+  完成真正的插入内核功能
 \item
   释放 mod
 \item
@@ -2160,16 +2197,35 @@ kmod\_module\_insert\_module(mod, 0, opts);
 {\begin{shaded}\begin{verbatim}
 do_rmmod()
 {
+    //  打开日志文件, 调用了系统的 openlog()
     log_open(use_syslog);
+
+    // 创建 kmod 库上下文 
     ctx = kmod_new(NULL, &null_config);
+
+    // 设置 kmod log 日志输出的优先级
     log_setup_kmod_log(ctx, verbose);
     arg = argv[i];
+
+    // 从路径名 path 创建 kmod module
     err = kmod_module_new_from_path(ctx, arg, &mod);
+
+    // 从文件名 name 创建 kmod module
     err = kmod_module_new_from_name(ctx, arg, &mod);
+
+    // 检查模块是否正在使用，通过引用计数来帮助判断是否真正需要卸载模块
     check_module_inuse(mod);
+
+    // 卸载 kmod module 单个文件，不包含依赖关系
     err = kmod_module_remove_module(mod, flags);
+
+    // 释放当前模块
     kmod_module_unref(mod);
+
+    // 释放 kmod 库上下文
     kmod_unref(ctx);
+
+    // 关闭日志文件，调用 closelog()
     log_close();
 }
 \end{verbatim}\end{shaded}}
@@ -2179,21 +2235,28 @@ do_rmmod()
 \caption{rmmod 调用层次图}
 \end{figure}
 
-do\_rmmod() 的实现可以分为5个步骤
+do\_rmmod() 的实现相比 do\_insmod() 的实现，主要是多了一个 log 的模块
 
 \begin{itemize}
 \item
+  打开日志 log
+\item
   创建模块的上下文 struct kmod\_ctx ctx
 \item
-  通过 filename 和 ctx 获得模块 struct kmod\_module mod
+  通过 path/name 和 ctx 获得模块 struct kmod\_module mod
 \item
-  将 mod 插入到当前模块列表中, 完成真正的插入内核功能
+  判别当前模块是否在使用中，如果在使用则不能卸载，释放相关资源后返回
+\item
+  如果不在使用中，则通过 kmod\_module\_remove\_module 将 mod
+  从当前模块列表中卸载
 \item
   释放 mod
 \item
   释放 ctx
+\item
+  关闭日志 log
 \end{itemize}
-涉及到两个模块的5个接口，两个模块是
+涉及到3个模块的8个接口，3个模块和相关接口是
 
 \begin{itemize}
 \item
@@ -2214,7 +2277,21 @@ do\_rmmod() 的实现可以分为5个步骤
   \item
     kmod\_module\_unref()
   \end{itemize}
+\item
+  libkmod/tools/log.c
+  \begin{itemize}
+  \item
+    log\_open()
+  \item
+    log\_close()
+  \item
+    log\_setup\_kmod\_log()
+  \end{itemize}
 \end{itemize}
+可以看出，这里真正最后完成插入操作的函数是
+kmod\_module\_insert\_module(mod, 0, opts);
+这个函数在我们下面的函数接口分析中还会详细阐述。
+
 \subsubsection{lsmod 命令实现流程}
 
 \textbf{do\_lsmod() 核心代码分析}
@@ -2223,28 +2300,44 @@ do\_rmmod() 的实现可以分为5个步骤
 static int do_lsmod(int argc, char *argv[])
 {
     struct kmod_list *list, *itr;
-    ctx = kmod_new(NULL, &null_config); 
+
+    // 创建 kmod 库上下文
+    ctx = kmod_new(NULL, &null_config);
+
+    // 从 /proc/modules 文件创建 kmod module list    
     err = kmod_module_new_from_loaded(ctx, &list);
     puts("Module                  Size  Used by");
 
+    // 遍历 list 链表，对每一个元素 itr 进行下面的操作
     kmod_list_foreach(itr, list) {
+        // 从链表节点的数据区域 获得 kmod module 指针
             struct kmod_module *mod = kmod_module_get_module(itr);
+        // 从模块指针获得模块名
             const char *name = kmod_module_get_name(mod);
+        // 从模块指针获得模块引用计数
             int use_count = kmod_module_get_refcnt(mod);
+        // 从模块指针获得模块文件大小
             long size = kmod_module_get_size(mod);
 
         printf("%-19s %8ld  %d ", name, size, use_count);
+        // 从模块指针获得当前正在使用这个模块的模块列表 list
         holders = kmod_module_get_holders(mod);
             kmod_list_foreach(hitr, holders) {
+            // 从链表节点的数据区域 获得 kmod module 指针
                     struct kmod_module *hm = kmod_module_get_module(hitr);
+            // 打印出当前这个 holder 的 name 
                     fputs(kmod_module_get_name(hm), stdout);
+            // 释放当前模块
                     kmod_module_unref(hm);
             }
-
+            // 释放当前 holder 列表
         kmod_module_unref_list(holders);
+        // 释放当前模块
             kmod_module_unref(mod);
     }
+    // 释放当前模块列表
     kmod_module_unref_list(list);
+    // 释放当前库上下文
     kmod_unref(ctx);
 
     return EXIT_SUCCESS;
@@ -2266,6 +2359,18 @@ kmod\_module\_new\_from\_loaded，这个函数主要通过分析 /proc/modules
 kmod\_module\_get\_module(itr)，获得模块的名字name,
 引用计数refcnt，以及模块的大小size，把这3个最重要的信息打印出来，并按照一定的格式进行显示输出。
 
+其中如果某个模块被其他别的模块正在使用，将会把这个 Use by
+信息也打印出来，用逗号间隔。
+
+举例：
+
+{\begin{shaded}\begin{verbatim}
+$ lsmod
+Module                  Size  Used by
+vmwgfx                102138  2 
+ttm                    65344  1 vmwgfx
+drm                   197692  3 vmwgfx,ttm
+\end{verbatim}\end{shaded}}
 \subsubsection{modinfo 命令实现流程}
 
 \textbf{do\_modinfo() 核心代码分析}
@@ -2273,19 +2378,24 @@ kmod\_module\_get\_module(itr)，获得模块的名字name,
 {\begin{shaded}\begin{verbatim}
 static int do_modinfo(int argc, char *argv[])
 {
+    // 创建 kmod 库上下文
     ctx = kmod_new(dirname, &null_config);
 
+    // 可以支持同时在一条命令中查看多个模块的信息
     for (i = optind; i < argc; i++) {
             const char *name = argv[i];
+        // 如果当前给定的名字是 模块名 path ，则调用 modinfo_path_do
+        // 如果当前给定的名字是 别名 alias ，则调用 modinfo_alias_do
             if (is_module_filename(name))
                     r = modinfo_path_do(ctx, name);
-            else
+            else 
                     r = modinfo_alias_do(ctx, name);
 
             if (r < 0)
                     err = r;
     }   
 
+    // 释放当前库上下文
     kmod_unref(ctx);
     return err >= 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }
@@ -2476,114 +2586,118 @@ tools/depmod.c - depmod\_xxx - cfg\_xxx
   \item
     depmod\_shutdown
   \end{itemize}
-\item
-  围绕上面这些函数，还需要调用到如下接口
-
-  static int depmod\_init(struct depmod *depmod, struct cfg *cfg, struct
-  kmod\_ctx *ctx) \{ array\_init(\&depmod-\textgreater{}modules, 128);
-
-{\begin{shaded}\begin{verbatim}
-depmod->modules_by_uncrelpath = hash_new(512, NULL);
-depmod->modules_by_name = hash_new(512, NULL);
-depmod->symbols = hash_new(2048, (void (*)(void *))symbol_free);
-
-hash_free(depmod->modules_by_name);
-hash_free(depmod->modules_by_uncrelpath);
-
-return err;
-\end{verbatim}\end{shaded}}
-  \}
-
-  static int depmod\_load\_symvers(struct depmod *depmod, const char
-  *filename) \{ fp = fopen(filename, ``r''); while (fgets(line,
-  sizeof(line), fp) != NULL) \{ ver = strtok(line, " \t");
-
-{\begin{shaded}\begin{verbatim}
-depmod_symbol_add(depmod, sym, crc, NULL);
-depmod_add_fake_syms(depmod);
-
-fclose(fp);
-return 0;
-\end{verbatim}\end{shaded}}
-  \}
-
-  static int depmod\_load\_system\_map(struct depmod *depmod, const char
-  *filename) \{ fp = fopen(filename, ``r''); while (fgets(line,
-  sizeof(line), fp) != NULL) \{ p = strchr(line, ' ');
-  depmod\_symbol\_add(depmod, p + ksymstr\_len, 0, NULL);
-  depmod\_add\_fake\_syms(depmod); fclose(fp); return 0; \}
-
-  static int depmod\_modules\_search(struct depmod *depmod) \{ DIR *d =
-  opendir(depmod-\textgreater{}cfg-\textgreater{}dirname); err =
-  depmod\_modules\_search\_dir(depmod, d, baselen, path); closedir(d);
-  return err; \}
-
-  static int depmod\_module\_add(struct depmod *depmod, struct
-  kmod\_module *kmod) \{ modname = kmod\_module\_get\_name(kmod);
-
-{\begin{shaded}\begin{verbatim}
-mod = calloc(1, sizeof(struct mod) + modnamelen);
-
-array_init(&mod->deps, 4);
-
-err = hash_add_unique(depmod->modules_by_name, mod->modname, mod);
-
-return 0;
-\end{verbatim}\end{shaded}}
-  \}
-
-  static int depmod\_modules\_build\_array(struct depmod *depmod) \{
-  hash\_iter\_init(depmod-\textgreater{}modules\_by\_name,
-  \&module\_iter);
-
-{\begin{shaded}\begin{verbatim}
-while (hash_iter_next(&module_iter, NULL, &v)) {
-        struct mod *mod = (struct mod *) v;
-        mod->idx = depmod->modules.count;
-        err = array_append(&depmod->modules, mod);
-        if (err < 0)
-                return err;
-}
-return 0;
-\end{verbatim}\end{shaded}}
-  \}
-
-  static void depmod\_modules\_sort(struct depmod *depmod) \{
-  snprintf(order\_file, sizeof(order\_file), ``\%s/modules.order'',
-  depmod-\textgreater{}cfg-\textgreater{}dirname); fp =
-  fopen(order\_file, ``r'');
-
-{\begin{shaded}\begin{verbatim}
-while (fgets(line, sizeof(line), fp) != NULL) {
-    mod = hash_find(depmod->modules_by_uncrelpath, line);
-}
-
-array_sort(&depmod->modules, mod_cmp);
-
-for (idx = 0; idx < depmod->modules.count; idx++) {
-        struct mod *m = depmod->modules.array[idx];
-        m->idx = idx;
-}
-\end{verbatim}\end{shaded}}
-  \}
-
-  static void depmod\_shutdown(struct depmod *depmod) \{
-  hash\_free(depmod-\textgreater{}symbols);
-
-{\begin{shaded}\begin{verbatim}
-hash_free(depmod->modules_by_uncrelpath);
-
-hash_free(depmod->modules_by_name);
-
-for (i = 0; i < depmod->modules.count; i++)
-        mod_free(depmod->modules.array[i]);
-
-array_free_array(&depmod->modules);
-
-kmod_unref(depmod->ctx);
-\end{verbatim}\end{shaded}}
-  \}
 \end{itemize}
+围绕上面这些函数，还需要调用到如下接口
+
+{\begin{shaded}\begin{verbatim}
+static int depmod_init(struct depmod *depmod, struct cfg *cfg,
+                                                    struct kmod_ctx *ctx)
+{
+    array_init(&depmod->modules, 128);
+
+    depmod->modules_by_uncrelpath = hash_new(512, NULL);
+    depmod->modules_by_name = hash_new(512, NULL);
+    depmod->symbols = hash_new(2048, (void (*)(void *))symbol_free);
+
+    hash_free(depmod->modules_by_name);
+    hash_free(depmod->modules_by_uncrelpath);
+
+    return err;
+}
+
+static int depmod_load_symvers(struct depmod *depmod, const char *filename)
+{
+    fp = fopen(filename, "r");
+    while (fgets(line, sizeof(line), fp) != NULL) {
+    ver = strtok(line, " \t");
+
+    depmod_symbol_add(depmod, sym, crc, NULL);
+    depmod_add_fake_syms(depmod);
+
+    fclose(fp);
+    return 0;
+}
+
+static int depmod_load_system_map(struct depmod *depmod, const char *filename)
+{
+    fp = fopen(filename, "r");
+    while (fgets(line, sizeof(line), fp) != NULL) {
+    p = strchr(line, ' ');
+    depmod_symbol_add(depmod, p + ksymstr_len, 0, NULL);
+    depmod_add_fake_syms(depmod);
+    fclose(fp);
+    return 0;
+}
+
+static int depmod_modules_search(struct depmod *depmod)
+{
+    DIR *d = opendir(depmod->cfg->dirname);
+    err = depmod_modules_search_dir(depmod, d, baselen, path);
+    closedir(d);
+    return err;
+}
+
+static int depmod_module_add(struct depmod *depmod, struct kmod_module *kmod)
+{
+    modname = kmod_module_get_name(kmod);
+
+    mod = calloc(1, sizeof(struct mod) + modnamelen);
+
+    array_init(&mod->deps, 4);
+
+    err = hash_add_unique(depmod->modules_by_name, mod->modname, mod);
+
+    return 0;
+}
+
+static int depmod_modules_build_array(struct depmod *depmod)
+{
+    hash_iter_init(depmod->modules_by_name, &module_iter);
+
+    while (hash_iter_next(&module_iter, NULL, &v)) {
+            struct mod *mod = (struct mod *) v;
+            mod->idx = depmod->modules.count;
+            err = array_append(&depmod->modules, mod);
+            if (err < 0)
+                    return err;
+    }
+    return 0;
+}
+
+static void depmod_modules_sort(struct depmod *depmod)
+{
+    snprintf(order_file, sizeof(order_file), "%s/modules.order",
+             depmod->cfg->dirname);
+        fp = fopen(order_file, "r");
+
+    while (fgets(line, sizeof(line), fp) != NULL) {
+        mod = hash_find(depmod->modules_by_uncrelpath, line);
+    }
+
+    array_sort(&depmod->modules, mod_cmp);
+
+    for (idx = 0; idx < depmod->modules.count; idx++) {
+            struct mod *m = depmod->modules.array[idx];
+            m->idx = idx;
+    }
+}
+
+static void depmod_shutdown(struct depmod *depmod)
+{
+    hash_free(depmod->symbols);
+
+    hash_free(depmod->modules_by_uncrelpath);
+
+    hash_free(depmod->modules_by_name);
+
+    for (i = 0; i < depmod->modules.count; i++)
+            mod_free(depmod->modules.array[i]);
+
+    array_free_array(&depmod->modules);
+
+    kmod_unref(depmod->ctx);
+}
+\end{verbatim}\end{shaded}}
 \textbf{cfg\_xxx}
 
 {\begin{shaded}\begin{verbatim}

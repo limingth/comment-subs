@@ -325,7 +325,7 @@ static char *get_kernel_release(const char *dirname)
  *
  * @note 注释详细内容:
  *
- * @brief  kmod_new - 创建 kmod 库上下文
+ * @brief  创建 kmod 库上下文
  *
  * 主要功能： 
  *	创建 kmod_ctx 结构体，设置mod引用计数为1
@@ -435,7 +435,7 @@ KMOD_EXPORT struct kmod_ctx *kmod_ref(struct kmod_ctx *ctx)
  *
  * @note 注释详细内容:
  *
- * @brief  kmod_unref - 释放 kmod 库上下文
+ * @brief  释放 kmod 库上下文
  * 
  * 主要功能： 
  *	给 kmod 的引用计数 refcount 减1
@@ -746,6 +746,18 @@ finish:
 	return err;
 }
 
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ * 
+ * @brief  实现从模块名字到模块依赖关系字符串的转换 name->line
+ */
 char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
 {
 	struct index_file *idx;

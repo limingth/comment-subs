@@ -656,6 +656,7 @@ fail:
  * Returns: NULL on failure or the kmod_module contained in this list entry
  * with its refcount incremented.
  */
+// kmod_module_get_module.cmt
 KMOD_EXPORT struct kmod_module *kmod_module_get_module(const struct kmod_list *entry)
 {
 	if (entry == NULL)
@@ -865,6 +866,7 @@ static bool module_is_blacklisted(struct kmod_module *mod)
  * Returns: 0 on success or < 0 otherwise. @output is saved with the updated
  * list.
  */
+// kmod_module_apply_filter.cmt
 KMOD_EXPORT int kmod_module_apply_filter(const struct kmod_ctx *ctx,
 						enum kmod_filter filter_type,
 						const struct kmod_list *input,
@@ -1550,6 +1552,7 @@ void kmod_module_set_remove_commands(struct kmod_module *mod, const char *cmd)
  *
  * Returns: 0 on success or < 0 on error.
  */
+// kmod_module_new_from_loaded.cmt
 KMOD_EXPORT int kmod_module_new_from_loaded(struct kmod_ctx *ctx,
 						struct kmod_list **list)
 {
@@ -1691,6 +1694,7 @@ KMOD_EXPORT int kmod_module_get_initstate(const struct kmod_module *mod)
  *
  * Returns: the size of this kmod module.
  */
+// kmod_module_get_size.cmt
 KMOD_EXPORT long kmod_module_get_size(const struct kmod_module *mod)
 {
 	FILE *fp;
@@ -1770,6 +1774,7 @@ done:
  *
  * Returns: 0 on success or < 0 on failure.
  */
+// kmod_module_get_refcnt.cmt
 KMOD_EXPORT int kmod_module_get_refcnt(const struct kmod_module *mod)
 {
 	char path[PATH_MAX];
@@ -1808,6 +1813,7 @@ KMOD_EXPORT int kmod_module_get_refcnt(const struct kmod_module *mod)
  *
  * Returns: a new list of kmod modules on success or NULL on failure.
  */
+// kmod_module_get_holders.cmt
 KMOD_EXPORT struct kmod_list *kmod_module_get_holders(const struct kmod_module *mod)
 {
 	char dname[PATH_MAX];
@@ -2042,6 +2048,7 @@ KMOD_EXPORT void kmod_module_section_free_list(struct kmod_list *list)
 	}
 }
 
+// kmod_module_get_elf.cmt
 static struct kmod_elf *kmod_module_get_elf(const struct kmod_module *mod)
 {
 	if (mod->file == NULL) {
@@ -2066,6 +2073,7 @@ struct kmod_module_info {
 	char value[];
 };
 
+// kmod_module_info_new.cmt
 static struct kmod_module_info *kmod_module_info_new(const char *key, size_t keylen, const char *value, size_t valuelen)
 {
 	struct kmod_module_info *info;
@@ -2104,6 +2112,7 @@ static void kmod_module_info_free(struct kmod_module_info *info)
  *
  * Returns: 0 on success or < 0 otherwise.
  */
+// kmod_module_get_info.cmt
 KMOD_EXPORT int kmod_module_get_info(const struct kmod_module *mod, struct kmod_list **list)
 {
 	struct kmod_elf *elf;
@@ -2130,6 +2139,7 @@ KMOD_EXPORT int kmod_module_get_info(const struct kmod_module *mod, struct kmod_
 		size_t keylen, valuelen;
 
 		key = strings[i];
+		printf("key = %s\n", key);
 		value = strchr(key, '=');
 		if (value == NULL) {
 			keylen = strlen(key);
@@ -2175,6 +2185,7 @@ list_error:
  * Returns: the key of this kmod module info on success or NULL on
  * failure. The string is owned by the info, do not free it.
  */
+// kmod_module_info_get_key.cmt
 KMOD_EXPORT const char *kmod_module_info_get_key(const struct kmod_list *entry)
 {
 	struct kmod_module_info *info;

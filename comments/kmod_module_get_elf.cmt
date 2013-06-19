@@ -1,0 +1,3 @@
+/*
+ * @brief  返回当前模块 mod 的 kmod_file 指针
+ */

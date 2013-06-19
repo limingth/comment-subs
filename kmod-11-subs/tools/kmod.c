@@ -238,12 +238,15 @@ static int handle_kmod_compat_commands(int argc, char *argv[])
  *
  * @note 注释详细内容:
  *
- * @brief  kmod 命令的主程序
+ * @brief  所有tools下实现的命令的主程序
  */
 int main(int argc, char *argv[])
 {
 	int err;
 
+	printf("program_invocation_short_name = %s\n", program_invocation_short_name);
+	printf("program_invocation_name = %s\n", program_invocation_name);
+	printf("program_invocation_short_name = %x\n", program_invocation_short_name);
 	if (strcmp(program_invocation_short_name, "kmod") == 0)
 		err = handle_kmod_commands(argc, argv);
 	else

@@ -1,0 +1,10 @@
+/*
+ * @brief 从文件别名 alias 创建 kmod module list
+ * 
+ * 该函数主要用于在 modprobe 中插入模块前所使用，根据用户给出的 alias 来完成构建 kmod_list 的操作，最后给 *list 赋值作为传出参数返回。
+ * 完成构建需要查找名为 alias 的全部模块，一旦在某个地方找到，就不再继续寻找而是创建并将模块保存在 *list 中。
+ * 
+ * 该函数中，模块查找的顺序是
+ * 在配置文件中 (/etc/modprobe.d/modules.conf）的 alias 是最先寻找的，它的设置将会覆盖其他地方的设置。 
+ * 接下来的顺序是，在 modules.dep -> modules.symbols -> commands -> modules.alias -> modules.buildin
+ */

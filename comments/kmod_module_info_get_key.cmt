@@ -1,0 +1,3 @@
+/*
+ * @brief 获取 kmod list 中的数据 data，转为 kmod_module_info 指针，返回 info->key 
+ */

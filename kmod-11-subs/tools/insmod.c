@@ -94,13 +94,23 @@ static const char *mod_strerror(int err)
  * @note 注释详细内容:
  * 
  * @brief  insmod 函数的真正实现，通过 getopt_long 分析传入参数，
+ * 
  * 通过调用 libkmod 的接口，实现 insmod 命令
- * 主要使用的接口包括
- * - kmod_new()
- * - kmod_module_new_from_path()
- * - kmod_module_insert_module()
- * - kmod_module_unref()
- * - kmod_unref()
+ * do_insmod() 的实现可以分为5个步骤
+ *	创建模块的上下文 struct kmod_ctx ctx
+ *	通过 filename 和 ctx 获得模块 struct kmod_module mod
+ *	将 mod 插入到当前模块列表中, 通过 kmod_module_insert_module 完成真正的插入内核功能
+ *	释放 mod 
+ *	释放 ctx
+ *
+ * 涉及到两个模块的5个接口，两个模块是
+ * libkmod/libkmod.c
+ *	 - kmod_new() 
+ *	 - kmod_unref()
+ * libkmod/libkmod-module.c
+ *	 - kmod_module_new_from_path()
+ *	 - kmod_module_insert_module()
+ *	 - kmod_module_unref()
  */ 
 static int do_insmod(int argc, char *argv[])
 {

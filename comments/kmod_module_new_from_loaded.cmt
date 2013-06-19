@@ -1,0 +1,6 @@
+/*
+ * @brief 从 /proc/modules 文件创建 kmod module list
+ *
+ * 该函数是实现 lsmod 命令的重要函数，通过读取 /proc/modules 文件的每一行，构建一个 kmod_list 列表，然后给 *list 赋值作为传出参数返回。
+ * 通过 cat 命令，查看 /proc/modules 文件的内容，格式不是很整齐，排列参差不齐。通过 lsmod 命令输出的信息，格式对齐，看起来信息也比较清晰。
+ */

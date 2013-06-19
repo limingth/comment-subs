@@ -1734,28 +1734,44 @@ do_rmmod() 的实现相比 do_insmod() 的实现，主要是多了一个 log 的
 	static int do_lsmod(int argc, char *argv[])
 	{
 		struct kmod_list *list, *itr;
-		ctx = kmod_new(NULL, &null_config);	
+
+		// 创建 kmod 库上下文
+		ctx = kmod_new(NULL, &null_config);
+
+		// 从 /proc/modules 文件创建 kmod module list	
 		err = kmod_module_new_from_loaded(ctx, &list);
 		puts("Module                  Size  Used by");
 
+		// 遍历 list 链表，对每一个元素 itr 进行下面的操作
 		kmod_list_foreach(itr, list) {
+			// 从链表节点的数据区域 获得 kmod module 指针
 		        struct kmod_module *mod = kmod_module_get_module(itr);
+			// 从模块指针获得模块名
 		        const char *name = kmod_module_get_name(mod);
+			// 从模块指针获得模块引用计数
 		        int use_count = kmod_module_get_refcnt(mod);
+			// 从模块指针获得模块文件大小
 		        long size = kmod_module_get_size(mod);
 
 			printf("%-19s %8ld  %d ", name, size, use_count);
+			// 从模块指针获得当前正在使用这个模块的模块列表 list
 			holders = kmod_module_get_holders(mod);
 		        kmod_list_foreach(hitr, holders) {
+				// 从链表节点的数据区域 获得 kmod module 指针
 		                struct kmod_module *hm = kmod_module_get_module(hitr);
+				// 打印出当前这个 holder 的 name 
 		                fputs(kmod_module_get_name(hm), stdout);
+				// 释放当前模块
 		                kmod_module_unref(hm);
 		        }
-		       
+		       	// 释放当前 holder 列表
 			kmod_module_unref_list(holders);
+			// 释放当前模块
 		        kmod_module_unref(mod);
 		}
+		// 释放当前模块列表
 		kmod_module_unref_list(list);
+		// 释放当前库上下文
 		kmod_unref(ctx);
 
 		return EXIT_SUCCESS;
@@ -1767,25 +1783,41 @@ lsmod 命令的实现代码中，最重要的一个调用，就是 kmod_module_n
 
 后面的实现部分，主要是通过 kmod_list_foreach 的宏，遍历整个链表，取出每一个模块 mod = kmod_module_get_module(itr)，获得模块的名字name, 引用计数refcnt，以及模块的大小size，把这3个最重要的信息打印出来，并按照一定的格式进行显示输出。
 
+其中如果某个模块被其他别的模块正在使用，将会把这个 Use by 信息也打印出来，用逗号间隔。
+
+举例：
+
+	$ lsmod
+	Module                  Size  Used by
+	vmwgfx                102138  2 
+	ttm                    65344  1 vmwgfx
+	drm                   197692  3 vmwgfx,ttm
+
+
 ### modinfo 命令实现流程
 
 **do_modinfo() 核心代码分析**
 
 	static int do_modinfo(int argc, char *argv[])
 	{
+		// 创建 kmod 库上下文
 		ctx = kmod_new(dirname, &null_config);
 		
+		// 可以支持同时在一条命令中查看多个模块的信息
 		for (i = optind; i < argc; i++) {
 		        const char *name = argv[i];
+			// 如果当前给定的名字是 模块名 path ，则调用 modinfo_path_do
+			// 如果当前给定的名字是 别名 alias ，则调用 modinfo_alias_do
 		        if (is_module_filename(name))
 		                r = modinfo_path_do(ctx, name);
-		        else
+		        else 
 		                r = modinfo_alias_do(ctx, name);
 
 		        if (r < 0)
 		                err = r;
 		}   
 
+		// 释放当前库上下文
 		kmod_unref(ctx);
 		return err >= 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 	}
@@ -1797,8 +1829,13 @@ modinfo 命令中最重要的调用就是 modinfo_path_do 和 modinfo_alias_do �
 	static int modinfo_path_do(struct kmod_ctx *ctx, const char *path)
 	{
 		struct kmod_module *mod;
+		// 从路径名 path 创建 kmod module
 		int err = kmod_module_new_from_path(ctx, path, &mod);
+
+		// 输出传入参数 mod 的 info 信息
 		err = modinfo_do(mod);
+
+		// 释放当前模块
 		kmod_module_unref(mod);
 		return err;
 	}
@@ -1806,18 +1843,32 @@ modinfo 命令中最重要的调用就是 modinfo_path_do 和 modinfo_alias_do �
 	static int modinfo_alias_do(struct kmod_ctx *ctx, const char *alias)
 	{
 		struct kmod_list *l, *filtered, *list = NULL;
+
+		// 从文件别名 alias 创建 kmod module list
 		int err = kmod_module_new_from_lookup(ctx, alias, &list);
 		
+		// 对当前的 kmod module list 使用过滤器生成新的 list (filtered)
 		err = kmod_module_apply_filter(ctx, KMOD_FILTER_BUILTIN, list, &filtered);
+
+		// 删除 kmod list 链表 list 中的每一个节点
 		kmod_module_unref_list(list);
 		
+		// 遍历新生成的 filtered 链表
 		kmod_list_foreach(l, filtered) {
+
+			// 从链表节点的数据区域 获得 kmod module 指针
 		        struct kmod_module *mod = kmod_module_get_module(l);
-		        int r = modinfo_do(mod);
+
+			// 输出传入参数 mod 的 info 信息		        
+			int r = modinfo_do(mod);
+
+			// 释放当前模块
 		        kmod_module_unref(mod);
 		        if (r < 0)
 		                err = r;
 		}
+
+		// 删除 kmod list 链表 filtered 中的每一个节点
 		kmod_module_unref_list(filtered);
 		return err;
 	}
@@ -1831,13 +1882,18 @@ modinfo 命令中最重要的调用就是 modinfo_path_do 和 modinfo_alias_do �
 	{
 		struct kmod_list *l, *list = NULL;
 		struct param *params = NULL;
-
+		
+		// 从模块指针获得模块的完整路径名
 		printf("%s%c", kmod_module_get_path(mod), separator);
+
+		// 核心函数，获得所有信息 到 list 表中
 		err = kmod_module_get_info(mod, &list);
-		kmod_module_get_name(mod), strerror(-err));
-	       
+
+		// 遍历整个 list 数组
 		kmod_list_foreach(l, list) {
+			// 获取 l-data->key 
 		        const char *key = kmod_module_info_get_key(l);
+			// 获取 l-data-value
 		        const char *value = kmod_module_info_get_value(l);
 		        
 			process_parm(key, value, &params);
@@ -1924,7 +1980,7 @@ do_depmod() 的实现可以分为7个步骤
 	- depmod_modules_sort
 	- depmod_shutdown
 
-* 围绕上面这些函数，还需要调用到如下接口
+围绕上面这些函数，还需要调用到如下接口
 
 	static int depmod_init(struct depmod *depmod, struct cfg *cfg,
                                                         struct kmod_ctx *ctx)
@@ -2592,6 +2648,54 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 	}
 
 ![kmod_module_new_from_loaded 调用层次图](./figures/kmod_module_new_from_loaded.jpg)
+
+### kmod_module_get_info 核心代码分析
+该函数的主要功能是 获取当前模块 mod 的 info 信息(.modinfo字段)，组装成一个 list 返回。
+
+举例：
+	$ ./kmod-11/tools/modinfo ./hello-module/hello.ko 
+
+	key = license=GPL
+	key = description=module example 
+	key = author=AKAEDU
+	key = srcversion=49A755BEBF4FF5E99BDBD01
+	key = depends=
+	key = vermagic=3.2.0-29-generic-pae SMP mod_unload modversions 686 
+
+
+	struct kmod_module_info {
+		char *key;
+		char value[];
+	};
+
+	KMOD_EXPORT int kmod_module_get_info(const struct kmod_module *mod, struct kmod_list **list)
+	{
+		char **strings;
+
+		// 返回当前模块 mod 的 kmod_file 指针
+		elf = kmod_module_get_elf(mod);
+
+		// 获得名为 .modinfo 字段的字符串数组的 string 并分配空间用来存放，返回值为string数组元素个数
+		count = kmod_elf_get_strings(elf, ".modinfo", &strings);
+
+		for (i = 0; i < count; i++) {
+			struct kmod_module_info *info;
+				
+			// 获得 string 数组中的每一个字符串指针，赋值给 key
+			key = strings[i];
+			printf("key = %s\n", key);
+			value = strchr(key, '=');
+
+			// 生成 kmod_module_info 结构体，将传入参数填入，返回结构体指针
+			info = kmod_module_info_new(key, keylen, value, valuelen);
+
+			// 在当前 kmod list 的后面，新增一个节点 node，数据为 info 指针
+			n = kmod_list_append(*list, info);	
+		}
+
+		// 释放 string 数组
+		free(strings);
+	}
 
 ### kmod_module_new_from_lookup 核心代码分析
 该函数主要用于在 modprobe 中插入模块前所使用，根据用户给出的 alias 来完成构建 kmod_list 的操作，最后给 *list 赋值作为传出参数返回。

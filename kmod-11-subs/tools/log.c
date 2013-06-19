@@ -212,6 +212,19 @@ void log_printf(int prio, const char *fmt, ...)
 		exit(EXIT_FAILURE);
 }
 
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ * 
+ * @brief 设置 kmod log 日志输出的优先级 
+ */
+ 
 void log_setup_kmod_log(struct kmod_ctx *ctx, int priority)
 {
 	log_priority = priority;

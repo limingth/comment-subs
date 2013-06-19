@@ -15,3 +15,5 @@ f figures:
 	xelatex $@.tex
 	gnome-open $@.pdf
 
+clean:
+	rm *.html *.tex *.pdf *.aux *.log *.aux *.out
