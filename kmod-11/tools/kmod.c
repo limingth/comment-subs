@@ -167,6 +167,9 @@ int main(int argc, char *argv[])
 {
 	int err;
 
+	printf("program_invocation_short_name = %s\n", program_invocation_short_name);
+	printf("program_invocation_name = %s\n", program_invocation_name);
+	printf("program_invocation_short_name = %x\n", program_invocation_short_name);
 	if (strcmp(program_invocation_short_name, "kmod") == 0)
 		err = handle_kmod_commands(argc, argv);
 	else

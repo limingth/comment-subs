@@ -54,12 +54,11 @@
 \BOOKMARK [3][-]{section*.63}{kmod\137module\137new\137from\137name\(\) 核心代码分析}{section*.59}
 \BOOKMARK [3][-]{section*.64}{kmod\137module\137new\(\) 核心代码分析}{section*.59}
 \BOOKMARK [3][-]{section*.65}{kmod\137module\137insert\137module\(\) 核心代码分析}{section*.59}
-\BOOKMARK [3][-]{section*.66}{kmod\137module\137unref\(\) 核心代码分析}{section*.59}
+\BOOKMARK [3][-]{section*.66}{kmod\137module\137remove\137module\(\) 核心代码分析}{section*.59}
 \BOOKMARK [3][-]{section*.67}{init\137module\(\) 核心代码分析}{section*.59}
 \BOOKMARK [3][-]{section*.68}{delete\137module\(\) 核心代码分析}{section*.59}
-\BOOKMARK [3][-]{section*.69}{kmod\137module\137remove\137module\(\) 核心代码分析}{section*.59}
+\BOOKMARK [3][-]{section*.69}{kmod\137module\137unref\(\) 核心代码分析}{section*.59}
 \BOOKMARK [3][-]{section*.70}{kmod\137module\137new\137from\137loaded 核心代码分析}{section*.59}
 \BOOKMARK [3][-]{section*.71}{kmod\137module\137new\137from\137lookup 核心代码分析}{section*.59}
 \BOOKMARK [3][-]{section*.72}{kmod\137module\137probe\137insert\137module}{section*.59}
-\BOOKMARK [3][-]{section*.73}{kmod\137module\137get\137probe\137list 函数调用流程}{section*.59}
-\BOOKMARK [2][-]{section*.78}{5. 总结}{section*.22}
+\BOOKMARK [2][-]{section*.77}{5. 总结}{section*.22}

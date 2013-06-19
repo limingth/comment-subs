@@ -1,14 +1,28 @@
 /* 
  * @brief  rmmod 函数的真正实现，通过 getopt_long 分析传入参数，
- * 通过调用 libkmod 的接口，实现 rmmod 命令
- * 主要使用的接口包括
- * - log_open()
- * - kmod_new()
- * - log_setup_kmod_log()
- * - kmod_module_new_from_path()
- * - check_module_inuse()
- * - kmod_module_remove_module()
- * - kmod_module_unref()
- * - kmod_unref()
- * - log_close()
+ *
+ * 通过调用 libkmod 的接口，实现 rmmod 命令，主要步骤包括
+ *
+ *	打开日志 log
+ *	创建模块的上下文 struct kmod_ctx ctx
+ *	通过 path/name 和 ctx 获得模块 struct kmod_module mod
+ *	判别当前模块是否在使用中，如果在使用则不能卸载，释放相关资源后返回
+ *	如果不在使用中，则通过 kmod_module_remove_module 将 mod 从当前模块列表中卸载
+ *	释放 mod 
+ *	释放 ctx
+ *	关闭日志 log
+ *
+ * 涉及到3个模块的8个接口，3个模块和相关接口是
+ *
+ * libkmod/libkmod.c
+ *	 - kmod_new() 
+ *	 - kmod_unref()
+ * libkmod/libkmod-module.c
+ *	 - kmod_module_new_from_path()
+ *	 - kmod_module_insert_module()
+ *	 - kmod_module_unref()
+ * libkmod/tools/log.c
+ *	 - log_open()
+ *	 - log_close()
+ *	 - log_setup_kmod_log()
  */ 

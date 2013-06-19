@@ -1508,21 +1508,35 @@ elf 模块的接口主要包含 elf_get_mem, elf_get_section_header, elf_get_str
 每一个命令，都定义实现了一个 struct kmod_cmd 的数据结构，这个数据结构定义在 kmod-11/tools/kmod.h 文件中。
 
 	struct kmod_cmd {
+		// name 表示执行的命令，以字符串的方式存储，用于匹配命令
 		const char *name;
+		// cmd 表示该命令所对应的 main 函数指针
 		int (*cmd)(int argc, char *argv[]);
+		// help 表示该命令的功能作用的字符串
 		const char *help;
 	};
 
-在 kmod-11/tools/insmod.c 文件中，用这个结构体定义了 
+在 kmod-11/tools/insmod.c 文件中，用这个结构体定义了一个 kmod_cmd_compat_insmod 变量，最后这个变量会添加到整个项目所支持的命令集 kmod_compat_cmds数组中。
 
-	160 
+	160 // insmod 命令所需要提供的数据结构
 	161 const struct kmod_cmd kmod_cmd_compat_insmod = {
 	162         .name = "insmod",
 	163         .cmd = do_insmod,
 	164         .help = "compat insmod command",
 	165 };
 
-在 kmod-11/tools/kmod.c 文件中，实现了一个通用的 main 方法。
+在 kmod-11/tools/kmod.c 文件中，实现了一个通用的 main 方法。在这个 main 函数中，实现了所有命令调用的真正入口。
+其中用到了一个 program_invocation_short_name 变量，是一个全局变量，它代表了当前程序执行时候的可执行文件名。
+通过查看 man program_invocation_short_name 帮助，可以看到其实一共有 2 个全局变量，名字很接近，其中一个是长路径，另一个是当前可执行文件名称。
+
+	#define _GNU_SOURCE         /* See feature_test_macros(7) */
+	#include <errno.h>
+
+	// 这个变量是长路径名 program_invocation_name = ./kmod-11/tools/lsmod
+	extern char *program_invocation_name;
+
+	// 这个变量是可执行文件名 program_invocation_short_name = lsmod
+	extern char *program_invocation_short_name;
 
 	166 int main(int argc, char *argv[])
 	167 {
@@ -1536,7 +1550,9 @@ elf 模块的接口主要包含 elf_get_mem, elf_get_section_header, elf_get_str
 	175         return err;
 	176 }
 
-在这个main函数中，调用了 handle_kmod_compat_commands 函数。
+在这个main函数中，调用了 handle_kmod_commands 和 handle_kmod_compat_commands 这2个函数。
+其中第一个支持 kmod 系统命令，这个 kmod 命令目前暂时只支持 kmod help 和 kmod list 两个子命令，
+第二个支持早期的 insmod/rmmod/modinfo/lsmod/depmod/modprobe 这6个 compat 兼容命令。
 
 	149 
 	150 static int handle_kmod_compat_commands(int argc, char *argv[])
@@ -1588,6 +1604,9 @@ kmod_compat_cmds 这个数组目前有6个元素，分别就是在 insmod.c rmmo
 对于第三层的重要函数的实现分析，将放到核心代码分析章节中，不在本章节中展开。这样做的目的，主要是希望能够在有限的篇幅中，
 把实现每个命令所调用的最重要的库函数接口体现出来，避免在繁冗复杂的函数接口列表中无重点的分析。
 
+注意这个小节中后面的绝大部分代码都不是原代码的直接引用，而是将其中最核心的函数调用和传入传出的参数整理到函数体内部，为便于查看函数调用关系而做了简化。
+因此可能有的变量没有清楚的定义，有的函数没有给出参数和返回值，也包括有的逻辑关系做了删减。但重要的调用关系都保留下来。
+
 ### insmod 命令实现流程
 
 **do_insmod 核心代码分析**
@@ -1596,15 +1615,24 @@ kmod_compat_cmds 这个数组目前有6个元素，分别就是在 insmod.c rmmo
 
 	do_insmod()
 	{
+		// 将 insmod 命令的参数传给 opts 指针
 		opts = argv[x];	// name=value
+
+		// 创建 kmod 库上下文
 		ctx = kmod_new(NULL, &null_config);
+
+		// 从路径名 path 创建 kmod module
 		err = kmod_module_new_from_path(ctx, filename, &mod);
+
+		// 插入 kmod module 单个文件，不包含依赖关系
 		err = kmod_module_insert_module(mod, 0, opts);
+
+		// 释放当前模块，给当前模块的引用计数减1
 		kmod_module_unref(mod);
+
+		// 释放 kmod 库上下文
 		kmod_unref(ctx);
 	}
-
-注意这个小节中后面的绝大部分代码都不是原代码的引用，而是将其中最核心的函数调用和传入传出的参数整理到函数体内部，为便于查看函数调用关系而做了简化。
 
 ![insmod 调用层次图](./figures/insmod.jpg)
 
@@ -1612,7 +1640,7 @@ do_insmod() 的实现可以分为5个步骤
 
 * 创建模块的上下文 struct kmod_ctx ctx
 * 通过 filename 和 ctx 获得模块 struct kmod_module mod
-* 将 mod 插入到当前模块列表中, 完成真正的插入内核功能
+* 将 mod 插入到当前模块列表中, 通过 kmod_module_insert_module 完成真正的插入内核功能
 * 释放 mod 
 * 释放 ctx
 
@@ -1637,30 +1665,52 @@ do_insmod() 的实现可以分为5个步骤
 
 	do_rmmod()
 	{
+		//  打开日志文件, 调用了系统的 openlog()
 		log_open(use_syslog);
+
+		// 创建 kmod 库上下文 
 		ctx = kmod_new(NULL, &null_config);
+
+		// 设置 kmod log 日志输出的优先级
 		log_setup_kmod_log(ctx, verbose);
 		arg = argv[i];
+
+		// 从路径名 path 创建 kmod module
 		err = kmod_module_new_from_path(ctx, arg, &mod);
+	
+		// 从文件名 name 创建 kmod module
 		err = kmod_module_new_from_name(ctx, arg, &mod);
+
+		// 检查模块是否正在使用，通过引用计数来帮助判断是否真正需要卸载模块
 		check_module_inuse(mod);
+
+		// 卸载 kmod module 单个文件，不包含依赖关系
 		err = kmod_module_remove_module(mod, flags);
+
+		// 释放当前模块
 		kmod_module_unref(mod);
+
+		// 释放 kmod 库上下文
 		kmod_unref(ctx);
+
+		// 关闭日志文件，调用 closelog()
 		log_close();
 	}
 
 ![rmmod 调用层次图](./figures/rmmod.jpg)
 
-do_rmmod() 的实现可以分为5个步骤
+do_rmmod() 的实现相比 do_insmod() 的实现，主要是多了一个 log 的模块
 
+* 打开日志 log
 * 创建模块的上下文 struct kmod_ctx ctx
-* 通过 filename 和 ctx 获得模块 struct kmod_module mod
-* 将 mod 插入到当前模块列表中, 完成真正的插入内核功能
+* 通过 path/name 和 ctx 获得模块 struct kmod_module mod
+* 判别当前模块是否在使用中，如果在使用则不能卸载，释放相关资源后返回
+* 如果不在使用中，则通过 kmod_module_remove_module 将 mod 从当前模块列表中卸载
 * 释放 mod 
 * 释放 ctx
+* 关闭日志 log
 
-涉及到两个模块的5个接口，两个模块是
+涉及到3个模块的8个接口，3个模块和相关接口是
 
 * libkmod/libkmod.c
 	- kmod_new() 
@@ -1669,6 +1719,13 @@ do_rmmod() 的实现可以分为5个步骤
 	- kmod_module_new_from_path()
 	- kmod_module_insert_module()
 	- kmod_module_unref()
+* libkmod/tools/log.c
+	- log_open()
+	- log_close()
+	- log_setup_kmod_log()
+
+可以看出，这里真正最后完成插入操作的函数是 kmod_module_insert_module(mod, 0, opts);
+这个函数在我们下面的函数接口分析中还会详细阐述。
 
 ### lsmod 命令实现流程
 
@@ -2355,15 +2412,107 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 
 		// 通过模块的上下文和完整的路径，打开这个文件, 将文件内容读出到 ctx 结构体中
 		file = kmod_file_open(mod->ctx, path);
+
+		// 获得文件大小
 		size = kmod_file_get_size(file);
+
+		// 获得文件内容指针 memory
 		mem = kmod_file_get_contents(file);
+
+		// 创建一个 struct kmod_elf 结构体并将 size, offset, section.count 填入
 		elf = kmod_elf_new(mem, size);
-		kmod_elf_strip_section(elf);
+
+		// 对 __versions 进行 strip,去掉有关版本版本信息，此项操作针对 -force 选项
+		kmod_elf_strip_section(elf, "__versions");
+
+		// 获得 elf 文件的 memory 指针
 		mem = kmod_elf_get_memory(elf);
+
+		// 进行系统调用 init_module 完成真正的模块插入
 		init_module(mem, size, args);
+
+		// 释放之前分配的内存资源
 		kmod_elf_unref(elf);
 		kmod_file_unref(file);
 	}
+
+### kmod_module_remove_module() 核心代码分析
+该函数是实现 rmmod 的最主要的函数，它的实现也很简单，就是调用 delete_module 系统调用。
+
+	int kmod_module_remove_module(kmod_module *mod, int flags)
+	{
+		err = delete_module(mod->name, flags);
+
+		return err;
+	}
+
+### init_module() 核心代码分析
+在 kmod_module_insert_module 函数中调用的 init_module 系统调用，将会在进入到内核之后完成真正的加载操作。
+用户空间的系统调用叫 init_module ，在内核空间这个系统调用的实现主要是依靠 sys_init_module 函数完成的。
+
+![内核模块的加载和卸载的内存空间调用关系](./figures/user_sys_module.jpg)
+
+内核模块的加载，本质上是一个模块被内核静态链接的过程，sys_init_module 函数可以分为以下关键步骤：
+
+* 调用内核空间的 load_module 函数，然后通过 copy_from_user 把 ELF 内容读入到内核临时空间做一个映像分析
+* 对加载的 ELF 映像进行分析，确定要加载哪些段进入到真正代码空间
+* 为要加载的每一个段进行重新定位，最终完成加载，插入到内核中，成为内核符号表的一部分
+
+![内核模块在内核空间的加载流程](./figures/sys_init_module.jpg)
+
+在 kmod-11 项目中，在 testsuite/ 目录下有一个 init_module.c ，里面也实现了一个 init_module 的函数，
+它的功能主要是在用户空间模拟内核加载，来进行调试和分析，并不是真正的加载模块。
+
+从下面的代码分析可以看出，这个“假的” init_module 实际上是通过 create_sysfs_files 创建系统文件来表明模块已经完成插入工作。
+
+	long init_module(void *mem, unsigned long len, const char *args)
+	{
+		kmod_elf *elf = kmod_elf_new(mem, len);
+
+		err = kmod_elf_get_section(elf, ".gnu.linkonce.this_module", &buf, &bufsize);
+		kmod_elf_unref(elf);
+		mod = find_module(modules, modname);
+		if(mod != NULL)
+		{ 
+		} else if (module_is_inkernel(modname))
+		{
+		} else 	// 通过创建文件的方法来表示当前模块已经插入
+			create_sysfs_files(modname);
+
+		return err;
+	}
+
+### delete_module() 核心代码分析
+在 kmod_module_remove_module 函数中调用的 delete_module 系统调用，将会在进入到内核之后完成真正的卸载操作。
+用户空间的系统调用叫 delete_module ，在内核空间这个系统调用的实现主要是依靠 sys_delete_module 函数完成的。
+
+内核模块的加载，和加载过程基本相反，sys_delete_module 函数可以分为以下关键步骤：
+
+* 首先检查模块的依赖关系，看是否还有其他模块依赖于这个模块，如果没有则可以卸载这个模块
+* 然后调用模块的 exit 函数，最后调用内核空间的 free_module 函数
+* 在 free_module 函数中，开始完成对该模块在系统文件、模块列表中的清除工作
+* 释放为该模块分配的各种内存，最终完成卸载该模块的操作
+
+![内核模块在内核空间的加载流程](./figures/sys_delete_module.jpg)
+
+在 kmod-11 项目中，在 testsuite/ 目录下有一个 delete_module.c ，里面也实现了一个 delete_module 的函数，
+同样的，它也并不是真正的卸载模块，仅仅只是查找一下当前模块，并不执行实际的删除操作。
+
+	long delete_module(void *mem, int flags)
+	{
+		struct mod *mod;
+
+		mod = find_module(modules, modname);
+
+		return mod->ret;
+	}
+
+* 参考文档 
+
+<https://www.ibm.com/developerworks/cn/linux/l-lkm/>
+
+<http://hi.baidu.com/youngky2008/item/8e6a51fe76b45551c9f337a9>
+
 
 ### kmod_module_unref() 核心代码分析
 该函数是 kmod_module_new 操作的反操作，主要功能是释放 new 函数中分配的内存空间。
@@ -2379,52 +2528,22 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 
 	kmod_module *kmod_module_unref(kmod_module *mod)
 	{
+		// 减少模块的引用计数,如果已经减到0，则卸载该模块
 		--mod->refcount;
-
+		
+		//  在 kmod 池中通过 hash_add 删除一个键值为 key 的模块
 		kmod_pool_del_module(mod->ctx, mod, mod->hashkey);
+
+		// 删除 kmod list 链表中的每一个节点
 		kmod_module_unref_list(mod->dep);
+
+		// 释放文件资源，关闭当前文件描述符
 		kmod_file_unref(mod->file);
+
+		// 释放 kmod 库上下文
 		kmod_unref(mod->ctx);
 
 		return NULL;
-	}
-
-### init_module() 核心代码分析
-	long init_module(void *mem, unsigned long len, const char *args)
-	{
-		kmod_elf *elf = kmod_elf_new(mem, len);
-
-		err = kmod_elf_get_section(elf, ".gnu.linkonce.this_module", &buf, &bufsize);
-		kmod_elf_unref(elf);
-		mod = find_module(modules, modname);
-		if(mod != NULL)
-		{ 
-		} else if (module_is_inkernel(modname))
-		{
-		} else
-			create_sysfs_files(modname);
-
-		return err;
-	}
-
-### delete_module() 核心代码分析
-	long delete_module(void *mem, int flags)
-	{
-		struct mod *mod;
-
-		mod = find_module(modules, modname);
-
-		return mod->ret;
-	}
-
-### kmod_module_remove_module() 核心代码分析
-该函数是实现 rmmod 的最主要的函数，它的实现也很简单，就是调用 delete_module 系统调用。
-
-	int kmod_module_remove_module(kmod_module *mod, int flags)
-	{
-		err = delete_module(mod->name, flags);
-
-		return err;
 	}
 
 ### kmod_module_new_from_loaded 核心代码分析
@@ -2438,19 +2557,22 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 		FILE *fp;
 		char line[4096];
 
-		if (ctx == NULL || list == NULL)
-			return -ENOENT;
-
+		// 打开 /proc/modules 系统内存文件
 		fp = fopen("/proc/modules", "re");
 		
+		// 读取1行进行分析
 		while (fgets(line, sizeof(line), fp)) {
 			struct kmod_module *m;
 			struct kmod_list *node;
 			int err;
+
+			// 以空格和\t（tab键）作为间隔token，依次读取每个字段
 			char *saveptr, *name = strtok_r(line, " \t", &saveptr);
 
+			// 通过读的名字进行创建 kmod_module m
 			err = kmod_module_new_from_name(ctx, name, &m);
-			
+
+			// 将创建的 m 插入到 kmod_list l 中
 			node = kmod_list_append(l, m);
 			if (node)
 				l = node;
@@ -2460,7 +2582,10 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 			}
 		}
 
+		// 关闭文件fp指针
 		fclose(fp);
+
+		// 将 kmod_list l 作为链表头返回
 		*list = l;
 
 		return 0;
@@ -2470,6 +2595,14 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 
 ### kmod_module_new_from_lookup 核心代码分析
 该函数主要用于在 modprobe 中插入模块前所使用，根据用户给出的 alias 来完成构建 kmod_list 的操作，最后给 *list 赋值作为传出参数返回。
+完成构建需要查找名为 alias 的全部模块，一旦在某个地方找到，就不再继续寻找而是创建并将模块保存在 *list 中。
+
+该函数中，模块查找的顺序是
+
+* 在配置文件中 (/etc/modprobe.d/modules.conf）的 alias 是最先寻找的，它的设置将会覆盖其他地方的设置。 
+* 接下来的顺序是，在 modules.dep -> modules.symbols -> commands -> modules.alias -> modules.buildin
+
+下面是这个函数实现的核心代码
 
 	KMOD_EXPORT int kmod_module_new_from_lookup(struct kmod_ctx *ctx,
 							const char *given_alias,
@@ -2484,6 +2617,7 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 
 		/* Aliases from config file override all the others */
 		err = kmod_lookup_alias_from_config(ctx, alias, list);
+
 		err = kmod_lookup_alias_from_moddep_file(ctx, alias, list);
 		err = kmod_lookup_alias_from_symbols_file(ctx, alias, list);
 		err = kmod_lookup_alias_from_commands(ctx, alias, list);
@@ -2502,18 +2636,20 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 
 	int kmod_module_probe_insert_module(mod, flags, extra_options, run_install)
 	{
+		// 从 modules.dep 文件中，读取该模块的依赖关系列表		
 		err = kmod_module_get_probe_list(mod, !!(flags & KMOD_PROBE_IGNORE_COMMAND), &list);
 	
 		kmod_list_foreach(l, list) 
 		{
 			struct kmod_module *m = l->data;
+			// 对于链表中的每一个module，依次调用 insert 加载
 			err = kmod_module_insert_module(m, flags, options);
 		}
 	}
 
 ![kmod_module_probe_insert_module 调用层次图](./figures/kmod_module_probe_insert_module.jpg)
 
-### kmod_module_get_probe_list 函数调用流程
+这个 kmod_module_get_probe_list 函数的调用流程比较复杂，下面这个图是跟踪函数执行的关键调用，最后到底层发现是通过 kmod_module_parse_depline 来解析 modules.dep 文件中的包含依赖关系的那行（字符串），然后分离出当前模块依赖的每一个模块的path，然后仍然是通过直接最核心 kmod_module_new_from_path 函数来完成所有涉及到的模块加载。
 
 	-> kmod_module_get_probe_list
 		-> __kmod_module_get_probe_list
@@ -2526,10 +2662,13 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 #### kmod_module_get_dependencies 核心代码分析
 	kmod_list *kmod_module_get_dependencies(struct kmod_module *mod)
 	{
+		// 找到当前 mod 的依赖关系模块，添加到 mod->dep 的 kmod_list 指针上去
 		module_get_dependencies_noref(mod);
 
+		// 遍历整个 mod->dep 链表，找出每一个节点模块
 		kmod_list_foreach(l, mod->dep)
 		{
+			// 调用 kmod_list_append 把其中的字符串，添加到一个新的链表上
 			l_new = kmod_list_append(list_new, kmod_module_ref(l->data));
 			list_new = l_new;
 		}
@@ -2539,6 +2678,7 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 
 #### module_get_dependencies_noref 核心代码分析
 找到 mod->name 所在的行，得到该模块的依赖关系字符串到 line 中，然后对这个 line 进行 parse 操作，获得每一个依赖模块逐一加载。
+
 举例：
 	$ ./kmod-11/tools/modprobe nfs
 
@@ -2546,8 +2686,10 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 
 	kmod_list *module_get_dependencies_noref(struct kmod_module *mod)
 	{
+		// 通过模块名 mod->name 找到表示当前模块 mod 依赖关系的字符串 line
 		char *line = kmod_search_moddep(mod->ctx, mod->name);
 
+		// 分析字符串 line，建立一个关于依赖关系的 kmod_list，赋值给 mod->dep
 		kmod_module_parse_depline(mod, line);
 
 		return mod->dep;
@@ -2556,9 +2698,13 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 #### kmod_search_moddep 核心代码分析
 该函数是实现从模块名字到模块依赖关系字符串的转换，简单来说就是实现 name -> line 的转换。
 
+举例 modprobe nfs 命令中，name = nfs，找到的字符串就是
+
+	kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
+
 	char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
 	{
-		// name = nfs;		// modprobe nfs
+		// 通过 index 模块的索引，找到 名字为 name 的字符串行
 		return index_mm_search(ctx->indexes[KMOD_INDEX_MODULES_DEP], name);
 		
 		DBG(ctx, "file=%s modname=%s\n", fn, name);

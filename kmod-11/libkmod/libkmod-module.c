@@ -1099,6 +1099,7 @@ finish:
 	return err;
 }
 
+// kmod_module_get_probe_list.cmt
 static int kmod_module_get_probe_list(struct kmod_module *mod,
 						bool ignorecmd,
 						struct kmod_list **list)

@@ -356,6 +356,7 @@ off_t kmod_file_get_size(const struct kmod_file *file)
 	return file->size;
 }
 
+// kmod_file_unref.cmt
 void kmod_file_unref(struct kmod_file *file)
 {
 	if (file->elf)

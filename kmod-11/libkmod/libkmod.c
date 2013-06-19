@@ -545,6 +545,7 @@ finish:
 	return err;
 }
 
+// kmod_search_moddep.cmt
 char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
 {
 	struct index_file *idx;

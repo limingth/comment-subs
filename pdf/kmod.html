@@ -1921,9 +1921,16 @@ static void cfg_free(struct cfg *cfg)
 </div>
 <pre><code>kmod_ctx *kmod_new(char *dirname, char *config_paths)
 {
+    // 分配空间给 ctx 指针
     ctx = calloc(1, sizeof(struct kmod_ctx));
+
+    // 得到模块所在的路径名称
     ctx-&gt;dirname = get_kernel_release(dirname);
+
+    // 通过传入2个参数 ctx, config_paths ，传出 ctx-&gt;config 指针
     err = kmod_config_new(ctx, &amp;ctx-&gt;config, config_paths);
+
+    // 调用 hash_new 分配一个 struct hash 指针
     ctx-&gt;modules_by_name = hash_new(KMOD_HASH_SIZE, NULL);
 
     return ctx;
@@ -1939,9 +1946,16 @@ static void cfg_free(struct cfg *cfg)
 </div>
 <pre><code>kmod_ctx *kmod_unref(kmod_ctx *ctx)
 {
+    // 释放 ctx 所占用的资源
     kmod_unload_resources(ctx);
+
+    // 释放 struct hash * ctx-&gt;modules_by_name 指针内存空间 
     hash_free(ctx-&gt;modules_by_name);
+
+    // 释放 struct kmod_config * ctx-&gt;config 指针内存空间 
     kmod_config_free(ctx-&gt;config);
+
+    // 释放 struct kmod_ctx * ctx 指针内存空间 
     free(ctx);
 
     return NULL;
@@ -1953,15 +1967,25 @@ static void cfg_free(struct cfg *cfg)
 </div>
 <pre><code>int kmod_module_new_from_path(kmod_ctx *ctx, char *path, kmod_module **mod)
 {
+    // 从路径名称中分离出模块名称，例如 ./tools/insmod ../hello-module/hello.ko
+    //  name=&#39;hello&#39; path=&#39;/home/akaedu/Github/test-kmod-11/kmod-11/../hello-module/hello.ko&#39;
     path_to_modname(path, name, &amp;namelen);
+
+    // 从 name 名称中得到指向该模块的指针 m
     m = kmod_pool_get_module(ctx, name);
+
+    // 增加该模块的引用计数
     kmod_module_ref(m);
-    err = kmod_module_new(ctx, name, name, namelen, NULL, 0, &amp;m); *
+
+    // 根据 name 创建一个新的模块
+    err = kmod_module_new(ctx, name, name, namelen, NULL, 0, &amp;m); 
+
+    // 将模块指针 m 作为返回值通过 *mod 返回
     *mod = m;
     return 0;
 }
 
-157 // kmod-11/libkmod/libkmod-util.c 
+157 // 详见 kmod-11/libkmod/libkmod-util.c 
 158 char *path_to_modname(const char *path, char buf[PATH_MAX], size_t *len)
 159 {
 160         char *modname;
@@ -1973,7 +1997,7 @@ static void cfg_free(struct cfg *cfg)
 166         return modname_normalize(modname, buf, len);
 167 }
 
-133 // kmod-11/libkmod/libkmod-util.c 
+133 // 详见 kmod-11/libkmod/libkmod-util.c 
 134 inline char *modname_normalize(const char *modname, char buf[PATH_MAX],
 135                                                                 size_t *len)
 136 {
@@ -2011,8 +2035,10 @@ static void cfg_free(struct cfg *cfg)
     if (ctx == NULL || name == NULL || mod == NULL)
             return -ENOENT;
 
+    // 模块名称的正规化操作
     modname_normalize(name, name_norm, &amp;namelen);
 
+    // 最终还是依靠调用 kmod_module_new 完成模块的创建操作
     return kmod_module_new(ctx, name_norm, name_norm, namelen, NULL, 0, mod);
 }</code></pre>
 <h3 id="kmod_module_new-核心代码分析">kmod_module_new() 核心代码分析</h3>
@@ -2043,9 +2069,11 @@ static void cfg_free(struct cfg *cfg)
     struct kmod_module *m;
     size_t keylen;
 
+    // 从 kmod pool 中通过 hash_find 获取模块指针 m
     m = kmod_pool_get_module(ctx, key);
     *mod = kmod_module_ref(m);
 
+    // 通过 malloc 分配一个 struct module 结构体
     m = malloc(sizeof(*m) + (alias == NULL ? 1 : 2) * (keylen + 1));
     m-&gt;ctx = kmod_ref(ctx);
     m-&gt;name = (char *)m + sizeof(*m);
@@ -2056,7 +2084,10 @@ static void cfg_free(struct cfg *cfg)
     m-&gt;hashkey = m-&gt;name + keylen + 1;
     memcpy(m-&gt;hashkey, key, keylen + 1);
 
+    // 设置当前模块 m 的引用计数为 1
     m-&gt;refcount = 1;
+
+    // 在 kmod 池中通过 hash_add 添加一个键值为 m-hashkey 的模块
     kmod_pool_add_module(ctx, m, m-&gt;hashkey);
     *mod = m;
 
@@ -2069,35 +2100,58 @@ static void cfg_free(struct cfg *cfg)
 </div>
 <pre><code>int kmod_module_insert_module(kmod_module *mod, int flags, char *options)
 {
+    // 从模块指针获得模块的完整路径名
     path = kmod_module_get_path(mod);
+
+    // 通过模块的上下文和完整的路径，打开这个文件, 将文件内容读出到 ctx 结构体中
     file = kmod_file_open(mod-&gt;ctx, path);
+
+    // 获得文件大小
     size = kmod_file_get_size(file);
+
+    // 获得文件内容指针 memory
     mem = kmod_file_get_contents(file);
+
+    // 创建一个 struct kmod_elf 结构体并将 size, offset, section.count 填入
     elf = kmod_elf_new(mem, size);
-    kmod_elf_strip_section(elf);
+
+    // 对 __versions 进行 strip,去掉有关版本版本信息，此项操作针对 -force 选项
+    kmod_elf_strip_section(elf, &quot;__versions&quot;);
+
+    // 获得 elf 文件的 memory 指针
     mem = kmod_elf_get_memory(elf);
+
+    // 进行系统调用 init_module 完成真正的模块插入
     init_module(mem, size, args);
+
+    // 释放之前分配的内存资源
     kmod_elf_unref(elf);
     kmod_file_unref(file);
 }</code></pre>
-<h3 id="kmod_module_unref-核心代码分析">kmod_module_unref() 核心代码分析</h3>
-<p>该函数是 kmod_module_new 操作的反操作，主要功能是释放 new 函数中分配的内存空间。 通过调用 kmod_pool_del_module 在 kmod_pool 池中删除该模块的hash键值。 同时减少对该模块的引用计数 --mod-&gt;refcount; 如果减1后计数为0，则需要彻底将该模块从内核中清除。</p>
-<p>首先，把它从 kmod_pool 中删除 kmod_pool_del_module(mod-&gt;ctx, mod, mod-&gt;hashkey); 对于该模块所依赖的模块列表中的所有模块的引用计数也需要进行减1操作 kmod_module_unref_list(mod-&gt;dep)。 释放该模块对应的 kmod_file 也就是 kmod_file_unref(mod-&gt;file); 释放该模块对应的 kmod_ctx 也就是 kmod_unref(mod-&gt;ctx);</p>
-<div class="figure">
-<img src="./figures/kmod_module_unref.jpg" alt="kmod_module_unref 调用层次图" /><p class="caption">kmod_module_unref 调用层次图</p>
-</div>
-<pre><code>kmod_module *kmod_module_unref(kmod_module *mod)
+<h3 id="kmod_module_remove_module-核心代码分析">kmod_module_remove_module() 核心代码分析</h3>
+<p>该函数是实现 rmmod 的最主要的函数，它的实现也很简单，就是调用 delete_module 系统调用。</p>
+<pre><code>int kmod_module_remove_module(kmod_module *mod, int flags)
 {
-    --mod-&gt;refcount;
+    err = delete_module(mod-&gt;name, flags);
 
-    kmod_pool_del_module(mod-&gt;ctx, mod, mod-&gt;hashkey);
-    kmod_module_unref_list(mod-&gt;dep);
-    kmod_file_unref(mod-&gt;file);
-    kmod_unref(mod-&gt;ctx);
-
-    return NULL;
+    return err;
 }</code></pre>
 <h3 id="init_module-核心代码分析">init_module() 核心代码分析</h3>
+<p>在 kmod_module_insert_module 函数中调用的 init_module 系统调用，将会在进入到内核之后完成真正的加载操作。 用户空间的系统调用叫 init_module ，在内核空间这个系统调用的实现主要是依靠 sys_init_module 函数完成的。</p>
+<div class="figure">
+<img src="./figures/user_sys_module.jpg" alt="内核模块的加载和卸载的内存空间调用关系" /><p class="caption">内核模块的加载和卸载的内存空间调用关系</p>
+</div>
+<p>内核模块的加载，本质上是一个模块被内核静态链接的过程，sys_init_module 函数可以分为以下关键步骤：</p>
+<ul>
+<li>调用内核空间的 load_module 函数，然后通过 copy_from_user 把 ELF 内容读入到内核临时空间做一个映像分析</li>
+<li>对加载的 ELF 映像进行分析，确定要加载哪些段进入到真正代码空间</li>
+<li>为要加载的每一个段进行重新定位，最终完成加载，插入到内核中，成为内核符号表的一部分</li>
+</ul>
+<div class="figure">
+<img src="./figures/sys_init_module.jpg" alt="内核模块在内核空间的加载流程" /><p class="caption">内核模块在内核空间的加载流程</p>
+</div>
+<p>在 kmod-11 项目中，在 testsuite/ 目录下有一个 init_module.c ，里面也实现了一个 init_module 的函数， 它的功能主要是在用户空间模拟内核加载，来进行调试和分析，并不是真正的加载模块。</p>
+<p>从下面的代码分析可以看出，这个“假的” init_module 实际上是通过 create_sysfs_files 创建系统文件来表明模块已经完成插入工作。</p>
 <pre><code>long init_module(void *mem, unsigned long len, const char *args)
 {
     kmod_elf *elf = kmod_elf_new(mem, len);
@@ -2109,12 +2163,24 @@ static void cfg_free(struct cfg *cfg)
     { 
     } else if (module_is_inkernel(modname))
     {
-    } else
+    } else  // 通过创建文件的方法来表示当前模块已经插入
         create_sysfs_files(modname);
 
     return err;
 }</code></pre>
 <h3 id="delete_module-核心代码分析">delete_module() 核心代码分析</h3>
+<p>在 kmod_module_remove_module 函数中调用的 delete_module 系统调用，将会在进入到内核之后完成真正的卸载操作。 用户空间的系统调用叫 delete_module ，在内核空间这个系统调用的实现主要是依靠 sys_delete_module 函数完成的。</p>
+<p>内核模块的加载，和加载过程基本相反，sys_delete_module 函数可以分为以下关键步骤：</p>
+<ul>
+<li>首先检查模块的依赖关系，看是否还有其他模块依赖于这个模块，如果没有则可以卸载这个模块</li>
+<li>然后调用模块的 exit 函数，最后调用内核空间的 free_module 函数</li>
+<li>在 free_module 函数中，开始完成对该模块在系统文件、模块列表中的清除工作</li>
+<li>释放为该模块分配的各种内存，最终完成卸载该模块的操作</li>
+</ul>
+<div class="figure">
+<img src="./figures/sys_delete_module.jpg" alt="内核模块在内核空间的加载流程" /><p class="caption">内核模块在内核空间的加载流程</p>
+</div>
+<p>在 kmod-11 项目中，在 testsuite/ 目录下有一个 delete_module.c ，里面也实现了一个 delete_module 的函数， 同样的，它也并不是真正的卸载模块，仅仅只是查找一下当前模块，并不执行实际的删除操作。</p>
 <pre><code>long delete_module(void *mem, int flags)
 {
     struct mod *mod;
@@ -2123,13 +2189,35 @@ static void cfg_free(struct cfg *cfg)
 
     return mod-&gt;ret;
 }</code></pre>
-<h3 id="kmod_module_remove_module-核心代码分析">kmod_module_remove_module() 核心代码分析</h3>
-<p>该函数是实现 rmmod 的最主要的函数，它的实现也很简单，就是调用 delete_module 系统调用。</p>
-<pre><code>int kmod_module_remove_module(kmod_module *mod, int flags)
+<ul>
+<li>参考文档</li>
+</ul>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-lkm/"><code class="url">https://www.ibm.com/developerworks/cn/linux/l-lkm/</code></a></p>
+<p><a href="http://hi.baidu.com/youngky2008/item/8e6a51fe76b45551c9f337a9"><code class="url">http://hi.baidu.com/youngky2008/item/8e6a51fe76b45551c9f337a9</code></a></p>
+<h3 id="kmod_module_unref-核心代码分析">kmod_module_unref() 核心代码分析</h3>
+<p>该函数是 kmod_module_new 操作的反操作，主要功能是释放 new 函数中分配的内存空间。 通过调用 kmod_pool_del_module 在 kmod_pool 池中删除该模块的hash键值。 同时减少对该模块的引用计数 --mod-&gt;refcount; 如果减1后计数为0，则需要彻底将该模块从内核中清除。</p>
+<p>首先，把它从 kmod_pool 中删除 kmod_pool_del_module(mod-&gt;ctx, mod, mod-&gt;hashkey); 对于该模块所依赖的模块列表中的所有模块的引用计数也需要进行减1操作 kmod_module_unref_list(mod-&gt;dep)。 释放该模块对应的 kmod_file 也就是 kmod_file_unref(mod-&gt;file); 释放该模块对应的 kmod_ctx 也就是 kmod_unref(mod-&gt;ctx);</p>
+<div class="figure">
+<img src="./figures/kmod_module_unref.jpg" alt="kmod_module_unref 调用层次图" /><p class="caption">kmod_module_unref 调用层次图</p>
+</div>
+<pre><code>kmod_module *kmod_module_unref(kmod_module *mod)
 {
-    err = delete_module(mod-&gt;name, flags);
+    // 减少模块的引用计数,如果已经减到0，则卸载该模块
+    --mod-&gt;refcount;
 
-    return err;
+    //  在 kmod 池中通过 hash_add 删除一个键值为 key 的模块
+    kmod_pool_del_module(mod-&gt;ctx, mod, mod-&gt;hashkey);
+
+    // 删除 kmod list 链表中的每一个节点
+    kmod_module_unref_list(mod-&gt;dep);
+
+    // 释放文件资源，关闭当前文件描述符
+    kmod_file_unref(mod-&gt;file);
+
+    // 释放 kmod 库上下文
+    kmod_unref(mod-&gt;ctx);
+
+    return NULL;
 }</code></pre>
 <h3 id="kmod_module_new_from_loaded-核心代码分析">kmod_module_new_from_loaded 核心代码分析</h3>
 <p>该函数是实现 lsmod 命令的重要函数，通过读取 /proc/modules 文件的每一行，构建一个 kmod_list 列表，然后给 *list 赋值作为传出参数返回。 通过 cat 命令，查看 /proc/modules 文件的内容，格式不是很整齐，排列参差不齐。通过 lsmod 命令输出的信息，格式对齐，看起来信息也比较清晰。</p>
@@ -2140,19 +2228,22 @@ static void cfg_free(struct cfg *cfg)
     FILE *fp;
     char line[4096];
 
-    if (ctx == NULL || list == NULL)
-        return -ENOENT;
-
+    // 打开 /proc/modules 系统内存文件
     fp = fopen(&quot;/proc/modules&quot;, &quot;re&quot;);
 
+    // 读取1行进行分析
     while (fgets(line, sizeof(line), fp)) {
         struct kmod_module *m;
         struct kmod_list *node;
         int err;
+
+        // 以空格和\t（tab键）作为间隔token，依次读取每个字段
         char *saveptr, *name = strtok_r(line, &quot; \t&quot;, &amp;saveptr);
 
+        // 通过读的名字进行创建 kmod_module m
         err = kmod_module_new_from_name(ctx, name, &amp;m);
 
+        // 将创建的 m 插入到 kmod_list l 中
         node = kmod_list_append(l, m);
         if (node)
             l = node;
@@ -2162,7 +2253,10 @@ static void cfg_free(struct cfg *cfg)
         }
     }
 
+    // 关闭文件fp指针
     fclose(fp);
+
+    // 将 kmod_list l 作为链表头返回
     *list = l;
 
     return 0;
@@ -2171,7 +2265,13 @@ static void cfg_free(struct cfg *cfg)
 <img src="./figures/kmod_module_new_from_loaded.jpg" alt="kmod_module_new_from_loaded 调用层次图" /><p class="caption">kmod_module_new_from_loaded 调用层次图</p>
 </div>
 <h3 id="kmod_module_new_from_lookup-核心代码分析">kmod_module_new_from_lookup 核心代码分析</h3>
-<p>该函数主要用于在 modprobe 中插入模块前所使用，根据用户给出的 alias 来完成构建 kmod_list 的操作，最后给 *list 赋值作为传出参数返回。</p>
+<p>该函数主要用于在 modprobe 中插入模块前所使用，根据用户给出的 alias 来完成构建 kmod_list 的操作，最后给 *list 赋值作为传出参数返回。 完成构建需要查找名为 alias 的全部模块，一旦在某个地方找到，就不再继续寻找而是创建并将模块保存在 *list 中。</p>
+<p>该函数中，模块查找的顺序是</p>
+<ul>
+<li>在配置文件中 (/etc/modprobe.d/modules.conf）的 alias 是最先寻找的，它的设置将会覆盖其他地方的设置。</li>
+<li>接下来的顺序是，在 modules.dep -&gt; modules.symbols -&gt; commands -&gt; modules.alias -&gt; modules.buildin</li>
+</ul>
+<p>下面是这个函数实现的核心代码</p>
 <pre><code>KMOD_EXPORT int kmod_module_new_from_lookup(struct kmod_ctx *ctx,
                         const char *given_alias,
                         struct kmod_list **list)
@@ -2185,6 +2285,7 @@ static void cfg_free(struct cfg *cfg)
 
     /* Aliases from config file override all the others */
     err = kmod_lookup_alias_from_config(ctx, alias, list);
+
     err = kmod_lookup_alias_from_moddep_file(ctx, alias, list);
     err = kmod_lookup_alias_from_symbols_file(ctx, alias, list);
     err = kmod_lookup_alias_from_commands(ctx, alias, list);
@@ -2198,18 +2299,20 @@ static void cfg_free(struct cfg *cfg)
 <p>其中 kmod_module_get_probe_list 是整个 modprobe 操作中最难部分，体现为需要从 depmod 命令生成的 modules.dep 文件中，读取该模块的依赖关系列表。 并由此生成一个 list ，用于之后通过这个 list 来依次插入每一个所需要的内核模块。</p>
 <pre><code>int kmod_module_probe_insert_module(mod, flags, extra_options, run_install)
 {
+    // 从 modules.dep 文件中，读取该模块的依赖关系列表       
     err = kmod_module_get_probe_list(mod, !!(flags &amp; KMOD_PROBE_IGNORE_COMMAND), &amp;list);
 
     kmod_list_foreach(l, list) 
     {
         struct kmod_module *m = l-&gt;data;
+        // 对于链表中的每一个module，依次调用 insert 加载
         err = kmod_module_insert_module(m, flags, options);
     }
 }</code></pre>
 <div class="figure">
 <img src="./figures/kmod_module_probe_insert_module.jpg" alt="kmod_module_probe_insert_module 调用层次图" /><p class="caption">kmod_module_probe_insert_module 调用层次图</p>
 </div>
-<h3 id="kmod_module_get_probe_list-函数调用流程">kmod_module_get_probe_list 函数调用流程</h3>
+<p>这个 kmod_module_get_probe_list 函数的调用流程比较复杂，下面这个图是跟踪函数执行的关键调用，最后到底层发现是通过 kmod_module_parse_depline 来解析 modules.dep 文件中的包含依赖关系的那行（字符串），然后分离出当前模块依赖的每一个模块的path，然后仍然是通过直接最核心 kmod_module_new_from_path 函数来完成所有涉及到的模块加载。</p>
 <pre><code>-&gt; kmod_module_get_probe_list
     -&gt; __kmod_module_get_probe_list
         -&gt; kmod_module_get_dependencies
@@ -2221,10 +2324,13 @@ static void cfg_free(struct cfg *cfg)
 <h4 id="kmod_module_get_dependencies-核心代码分析">kmod_module_get_dependencies 核心代码分析</h4>
 <pre><code>kmod_list *kmod_module_get_dependencies(struct kmod_module *mod)
 {
+    // 找到当前 mod 的依赖关系模块，添加到 mod-&gt;dep 的 kmod_list 指针上去
     module_get_dependencies_noref(mod);
 
+    // 遍历整个 mod-&gt;dep 链表，找出每一个节点模块
     kmod_list_foreach(l, mod-&gt;dep)
     {
+        // 调用 kmod_list_append 把其中的字符串，添加到一个新的链表上
         l_new = kmod_list_append(list_new, kmod_module_ref(l-&gt;data));
         list_new = l_new;
     }
@@ -2232,22 +2338,28 @@ static void cfg_free(struct cfg *cfg)
     return list_new;
 }</code></pre>
 <h4 id="module_get_dependencies_noref-核心代码分析">module_get_dependencies_noref 核心代码分析</h4>
-<p>找到 mod-&gt;name 所在的行，得到该模块的依赖关系字符串到 line 中，然后对这个 line 进行 parse 操作，获得每一个依赖模块逐一加载。 举例： $ ./kmod-11/tools/modprobe nfs</p>
+<p>找到 mod-&gt;name 所在的行，得到该模块的依赖关系字符串到 line 中，然后对这个 line 进行 parse 操作，获得每一个依赖模块逐一加载。</p>
+<p>举例： $ ./kmod-11/tools/modprobe nfs</p>
 <pre><code>line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
 
 kmod_list *module_get_dependencies_noref(struct kmod_module *mod)
 {
+    // 通过模块名 mod-&gt;name 找到表示当前模块 mod 依赖关系的字符串 line
     char *line = kmod_search_moddep(mod-&gt;ctx, mod-&gt;name);
 
+    // 分析字符串 line，建立一个关于依赖关系的 kmod_list，赋值给 mod-&gt;dep
     kmod_module_parse_depline(mod, line);
 
     return mod-&gt;dep;
 }</code></pre>
 <h4 id="kmod_search_moddep-核心代码分析">kmod_search_moddep 核心代码分析</h4>
 <p>该函数是实现从模块名字到模块依赖关系字符串的转换，简单来说就是实现 name -&gt; line 的转换。</p>
-<pre><code>char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
+<p>举例 modprobe nfs 命令中，name = nfs，找到的字符串就是</p>
+<pre><code>kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
+
+char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
 {
-    // name = nfs;      // modprobe nfs
+    // 通过 index 模块的索引，找到 名字为 name 的字符串行
     return index_mm_search(ctx-&gt;indexes[KMOD_INDEX_MODULES_DEP], name);
 
     DBG(ctx, &quot;file=%s modname=%s\n&quot;, fn, name);
@@ -2345,188 +2457,3 @@ int main(int argc, char *argv[])
 <ol start="3" style="list-style-type: decimal">
 <li>系统调用模拟层的设计理念。因为内核模块会经常需要和内核打交道，无论插入和删除，一不小心可能会造成内核崩溃，只能靠 reset 重启来进行调试。因此引入关于系统调用函数的应用层实现，就可以在用户空间模拟系统调用后发生的行为，进行调试和验证。</li>
 </ol>
-<table>
-<thead>
-<tr class="header">
-<th align="left">a</th>
-<th align="center">b</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">aaa</td>
-<td align="center">bbb</td>
-</tr>
-</tbody>
-</table>
-<table>
-   <tr>
-         <td>
-用例标识
-</td>
-           <td>
-THU-12-1
-</td>
-                 <td>
-用例名称
-</td>
-                   <td>
-Kmod-11下载
-</td>
-                     <td>
-测试项编号
-</td>
-                       <td>
-THU-12-1
-</td>
-                          </tr>
-                         <tr>
-                               <td>
-测试用例说明
-</td>
-                                 <td>
-本用例用于测试在 uBuntu 12.04 上，如何下载安装 kmod-11 项目。
-</td>
-                                </tr>
-                                   <tr>
-                                         <td>
-初始化要求
-</td>
-                                           <td>
-硬件环境 型号：Macbook Air 笔记本电脑 CPU：Intel Core 2 Duo 1.4GHz 内存：2GB DDR3 硬盘：64GB
-</td>
-                                          </tr>
-                                             <tr>
-                                               <td>
-软件环境 已安装 Vmware Fusion 虚拟机 5.0.3, 虚拟机安装有Ubuntu 12.04.2 LTS，其中安装有GCC版本 4.6.3
-</td>
-                                                  </tr>
-                                                 <tr>
-                                                       <td>
-前提和约束
-</td>
-                                                         <td>
-无
-</td>
-                                                        </tr>
-                                                           <tr>
-                                                                 <td>
-测试过程
-</td>
-                                                                </tr>
-                                                               <tr>
-                                                                     <td>
-序号
-</td>
-                                                                       <td>
-测试过程
-</td>
-                                                                             <td>
-备注
-</td>
-                                                                            </tr>
-                                                                           <tr>
-                                                                                 <td>
-1
-</td>
-                                                                                   <td>
-详细步骤
-</td>
-                                                                                         <td>
-修改gcc编译选项，使其不生成.note.gnu.build-id段
-</td>
-                                                                                           <td></td>
-                                                                                          </tr>
-                                                                                             <tr>
-                                                                                               <td>
-输入数据
-</td>
-                                                                                                     <td>
-CC=&quot;gcc -Wl,--build-id=none&quot; ./configure --prefix=/opt/grub/
-</td>
-                                                                                                    </tr>
-                                                                                                   <tr>
-                                                                                                         <td>
-预期结果
-</td>
-                                                                                                           <td>
-在GRUB源代码目录下生成Makefile文件
-</td>
-                                                                                                              </tr>
-                                                                                                             <tr>
-                                                                                                                   <td>
-2
-</td>
-                                                                                                                     <td>
-详细步骤
-</td>
-                                                                                                                       <td>
-输入make命令，构建二进制文件
-</td>
-                                                                                                                             <td></td>
-                                                                                                                            </tr>
-                                                                                                                           <tr>
-                                                                                                                                 <td>
-输入数据
-</td>
-                                                                                                                                   <td>
-make
-</td>
-                                                                                                                                      </tr>
-                                                                                                                                     <tr>
-                                                                                                                                           <td>
-预期结果
-</td>
-                                                                                                                                             <td>
-生成stage1，stage1_5（e2fs_stage1_5， fat_stage1_5， ffs_stage1_5， iso9660_stage1_5， jfs_stage1_5， minix_stage1_5， reiserfs_stage1_5 ，ufs2_stage1_5， vstafs_stage1_5， xfs_stage1_5），以及stage2这些二进制映像。
-</td>
-                                                                                                                                            </tr>
-                                                                                                                                               <tr>
-                                                                                                                                                     <td>
-3
-</td>
-                                                                                                                                                       <td>
-详细步骤
-</td>
-                                                                                                                                                         <td>
-输入make install命令，将二进制文件安装到指定目录
-</td>
-                                                                                                                                                           <td></td>
-                                                                                                                                                              </tr>
-                                                                                                                                                             <tr>
-                                                                                                                                                                   <td>
-输入数据
-</td>
-                                                                                                                                                                     <td>
-make install
-</td>
-                                                                                                                                                                    </tr>
-                                                                                                                                                                       <tr>
-                                                                                                                                                                             <td>
-预期结果
-</td>
-                                                                                                                                                                               <td>
-在/opt/grub/下生成以下目录：bin， info， lib， man，sbin
-</td>
-                                                                                                                                                                              </tr>
-                                                                                                                                                                                 <tr>
-                                                                                                                                                                                   <td>
-过程终止条件
-</td>
-                                                                                                                                                                                         <td>
-make install成功并在/opt/grub/下生成以下目录：bin， info， lib， man，sbin
-</td>
-                                                                                                                                                                                        </tr>
-                                                                                                                                                                                       <tr>
-                                                                                                                                                                                             <td>
-结果判定标准
-</td>
-                                                                                                                                                                                               <td>
-以上各步骤都成功，并没有错误产生。
-</td>
-                                                                                                                                                                                                  </tr>
-                                                                                                                                                                                              </table>
-
-
-
-

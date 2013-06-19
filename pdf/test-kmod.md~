@@ -113,6 +113,131 @@
 	 /bin/mkdir -p '/usr/share/man/man8'
 	 /usr/bin/install -c -m 644 depmod.8 insmod.8 lsmod.8 rmmod.8 modprobe.8 modinfo.8 '/usr/share/man/man8'
 
+## THU-12-2 测试 kmod 命令
+### 运行 make install 安装命令
+	
+	$ sudo make install
+
+### 直接运行 kmod 命令
+	$ kmod
+	missing command
+	kmod - Manage kernel modules: list, load, unload, etc
+	Usage:
+		kmod [options] command [command_options]
+
+	Options:
+		-V, --version     show version
+		-h, --help        show this help
+
+	Commands:
+	  help         Show help message
+	  list         list currently loaded modules
+
+	kmod also handles gracefully if called from following symlinks:
+	  lsmod        compat lsmod command
+	  rmmod        compat rmmod command
+	  insmod       compat insmod command
+	  modinfo      compat modinfo command
+	  modprobe     compat modprobe command
+	  depmod       compat depmod command
+
+### 运行 kmod help 命令
+	$ kmod help
+	kmod - Manage kernel modules: list, load, unload, etc
+	Usage:
+		help [options] command [command_options]
+
+	Options:
+		-V, --version     show version
+		-h, --help        show this help
+
+	Commands:
+	  help         Show help message
+	  list         list currently loaded modules
+
+	kmod also handles gracefully if called from following symlinks:
+	  lsmod        compat lsmod command
+	  rmmod        compat rmmod command
+	  insmod       compat insmod command
+	  modinfo      compat modinfo command
+	  modprobe     compat modprobe command
+	  depmod       compat depmod command
+	$ 
+
+### 运行 kmod list 命令
+	$ kmod list
+	Module                  Size  Used by
+	vmwgfx                102138  2 
+	ttm                    65344  1 vmwgfx
+	drm                   197692  3 ttm,vmwgfx
+	acpiphp                23535  0 
+	vmw_balloon            12700  0 
+	psmouse                72919  0 
+	serio_raw              13027  0 
+	joydev                 17393  0 
+	btusb                  17912  2 
+	i2c_piix4              13093  0 
+	mac_hid                13077  0 
+	shpchp                 32325  0 
+	bnep                   17830  2 
+	nfsd                  229850  13 
+	bluetooth             158438  10 bnep,btusb
+	nfs                   307376  0 
+	parport_pc             32114  1 
+	snd_ens1371            24819  2 
+	snd_ac97_codec        106082  1 snd_ens1371
+	ppdev                  12849  0 
+	ac97_bus               12642  1 snd_ac97_codec
+	gameport               15060  1 snd_ens1371
+	snd_rawmidi            25424  1 snd_ens1371
+	nfs_acl                12771  2 nfs,nfsd
+	auth_rpcgss            39597  2 nfs,nfsd
+	fscache                50642  1 nfs
+	snd_seq_device         14172  1 snd_rawmidi
+	snd_pcm                80845  2 snd_ac97_codec,snd_ens1371
+	lockd                  78804  2 nfs,nfsd
+	snd_page_alloc         14108  1 snd_pcm
+	snd_timer              28931  1 snd_pcm
+	sunrpc                205647  19 lockd,auth_rpcgss,nfs_acl,nfs,nfsd
+	snd                    62064  10 snd_timer,snd_pcm,snd_seq_device,snd_rawmidi,snd_ac97_codec,snd_ens1371
+	soundcore              14635  1 snd
+	lp                     17455  0 
+	parport                40930  3 lp,ppdev,parport_pc
+	pcnet32                41110  0 
+	usbhid                 41906  0 
+	floppy                 60310  0 
+	mptspi                 22474  2 
+	mptscsih               39530  1 mptspi
+	mptbase                96852  2 mptscsih,mptspi
+	hid                    77367  1 usbhid
+	vmw_pvscsi             18334  0 
+	vmxnet3                44924  0 
+	$ 
+
+### kmod-11 版本中暂时不支持 load/unload 命令
+	$ kmod load
+	invalid command 'load'
+	kmod - Manage kernel modules: list, load, unload, etc
+	Usage:
+		kmod [options] command [command_options]
+
+	Options:
+		-V, --version     show version
+		-h, --help        show this help
+
+	Commands:
+	  help         Show help message
+	  list         list currently loaded modules
+
+	kmod also handles gracefully if called from following symlinks:
+	  lsmod        compat lsmod command
+	  rmmod        compat rmmod command
+	  insmod       compat insmod command
+	  modinfo      compat modinfo command
+	  modprobe     compat modprobe command
+	  depmod       compat depmod command
+
+
 ## THU-12-2 测试 insmod 命令
 
 ### 编写测试用内核模块源码 hello.c 
@@ -1429,7 +1554,6 @@
 	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9ee5088 key='hello'
 	libkmod: INFO libkmod/libkmod.c:318 kmod_unref: context 0x9ee5008 released
 	$ 
-
 
 ## modinf 命令
 	$ ./tools/modinfo ../hello-module/hello.ko 

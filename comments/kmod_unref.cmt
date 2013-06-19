@@ -1,5 +1,5 @@
 /*
- * @brief  kmod_unref - 释放 kmod 库上下文
+ * @brief  释放 kmod 库上下文
  * 
  * 主要功能： 
  *	给 kmod 的引用计数 refcount 减1

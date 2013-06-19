@@ -139,6 +139,7 @@ void log_printf(int prio, const char *fmt, ...)
 		exit(EXIT_FAILURE);
 }
 
+// log_setup_kmod_log.cmt
 void log_setup_kmod_log(struct kmod_ctx *ctx, int priority)
 {
 	log_priority = priority;
