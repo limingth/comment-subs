@@ -1306,7 +1306,7 @@ kmod_module 是所有模块中最重要和最核心的模块。该模块的主�
 		        container_of(list_entry->node.next, struct kmod_list, node))
 
 ### kmod_config 内核模块配置
-该模块是隶属于 kmod_ctx 模块的一个成员变量，用来支持 kmod_ctx 模块的实现。在 kmod_new 函数的实现中，需要传递一个 config_paths 字符串变量，这个变量将作为 kmod_config_new 的参数，创建出一个 kmod_config 变量，用来填充 kmod_ctx 数据结构中的 *config，表示配置文件所在的路径。如果默认是NULL，则会到以下3个路径中去寻找 /run/modprobe.d/， /lib/modprobe.d/， /etc/modprobe.d/ ， 否则，则会将 config_paths 作为一个指针数组的基地址，用 config_paths[i] 来遍历整个指针数组，获得每一个路径 char * path = config_paths[i]，然后用 path 来创建 conf_files_list 。
+该模块是隶属于 kmod_ctx 模块的一个成员变量，用来支持 kmod_ctx 模块的实现。在 kmod_new 函数的实现中，需要传递一个 config_paths 字符串变量，这个变量将作为 kmod_config_new 的参数，创建出一个 kmod_config 变量，用来填充 kmod_ctx 数据结构中的 *config，表示配置文件所在的路径。如果默认是NULL，则会到以下3个路径中去寻找 /run/modprobe.d/，/lib/modprobe.d/，/etc/modprobe.d/ ， 否则，则会将 config_paths 作为一个指针数组的基地址，用 config_paths[i] 来遍历整个指针数组，获得每一个路径 char * path = config_paths[i]，然后用 path 来创建 conf_files_list 。
 
 该模块主要的实现代码在 libkmod/libkmod-config.c, 其中结构体的定义在 kmod-11/libkmod/libkmod-private.h 中。
 
@@ -1891,16 +1891,18 @@ modinfo 命令中最重要的调用就是 modinfo_path_do 和 modinfo_alias_do �
 
 		// 遍历整个 list 数组
 		kmod_list_foreach(l, list) {
+
 			// 获取 l-data->key 
 		        const char *key = kmod_module_info_get_key(l);
-			// 获取 value
+
+			// 获取 l-data->value
 		        const char *value = kmod_module_info_get_value(l);
 		        
-			process_parm(key, value, &params);
-		  
+			// 打印 key 和 alue，类似 license:        GPL
 		        printf("%s:%-*s%s%c", key, 15 - keylen, "", value, separator);
 		}
 
+		// 释放当前链表 list
 		kmod_module_info_free_list(list);
 
 		return err;
@@ -1915,9 +1917,12 @@ modinfo 命令中最重要的调用就是 modinfo_path_do 和 modinfo_alias_do �
 
 	do_depmod(int argc, char *argv[])
 	{
-		out = stdout;		
+		out = stdout;	
+
+		// 创建 kmod 库上下文
 		ctx = kmod_new(cfg.dirname, &null_kmod_config);
 		
+		// 	
 		err = depmod_init(&depmod, &cfg, ctx);
 		err = depmod_load_symvers(&depmod, module_symvers);
 		err = depmod_load_system_map(&depmod, system_map);
@@ -2211,6 +2216,7 @@ cfg_xxx 模块主要完成对 config 配置文件的分析，
 #### insmod_all()
 	static int insmod_all(struct kmod_ctx *ctx, char **args, int nargs)
 	{
+		// 根据参数列表，调用多次 insmod 函数完成 insmod_all
 	        for (i = 0; i < nargs; i++) 
 			err = insmod(ctx, args[i], NULL);
 
@@ -2218,6 +2224,13 @@ cfg_xxx 模块主要完成对 config 配置文件的分析，
 	}
 
 #### insmod()
+这里所实现的 insmod 函数，和之前的 insmod 命令不同，这个函数能够实现对当前模块所依赖的所有模块的 probe 方式加载。
+其实也就是实现 modprobe 命令的核心函数。其中所用到的实现加载功能的核心函数是 kmod_module_probe_insert_module 。
+
+对比一下 insmod 命令当时的实现代码，其用到的核心函数是 kmod_module_insert_module ，这个函数只能加载一个模块，
+不能实现对所有依赖关系模块的加载，因此功能上来说，kmod_module_probe_insert_module 需要调用 kmod_module_insert_module 来完成真正的加载。
+总的来说，前者的完成需要实现一个依赖关系的列表，然后通过循环调用多次后者，才能完成 probe 方式加载。
+
 	static int insmod(struct kmod_ctx *ctx, const char *alias,
 		                                        const char *extra_options)
 	{
@@ -2227,24 +2240,26 @@ cfg_xxx 模块主要完成对 config 配置文件的分析，
 		void (*show)(struct kmod_module *m, bool install,
 		                                        const char *options) = NULL;
 
+		//  从文件别名 alias 创建 kmod module list
 		err = kmod_module_new_from_lookup(ctx, alias, &list);
 	   
 		kmod_list_foreach(l, list) {
+			// 从链表节点的数据区域 获得 kmod module 指针
 		        struct kmod_module *mod = kmod_module_get_module(l);
 
-		        if (lookup_only)
-		                printf("%s\n", kmod_module_get_name(mod));
-		        else {
-		                err = kmod_module_probe_insert_module(mod, flags,
+			// 根据依赖关系插入模块，如果有多个依赖，则会全部插入
+		        err = kmod_module_probe_insert_module(mod, flags,
 		                                extra_options, NULL, NULL, show);
-		        }
-
+			// 释放当前模块
 		        kmod_module_unref(mod);
 		}
 
+		// 删除 kmod list 链表中的每一个节点
 		kmod_module_unref_list(list);
 		return err;
 	}
+
+![insmod_all 函数调用层次图](./figures/insmod_all.jpg)
 
 从上面的代码分析可以看出，insmod 函数是依靠调用 kmod_module_probe_insert_module() 来完成模块加载的。
 为什么这里的 insmod 没有调用之前分析过的 kmod_module_insert_module() 来实现呢？
@@ -2255,17 +2270,7 @@ cfg_xxx 模块主要完成对 config 配置文件的分析，
 当然这两个函数之间也是有相互关系的，表现为 kmod_module_probe_insert_module() 函数会调用 kmod_module_insert_module()，
 而在此之前，还需要通过 kmod_module_get_probe_list() 函数来得到一个 probe_list 也就是加载模块列表。
 
-#### kmod_module_probe_insert_module
-	int kmod_module_probe_insert_module(mod, flags, extra_options, run_install)
-	{
-		err = kmod_module_get_probe_list(mod, !!(flags & KMOD_PROBE_IGNORE_COMMAND), &list);
-	
-		kmod_list_foreach(l, list) 
-		{
-			struct kmod_module *m = l->data;
-			err = kmod_module_insert_module(m, flags, options);
-		}
-	}
+![kmod_module_probe_insert_module 调用层次图](./figures/kmod_module_probe_insert_module.jpg)
 
 5. 函数接口分析
 ----------------
@@ -2475,7 +2480,7 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 		// 获得文件内容指针 memory
 		mem = kmod_file_get_contents(file);
 
-		// 创建一个 struct kmod_elf 结构体并将 size, offset, section.count 填入
+		// 创建一个 struct kmod_elf 结构体并将相关信息填入结构体
 		elf = kmod_elf_new(mem, size);
 
 		// 对 __versions 进行 strip,去掉有关版本版本信息，此项操作针对 -force 选项

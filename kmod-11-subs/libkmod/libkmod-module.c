@@ -1392,6 +1392,18 @@ static int kmod_module_get_probe_list(struct kmod_module *mod,
  * Returns: 0 on success, > 0 if stopped by a reason given in @flags or < 0 on
  * failure.
  */
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ *
+ * @brief  根据依赖关系插入模块，如果有多个依赖，则会全部插入
+ */
 KMOD_EXPORT int kmod_module_probe_insert_module(struct kmod_module *mod,
 			unsigned int flags, const char *extra_options,
 			int (*run_install)(struct kmod_module *m,
@@ -2556,6 +2568,18 @@ KMOD_EXPORT const char *kmod_module_info_get_value(const struct kmod_list *entry
  * @list: kmod module info list
  *
  * Release the resources taken by @list
+ */
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ *
+ * @brief  释放当前链表 list 
  */
 KMOD_EXPORT void kmod_module_info_free_list(struct kmod_list *list)
 {

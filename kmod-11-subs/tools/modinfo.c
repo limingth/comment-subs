@@ -233,7 +233,8 @@ static int modinfo_do(struct kmod_module *mod)
 		}
 
 		keylen = strlen(key);
-			printf("<mydebug> k %s\n", key);
+		printf("<mydebug> k %s\n", key);
+		printf("<mydebug> v %s\n", value);
 		printf("%s:%-*s%s%c", key, 15 - keylen, "", value, separator);
 	}
 

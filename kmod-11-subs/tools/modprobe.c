@@ -591,8 +591,9 @@ static void print_action(struct kmod_module *m, bool install,
  *
  * @note 注释详细内容:
  * 
- * @brief  完成一个模块的插入操作，是一个内部的static函数，
- * 因此仅在 modprobe.c 中使用
+ * @brief  完成模块的 probe 方式插入操作，是一个内部的static函数，
+ * 因此仅在 modprobe.c 中使用，可以实现有依赖关系的模块全部插入
+ *
  * 其中用到了 libkmod 的一些接口，如下
  *	- kmod_module_new_from_lookup()
  *	- kmod_module_get_module()

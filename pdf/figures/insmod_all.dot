@@ -1,0 +1,11 @@
+digraph G {
+
+	insmod_all -> insmod;
+
+	insmod -> kmod_module_new_from_lookup;
+	insmod -> kmod_module_get_module;
+	insmod -> kmod_module_probe_insert_module;
+	insmod -> kmod_module_unref_list;
+
+}
+

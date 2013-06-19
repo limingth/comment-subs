@@ -1149,6 +1149,7 @@ static int kmod_module_get_probe_list(struct kmod_module *mod,
  * Returns: 0 on success, > 0 if stopped by a reason given in @flags or < 0 on
  * failure.
  */
+// kmod_module_probe_insert_module.cmt
 KMOD_EXPORT int kmod_module_probe_insert_module(struct kmod_module *mod,
 			unsigned int flags, const char *extra_options,
 			int (*run_install)(struct kmod_module *m,
@@ -2223,6 +2224,7 @@ KMOD_EXPORT const char *kmod_module_info_get_value(const struct kmod_list *entry
  *
  * Release the resources taken by @list
  */
+// kmod_module_info_free_list.cmt
 KMOD_EXPORT void kmod_module_info_free_list(struct kmod_list *list)
 {
 	while (list) {
