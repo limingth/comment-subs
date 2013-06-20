@@ -1068,15 +1068,14 @@ modprobe利用这个文件来自动解决添加和删除模块时候的依赖关
 如果用户指定了 -f 参数，则要求强制加载，那么加载程序所需要处理的就是将 .modinfo 字段去掉，然后再交给内核去加载。
 
 * alias 别名
-
 例如  
 
 	$ cat /etc/modprobe.d/myalias.conf
 	alias mymod really_long_module_name
 
 * blacklist 黑名单
-
 例如  
+
 	$ cat /etc/modprobe.d/blacklist
 	blacklist ieee1394
 	blacklist ohci1394
@@ -1084,8 +1083,8 @@ modprobe利用这个文件来自动解决添加和删除模块时候的依赖关
 	blacklist sbp2
 
 * install 和 remove 命令
-
 例如  
+
 	$ cat /etc/modprobe.d/ieee1394
 	install ieee1394 /bin/true
 	install ohci1394 /bin/true
@@ -2594,11 +2593,24 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 
 ![内核模块的加载和卸载的内存空间调用关系](./figures/user_sys_module.jpg)
 
-内核模块的加载，本质上是一个模块被内核静态链接的过程，sys_init_module 函数可以分为以下关键步骤：
+操作系统在初始化时，调用 static LIST_HEAD(modules)建立了一个空链表，之后，每装入一个内核模块，即创建一个 struct module 结构， 并把它链入 modules 这个全局的链表中。
 
+从操作系统内核的角度来说，它提供的用户服务，都是通过系统调用来实现的。实际上，我们在调用 module_init 和 module_exit 时，都是首先需要通过这两个系统调用来实现的：sys_init_module(), sys_delete_module()。
+
+内核模块的加载，本质上是一个模块被内核静态链接的过程，当模块被加载时，模块中声明的任何全局符号都成为内核符号表的一部分。
+什么是内核符号表呢? 内核符号表是内核中所有允许被公开访问的变量和函数，可以通过以文本方式读取 /proc/kallsyms 文件获得。
+
+sys_init_module 函数可以分为以下关键步骤：
+
+* 确保有插入和删除模块不受限制的权利，并且模块没有被禁止插入或删除	
 * 调用内核空间的 load_module 函数，然后通过 copy_from_user 把 ELF 内容读入到内核临时空间做一个映像分析
 * 对加载的 ELF 映像进行分析，确定要加载哪些段进入到真正代码空间
-* 为要加载的每一个段进行重新定位，最终完成加载，插入到内核中，成为内核符号表的一部分
+* 为要加载的每一个段进行重新定位，最终完成加载，插入到内核中，成为内核符号表的一部分，并创建相关的sysfs文件
+
+
+参考代码： 摘自 linux-x.x.xx/kernel/module.c 
+
+<http://blog.csdn.net/ganggexiongqi/article/details/6823960>
 
 ![内核模块在内核空间的加载流程](./figures/sys_init_module.jpg)
 
@@ -2635,7 +2647,7 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 * 在 free_module 函数中，开始完成对该模块在系统文件、模块列表中的清除工作
 * 释放为该模块分配的各种内存，最终完成卸载该模块的操作
 
-![内核模块在内核空间的加载流程](./figures/sys_delete_module.jpg)
+![内核模块在内核空间的卸载流程](./figures/sys_delete_module.jpg)
 
 在 kmod-11 项目中，在 testsuite/ 目录下有一个 delete_module.c ，里面也实现了一个 delete_module 的函数，
 同样的，它也并不是真正的卸载模块，仅仅只是查找一下当前模块，并不执行实际的删除操作。
@@ -2909,7 +2921,8 @@ kmod_module_new 函数是通过传入的 key，name 和 alias 以及 ctx 指针�
 ![kmod_search_moddep 调用层次图](./figures/kmod_search_moddep.jpg)
 
 #### kmod_module_parse_depline 核心代码分析
-从 line 中根据冒号作为间隔符，冒号左边是要加载的模块，冒号右边是依赖关系列表，列表中的各个模块是以 path 的方式存储的，两个之间用空格或者 \t 间隔，因此需要通过 strtok 函数来依次获得每一个模块的字符串，通过这个字符串 path，调用 kmod_module_new_from_path 来得到一个 kmod_list。
+从 line 中根据冒号作为间隔符，冒号左边是要加载的模块，冒号右边是依赖关系列表，列表中的各个模块是以 path 的方式存储的，两个之间用空格或者 \t 间隔，
+因此需要通过 strtok 函数来依次获得每一个模块的字符串，通过这个字符串 path，调用 kmod_module_new_from_path 来得到一个 kmod_list。
 
 ![kmod_module_parse_depline 调用层次图](./figures/kmod_module_parse_depline.jpg)
 
@@ -2986,6 +2999,9 @@ libabc 项目发源于2002年，在2011年发布了 version 4。目前最近一�
 		abc_unref(ctx);
 		return EXIT_SUCCESS;
 	}
+
+从这个例子可以看出，整个 kmod 项目的框架就是建立在 libabc 的基础上，其函数命名和设计思路，都是借鉴了 libabc 开源项目的框架模型。
+
 
 2) 基础类的数据结构和算法，是写一个大型项目所必须具备的知识储备。
 

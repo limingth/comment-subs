@@ -1,4 +1,5 @@
 digraph G {
+size = "7.5 7.5"
 	kmod_module_new_from_name -> modname_normalize;
 	kmod_module_new_from_name -> kmod_module_new;
 

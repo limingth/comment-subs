@@ -21,5 +21,8 @@ f figures:
 	openout_any=a xelatex $@.tex
 	gnome-open $@.pdf
 
+doc: figures
+	pandoc kmod.md -o kmod.doc
+
 clean:
 	rm *.html *.tex *.pdf *.aux *.log *.aux *.out *.old~

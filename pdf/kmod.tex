@@ -3763,7 +3763,7 @@ char *kmod_search_moddep(struct kmod_ctx *ctx, const char *name)
 
 从 line
 中根据冒号作为间隔符，冒号左边是要加载的模块，冒号右边是依赖关系列表，列表中的各个模块是以
-path 的方式存储的，两个之间用空格或者 \t 间隔，因此需要通过 strtok
+path 的方式存储的，两个之间用空格或者 \t 间隔， 因此需要通过 strtok
 函数来依次获得每一个模块的字符串，通过这个字符串 path，调用
 kmod\_module\_new\_from\_path 来得到一个 kmod\_list。
 
@@ -3852,6 +3852,9 @@ int main(int argc, char *argv[])
     return EXIT_SUCCESS;
 }
 \end{verbatim}\end{shaded}}
+从这个例子可以看出，整个 kmod 项目的框架就是建立在 libabc
+的基础上，其函数命名和设计思路，都是借鉴了 libabc 开源项目的框架模型。
+
 \begin{enumerate}[1)]
 \setcounter{enumi}{1}
 \item

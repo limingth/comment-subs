@@ -9,6 +9,7 @@ all: $(JPG)
 	dot -Tjpg 1-app.dot -o 1-app.jpg
 	dot -Tjpg kmod_module_probe_insert_module.dot -o kmod_module_probe_insert_module.jpg
 	dot -Tjpg cmd.dot -o cmd.jpg
+	dot -Tjpg 3-syscall.dot -o 3-syscall.jpg
 
 %.jpg : %.dot
 	dot -Grankdir=LR -Tjpg $< -o $@

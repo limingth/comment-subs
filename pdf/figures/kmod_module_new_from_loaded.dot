@@ -1,5 +1,6 @@
 digraph G
 {
+	size = "7.5 7.5"
 	kmod_module_new_from_loaded -> "fopen /proc/modules"
 	kmod_module_new_from_loaded -> "fgets"
 	kmod_module_new_from_loaded -> "kmod_module_new_from_name"

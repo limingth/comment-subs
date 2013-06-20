@@ -20,7 +20,7 @@ digraph G {
 
 	}
 	
-	size="8, 8";  
+	size="7.5 7.5";  
 
 	modinfo -> do_modinfo;
 

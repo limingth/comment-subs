@@ -1633,16 +1633,85 @@
 	$ 
 
 
+## Hole-1 mkdir
+
+	$ sudo cat /proc/kallsyms | grep sys_call_table
+	c15b0000 R sys_call_table
+	$ 
+
+	$ vi /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/unistd_32.h 
+	 46 #define __NR_rename              38
+	 47 #define __NR_mkdir               39
+	 48 #define __NR_rmdir               40
+
+## kill 命令
+	$ cat /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/unistd_32.h | grep kill
+
+	#define __NR_kill		 37
+	#define __NR_tkill		238
+	#define __NR_tgkill		270
+
+	$ sudo insmod mk.ko
+	$ ls
+	aabb      mk.c      mkdir.mod.c  mkdir.o  mk.mod.c  m.ko  modules.order
+	Makefile  mkdir.ko  mkdir.mod.o  mk.ko    mk.mod.o  mk.o  Module.symvers
+	$ ps 
+	  PID TTY          TIME CMD
+	 3307 pts/2    00:00:10 bash
+	 7043 pts/2    00:00:26 evince
+	15090 pts/2    00:00:00 ps
+	$ kill 7043
+	$ dmesg | tail
+	[83680.122974] table at c15b0000
+	[83706.463982] exit ok
+	[83733.513558] init ok, SYS_mkdir = 39
+	[83733.513570] table at c15b0000
+	[83736.190368] haha, mkdir is hacked!
+	[83747.506425] haha, mkdir is hacked!
+	[83759.254190] exit ok
+	[84529.398497] init ok, SYS_mkdir = 37
+	[84529.398504] table at c15b0000
+	[84556.100726] haha, mkdir is hacked!
+	$ sudo rmmod mk.ko
+	$ kill 7043
+
+## ls 命令
+	$ strace ls 2>&1 | grep dent
+	getdents64(3, /* 23 entries */, 32768)  = 736
+	getdents64(3, /* 0 entries */, 32768)   = 0
+
+	$ cat /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/unistd_32.h | grep getdents 
+	#define __NR_getdents		141
+	#define __NR_getdents64		220
 
 
+	$ sudo insmod mk.ko
+	$ ls
+	$ ls
+	$ cat Makefile
+
+	obj-m := mk.o
+
+	#KDIR := /home/limingth/tiny210/src/linux-2.6.35.7
+	#KDIR := /home/akaedu/teacher_li/linux-2.6.35.7/
+	KDIR := /usr/src/linux-headers-3.2.0-29-generic-pae/
+
+	all:
+		make -C $(KDIR)	SUBDIRS=$(PWD) 	modules
+
+	clean:
+		rm -rf *.o *.ko *.mod.* *.cmd 
+		rm -rf .*
+
+	$ sudo rmmod mk.ko
+	$ ls
+	aabb      mk.c      mkdir.mod.c  mkdir.o  mk.mod.c  m.ko  modules.order
+	Makefile  mkdir.ko  mkdir.mod.o  mk.ko    mk.mod.o  mk.o  Module.symvers
+	$ 
 
 
-
-
-
-
-
-
-
+	
+参考资料：
+<http://hi.baidu.com/lu_youyou/item/b6585ff84ade0b1ea62988c9>
 
 

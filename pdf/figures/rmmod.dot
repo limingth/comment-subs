@@ -1,4 +1,5 @@
 digraph G {
+size = "7.5 7.5"
 	rmmod -> do_rmmod;
 
 	do_rmmod -> log -> log_open;
