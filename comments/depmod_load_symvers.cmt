@@ -1,0 +1,3 @@
+/*
+ * @brief 使用通过 -E 参数传入的 Module.symvers 文件
+ */

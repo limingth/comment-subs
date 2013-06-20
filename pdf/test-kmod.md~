@@ -115,7 +115,6 @@
 
 ## THU-12-2 测试 kmod 命令
 ### 运行 make install 安装命令
-	
 	$ sudo make install
 
 ### 直接运行 kmod 命令
@@ -598,6 +597,41 @@
 	sunrpc                205647  18 nfsd,nfs_acl,auth_rpcgss,lockd
 	$ 
 
+### THU-12-8 测试 modprobe 命令参数
+	$ modprobe --show-depends module_name
+
+查看 nfs 模块的依赖关系，也就是依赖于哪些模块的加载
+
+	$ modprobe --show-depends nfs
+	insmod /lib/modules/3.2.0-29-generic-pae/kernel/net/sunrpc/sunrpc.ko 
+	insmod /lib/modules/3.2.0-29-generic-pae/kernel/fs/lockd/lockd.ko 
+	insmod /lib/modules/3.2.0-29-generic-pae/kernel/fs/fscache/fscache.ko 
+	insmod /lib/modules/3.2.0-29-generic-pae/kernel/net/sunrpc/auth_gss/auth_rpcgss.ko 
+	insmod /lib/modules/3.2.0-29-generic-pae/kernel/fs/nfs_common/nfs_acl.ko 
+	insmod /lib/modules/3.2.0-29-generic-pae/kernel/fs/nfs/nfs.ko 
+	$ 
+
+查看以 nfs 结尾的符号信息，也就是 nfs 模块所 export 的符号表
+
+	$ modprobe -c | egrep "nfs$"
+	alias symbol:nfs4_reset_read nfs
+	alias symbol:nfs4_reset_write nfs
+	alias symbol:nfs4_set_ds_client nfs
+	alias symbol:nfs_commit_clear_lock nfs
+	alias symbol:nfs_commit_free nfs
+	alias symbol:nfs_commit_release_pages nfs
+	alias symbol:nfs_commitdata_alloc nfs
+	alias symbol:nfs_commitdata_release nfs
+	alias symbol:nfs_generic_pg_test nfs
+	alias symbol:nfs_init_commit nfs
+	alias symbol:nfs_initiate_commit nfs
+	alias symbol:nfs_initiate_read nfs
+	alias symbol:nfs_initiate_write nfs
+	alias symbol:nfs_pageio_reset_read_mds nfs
+	alias symbol:nfs_pageio_reset_write_mds nfs
+	alias symbol:nfs_put_client nfs
+	alias symbol:nfs_retry_commit nfs
+	$ 
 
 ## THU-12-9 修改调试 depmod 命令
 
@@ -775,6 +809,17 @@
 	<mydebug> p = kernel/fs/fscache/fscache.ko
 	<mydebug> p = kernel/fs/lockd/lockd.ko
 	<mydebug> p = kernel/net/sunrpc/sunrpc.ko
+
+
+### modprobe 参数----
+	$ ../kmod-11/tools/modprobe  --show-modversions ../hello-module/hello.ko 
+	program_invocation_short_name = modprobe
+	program_invocation_name = ../kmod-11/tools/modprobe
+	program_invocation_short_name = bfeb3601
+	0x75646f6d98397cc5	le_layout
+	0x6666696a7d11c268	ies
+	0x6e69727050eedeb8	tk
+
 
 ## THU-12-11 编译生成 testsuite 命令集
 
@@ -1555,7 +1600,7 @@
 	libkmod: INFO libkmod/libkmod.c:318 kmod_unref: context 0x9ee5008 released
 	$ 
 
-## modinf 命令
+## modinfo 命令
 	$ ./tools/modinfo ../hello-module/hello.ko 
 	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x90b7008 created
 	libkmod: DEBUG libkmod/libkmod.c:276 kmod_new: log_priority=7

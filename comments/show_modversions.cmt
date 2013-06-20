@@ -1,0 +1,3 @@
+/*
+ * @brief 显示模块符号信息，配合 modprobe --show-modversions 参数使用 
+ */

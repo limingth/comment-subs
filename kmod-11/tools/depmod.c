@@ -895,6 +895,7 @@ static int cfg_files_list(struct cfg_file ***p_files, size_t *p_n_files,
 	return err;
 }
 
+// cfg_load.cmt
 static int cfg_load(struct cfg *cfg, const char * const *cfg_paths)
 {
 	size_t i, n_files = 0;
@@ -922,6 +923,7 @@ static int cfg_load(struct cfg *cfg, const char * const *cfg_paths)
 	return 0;
 }
 
+// cfg_free.cmt
 static void cfg_free(struct cfg *cfg)
 {
 	while (cfg->overrides) {
@@ -1013,6 +1015,7 @@ static void symbol_free(struct symbol *sym)
 	free(sym);
 }
 
+// depmod_init.cmt
 static int depmod_init(struct depmod *depmod, struct cfg *cfg,
 							struct kmod_ctx *ctx)
 {
@@ -1051,6 +1054,7 @@ modules_by_uncrelpath_failed:
 	return err;
 }
 
+// depmod_shutdown.cmt
 static void depmod_shutdown(struct depmod *depmod)
 {
 	size_t i;
@@ -1068,6 +1072,7 @@ static void depmod_shutdown(struct depmod *depmod)
 	kmod_unref(depmod->ctx);
 }
 
+// depmod_module_add.cmt
 static int depmod_module_add(struct depmod *depmod, struct kmod_module *kmod)
 {
 	const struct cfg *cfg = depmod->cfg;
@@ -1347,6 +1352,7 @@ static int depmod_modules_search_dir(struct depmod *depmod, DIR *d, size_t basel
 	return err;
 }
 
+// depmod_modules_search.cmt
 static int depmod_modules_search(struct depmod *depmod)
 {
 	char path[PATH_MAX];
@@ -1382,6 +1388,7 @@ static int mod_cmp(const void *pa, const void *pb) {
 	return a->sort_idx - b->sort_idx;
 }
 
+// depmod_modules_build_array.cmt
 static int depmod_modules_build_array(struct depmod *depmod)
 {
 	struct hash_iter module_iter;
@@ -1400,6 +1407,7 @@ static int depmod_modules_build_array(struct depmod *depmod)
 	return 0;
 }
 
+// depmod_modules_sort.cmt
 static void depmod_modules_sort(struct depmod *depmod)
 {
 	char order_file[PATH_MAX], line[PATH_MAX];
@@ -1698,6 +1706,7 @@ static int depmod_calculate_dependencies(struct depmod *depmod)
 	return 0;
 }
 
+// depmod_load.cmt
 static int depmod_load(struct depmod *depmod)
 {
 	int err;
@@ -2160,6 +2169,7 @@ static int output_devname(struct depmod *depmod, FILE *out)
 	return 0;
 }
 
+// depmod_output.cmt
 static int depmod_output(struct depmod *depmod, FILE *out)
 {
 	static const struct depfile {
@@ -2262,6 +2272,7 @@ static void depmod_add_fake_syms(struct depmod *depmod)
 	depmod_symbol_add(depmod, "_GLOBAL_OFFSET_TABLE_", 0, NULL);
 }
 
+// depmod_load_symvers.cmt
 static int depmod_load_symvers(struct depmod *depmod, const char *filename)
 {
 	char line[10240];
@@ -2310,6 +2321,7 @@ static int depmod_load_symvers(struct depmod *depmod, const char *filename)
 	return 0;
 }
 
+// depmod_load_system_map.cmt
 static int depmod_load_system_map(struct depmod *depmod, const char *filename)
 {
 	const char ksymstr[] = "__ksymtab_";

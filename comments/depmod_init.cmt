@@ -1,0 +1,3 @@
+/*
+ * @brief  对 struct depmod 结构体进行初始化，将传入 cfg 和 ctx 赋值给结构体
+ */

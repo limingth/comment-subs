@@ -895,6 +895,18 @@ static int cfg_files_list(struct cfg_file ***p_files, size_t *p_n_files,
 	return err;
 }
 
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ *
+ * @brief 读取配置文件目录，加载配置文件到一个list中 
+ */
 static int cfg_load(struct cfg *cfg, const char * const *cfg_paths)
 {
 	size_t i, n_files = 0;
@@ -922,6 +934,16 @@ static int cfg_load(struct cfg *cfg, const char * const *cfg_paths)
 	return 0;
 }
 
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ */
 static void cfg_free(struct cfg *cfg)
 {
 	while (cfg->overrides) {
@@ -1013,6 +1035,18 @@ static void symbol_free(struct symbol *sym)
 	free(sym);
 }
 
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ *
+ * @brief  对 struct depmod 结构体进行初始化，将传入 cfg 和 ctx 赋值给结构体
+ */
 static int depmod_init(struct depmod *depmod, struct cfg *cfg,
 							struct kmod_ctx *ctx)
 {
@@ -1051,6 +1085,18 @@ modules_by_uncrelpath_failed:
 	return err;
 }
 
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ *
+ * @brief 释放相关资源包括 hash 表和 array数组 
+ */
 static void depmod_shutdown(struct depmod *depmod)
 {
 	size_t i;
@@ -1068,6 +1114,18 @@ static void depmod_shutdown(struct depmod *depmod)
 	kmod_unref(depmod->ctx);
 }
 
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ *
+ * @brief 将 mod 添加到动态数组 array 中
+ */
 static int depmod_module_add(struct depmod *depmod, struct kmod_module *kmod)
 {
 	const struct cfg *cfg = depmod->cfg;
@@ -1347,6 +1405,16 @@ static int depmod_modules_search_dir(struct depmod *depmod, DIR *d, size_t basel
 	return err;
 }
 
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ */
 static int depmod_modules_search(struct depmod *depmod)
 {
 	char path[PATH_MAX];
@@ -1382,6 +1450,18 @@ static int mod_cmp(const void *pa, const void *pb) {
 	return a->sort_idx - b->sort_idx;
 }
 
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ *
+ * @brief 通过 hash 表添加模块名称到动态数组  
+ */
 static int depmod_modules_build_array(struct depmod *depmod)
 {
 	struct hash_iter module_iter;
@@ -1400,6 +1480,16 @@ static int depmod_modules_build_array(struct depmod *depmod)
 	return 0;
 }
 
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ */
 static void depmod_modules_sort(struct depmod *depmod)
 {
 	char order_file[PATH_MAX], line[PATH_MAX];
@@ -1698,6 +1788,18 @@ static int depmod_calculate_dependencies(struct depmod *depmod)
 	return 0;
 }
 
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ *
+ * @brief 加载模块，加载依赖关系，计算依赖关系
+ */
 static int depmod_load(struct depmod *depmod)
 {
 	int err;
@@ -2160,6 +2262,18 @@ static int output_devname(struct depmod *depmod, FILE *out)
 	return 0;
 }
 
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ *
+ * @brief 将 depmod 的结果输出到指定的文件中
+ */
 static int depmod_output(struct depmod *depmod, FILE *out)
 {
 	static const struct depfile {
@@ -2262,6 +2376,18 @@ static void depmod_add_fake_syms(struct depmod *depmod)
 	depmod_symbol_add(depmod, "_GLOBAL_OFFSET_TABLE_", 0, NULL);
 }
 
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ *
+ * @brief 使用通过 -E 参数传入的 Module.symvers 文件
+ */
 static int depmod_load_symvers(struct depmod *depmod, const char *filename)
 {
 	char line[10240];
@@ -2310,6 +2436,18 @@ static int depmod_load_symvers(struct depmod *depmod, const char *filename)
 	return 0;
 }
 
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ *
+ * @brief 使用通过 -F 参数指定的 内核符号表文件
+ */
 static int depmod_load_system_map(struct depmod *depmod, const char *filename)
 {
 	const char ksymstr[] = "__ksymtab_";

@@ -1040,8 +1040,7 @@ KMOD_EXPORT int kmod_validate_resources(struct kmod_ctx *ctx)
  *
  * @note 注释详细内容:
  *
- * @brief  kmod_load_resources
- * 加载所有的索引
+ * @brief  加载所有的索引,以便提高后继操作速度
  * 如果用户会操作多次 lookups, insertions, deletions 操作
  * 那么最好是先调用这个函数，这样可以加快查找速度
  *	- index_mm_open()

@@ -156,6 +156,18 @@ static inline void _show(const char *fmt, ...)
 }
 #define SHOW(...) _show(__VA_ARGS__)
 
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ *
+ * @brief  显示配置信息，配合 modprobe -c 参数使用
+ */
 static int show_config(struct kmod_ctx *ctx)
 {
 	struct config_iterators {
@@ -202,6 +214,18 @@ static int show_config(struct kmod_ctx *ctx)
 	return 0;
 }
 
+/**
+ * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
+ *（课题编号：2012ZX01039-004）”的资助。
+
+ * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+ * @author 注释添加人员： 李明
+ * @date 2013-6-1
+ *
+ * @note 注释详细内容:
+ *
+ * @brief 显示模块符号信息，配合 modprobe --show-modversions 参数使用 
+ */
 static int show_modversions(struct kmod_ctx *ctx, const char *filename)
 {
 	struct kmod_list *l, *list = NULL;

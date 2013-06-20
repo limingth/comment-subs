@@ -156,6 +156,7 @@ static inline void _show(const char *fmt, ...)
 }
 #define SHOW(...) _show(__VA_ARGS__)
 
+// show_config.cmt
 static int show_config(struct kmod_ctx *ctx)
 {
 	struct config_iterators {
@@ -202,6 +203,7 @@ static int show_config(struct kmod_ctx *ctx)
 	return 0;
 }
 
+// show_modversions.cmt
 static int show_modversions(struct kmod_ctx *ctx, const char *filename)
 {
 	struct kmod_list *l, *list = NULL;

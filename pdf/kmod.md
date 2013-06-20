@@ -973,6 +973,13 @@ kmod-11 项目系统层次结构如图
 #### depmod 命令
 该命令的功能是: 分析可加载模块的依赖性，生成 /lib/modules/3.2.0-29-generic-pae/modules.dep 文件和映射文件。
 
+depmod 通过读取 /lib/modules/version 目录下的每一个 module 文件，判断每个模块会导出什么符号，同时依赖什么符号。
+默认情况下，这个模块列表会写入 modules.dep 文件中，另外还有一个是二进制方式存储了hash表的 modules.dep.bin 文件。
+
+depmod 也会创建所有模块用到的符号表文件 modules.symbols，以及这个文件的二进制版本 modules.symbols.bin。
+最后 depmod 还会输出一个 modules.devname 文件，如果这些模块中支持某些特殊设备名 devname。
+
+
 	$ ./kmod-11/tools/depmod -h
 	Usage:
 		depmod -[aA] [options] [forced_version]
@@ -1002,7 +1009,15 @@ kmod-11 项目系统层次结构如图
 	$ 
 
 #### modprobe 命令
-该命令的功能是: Linux内核添加或者删除模块
+该命令的功能是: Linux内核添加或者删除模块。modprobe会从linux内核中智能地添加或者移除模块。
+
+为了方便，在module名称中的_和-是一样的，同时模块名称中不能出现小数点，这个工作叫 normalize 正规化。
+
+modprobe在模块目录/lib/modules/`uname -r`中查找除了 /etc/modprobe.conf配置文件和/etc/modprobe.d目录之外中的模块和其他文件。
+
+modprobe需要一个实时更新的modules.dep文件，这个文件由depmod生成。这个文件列出了每个模块还需要依赖哪些其他的模块。
+
+modprobe利用这个文件来自动解决添加和删除模块时候的依赖关系。
 
 	$ ./kmod-11/tools/modprobe -h
 	Usage:
@@ -1049,6 +1064,34 @@ kmod-11 项目系统层次结构如图
 		-h, --help                  show this help
 	$ 
 
+模块加载时，会用到配置信息 configuration, 使用 modprobe -c 命令可以查看这些配置信息，包括如下参数
+如果用户指定了 -f 参数，则要求强制加载，那么加载程序所需要处理的就是将 .modinfo 字段去掉，然后再交给内核去加载。
+
+* alias 别名
+
+例如  
+
+	$ cat /etc/modprobe.d/myalias.conf
+	alias mymod really_long_module_name
+
+* blacklist 黑名单
+
+例如  
+	$ cat /etc/modprobe.d/blacklist
+	blacklist ieee1394
+	blacklist ohci1394
+	blacklist eth1394
+	blacklist sbp2
+
+* install 和 remove 命令
+
+例如  
+	$ cat /etc/modprobe.d/ieee1394
+	install ieee1394 /bin/true
+	install ohci1394 /bin/true
+	install eth1394 /bin/true
+	install sbp2 /bin/true
+
 ### 库接口层
 库接口层包含了 libkmod 目录下的形如 libkmod-xxx.c 的模块文件，其中涉及用到的编程接口将近100个，形如 kmod_xxx_xxx_xxx 的接口函数。
 
@@ -1069,7 +1112,6 @@ hash, index_mm，elf，list，array，log。
 系统调用模拟层的实现，主要是采用了通过文件来模拟内核空间行为的方法。
 
 例如 init_module 调用 create_sysfs_files 创建了 /sys/module/ 目录下的 initstate 文件，文件内容仅仅就是一个 live 字符串表示该模块已经插入到内核中了。有关这个文件，可以参考如下路径 kmod-11/testsuite/rootfs/test-init/sys/module/ext4/initstate （需要 make rootfs）
-
 
 ![kmod-11 项目系统调用模拟层结构图](./figures/3-syscall.jpg)
 
@@ -1922,21 +1964,46 @@ modinfo 命令中最重要的调用就是 modinfo_path_do 和 modinfo_alias_do �
 		// 创建 kmod 库上下文
 		ctx = kmod_new(cfg.dirname, &null_kmod_config);
 		
-		// 	
+		// 对 struct depmod 结构体进行初始化，将传入 cfg 和 ctx 赋值给结构体
 		err = depmod_init(&depmod, &cfg, ctx);
+
+		// 使用通过 -E 参数传入的 Module.symvers 文件
 		err = depmod_load_symvers(&depmod, module_symvers);
+
+		// 使用通过 -F 参数指定的 内核符号表文件
 		err = depmod_load_system_map(&depmod, system_map);
+
+		// 读取配置文件目录，加载配置文件到一个list中
 		err = cfg_load(&cfg, config_paths);
+
+		// 通过构建 hash 表的方法，查找 cfg 配置目录下的模块，添加到动态数组 array 中
 		err = depmod_modules_search(&depmod);
+
+		// 按路径名的方式创建新模块 mod
 		err = kmod_module_new_from_path(depmod.ctx, path, &mod);
+
+		// 将 mod 添加到动态数组 array 中, struct mod->deps
 		err = depmod_module_add(&depmod, mod);
+
+		// 通过 hash 表添加模块名称到动态数组 
 		err = depmod_modules_build_array(&depmod);
+
+		// 按照模块名称进行排序
 		depmod_modules_sort(&depmod);
+
+		// 加载模块，加载依赖关系，计算依赖关系
 		err = depmod_load(&depmod);
 
+		// 将 depmod 的结果输出到指定的文件中
 		err = depmod_output(&depmod, out);
+
+		// 释放相关资源包括 hash 表和 array数组
 		depmod_shutdown(&depmod);
+
+		// 释放配置信息列表
 		cfg_free(&cfg);
+
+		// 释放 kmod 库上下文
 		kmod_unref(ctx);
 	}
 
@@ -1995,9 +2062,6 @@ do_depmod() 的实现可以分为7个步骤
 		depmod->modules_by_uncrelpath = hash_new(512, NULL);
 		depmod->modules_by_name = hash_new(512, NULL);
 		depmod->symbols = hash_new(2048, (void (*)(void *))symbol_free);
-
-		hash_free(depmod->modules_by_name);
-		hash_free(depmod->modules_by_uncrelpath);
 
 		return err;
 	}
@@ -2154,6 +2218,12 @@ do_depmod() 的实现可以分为7个步骤
 通过修改如下 fprintf(out, ...) 函数，增添输出到标准输出 stdout 的 fprintf(stdout, ...)
 则可以在屏幕上看到运行 depmod 命令时候的全部输出结果，这个结果和 modules.dep 文件中的内容是完全一样的。
 
+这里用的几个文件，含义和用法如下：
+* modules.alias : 模块别名定义. 模块加载工具使用它来加载相应的模块.
+* modules.dep : 定义了模块间的依赖关系.
+* modules.symbols : 指定符号属于哪个模块.
+* 
+
 	1790 static int output_deps(struct depmod *depmod, FILE *out)
 	1791 {
 	1792         size_t i;
@@ -2183,19 +2253,31 @@ cfg_xxx 模块主要完成对 config 配置文件的分析，
 
 	do_modprobe(int argc, char *argv[])
 	{
+		// 打开日志文件, 调用了系统的 openlog()
 		log_open(use_syslog);
 
 		snprintf(dirname_buf, sizeof(dirname_buf), "%s/lib/modules/%s", root, kversion);
 		dirname = dirname_buf;
 
+		// 创建 kmod 库上下文
 		ctx = kmod_new(dirname, config_paths);
 
+		// 设置 kmod log 日志输出的优先级
 		log_setup_kmod_log(ctx, verbose);
+
+		// 加载所有的索引,以便提高后继操作速度
 		kmod_load_resources(ctx);
 
+		// 显示配置信息，配合 modprobe -c 参数使用
 		err = show_config(ctx);	
+
+		// 显示模块符号信息，配合 modprobe --show-modversions 参数使用
 		err = show_modversions(ctx, args[0]);
+		
+		//  根据传入的 argv[] 参数，依次插入 nargs 个模块
 		err = insmod_all(ctx, args, nargs);
+
+		//  根据传入的 argv[] 参数，依次卸载 nargs 个模块
 		err = rmmod_all(ctx, args, nargs); 
 
 		err = options_from_array(args, nargs, &opts);
