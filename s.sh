@@ -107,5 +107,6 @@ echo Total `find $1 -name "*.c" | wc -l` \*.c files
 diff -Nur $SRC $DST > diff.$SRC
 ls -l diff.$SRC
 du -bs comments
+ls -l comments/ | wc -l
 
 exit

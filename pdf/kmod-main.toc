@@ -67,7 +67,7 @@
 \contentsline {subsection}{\numberline {3.2.5}modinfo 命令实现流程}{66}{subsection.3.2.5}
 \contentsline {subsection}{\numberline {3.2.6}depmod 命令实现流程}{69}{subsection.3.2.6}
 \contentsline {subsection}{\numberline {3.2.7}modprobe 命令实现流程}{77}{subsection.3.2.7}
-\contentsline {subsubsection}{insmod\_all()}{79}{section*.22}
+\contentsline {subsubsection}{insmod\_all()}{78}{section*.22}
 \contentsline {subsubsection}{insmod()}{79}{section*.23}
 \contentsline {section}{\numberline {3.3}函数接口分析}{81}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}kmod\_new() 核心代码分析}{81}{subsection.3.3.1}

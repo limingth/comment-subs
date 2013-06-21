@@ -1135,6 +1135,7 @@ fail:
 	return err;
 }
 
+// depmod_module_del.cmt
 static int depmod_module_del(struct depmod *depmod, struct mod *mod)
 {
 	DBG("del %p kmod=%p, path=%s\n", mod, mod->kmod, mod->path);

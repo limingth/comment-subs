@@ -38,6 +38,8 @@ static __noreturn int modprobe_show_depends(const struct test *t)
 	test_spawn_prog(progname, args);
 	exit(EXIT_FAILURE);
 }
+
+// modprobe_show_depends_ds.cmt
 static DEFINE_TEST(modprobe_show_depends,
 	.description = "check if output for modprobe --show-depends is correct for loaded modules",
 	.config = {
@@ -60,6 +62,8 @@ static __noreturn int modprobe_show_depends2(const struct test *t)
 	test_spawn_prog(progname, args);
 	exit(EXIT_FAILURE);
 }
+
+// modprobe_show_depends2_ds.cmt
 static DEFINE_TEST(modprobe_show_depends2,
 	.description = "check if output for modprobe --show-depends is correct",
 	.config = {

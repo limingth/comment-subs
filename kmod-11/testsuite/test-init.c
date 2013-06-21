@@ -105,6 +105,8 @@ static __noreturn int test_remove(const struct test *t)
 
 	exit(EXIT_SUCCESS);
 }
+
+// test_remove_ds.cmt
 static DEFINE_TEST(test_remove,
 	.description = "test if libkmod's remove_module returns ok",
 	.config = {

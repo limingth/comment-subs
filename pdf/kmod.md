@@ -2242,7 +2242,6 @@ do_depmod() 的实现可以分为7个步骤
 * modules.alias : 模块别名定义. 模块加载工具使用它来加载相应的模块.
 * modules.dep : 定义了模块间的依赖关系.
 * modules.symbols : 指定符号属于哪个模块.
-* 
 
 	1790 static int output_deps(struct depmod *depmod, FILE *out)
 	1791 {
@@ -2299,12 +2298,15 @@ cfg_xxx 模块主要完成对 config 配置文件的分析，
 
 		//  根据传入的 argv[] 参数，依次卸载 nargs 个模块
 		err = rmmod_all(ctx, args, nargs); 
-
 		err = options_from_array(args, nargs, &opts);
+
+		// 完成模块的 probe 方式插入操作，是一个内部的static函数
 		err = insmod(ctx, args[0], opts);
 
+		// 释放 kmod 库上下文
 		kmod_unref(ctx);
 
+		// 关闭日志文件，调用 closelog()
 		log_close();
 	}
 

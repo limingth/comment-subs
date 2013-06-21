@@ -58,6 +58,8 @@ static int alias_1(const struct test *t)
 
 	return EXIT_SUCCESS;
 }
+
+// alias_1_ds.cmt
 static DEFINE_TEST(alias_1,
 	.description = "check if alias_normalize does the right thing",
 	.config = {

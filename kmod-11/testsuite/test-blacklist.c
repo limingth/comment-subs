@@ -92,6 +92,8 @@ fail_lookup:
 	kmod_unref(ctx);
 	return EXIT_FAILURE;
 }
+
+// sblacklist_1_ds.cmt
 static const struct test sblacklist_1 = {
 	.name = "blacklist_1",
 	.description = "check if modules are correctly blacklisted",

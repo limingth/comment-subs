@@ -166,7 +166,7 @@ struct kmod_list *kmod_list_insert_after(struct kmod_list *list,
 	return list;
 }
 
-// kmod_list_insert_before.cmt_
+// kmod_list_insert_before.cmt
 struct kmod_list *kmod_list_insert_before(struct kmod_list *list,
 							const void *data)
 {

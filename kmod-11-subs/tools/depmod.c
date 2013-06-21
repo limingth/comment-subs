@@ -895,15 +895,20 @@ static int cfg_files_list(struct cfg_file ***p_files, size_t *p_n_files,
 	return err;
 }
 
-/**
- * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+/**                                                                
+ * @attention 本注释得到了"核高基"科技重大专项2012年课题
+ *             “开源操作系统内核分析和安全性评估
+ *            （课题编号：2012ZX01039-004）”的资助。
+ *                                                                      
+ * @copyright 注释添加单位：清华大学——03任务
+ *            （Linux内核相关通用基础软件包分析）
+ *                                                                        
  * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
+ *             (电子邮件 <limingth@gmail.com>)
+ *                                                                    
+ * @date 注释添加日期： 2013-6-1
+ *                                                                   
+ * @note 注释详细内容:                                                
  *
  * @brief 读取配置文件目录，加载配置文件到一个list中 
  */
@@ -934,15 +939,22 @@ static int cfg_load(struct cfg *cfg, const char * const *cfg_paths)
 	return 0;
 }
 
-/**
- * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+/**                                                                
+ * @attention 本注释得到了"核高基"科技重大专项2012年课题
+ *             “开源操作系统内核分析和安全性评估
+ *            （课题编号：2012ZX01039-004）”的资助。
+ *                                                                      
+ * @copyright 注释添加单位：清华大学——03任务
+ *            （Linux内核相关通用基础软件包分析）
+ *                                                                        
  * @author 注释添加人员： 李明
- * @date 2013-6-1
+ *             (电子邮件 <limingth@gmail.com>)
+ *                                                                    
+ * @date 注释添加日期： 2013-6-1
+ *                                                                   
+ * @note 注释详细内容:                                                
  *
- * @note 注释详细内容:
+ * @brief 释放配置信息列表
  */
 static void cfg_free(struct cfg *cfg)
 {
@@ -1035,15 +1047,20 @@ static void symbol_free(struct symbol *sym)
 	free(sym);
 }
 
-/**
- * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+/**                                                                
+ * @attention 本注释得到了"核高基"科技重大专项2012年课题
+ *             “开源操作系统内核分析和安全性评估
+ *            （课题编号：2012ZX01039-004）”的资助。
+ *                                                                      
+ * @copyright 注释添加单位：清华大学——03任务
+ *            （Linux内核相关通用基础软件包分析）
+ *                                                                        
  * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
+ *             (电子邮件 <limingth@gmail.com>)
+ *                                                                    
+ * @date 注释添加日期： 2013-6-1
+ *                                                                   
+ * @note 注释详细内容:                                                
  *
  * @brief  对 struct depmod 结构体进行初始化，将传入 cfg 和 ctx 赋值给结构体
  */
@@ -1085,15 +1102,20 @@ modules_by_uncrelpath_failed:
 	return err;
 }
 
-/**
- * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+/**                                                                
+ * @attention 本注释得到了"核高基"科技重大专项2012年课题
+ *             “开源操作系统内核分析和安全性评估
+ *            （课题编号：2012ZX01039-004）”的资助。
+ *                                                                      
+ * @copyright 注释添加单位：清华大学——03任务
+ *            （Linux内核相关通用基础软件包分析）
+ *                                                                        
  * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
+ *             (电子邮件 <limingth@gmail.com>)
+ *                                                                    
+ * @date 注释添加日期： 2013-6-1
+ *                                                                   
+ * @note 注释详细内容:                                                
  *
  * @brief 释放相关资源包括 hash 表和 array数组 
  */
@@ -1114,15 +1136,20 @@ static void depmod_shutdown(struct depmod *depmod)
 	kmod_unref(depmod->ctx);
 }
 
-/**
- * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+/**                                                                
+ * @attention 本注释得到了"核高基"科技重大专项2012年课题
+ *             “开源操作系统内核分析和安全性评估
+ *            （课题编号：2012ZX01039-004）”的资助。
+ *                                                                      
+ * @copyright 注释添加单位：清华大学——03任务
+ *            （Linux内核相关通用基础软件包分析）
+ *                                                                        
  * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
+ *             (电子邮件 <limingth@gmail.com>)
+ *                                                                    
+ * @date 注释添加日期： 2013-6-1
+ *                                                                   
+ * @note 注释详细内容:                                                
  *
  * @brief 将 mod 添加到动态数组 array 中
  */
@@ -1188,6 +1215,23 @@ fail:
 	return err;
 }
 
+/**                                                                
+ * @attention 本注释得到了"核高基"科技重大专项2012年课题
+ *             “开源操作系统内核分析和安全性评估
+ *            （课题编号：2012ZX01039-004）”的资助。
+ *                                                                      
+ * @copyright 注释添加单位：清华大学——03任务
+ *            （Linux内核相关通用基础软件包分析）
+ *                                                                        
+ * @author 注释添加人员： 李明
+ *             (电子邮件 <limingth@gmail.com>)
+ *                                                                    
+ * @date 注释添加日期： 2013-6-1
+ *                                                                   
+ * @note 注释详细内容:                                                
+ *
+ * @brief 将 mod 从动态数组 array 中删除
+ */
 static int depmod_module_del(struct depmod *depmod, struct mod *mod)
 {
 	DBG("del %p kmod=%p, path=%s\n", mod, mod->kmod, mod->path);
@@ -1405,16 +1449,24 @@ static int depmod_modules_search_dir(struct depmod *depmod, DIR *d, size_t basel
 	return err;
 }
 
-/**
- * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+/**                                                                
+ * @attention 本注释得到了"核高基"科技重大专项2012年课题
+ *             “开源操作系统内核分析和安全性评估
+ *            （课题编号：2012ZX01039-004）”的资助。
+ *                                                                      
+ * @copyright 注释添加单位：清华大学——03任务
+ *            （Linux内核相关通用基础软件包分析）
+ *                                                                        
  * @author 注释添加人员： 李明
- * @date 2013-6-1
+ *             (电子邮件 <limingth@gmail.com>)
+ *                                                                    
+ * @date 注释添加日期： 2013-6-1
+ *                                                                   
+ * @note 注释详细内容:                                                
  *
- * @note 注释详细内容:
+ * @brief 通过构建 hash 表的方法，查找 cfg 配置目录下的模块，添加到动态数组 array 中
  */
+
 static int depmod_modules_search(struct depmod *depmod)
 {
 	char path[PATH_MAX];
@@ -1450,15 +1502,20 @@ static int mod_cmp(const void *pa, const void *pb) {
 	return a->sort_idx - b->sort_idx;
 }
 
-/**
- * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+/**                                                                
+ * @attention 本注释得到了"核高基"科技重大专项2012年课题
+ *             “开源操作系统内核分析和安全性评估
+ *            （课题编号：2012ZX01039-004）”的资助。
+ *                                                                      
+ * @copyright 注释添加单位：清华大学——03任务
+ *            （Linux内核相关通用基础软件包分析）
+ *                                                                        
  * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
+ *             (电子邮件 <limingth@gmail.com>)
+ *                                                                    
+ * @date 注释添加日期： 2013-6-1
+ *                                                                   
+ * @note 注释详细内容:                                                
  *
  * @brief 通过 hash 表添加模块名称到动态数组  
  */
@@ -1480,15 +1537,22 @@ static int depmod_modules_build_array(struct depmod *depmod)
 	return 0;
 }
 
-/**
- * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+/**                                                                
+ * @attention 本注释得到了"核高基"科技重大专项2012年课题
+ *             “开源操作系统内核分析和安全性评估
+ *            （课题编号：2012ZX01039-004）”的资助。
+ *                                                                      
+ * @copyright 注释添加单位：清华大学——03任务
+ *            （Linux内核相关通用基础软件包分析）
+ *                                                                        
  * @author 注释添加人员： 李明
- * @date 2013-6-1
+ *             (电子邮件 <limingth@gmail.com>)
+ *                                                                    
+ * @date 注释添加日期： 2013-6-1
+ *                                                                   
+ * @note 注释详细内容:                                                
  *
- * @note 注释详细内容:
+ * @brief 按照模块名称进行排序 
  */
 static void depmod_modules_sort(struct depmod *depmod)
 {
@@ -1788,15 +1852,20 @@ static int depmod_calculate_dependencies(struct depmod *depmod)
 	return 0;
 }
 
-/**
- * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+/**                                                                
+ * @attention 本注释得到了"核高基"科技重大专项2012年课题
+ *             “开源操作系统内核分析和安全性评估
+ *            （课题编号：2012ZX01039-004）”的资助。
+ *                                                                      
+ * @copyright 注释添加单位：清华大学——03任务
+ *            （Linux内核相关通用基础软件包分析）
+ *                                                                        
  * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
+ *             (电子邮件 <limingth@gmail.com>)
+ *                                                                    
+ * @date 注释添加日期： 2013-6-1
+ *                                                                   
+ * @note 注释详细内容:                                                
  *
  * @brief 加载模块，加载依赖关系，计算依赖关系
  */
@@ -2262,15 +2331,20 @@ static int output_devname(struct depmod *depmod, FILE *out)
 	return 0;
 }
 
-/**
- * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+/**                                                                
+ * @attention 本注释得到了"核高基"科技重大专项2012年课题
+ *             “开源操作系统内核分析和安全性评估
+ *            （课题编号：2012ZX01039-004）”的资助。
+ *                                                                      
+ * @copyright 注释添加单位：清华大学——03任务
+ *            （Linux内核相关通用基础软件包分析）
+ *                                                                        
  * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
+ *             (电子邮件 <limingth@gmail.com>)
+ *                                                                    
+ * @date 注释添加日期： 2013-6-1
+ *                                                                   
+ * @note 注释详细内容:                                                
  *
  * @brief 将 depmod 的结果输出到指定的文件中
  */
@@ -2376,15 +2450,20 @@ static void depmod_add_fake_syms(struct depmod *depmod)
 	depmod_symbol_add(depmod, "_GLOBAL_OFFSET_TABLE_", 0, NULL);
 }
 
-/**
- * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+/**                                                                
+ * @attention 本注释得到了"核高基"科技重大专项2012年课题
+ *             “开源操作系统内核分析和安全性评估
+ *            （课题编号：2012ZX01039-004）”的资助。
+ *                                                                      
+ * @copyright 注释添加单位：清华大学——03任务
+ *            （Linux内核相关通用基础软件包分析）
+ *                                                                        
  * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
+ *             (电子邮件 <limingth@gmail.com>)
+ *                                                                    
+ * @date 注释添加日期： 2013-6-1
+ *                                                                   
+ * @note 注释详细内容:                                                
  *
  * @brief 使用通过 -E 参数传入的 Module.symvers 文件
  */
@@ -2436,15 +2515,20 @@ static int depmod_load_symvers(struct depmod *depmod, const char *filename)
 	return 0;
 }
 
-/**
- * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+/**                                                                
+ * @attention 本注释得到了"核高基"科技重大专项2012年课题
+ *             “开源操作系统内核分析和安全性评估
+ *            （课题编号：2012ZX01039-004）”的资助。
+ *                                                                      
+ * @copyright 注释添加单位：清华大学——03任务
+ *            （Linux内核相关通用基础软件包分析）
+ *                                                                        
  * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
+ *             (电子邮件 <limingth@gmail.com>)
+ *                                                                    
+ * @date 注释添加日期： 2013-6-1
+ *                                                                   
+ * @note 注释详细内容:                                                
  *
  * @brief 使用通过 -F 参数指定的 内核符号表文件
  */
@@ -2865,15 +2949,20 @@ cmdline_failed:
 	return EXIT_FAILURE;
 }
 
-/**
- * 本注释得到了"核高基"科技重大专项2012年课题“开源操作系统内核分析和安全性评估
- *（课题编号：2012ZX01039-004）”的资助。
-
- * @copyright 注释添加单位：清华大学——03任务（Linux内核相关通用基础软件包分析）承担单位
+/**                                                                
+ * @attention 本注释得到了"核高基"科技重大专项2012年课题
+ *             “开源操作系统内核分析和安全性评估
+ *            （课题编号：2012ZX01039-004）”的资助。
+ *                                                                      
+ * @copyright 注释添加单位：清华大学——03任务
+ *            （Linux内核相关通用基础软件包分析）
+ *                                                                        
  * @author 注释添加人员： 李明
- * @date 2013-6-1
- *
- * @note 注释详细内容:
+ *             (电子邮件 <limingth@gmail.com>)
+ *                                                                    
+ * @date 注释添加日期： 2013-6-1
+ *                                                                   
+ * @note 注释详细内容:                                                
  * 
  * @brief  用于实现该命令的结构体, 在 kmod.c 中有关于这个结构体的指针数组
  * 通过用户输入命令的字符串和结构体的 name 成员相比较，确定是哪个命令
