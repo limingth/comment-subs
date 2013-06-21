@@ -7,27 +7,26 @@
 //#define SYS_mkdir __NR_mkdir
 //#define SYS_mkdir __NR_kill
 //#define SYS_mkdir __NR_getdents
-#define SYS_mkdir __NR_getdents64
+#define SYSCALL_NUM	__NR_getdents64
 
 MODULE_AUTHOR("AKAEDU");
 MODULE_DESCRIPTION("module example ");
 MODULE_LICENSE("GPL");
 
-// see all syscall in  /usr/include/sys/syscall.h
+// see all syscall number in 
+// /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/unistd_32.h 
 
 //extern void* sys_call_table[]; /*sys_call_table 被引出，所以我们可访问它*/
 void ** sys_call_table = (int *)0xc15b0000;
-int (*orig_mkdir)(const char *path); /*未改前的系统调用*/
+int (*orig_syscall)(const char *path); /*未改前的系统调用*/
 
-int hacked_mkdir(const char *path)
+int hacked_cmd(const char *path)
 {
-	printk("haha, mkdir is hacked!\n");
+	printk("haha, your command is hacked!\n");
 	return 0; /*一切正常，但新的系统调用什么也不做*/
 }
 
 int orig_cr0;
-
-static int (*anything_saved)(void);
 
 unsigned int clear_and_return_cr0(void)
 {
@@ -59,14 +58,14 @@ void setback_cr0(unsigned int val)
 
 int my_init_module(void) /*模块初始化*/
 {
-	printk("init ok, SYS_mkdir = %d\n", SYS_mkdir);
+	printk("init ok, SYSCALL NUM = %d\n", SYSCALL_NUM);
 	printk("table at %p\n", sys_call_table);
 
 	orig_cr0 = clear_and_return_cr0(); //cr0寄存器的第16位清0
 
-	orig_mkdir=sys_call_table[SYS_mkdir];
+	orig_syscall = sys_call_table[SYSCALL_NUM];
 
-	sys_call_table[SYS_mkdir]=hacked_mkdir;
+	sys_call_table[SYSCALL_NUM] = hacked_cmd;
 
 	//恢复cr0寄存器的第16位    
 	setback_cr0(orig_cr0);
@@ -80,7 +79,7 @@ void my_cleanup_module(void) /*模块卸载*/
 
 	orig_cr0 = clear_and_return_cr0(); //cr0寄存器的第16位清0
 
-	sys_call_table[SYS_mkdir]=orig_mkdir; /*把mkdir系统调用恢复*/
+	sys_call_table[SYSCALL_NUM] = orig_syscall; /*把系统调用恢复*/
 
 	//恢复cr0寄存器的第16位    
 	setback_cr0(orig_cr0);

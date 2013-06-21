@@ -1,0 +1,87 @@
+\BOOKMARK [0][-]{chapter.1}{kmod 内核模块工具简介}{}
+\BOOKMARK [1][-]{section.1.1}{项目背景介绍}{chapter.1}
+\BOOKMARK [2][-]{subsection.1.1.1}{建立时间}{section.1.1}
+\BOOKMARK [2][-]{subsection.1.1.2}{创建者和维护者}{section.1.1}
+\BOOKMARK [2][-]{subsection.1.1.3}{更新记录}{section.1.1}
+\BOOKMARK [2][-]{subsection.1.1.4}{版本情况}{section.1.1}
+\BOOKMARK [2][-]{subsection.1.1.5}{资源汇总}{section.1.1}
+\BOOKMARK [1][-]{section.1.2}{项目架构设计}{chapter.1}
+\BOOKMARK [2][-]{subsection.1.2.1}{应用层}{section.1.2}
+\BOOKMARK [2][-]{subsection.1.2.2}{库接口层}{section.1.2}
+\BOOKMARK [2][-]{subsection.1.2.3}{系统调用模拟层}{section.1.2}
+\BOOKMARK [2][-]{subsection.1.2.4}{各层之间相互关系图}{section.1.2}
+\BOOKMARK [0][-]{chapter.2}{Kmod-11 项目概要分析}{}
+\BOOKMARK [1][-]{section.2.1}{工具安装使用流程}{chapter.2}
+\BOOKMARK [2][-]{subsection.2.1.1}{开发环境准备}{section.2.1}
+\BOOKMARK [2][-]{subsection.2.1.2}{编译和安装}{section.2.1}
+\BOOKMARK [2][-]{subsection.2.1.3}{错误及解决}{section.2.1}
+\BOOKMARK [2][-]{subsection.2.1.4}{编译过程}{section.2.1}
+\BOOKMARK [2][-]{subsection.2.1.5}{生成文件}{section.2.1}
+\BOOKMARK [2][-]{subsection.2.1.6}{安装过程}{section.2.1}
+\BOOKMARK [2][-]{subsection.2.1.7}{安装文件说明}{section.2.1}
+\BOOKMARK [2][-]{subsection.2.1.8}{文件功能简介}{section.2.1}
+\BOOKMARK [1][-]{section.2.2}{代码实现概要分析}{chapter.2}
+\BOOKMARK [2][-]{subsection.2.2.1}{源码目录结构}{section.2.2}
+\BOOKMARK [2][-]{subsection.2.2.2}{头文件 libkmod.h 分析}{section.2.2}
+\BOOKMARK [2][-]{subsection.2.2.3}{数据结构设计}{section.2.2}
+\BOOKMARK [2][-]{subsection.2.2.4}{重要接口实现}{section.2.2}
+\BOOKMARK [0][-]{chapter.3}{Kmod-11 项目详细分析报告}{}
+\BOOKMARK [1][-]{section.3.1}{模块设计分析}{chapter.3}
+\BOOKMARK [2][-]{subsection.3.1.1}{kmod\137ctx 库上下文}{section.3.1}
+\BOOKMARK [2][-]{subsection.3.1.2}{kmod\137module 内核模块核心操作}{section.3.1}
+\BOOKMARK [2][-]{subsection.3.1.3}{kmod\137file 内核模块文件操作}{section.3.1}
+\BOOKMARK [2][-]{subsection.3.1.4}{kmod\137elf 内核模块elf文件操作}{section.3.1}
+\BOOKMARK [2][-]{subsection.3.1.5}{kmod\137list 内核模块列表}{section.3.1}
+\BOOKMARK [2][-]{subsection.3.1.6}{kmod\137config 内核模块配置}{section.3.1}
+\BOOKMARK [2][-]{subsection.3.1.7}{hash 哈希表模块}{section.3.1}
+\BOOKMARK [2][-]{subsection.3.1.8}{index\137mm 索引查找模块}{section.3.1}
+\BOOKMARK [2][-]{subsection.3.1.9}{elf 文件分析模块}{section.3.1}
+\BOOKMARK [2][-]{subsection.3.1.10}{list 链表模块}{section.3.1}
+\BOOKMARK [2][-]{subsection.3.1.11}{array 动态数组模块}{section.3.1}
+\BOOKMARK [2][-]{subsection.3.1.12}{log 日志记录模块}{section.3.1}
+\BOOKMARK [1][-]{section.3.2}{运行流程分析}{chapter.3}
+\BOOKMARK [2][-]{subsection.3.2.1}{命令实现流程概述}{section.3.2}
+\BOOKMARK [2][-]{subsection.3.2.2}{insmod 命令实现流程}{section.3.2}
+\BOOKMARK [2][-]{subsection.3.2.3}{rmmod 命令实现流程}{section.3.2}
+\BOOKMARK [2][-]{subsection.3.2.4}{lsmod 命令实现流程}{section.3.2}
+\BOOKMARK [2][-]{subsection.3.2.5}{modinfo 命令实现流程}{section.3.2}
+\BOOKMARK [2][-]{subsection.3.2.6}{depmod 命令实现流程}{section.3.2}
+\BOOKMARK [2][-]{subsection.3.2.7}{modprobe 命令实现流程}{section.3.2}
+\BOOKMARK [1][-]{section.3.3}{函数接口分析}{chapter.3}
+\BOOKMARK [2][-]{subsection.3.3.1}{kmod\137new\(\) 核心代码分析}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.2}{kmod\137unref\(\) 核心代码分析}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.3}{kmod\137module\137new\137from\137path\(\) 核心代码分析}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.4}{kmod\137module\137new\137from\137name\(\) 核心代码分析}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.5}{kmod\137module\137new\(\) 核心代码分析}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.6}{kmod\137module\137insert\137module\(\) 核心代码分析}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.7}{kmod\137module\137remove\137module\(\) 核心代码分析}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.8}{init\137module\(\) 核心代码分析}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.9}{delete\137module\(\) 核心代码分析}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.10}{kmod\137module\137unref\(\) 核心代码分析}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.11}{kmod\137module\137new\137from\137loaded 核心代码分析}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.12}{kmod\137module\137get\137info 核心代码分析}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.13}{kmod\137module\137new\137from\137lookup 核心代码分析}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.14}{kmod\137module\137probe\137insert\137module 核心代码分析}{section.3.3}
+\BOOKMARK [1][-]{section.3.4}{项目详细分析总结}{chapter.3}
+\BOOKMARK [2][-]{subsection.3.4.1}{libabc 的库项目框架}{section.3.4}
+\BOOKMARK [2][-]{subsection.3.4.2}{基础类的数据结构和算法}{section.3.4}
+\BOOKMARK [2][-]{subsection.3.4.3}{系统调用模拟层的设计理念}{section.3.4}
+\BOOKMARK [0][-]{chapter.4}{Kmod-11 项目安全漏洞分析报告}{}
+\BOOKMARK [1][-]{section.4.1}{安全漏洞案例1-ls命令}{chapter.4}
+\BOOKMARK [2][-]{subsection.4.1.1}{strace 跟踪 ls 命令的系统调用}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.2}{获得系统调用号}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.3}{获得系统调用表的入口地址}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.4}{编写内核源码文件}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.5}{编译并加载内核模块}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.6}{清空系统日志信息以便查看模块加载信息}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.7}{插入模块打印加载提示信息}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.8}{模块加载后运行 ls 命令没有输出}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.9}{卸载模块后运行 ls 输出恢复正常}{section.4.1}
+\BOOKMARK [1][-]{section.4.2}{安全漏洞案例2-Kill命令}{chapter.4}
+\BOOKMARK [2][-]{subsection.4.2.1}{获得系统调用号}{section.4.2}
+\BOOKMARK [2][-]{subsection.4.2.2}{编译源码}{section.4.2}
+\BOOKMARK [2][-]{subsection.4.2.3}{编译生成内核模块}{section.4.2}
+\BOOKMARK [2][-]{subsection.4.2.4}{插入模块，查看系统日志输出}{section.4.2}
+\BOOKMARK [2][-]{subsection.4.2.5}{运行 kill 试图杀死当前 bash 不能成功}{section.4.2}
+\BOOKMARK [2][-]{subsection.4.2.6}{杀死其他进程\(cat\)可以成功}{section.4.2}
+\BOOKMARK [1][-]{section.4.3}{总结}{chapter.4}

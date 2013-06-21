@@ -1,5 +1,5 @@
 <h1 id="kmod-linux内核模块工具简介">kmod-Linux内核模块工具简介</h1>
-<h2 id="项目背景分析">1. 项目背景分析</h2>
+<h2 id="项目背景分析">项目背景分析</h2>
 <p>kmod 是为了能够操作 Linux 内核模块而推出的一系列工具集，这些操作包括 插入（insert），删除（remove），列出（list），检查属性（check properties）和解决依赖关系（dependencies）。</p>
 <p>这些工具在底层都需要用到 libkmod 这个库，相关的源码也会跟着 kmod 项目一同发布。这个项目的目标是能够实现与在此之前 module-init-tools 项目所提供的工具兼容。</p>
 <h3 id="项目建立时间">项目建立时间</h3>
@@ -26,7 +26,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'<code>'+e+'</code>'+'<\/'+
 <li><p>Git项目仓库<br /> git://git.kernel.org/pub/scm/utils/kernel/kmod/kmod.git<br /> <a href="https://git.kernel.org/pub/scm/utils/kernel/kmod/kmod.git"><code class="url">https://git.kernel.org/pub/scm/utils/kernel/kmod/kmod.git</code></a></p></li>
 <li><p>Gitweb页面<br /> <a href="http://git.kernel.org/?p=utils/kernel/kmod/kmod.git"><code class="url">http://git.kernel.org/?p=utils/kernel/kmod/kmod.git</code></a></p></li>
 </ul>
-<h2 id="项目技术分析">2. 项目技术分析</h2>
+<h2 id="项目技术分析">项目技术分析</h2>
 <h3 id="开发环境准备">开发环境准备</h3>
 <ul>
 <li>首先需要安装如下的软件工具
@@ -349,7 +349,7 @@ $ ls /usr/share/man/man8/ -l | grep &quot;Apr 17&quot;
 <li>提供通过类似 man 5 depmod.d 命令来查看帮助的源文件 depmod.d.5</li>
 </ul></li>
 </ul>
-<h2 id="项目代码分析">3. 项目代码分析</h2>
+<h2 id="项目代码分析">项目代码分析</h2>
 <h3 id="源码目录结构">源码目录结构</h3>
 <ul>
 <li>tools
@@ -865,7 +865,7 @@ struct kmod_module {
 </ul></li>
 </ul>
 <h1 id="kmod-11-详细分析报告">kmod-11 详细分析报告</h1>
-<h2 id="架构分析">1. 架构分析</h2>
+<h2 id="架构分析">架构分析</h2>
 <p>kmod-11 项目的整个技术架构分为3层。最上层是tools目录下的6个命令，中间是libkmod库所提供的各种编程接口，最下层是testsuite所包含的系统调用抽象层，便于在用户空间进行接口测试。</p>
 <p>kmod-11 项目系统层次结构如图</p>
 <div class="figure">
@@ -1004,19 +1004,13 @@ General Options:
 $ </code></pre>
 <p>模块加载时，会用到配置信息 configuration, 使用 modprobe -c 命令可以查看这些配置信息，包括如下参数 如果用户指定了 -f 参数，则要求强制加载，那么加载程序所需要处理的就是将 .modinfo 字段去掉，然后再交给内核去加载。</p>
 <ul>
-<li>alias 别名</li>
+<li><p>alias 别名 例如</p>
+<p>$ cat /etc/modprobe.d/myalias.conf alias mymod really_long_module_name</p></li>
+<li><p>blacklist 黑名单 例如</p>
+<p>$ cat /etc/modprobe.d/blacklist blacklist ieee1394 blacklist ohci1394 blacklist eth1394 blacklist sbp2</p></li>
+<li><p>install 和 remove 命令 例如</p>
+<p>$ cat /etc/modprobe.d/ieee1394 install ieee1394 /bin/true install ohci1394 /bin/true install eth1394 /bin/true install sbp2 /bin/true</p></li>
 </ul>
-<p>例如</p>
-<pre><code>$ cat /etc/modprobe.d/myalias.conf
-alias mymod really_long_module_name</code></pre>
-<ul>
-<li>blacklist 黑名单</li>
-</ul>
-<p>例如<br /> $ cat /etc/modprobe.d/blacklist blacklist ieee1394 blacklist ohci1394 blacklist eth1394 blacklist sbp2</p>
-<ul>
-<li>install 和 remove 命令</li>
-</ul>
-<p>例如<br /> $ cat /etc/modprobe.d/ieee1394 install ieee1394 /bin/true install ohci1394 /bin/true install eth1394 /bin/true install sbp2 /bin/true</p>
 <h3 id="库接口层">库接口层</h3>
 <p>库接口层包含了 libkmod 目录下的形如 libkmod-xxx.c 的模块文件，其中涉及用到的编程接口将近100个，形如 kmod_xxx_xxx_xxx 的接口函数。</p>
 <p>按照这些接口函数的归属模块划分，我们经过代码分析，可以将它们分为6个重要的核心子模块，分别是 kmod_ctx, kmod_module, kmod_config, kmod_list, kmod_elf, kmod_file。</p>
@@ -1041,7 +1035,7 @@ alias mymod really_long_module_name</code></pre>
 </div>
 <p>其中命令层就是应用层，一般命令的实现都会首先使用 kmod_ctx 和 kmod_module 两个核心子模块的接口，其中 kmod_ctx 调用了 kmod_config 核心子模块和 hash, log, index_mm 基础子模块的接口功能，kmod_module 调用了 kmod_file, kmod_elf, kmod_list 这3个核心子模块的接口功能，以及简介调用了 elf, list 这2个基础子模块的接口功能，同时还使用了模拟层中有关系统调用模拟实现的接口。</p>
 <p>因此在我们所列出的6个核心子模块中，kmod_ctx 和 kmod_module 这2个核心子模块占据着更为重要的作用，是整个 libkmod 库的核心中的核心。在下面的分析中，我们还会详细论述它们的功能。</p>
-<h2 id="模块分析">2. 模块分析</h2>
+<h2 id="模块分析">模块分析</h2>
 <p>整个 kmod 项目的核心设计思想，是采用面向对象的编程模型，以C语言的结构体为数据结构的核心，将结构体作为对象来看待，围绕结构体来组织相应的函数接口。 这些函数接口，大多具有较强的可读性，从它们的命名中，就能看出是属于哪个对象的什么方法。因为 C 语言中没有对象的概念，我们取而代之以模块来进行论述和分析。</p>
 <h3 id="kmod_ctx-库上下文">kmod_ctx 库上下文</h3>
 <p>该模块的主要功能，是为 kmod module 提供一个执行环境，也就是通常所说的上下文 context 的概念。数据结构的设计，用了 ctx 来表示这个上下文的英文缩写。</p>
@@ -1385,8 +1379,8 @@ int array_remove_at(struct array *array, unsigned int pos); </code></pre>
  30 #  define INFO(ctx, arg...) kmod_log_null(ctx, ## arg)
  31 #  define ERR(ctx, arg...) kmod_log_null(ctx, ## arg)
  32 #endif</code></pre>
-<h2 id="运行时调试图">3. 运行时调试图</h2>
-<h2 id="运行流程分析">4. 运行流程分析</h2>
+<h2 id="运行时调试图">运行时调试图</h2>
+<h2 id="运行流程分析">运行流程分析</h2>
 <h3 id="命令实现流程概述">命令实现流程概述</h3>
 <p>因为所有命令的实现机制是相同的，都是采用了一个统一的调用方法，所以我们以 insmod 命令为例，介绍一下命令实现流程。</p>
 <p>每一个命令，都定义实现了一个 struct kmod_cmd 的数据结构，这个数据结构定义在 kmod-11/tools/kmod.h 文件中。</p>
@@ -2115,7 +2109,7 @@ static void cfg_free(struct cfg *cfg)
 <div class="figure">
 <img src="./figures/kmod_module_probe_insert_module.jpg" alt="kmod_module_probe_insert_module 调用层次图" /><p class="caption">kmod_module_probe_insert_module 调用层次图</p>
 </div>
-<h2 id="函数接口分析">5. 函数接口分析</h2>
+<h2 id="函数接口分析">函数接口分析</h2>
 <h3 id="kmod_new-核心代码分析">kmod_new() 核心代码分析</h3>
 <p>kmod_new 函数通过调用 calloc 动态内存分配一个 struct kmod_ctx 结构体，并将获得的指针作为返回值。 在这个 ctx 结构体里面，有3个重要的成员变量需要赋值，dirname ，config 和 modules_by_name 分别对应着3个重要的函数接口。</p>
 <ul>
@@ -2348,12 +2342,18 @@ static void cfg_free(struct cfg *cfg)
 <div class="figure">
 <img src="./figures/user_sys_module.jpg" alt="内核模块的加载和卸载的内存空间调用关系" /><p class="caption">内核模块的加载和卸载的内存空间调用关系</p>
 </div>
-<p>内核模块的加载，本质上是一个模块被内核静态链接的过程，sys_init_module 函数可以分为以下关键步骤：</p>
+<p>操作系统在初始化时，调用 static LIST_HEAD(modules)建立了一个空链表，之后，每装入一个内核模块，即创建一个 struct module 结构， 并把它链入 modules 这个全局的链表中。</p>
+<p>从操作系统内核的角度来说，它提供的用户服务，都是通过系统调用来实现的。实际上，我们在调用 module_init 和 module_exit 时，都是首先需要通过这两个系统调用来实现的：sys_init_module(), sys_delete_module()。</p>
+<p>内核模块的加载，本质上是一个模块被内核静态链接的过程，当模块被加载时，模块中声明的任何全局符号都成为内核符号表的一部分。 什么是内核符号表呢? 内核符号表是内核中所有允许被公开访问的变量和函数，可以通过以文本方式读取 /proc/kallsyms 文件获得。</p>
+<p>sys_init_module 函数可以分为以下关键步骤：</p>
 <ul>
+<li>确保有插入和删除模块不受限制的权利，并且模块没有被禁止插入或删除<br /></li>
 <li>调用内核空间的 load_module 函数，然后通过 copy_from_user 把 ELF 内容读入到内核临时空间做一个映像分析</li>
 <li>对加载的 ELF 映像进行分析，确定要加载哪些段进入到真正代码空间</li>
-<li>为要加载的每一个段进行重新定位，最终完成加载，插入到内核中，成为内核符号表的一部分</li>
+<li>为要加载的每一个段进行重新定位，最终完成加载，插入到内核中，成为内核符号表的一部分，并创建相关的sysfs文件</li>
 </ul>
+<p>参考代码： 摘自 linux-x.x.xx/kernel/module.c</p>
+<p><a href="http://blog.csdn.net/ganggexiongqi/article/details/6823960"><code class="url">http://blog.csdn.net/ganggexiongqi/article/details/6823960</code></a></p>
 <div class="figure">
 <img src="./figures/sys_init_module.jpg" alt="内核模块在内核空间的加载流程" /><p class="caption">内核模块在内核空间的加载流程</p>
 </div>
@@ -2385,7 +2385,7 @@ static void cfg_free(struct cfg *cfg)
 <li>释放为该模块分配的各种内存，最终完成卸载该模块的操作</li>
 </ul>
 <div class="figure">
-<img src="./figures/sys_delete_module.jpg" alt="内核模块在内核空间的加载流程" /><p class="caption">内核模块在内核空间的加载流程</p>
+<img src="./figures/sys_delete_module.jpg" alt="内核模块在内核空间的卸载流程" /><p class="caption">内核模块在内核空间的卸载流程</p>
 </div>
 <p>在 kmod-11 项目中，在 testsuite/ 目录下有一个 delete_module.c ，里面也实现了一个 delete_module 的函数， 同样的，它也并不是真正的卸载模块，仅仅只是查找一下当前模块，并不执行实际的删除操作。</p>
 <pre><code>long delete_module(void *mem, int flags)
@@ -2663,9 +2663,10 @@ int kmod_module_parse_depline(struct kmod_module *mod, char *line)
 
     return n;
 }</code></pre>
-<h2 id="总结">5. 总结</h2>
+<h2 id="总结">总结</h2>
 <p>kmod-11 的项目分析，对于我们未来设计类似的软件架构，有如下启示：</p>
-<p>1）kmod-11 采用了 libabc 的库项目框架，这个项目是一个开源项目，项目的参考代码可以在 github 上找到。</p>
+<h3 id="libabc-的库项目框架">libabc 的库项目框架</h3>
+<p>kmod-11 采用了 libabc 的库项目框架，这个项目是一个开源项目，项目的参考代码可以在 github 上找到。</p>
 <p>https://github.com/bitbckt/libabc</p>
 <p>https://git.kernel.org/cgit/linux/kernel/git/kay/libabc.git</p>
 <p>libabc 项目发源于2002年，在2011年发布了 version 4。目前最近一次提交是2013.3.11。</p>
@@ -2693,10 +2694,8 @@ int main(int argc, char *argv[])
     return EXIT_SUCCESS;
 }</code></pre>
 <p>从这个例子可以看出，整个 kmod 项目的框架就是建立在 libabc 的基础上，其函数命名和设计思路，都是借鉴了 libabc 开源项目的框架模型。</p>
-<ol start="2" style="list-style-type: decimal">
-<li>基础类的数据结构和算法，是写一个大型项目所必须具备的知识储备。</li>
-</ol>
-<p>在 kmod-11 项目中，6个基础类的子模块，</p>
+<h3 id="基础类的数据结构和算法">基础类的数据结构和算法</h3>
+<p>在 kmod-11 项目中，6个基础类的子模块，这些模块和算法都是写一个大型项目所必须具备的知识储备。</p>
 <ul>
 <li>hash 哈希表模块</li>
 <li>list 链表模块</li>
@@ -2706,6 +2705,5 @@ int main(int argc, char *argv[])
 <li>elf 文件分析模块</li>
 </ul>
 <p>这几个模块并非是 kmod 项目所独有的，完全可以作为未来开发项目的基础类库得以复用。</p>
-<ol start="3" style="list-style-type: decimal">
-<li>系统调用模拟层的设计理念。因为内核模块会经常需要和内核打交道，无论插入和删除，一不小心可能会造成内核崩溃，只能靠 reset 重启来进行调试。因此引入关于系统调用函数的应用层实现，就可以在用户空间模拟系统调用后发生的行为，进行调试和验证。</li>
-</ol>
+<h3 id="系统调用模拟层的设计理念">系统调用模拟层的设计理念</h3>
+<p>因为内核模块会经常需要和内核打交道，无论插入和删除，一不小心可能会造成内核崩溃，只能靠 reset 重启来进行调试。因此引入关于系统调用函数的应用层实现，就可以在用户空间模拟系统调用后发生的行为，进行调试和验证。</p>

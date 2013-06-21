@@ -1,0 +1,168 @@
+\relax 
+\ifx\hyper@anchor\@undefined
+\global \let \oldcontentsline\contentsline
+\gdef \contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global \let \oldnewlabel\newlabel
+\gdef \newlabel#1#2{\newlabelxx{#1}#2}
+\gdef \newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\let \contentsline\oldcontentsline
+\let \newlabel\oldnewlabel}
+\else
+\global \let \hyper@last\relax 
+\fi
+
+\providecommand*\HyPL@Entry[1]{}
+\HyPL@Entry{0<</S/D>>}
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}kmod 内核模块工具简介}{7}{chapter.1}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {1.1}项目背景介绍}{7}{section.1.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.1}建立时间}{7}{subsection.1.1.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.2}创建者和维护者}{7}{subsection.1.1.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.3}更新记录}{8}{subsection.1.1.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.4}版本情况}{8}{subsection.1.1.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1.5}资源汇总}{8}{subsection.1.1.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.2}项目架构设计}{8}{section.1.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces kmod-11 项目系统结构层次图}}{9}{figure.1.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.1}应用层}{9}{subsection.1.2.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces kmod-11 项目应用层结构图}}{9}{figure.1.2}}
+\@writefile{toc}{\contentsline {subsubsection}{insmod 命令}{9}{section*.2}}
+\@writefile{toc}{\contentsline {subsubsection}{rmmod 命令}{10}{section*.3}}
+\@writefile{toc}{\contentsline {subsubsection}{lsmod 命令}{10}{section*.4}}
+\@writefile{toc}{\contentsline {subsubsection}{modinfo 命令}{11}{section*.5}}
+\@writefile{toc}{\contentsline {subsubsection}{depmod 命令}{11}{section*.6}}
+\@writefile{toc}{\contentsline {subsubsection}{modprobe 命令}{12}{section*.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.2}库接口层}{14}{subsection.1.2.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.3}{\ignorespaces kmod-11 项目库接口层核心子模块结构图}}{15}{figure.1.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.4}{\ignorespaces kmod-11 项目库接口层基础子模块结构图}}{16}{figure.1.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.3}系统调用模拟层}{16}{subsection.1.2.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.4}各层之间相互关系图}{16}{subsection.1.2.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.5}{\ignorespaces kmod-11 项目系统调用模拟层结构图}}{17}{figure.1.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.6}{\ignorespaces kmod-11 项目系统各层结构关系图}}{17}{figure.1.6}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Kmod-11 项目概要分析}{19}{chapter.2}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}工具安装使用流程}{19}{section.2.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}开发环境准备}{19}{subsection.2.1.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}编译和安装}{19}{subsection.2.1.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.3}错误及解决}{20}{subsection.2.1.3}}
+\@writefile{toc}{\contentsline {subsubsection}{autoconf 缺少环境变量文件}{20}{section*.8}}
+\@writefile{toc}{\contentsline {subsubsection}{configure 脚本执行时缺少 libtool 工具}{20}{section*.9}}
+\@writefile{toc}{\contentsline {subsubsection}{configuire 脚本执行缺少 xsltproc 命令}{21}{section*.10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.4}编译过程}{21}{subsection.2.1.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.5}生成文件}{22}{subsection.2.1.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.6}安装过程}{23}{subsection.2.1.6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.7}安装文件说明}{25}{subsection.2.1.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.8}文件功能简介}{28}{subsection.2.1.8}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}代码实现概要分析}{29}{section.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}源码目录结构}{29}{subsection.2.2.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}头文件 libkmod.h 分析}{31}{subsection.2.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}数据结构设计}{38}{subsection.2.2.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}重要接口实现}{40}{subsection.2.2.4}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Kmod-11 项目详细分析报告}{43}{chapter.3}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}模块设计分析}{43}{section.3.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}kmod\_ctx 库上下文}{43}{subsection.3.1.1}}
+\@writefile{toc}{\contentsline {subsubsection}{struct kmod\_ctx 结构体定义}{43}{section*.11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}kmod\_module 内核模块核心操作}{44}{subsection.3.1.2}}
+\@writefile{toc}{\contentsline {subsubsection}{struct kmod\_module 结构体定义}{45}{section*.12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}kmod\_file 内核模块文件操作}{47}{subsection.3.1.3}}
+\@writefile{toc}{\contentsline {subsubsection}{struct kmod\_file 结构体定义}{47}{section*.13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}kmod\_elf 内核模块elf文件操作}{48}{subsection.3.1.4}}
+\@writefile{toc}{\contentsline {subsubsection}{struct kmod\_elf 结构体定义}{48}{section*.14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}kmod\_list 内核模块列表}{49}{subsection.3.1.5}}
+\@writefile{toc}{\contentsline {subsubsection}{struct kmod\_list 结构体定义}{50}{section*.15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.6}kmod\_config 内核模块配置}{50}{subsection.3.1.6}}
+\@writefile{toc}{\contentsline {subsubsection}{struct kmod\_config 结构体定义}{50}{section*.16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.7}hash 哈希表模块}{51}{subsection.3.1.7}}
+\@writefile{toc}{\contentsline {subsubsection}{struct hash 结构体定义}{51}{section*.17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.8}index\_mm 索引查找模块}{52}{subsection.3.1.8}}
+\@writefile{toc}{\contentsline {subsubsection}{struct index\_mm 结构体定义}{52}{section*.18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.9}elf 文件分析模块}{52}{subsection.3.1.9}}
+\@writefile{toc}{\contentsline {subsubsection}{struct kmod\_elf\_header 结构体定义}{52}{section*.19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.10}list 链表模块}{53}{subsection.3.1.10}}
+\@writefile{toc}{\contentsline {subsubsection}{struct list\_node 结构体定义}{54}{section*.20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.11}array 动态数组模块}{54}{subsection.3.1.11}}
+\@writefile{toc}{\contentsline {subsubsection}{struct array 结构体定义}{54}{section*.21}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.12}log 日志记录模块}{55}{subsection.3.1.12}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}运行流程分析}{56}{section.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}命令实现流程概述}{56}{subsection.3.2.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces 命令实现结构图}}{59}{figure.3.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}insmod 命令实现流程}{60}{subsection.3.2.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces insmod 调用层次图}}{61}{figure.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}rmmod 命令实现流程}{61}{subsection.3.2.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces rmmod 调用层次图}}{63}{figure.3.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}lsmod 命令实现流程}{64}{subsection.3.2.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces lsmod 调用层次图}}{65}{figure.3.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.5}modinfo 命令实现流程}{66}{subsection.3.2.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces modinfo 调用层次图}}{67}{figure.3.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.6}depmod 命令实现流程}{69}{subsection.3.2.6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces depmod 调用层次图}}{71}{figure.3.6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.7}modprobe 命令实现流程}{77}{subsection.3.2.7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces modprobe 调用层次图}}{78}{figure.3.7}}
+\@writefile{toc}{\contentsline {subsubsection}{insmod\_all()}{79}{section*.22}}
+\@writefile{toc}{\contentsline {subsubsection}{insmod()}{79}{section*.23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces modprobe 实现内部 insmod 调用层次图}}{80}{figure.3.8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces insmod\_all 函数调用层次图}}{80}{figure.3.9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces kmod\_module\_probe\_insert\_module 调用层次图}}{81}{figure.3.10}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}函数接口分析}{81}{section.3.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}kmod\_new() 核心代码分析}{81}{subsection.3.3.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces kmod\_new 调用层次图}}{82}{figure.3.11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}kmod\_unref() 核心代码分析}{82}{subsection.3.3.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces kmod\_unref 调用层次图}}{83}{figure.3.12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}kmod\_module\_new\_from\_path() 核心代码分析}{83}{subsection.3.3.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.13}{\ignorespaces kmod\_module\_new\_from\_path 调用层次图}}{84}{figure.3.13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}kmod\_module\_new\_from\_name() 核心代码分析}{85}{subsection.3.3.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.14}{\ignorespaces kmod\_module\_new\_from\_name 调用层次图}}{85}{figure.3.14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.5}kmod\_module\_new() 核心代码分析}{86}{subsection.3.3.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.15}{\ignorespaces kmod\_module\_new 调用层次图}}{87}{figure.3.15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.6}kmod\_module\_insert\_module() 核心代码分析}{88}{subsection.3.3.6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.16}{\ignorespaces kmod\_module\_insert\_module 调用层次图}}{88}{figure.3.16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.7}kmod\_module\_remove\_module() 核心代码分析}{89}{subsection.3.3.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.8}init\_module() 核心代码分析}{89}{subsection.3.3.8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.17}{\ignorespaces 内核模块的加载和卸载的内存空间调用关系}}{90}{figure.3.17}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.18}{\ignorespaces 内核模块在内核空间的加载流程}}{91}{figure.3.18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.9}delete\_module() 核心代码分析}{92}{subsection.3.3.9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.19}{\ignorespaces 内核模块在内核空间的卸载流程}}{93}{figure.3.19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.10}kmod\_module\_unref() 核心代码分析}{93}{subsection.3.3.10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.20}{\ignorespaces kmod\_module\_unref 调用层次图}}{94}{figure.3.20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.11}kmod\_module\_new\_from\_loaded 核心代码分析}{95}{subsection.3.3.11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.21}{\ignorespaces kmod\_module\_new\_from\_loaded 调用层次图}}{96}{figure.3.21}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.12}kmod\_module\_get\_info 核心代码分析}{96}{subsection.3.3.12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.13}kmod\_module\_new\_from\_lookup 核心代码分析}{97}{subsection.3.3.13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.14}kmod\_module\_probe\_insert\_module 核心代码分析}{98}{subsection.3.3.14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.22}{\ignorespaces kmod\_module\_probe\_insert\_module 调用层次图}}{99}{figure.3.22}}
+\@writefile{toc}{\contentsline {subsubsection}{kmod\_module\_get\_dependencies 核心代码分析}{99}{section*.24}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.23}{\ignorespaces kmod\_module\_get\_probe\_list 调用层次图}}{100}{figure.3.23}}
+\@writefile{toc}{\contentsline {subsubsection}{module\_get\_dependencies\_noref 核心代码分析}{100}{section*.25}}
+\@writefile{toc}{\contentsline {subsubsection}{kmod\_search\_moddep 核心代码分析}{101}{section*.26}}
+\@writefile{toc}{\contentsline {subsubsection}{kmod\_module\_parse\_depline 核心代码分析}{101}{section*.27}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.24}{\ignorespaces kmod\_search\_moddep 调用层次图}}{102}{figure.3.24}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.25}{\ignorespaces kmod\_module\_parse\_depline 调用层次图}}{102}{figure.3.25}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}项目详细分析总结}{103}{section.3.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}libabc 的库项目框架}{104}{subsection.3.4.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}基础类的数据结构和算法}{104}{subsection.3.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.3}系统调用模拟层的设计理念}{105}{subsection.3.4.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.26}{\ignorespaces 系统调用模拟层设计架构图}}{105}{figure.3.26}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Kmod-11 项目安全漏洞分析报告}{107}{chapter.4}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}安全漏洞案例1-ls命令}{107}{section.4.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}strace 跟踪 ls 命令的系统调用}{107}{subsection.4.1.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}获得系统调用号}{110}{subsection.4.1.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}获得系统调用表的入口地址}{111}{subsection.4.1.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.4}编写内核源码文件}{111}{subsection.4.1.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.5}编译并加载内核模块}{114}{subsection.4.1.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.6}清空系统日志信息以便查看模块加载信息}{114}{subsection.4.1.6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.7}插入模块打印加载提示信息}{114}{subsection.4.1.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.8}模块加载后运行 ls 命令没有输出}{114}{subsection.4.1.8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.9}卸载模块后运行 ls 输出恢复正常}{115}{subsection.4.1.9}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}安全漏洞案例2-Kill命令}{116}{section.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}获得系统调用号}{116}{subsection.4.2.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}编译源码}{116}{subsection.4.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}编译生成内核模块}{119}{subsection.4.2.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.4}插入模块，查看系统日志输出}{119}{subsection.4.2.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.5}运行 kill 试图杀死当前 bash 不能成功}{120}{subsection.4.2.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.6}杀死其他进程(cat)可以成功}{120}{subsection.4.2.6}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}总结}{121}{section.4.3}}

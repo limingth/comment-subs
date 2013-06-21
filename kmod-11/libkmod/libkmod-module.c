@@ -703,7 +703,9 @@ KMOD_EXPORT const char *kmod_module_get_path(const struct kmod_module *mod)
 	if (mod == NULL)
 		return NULL;
 
+	printf("1 name='%s' path='%s'\n", mod->name, mod->path);
 	DBG(mod->ctx, "name='%s' path='%s'\n", mod->name, mod->path);
+	printf("2 name='%s' path='%s'\n", mod->name, mod->path);
 
 	if (mod->path != NULL)
 		return mod->path;
@@ -785,7 +787,9 @@ KMOD_EXPORT int kmod_module_insert_module(struct kmod_module *mod,
 	if (mod == NULL)
 		return -ENOENT;
 
+	printf("mod = %p\n", mod);
 	path = kmod_module_get_path(mod);
+	printf("path = %s\n", path);
 	if (path == NULL) {
 		ERR(mod->ctx, "could not find module by name='%s'\n", mod->name);
 		return -ENOSYS;

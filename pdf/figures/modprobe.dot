@@ -1,21 +1,5 @@
 digraph G {
 
-	subgraph kmod_module_4_insmod 
-	{
-	"insmod()" [shape=box style="filled" gradientangle=90];
-
-	"insmod()" -> kmod_module ;
-
-	kmod_module -> kmod_module_new_from_lookup;
-	kmod_module -> kmod_module_get_module;
-	kmod_module -> kmod_module_probe_insert_module;
-	kmod_module -> kmod_module_unref;
-	kmod_module -> kmod_module_unref_list;
-
-	node [shape=box style="filled" gradientangle=90]
-			insmod;
-	}
-
 	size="7.5 7.5";  
 
 	modprobe -> do_modprobe;
@@ -32,5 +16,7 @@ digraph G {
 	do_modprobe -> insmod_all;
 	do_modprobe -> insmod;
 	insmod_all -> insmod;
+	
+	insmod[shape=box style="filled" gradientangle=90];
 
 } 

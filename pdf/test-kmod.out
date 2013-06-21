@@ -1,0 +1,86 @@
+\BOOKMARK [1][-]{section.1}{kmod-11 测试案例分析}{}
+\BOOKMARK [2][-]{subsection.1.1}{THU-12-1 编译 kmod 项目源码}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.1.1}{下载源码包}{subsection.1.1}
+\BOOKMARK [3][-]{subsubsection.1.1.2}{解压源码包}{subsection.1.1}
+\BOOKMARK [3][-]{subsubsection.1.1.3}{编译项目源码}{subsection.1.1}
+\BOOKMARK [2][-]{subsection.1.2}{THU-12-2 测试 kmod 命令}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.2.1}{运行 make install 安装命令}{subsection.1.2}
+\BOOKMARK [3][-]{subsubsection.1.2.2}{直接运行 kmod 命令}{subsection.1.2}
+\BOOKMARK [3][-]{subsubsection.1.2.3}{运行 kmod help 命令}{subsection.1.2}
+\BOOKMARK [3][-]{subsubsection.1.2.4}{运行 kmod list 命令}{subsection.1.2}
+\BOOKMARK [3][-]{subsubsection.1.2.5}{kmod-11 版本中暂时不支持 load/unload 命令}{subsection.1.2}
+\BOOKMARK [2][-]{subsection.1.3}{THU-12-3 测试 insmod 命令}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.3.1}{编写测试用内核模块源码 hello.c}{subsection.1.3}
+\BOOKMARK [3][-]{subsubsection.1.3.2}{编写测试用内核模块的 Makefile 文件}{subsection.1.3}
+\BOOKMARK [3][-]{subsubsection.1.3.3}{编译内核模块 hello.ko}{subsection.1.3}
+\BOOKMARK [3][-]{subsubsection.1.3.4}{使用测试用工具 insmod 插入内核模块}{subsection.1.3}
+\BOOKMARK [3][-]{subsubsection.1.3.5}{查看插入内核模块后的打印结果}{subsection.1.3}
+\BOOKMARK [3][-]{subsubsection.1.3.6}{重复插入同样的内核模块系统会报错}{subsection.1.3}
+\BOOKMARK [2][-]{subsection.1.4}{THU-12-4 测试 rmmod 命令}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.4.1}{使用测试用工具 rmmod 卸载内核模块}{subsection.1.4}
+\BOOKMARK [3][-]{subsubsection.1.4.2}{查看卸载内核模块后的打印结果}{subsection.1.4}
+\BOOKMARK [2][-]{subsection.1.5}{THU-12-5 测试 lsmod 命令}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.5.1}{lsmod 命令运行}{subsection.1.5}
+\BOOKMARK [3][-]{subsubsection.1.5.2}{lsmod 命令运行参数}{subsection.1.5}
+\BOOKMARK [2][-]{subsection.1.6}{THU-12-6 测试 modinfo 命令}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.6.1}{modinfo 命令运行参数}{subsection.1.6}
+\BOOKMARK [3][-]{subsubsection.1.6.2}{modinfo 命令检查依赖关系}{subsection.1.6}
+\BOOKMARK [3][-]{subsubsection.1.6.3}{查看别名信息 alias}{subsection.1.6}
+\BOOKMARK [3][-]{subsubsection.1.6.4}{使用 modinfo 查看各个依赖模块信息}{subsection.1.6}
+\BOOKMARK [2][-]{subsection.1.7}{THU-12-7 测试 depmod 命令}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.7.1}{直接运行 depmod 命令}{subsection.1.7}
+\BOOKMARK [3][-]{subsubsection.1.7.2}{查看生成的 modules.dep 文件}{subsection.1.7}
+\BOOKMARK [2][-]{subsection.1.8}{THU-12-8 测试 modprobe 命令}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.8.1}{直接运行 modprobe 命令，加 -l 参数查看可以加载的模块}{subsection.1.8}
+\BOOKMARK [3][-]{subsubsection.1.8.2}{直接运行 modprobe 命令，加 -D 参数查看依赖关系}{subsection.1.8}
+\BOOKMARK [3][-]{subsubsection.1.8.3}{使用 modprobe nfs 加载 nfs 内核模块和相关依赖模块}{subsection.1.8}
+\BOOKMARK [3][-]{subsubsection.1.8.4}{使用 modprobe -r nfs 卸载 nfs 内核模块和相关依赖模块}{subsection.1.8}
+\BOOKMARK [2][-]{subsection.1.9}{THU-12-9 测试 modprobe 命令参数}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.9.1}{查看依赖关系 show-depends}{subsection.1.9}
+\BOOKMARK [3][-]{subsubsection.1.9.2}{查看配置信息 config}{subsection.1.9}
+\BOOKMARK [3][-]{subsubsection.1.9.3}{查看模块内部信息 show-modversions}{subsection.1.9}
+\BOOKMARK [2][-]{subsection.1.10}{THU-12-10 修改调试 depmod 命令}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.10.1}{修改源码，插入打印函数}{subsection.1.10}
+\BOOKMARK [3][-]{subsubsection.1.10.2}{重新编译生成新的 depmod}{subsection.1.10}
+\BOOKMARK [3][-]{subsubsection.1.10.3}{再次执行 depmod，观察从标准输出的打印信息}{subsection.1.10}
+\BOOKMARK [2][-]{subsection.1.11}{THU-12-11 修改调试 modprobe 命令}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.11.1}{查看 modprobe 源码}{subsection.1.11}
+\BOOKMARK [3][-]{subsubsection.1.11.2}{修改 kmod\137module\137parse\137depline 函数}{subsection.1.11}
+\BOOKMARK [3][-]{subsubsection.1.11.3}{插入130行的打印 line 的语句}{subsection.1.11}
+\BOOKMARK [3][-]{subsubsection.1.11.4}{重新编译生成新的 modprobe}{subsection.1.11}
+\BOOKMARK [3][-]{subsubsection.1.11.5}{运行 modprobe nfs}{subsection.1.11}
+\BOOKMARK [3][-]{subsubsection.1.11.6}{插入167行打印语句}{subsection.1.11}
+\BOOKMARK [3][-]{subsubsection.1.11.7}{重新编译生成新的 modprobe}{subsection.1.11}
+\BOOKMARK [3][-]{subsubsection.1.11.8}{运行 modprobe nfs}{subsection.1.11}
+\BOOKMARK [2][-]{subsection.1.12}{THU-12-12 编译生成 testsuite 命令集}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.12.1}{make check 编译并运行集成测试}{subsection.1.12}
+\BOOKMARK [3][-]{subsubsection.1.12.2}{单独创建根文件系统}{subsection.1.12}
+\BOOKMARK [3][-]{subsubsection.1.12.3}{查看生成的 rootfs}{subsection.1.12}
+\BOOKMARK [3][-]{subsubsection.1.12.4}{确认没有此时 rootfs/test-init/ 下没有生成 sys 子目录}{subsection.1.12}
+\BOOKMARK [3][-]{subsubsection.1.12.5}{运行 test-init 命令}{subsection.1.12}
+\BOOKMARK [3][-]{subsubsection.1.12.6}{查看 rootfs/test-init/ 已经产生 sys 子目录}{subsection.1.12}
+\BOOKMARK [3][-]{subsubsection.1.12.7}{查看 initstate 文件的内容为 ``live'' 字符串}{subsection.1.12}
+\BOOKMARK [2][-]{subsection.1.13}{THU-12-13 编译生成 Debug 版}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.13.1}{配置时加上 \205enable-debug, \205enable-logging 参数}{subsection.1.13}
+\BOOKMARK [3][-]{subsubsection.1.13.2}{make clean \046\046 make 重新编译}{subsection.1.13}
+\BOOKMARK [3][-]{subsubsection.1.13.3}{设置日志优先级 KMOD\137LOG=7}{subsection.1.13}
+\BOOKMARK [3][-]{subsubsection.1.13.4}{重新运行 lsmod 命令，观察调试信息输出}{subsection.1.13}
+\BOOKMARK [3][-]{subsubsection.1.13.5}{设置日志输出级别为6}{subsection.1.13}
+\BOOKMARK [3][-]{subsubsection.1.13.6}{设置日志输出级别为5}{subsection.1.13}
+\BOOKMARK [3][-]{subsubsection.1.13.7}{insmod 命令执行流程}{subsection.1.13}
+\BOOKMARK [3][-]{subsubsection.1.13.8}{如果用 sudo 则必须重新传递 KMOD\137LOG=7}{subsection.1.13}
+\BOOKMARK [3][-]{subsubsection.1.13.9}{modinfo 命令}{subsection.1.13}
+\BOOKMARK [2][-]{subsection.1.14}{THU-12-14 测试 alias 方式加载}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.14.1}{编译获得内核模块hello.ko（测试用）}{subsection.1.14}
+\BOOKMARK [3][-]{subsubsection.1.14.2}{编写 modprobe.conf 配置文件}{subsection.1.14}
+\BOOKMARK [3][-]{subsubsection.1.14.3}{此时用 modprobe 加载，失败}{subsection.1.14}
+\BOOKMARK [3][-]{subsubsection.1.14.4}{复制 hello.ko 到系统目录下 /lib/modules/3.2.0-29-generic-pae/}{subsection.1.14}
+\BOOKMARK [3][-]{subsubsection.1.14.5}{此时用 modprobe 加载，仍然失败}{subsection.1.14}
+\BOOKMARK [3][-]{subsubsection.1.14.6}{运行 depmod 命令，重新生成依赖关系}{subsection.1.14}
+\BOOKMARK [3][-]{subsubsection.1.14.7}{此时再用 modprobe 加载，终于成功}{subsection.1.14}
+\BOOKMARK [2][-]{subsection.1.15}{THU-12-15 测试 blacklist 方式禁止加载}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.15.1}{编写 modprobe.conf 配置文件}{subsection.1.15}
+\BOOKMARK [3][-]{subsubsection.1.15.2}{重新用 modprobe 加载，失败}{subsection.1.15}
+\BOOKMARK [3][-]{subsubsection.1.15.3}{用 lsmod 查看没有加载成功}{subsection.1.15}
+\BOOKMARK [3][-]{subsubsection.1.15.4}{重新修改 modprobe.conf 配置文件}{subsection.1.15}
+\BOOKMARK [3][-]{subsubsection.1.15.5}{重新用 modprobe 加载，成功}{subsection.1.15}

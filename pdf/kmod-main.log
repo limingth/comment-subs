@@ -1,0 +1,1749 @@
+This is XeTeX, Version 3.1415926-2.2-0.9995.2 (TeX Live 2009/Debian) (format=xelatex 2013.6.16)  21 JUN 2013 20:52
+entering extended mode
+ %&-line parsing enabled.
+**kmod-main.tex
+(./kmod-main.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, pinyin, loaded.
+(/usr/share/texmf-texlive/tex/latex/base/book.cls
+Document Class: book 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/bk12.clo
+File: bk12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@chapter=\count81
+\c@section=\count82
+\c@subsection=\count83
+\c@subsubsection=\count84
+\c@paragraph=\count85
+\c@subparagraph=\count86
+\c@figure=\count87
+\c@table=\count88
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf-texlive/tex/xelatex/xecjk/xeCJK.sty
+Package: xeCJK 2009/09/30 2.3.10
+
+(/usr/share/texmf-texlive/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2009/01/23 v0.5 Provides ifxetex conditional
+)
+(/usr/share/texmf-texlive/tex/xelatex/fontspec/fontspec.sty
+Package: fontspec 2008/08/09 v1.18 Advanced font selection for XeLaTeX
+\c@zf@newff=\count89
+\c@zf@index=\count90
+\c@zf@script=\count91
+\c@zf@language=\count92
+
+(/usr/share/texmf-texlive/tex/latex/tools/calc.sty
+Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count93
+\calc@Bcount=\count94
+\calc@Adimen=\dimen103
+\calc@Bdimen=\dimen104
+\calc@Askip=\skip43
+\calc@Bskip=\skip44
+LaTeX Info: Redefining \setlength on input line 76.
+LaTeX Info: Redefining \addtolength on input line 77.
+\calc@Ccount=\count95
+\calc@Cskip=\skip45
+)
+(/usr/share/texmf-texlive/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2008/08/13 v2.6a package option processing (HA)
+
+(/usr/share/texmf-texlive/tex/generic/xkeyval/xkeyval.tex
+\XKV@toks=\toks14
+\XKV@tempa@toks=\toks15
+\XKV@depth=\count96
+File: xkeyval.tex 2008/08/13 v2.6a key=value parser (HA)
+
+(/usr/share/texmf-texlive/tex/generic/xkeyval/keyval.tex)))
+(/usr/share/texmf-texlive/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/usr/share/texmf-texlive/tex/xelatex/euenc/eu1enc.def
+File: eu1enc.def 2008/03/08 v0.1d Experimental unicode font encoding
+)
+LaTeX Font Info:    Try loading font information for EU1+lmr on input line 100.
+
+
+(/usr/share/texmf-texlive/tex/xelatex/euenc/eu1lmr.fd
+File: eu1lmr.fd 2007/01/14 v1.3 Font defs for Latin Modern
+))
+LaTeX Info: Redefining \itshape on input line 1163.
+LaTeX Info: Redefining \slshape on input line 1166.
+LaTeX Info: Redefining \scshape on input line 1169.
+LaTeX Info: Redefining \upshape on input line 1172.
+
+fontspec.cfg loaded.
+(/usr/share/texmf-texlive/tex/xelatex/fontspec/fontspec.cfg))
+\xeCJK@cnta=\count97
+\xeCJK@cntb=\count98
+\xeCJK@cntc=\count99
+\xeCJK@cntd=\count100
+\xeCJK@cnte=\count101
+\xeCJK@dima=\dimen105
+LaTeX Info: Redefining \rmfamily on input line 762.
+LaTeX Info: Redefining \sffamily on input line 766.
+LaTeX Info: Redefining \ttfamily on input line 770.
+\xeCJK@featureadded=\count102
+)
+\c@zf@famc@Courier New=\count103
+Package fontspec Info: Defining font family for 'Courier New'with options [] on
+ input line 3.
+
+(/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/etc/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: xetex.def on input line 91.
+
+(/usr/share/texmf-texlive/tex/xelatex/xetex-def/xetex.def
+File: xetex.def 2009/11/22 v0.94 LaTeX color/graphics driver for XeTeX (RRM/JK)
+
+))
+\Gin@req@height=\dimen106
+\Gin@req@width=\dimen107
+)
+(/usr/share/texmf-texlive/tex/latex/preprint/fullpage.sty
+Package: fullpage 1999/02/23 1.1 (PWD)
+\FP@margin=\skip46
+)
+(/usr/share/texmf-texlive/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2009/10/09 v6.79a Hypertext links for LaTeX
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in pdf mode not detected.
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/share/texmf-texlive/tex/latex/oberdiek/hycolor.sty
+Package: hycolor 2009/10/02 v1.5 Code for color options of hyperref/bookmark (H
+O)
+
+(/usr/share/texmf-texlive/tex/latex/oberdiek/xcolor-patch.sty
+Package: xcolor-patch 2009/10/02 xcolor patch
+))
+\@linkdim=\dimen108
+\Hy@linkcounter=\count104
+\Hy@pagecounter=\count105
+
+(/usr/share/texmf-texlive/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2007/12/12 v1.2 Prefix for e-TeX command names (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2007/09/09 v1.2 Providing info/warning/message (HO)
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)
+(/usr/share/texmf-texlive/tex/xelatex/xetexconfig/hyperref.cfg
+File: hyperref.cfg 2008/07/11 v1.2 hyperref configuration for XeLaTeX
+)
+(/usr/share/texmf-texlive/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2009/08/13 v3.4 Keyval support for LaTeX options (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2009/07/30 v1.5 Key value parser with default handler suppor
+t (HO)
+))
+Package hyperref Info: Option `colorlinks' set `true' on input line 2864.
+Package hyperref Info: Hyper figures OFF on input line 2975.
+Package hyperref Info: Link nesting OFF on input line 2980.
+Package hyperref Info: Hyper index ON on input line 2983.
+Package hyperref Info: Plain pages OFF on input line 2990.
+Package hyperref Info: Backreferencing OFF on input line 2995.
+
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 3191.
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/url.sty
+\Urlmuskip=\muskip10
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 3428.
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/bitset.sty
+Package: bitset 2007/09/28 v1.0 Data type bit set (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/intcalc.sty
+Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/bigintcalc.sty
+Package: bigintcalc 2007/11/11 v1.1 Expandable big integer calculations (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2009/09/23 v0.6 LuaTeX support for pdfTeX utility functions
+ (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2009/04/17 v1.2 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2009/08/05 v1.0 Some LaTeX kernel commands for general use (HO
+)
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: pdfTeX >= 1.30 not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+)))
+\Fld@menulength=\count106
+\Field@Width=\dimen109
+\Fld@charsize=\dimen110
+\Field@toks=\toks16
+Package hyperref Info: Hyper figures OFF on input line 4377.
+Package hyperref Info: Link nesting OFF on input line 4382.
+Package hyperref Info: Hyper index ON on input line 4385.
+Package hyperref Info: backreferencing OFF on input line 4392.
+Package hyperref Info: Link coloring ON on input line 4395.
+Package hyperref Info: Link coloring with OCG OFF on input line 4402.
+Package hyperref Info: PDF/A mode OFF on input line 4407.
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
+)
+\Hy@abspage=\count107
+\c@Item=\count108
+\c@Hfootnote=\count109
+)
+*hyperref using default driver hdvipdfm*
+(/usr/share/texmf-texlive/tex/latex/hyperref/hdvipdfm.def
+File: hdvipdfm.def 2009/10/09 v6.79a Hyperref driver for dvipdfm
+\pdfm@box=\box26
+\c@Hy@AnnotLevel=\count110
+\HyField@AnnotCount=\count111
+\Fld@listcount=\count112
+)
+\c@zf@famc@WenQuanYi Micro Hei=\count113
+Package fontspec Info: Defining font family for 'WenQuanYi Micro Hei'with optio
+ns [BoldFont={WenQuanYi Micro Hei},BoldFeatures={RawFeature={embolden=4}},Itali
+cFont={WenQuanYi Micro Hei},ItalicFeatures={RawFeature={slant=0.17}},BoldItalic
+Font={WenQuanYi Micro Hei},BoldItalicFeatures={RawFeature={embolden=4,slant=0.1
+7}}] on input line 9.
+LaTeX Info: Redefining \xeCJK@font@rm on input line 9.
+Package hyperref Info: Option `breaklinks' set `true' on input line 10.
+
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/framed.sty
+Package: framed 2007/10/04 v 0.95: framed or shaded text with page breaks
+\fb@frw=\dimen111
+\fb@frh=\dimen112
+\FrameRule=\dimen113
+\FrameSep=\dimen114
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/etc/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: xetex.def on input line 130.
+) (./kmod-main.aux)
+\openout1 = `kmod-main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for EU1/lmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid this).
+ on input line 27.
+\symlegacymaths=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 27.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 27.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 27.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 27.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 27.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 27.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 27.
+LaTeX Font Info:    Redeclaring math accent \check on input line 27.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 27.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 27.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 27.
+LaTeX Font Info:    Redeclaring math symbol \colon on input line 27.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 27.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 27.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 27.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 27.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 27.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 27.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 27.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 27.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 27.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 27.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 27.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 27.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 27.
+LaTeX Font Info:    Encoding `OT1' has changed to `EU1' for symbol font
+(Font)              `operators' in the math version `normal' on input line 27.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> EU1/CourierNew(0)/m/n on input line 27.
+
+LaTeX Font Info:    Encoding `OT1' has changed to `EU1' for symbol font
+(Font)              `operators' in the math version `bold' on input line 27.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> EU1/CourierNew(0)/m/n on input line 27
+.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  EU1/CourierNew(0)/m/n --> EU1/CourierNew(0)/m/n on inpu
+t line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  EU1/CourierNew(0)/m/n --> EU1/CourierNew(0)/m/n on inpu
+t line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> EU1/CourierNew(0)/m/it on input line 2
+7.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> EU1/CourierNew(0)/bx/n on input line 2
+7.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> EU1/lmss/m/n on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> EU1/lmtt/m/n on input line 27.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  EU1/CourierNew(0)/m/n --> EU1/CourierNew(0)/bx/n on inp
+ut line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
+(Font)                  EU1/CourierNew(0)/m/n --> EU1/CourierNew(0)/bx/n on inp
+ut line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> EU1/CourierNew(0)/bx/it on input line
+ 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> EU1/lmss/bx/n on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> EU1/lmtt/bx/n on input line 27.
+Package hyperref Info: Link coloring ON on input line 27.
+
+(/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
+Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
+
+(/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
+Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
+)
+\c@section@level=\count114
+)
+LaTeX Info: Redefining \ref on input line 27.
+LaTeX Info: Redefining \pageref on input line 27.
+ (./kmod-main.out)
+(./kmod-main.out)
+\@outlinefile=\write3
+\openout3 = `kmod-main.out'.
+
+\AtBeginShipoutBox=\box27
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 33.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 33.
+ [1
+
+
+] [2
+
+] (./kmod-main.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 2.
+ [3]
+Overfull \hbox (4.80707pt too wide) detected at line 57
+\EU1/CourierNew(0)/m/n/12 3.1.10 
+ []
+
+
+Overfull \hbox (4.80707pt too wide) detected at line 59
+\EU1/CourierNew(0)/m/n/12 3.1.11 
+ []
+
+
+Overfull \hbox (4.80707pt too wide) detected at line 61
+\EU1/CourierNew(0)/m/n/12 3.1.12 
+ []
+
+
+Overfull \hbox (4.80707pt too wide) detected at line 82
+\EU1/CourierNew(0)/m/n/12 3.3.10 
+ []
+
+[4]
+Overfull \hbox (4.80707pt too wide) detected at line 83
+\EU1/CourierNew(0)/m/n/12 3.3.11 
+ []
+
+
+Overfull \hbox (4.80707pt too wide) detected at line 84
+\EU1/CourierNew(0)/m/n/12 3.3.12 
+ []
+
+
+Overfull \hbox (4.80707pt too wide) detected at line 85
+\EU1/CourierNew(0)/m/n/12 3.3.13 
+ []
+
+
+Overfull \hbox (4.80707pt too wide) detected at line 86
+\EU1/CourierNew(0)/m/n/12 3.3.14 
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 91
+ []\EU1/CourierNew(0)/m/n/12 101
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 92
+ []\EU1/CourierNew(0)/m/n/12 102
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 93
+ []\EU1/CourierNew(0)/m/n/12 102
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 94
+ []\EU1/CourierNew(0)/m/n/12 103
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 96
+ []\EU1/CourierNew(0)/m/n/12 105
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 97
+ []\EU1/CourierNew(0)/m/n/12 105
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 98
+ []\EU1/CourierNew(0)/m/n/12 108
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 99
+ []\EU1/CourierNew(0)/m/n/12 109
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 100
+ []\EU1/CourierNew(0)/m/n/12 109
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 101
+ []\EU1/CourierNew(0)/m/n/12 112
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 102
+ []\EU1/CourierNew(0)/m/n/12 112
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 103
+ []\EU1/CourierNew(0)/m/n/12 112
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 104
+ []\EU1/CourierNew(0)/m/n/12 112
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 105
+ []\EU1/CourierNew(0)/m/n/12 113
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 106
+ []\EU1/CourierNew(0)/m/n/12 114
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 107
+ []\EU1/CourierNew(0)/m/n/12 114
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 108
+ []\EU1/CourierNew(0)/m/n/12 114
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 109
+ []\EU1/CourierNew(0)/m/n/12 117
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 110
+ []\EU1/CourierNew(0)/m/n/12 117
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 111
+ []\EU1/CourierNew(0)/m/n/12 118
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 112
+ []\EU1/CourierNew(0)/m/n/12 118
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 113
+ []\EU1/CourierNew(0)/m/n/12 119
+ []
+
+)
+\tf@toc=\write4
+\openout4 = `kmod-main.toc'.
+
+ (./kmod-new.tex [5] [6
+
+]
+Chapter 1.
+LaTeX Font Info:    Try loading font information for OMS+CourierNew(0) on input
+ line 21.
+LaTeX Font Info:    No file OMSCourierNew(0).fd. on input line 21.
+LaTeX Font Info:    Font shape `OMS/CourierNew(0)/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbullet' on input line 21.
+
+Package xeCJK Warning: Unknown CJK family `tt' is ignored.
+Use \setCJKfamilyfont to define a CJK family. on input line 22.
+
+LaTeX Font Info:    Try loading font information for EU1+lmtt on input line 22.
+
+(/usr/share/texmf-texlive/tex/xelatex/euenc/eu1lmtt.fd
+File: eu1lmtt.fd 2007/01/14 v1.3 Font defs for Latin Modern
+)
+Missing character: There is no ） in font Courier New/ICU!
+ [7]
+File: ./figures/0-overview.jpg Graphic file (type QTm)
+
+<use  "./figures/0-overview.jpg" >
+File: ./figures/1-app.jpg Graphic file (type QTm)
+ <use  "./figures/1-app.jpg" > [8] [9]
+[10] [11]
+Overfull \hbox (22.48418pt too wide) in paragraph at lines 229--231
+[]\EU1/CourierNew(0)/m/n/12 modprobe \rm/m/n/12 在 模 块 目 录\EU1/Courier
+New(0)/m/n/12 /lib/modules/\EU1/lmtt/m/n/12 uname -r \rm/m/n/12 中 查 找 除
+ 了\EU1/CourierNew(0)/m/n/12 /etc/modprobe.conf
+ []
+
+[12] [13]
+File: ./figures/2-core.jpg Graphic file (type QTm)
+ <use  "./figures/2-core.jpg" > [14] [15]
+File: ./figures/2-base.jpg Graphic file (type QTm)
+
+<use  "./figures/2-base.jpg" >
+File: ./figures/3-syscall.jpg Graphic file (type QTm)
+ <use  "./figures/3-syscall.jpg" >
+File: ./figures/sys.jpg Graphic file (type QTm)
+
+<use  "./figures/sys.jpg" > [16] [17] [18]
+Chapter 2.
+LaTeX Font Info:    Try loading font information for OT1+CourierNew(0) on input
+ line 389.
+LaTeX Font Info:    No file OT1CourierNew(0).fd. on input line 389.
+LaTeX Font Info:    Font shape `OT1/CourierNew(0)/bx/n' undefined
+(Font)              using `OT1/cmr/m/n' instead
+(Font)              for symbol `textendash' on input line 389.
+
+Overfull \hbox (22.89201pt too wide) in paragraph at lines 423--423
+[]\EU1/lmtt/m/n/12 $ ./configure CFLAGS="-g -O2" --prefix=/usr --sysconfdir=/et
+c --libdir=/usr/lib[] 
+ []
+
+[19
+
+]
+Overfull \hbox (22.89201pt too wide) in paragraph at lines 450--450
+[]\EU1/lmtt/m/n/12 $ ./configure CFLAGS="-g -O2" --prefix=/usr --sysconfdir=/et
+c --libdir=/usr/lib[] 
+ []
+
+
+Overfull \hbox (82.63203pt too wide) in paragraph at lines 450--450
+[]\EU1/lmtt/m/n/12 configure: error: cannot find install-sh, install.sh, or sht
+ool in build-aux "."/build-aux[] 
+ []
+
+
+Overfull \hbox (37.28804pt too wide) in paragraph at lines 450--450
+[]\EU1/lmtt/m/n/12 Can't exec "libtoolize": No such file or directory at /usr/b
+in/autoreconf line 196.[] 
+ []
+
+
+Overfull \hbox (31.10802pt too wide) in paragraph at lines 450--450
+[]\EU1/lmtt/m/n/12 Use of uninitialized value in pattern match (m//) at /usr/bi
+n/autoreconf line 196.[] 
+ []
+
+[20]
+Overfull \hbox (22.89201pt too wide) in paragraph at lines 459--459
+[]\EU1/lmtt/m/n/12 $ ./configure CFLAGS="-g -O2" --prefix=/usr --sysconfdir=/et
+c --libdir=/usr/lib[] 
+ []
+
+
+Overfull \hbox (24.95203pt too wide) in paragraph at lines 459--459
+[]\EU1/lmtt/m/n/12 configure: error: xsltproc command not found, try ./configur
+e --disable-manpages[] 
+ []
+
+[21] [22]
+Overfull \hbox (74.392pt too wide) in paragraph at lines 588--588
+[] \EU1/lmtt/m/n/12 /bin/bash ./libtool   --mode=install /usr/bin/install -c   
+libkmod/libkmod.la '/usr/lib'[] 
+ []
+
+
+Overfull \hbox (117.65198pt too wide) in paragraph at lines 588--588
+[]\EU1/lmtt/m/n/12 libtool: install: /usr/bin/install -c libkmod/.libs/libkmod.
+so.2.2.3 /usr/lib/libkmod.so.2.2.3[] 
+ []
+
+
+Overfull \hbox (94.99203pt too wide) in paragraph at lines 588--588
+[]\EU1/lmtt/m/n/12 /usr/bin/install: cannot create regular file `/usr/lib/libkm
+od.so.2.2.3': Permission denied[] 
+ []
+
+[23]
+Overfull \hbox (74.392pt too wide) in paragraph at lines 645--645
+[] \EU1/lmtt/m/n/12 /bin/bash ./libtool   --mode=install /usr/bin/install -c   
+libkmod/libkmod.la '/usr/lib'[] 
+ []
+
+
+Overfull \hbox (117.65198pt too wide) in paragraph at lines 645--645
+[]\EU1/lmtt/m/n/12 libtool: install: /usr/bin/install -c libkmod/.libs/libkmod.
+so.2.2.3 /usr/lib/libkmod.so.2.2.3[] 
+ []
+
+
+Overfull \hbox (391.63194pt too wide) in paragraph at lines 645--645
+[]\EU1/lmtt/m/n/12 libtool: install: (cd /usr/lib && { ln -s -f libkmod.so.2.2.
+3 libkmod.so.2 || { rm -f libkmod.so.2 && ln -s libkmod.so.2.2.3 libkmod.so.2; 
+}; })[] 
+ []
+
+
+Overfull \hbox (354.55197pt too wide) in paragraph at lines 645--645
+[]\EU1/lmtt/m/n/12 libtool: install: (cd /usr/lib && { ln -s -f libkmod.so.2.2.
+3 libkmod.so || { rm -f libkmod.so && ln -s libkmod.so.2.2.3 libkmod.so; }; })[
+] 
+ []
+
+
+Overfull \hbox (49.67204pt too wide) in paragraph at lines 645--645
+[]\EU1/lmtt/m/n/12 libtool: install: /usr/bin/install -c libkmod/.libs/libkmod.
+lai /usr/lib/libkmod.la[] 
+ []
+
+
+Overfull \hbox (222.7117pt too wide) in paragraph at lines 645--645
+[]\EU1/lmtt/m/n/12 libtool: finish: PATH="/usr/local/sbin:/usr/local/bin:/usr/s
+bin:/usr/bin:/sbin:/bin:/sbin" ldconfig -n /usr/lib[] 
+ []
+
+
+Overfull \hbox (20.83202pt too wide) in paragraph at lines 645--645
+[]  \EU1/lmtt/m/n/12 /bin/bash ./libtool   --mode=install /usr/bin/install -c t
+ools/kmod '/usr/bin'[] 
+ []
+
+
+Overfull \hbox (55.85193pt too wide) in paragraph at lines 645--645
+[]        \EU1/lmtt/m/n/12 so_img_rel_target_prefix=$(echo /usr/lib | sed 's,\(
+^/\|\)[^/][^/]*,..,g') && \[] 
+ []
+
+
+Overfull \hbox (51.73184pt too wide) in paragraph at lines 645--645
+[]        \EU1/lmtt/m/n/12 ln -sf $so_img_rel_target_prefix/usr/lib/$so_img_nam
+e /usr/lib/libkmod.so && \[] 
+ []
+
+
+Overfull \hbox (177.38002pt too wide) in paragraph at lines 645--645
+[] \EU1/lmtt/m/n/12 /usr/bin/install -c -m 644 depmod.d.5 modprobe.d.5 modules.
+dep.5 modules.dep.bin.5 '/usr/share/man/man5'[] 
+ []
+
+
+Overfull \hbox (167.08002pt too wide) in paragraph at lines 645--645
+[] \EU1/lmtt/m/n/12 /usr/bin/install -c -m 644 depmod.8 insmod.8 lsmod.8 rmmod.
+8 modprobe.8 modinfo.8 '/usr/share/man/man8'[] 
+ []
+
+[24]
+Overfull \hbox (24.94pt too wide) in paragraph at lines 660--660
+[]\EU1/lmtt/m/n/12 lrwxrwxrwx 1 root root     16 Apr 17 04:55 /usr/lib/libkmod.
+so -> libkmod.so.2.2.3[] 
+ []
+
+
+Overfull \hbox (37.3pt too wide) in paragraph at lines 660--660
+[]\EU1/lmtt/m/n/12 lrwxrwxrwx 1 root root     16 Apr 17 04:55 /usr/lib/libkmod.
+so.2 -> libkmod.so.2.2.3[] 
+ []
+
+[25]
+Overfull \hbox (24.94pt too wide) in paragraph at lines 673--673
+[]\EU1/lmtt/m/n/12 lrwxrwxrwx 1 root root     16 Apr 17 04:55 /usr/lib/libkmod.
+so -> libkmod.so.2.2.3[] 
+ []
+
+
+Overfull \hbox (37.3pt too wide) in paragraph at lines 673--673
+[]\EU1/lmtt/m/n/12 lrwxrwxrwx 1 root root     16 Apr 17 04:55 /usr/lib/libkmod.
+so.2 -> libkmod.so.2.2.3[] 
+ []
+
+
+Overfull \hbox (766.50365pt too wide) in paragraph at lines 704--704
+[]\EU1/lmtt/m/n/12 /usr/bin/kmod: ELF 32-bit LSB executable, Intel 80386, versi
+on 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.24, Build
+ID[sha1]=0x9d4131d1eb78b1e1852cc5ad44f06417ae3caa3c, not stripped[] 
+ []
+
+
+Overfull \hbox (103.23201pt too wide) in paragraph at lines 704--704
+[]  \EU1/lmtt/m/n/12 static-nodes outputs the static-node information installed
+ with the currently running kernel[] 
+ []
+
+[26] [27] [28] [29] [30]
+Overfull \hbox (29.07204pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 struct kmod_ctx *kmod_new(const char *dirname, const char * 
+const *config_paths);[] 
+ []
+
+
+Overfull \hbox (31.13199pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 struct kmod_config_iter *kmod_config_get_blacklists(const st
+ruct kmod_ctx *ctx);[] 
+ []
+
+
+Overfull \hbox (68.21194pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 struct kmod_config_iter *kmod_config_get_install_commands(co
+nst struct kmod_ctx *ctx);[] 
+ []
+
+
+Overfull \hbox (62.03195pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 struct kmod_config_iter *kmod_config_get_remove_commands(con
+st struct kmod_ctx *ctx);[] 
+ []
+
+
+Overfull \hbox (12.59201pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 struct kmod_config_iter *kmod_config_get_aliases(const struc
+t kmod_ctx *ctx);[] 
+ []
+
+
+Overfull \hbox (12.59201pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 struct kmod_config_iter *kmod_config_get_options(const struc
+t kmod_ctx *ctx);[] 
+ []
+
+
+Overfull \hbox (18.772pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 struct kmod_config_iter *kmod_config_get_softdeps(const stru
+ct kmod_ctx *ctx);[] 
+ []
+
+
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 const char *kmod_config_iter_get_value(const struct kmod_con
+fig_iter *iter);[] 
+ []
+
+
+Overfull \hbox (16.71194pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 int kmod_module_new_from_lookup(struct kmod_ctx *ctx, const 
+char *given_alias,[] 
+ []
+
+
+Overfull \hbox (6.41194pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 const char *kmod_module_get_install_commands(const struct km
+od_module *mod);[] 
+ []
+
+
+Overfull \hbox (18.77197pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 struct kmod_list *kmod_module_get_dependencies(const struct 
+kmod_module *mod);[] 
+ []
+
+
+Overfull \hbox (12.59196pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 unsigned long kmod_module_section_get_address(const struct k
+mod_list *entry);[] 
+ []
+
+
+Overfull \hbox (33.19202pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 int kmod_module_get_info(const struct kmod_module *mod, stru
+ct kmod_list **list);[] 
+ []
+
+
+Overfull \hbox (57.91199pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 int kmod_module_get_versions(const struct kmod_module *mod, 
+struct kmod_list **list);[] 
+ []
+
+
+Overfull \hbox (51.732pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 int kmod_module_get_symbols(const struct kmod_module *mod, s
+truct kmod_list **list);[] 
+ []
+
+
+Overfull \hbox (119.71191pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 int kmod_module_get_dependency_symbols(const struct kmod_mod
+ule *mod, struct kmod_list **list);[] 
+ []
+
+
+Overfull \hbox (55.85188pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 const char *kmod_module_dependency_symbol_get_symbol(const s
+truct kmod_list *entry);[] 
+ []
+
+
+Overfull \hbox (20.81992pt too wide) in paragraph at lines 1268--1268
+[]\EU1/lmtt/m/n/12 uint64_t kmod_module_dependency_symbol_get_crc(const struct 
+kmod_list *entry);[] 
+ []
+
+[31] [32]
+Underfull \vbox (badness 10000) detected at line 1268
+ []
+
+
+Overfull \vbox (2.48512pt too high) detected at line 1268
+ []
+
+[33]
+Underfull \vbox (badness 10000) detected at line 1268
+ []
+
+
+Overfull \vbox (2.22112pt too high) detected at line 1268
+ []
+
+[34]
+Underfull \vbox (badness 10000) detected at line 1268
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1268
+ []
+
+[35]
+Underfull \vbox (badness 10000) detected at line 1268
+ []
+
+
+Overfull \vbox (2.56912pt too high) detected at line 1268
+ []
+
+[36]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [37]
+[38] [39] [40] [41] [42
+
+]
+Chapter 3.
+[43]
+Overfull \hbox (29.07204pt too wide) in paragraph at lines 1513--1513
+[]\EU1/lmtt/m/n/12 struct kmod_ctx *kmod_new(const char *dirname, const char * 
+const *config_paths);[] 
+ []
+
+[44] [45]
+Overfull \hbox (16.71194pt too wide) in paragraph at lines 1589--1589
+[]\EU1/lmtt/m/n/12 int kmod_module_new_from_lookup(struct kmod_ctx *ctx, const 
+char *given_alias,[] 
+ []
+
+
+Overfull \hbox (6.41194pt too wide) in paragraph at lines 1621--1621
+[]\EU1/lmtt/m/n/12 const char *kmod_module_get_install_commands(const struct km
+od_module *mod);[] 
+ []
+
+
+Overfull \hbox (18.77197pt too wide) in paragraph at lines 1621--1621
+[]\EU1/lmtt/m/n/12 struct kmod_list *kmod_module_get_dependencies(const struct 
+kmod_module *mod);[] 
+ []
+
+[46]
+Overfull \hbox (33.19202pt too wide) in paragraph at lines 1632--1632
+[]\EU1/lmtt/m/n/12 int kmod_module_get_info(const struct kmod_module *mod, stru
+ct kmod_list **list);[] 
+ []
+
+[47]
+Overfull \hbox (37.31206pt too wide) in paragraph at lines 1667--1667
+[]\EU1/lmtt/m/n/12 struct kmod_file *kmod_file_open(const struct kmod_ctx *ctx,
+ const char *filename)[] 
+ []
+
+[48]
+LaTeX Font Info:    Try loading font information for OML+CourierNew(0) on input
+ line 1708.
+LaTeX Font Info:    No file OMLCourierNew(0).fd. on input line 1708.
+LaTeX Font Info:    Font shape `OML/CourierNew(0)/m/n' undefined
+(Font)              using `OML/cmm/m/it' instead
+(Font)              for symbol `textgreater' on input line 1708.
+ [49]
+Overfull \hbox (257.73195pt too wide) in paragraph at lines 1756--1756
+[]\EU1/lmtt/m/n/12 struct kmod_list *kmod_list_append(struct kmod_list *list, c
+onst void *data) _must_check_ __attribute__((nonnull(2)));[] 
+ []
+
+
+Overfull \hbox (263.91194pt too wide) in paragraph at lines 1756--1756
+[]\EU1/lmtt/m/n/12 struct kmod_list *kmod_list_prepend(struct kmod_list *list, 
+const void *data) _must_check_ __attribute__((nonnull(2)));[] 
+ []
+
+
+Overfull \hbox (51.73184pt too wide) in paragraph at lines 1756--1756
+[]                                    \EU1/lmtt/m/n/12 const void *data) _must_
+check_ __attribute__((nonnull(2)));[] 
+ []
+
+
+Overfull \hbox (216.53192pt too wide) in paragraph at lines 1756--1756
+[]\EU1/lmtt/m/n/12 struct kmod_list *kmod_list_insert_after(struct kmod_list *l
+ist, const void *data) __attribute__((nonnull(2)));[] 
+ []
+
+
+Overfull \hbox (222.71191pt too wide) in paragraph at lines 1756--1756
+[]\EU1/lmtt/m/n/12 struct kmod_list *kmod_list_insert_before(struct kmod_list *
+list, const void *data) __attribute__((nonnull(2)));[] 
+ []
+
+
+Overfull \hbox (167.09198pt too wide) in paragraph at lines 1756--1756
+[]\EU1/lmtt/m/n/12 struct kmod_list *kmod_list_append_list(struct kmod_list *li
+st1, struct kmod_list *list2) _must_check_;[] 
+ []
+
+
+Overfull \hbox (31.13196pt too wide) in paragraph at lines 1756--1756
+[]            \EU1/lmtt/m/n/12 list_entry = (list_entry->node.next == &((first_
+entry)->node)) ? NULL : \[] 
+ []
+
+
+Overfull \hbox (179.452pt too wide) in paragraph at lines 1789--1789
+[]\EU1/lmtt/m/n/12 int kmod_config_new(struct kmod_ctx *ctx, struct kmod_config
+ **p_config, const char * const *config_paths)[] 
+ []
+
+[50]
+Overfull \hbox (20.83203pt too wide) in paragraph at lines 1818--1818
+[]\EU1/lmtt/m/n/12 struct hash *hash_new(unsigned int n_buckets, void (*free_va
+lue)(void *value));[] 
+ []
+
+[51]
+Overfull \hbox (14.65204pt too wide) in paragraph at lines 1851--1851
+[]\EU1/lmtt/m/n/12 struct index_value *index_searchwild(struct index_file *idx,
+ const char *key);[] 
+ []
+
+
+Overfull \hbox (20.83202pt too wide) in paragraph at lines 1851--1851
+[]\EU1/lmtt/m/n/12 struct index_value *index_mm_searchwild(struct index_mm *idx
+, const char *key);[] 
+ []
+
+[52]
+Underfull \hbox (badness 1087) in paragraph at lines 1885--1887
+[]\EU1/CourierNew(0)/m/n/12 elf \rm/m/n/12 模 块 的 接 口 主 要 包 含 
+\EU1/CourierNew(0)/m/n/12 elf[]get[]mem, elf[]get[]section[]header,
+ []
+
+
+Overfull \hbox (76.41602pt too wide) in paragraph at lines 1896--1896
+[]\EU1/lmtt/m/n/12 static uint64_t elf_get_uint (const struct kmod_elf *elf, ui
+nt64_t offset, uint16_t size)[] 
+ []
+
+
+Overfull \hbox (105.256pt too wide) in paragraph at lines 1896--1896
+[]\EU1/lmtt/m/n/12 static int elf_set_uint (struct kmod_elf *elf, uint64_t offs
+et, uint64_t size, uint64_t value)[] 
+ []
+
+
+Overfull \hbox (47.60004pt too wide) in paragraph at lines 1896--1896
+[]\EU1/lmtt/m/n/12 static const void *elf_get_section_header (const struct kmod
+_elf *elf, uint16_t idx)[] 
+ []
+
+
+Overfull \hbox (303.01596pt too wide) in paragraph at lines 1896--1896
+[]\EU1/lmtt/m/n/12 static int elf_get_section_info (const struct kmod_elf *elf,
+ uint16_t idx, uint64_t *offset, uint64_t *size, uint32_t *nameoff)[] 
+ []
+
+
+Overfull \hbox (70.26003pt too wide) in paragraph at lines 1896--1896
+[]\EU1/lmtt/m/n/12 static const char * elf_get_strings_section (const struct km
+od_elf *elf, uint64_t *size)[] 
+ []
+
+[53]
+Overfull \hbox (6.41203pt too wide) in paragraph at lines 1923--1923
+[]\EU1/lmtt/m/n/12 static void list_node_append (struct list_node *list, struct
+ list_node *node)[] 
+ []
+
+
+Overfull \hbox (43.49203pt too wide) in paragraph at lines 1923--1923
+[]\EU1/lmtt/m/n/12 static void list_node_insert_after (struct list_node *list, 
+struct list_node *node)[] 
+ []
+
+
+Overfull \hbox (49.67203pt too wide) in paragraph at lines 1923--1923
+[]\EU1/lmtt/m/n/12 static void list_node_insert_before (struct list_node *list,
+ struct list_node *node)[] 
+ []
+
+
+Overfull \hbox (49.67204pt too wide) in paragraph at lines 1923--1923
+[]\EU1/lmtt/m/n/12 static void list_node_append_list (struct list_node *list1, 
+struct list_node *list2)[] 
+ []
+
+
+Overfull \hbox (14.65201pt too wide) in paragraph at lines 1956--1956
+[]\EU1/lmtt/m/n/12 void array_sort(struct array *array, int (*cmp)(const void *
+a, const void *b));[] 
+ []
+
+[54] [55]
+Overfull \hbox (78.06726pt too wide) in paragraph at lines 2021--2025
+[]\rm/m/n/12 在 \EU1/CourierNew(0)/m/n/12 kmod-11/tools/insmod.c \rm/m/n/12 �
+� 件 中，| 用 这 个 结 构 体 定 义 了 一 个 \EU1/CourierNew(0)/m/
+n/12 kmod[]cmd[]compat[]insmod
+ []
+
+[56]
+Overfull \hbox (72.3147pt too wide) in paragraph at lines 2063--2068
+[]\rm/m/n/12 在 这 个 \EU1/CourierNew(0)/m/n/12 main \rm/m/n/12 函 数 中�
+��| 调 用 了 \EU1/CourierNew(0)/m/n/12 handle[]kmod[]commands \rm/m/n/12 和
+ \EU1/CourierNew(0)/m/n/12 handle[]kmod[]compat[]commands
+ []
+
+[57] [58]
+File: ./figures/cmd.jpg Graphic file (type QTm)
+ <use  "./figures/cmd.jpg" > [59]
+File: ./figures/insmod.jpg Graphic file (type QTm)
+ <use  "./figures/insmod.jpg" >
+[60]
+Overfull \hbox (10.02448pt too wide) in paragraph at lines 2208--2211
+\rm/m/n/12 可 以 看 出，| 这 里 真 正 最 后 完 成 插 入 操 作 
+的 函 数 是 \EU1/CourierNew(0)/m/n/12 kmod[]module[]insert[]module(mod,
+ []
+
+[61]
+File: ./figures/rmmod.jpg Graphic file (type QTm)
+ <use  "./figures/rmmod.jpg" > [62]
+Overfull \hbox (10.02448pt too wide) in paragraph at lines 2312--2315
+\rm/m/n/12 可 以 看 出，| 这 里 真 正 最 后 完 成 插 入 操 作 
+的 函 数 是 \EU1/CourierNew(0)/m/n/12 kmod[]module[]insert[]module(mod,
+ []
+
+[63] [64]
+File: ./figures/lsmod.jpg Graphic file (type QTm)
+ <use  "./figures/lsmod.jpg" >
+Overfull \hbox (36.53113pt too wide) in paragraph at lines 2373--2377
+[]\EU1/CourierNew(0)/m/n/12 lsmod \rm/m/n/12 命 令 的 实 现 代 码 中，
+| 最 重 要 的 一 个 调 用，| 就 是 \EU1/CourierNew(0)/m/n/12 kmod[]m
+odule[]new[]from[]loaded\rm/m/n/12 ，|
+ []
+
+[65]
+File: ./figures/modinfo.jpg Graphic file (type QTm)
+ <use  "./figures/modinfo.jpg" > [66]
+Overfull \hbox (10.53197pt too wide) in paragraph at lines 2484--2484
+[]    \EU1/lmtt/m/n/12 err = kmod_module_apply_filter(ctx, KMOD_FILTER_BUILTIN,
+ list, &filtered);[] 
+ []
+
+[67] [68] [69]
+File: ./figures/depmod.jpg Graphic file (type QTm)
+ <use  "./figures/depmod.jpg" > [70] [71] [72]
+Overfull \hbox (14.652pt too wide) in paragraph at lines 2772--2772
+[]\EU1/lmtt/m/n/12 static int depmod_load_system_map(struct depmod *depmod, con
+st char *filename)[] 
+ []
+
+
+Overfull \hbox (8.47203pt too wide) in paragraph at lines 2772--2772
+[]\EU1/lmtt/m/n/12 static int depmod_module_add(struct depmod *depmod, struct k
+mod_module *kmod)[] 
+ []
+
+[73]
+Underfull \vbox (badness 10000) detected at line 2772
+ []
+
+
+Overfull \vbox (0.81712pt too high) detected at line 2772
+ []
+
+[74] [75] [76]
+Overfull \hbox (49.67203pt too wide) in paragraph at lines 2906--2906
+[]    \EU1/lmtt/m/n/12 snprintf(dirname_buf, sizeof(dirname_buf), "%s/lib/modul
+es/%s", root, kversion);[] 
+ []
+
+[77]
+File: ./figures/modprobe.jpg Graphic file (type QTm)
+ <use  "./figures/modprobe.jpg" > [78]
+Overfull \hbox (68.45203pt too wide) in paragraph at lines 2938--2944
+[]\rm/m/n/12 对 比 一 下 \EU1/CourierNew(0)/m/n/12 insmod \rm/m/n/12 命 �
+� 当 时 的 实 现 代 码，| 其 用 到 的 核 心 函 数 是 \EU1/Cour
+ierNew(0)/m/n/12 kmod[]module[]insert[]module
+ []
+
+
+Overfull \hbox (10.53107pt too wide) in paragraph at lines 2938--2944
+\rm/m/n/12 说，| \EU1/CourierNew(0)/m/n/12 kmod[]module[]probe[]insert[]modul
+e \rm/m/n/12 需 要 调 用 \EU1/CourierNew(0)/m/n/12 kmod[]module[]insert[]mo
+dule
+ []
+
+[79]
+File: ./figures/modprobe-insmod.jpg Graphic file (type QTm)
+ <use  "./figures/modprobe-insmod.jpg" >
+File: ./figures/insmod_all.jpg Graphic file (type QTm)
+
+<use  "./figures/insmod_all.jpg" >
+Overfull \hbox (82.37946pt too wide) in paragraph at lines 2986--2994
+[]\rm/m/n/12 从 上 面 的 代 码 分 析 可 以 看 出，| \EU1/CourierNe
+w(0)/m/n/12 insmod \rm/m/n/12 函 数 是 依 靠 调 用 \EU1/CourierNew(0)/m/
+n/12 kmod[]module[]probe[]insert[]module()
+ []
+
+
+Overfull \hbox (89.22955pt too wide) in paragraph at lines 2986--2994
+\rm/m/n/12 来 完 成 模 块 加 载 的。| 为 什 么 这 里 的 \EU1/Cou
+rierNew(0)/m/n/12 insmod \rm/m/n/12 没 有 调 用 之 前 分 析 过 的 \EU
+1/CourierNew(0)/m/n/12 kmod[]module[]insert[]module()
+ []
+
+
+Underfull \hbox (badness 2012) in paragraph at lines 2986--2994
+\rm/m/n/12 来 实 现 呢？| 是 因 为 \EU1/CourierNew(0)/m/n/12 kmod[]modu
+le[]insert[]module() \rm/m/n/12 只 负 责 插 入 当 前 这
+ []
+
+[80]
+Overfull \hbox (46.37164pt too wide) in paragraph at lines 2995--3000
+[]\rm/m/n/12 当 然 这 两 个 函 数 之 间 也 是 有 相 互 关 系 �
+�，| 表 现 为 \EU1/CourierNew(0)/m/n/12 kmod[]module[]probe[]insert[]module
+()
+ []
+
+
+Underfull \hbox (badness 2213) in paragraph at lines 2995--3000
+\rm/m/n/12 函 数 会 调 用 \EU1/CourierNew(0)/m/n/12 kmod[]module[]insert[]
+module()\rm/m/n/12 ，| 而 在 此 之 前，| 还 需 要 通 过
+ []
+
+File: ./figures/kmod_module_probe_insert_module.jpg Graphic file (type QTm)
+<use  "./figures/kmod_module_probe_insert_module.jpg" >
+File: ./figures/kmod_new.jpg Graphic file (type QTm)
+
+<use  "./figures/kmod_new.jpg" > [81]
+File: ./figures/kmod_unref.jpg Graphic file (type QTm)
+ <use  "./figures/kmod_unref.jpg" >
+[82]
+File: ./figures/kmod_module_new_from_path.jpg Graphic file (type QTm)
+ <use  "./figures/kmod_module_new_from_path.jpg" > [83]
+Underfull \hbox (badness 10000) in paragraph at lines 3155--3155
+[]    \EU1/lmtt/m/n/12 // \rm/m/n/12 从 路 径 名 称 中 分 离 出 模 �
+� 名 称，| 例
+ []
+
+
+Overfull \hbox (107.35199pt too wide) in paragraph at lines 3155--3155
+[]    \EU1/lmtt/m/n/12 //  name='hello' path='/home/akaedu/Github/test-kmod-11/
+kmod-11/../hello-module/hello.ko'[] 
+ []
+
+[84]
+File: ./figures/kmod_module_new_from_name.jpg Graphic file (type QTm)
+ <use  "./figures/kmod_module_new_from_name.jpg" > [85]
+File: ./figures/kmod_module_new.jpg Graphic file (type QTm)
+
+<use  "./figures/kmod_module_new.jpg" > [86]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [87]
+File: ./figures/kmod_module_insert_module.jpg Graphic file (type QTm)
+
+<use  "./figures/kmod_module_insert_module.jpg" > [88]
+File: ./figures/user_sys_module.jpg Graphic file (type QTm)
+
+<use  "./figures/user_sys_module.jpg" > [89]
+Underfull \hbox (badness 10000) in paragraph at lines 3346--3348
+
+ []
+
+File: ./figures/sys_init_module.jpg Graphic file (type QTm)
+<use  "./figures/sys_init_module.jpg" >
+Overfull \hbox (29.07196pt too wide) in paragraph at lines 3389--3389
+[]    \EU1/lmtt/m/n/12 err = kmod_elf_get_section(elf, ".gnu.linkonce.this_modu
+le", &buf, &bufsize);[] 
+ []
+
+[90] [91]
+Overfull \hbox (2.82526pt too wide) in paragraph at lines 3392--3396
+\EU1/CourierNew(0)/m/n/12 delete[]module \rm/m/n/12 ，| 在 内 核 空 间 �
+� 个 系 统 调 用 的 实 现 主 要 是 依 靠 \EU1/CourierNew(0)/m/n/12
+ sys[]delete[]module
+ []
+
+File: ./figures/sys_delete_module.jpg Graphic file (type QTm)
+<use  "./figures/sys_delete_module.jpg" > [92] [93]
+File: ./figures/kmod_module_unref.jpg Graphic file (type QTm)
+
+<use  "./figures/kmod_module_unref.jpg" > [94] [95]
+File: ./figures/kmod_module_new_from_loaded.jpg Graphic file (type QTm)
+
+<use  "./figures/kmod_module_new_from_loaded.jpg" >
+LaTeX Font Info:    Font shape `OT1/CourierNew(0)/m/n' undefined
+(Font)              using `OT1/cmr/m/n' instead
+(Font)              for symbol `textdollar' on input line 3545.
+
+Overfull \hbox (99.112pt too wide) in paragraph at lines 3589--3589
+[]\EU1/lmtt/m/n/12 KMOD_EXPORT int kmod_module_get_info(const struct kmod_modul
+e *mod, struct kmod_list **list)[] 
+ []
+
+[96] [97]
+Overfull \hbox (2.29193pt too wide) in paragraph at lines 3661--3661
+[]\EU1/lmtt/m/n/12 int kmod_module_probe_insert_module(mod, flags, extra_option
+s, run_install)[] 
+ []
+
+
+Overfull \hbox (70.27191pt too wide) in paragraph at lines 3661--3661
+[]    \EU1/lmtt/m/n/12 err = kmod_module_get_probe_list(mod, !!(flags & KMOD_PR
+OBE_IGNORE_COMMAND), &list);[] 
+ []
+
+[98]
+File: ./figures/kmod_module_probe_insert_module.jpg Graphic file (type QTm)
+ <use  "./figures/kmod_module_probe_insert_module.jpg" >
+Underfull \hbox (badness 1609) in paragraph at lines 3668--3673
+\rm/m/n/12 来 解 析 \EU1/CourierNew(0)/m/n/12 modules.dep \rm/m/n/12 文 件
+ 中 的 包 含 依 赖 关 系 的 那 行 |（字 符 串）|，| 然 后
+ []
+
+File: ./figures/kmod_module_get_probe_list.jpg Graphic file (type QTm)
+<use  "./figures/kmod_module_get_probe_list.jpg" > [99]
+Overfull \hbox (669.73172pt too wide) in paragraph at lines 3726--3726
+[]\EU1/lmtt/m/n/12 line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko
+ kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/
+fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko[] 
+ []
+
+[100]
+Overfull \hbox (630.59174pt too wide) in paragraph at lines 3750--3750
+[]\EU1/lmtt/m/n/12 kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel
+/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lock
+d/lockd.ko kernel/net/sunrpc/sunrpc.ko[] 
+ []
+
+File: ./figures/kmod_search_moddep.jpg Graphic file (type QTm)
+<use  "./figures/kmod_search_moddep.jpg" >
+Missing character: There is no 间 in font Courier New/ICU!
+File: ./figures/kmod_module_parse_depline.jpg Graphic file (type QTm)
+
+<use  "./figures/kmod_module_parse_depline.jpg" > [101] [102]
+Overfull \hbox (669.73172pt too wide) in paragraph at lines 3807--3807
+[]\EU1/lmtt/m/n/12 line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko
+ kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/
+fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko[] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [103]
+[104]
+File: ./figures/sys_sim.jpg Graphic file (type QTm)
+ <use  "./figures/sys_sim.jpg" > [105] [106
+
+]
+Chapter 4.
+
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such
+ file or directory)[] 
+ []
+
+
+Overfull \hbox (64.06798pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON
+YMOUS, -1, 0) = 0xb7764000[] 
+ []
+
+
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such
+ file or directory)[] 
+ []
+
+
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such
+ file or directory)[] 
+ []
+
+
+Overfull \hbox (76.45172pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0@A\0
+\0004\0\0\0"..., 512) = 512[] 
+ []
+
+
+Overfull \hbox (64.092pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(NULL, 125852, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DEN
+YWRITE, 3, 0) = 0xb7730000[] 
+ []
+
+
+Overfull \hbox (175.31989pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(0xb774d000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MA
+P_FIXED|MAP_DENYWRITE, 3, 0x1c) = 0xb774d000[] 
+ []
+
+
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such
+ file or directory)[] 
+ []
+
+
+Overfull \hbox (107.35168pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\320
+\30\0\0004\0\0\0"..., 512) = 512[] 
+ []
+
+
+Overfull \hbox (57.9pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(NULL, 33360, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENY
+WRITE, 3, 0) = 0xb7727000[] 
+ []
+
+
+Overfull \hbox (169.12788pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(0xb772e000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MA
+P_FIXED|MAP_DENYWRITE, 3, 0x6) = 0xb772e000[] 
+ []
+
+
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such
+ file or directory)[] 
+ []
+
+
+Overfull \hbox (107.35168pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\200
+\24\0\0004\0\0\0"..., 512) = 512[] 
+ []
+
+
+Overfull \hbox (64.05598pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON
+YMOUS, -1, 0) = 0xb7726000[] 
+ []
+
+
+Overfull \hbox (57.91199pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(NULL, 33088, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENY
+WRITE, 3, 0) = 0xb771d000[] 
+ []
+
+
+Overfull \hbox (169.12788pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(0xb7724000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MA
+P_FIXED|MAP_DENYWRITE, 3, 0x6) = 0xb7724000[] 
+ []
+
+
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such
+ file or directory)[] 
+ []
+
+
+Overfull \hbox (107.33969pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0000\
+226\1\0004\0\0\0"..., 512) = 512[] 
+ []
+
+
+Overfull \hbox (70.26pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(NULL, 1739484, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DE
+NYWRITE, 3, 0) = 0xb7574000[] 
+ []
+
+
+Overfull \hbox (187.6919pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(0xb7717000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|M
+AP_FIXED|MAP_DENYWRITE, 3, 0x1a3) = 0xb7717000[] 
+ []
+
+
+Overfull \hbox (169.13991pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(0xb771a000, 10972, PROT_READ|PROT_WRITE, MAP_PRIVATE|M
+AP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb771a000[] 
+ []
+
+
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such
+ file or directory)[] 
+ []
+
+
+Overfull \hbox (82.63185pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0`\n\
+0\0004\0\0\0"..., 512) = 512[] 
+ []
+
+
+Overfull \hbox (57.88799pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(NULL, 16504, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENY
+WRITE, 3, 0) = 0xb756f000[] 
+ []
+
+
+Overfull \hbox (169.1399pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(0xb7572000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MA
+P_FIXED|MAP_DENYWRITE, 3, 0x2) = 0xb7572000[] 
+ []
+
+
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such
+ file or directory)[] 
+ []
+
+
+Overfull \hbox (76.45172pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0p[\0
+\0004\0\0\0"..., 512) = 512[] 
+ []
+
+
+Overfull \hbox (64.092pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(NULL, 107008, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DEN
+YWRITE, 3, 0) = 0xb7554000[] 
+ []
+
+
+Overfull \hbox (175.28389pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(0xb756b000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MA
+P_FIXED|MAP_DENYWRITE, 3, 0x16) = 0xb756b000[] 
+ []
+
+
+Overfull \hbox (162.9359pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(0xb756d000, 4608, PROT_READ|PROT_WRITE, MAP_PRIVATE|MA
+P_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb756d000[] 
+ []
+
+
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such
+ file or directory)[] 
+ []
+
+
+Overfull \hbox (82.63171pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0@\f\
+0\0004\0\0\0"..., 512) = 512[] 
+ []
+
+
+Overfull \hbox (57.91199pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(NULL, 20584, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENY
+WRITE, 3, 0) = 0xb754e000[] 
+ []
+
+
+Overfull \hbox (169.1399pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(0xb7552000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MA
+P_FIXED|MAP_DENYWRITE, 3, 0x3) = 0xb7552000[] 
+ []
+
+
+Overfull \hbox (64.068pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON
+YMOUS, -1, 0) = 0xb754d000[] 
+ []
+
+
+Overfull \hbox (64.068pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON
+YMOUS, -1, 0) = 0xb754c000[] 
+ []
+
+
+Overfull \hbox (579.07985pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 set_thread_area({entry_number:-1 -> 6, base_addr:0xb754c740,
+ limit:1048575, seg_32bit:1, contents:0, read_exec_only:0, limit_in_pages:1, se
+g_not_present:0, useable:1}) = 0[] 
+ []
+
+
+Overfull \hbox (336.0118pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 futex(0xbfe24424, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REAL
+TIME, 1, NULL, b754c740) = -1 EAGAIN (Resource temporarily unavailable)[] 
+ []
+
+
+Overfull \hbox (852.87985pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 statfs64("/selinux", 84, {f_type="EXT2_SUPER_MAGIC", f_bsize
+=4096, f_blocks=2482061, f_bfree=409986, f_bavail=285481, f_files=622592, f_ffr
+ee=316434, f_fsid={497937565, 1217050106}, f_namelen=255, f_frsize=4096}) = 0[]
+ 
+ []
+
+
+Overfull \hbox (64.05598pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON
+YMOUS, -1, 0) = 0xb7763000[] 
+ []
+
+
+Overfull \hbox (18.772pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 ioctl(1, SNDCTL_TMR_TIMEBASE or TCGETS, {B38400 opost isig i
+canon echo ...}) = 0[] 
+ []
+
+
+Overfull \hbox (33.1918pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 openat(AT_FDCWD, ".", O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_DIRE
+CTORY|O_CLOEXEC) = 3[] 
+ []
+
+
+Overfull \hbox (64.05598pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON
+YMOUS, -1, 0) = 0xb7762000[] 
+ []
+
+
+Overfull \hbox (243.28793pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 write(1, "aclocal.m4   config.log     COPY"..., 67aclocal.m4
+   config.log     COPYING  Makefile   NEWS      testsuite) = 67[] 
+ []
+
+
+Overfull \hbox (239.16795pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 write(1, "build-aux    config.status  libk"..., 65build-aux 
+   config.status  libkmod  Makefile.am  README    TODO) = 65[] 
+ []
+
+
+Overfull \hbox (243.28789pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 write(1, "config.h     configure\t    libto"..., 65config.h 
+    configure       libtool  Makefile.in  stamp-h1  tools) = 65[] 
+ []
+
+
+Overfull \hbox (154.73189pt too wide) in paragraph at lines 4040--4040
+[]\EU1/lmtt/m/n/12 write(1, "config.h.in  configure.ac   m4\t "..., 47config.h.
+in  configure.ac   m4        man      tags) = 47[] 
+ []
+
+[107]
+Underfull \vbox (badness 10000) detected at line 4040
+ []
+
+
+Overfull \vbox (2.56912pt too high) detected at line 4040
+ []
+
+[108]
+Underfull \vbox (badness 10000) detected at line 4040
+ []
+
+
+Overfull \vbox (2.48512pt too high) detected at line 4040
+ []
+
+[109]
+Overfull \hbox (142.34793pt too wide) in paragraph at lines 4061--4061
+[]\EU1/lmtt/m/n/12 $ cat /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/i
+nclude/asm/unistd_32.h | grep getdents[] 
+ []
+
+[110]
+Overfull \hbox (33.16797pt too wide) in paragraph at lines 4165--4165
+[]\EU1/lmtt/m/n/12 // /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/incl
+ude/asm/unistd_32.h[] 
+ []
+
+[111]
+Underfull \vbox (badness 10000) detected at line 4165
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4165
+ []
+
+[112]
+Underfull \vbox (badness 3977) has occurred while \output is active []
+
+ [113]
+Overfull \hbox (313.33992pt too wide) in paragraph at lines 4199--4199
+[]\EU1/lmtt/m/n/12 make -C /usr/src/linux-headers-3.2.0-29-generic-pae/    SUBD
+IRS=/home/akaedu/Github/comment-subs/secure-hole/1-hackls   modules[] 
+ []
+
+
+Overfull \hbox (424.57997pt too wide) in paragraph at lines 4199--4199
+[]\EU1/lmtt/m/n/12 /home/akaedu/Github/comment-subs/secure-hole/1-hackls/hackls
+.c:20:26: warning: initialization from incompatible pointer type [enabled by de
+fault][] 
+ []
+
+[114] [115]
+Overfull \hbox (43.46796pt too wide) in paragraph at lines 4271--4271
+[]\EU1/lmtt/m/n/12 $ vi /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/in
+clude/asm/unistd_32.h[] 
+ []
+
+
+Overfull \hbox (117.62793pt too wide) in paragraph at lines 4286--4286
+[]\EU1/lmtt/m/n/12 $ cat /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/i
+nclude/asm/unistd_32.h | grep kill[] 
+ []
+
+
+Overfull \hbox (33.16797pt too wide) in paragraph at lines 4395--4395
+[]\EU1/lmtt/m/n/12 // /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/incl
+ude/asm/unistd_32.h[] 
+ []
+
+[116]
+Underfull \vbox (badness 10000) detected at line 4395
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4395
+ []
+
+[117]
+Underfull \vbox (badness 10000) detected at line 4395
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4395
+ []
+
+[118]
+Overfull \hbox (335.99991pt too wide) in paragraph at lines 4410--4410
+[]\EU1/lmtt/m/n/12 make -C /usr/src/linux-headers-3.2.0-29-generic-pae/    SUBD
+IRS=/home/akaedu/Github/comment-subs/secure-hole/2-hack-kill    modules[] 
+ []
+
+
+Overfull \hbox (18.772pt too wide) in paragraph at lines 4410--4410
+[]  \EU1/lmtt/m/n/12 CC [M]  /home/akaedu/Github/comment-subs/secure-hole/2-hac
+k-kill/hack-kill.o[] 
+ []
+
+
+Overfull \hbox (461.65997pt too wide) in paragraph at lines 4410--4410
+[]\EU1/lmtt/m/n/12 /home/akaedu/Github/comment-subs/secure-hole/2-hack-kill/hac
+k-kill.c:20:26: warning: initialization from incompatible pointer type [enabled
+ by default][] 
+ []
+
+
+Overfull \hbox (37.312pt too wide) in paragraph at lines 4410--4410
+[]  \EU1/lmtt/m/n/12 CC      /home/akaedu/Github/comment-subs/secure-hole/2-hac
+k-kill/hack-kill.mod.o[] 
+ []
+
+
+Overfull \hbox (24.95201pt too wide) in paragraph at lines 4410--4410
+[]  \EU1/lmtt/m/n/12 LD [M]  /home/akaedu/Github/comment-subs/secure-hole/2-hac
+k-kill/hack-kill.ko[] 
+ []
+
+[119] [120]) [121] (./kmod-main.aux)
+LaTeX Font Info:    Some font shapes were not available, defaults substituted.
+ ) 
+Here is how much of TeX's memory you used:
+ 6328 strings out of 495713
+ 108227 string characters out of 1188883
+ 247417 words of memory out of 3000000
+ 9314 multiletter control sequences out of 15000+50000
+ 7513 words of font info for 54 fonts, out of 3000000 for 9000
+ 28 hyphenation exceptions out of 8191
+ 38i,6n,44p,467b,424s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on kmod-main.pdf (121 pages).

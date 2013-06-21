@@ -1,0 +1,15 @@
+digraph G {
+
+	size="7.5 7.5";  
+
+	"insmod()" [shape=box style="filled" gradientangle=90];
+	"insmod()" -> kmod_module ;
+
+	kmod_module -> kmod_module_new_from_lookup;
+	kmod_module -> kmod_module_get_module;
+	kmod_module -> kmod_module_probe_insert_module;
+	kmod_module -> kmod_module_unref;
+	kmod_module -> kmod_module_unref_list;
+
+}
+

@@ -1,0 +1,43 @@
+\documentclass[12pt, a4paper]{book}
+\usepackage[BoldFont,SlantFont,CJKchecksingle]{xeCJK}
+\setmainfont{Courier New}
+\usepackage{graphicx}
+\usepackage{xeCJK}
+\usepackage{fullpage}
+\usepackage[urlcolor=blue, colorlinks=true, linkcolor=black]{hyperref}
+%\setCJKmainfont{AR PL UMing CN}
+\setCJKmainfont{WenQuanYi Micro Hei}
+\hypersetup{breaklinks=true, pdfborder={0 0 0}}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+
+\usepackage{url}
+\usepackage{graphicx}
+
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth]{#1}}
+
+\usepackage{framed,color}
+\definecolor{shadecolor}{gray}{0.95}
+
+\usepackage{listings}
+\lstset{language=C++}%这条命令可以让LaTeX排版时将C++键字突出显示
+\lstset{breaklines}%这条命令可以让LaTeX自动将长的代码行换行排版
+\lstset{extendedchars=false}%这一条命令可以解决代码跨页时，章节标题，页眉等汉字不显示的问题
+
+
+\begin{document}
+
+\title{Kmod 项目分析报告}
+\author{\\李明 <limingth@gmail.com>}
+\date{2013.6.9}
+\maketitle
+\tableofcontents
+
+\input{"kmod-new.tex"}
+
+\end{document}

@@ -16,7 +16,7 @@ b build:
 
 .PHONY: pdf
 p pdf: f
-	make -C pdf kmod
+	make -C pdf 
 
 f figure:
 	make -C pdf/figures

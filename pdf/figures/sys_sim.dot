@@ -1,0 +1,18 @@
+digraph G {
+
+	size="7.5 7.5";  
+	
+	"init_module()" [shape="box" style="filled" gradientangle=90];
+
+	"tools目录下的命令" [style="filled" gradientangle=30 ];
+	"sys_init_module()系统调用" [style="filled" gradientangle=30];
+	"glibc库" [style="filled" gradientangle=30 ];
+
+	"testsuite目录下的命令" -> "init_module()函数调用";
+	"tools目录下的命令" -> "init_module()函数调用";
+
+	
+	"init_module()函数调用" -> glibc库 -> "内核中的sys_init_module()系统调用"
+	"init_module()函数调用" -> 系统调用模拟层 -> "init_module.c文件中的init_module()"
+
+}

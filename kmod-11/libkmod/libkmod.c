@@ -823,6 +823,7 @@ KMOD_EXPORT int kmod_load_resources(struct kmod_ctx *ctx)
 							index_files[i].fn);
 			continue;
 		}
+		printf("path is %s\n", path);
 
 		snprintf(path, sizeof(path), "%s/%s.bin", ctx->dirname,
 							index_files[i].fn);

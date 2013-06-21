@@ -1,8 +1,9 @@
-cmd_/home/akaedu/Github/comment-subs/secure-hole/1-hacked-mkdir/mkdir.o := gcc -Wp,-MD,/home/akaedu/Github/comment-subs/secure-hole/1-hacked-mkdir/.mkdir.o.d  -nostdinc -isystem /usr/lib/gcc/i686-linux-gnu/4.6/include  -I/usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include -Iarch/x86/include/generated -Iinclude  -include /usr/src/linux-headers-3.2.0-29-generic-pae/include/linux/kconfig.h -Iubuntu/include  -D__KERNEL__ -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -O2 -m32 -msoft-float -mregparm=3 -freg-struct-return -mpreferred-stack-boundary=2 -march=i686 -mtune=generic -maccumulate-outgoing-args -Wa,-mtune=generic32 -ffreestanding -fstack-protector -DCONFIG_AS_CFI=1 -DCONFIG_AS_CFI_SIGNAL_FRAME=1 -DCONFIG_AS_CFI_SECTIONS=1 -pipe -Wno-sign-compare -fno-asynchronous-unwind-tables -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -Wframe-larger-than=1024 -Wno-unused-but-set-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -pg -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -DCC_HAVE_ASM_GOTO  -DMODULE  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(mkdir)"  -D"KBUILD_MODNAME=KBUILD_STR(mkdir)" -c -o /home/akaedu/Github/comment-subs/secure-hole/1-hacked-mkdir/.tmp_mkdir.o /home/akaedu/Github/comment-subs/secure-hole/1-hacked-mkdir/mkdir.c
+cmd_/home/akaedu/Github/comment-subs/secure-hole/2-hack-kill/hack-kill.mod.o := gcc -Wp,-MD,/home/akaedu/Github/comment-subs/secure-hole/2-hack-kill/.hack-kill.mod.o.d  -nostdinc -isystem /usr/lib/gcc/i686-linux-gnu/4.6/include  -I/usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include -Iarch/x86/include/generated -Iinclude  -include /usr/src/linux-headers-3.2.0-29-generic-pae/include/linux/kconfig.h -Iubuntu/include  -D__KERNEL__ -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -O2 -m32 -msoft-float -mregparm=3 -freg-struct-return -mpreferred-stack-boundary=2 -march=i686 -mtune=generic -maccumulate-outgoing-args -Wa,-mtune=generic32 -ffreestanding -fstack-protector -DCONFIG_AS_CFI=1 -DCONFIG_AS_CFI_SIGNAL_FRAME=1 -DCONFIG_AS_CFI_SECTIONS=1 -pipe -Wno-sign-compare -fno-asynchronous-unwind-tables -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -Wframe-larger-than=1024 -Wno-unused-but-set-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -pg -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -DCC_HAVE_ASM_GOTO  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(hack_kill.mod)"  -D"KBUILD_MODNAME=KBUILD_STR(hack_kill)" -DMODULE  -c -o /home/akaedu/Github/comment-subs/secure-hole/2-hack-kill/hack-kill.mod.o /home/akaedu/Github/comment-subs/secure-hole/2-hack-kill/hack-kill.mod.c
 
-source_/home/akaedu/Github/comment-subs/secure-hole/1-hacked-mkdir/mkdir.o := /home/akaedu/Github/comment-subs/secure-hole/1-hacked-mkdir/mkdir.c
+source_/home/akaedu/Github/comment-subs/secure-hole/2-hack-kill/hack-kill.mod.o := /home/akaedu/Github/comment-subs/secure-hole/2-hack-kill/hack-kill.mod.c
 
-deps_/home/akaedu/Github/comment-subs/secure-hole/1-hacked-mkdir/mkdir.o := \
+deps_/home/akaedu/Github/comment-subs/secure-hole/2-hack-kill/hack-kill.mod.o := \
+    $(wildcard include/config/module/unload.h) \
   include/linux/module.h \
     $(wildcard include/config/sysfs.h) \
     $(wildcard include/config/modules.h) \
@@ -14,7 +15,6 @@ deps_/home/akaedu/Github/comment-subs/secure-hole/1-hacked-mkdir/mkdir.o := \
     $(wildcard include/config/tracing.h) \
     $(wildcard include/config/event/tracing.h) \
     $(wildcard include/config/ftrace/mcount/record.h) \
-    $(wildcard include/config/module/unload.h) \
     $(wildcard include/config/constructors.h) \
     $(wildcard include/config/debug/set/module/ronx.h) \
   include/linux/list.h \
@@ -494,238 +494,9 @@ deps_/home/akaedu/Github/comment-subs/secure-hole/1-hacked-mkdir/mkdir.o := \
   include/asm-generic/module.h \
   include/trace/events/module.h \
   include/trace/define_trace.h \
-  include/linux/syscalls.h \
-    $(wildcard include/config/ftrace/syscalls.h) \
-    $(wildcard include/config/mips.h) \
-    $(wildcard include/config/have/syscall/wrappers.h) \
-  include/linux/aio_abi.h \
-  include/linux/capability.h \
-  include/linux/sem.h \
-    $(wildcard include/config/sysvipc.h) \
-  include/linux/ipc.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/ipcbuf.h \
-  include/asm-generic/ipcbuf.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/sembuf.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/siginfo.h \
-  include/asm-generic/siginfo.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/signal.h \
-  include/asm-generic/signal-defs.h \
-  include/linux/unistd.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/unistd.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/unistd_32.h \
-  include/linux/quota.h \
-    $(wildcard include/config/quota/netlink/interface.h) \
-  include/linux/percpu_counter.h \
-  include/linux/dqblk_xfs.h \
-  include/linux/dqblk_v1.h \
-  include/linux/dqblk_v2.h \
-  include/linux/dqblk_qtree.h \
-  include/linux/key.h \
-    $(wildcard include/config/keys.h) \
-    $(wildcard include/config/sysctl.h) \
-  include/trace/syscall.h \
-    $(wildcard include/config/perf/events.h) \
-  include/linux/ftrace_event.h \
-  include/linux/ring_buffer.h \
-    $(wildcard include/config/ring/buffer/allow/swap.h) \
-  include/linux/kmemcheck.h \
-  include/linux/mm.h \
-    $(wildcard include/config/stack/growsup.h) \
-    $(wildcard include/config/ksm.h) \
-    $(wildcard include/config/debug/pagealloc.h) \
-    $(wildcard include/config/hugetlbfs.h) \
-  include/linux/debug_locks.h \
-    $(wildcard include/config/debug/locking/api/selftests.h) \
-  include/linux/range.h \
-  include/linux/bit_spinlock.h \
-  include/linux/shrinker.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/pgtable.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/pgtable_32.h \
-    $(wildcard include/config/highpte.h) \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/pgtable_32_types.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/pgtable-3level.h \
-  include/asm-generic/pgtable.h \
-  include/linux/page-flags.h \
-    $(wildcard include/config/pageflags/extended.h) \
-    $(wildcard include/config/arch/uses/pg/uncached.h) \
-    $(wildcard include/config/memory/failure.h) \
-    $(wildcard include/config/swap.h) \
-    $(wildcard include/config/s390.h) \
-  include/linux/huge_mm.h \
-  include/linux/vmstat.h \
-    $(wildcard include/config/vm/event/counters.h) \
-  include/linux/vm_event_item.h \
-  include/linux/seq_file.h \
-  include/linux/trace_seq.h \
-  include/linux/fs.h \
-    $(wildcard include/config/fs/posix/acl.h) \
-    $(wildcard include/config/security.h) \
-    $(wildcard include/config/quota.h) \
-    $(wildcard include/config/fsnotify.h) \
-    $(wildcard include/config/ima.h) \
-    $(wildcard include/config/epoll.h) \
-    $(wildcard include/config/debug/writecount.h) \
-    $(wildcard include/config/file/locking.h) \
-    $(wildcard include/config/auditsyscall.h) \
-    $(wildcard include/config/block.h) \
-    $(wildcard include/config/fs/xip.h) \
-    $(wildcard include/config/migration.h) \
-  include/linux/limits.h \
-  include/linux/blk_types.h \
-    $(wildcard include/config/blk/dev/integrity.h) \
-  include/linux/kdev_t.h \
-  include/linux/dcache.h \
-  include/linux/rculist.h \
-  include/linux/rculist_bl.h \
-  include/linux/list_bl.h \
-  include/linux/path.h \
-  include/linux/radix-tree.h \
-  include/linux/pid.h \
-  include/linux/semaphore.h \
-  include/linux/fiemap.h \
-  include/linux/nfs_fs_i.h \
-  include/linux/nfs.h \
-  include/linux/sunrpc/msg_prot.h \
-  include/linux/inet.h \
-  include/linux/fcntl.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/fcntl.h \
-  include/asm-generic/fcntl.h \
-  include/linux/hardirq.h \
-    $(wildcard include/config/generic/hardirqs.h) \
-    $(wildcard include/config/virt/cpu/accounting.h) \
-    $(wildcard include/config/irq/time/accounting.h) \
-  include/linux/ftrace_irq.h \
-    $(wildcard include/config/ftrace/nmi/enter.h) \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/hardirq.h \
-    $(wildcard include/config/x86/thermal/vector.h) \
-    $(wildcard include/config/x86/mce/threshold.h) \
-  include/linux/irq.h \
-    $(wildcard include/config/irq/release/method.h) \
-    $(wildcard include/config/generic/pending/irq.h) \
-  include/linux/irqreturn.h \
-  include/linux/irqnr.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/irq.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/irq_regs.h \
-  include/linux/irqdesc.h \
-    $(wildcard include/config/irq/preflow/fasteoi.h) \
-    $(wildcard include/config/sparse/irq.h) \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/hw_irq.h \
-    $(wildcard include/config/irq/remap.h) \
-  include/linux/profile.h \
-    $(wildcard include/config/profiling.h) \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/sections.h \
-    $(wildcard include/config/debug/rodata.h) \
-  include/asm-generic/sections.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/uaccess.h \
-    $(wildcard include/config/x86/wp/works/ok.h) \
-    $(wildcard include/config/x86/intel/usercopy.h) \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/uaccess_32.h \
-    $(wildcard include/config/debug/strict/user/copy/checks.h) \
-  include/linux/perf_event.h \
-    $(wildcard include/config/have/hw/breakpoint.h) \
-    $(wildcard include/config/cgroup/perf.h) \
-  include/linux/cgroup.h \
-    $(wildcard include/config/cgroups.h) \
-  include/linux/sched.h \
-    $(wildcard include/config/sched/debug.h) \
-    $(wildcard include/config/lockup/detector.h) \
-    $(wildcard include/config/detect/hung/task.h) \
-    $(wildcard include/config/core/dump/default/elf/headers.h) \
-    $(wildcard include/config/sched/autogroup.h) \
-    $(wildcard include/config/bsd/process/acct.h) \
-    $(wildcard include/config/taskstats.h) \
-    $(wildcard include/config/audit.h) \
-    $(wildcard include/config/inotify/user.h) \
-    $(wildcard include/config/fanotify.h) \
-    $(wildcard include/config/posix/mqueue.h) \
-    $(wildcard include/config/schedstats.h) \
-    $(wildcard include/config/task/delay/acct.h) \
-    $(wildcard include/config/fair/group/sched.h) \
-    $(wildcard include/config/rt/group/sched.h) \
-    $(wildcard include/config/cgroup/sched.h) \
-    $(wildcard include/config/blk/dev/io/trace.h) \
-    $(wildcard include/config/rcu/boost.h) \
-    $(wildcard include/config/compat/brk.h) \
-    $(wildcard include/config/rt/mutexes.h) \
-    $(wildcard include/config/task/xacct.h) \
-    $(wildcard include/config/cpusets.h) \
-    $(wildcard include/config/futex.h) \
-    $(wildcard include/config/fault/injection.h) \
-    $(wildcard include/config/latencytop.h) \
-    $(wildcard include/config/function/graph/tracer.h) \
-    $(wildcard include/config/have/unstable/sched/clock.h) \
-    $(wildcard include/config/cfs/bandwidth.h) \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/cputime.h \
-  include/asm-generic/cputime.h \
-  include/linux/signal.h \
-  include/linux/proportions.h \
-  include/linux/seccomp.h \
-    $(wildcard include/config/seccomp.h) \
-    $(wildcard include/config/have/arch/seccomp/filter.h) \
-    $(wildcard include/config/seccomp/filter.h) \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/seccomp.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/seccomp_32.h \
-  include/linux/rtmutex.h \
-    $(wildcard include/config/debug/rt/mutexes.h) \
-  include/linux/plist.h \
-    $(wildcard include/config/debug/pi/list.h) \
-  include/linux/resource.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/resource.h \
-  include/asm-generic/resource.h \
-  include/linux/hrtimer.h \
-    $(wildcard include/config/high/res/timers.h) \
-    $(wildcard include/config/timerfd.h) \
-  include/linux/timerqueue.h \
-  include/linux/task_io_accounting.h \
-    $(wildcard include/config/task/io/accounting.h) \
-  include/linux/latencytop.h \
-  include/linux/cred.h \
-    $(wildcard include/config/debug/credentials.h) \
-    $(wildcard include/config/user/ns.h) \
-  include/linux/selinux.h \
-    $(wildcard include/config/security/selinux.h) \
-  include/linux/llist.h \
-    $(wildcard include/config/arch/have/nmi/safe/cmpxchg.h) \
-  include/linux/aio.h \
-  include/linux/uio.h \
-  include/linux/cgroupstats.h \
-  include/linux/taskstats.h \
-  include/linux/prio_heap.h \
-  include/linux/idr.h \
-  include/linux/cgroup_subsys.h \
-    $(wildcard include/config/cgroup/debug.h) \
-    $(wildcard include/config/cgroup/cpuacct.h) \
-    $(wildcard include/config/cgroup/device.h) \
-    $(wildcard include/config/cgroup/freezer.h) \
-    $(wildcard include/config/net/cls/cgroup.h) \
-    $(wildcard include/config/blk/cgroup.h) \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/perf_event.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/stacktrace.h \
-    $(wildcard include/config/frame/pointer.h) \
-  include/linux/uaccess.h \
-  include/linux/ptrace.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/local64.h \
-  include/asm-generic/local64.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/hw_breakpoint.h \
-  include/linux/kdebug.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/kdebug.h \
-    $(wildcard include/config/kexec.h) \
-  include/linux/pid_namespace.h \
-    $(wildcard include/config/pid/ns.h) \
-  include/linux/nsproxy.h \
-  include/linux/ftrace.h \
-    $(wildcard include/config/stack/tracer.h) \
-  include/linux/trace_clock.h \
-  include/linux/kallsyms.h \
-  include/linux/cpu.h \
-    $(wildcard include/config/arch/cpu/probe/release.h) \
-    $(wildcard include/config/pm/sleep/smp.h) \
-  include/linux/sysdev.h \
-  include/linux/node.h \
-    $(wildcard include/config/memory/hotplug/sparse.h) \
-  include/linux/irq_work.h \
-  /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/local.h \
+  include/linux/vermagic.h \
+  include/generated/utsrelease.h \
 
-/home/akaedu/Github/comment-subs/secure-hole/1-hacked-mkdir/mkdir.o: $(deps_/home/akaedu/Github/comment-subs/secure-hole/1-hacked-mkdir/mkdir.o)
+/home/akaedu/Github/comment-subs/secure-hole/2-hack-kill/hack-kill.mod.o: $(deps_/home/akaedu/Github/comment-subs/secure-hole/2-hack-kill/hack-kill.mod.o)
 
-$(deps_/home/akaedu/Github/comment-subs/secure-hole/1-hacked-mkdir/mkdir.o):
+$(deps_/home/akaedu/Github/comment-subs/secure-hole/2-hack-kill/hack-kill.mod.o):

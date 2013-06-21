@@ -1,6 +1,8 @@
-# kmod-11 测试
+kmod-11 测试案例分析
+=========================
 
-## THU-12-1 下载编译源码包
+THU-12-1 编译 kmod 项目源码
+---------------------------
 
 ### 下载源码包
 	$ wget https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-11.tar.gz
@@ -27,8 +29,7 @@
 	$ ls
 	kmod-11  kmod-11.tar.gz
 
-查看解压后文件数量 421个
-
+查看解压目录，可以统计出解压后文件数量 421个
 	$ cd kmod-11
 	$ find * | wc  -l
 	421
@@ -46,6 +47,7 @@
 	$ make
 	
 查看tools目录下生成的可执行文件
+
 	$ ls ./tools/ -l |  grep "x"
 	lrwxrwxrwx 1 akaedu akaedu     10 Jun 18 01:17 depmod -> kmod-nolib
 	lrwxrwxrwx 1 akaedu akaedu     10 Jun 18 01:17 insmod -> kmod-nolib
@@ -57,6 +59,7 @@
 	lrwxrwxrwx 1 akaedu akaedu     10 Jun 18 01:17 rmmod -> kmod-nolib
 
 安装可执行文件
+
 	$ make install
 	权限不够，需要 sudo
 
@@ -113,7 +116,11 @@
 	 /bin/mkdir -p '/usr/share/man/man8'
 	 /usr/bin/install -c -m 644 depmod.8 insmod.8 lsmod.8 rmmod.8 modprobe.8 modinfo.8 '/usr/share/man/man8'
 
-## THU-12-2 测试 kmod 命令
+
+
+THU-12-2 测试 kmod 命令
+---------------------------
+
 ### 运行 make install 安装命令
 	$ sudo make install
 
@@ -237,7 +244,8 @@
 	  depmod       compat depmod command
 
 
-## THU-12-2 测试 insmod 命令
+THU-12-3 测试 insmod 命令
+---------------------------
 
 ### 编写测试用内核模块源码 hello.c 
 
@@ -340,7 +348,8 @@
 	hello                  12415  0 
 	
 
-## THU-12-3 测试 rmmod 命令
+THU-12-4 测试 rmmod 命令
+---------------------------
 
 ### 使用测试用工具 rmmod 卸载内核模块
 	$ sudo ./kmod-11/tools/rmmod hello-module/hello.ko
@@ -362,7 +371,9 @@
 	[352365.795628] .stack = dd197f40
 	$ 
 
-## THU-12-4 测试 lsmod 命令
+
+THU-12-5 测试 lsmod 命令
+---------------------------
 
 ### lsmod 命令运行
 不加参数，直接运行 lsmod ，可以显示出当前在内核中的模块情况。
@@ -446,7 +457,8 @@
 	$
 
 
-## THU-12-5 测试 modinfo 命令
+THU-12-6 测试 modinfo 命令
+---------------------------
 
 ### modinfo 命令运行参数
 对于没有依赖关系的单个 .ko 内核模块，使用 modinfo 可以直接显示出模块的信息。
@@ -539,7 +551,9 @@
 	vermagic:       3.2.0-29-generic-pae SMP mod_unload modversions 686 
 	$ 
 
-## THU-12-6 测试 depmod 命令
+
+THU-12-7 测试 depmod 命令
+---------------------------
 
 ### 直接运行 depmod 命令
 
@@ -561,7 +575,18 @@
 	kernel/arch/x86/crypto/aesni-intel.ko: kernel/arch/x86/crypto/aes-i586.ko kernel/crypto/cryptd.ko
 	$ 
 
-## THU-12-7 测试 modprobe 命令
+
+
+THU-12-8 测试 modprobe 命令
+---------------------------
+### 直接运行 modprobe 命令，加 -l 参数查看可以加载的模块
+
+	$ sudo ./kmod-11/tools/modprobe -l | grep nfs
+	kernel/fs/nfs_common/nfs_acl.ko
+	kernel/fs/nfs/nfs.ko
+	kernel/fs/nfsd/nfsd.ko
+	kernel/drivers/xen/xenfs/xenfs.ko
+	$ 
 
 ### 直接运行 modprobe 命令，加 -D 参数查看依赖关系
 
@@ -597,7 +622,10 @@
 	sunrpc                205647  18 nfsd,nfs_acl,auth_rpcgss,lockd
 	$ 
 
-### THU-12-8 测试 modprobe 命令参数
+THU-12-9 测试 modprobe 命令参数
+---------------------------
+
+### 查看依赖关系 show-depends 
 	$ modprobe --show-depends module_name
 
 查看 nfs 模块的依赖关系，也就是依赖于哪些模块的加载
@@ -611,6 +639,7 @@
 	insmod /lib/modules/3.2.0-29-generic-pae/kernel/fs/nfs/nfs.ko 
 	$ 
 
+### 查看配置信息 config
 查看以 nfs 结尾的符号信息，也就是 nfs 模块所 export 的符号表
 
 	$ modprobe -c | egrep "nfs$"
@@ -633,7 +662,28 @@
 	alias symbol:nfs_retry_commit nfs
 	$ 
 
-## THU-12-9 修改调试 depmod 命令
+### 查看模块内部信息 show-modversions
+	$ ../kmod-11/tools/modprobe  --show-modversions ../hello-module/hello.ko 
+	program_invocation_short_name = modprobe
+	program_invocation_name = ../kmod-11/tools/modprobe
+	program_invocation_short_name = bfeb3601
+	0x75646f6d98397cc5	le_layout
+	0x6666696a7d11c268	ies
+	0x6e69727050eedeb8	tk
+
+	$ ../kmod-11/tools/modprobe  --show-modversions ../kmod-11/testsuite/rootfs-pristine/test-init/ext4-i686.ko 
+	program_invocation_short_name = modprobe
+	program_invocation_name = ../kmod-11/tools/modprobe
+	program_invocation_short_name = bfc845de
+	0x75646f6d0041086e	le_layout
+	0x635f626dcefcf88c	ache_entry_find_next
+	0x6a626f6b9bedef39	ect_put
+	0x646b6c62d42788de	ev_issue_discard
+	0x7465736b5edae721	_create_and_add
+	0x61705f6444cd091f	th
+
+THU-12-10 修改调试 depmod 命令
+---------------------------
 
 ### 修改源码，插入打印函数
 
@@ -689,8 +739,10 @@
 	$ 
 
 
-## THU-12-10 修改调试 modprobe 命令
+THU-12-11 修改调试 modprobe 命令
+---------------------------
 
+### 查看 modprobe 源码
 	$ vi kmod-11/tools/modprobe.c 
 	跟踪 modprobe 函数执行过程，最后在 libkmod-module.c 中找到构建模块依赖关系的代码
 
@@ -714,6 +766,7 @@
 	616         return mod->dep;
 	617 }
 
+### 修改 kmod_module_parse_depline 函数
 	$ vi kmod-11/libkmod/libkmod-module.c +120
 	120 int kmod_module_parse_depline(struct kmod_module *mod, char *line)
 	121 {
@@ -738,11 +791,9 @@
 	140 
 
 ### 插入130行的打印 line 的语句
-
 	130         printf("<mydebug> line = %s\n", line);
 
 ### 重新编译生成新的 modprobe
-	
 	$ make -C kmod-11/
 	make: Entering directory `/home/akaedu/Github/test-kmod-11/kmod-11'
 	make --no-print-directory all-recursive
@@ -760,7 +811,6 @@
 	$ 
 
 ### 运行 modprobe nfs 
-
 	$ ./kmod-11/tools/modprobe nfs
 	<mydebug> line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
 	$ 
@@ -783,7 +833,6 @@
 
 
 ### 重新编译生成新的 modprobe
-	
 	$ make -C kmod-11/
 	make: Entering directory `/home/akaedu/Github/test-kmod-11/kmod-11'
 	make --no-print-directory all-recursive
@@ -801,7 +850,6 @@
 	$ 
 
 ### 运行 modprobe nfs 
-
 	$ ./kmod-11/tools/modprobe nfs
 	<mydebug> line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
 	<mydebug> p = kernel/fs/nfs_common/nfs_acl.ko
@@ -810,29 +858,8 @@
 	<mydebug> p = kernel/fs/lockd/lockd.ko
 	<mydebug> p = kernel/net/sunrpc/sunrpc.ko
 
-
-### modprobe 参数----
-	$ ../kmod-11/tools/modprobe  --show-modversions ../hello-module/hello.ko 
-	program_invocation_short_name = modprobe
-	program_invocation_name = ../kmod-11/tools/modprobe
-	program_invocation_short_name = bfeb3601
-	0x75646f6d98397cc5	le_layout
-	0x6666696a7d11c268	ies
-	0x6e69727050eedeb8	tk
-
-
-	$ ../kmod-11/tools/modprobe  --show-modversions ../kmod-11/testsuite/rootfs-pristine/test-init/ext4-i686.ko 
-	program_invocation_short_name = modprobe
-	program_invocation_name = ../kmod-11/tools/modprobe
-	program_invocation_short_name = bfc845de
-	0x75646f6d0041086e	le_layout
-	0x635f626dcefcf88c	ache_entry_find_next
-	0x6a626f6b9bedef39	ect_put
-	0x646b6c62d42788de	ev_issue_discard
-	0x7465736b5edae721	_create_and_add
-	0x61705f6444cd091f	th
-
-## THU-12-11 编译生成 testsuite 命令集
+THU-12-12 编译生成 testsuite 命令集
+---------------------------
 
 ### make check 编译并运行集成测试
 
@@ -1002,7 +1029,8 @@
 	$ 
 
 
-## THU-12-12 编译 Debug 版 
+THU-12-13 编译生成 Debug 版 
+---------------------------
 
 ### 配置时加上 --enable-debug, --enable-logging 参数
 	$ ./configure CFLAGS="-g -O2" --prefix=/usr --sysconfdir=/etc --libdir=/usr/lib --enable-debug --enable-logging
@@ -1475,7 +1503,6 @@
 	$ 
 
 ### 设置日志输出级别为6
-
 	$ export KMOD_LOG=6
 	$ ./tools/lsmod 
 	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x99cf008 created
@@ -1530,7 +1557,6 @@
 	$ 
 
 ### 设置日志输出级别为5
-
 	$ export KMOD_LOG=5
 	$ ./tools/lsmod 
 	Module                  Size  Used by
@@ -1582,7 +1608,7 @@
 	vmxnet3                44924  0 
 	$ 
 
-## insmod 命令执行流程
+### insmod 命令执行流程
 	$ export KMOD_LOG=7
 	$ ./tools/insmod ../hello-module/hello.ko 
 	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x8b64008 created
@@ -1611,7 +1637,7 @@
 	libkmod: INFO libkmod/libkmod.c:318 kmod_unref: context 0x9ee5008 released
 	$ 
 
-## modinfo 命令
+### modinfo 命令
 	$ ./tools/modinfo ../hello-module/hello.ko 
 	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x90b7008 created
 	libkmod: DEBUG libkmod/libkmod.c:276 kmod_new: log_priority=7
@@ -1633,85 +1659,137 @@
 	$ 
 
 
-## Hole-1 mkdir
+THU-12-14 测试 alias 方式加载
+---------------------------
 
-	$ sudo cat /proc/kallsyms | grep sys_call_table
-	c15b0000 R sys_call_table
+### 编译获得内核模块hello.ko（测试用）
+	$ ls hello-module/
+	hello.c   hello.mod.c  hello.o   modules.order
+	hello.ko  hello.mod.o  Makefile  Module.symvers
+	$ ls hello-module/hello.ko 
+	hello-module/hello.ko
 	$ 
 
-	$ vi /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/unistd_32.h 
-	 46 #define __NR_rename              38
-	 47 #define __NR_mkdir               39
-	 48 #define __NR_rmdir               40
-
-## kill 命令
-	$ cat /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/unistd_32.h | grep kill
-
-	#define __NR_kill		 37
-	#define __NR_tkill		238
-	#define __NR_tgkill		270
-
-	$ sudo insmod mk.ko
-	$ ls
-	aabb      mk.c      mkdir.mod.c  mkdir.o  mk.mod.c  m.ko  modules.order
-	Makefile  mkdir.ko  mkdir.mod.o  mk.ko    mk.mod.o  mk.o  Module.symvers
-	$ ps 
-	  PID TTY          TIME CMD
-	 3307 pts/2    00:00:10 bash
-	 7043 pts/2    00:00:26 evince
-	15090 pts/2    00:00:00 ps
-	$ kill 7043
-	$ dmesg | tail
-	[83680.122974] table at c15b0000
-	[83706.463982] exit ok
-	[83733.513558] init ok, SYS_mkdir = 39
-	[83733.513570] table at c15b0000
-	[83736.190368] haha, mkdir is hacked!
-	[83747.506425] haha, mkdir is hacked!
-	[83759.254190] exit ok
-	[84529.398497] init ok, SYS_mkdir = 37
-	[84529.398504] table at c15b0000
-	[84556.100726] haha, mkdir is hacked!
-	$ sudo rmmod mk.ko
-	$ kill 7043
-
-## ls 命令
-	$ strace ls 2>&1 | grep dent
-	getdents64(3, /* 23 entries */, 32768)  = 736
-	getdents64(3, /* 0 entries */, 32768)   = 0
-
-	$ cat /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/unistd_32.h | grep getdents 
-	#define __NR_getdents		141
-	#define __NR_getdents64		220
-
-
-	$ sudo insmod mk.ko
-	$ ls
-	$ ls
-	$ cat Makefile
-
-	obj-m := mk.o
-
-	#KDIR := /home/limingth/tiny210/src/linux-2.6.35.7
-	#KDIR := /home/akaedu/teacher_li/linux-2.6.35.7/
-	KDIR := /usr/src/linux-headers-3.2.0-29-generic-pae/
-
-	all:
-		make -C $(KDIR)	SUBDIRS=$(PWD) 	modules
-
-	clean:
-		rm -rf *.o *.ko *.mod.* *.cmd 
-		rm -rf .*
-
-	$ sudo rmmod mk.ko
-	$ ls
-	aabb      mk.c      mkdir.mod.c  mkdir.o  mk.mod.c  m.ko  modules.order
-	Makefile  mkdir.ko  mkdir.mod.o  mk.ko    mk.mod.o  mk.o  Module.symvers
+### 编写 modprobe.conf 配置文件
+	$ vi /etc/modprobe.d/modprobe.conf 
+	$ 此时发现权限只读，改为 sudo 方式打开
+	$ sudo vi /etc/modprobe.d/modprobe.conf 
+	$ cat /etc/modprobe.d/modprobe.conf 
+	alias myalias hello
 	$ 
 
+### 此时用 modprobe 加载，失败
+	$ ./kmod-11/tools/modprobe myalias
+	program_invocation_short_name = modprobe
+	program_invocation_name = ./kmod-11/tools/modprobe
+	program_invocation_short_name = bfa9463d
+	path is quiet
+	path is /lib/modules/3.2.0-29-generic-pae/modules.dep.bin
+	path is /lib/modules/3.2.0-29-generic-pae/modules.alias.bin
+	path is /lib/modules/3.2.0-29-generic-pae/modules.symbols.bin
+	before options args[i] = myalias
+	name = hello
+	mod = 0x8b5a148
+	1 name='hello' path='(null)'
+	2 name='hello' path='(null)'
+	name = hello
+	path = (null)
+	modprobe: ERROR: could not find module by name='hello'
+	modprobe: ERROR: could not insert 'hello': Function not implemented
+	0, args[i] = myalias
+	$ 
 
+### 复制 hello.ko 到系统目录下 /lib/modules/3.2.0-29-generic-pae/
+	$ sudo cp ./hello-module/hello.ko /lib/modules/3.2.0-29-generic-pae/
+	$ ls /lib/modules/3.2.0-29-generic-pae/hello.ko 
+	/lib/modules/3.2.0-29-generic-pae/hello.ko
+	$ 
+
+### 此时用 modprobe 加载，仍然失败
+	$ ./kmod-11/tools/modprobe myalias
+	program_invocation_short_name = modprobe
+	program_invocation_name = ./kmod-11/tools/modprobe
+	program_invocation_short_name = bf99d63d
+	path is quiet
+	path is /lib/modules/3.2.0-29-generic-pae/modules.dep.bin
+	path is /lib/modules/3.2.0-29-generic-pae/modules.alias.bin
+	path is /lib/modules/3.2.0-29-generic-pae/modules.symbols.bin
+	before options args[i] = myalias
+	name = hello
+	mod = 0x9a42148
+	1 name='hello' path='(null)'
+	2 name='hello' path='(null)'
+	name = hello
+	path = (null)
+	modprobe: ERROR: could not find module by name='hello'
+	modprobe: ERROR: could not insert 'hello': Function not implemented
+	0, args[i] = myalias
+	$ 
+
+### 运行 depmod 命令，重新生成依赖关系
+	$ sudo ./kmod-11/tools/depmod 
+	$ 此时识别出 hello.ko，并将它的依赖关系写入 modules.dep 文件
+	$ cat /lib/modules/3.2.0-29-generic-pae/modules.dep | grep hello
+	hello.ko:
+	$ 
+
+### 此时再用 modprobe 加载，终于成功
+	$ sudo ./kmod-11/tools/modprobe myalias
+	program_invocation_short_name = modprobe
+	program_invocation_name = ./kmod-11/tools/modprobe
+	program_invocation_short_name = bfd7494c
+	path is quiet
+	path is /lib/modules/3.2.0-29-generic-pae/modules.dep.bin
+	path is /lib/modules/3.2.0-29-generic-pae/modules.alias.bin
+	path is /lib/modules/3.2.0-29-generic-pae/modules.symbols.bin
+	before options args[i] = myalias
+	name = hello
+
+	line = hello.ko:
+	---------------------
+	mod = 0x85e3148
+	1 name='hello' path='/lib/modules/3.2.0-29-generic-pae/hello.ko'
+	2 name='hello' path='/lib/modules/3.2.0-29-generic-pae/hello.ko'
+	path = /lib/modules/3.2.0-29-generic-pae/hello.ko
+	0, args[i] = myalias
+	$ lsmod | grep hello
+	hello                  12415  0 
+	$ 
+
+THU-12-15 测试 blacklist 方式禁止加载
+---------------------------
+
+### 编写 modprobe.conf 配置文件
+	$ sudo vi /etc/modprobe.d/modprobe.conf 
+	$ cat /etc/modprobe.d/modprobe.conf 
+	alias myalias hello
+	blacklist hello 
+	$ 
+
+### 重新用 modprobe 加载，失败 
+	$ sudo ./kmod-11/tools/modprobe myalias 
+	program_invocation_short_name = modprobe
+	program_invocation_name = ./kmod-11/tools/modprobe
+	program_invocation_short_name = bfa51940
+	libkmod: kmod_new: ctx 0x8ab4008 created
+	path is quiet
+	path is /lib/modules/3.2.0-29-generic-pae/modules.dep.bin
+	path is /lib/modules/3.2.0-29-generic-pae/modules.alias.bin
+	path is /lib/modules/3.2.0-29-generic-pae/modules.symbols.bin
+	before options args[i] = myalias
+	0, args[i] = myalias
 	
-参考资料：
-<http://hi.baidu.com/lu_youyou/item/b6585ff84ade0b1ea62988c9>
+### 用 lsmod 查看没有加载成功
+	$ lsmod | grep hello
+	$ 
+
+### 重新修改 modprobe.conf 配置文件
+	$ sudo vi /etc/modprobe.d/modprobe.conf 
+	1 alias myalias hello
+	2 #blacklist hello 
+
+### 重新用 modprobe 加载，成功
+
+
 
 
