@@ -2702,4 +2702,64 @@ Underfull \hbox (badness 10000) in paragraph at lines 1790--1790
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 1790--1790
-[]\EU1/lmtt/m/n/10.95 libkmod: DEBUG libkmod/ libkmod- modul
+[]\EU1/lmtt/m/n/10.95 libkmod: DEBUG libkmod/ libkmod- module.c:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1790--1790
+[]\EU1/lmtt/m/n/10.95 libkmod: DEBUG libkmod/ libkmod.c:
+ []
+
+
+Overfull \hbox (53.70993pt too wide) in paragraph at lines 1790--1790
+[]\EU1/lmtt/m/n/10.95 libkmod: INFO libkmod/ libkmod.c: 318 kmod_unref: context
+ 0x90b7008 released[] 
+ []
+
+[54] [55]
+Overfull \hbox (9.83621pt too wide) in paragraph at lines 1835--1835
+[]\EU1/lmtt/m/n/10.95 modprobe: ERROR: could not insert 'hello': Function not i
+mplemented[] 
+ []
+
+
+Overfull \hbox (9.83621pt too wide) in paragraph at lines 1867--1867
+[]\EU1/lmtt/m/n/10.95 modprobe: ERROR: could not insert 'hello': Function not i
+mplemented[] 
+ []
+
+[56]
+Underfull \hbox (badness 6758) in paragraph at lines 1901--1901
+[]\EU1/lmtt/m/n/10.95 1 name='hello' path='/ lib/ modules/ 3.2.0-29- generic- p
+ae/
+ []
+
+
+Underfull \hbox (badness 6758) in paragraph at lines 1901--1901
+[]\EU1/lmtt/m/n/10.95 2 name='hello' path='/ lib/ modules/ 3.2.0-29- generic- p
+ae/
+ []
+
+[57] [58]
+Underfull \hbox (badness 6758) in paragraph at lines 1965--1965
+[]\EU1/lmtt/m/n/10.95 1 name='hello' path='/ lib/ modules/ 3.2.0-29- generic- p
+ae/
+ []
+
+
+Underfull \hbox (badness 6758) in paragraph at lines 1965--1965
+[]\EU1/lmtt/m/n/10.95 2 name='hello' path='/ lib/ modules/ 3.2.0-29- generic- p
+ae/
+ []
+
+[59] [60] (./test-kmod.aux) ) 
+Here is how much of TeX's memory you used:
+ 9679 strings out of 495713
+ 149641 string characters out of 1188883
+ 312213 words of memory out of 3000000
+ 12705 multiletter control sequences out of 15000+50000
+ 4092 words of font info for 34 fonts, out of 3000000 for 9000
+ 28 hyphenation exceptions out of 8191
+ 40i,5n,44p,742b,332s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on test-kmod.pdf (60 pages).
