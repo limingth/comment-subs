@@ -454,7 +454,6 @@ Kmod 运行时调试图
 	libkmod: DEBUG libkmod/libkmod.c:276 kmod_new: log_priority=7
 	$ 
 
-
 ![设置 KMOD_LOG=6 模式下插入模块](./pictures/2-4-insert2.png)
 
 

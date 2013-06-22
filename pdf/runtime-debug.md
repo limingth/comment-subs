@@ -436,7 +436,7 @@ Kmod 运行时调试图
 	libkmod: INFO libkmod/libkmod.c:318 kmod_unref: context 0x8688008 released
 	$ 
 
-![设置 KMOD_LOG=7 模式下插入模块](./pictures/2-3-insert.png)
+![设置 KMOD_LOG=7 模式下插入模块](./pictures/2-3-insmod.png)
 
 	$ sudo KMOD_LOG=7 ./tools/rmmod ../hello-module/hello.ko
 	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x9584008 created
@@ -454,7 +454,7 @@ Kmod 运行时调试图
 	libkmod: DEBUG libkmod/libkmod.c:276 kmod_new: log_priority=7
 	$ 
 
-![设置 KMOD_LOG=6 模式下插入模块](./pictures/2-4-insert2.png)
+![设置 KMOD_LOG=6 模式下插入模块](./pictures/2-4-insmod2.png)
 
 
 
