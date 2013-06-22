@@ -1,6 +1,8 @@
 all: 
 	make new
+	make kmod 
 	make test-kmod
+	make doc
 
 f figures:
 	make -C figures

@@ -424,19 +424,18 @@ Kmod 运行时调试图
 
 ### 设置日志优先级 KMOD_LOG=7
 	$ sudo KMOD_LOG=7 ./tools/insmod ../hello-module/hello.ko
-	[sudo] password for akaedu: 
-	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x8688008 created
+	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x9243008 created
 	libkmod: DEBUG libkmod/libkmod.c:276 kmod_new: log_priority=7
 	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='hello' found=(nil)
 	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='hello' found=(nil)
-	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x8688088 key='hello'
-	libkmod: DEBUG libkmod/libkmod-module.c:714 kmod_module_get_path: name='hello' path='/tmp/kmod-11/../hello-module/hello.ko'
-	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x8688088 released
-	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x8688088 key='hello'
-	libkmod: INFO libkmod/libkmod.c:318 kmod_unref: context 0x8688008 released
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9243088 key='hello'
+	libkmod: DEBUG libkmod/libkmod-module.c:718 kmod_module_get_path: name='hello' path='/home/akaedu/Github/test-kmod-11/kmod-11/../hello-module/hello.ko'
+	libkmod: DEBUG libkmod/libkmod-module.c:440 kmod_module_unref: kmod_module 0x9243088 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9243088 key='hello'
+	libkmod: INFO libkmod/libkmod.c:318 kmod_unref: context 0x9243008 released
 	$ 
 
-![设置 KMOD_LOG=7 模式下插入模块](./pictures/2-3-insert.png)
+![设置 KMOD_LOG=7 模式下插入模块](./pictures/2-3-insmod.png)
 
 	$ sudo KMOD_LOG=7 ./tools/rmmod ../hello-module/hello.ko
 	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x9584008 created
@@ -454,9 +453,147 @@ Kmod 运行时调试图
 	libkmod: DEBUG libkmod/libkmod.c:276 kmod_new: log_priority=7
 	$ 
 
-![设置 KMOD_LOG=6 模式下插入模块](./pictures/2-4-insert2.png)
-
+![设置 KMOD_LOG=6 模式下插入模块](./pictures/2-4-insmod2.png)
 
 
 源码修改运行调试图
 ---------------------
+
+### 修改 modprobe.c 源码
+	
+### 修改 kmod_module_parse_depline 函数
+	$ vi kmod-11/libkmod/libkmod-module.c +120
+	120 int kmod_module_parse_depline(struct kmod_module *mod, char *line)
+	121 {
+	122         struct kmod_ctx *ctx = mod->ctx;
+	123         struct kmod_list *list = NULL;
+	124         const char *dirname;
+	125         char buf[PATH_MAX];
+	126         char *p, *saveptr;
+	127         int err = 0, n = 0;
+	128         size_t dirnamelen;
+	129 
+	130         printf("<mydebug> line = %s\n", line);
+	131 
+	132         if (mod->init.dep)
+	133                 return mod->n_dep;
+	134         assert(mod->dep == NULL);
+	135         mod->init.dep = true;
+	136 
+	137         p = strchr(line, ':');
+	138         if (p == NULL)
+	139                 return 0;
+	140 
+
+![插入130行的打印 line 的语句](./pictures/3-1-depline.png)
+
+### 重新编译生成新的 modprobe
+	$ make -C kmod-11/
+	make: Entering directory `/home/akaedu/Github/test-kmod-11/kmod-11'
+	make --no-print-directory all-recursive
+	Making all in .
+	  CC       libkmod/libkmod-module.lo
+	  CCLD     libkmod/libkmod.la
+	  CCLD     libkmod/libkmod-private.la
+	  CCLD     tools/kmod
+	  CCLD     tools/kmod-nolib
+	Making all in libkmod/docs
+	make[2]: Nothing to be done for `all'.
+	Making all in man
+	make[2]: Nothing to be done for `all'.
+	make: Leaving directory `/home/akaedu/Github/test-kmod-11/kmod-11'
+	$ 
+
+![make编译成功，增量编译了libkmod-module模块](./pictures/3-2-make.png)
+
+### 运行 modprobe nfs 
+	$ ./kmod-11/tools/modprobe nfs
+	<mydebug> line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
+
+	$ lsmod | grep nfs
+	nfsd                  229850  13 
+	nfs                   307376  0 
+	nfs_acl                12771  2 nfsd,nfs
+	auth_rpcgss            39597  2 nfsd,nfs
+	fscache                50642  1 nfs
+	lockd                  78804  2 nfsd,nfs
+	sunrpc                205647  19 nfsd,nfs,nfs_acl,auth_rpcgss,lockd
+	$ 
+
+![运行 modprobe nfs 完成插入](./pictures/3-3-modprobe.png)
+
+
+### 插入167行打印语句
+	$ vi kmod-11/libkmod/libkmod-module.c +161
+	161         p++;
+	162         for (p = strtok_r(p, " \t", &saveptr); p != NULL;
+	163                                         p = strtok_r(NULL, " \t", &saveptr)     ) {
+	164                 struct kmod_module *depmod;
+	165                 const char *path;
+	166 
+	167                 printf("<mydebug> p = %s\n", p);
+	168                 path = path_join(p, dirnamelen, buf);
+	169                 if (path == NULL) {
+	170                         ERR(ctx, "could not join path '%s' and '%s'.\n",
+	171                             dirname, p);
+	172                         goto fail;
+	173                 }
+	
+![插入打印每个模块名称的调试代码](./pictures/3-4-print-p.png)
+
+### 重新编译生成新的 modprobe
+	$ make -C kmod-11/
+	make: Entering directory `/home/akaedu/Github/test-kmod-11/kmod-11'
+	make --no-print-directory all-recursive
+	Making all in .
+	  CC       libkmod/libkmod-module.lo
+	  CCLD     libkmod/libkmod.la
+	  CCLD     libkmod/libkmod-private.la
+	  CCLD     tools/kmod
+	  CCLD     tools/kmod-nolib
+	Making all in libkmod/docs
+	make[2]: Nothing to be done for `all'.
+	Making all in man
+	make[2]: Nothing to be done for `all'.
+	make: Leaving directory `/home/akaedu/Github/test-kmod-11/kmod-11'
+	$ 
+
+### 运行 modprobe nfs 
+	$ ./kmod-11/tools/modprobe nfs
+	<mydebug> line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
+	<mydebug> p = kernel/fs/nfs_common/nfs_acl.ko
+	<mydebug> p = kernel/net/sunrpc/auth_gss/auth_rpcgss.ko
+	<mydebug> p = kernel/fs/fscache/fscache.ko
+	<mydebug> p = kernel/fs/lockd/lockd.ko
+	<mydebug> p = kernel/net/sunrpc/sunrpc.ko
+
+![调试代码输出详细调试信息](./pictures/3-5-print-p-output.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

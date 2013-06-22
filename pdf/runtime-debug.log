@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.2-0.9995.2 (TeX Live 2009/Debian) (format=xelatex 2013.6.16)  22 JUN 2013 09:11
+This is XeTeX, Version 3.1415926-2.2-0.9995.2 (TeX Live 2009/Debian) (format=xelatex 2013.6.16)  22 JUN 2013 10:43
 entering extended mode
  %&-line parsing enabled.
 **runtime-debug.tex
@@ -482,14 +482,440 @@ Overfull \vbox (0.86424pt too high) detected at line 234
 
 [6]
 File: ./pictures/1-5-test.png Graphic file (type QTm)
- <use  "./pictures/1-5-test.png" > [7] [8] (./runtime-debug.aux) ) 
+ <use  "./pictures/1-5-test.png" > [7]
+Overfull \hbox (38.47997pt too wide) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking for gcc - std=gnu99 option to accept ISO Standar
+d C... (cached) -
+ []
+
+
+Overfull \hbox (11.75247pt too wide) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking for special C compiler options needed for large 
+files... no[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking how to convert i686- pc- linux-
+ []
+
+
+Underfull \hbox (badness 3098) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports - fno- rtti - fno-
+ []
+
+
+Underfull \hbox (badness 2035) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking whether the gcc - std=gnu99 linker (/ usr/ bin/
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag -
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag -
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag -
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag -
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag -
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wno-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag -
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag -
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag -
+ []
+
+
+Underfull \hbox (badness 4181) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wlogical-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wsign-
+ []
+
+
+Underfull \hbox (badness 5345) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wformat-
+ []
+
+
+Underfull \hbox (badness 5345) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wformat-
+ []
+
+
+Underfull \hbox (badness 2035) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wold- style-
+ []
+
+
+Underfull \hbox (badness 4181) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wpointer-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Winit-
+ []
+
+
+Underfull \hbox (badness 6725) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wfloat-
+ []
+
+
+Underfull \hbox (badness 4181) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wmissing-
+ []
+
+
+Underfull \hbox (badness 5345) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wstrict-
+ []
+
+
+Underfull \hbox (badness 2368) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wredundant-
+ []
+
+
+Underfull \hbox (badness 4181) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wmissing-
+ []
+
+
+Underfull \hbox (badness 4181) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wmissing-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag -
+ []
+
+
+Underfull \hbox (badness 6725) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wendif-
+ []
+
+
+Underfull \hbox (badness 5345) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wstrict-
+ []
+
+
+Underfull \hbox (badness 6725) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wwrite-
+ []
+
+
+Underfull \hbox (badness 3590) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wno- long-
+ []
+
+
+Underfull \hbox (badness 2035) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wno- unused-
+ []
+
+
+Underfull \hbox (badness 2035) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wno- unused-
+ []
+
+
+Underfull \hbox (badness 5345) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wnested-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wchar-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wtype-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag -
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - fno-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag -
+ []
+
+
+Underfull \hbox (badness 3189) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - ffunction-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - fdata-
+ []
+
+
+Underfull \hbox (badness 4595) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wl,-- as-
+ []
+
+
+Underfull \hbox (badness 4595) in paragraph at lines 429--429
+[]\EU1/lmtt/m/n/10.95 checking if gcc - std=gnu99 supports flag - Wl,-- gc-
+ []
+
+
+Underfull \hbox (badness 1762) in paragraph at lines 429--429
+\EU1/lmtt/m/n/10.95 arith - Winit- self - Wdeclaration- after- statement - Wflo
+at-
+ []
+
+
+Underfull \hbox (badness 2680) in paragraph at lines 429--429
+\EU1/lmtt/m/n/10.95 Wendif- labels - Wstrict- aliasing=2 - Wwrite- strings - Wn
+o-
+ []
+
+[8]
+Underfull \vbox (badness 10000) detected at line 429
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 429
+ []
+
+[9]
+Underfull \vbox (badness 10000) detected at line 429
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 429
+ []
+
+[10]
+Underfull \vbox (badness 10000) detected at line 429
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 429
+ []
+
+[11]
+Underfull \vbox (badness 10000) detected at line 429
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 429
+ []
+
+[12]
+Underfull \vbox (badness 10000) detected at line 429
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 429
+ []
+
+[13]
+File: ./pictures/2-1-configure.png Graphic file (type QTm)
+ <use  "./pictures/2-1-configure.png" >
+Underfull \hbox (badness 1803) in paragraph at lines 509--509
+[]\EU1/lmtt/m/n/10.95 test - z "testsuite/ uname.la testsuite/ path.la testsuit
+e/
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 509--509
+\EU1/lmtt/m/n/10.95 init_module.la testsuite/ delete_module.la testsuite/
+ []
+
+
+Underfull \hbox (badness 1910) in paragraph at lines 509--509
+\EU1/lmtt/m/n/10.95 libtestsuite.la" || rm - f testsuite/ uname.la testsuite/
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 509--509
+\EU1/lmtt/m/n/10.95 path.la testsuite/ init_module.la testsuite/
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 509--509
+\EU1/lmtt/m/n/10.95 test- loaded testsuite/ test- modinfo testsuite/ test-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 509--509
+\EU1/lmtt/m/n/10.95 alias testsuite/ test- new- module testsuite/ test-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 509--509
+\EU1/lmtt/m/n/10.95 modprobe testsuite/ test- blacklist testsuite/ test-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 509--509
+[]\EU1/lmtt/m/n/10.95 test - z "libkmod/ libkmod- util.la libkmod/ libkmod-
+ []
+
+[14]
+Underfull \vbox (badness 10000) detected at line 509
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 509
+ []
+
+[15]
+File: ./pictures/2-2-make.png Graphic file (type QTm)
+ <use  "./pictures/2-2-make.png" >
+Overfull \hbox (13.46869pt too wide) in paragraph at lines 530--530
+[]\EU1/lmtt/m/n/10.95 libkmod: INFO libkmod/ libkmod.c: 275 kmod_new: ctx 0x924
+3008 created[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 530--530
+[]\EU1/lmtt/m/n/10.95 libkmod: DEBUG libkmod/ libkmod.c:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 530--530
+[]\EU1/lmtt/m/n/10.95 libkmod: DEBUG libkmod/ libkmod.c:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 530--530
+[]\EU1/lmtt/m/n/10.95 libkmod: DEBUG libkmod/ libkmod.c:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 530--530
+[]\EU1/lmtt/m/n/10.95 libkmod: DEBUG libkmod/ libkmod- module.c:
+ []
+
+
+Underfull \hbox (badness 1558) in paragraph at lines 530--530
+\EU1/lmtt/m/n/10.95 718 kmod_module_get_path: name='hello' path='/ home/ akaedu
+/
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 530--530
+[]\EU1/lmtt/m/n/10.95 libkmod: DEBUG libkmod/ libkmod- module.c:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 530--530
+[]\EU1/lmtt/m/n/10.95 libkmod: DEBUG libkmod/ libkmod.c:
+ []
+
+
+Overfull \hbox (53.70993pt too wide) in paragraph at lines 530--530
+[]\EU1/lmtt/m/n/10.95 libkmod: INFO libkmod/ libkmod.c: 318 kmod_unref: context
+ 0x9243008 released[] 
+ []
+
+[16]
+File: ./pictures/2-3-insmod.png Graphic file (type QTm)
+ <use  "./pictures/2-3-insmod.png" >
+Overfull \hbox (13.46869pt too wide) in paragraph at lines 544--544
+[]\EU1/lmtt/m/n/10.95 libkmod: INFO libkmod/ libkmod.c: 275 kmod_new: ctx 0x958
+4008 created[] 
+ []
+
+[17]
+Overfull \hbox (13.46869pt too wide) in paragraph at lines 557--557
+[]\EU1/lmtt/m/n/10.95 libkmod: INFO libkmod/ libkmod.c: 275 kmod_new: ctx 0x9c4
+6008 created[] 
+ []
+
+
+Overfull \hbox (53.70993pt too wide) in paragraph at lines 557--557
+[]\EU1/lmtt/m/n/10.95 libkmod: INFO libkmod/ libkmod.c: 318 kmod_unref: context
+ 0x9c46008 released[] 
+ []
+
+
+Overfull \hbox (13.46869pt too wide) in paragraph at lines 557--557
+[]\EU1/lmtt/m/n/10.95 libkmod: INFO libkmod/ libkmod.c: 275 kmod_new: ctx 0x958
+4008 created[] 
+ []
+
+File: ./pictures/2-4-insmod2.png Graphic file (type QTm)
+<use  "./pictures/2-4-insmod2.png" > [18]
+Overfull \hbox (30.91493pt too wide) in paragraph at lines 593--593
+[]\EU1/lmtt/m/n/10.95 120 int kmod_module_parse_depline(struct kmod_module *mod
+, char *line)[] 
+ []
+
+[19]
+File: ./pictures/3-1-depline.png Graphic file (type QTm)
+ <use  "./pictures/3-1-depline.png" > [20]
+File: ./pictures/3-2-make.png Graphic file (type QTm)
+
+<use  "./pictures/3-2-make.png" > [21]
+File: ./pictures/3-3-modprobe.png Graphic file (type QTm)
+ <use  "./pictures/3-3-modprobe.png" >
+[22]
+Overfull \hbox (40.49641pt too wide) in paragraph at lines 664--664
+[]\EU1/lmtt/m/n/10.95 163                                         p = strtok_r(
+NULL, " \t", &saveptr)     ) {[] 
+ []
+
+File: ./pictures/3-4-print-p.png Graphic file (type QTm)
+<use  "./pictures/3-4-print-p.png" > [23]
+File: ./pictures/3-5-print-p-output.png Graphic file (type QTm)
+
+<use  "./pictures/3-5-print-p-output.png" > [24] [25] (./runtime-debug.aux) ) 
 Here is how much of TeX's memory you used:
- 9647 strings out of 495713
- 148971 string characters out of 1188883
- 251974 words of memory out of 3000000
- 12665 multiletter control sequences out of 15000+50000
+ 9672 strings out of 495713
+ 149481 string characters out of 1188883
+ 279974 words of memory out of 3000000
+ 12681 multiletter control sequences out of 15000+50000
  4092 words of font info for 34 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 40i,6n,44p,742b,338s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 40i,6n,44p,746b,338s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on runtime-debug.pdf (8 pages).
+Output written on runtime-debug.pdf (25 pages).

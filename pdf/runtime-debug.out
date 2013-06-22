@@ -6,4 +6,16 @@
 \BOOKMARK [3][-]{subsubsection.1.1.4}{编译项目源码}{subsection.1.1}
 \BOOKMARK [3][-]{subsubsection.1.1.5}{测试生成命令}{subsection.1.1}
 \BOOKMARK [2][-]{subsection.1.2}{项目Debug版运行调试图}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.2.1}{配置时加上 \205enable-debug, \205enable-logging 参数}{subsection.1.2}
+\BOOKMARK [3][-]{subsubsection.1.2.2}{make clean \046\046 make 重新编译}{subsection.1.2}
+\BOOKMARK [3][-]{subsubsection.1.2.3}{设置日志优先级 KMOD\137LOG=7}{subsection.1.2}
+\BOOKMARK [3][-]{subsubsection.1.2.4}{卸载模块以便进行下一次插入}{subsection.1.2}
+\BOOKMARK [3][-]{subsubsection.1.2.5}{设置日志优先级 KMOD\137LOG=6}{subsection.1.2}
 \BOOKMARK [2][-]{subsection.1.3}{源码修改运行调试图}{section.1}
+\BOOKMARK [3][-]{subsubsection.1.3.1}{修改 modprobe.c 源码}{subsection.1.3}
+\BOOKMARK [3][-]{subsubsection.1.3.2}{修改 kmod\137module\137parse\137depline 函数}{subsection.1.3}
+\BOOKMARK [3][-]{subsubsection.1.3.3}{重新编译生成新的 modprobe}{subsection.1.3}
+\BOOKMARK [3][-]{subsubsection.1.3.4}{运行 modprobe nfs}{subsection.1.3}
+\BOOKMARK [3][-]{subsubsection.1.3.5}{插入167行打印语句}{subsection.1.3}
+\BOOKMARK [3][-]{subsubsection.1.3.6}{重新编译生成新的 modprobe}{subsection.1.3}
+\BOOKMARK [3][-]{subsubsection.1.3.7}{运行 modprobe nfs}{subsection.1.3}
