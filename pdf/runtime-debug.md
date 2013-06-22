@@ -160,6 +160,301 @@ Kmod 运行时调试图
 项目Debug版运行调试图
 ---------------------
 
+### 配置时加上 --enable-debug, --enable-logging 参数
+	$ ./configure CFLAGS="-g -O2" --prefix=/usr --sysconfdir=/etc --libdir=/usr/lib --enable-debug --enable-logging
+	checking for a BSD-compatible install... /usr/bin/install -c
+	checking whether build environment is sane... yes
+	checking for a thread-safe mkdir -p... /bin/mkdir -p
+	checking for gawk... no
+	checking for mawk... mawk
+	checking whether make sets $(MAKE)... yes
+	checking whether make supports nested variables... yes
+	checking how to create a pax tar archive... gnutar
+	checking for style of include used by make... GNU
+	checking for gcc... gcc
+	checking whether the C compiler works... yes
+	checking for C compiler default output file name... a.out
+	checking for suffix of executables... 
+	checking whether we are cross compiling... no
+	checking for suffix of object files... o
+	checking whether we are using the GNU C compiler... yes
+	checking whether gcc accepts -g... yes
+	checking for gcc option to accept ISO C89... none needed
+	checking dependency style of gcc... gcc3
+	checking for gcc option to accept ISO C99... -std=gnu99
+	checking for gcc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+	checking how to run the C preprocessor... gcc -std=gnu99 -E
+	checking for grep that handles long lines and -e... /bin/grep
+	checking for egrep... /bin/grep -E
+	checking for ANSI C header files... yes
+	checking for sys/types.h... yes
+	checking for sys/stat.h... yes
+	checking for stdlib.h... yes
+	checking for string.h... yes
+	checking for memory.h... yes
+	checking for strings.h... yes
+	checking for inttypes.h... yes
+	checking for stdint.h... yes
+	checking for unistd.h... yes
+	checking minix/config.h usability... no
+	checking minix/config.h presence... no
+	checking for minix/config.h... no
+	checking whether it is safe to define __EXTENSIONS__... yes
+	checking for special C compiler options needed for large files... no
+	checking for _FILE_OFFSET_BITS value needed for large files... 64
+	checking whether make supports nested variables... (cached) yes
+	checking build system type... i686-pc-linux-gnu
+	checking host system type... i686-pc-linux-gnu
+	checking how to print strings... printf
+	checking for a sed that does not truncate output... /bin/sed
+	checking for fgrep... /bin/grep -F
+	checking for ld used by gcc -std=gnu99... /usr/bin/ld
+	checking if the linker (/usr/bin/ld) is GNU ld... yes
+	checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+	checking the name lister (/usr/bin/nm -B) interface... BSD nm
+	checking whether ln -s works... yes
+	checking the maximum length of command line arguments... 1572864
+	checking whether the shell understands some XSI constructs... yes
+	checking whether the shell understands "+="... yes
+	checking how to convert i686-pc-linux-gnu file names to i686-pc-linux-gnu format... func_convert_file_noop
+	checking how to convert i686-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+	checking for /usr/bin/ld option to reload object files... -r
+	checking for objdump... objdump
+	checking how to recognize dependent libraries... pass_all
+	checking for dlltool... no
+	checking how to associate runtime and link libraries... printf %s\n
+	checking for ar... ar
+	checking for archiver @FILE support... @
+	checking for strip... strip
+	checking for ranlib... ranlib
+	checking command to parse /usr/bin/nm -B output from gcc -std=gnu99 object... ok
+	checking for sysroot... no
+	checking for mt... mt
+	checking if mt is a manifest tool... no
+	checking for dlfcn.h... yes
+	checking for objdir... .libs
+	checking if gcc -std=gnu99 supports -fno-rtti -fno-exceptions... no
+	checking for gcc -std=gnu99 option to produce PIC... -fPIC -DPIC
+	checking if gcc -std=gnu99 PIC flag -fPIC -DPIC works... yes
+	checking if gcc -std=gnu99 static flag -static works... yes
+	checking if gcc -std=gnu99 supports -c -o file.o... yes
+	checking if gcc -std=gnu99 supports -c -o file.o... (cached) yes
+	checking whether the gcc -std=gnu99 linker (/usr/bin/ld) supports shared libraries... yes
+	checking whether -lc should be explicitly linked in... no
+	checking dynamic linker characteristics... GNU/Linux ld.so
+	checking how to hardcode library paths into programs... immediate
+	checking whether stripping libraries is possible... yes
+	checking if libtool supports shared libraries... yes
+	checking whether to build shared libraries... yes
+	checking whether to build static libraries... no
+	checking for gcc... (cached) gcc
+	checking whether we are using the GNU C compiler... (cached) yes
+	checking whether gcc accepts -g... (cached) yes
+	checking for gcc option to accept ISO C89... (cached) none needed
+	checking dependency style of gcc... (cached) gcc3
+	checking for gcc option to accept ISO C99... (cached) -std=gnu99
+	checking for typeof syntax and keyword spelling... typeof
+	checking whether gcc -std=gnu99 and cc understand -c and -o together... yes
+	checking whether gcc -std=gnu99 needs -traditional... no
+	checking whether byte ordering is bigendian... no
+	checking for a sed that does not truncate output... (cached) /bin/sed
+	checking for pkg-config... /usr/bin/pkg-config
+	checking pkg-config is at least version 0.9.0... yes
+	checking for __xstat... yes
+	checking for struct stat.st_mtim... yes
+	configure: Xz support not requested
+	configure: zlib support not requested
+	checking for xsltproc... /usr/bin/xsltproc
+	checking for gtkdoc-check... no
+	checking for gtkdoc-rebase... no
+	checking for gtkdoc-mkpdf... no
+	checking whether to build gtk-doc documentation... no
+	checking if gcc -std=gnu99 supports flag -pipe in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -DANOTHER_BRICK_IN_THE in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wall in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -W in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wextra in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wno-inline in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wvla in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wundef in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wformat=2 in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wlogical-op in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wsign-compare in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wformat-security in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wmissing-include-dirs in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wformat-nonliteral in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wold-style-definition in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wpointer-arith in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Winit-self in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wdeclaration-after-statement in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wfloat-equal in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wmissing-prototypes in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wstrict-prototypes in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wredundant-decls in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wmissing-declarations in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wmissing-noreturn in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wshadow in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wendif-labels in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wstrict-aliasing=2 in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wwrite-strings in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wno-long-long in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wno-overlength-strings in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wno-unused-parameter in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wno-missing-field-initializers in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wno-unused-result in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wnested-externs in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wchar-subscripts in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wtype-limits in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wuninitialized in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -fno-common in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -fdiagnostics-show-option in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -fvisibility=hidden in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -ffunction-sections in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -fdata-sections in envvar CFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wl,--as-needed in envvar LDFLAGS... yes
+	checking if gcc -std=gnu99 supports flag -Wl,--gc-sections in envvar LDFLAGS... yes
+	checking that generated files are newer than configure... done
+	configure: creating ./config.status
+	config.status: creating Makefile
+	config.status: creating man/Makefile
+	config.status: creating libkmod/docs/Makefile
+	config.status: creating libkmod/docs/version.xml
+	config.status: creating config.h
+	config.status: executing depfiles commands
+
+	config.status: executing libtool commands
+
+		kmod 11
+		======
+
+		prefix:			/usr
+		sysconfdir:		/etc
+		libdir:			/usr/lib
+		rootlibdir:		/usr/lib
+		includedir:		${prefix}/include
+		bindir:			${exec_prefix}/bin
+
+		compiler:		gcc -std=gnu99
+		cflags:			 -pipe -DANOTHER_BRICK_IN_THE -Wall -W -Wextra -Wno-inline -Wvla -Wundef -Wformat=2 -Wlogical-op -Wsign-compare -Wformat-security -Wmissing-include-dirs -Wformat-nonliteral -Wold-style-definition -Wpointer-arith -Winit-self -Wdeclaration-after-statement -Wfloat-equal -Wmissing-prototypes -Wstrict-prototypes -Wredundant-decls -Wmissing-declarations -Wmissing-noreturn -Wshadow -Wendif-labels -Wstrict-aliasing=2 -Wwrite-strings -Wno-long-long -Wno-overlength-strings -Wno-unused-parameter -Wno-missing-field-initializers -Wno-unused-result -Wnested-externs -Wchar-subscripts -Wtype-limits -Wuninitialized -fno-common -fdiagnostics-show-option -fvisibility=hidden -ffunction-sections -fdata-sections -g -O2
+		ldflags:		 -Wl,--as-needed -Wl,--gc-sections 
+
+		tools:			yes
+		logging:		yes
+		compression:		xz=no  zlib=no
+		debug:			yes
+		doc:			no
+		man:			yes
+
+![配置时加上调试参数](./pictures/2-1-configure.png)
+
+### make clean && make 重新编译
+	$ make clean && make
+	Making clean in .
+	 rm -f tools/kmod
+	test -z "testsuite/uname.la testsuite/path.la testsuite/init_module.la testsuite/delete_module.la testsuite/libtestsuite.la" || rm -f testsuite/uname.la testsuite/path.la testsuite/init_module.la testsuite/delete_module.la testsuite/libtestsuite.la
+	rm -f testsuite/so_locations
+	 rm -f testsuite/test-init testsuite/test-testsuite testsuite/test-loaded testsuite/test-modinfo testsuite/test-alias testsuite/test-new-module testsuite/test-modprobe testsuite/test-blacklist testsuite/test-dependencies testsuite/test-depmod
+	test -z "libkmod/libkmod.pc" || rm -f libkmod/libkmod.pc
+	test -z "libkmod/libkmod.la" || rm -f libkmod/libkmod.la
+	rm -f libkmod/so_locations
+	rm -rf .libs _libs
+	rm -rf libkmod/.libs libkmod/_libs
+	rm -rf testsuite/.libs testsuite/_libs
+	rm -rf tools/.libs tools/_libs
+	test -z "libkmod/libkmod-util.la libkmod/libkmod-private.la" || rm -f libkmod/libkmod-util.la libkmod/libkmod-private.la
+	rm -f libkmod/so_locations
+	 rm -f tools/kmod-nolib
+	rm -f *.o
+	rm -f libkmod/*.o
+	rm -f libkmod/*.lo
+	rm -f testsuite/*.o
+	rm -f testsuite/*.lo
+	rm -f tools/*.o
+	rm -f *.lo
+	Making clean in libkmod/docs
+	test -z "" || rm -f 
+	rm -rf .libs _libs
+	rm -f *.lo
+	Making clean in man
+	test -z "depmod.d.5 modprobe.d.5 modules.dep.5 depmod.8 insmod.8 lsmod.8 rmmod.8 modprobe.8 modinfo.8 modules.dep.bin.5" || rm -f depmod.d.5 modprobe.d.5 modules.dep.5 depmod.8 insmod.8 lsmod.8 rmmod.8 modprobe.8 modinfo.8 modules.dep.bin.5
+	rm -rf .libs _libs
+	rm -f *.lo
+	make --no-print-directory all-recursive
+	Making all in .
+	  CC       libkmod/libkmod.lo
+	  CC       libkmod/libkmod-list.lo
+	  CC       libkmod/libkmod-config.lo
+	  CC       libkmod/libkmod-index.lo
+	  CC       libkmod/libkmod-module.lo
+	  CC       libkmod/libkmod-file.lo
+	  CC       libkmod/libkmod-elf.lo
+	  CC       libkmod/libkmod-hash.lo
+	  CC       libkmod/libkmod-array.lo
+	  CC       libkmod/libkmod-util.lo
+	  CCLD     libkmod/libkmod-util.la
+	  CCLD     libkmod/libkmod.la
+	  CCLD     libkmod/libkmod-private.la
+	  CC       tools/kmod.o
+	  CC       tools/lsmod.o
+	  CC       tools/rmmod.o
+	  CC       tools/insmod.o
+	  CC       tools/modinfo.o
+	  CC       tools/modprobe.o
+	  CC       tools/depmod.o
+	  CC       tools/log.o
+	  CCLD     tools/kmod
+	  CCLD     tools/kmod-nolib
+	  GEN      libkmod/libkmod.pc
+	Making all in libkmod/docs
+	make[2]: Nothing to be done for `all'.
+	Making all in man
+	  GEN      depmod.d.5
+	  GEN      modprobe.d.5
+	  GEN      modules.dep.5
+	  GEN      depmod.8
+	  GEN      insmod.8
+	  GEN      lsmod.8
+	  GEN      rmmod.8
+	  GEN      modprobe.8
+	  GEN      modinfo.8
+	$ 
+
+
+![make重新编译](./pictures/2-2-make.png)
+
+### 设置日志优先级 KMOD_LOG=7
+	$ sudo KMOD_LOG=7 ./tools/insmod ../hello-module/hello.ko
+	[sudo] password for akaedu: 
+	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x8688008 created
+	libkmod: DEBUG libkmod/libkmod.c:276 kmod_new: log_priority=7
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='hello' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:389 kmod_pool_get_module: get module name='hello' found=(nil)
+	libkmod: DEBUG libkmod/libkmod.c:397 kmod_pool_add_module: add 0x8688088 key='hello'
+	libkmod: DEBUG libkmod/libkmod-module.c:714 kmod_module_get_path: name='hello' path='/tmp/kmod-11/../hello-module/hello.ko'
+	libkmod: DEBUG libkmod/libkmod-module.c:436 kmod_module_unref: kmod_module 0x8688088 released
+	libkmod: DEBUG libkmod/libkmod.c:405 kmod_pool_del_module: del 0x8688088 key='hello'
+	libkmod: INFO libkmod/libkmod.c:318 kmod_unref: context 0x8688008 released
+	$ 
+
+![设置 KMOD_LOG=7 模式下插入模块](./pictures/2-3-insert.png)
+
+	$ sudo KMOD_LOG=7 ./tools/rmmod ../hello-module/hello.ko
+	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x9584008 created
+	libkmod: DEBUG libkmod/libkmod.c:276 kmod_new: log_priority=7
+	$ 
+
+### 设置日志优先级 KMOD_LOG=6
+	$ sudo KMOD_LOG=6 ./tools/insmod ../hello-module/hello.ko
+	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x9c46008 created
+	libkmod: INFO libkmod/libkmod.c:318 kmod_unref: context 0x9c46008 released
+	$ 
+
+	$ sudo KMOD_LOG=6 ./tools/rmmod ../hello-module/hello.ko
+	libkmod: INFO libkmod/libkmod.c:275 kmod_new: ctx 0x9584008 created
+	libkmod: DEBUG libkmod/libkmod.c:276 kmod_new: log_priority=7
+	$ 
+
+![设置 KMOD_LOG=6 模式下插入模块](./pictures/2-4-insert2.png)
 
 
 
